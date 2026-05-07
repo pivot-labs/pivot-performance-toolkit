@@ -1,0 +1,28 @@
+{
+    "name": "jeffshaikh/performance-toolkit",
+    "description": "WordPress performance optimization toolkit",
+    "type": "wordpress-plugin",
+    "license": "proprietary",
+    "version": "0.1.0",
+    "autoload": {
+        "psr-4": {
+            "PerformanceToolkit\\": "includes/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Jeff Shaikh",
+            "email": "jeff@digitalcanvas.com"
+        }
+    ],
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.13",
+        "wp-coding-standards/wpcs": "^3.3",
+        "phpcompatibility/phpcompatibility-wp": "^2.1"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}
