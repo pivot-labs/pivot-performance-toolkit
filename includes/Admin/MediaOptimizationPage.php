@@ -41,13 +41,18 @@ final class MediaOptimizationPage implements AdminPageInterface
         ?>
         <section id="ptk-media-optimization" class="ptk-card">
             <h2><?php esc_html_e('Media Optimization', 'performance-toolkit'); ?></h2>
-            <form method="post" action="options.php">
+            <form method="post" action="<?php echo esc_url(admin_url('options.php')); ?>">
                 <?php settings_fields('performance_toolkit'); ?>
 
                 <input type="hidden" name="<?php echo esc_attr($this->settings->optionKey()); ?>[enable_page_cache]" value="<?php echo ! empty($options['enable_page_cache']) ? '1' : '0'; ?>" />
                 <input type="hidden" name="<?php echo esc_attr($this->settings->optionKey()); ?>[cache_ttl]" value="<?php echo esc_attr((string) $options['cache_ttl']); ?>" />
                 <input type="hidden" name="<?php echo esc_attr($this->settings->optionKey()); ?>[max_cache_size_mb]" value="<?php echo esc_attr((string) $options['max_cache_size_mb']); ?>" />
                 <input type="hidden" name="<?php echo esc_attr($this->settings->optionKey()); ?>[cache_excluded_urls]" value="<?php echo esc_attr((string) $options['cache_excluded_urls']); ?>" />
+                <input type="hidden" name="<?php echo esc_attr($this->settings->optionKey()); ?>[minify_html]" value="<?php echo ! empty($options['minify_html']) ? '1' : '0'; ?>" />
+                <input type="hidden" name="<?php echo esc_attr($this->settings->optionKey()); ?>[minify_css]" value="<?php echo ! empty($options['minify_css']) ? '1' : '0'; ?>" />
+                <input type="hidden" name="<?php echo esc_attr($this->settings->optionKey()); ?>[minify_external_css]" value="<?php echo ! empty($options['minify_external_css']) ? '1' : '0'; ?>" />
+                <input type="hidden" name="<?php echo esc_attr($this->settings->optionKey()); ?>[minify_external_css_exclusions]" value="<?php echo esc_attr((string) $options['minify_external_css_exclusions']); ?>" />
+                <input type="hidden" name="<?php echo esc_attr($this->settings->optionKey()); ?>[minify_js]" value="<?php echo ! empty($options['minify_js']) ? '1' : '0'; ?>" />
                 <input type="hidden" name="<?php echo esc_attr($this->settings->optionKey()); ?>[defer_scripts]" value="<?php echo ! empty($options['defer_scripts']) ? '1' : '0'; ?>" />
 
                 <div class="ptk-field">

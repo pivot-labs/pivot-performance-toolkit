@@ -46,13 +46,17 @@ final class AdvancedRulesPage implements AdminPageInterface
                 <?php esc_html_e('Enter URLs or path patterns that should never be cached — one per line. Prefix matching is used by default; add a wildcard (*) for substring patterns.', 'performance-toolkit'); ?>
             </p>
 
-            <form method="post" action="options.php">
+            <form method="post" action="<?php echo esc_url(admin_url('options.php')); ?>">
                 <?php settings_fields('performance_toolkit'); ?>
 
-                {{/* Preserve settings owned by other pages */}}
                 <input type="hidden" name="<?php echo esc_attr($key); ?>[enable_page_cache]"  value="<?php echo ! empty($options['enable_page_cache']) ? '1' : '0'; ?>" />
                 <input type="hidden" name="<?php echo esc_attr($key); ?>[cache_ttl]"           value="<?php echo esc_attr((string) $options['cache_ttl']); ?>" />
                 <input type="hidden" name="<?php echo esc_attr($key); ?>[max_cache_size_mb]"   value="<?php echo esc_attr((string) $options['max_cache_size_mb']); ?>" />
+                <input type="hidden" name="<?php echo esc_attr($key); ?>[minify_html]"         value="<?php echo ! empty($options['minify_html']) ? '1' : '0'; ?>" />
+                <input type="hidden" name="<?php echo esc_attr($key); ?>[minify_css]"          value="<?php echo ! empty($options['minify_css']) ? '1' : '0'; ?>" />
+                <input type="hidden" name="<?php echo esc_attr($key); ?>[minify_external_css]" value="<?php echo ! empty($options['minify_external_css']) ? '1' : '0'; ?>" />
+                <input type="hidden" name="<?php echo esc_attr($key); ?>[minify_external_css_exclusions]" value="<?php echo esc_attr((string) $options['minify_external_css_exclusions']); ?>" />
+                <input type="hidden" name="<?php echo esc_attr($key); ?>[minify_js]"           value="<?php echo ! empty($options['minify_js']) ? '1' : '0'; ?>" />
                 <input type="hidden" name="<?php echo esc_attr($key); ?>[defer_scripts]"       value="<?php echo ! empty($options['defer_scripts']) ? '1' : '0'; ?>" />
                 <input type="hidden" name="<?php echo esc_attr($key); ?>[lazy_load_images]"    value="<?php echo ! empty($options['lazy_load_images']) ? '1' : '0'; ?>" />
 

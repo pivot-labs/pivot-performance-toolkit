@@ -54,11 +54,16 @@ final class CachePage implements AdminPageInterface
                 <div class="notice notice-success is-dismissible"><p><?php esc_html_e('Cache cleared successfully.', 'performance-toolkit'); ?></p></div>
             <?php endif; ?>
 
-            <form method="post" action="options.php">
+            <form method="post" action="<?php echo esc_url(admin_url('options.php')); ?>">
                 <?php settings_fields('performance_toolkit'); ?>
                 <input type="hidden" name="<?php echo esc_attr($this->settings->optionKey()); ?>[defer_scripts]" value="<?php echo ! empty($options['defer_scripts']) ? '1' : '0'; ?>" />
                 <input type="hidden" name="<?php echo esc_attr($this->settings->optionKey()); ?>[lazy_load_images]" value="<?php echo ! empty($options['lazy_load_images']) ? '1' : '0'; ?>" />
                 <input type="hidden" name="<?php echo esc_attr($this->settings->optionKey()); ?>[cache_excluded_urls]" value="<?php echo esc_attr((string) $options['cache_excluded_urls']); ?>" />
+                <input type="hidden" name="<?php echo esc_attr($this->settings->optionKey()); ?>[minify_html]" value="<?php echo ! empty($options['minify_html']) ? '1' : '0'; ?>" />
+                <input type="hidden" name="<?php echo esc_attr($this->settings->optionKey()); ?>[minify_css]" value="<?php echo ! empty($options['minify_css']) ? '1' : '0'; ?>" />
+                <input type="hidden" name="<?php echo esc_attr($this->settings->optionKey()); ?>[minify_external_css]" value="<?php echo ! empty($options['minify_external_css']) ? '1' : '0'; ?>" />
+                <input type="hidden" name="<?php echo esc_attr($this->settings->optionKey()); ?>[minify_external_css_exclusions]" value="<?php echo esc_attr((string) $options['minify_external_css_exclusions']); ?>" />
+                <input type="hidden" name="<?php echo esc_attr($this->settings->optionKey()); ?>[minify_js]" value="<?php echo ! empty($options['minify_js']) ? '1' : '0'; ?>" />
                 <div class="ptk-field">
                     <label>
                         <input type="checkbox" name="<?php echo esc_attr($this->settings->optionKey()); ?>[enable_page_cache]" value="1" <?php checked((bool) $options['enable_page_cache']); ?> />

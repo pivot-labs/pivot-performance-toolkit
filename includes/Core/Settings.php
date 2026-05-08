@@ -18,6 +18,11 @@ final class Settings
             'cache_ttl'            => 600,
             'max_cache_size_mb'    => 50,
             'cache_excluded_urls'  => '',
+            'minify_html'          => false,
+            'minify_css'           => false,
+            'minify_external_css'  => false,
+            'minify_external_css_exclusions' => '',
+            'minify_js'            => false,
             'defer_scripts'        => true,
             'lazy_load_images'     => true,
         );
@@ -51,6 +56,11 @@ final class Settings
             'cache_ttl'           => max(60, (int) ($raw['cache_ttl'] ?? $defaults['cache_ttl'])),
             'max_cache_size_mb'   => max(1, (int) ($raw['max_cache_size_mb'] ?? $defaults['max_cache_size_mb'])),
             'cache_excluded_urls' => sanitize_textarea_field((string) ($raw['cache_excluded_urls'] ?? '')),
+            'minify_html'         => ! empty($raw['minify_html']),
+            'minify_css'          => ! empty($raw['minify_css']),
+            'minify_external_css' => ! empty($raw['minify_external_css']),
+            'minify_external_css_exclusions' => sanitize_textarea_field((string) ($raw['minify_external_css_exclusions'] ?? '')),
+            'minify_js'           => ! empty($raw['minify_js']),
             'defer_scripts'       => ! empty($raw['defer_scripts']),
             'lazy_load_images'    => ! empty($raw['lazy_load_images']),
         );
