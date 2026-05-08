@@ -62,8 +62,8 @@ final class Plugin
                 array(
                     new DashboardPage($this->settings),
                     new CachePage($this->settings),
-                    new FileOptimizationPage(),
-                    new MediaOptimizationPage(),
+                    new FileOptimizationPage($this->settings),
+                    new MediaOptimizationPage($this->settings),
                     new DatabasePage(),
                     new CdnIntegrationsPage(),
                     new AdvancedRulesPage(),
