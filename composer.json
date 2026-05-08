@@ -4,6 +4,10 @@
     "type": "wordpress-plugin",
     "license": "proprietary",
     "version": "0.1.0",
+    "scripts": {
+        "lint": "find includes -name '*.php' -print0 | xargs -0 -n1 php -l",
+        "test:smoke": "php tests/smoke-settings.php"
+    },
     "autoload": {
         "psr-4": {
             "PerformanceToolkit\\": "includes/"

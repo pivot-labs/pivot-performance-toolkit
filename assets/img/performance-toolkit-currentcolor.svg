@@ -1,0 +1,18 @@
+<svg width="24" height="24" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+            d="M96 320C96 231.634 167.634 160 256 160C344.366 160 416 231.634 416 320"
+            stroke="currentColor"
+            stroke-width="34"
+            stroke-linecap="round"
+    />
+    <line x1="128" y1="300" x2="160" y2="300" stroke="currentColor" stroke-width="20" stroke-linecap="round"/>
+    <line x1="176" y1="212" x2="198" y2="234" stroke="currentColor" stroke-width="20" stroke-linecap="round"/>
+    <line x1="256" y1="184" x2="256" y2="216" stroke="currentColor" stroke-width="20" stroke-linecap="round"/>
+    <line x1="314" y1="234" x2="336" y2="212" stroke="currentColor" stroke-width="20" stroke-linecap="round"/>
+    <line x1="352" y1="300" x2="384" y2="300" stroke="currentColor" stroke-width="20" stroke-linecap="round"/>
+    <path
+            d="M246 310 L344 232 Q350 226 356 232 Q362 238 356 244 L276 330 Z"
+            fill="currentColor"
+    />
+    <circle cx="256" cy="320" r="38" fill="currentColor"/>
+</svg>
