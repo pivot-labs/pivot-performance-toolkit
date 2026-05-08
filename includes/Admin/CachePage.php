@@ -40,8 +40,12 @@ final class CachePage implements AdminPageInterface
 
     public function renderContent(): void
     {
-        $options = $this->settings->all();
+        $options       = $this->settings->all();
         $cache_cleared = isset($_GET['ptk_cache_cleared']) && (string) $_GET['ptk_cache_cleared'] === '1';
+        $cache_dir     = WP_CONTENT_DIR . '/cache/performance-toolkit';
+        $current_size  = $this->getCacheDirSize($cache_dir);
+        $max_bytes     = (int) $options['max_cache_size_mb'] * 1048576;
+        $usage_pct     = $max_bytes > 0 ? min(100, (int) round($current_size / $max_bytes * 100)) : 0;
         ?>
         <section id="ptk-cache" class="ptk-card">
             <h2><?php esc_html_e('Cache', 'performance-toolkit'); ?></h2>
@@ -54,6 +58,7 @@ final class CachePage implements AdminPageInterface
                 <?php settings_fields('performance_toolkit'); ?>
                 <input type="hidden" name="<?php echo esc_attr($this->settings->optionKey()); ?>[defer_scripts]" value="<?php echo ! empty($options['defer_scripts']) ? '1' : '0'; ?>" />
                 <input type="hidden" name="<?php echo esc_attr($this->settings->optionKey()); ?>[lazy_load_images]" value="<?php echo ! empty($options['lazy_load_images']) ? '1' : '0'; ?>" />
+                <input type="hidden" name="<?php echo esc_attr($this->settings->optionKey()); ?>[cache_excluded_urls]" value="<?php echo esc_attr((string) $options['cache_excluded_urls']); ?>" />
                 <div class="ptk-field">
                     <label>
                         <input type="checkbox" name="<?php echo esc_attr($this->settings->optionKey()); ?>[enable_page_cache]" value="1" <?php checked((bool) $options['enable_page_cache']); ?> />
@@ -65,6 +70,28 @@ final class CachePage implements AdminPageInterface
                 <div class="ptk-field">
                     <label for="ptk-cache-ttl"><?php esc_html_e('Cache TTL (seconds)', 'performance-toolkit'); ?></label>
                     <input id="ptk-cache-ttl" type="number" min="60" step="60" name="<?php echo esc_attr($this->settings->optionKey()); ?>[cache_ttl]" value="<?php echo esc_attr((string) $options['cache_ttl']); ?>" class="small-text" />
+                </div>
+
+                <div class="ptk-field">
+                    <label for="ptk-max-cache-size"><?php esc_html_e('Max cache size (MB)', 'performance-toolkit'); ?></label>
+                    <input id="ptk-max-cache-size" type="number" min="1" step="1" name="<?php echo esc_attr($this->settings->optionKey()); ?>[max_cache_size_mb]" value="<?php echo esc_attr((string) $options['max_cache_size_mb']); ?>" class="small-text" />
+                    <p><?php esc_html_e('When the cache folder exceeds this size the oldest files are pruned automatically.', 'performance-toolkit'); ?></p>
+                    <div class="ptk-cache-usage">
+                        <div class="ptk-cache-usage-bar">
+                            <div class="ptk-cache-usage-fill <?php echo $usage_pct >= 90 ? 'is-critical' : ($usage_pct >= 70 ? 'is-warning' : ''); ?>" style="width:<?php echo esc_attr((string) $usage_pct); ?>%"></div>
+                        </div>
+                        <span class="ptk-cache-usage-label">
+                            <?php
+                            printf(
+                                /* translators: 1: current size formatted, 2: max size in MB, 3: percentage */
+                                esc_html__('%1$s of %2$s MB used (%3$s%%)', 'performance-toolkit'),
+                                esc_html(self::formatBytes($current_size)),
+                                esc_html((string) $options['max_cache_size_mb']),
+                                esc_html((string) $usage_pct)
+                            );
+                            ?>
+                        </span>
+                    </div>
                 </div>
 
                 <?php submit_button(__('Save changes', 'performance-toolkit')); ?>
@@ -95,7 +122,7 @@ final class CachePage implements AdminPageInterface
 
         $redirect_url = add_query_arg(
             array(
-                'page' => $this->slug(),
+                'page'             => $this->slug(),
                 'ptk_cache_cleared' => '1',
             ),
             admin_url('admin.php')
@@ -103,5 +130,31 @@ final class CachePage implements AdminPageInterface
 
         wp_safe_redirect($redirect_url);
         exit;
+    }
+
+    // ── Helpers ──────────────────────────────────────────────────────────────
+
+    private function getCacheDirSize(string $dir): int
+    {
+        $total = 0;
+
+        foreach (glob($dir . '/*.html') ?: array() as $file) {
+            $total += (int) @filesize($file);
+        }
+
+        return $total;
+    }
+
+    private static function formatBytes(int $bytes): string
+    {
+        if ($bytes >= 1048576) {
+            return number_format($bytes / 1048576, 2) . ' MB';
+        }
+
+        if ($bytes >= 1024) {
+            return number_format($bytes / 1024, 2) . ' KB';
+        }
+
+        return $bytes . ' B';
     }
 }

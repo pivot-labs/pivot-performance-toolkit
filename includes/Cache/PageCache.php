@@ -93,13 +93,32 @@ final class PageCache implements ModuleInterface
 
     private function isCacheableRequest(): bool
     {
-        return ! is_admin()
-            && ! is_user_logged_in()
-            && ! is_preview()
-            && ! is_feed()
-            && ! is_404()
-            && isset($_SERVER['REQUEST_METHOD'])
-            && strtoupper((string) $_SERVER['REQUEST_METHOD']) === 'GET';
+        if (is_admin() || is_user_logged_in() || is_preview() || is_feed() || is_404()) {
+            return false;
+        }
+
+        if (! isset($_SERVER['REQUEST_METHOD']) || strtoupper((string) $_SERVER['REQUEST_METHOD']) !== 'GET') {
+            return false;
+        }
+
+        $request_uri  = isset($_SERVER['REQUEST_URI']) ? (string) $_SERVER['REQUEST_URI'] : '/';
+        $request_path = strtok($request_uri, '?') ?: '/';  // strip query string for matching
+
+        foreach ($this->settings->getLines('cache_excluded_urls') as $pattern) {
+            if (strpos($pattern, '*') !== false) {
+                // Wildcard pattern — e.g. /my-account/*
+                if (fnmatch($pattern, $request_path)) {
+                    return false;
+                }
+            } else {
+                // Prefix match — /checkout matches /checkout, /checkout/, /checkout/step-2
+                if (strpos($request_path, rtrim($pattern, '/')) === 0) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
     private function cacheFilePath(): string

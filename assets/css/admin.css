@@ -142,6 +142,76 @@
     margin: 6px 0 0 0;
 }
 
+/* ── Cache usage bar ─────────────────────────────────────────────────────── */
+.ptk-cache-usage {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-width: 360px;
+}
+
+.ptk-cache-usage-bar {
+    height: 8px;
+    background: #e2e4e7;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.ptk-cache-usage-fill {
+    height: 100%;
+    background: #4f46e5;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.ptk-cache-usage-fill.is-warning {
+    background: #d97706;
+}
+
+.ptk-cache-usage-fill.is-critical {
+    background: #dc2626;
+}
+
+.ptk-cache-usage-label {
+    font-size: 12px;
+    color: #646970;
+}
+
+/* ── Advanced Rules – exclusions textarea ───────────────────────────────── */
+.ptk-exclusions-textarea {
+    display: block;
+    width: 100%;
+    max-width: 560px;
+    margin-top: 8px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    border: 1px solid #dcdcde;
+    border-radius: 6px;
+    padding: 10px 12px;
+    resize: vertical;
+    color: #1d2327;
+}
+
+.ptk-exclusions-textarea:focus {
+    border-color: #4f46e5;
+    outline: 2px solid #c7d2fe;
+    outline-offset: 0;
+}
+
+.ptk-exclusions-hint {
+    margin-top: 8px !important;
+    font-size: 12px !important;
+}
+
+.ptk-exclusions-hint code {
+    background: #f0f0f1;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 11px;
+}
+
 /* ── Database overview ──────────────────────────────────────────────────── */
 .ptk-db-stats {
     display: grid;
@@ -243,6 +313,19 @@
 
 .ptk-table-list tbody tr:hover {
     background: #f6f7f7;
+}
+
+.ptk-status-table th {
+    width: 260px;
+    background: transparent;
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 13px;
+    color: #1d2327;
+}
+
+.ptk-status-table td {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 .ptk-overhead-badge {
