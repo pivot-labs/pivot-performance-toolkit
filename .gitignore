@@ -1,5 +1,7 @@
 /vendor
 /node_modules
 /dist
+/wp-cache
+/references/ui/
 .DS_Store
 .idea

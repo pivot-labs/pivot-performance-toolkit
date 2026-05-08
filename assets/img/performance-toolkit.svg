@@ -1,0 +1,37 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="512" height="512" rx="92" fill="#041126"/>
+    <path
+            d="M96 320C96 231.634 167.634 160 256 160C344.366 160 416 231.634 416 320"
+            stroke="url(#gaugeGradient)"
+            stroke-width="28"
+            stroke-linecap="round"
+    />
+    <!-- Ticks -->
+    <line x1="128" y1="300" x2="160" y2="300" stroke="#F4F7FB" stroke-width="14" stroke-linecap="round"/>
+    <line x1="176" y1="212" x2="198" y2="234" stroke="#F4F7FB" stroke-width="14" stroke-linecap="round"/>
+    <line x1="256" y1="184" x2="256" y2="216" stroke="#F4F7FB" stroke-width="14" stroke-linecap="round"/>
+    <line x1="314" y1="234" x2="336" y2="212" stroke="#F4F7FB" stroke-width="14" stroke-linecap="round"/>
+    <line x1="352" y1="300" x2="384" y2="300" stroke="#F4F7FB" stroke-width="14" stroke-linecap="round"/>
+    <!-- Needle -->
+    <path
+            d="M246 310 L344 232 Q350 226 356 232 Q362 238 356 244 L276 330 Z"
+            fill="url(#needleGradient)"
+    />
+    <!-- Needle Center -->
+    <circle
+            cx="256"
+            cy="320"
+            r="34"
+            fill="url(#needleGradient)"
+    />
+    <defs>
+        <linearGradient id="gaugeGradient" x1="96" y1="160" x2="416" y2="320" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#43A5FF"/>
+            <stop offset="1" stop-color="#2F63FF"/>
+        </linearGradient>
+        <linearGradient id="needleGradient" x1="256" y1="320" x2="362" y2="236" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#32D4C2"/>
+            <stop offset="1" stop-color="#20C7E8"/>
+        </linearGradient>
+    </defs>
+</svg>
