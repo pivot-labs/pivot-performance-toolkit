@@ -47,7 +47,7 @@ final class Menu
 
         $top_level_hook = add_menu_page(
             $root_page->pageTitle(),
-            __('Performance Toolkit', 'performance-toolkit'),
+            __('Performance', 'performance-toolkit'),
             'manage_options',
             self::ROOT_SLUG,
             array($this, 'renderCurrentPage'),
@@ -124,7 +124,7 @@ final class Menu
         $icon_url = esc_url(PERFORMANCE_TOOLKIT_URL . 'assets/img/performance-toolkit-currentcolor.svg');
 
         printf(
-            '<style id="performance-toolkit-menu-icon">#adminmenu .toplevel_page_performance-toolkit .wp-menu-image img{display:none}#adminmenu .toplevel_page_performance-toolkit .wp-menu-image{color:inherit}#adminmenu .toplevel_page_performance-toolkit .wp-menu-image:before{content:"";display:block;width:28px;height:28px;margin:3px auto 0;background-color:currentColor;-webkit-mask-image:url("%1$s");mask-image:url("%1$s");-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:28px 28px;mask-size:28px 28px}</style>',
+            '<style id="performance-toolkit-menu-icon">#adminmenu .toplevel_page_performance-toolkit .wp-menu-image img{display:none}#adminmenu .toplevel_page_performance-toolkit .wp-menu-image{color:inherit}#adminmenu .toplevel_page_performance-toolkit .wp-menu-image:before{content:"";display:block;width:28px;height:28px;margin:1px auto 0;transform:translateY(-4px);background-color:currentColor;-webkit-mask-image:url("%1$s");mask-image:url("%1$s");-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:28px 28px;mask-size:28px 28px}</style>',
             $icon_url
         );
     }
