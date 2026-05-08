@@ -142,6 +142,133 @@
     margin: 6px 0 0 0;
 }
 
+/* ── Database overview ──────────────────────────────────────────────────── */
+.ptk-db-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.ptk-stat-warn {
+    color: #a16207;
+}
+
+/* ── Cleanup list ────────────────────────────────────────────────────────── */
+.ptk-cleanup-list {
+    border: 1px solid #e2e4e7;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.ptk-cleanup-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 16px;
+    border-bottom: 1px solid #e2e4e7;
+}
+
+.ptk-cleanup-item:last-child {
+    border-bottom: none;
+}
+
+.ptk-cleanup-item-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.ptk-cleanup-item-label {
+    font-weight: 600;
+    font-size: 13px;
+    color: #1d2327;
+}
+
+.ptk-cleanup-item-desc {
+    font-size: 12px;
+    color: #646970;
+    margin-top: 2px;
+}
+
+.ptk-cleanup-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 22px;
+    padding: 0 8px;
+    border-radius: 11px;
+    font-size: 12px;
+    font-weight: 600;
+    background: #f0f0f1;
+    color: #50575e;
+    flex-shrink: 0;
+}
+
+.ptk-cleanup-badge.has-items {
+    background: #fef9c3;
+    color: #a16207;
+}
+
+.ptk-cleanup-btn {
+    flex-shrink: 0;
+}
+
+/* ── Table breakdown ─────────────────────────────────────────────────────── */
+.ptk-table-list {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.ptk-table-list th,
+.ptk-table-list td {
+    text-align: left;
+    padding: 8px 12px;
+    border-bottom: 1px solid #e2e4e7;
+}
+
+.ptk-table-list tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.ptk-table-list th {
+    font-weight: 600;
+    font-size: 11px;
+    color: #646970;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: #f9f9f9;
+}
+
+.ptk-table-list tbody tr:hover {
+    background: #f6f7f7;
+}
+
+.ptk-overhead-badge {
+    display: inline-block;
+    background: #fef9c3;
+    color: #a16207;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 10px;
+}
+
+.ptk-overhead-ok {
+    color: #9ca3af;
+}
+
+.ptk-engine-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    color: #50575e;
+    background: #f0f0f1;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
 /* ── Sidebar toggle button (mobile only) ───────────────────────────────── */
 .ptk-sidebar-toggle {
     display: none;

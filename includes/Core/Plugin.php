@@ -9,6 +9,7 @@ use PerformanceToolkit\Admin\CachePage;
 use PerformanceToolkit\Admin\CdnIntegrationsPage;
 use PerformanceToolkit\Admin\DashboardPage;
 use PerformanceToolkit\Admin\DatabasePage;
+use PerformanceToolkit\Database\DatabaseOptimizer;
 use PerformanceToolkit\Admin\DocumentationPage;
 use PerformanceToolkit\Admin\FileOptimizationPage;
 use PerformanceToolkit\Admin\MediaOptimizationPage;
@@ -64,7 +65,7 @@ final class Plugin
                     new CachePage($this->settings),
                     new FileOptimizationPage($this->settings),
                     new MediaOptimizationPage($this->settings),
-                    new DatabasePage(),
+                    new DatabasePage(new DatabaseOptimizer()),
                     new CdnIntegrationsPage(),
                     new AdvancedRulesPage(),
                     new ToolsPage(),
