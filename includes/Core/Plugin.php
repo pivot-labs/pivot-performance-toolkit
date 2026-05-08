@@ -67,10 +67,10 @@ final class Plugin
                     new MediaOptimizationPage($this->settings),
                     new DatabasePage(new DatabaseOptimizer()),
                     new CdnIntegrationsPage(),
-                    new AdvancedRulesPage(),
+                    new AdvancedRulesPage($this->settings),
                     new ToolsPage(),
                     new DocumentationPage(),
-                    new SystemStatusPage(),
+                    new SystemStatusPage($this->settings),
                 )
             );
             $menu->register();

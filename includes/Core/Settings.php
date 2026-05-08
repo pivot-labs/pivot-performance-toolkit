@@ -9,15 +9,17 @@ final class Settings
     private const OPTION_KEY = 'performance_toolkit_settings';
 
     /**
-     * @return array<string, bool|int>
+     * @return array<string, bool|int|string>
      */
     public function defaults(): array
     {
         return array(
-            'enable_page_cache' => true,
-            'cache_ttl' => 600,
-            'defer_scripts' => true,
-            'lazy_load_images' => true,
+            'enable_page_cache'    => true,
+            'cache_ttl'            => 600,
+            'max_cache_size_mb'    => 50,
+            'cache_excluded_urls'  => '',
+            'defer_scripts'        => true,
+            'lazy_load_images'     => true,
         );
     }
 
@@ -37,7 +39,7 @@ final class Settings
     /**
      * @param mixed $raw
      *
-     * @return array<string, bool|int>
+     * @return array<string, bool|int|string>
      */
     public function sanitize($raw): array
     {
@@ -45,15 +47,17 @@ final class Settings
         $raw = is_array($raw) ? $raw : array();
 
         return array(
-            'enable_page_cache' => ! empty($raw['enable_page_cache']),
-            'cache_ttl' => max(60, (int) ($raw['cache_ttl'] ?? $defaults['cache_ttl'])),
-            'defer_scripts' => ! empty($raw['defer_scripts']),
-            'lazy_load_images' => ! empty($raw['lazy_load_images']),
+            'enable_page_cache'   => ! empty($raw['enable_page_cache']),
+            'cache_ttl'           => max(60, (int) ($raw['cache_ttl'] ?? $defaults['cache_ttl'])),
+            'max_cache_size_mb'   => max(1, (int) ($raw['max_cache_size_mb'] ?? $defaults['max_cache_size_mb'])),
+            'cache_excluded_urls' => sanitize_textarea_field((string) ($raw['cache_excluded_urls'] ?? '')),
+            'defer_scripts'       => ! empty($raw['defer_scripts']),
+            'lazy_load_images'    => ! empty($raw['lazy_load_images']),
         );
     }
 
     /**
-     * @return array<string, bool|int>
+     * @return array<string, bool|int|string>
      */
     public function all(): array
     {
@@ -74,6 +78,27 @@ final class Settings
     public function getInt(string $key): int
     {
         return (int) ($this->all()[$key] ?? 0);
+    }
+
+    public function getString(string $key): string
+    {
+        return (string) ($this->all()[$key] ?? '');
+    }
+
+    /**
+     * Returns a setting stored as newline-delimited text as a trimmed, non-empty array of lines.
+     *
+     * @return string[]
+     */
+    public function getLines(string $key): array
+    {
+        $raw   = $this->getString($key);
+        $lines = array_filter(
+            array_map('trim', explode("\n", $raw)),
+            static fn(string $line): bool => $line !== ''
+        );
+
+        return array_values($lines);
     }
 
     public function optionKey(): string
