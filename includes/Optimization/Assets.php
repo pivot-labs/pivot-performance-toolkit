@@ -56,6 +56,10 @@ final class Assets implements ModuleInterface
             return $tag;
         }
 
+        if ($this->isExcludedExternalJs($handle, $src)) {
+            return $tag;
+        }
+
         $source_path = $this->resolveLocalAssetPathFromUrl($src, 'js');
 
         if ($source_path === null || str_ends_with($source_path, '.min.js')) {
@@ -183,7 +187,7 @@ final class Assets implements ModuleInterface
         $basename = $path !== '' ? wp_basename($path) : '';
 
         foreach ($rules as $rule) {
-            if ($this->matchesExternalCssRule($rule, $handle, $href, $path, $basename)) {
+            if ($this->matchesExternalAssetRule($rule, $handle, $href, $path, $basename)) {
                 return true;
             }
         }
@@ -191,7 +195,27 @@ final class Assets implements ModuleInterface
         return false;
     }
 
-    private function matchesExternalCssRule(string $rule, string $handle, string $href, string $path, string $basename): bool
+    private function isExcludedExternalJs(string $handle, string $src): bool
+    {
+        $rules = $this->settings->getLines('minify_external_js_exclusions');
+
+        if ($rules === array()) {
+            return false;
+        }
+
+        $path     = (string) (wp_parse_url($src, PHP_URL_PATH) ?? '');
+        $basename = $path !== '' ? wp_basename($path) : '';
+
+        foreach ($rules as $rule) {
+            if ($this->matchesExternalAssetRule($rule, $handle, $src, $path, $basename)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function matchesExternalAssetRule(string $rule, string $handle, string $href, string $path, string $basename): bool
     {
         $rule = trim($rule);
 

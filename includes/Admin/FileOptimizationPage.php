@@ -116,6 +116,29 @@ final class FileOptimizationPage implements AdminPageInterface
                         <span><?php esc_html_e('Minify external JavaScript files', 'performance-toolkit'); ?></span>
                     </label>
                     <p><?php esc_html_e('Creates cached minified copies of local enqueued JavaScript files and rewrites their URLs.', 'performance-toolkit'); ?></p>
+
+                    <label for="ptk-external-js-exclusions" style="display:block;margin-top:10px;font-weight:600;">
+                        <?php esc_html_e('External JavaScript exclusions', 'performance-toolkit'); ?>
+                    </label>
+                    <textarea
+                        id="ptk-external-js-exclusions"
+                        name="<?php echo esc_attr($this->settings->optionKey()); ?>[minify_external_js_exclusions]"
+                        class="ptk-exclusions-textarea"
+                        rows="6"
+                        placeholder="<?php esc_attr_e("jquery-core\napp.js\n/wp-content/themes/your-theme/js/*", 'performance-toolkit'); ?>"
+                        spellcheck="false"
+                    ><?php echo esc_textarea((string) $options['minify_external_js_exclusions']); ?></textarea>
+                    <p class="ptk-exclusions-hint">
+                        <?php
+                        echo wp_kses(
+                            __('<strong>One rule per line.</strong> You can exclude by script handle, file name, full path, or wildcard pattern. Examples: <code>jquery-core</code>, <code>app.js</code>, <code>/wp-content/themes/your-theme/js/*</code>.', 'performance-toolkit'),
+                            array(
+                                'strong' => array(),
+                                'code'   => array(),
+                            )
+                        );
+                        ?>
+                    </p>
                 </div>
 
                 <div class="ptk-field">

@@ -53,6 +53,7 @@ final class MediaOptimizationPage implements AdminPageInterface
                 <input type="hidden" name="<?php echo esc_attr($this->settings->optionKey()); ?>[minify_external_css]" value="<?php echo ! empty($options['minify_external_css']) ? '1' : '0'; ?>" />
                 <input type="hidden" name="<?php echo esc_attr($this->settings->optionKey()); ?>[minify_external_css_exclusions]" value="<?php echo esc_attr((string) $options['minify_external_css_exclusions']); ?>" />
                 <input type="hidden" name="<?php echo esc_attr($this->settings->optionKey()); ?>[minify_external_js]" value="<?php echo ! empty($options['minify_external_js']) ? '1' : '0'; ?>" />
+                <input type="hidden" name="<?php echo esc_attr($this->settings->optionKey()); ?>[minify_external_js_exclusions]" value="<?php echo esc_attr((string) $options['minify_external_js_exclusions']); ?>" />
                 <input type="hidden" name="<?php echo esc_attr($this->settings->optionKey()); ?>[minify_js]" value="<?php echo ! empty($options['minify_js']) ? '1' : '0'; ?>" />
                 <input type="hidden" name="<?php echo esc_attr($this->settings->optionKey()); ?>[defer_scripts]" value="<?php echo ! empty($options['defer_scripts']) ? '1' : '0'; ?>" />
 
