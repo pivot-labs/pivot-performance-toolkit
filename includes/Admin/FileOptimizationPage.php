@@ -110,6 +110,15 @@ final class FileOptimizationPage implements AdminPageInterface
                 </div>
 
                 <div class="ptk-field">
+                    <input type="hidden" name="<?php echo esc_attr($this->settings->optionKey()); ?>[minify_external_js]" value="0" />
+                    <label>
+                        <input type="checkbox" name="<?php echo esc_attr($this->settings->optionKey()); ?>[minify_external_js]" value="1" <?php checked((bool) $options['minify_external_js']); ?> />
+                        <span><?php esc_html_e('Minify external JavaScript files', 'performance-toolkit'); ?></span>
+                    </label>
+                    <p><?php esc_html_e('Creates cached minified copies of local enqueued JavaScript files and rewrites their URLs.', 'performance-toolkit'); ?></p>
+                </div>
+
+                <div class="ptk-field">
                     <input type="hidden" name="<?php echo esc_attr($this->settings->optionKey()); ?>[minify_js]" value="0" />
                     <label>
                         <input type="checkbox" name="<?php echo esc_attr($this->settings->optionKey()); ?>[minify_js]" value="1" <?php checked((bool) $options['minify_js']); ?> />

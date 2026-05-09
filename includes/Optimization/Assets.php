@@ -27,6 +27,7 @@ final class Assets implements ModuleInterface
 
     public function register(): void
     {
+        add_filter('script_loader_tag', array($this, 'minifyScriptTag'), 9, 3);
         add_filter('script_loader_tag', array($this, 'addDeferAttribute'), 10, 3);
         add_filter('style_loader_tag', array($this, 'minifyStylesheetTag'), 10, 4);
         add_action('template_redirect', array($this, 'startOutputMinification'), 11);
@@ -49,6 +50,27 @@ final class Assets implements ModuleInterface
         return str_replace('<script ', '<script defer ', $tag);
     }
 
+    public function minifyScriptTag(string $tag, string $handle, string $src): string
+    {
+        if (is_admin() || ! $this->settings->getBool('minify_external_js') || $src === '') {
+            return $tag;
+        }
+
+        $source_path = $this->resolveLocalAssetPathFromUrl($src, 'js');
+
+        if ($source_path === null || str_ends_with($source_path, '.min.js')) {
+            return $tag;
+        }
+
+        $minified_url = $this->buildMinifiedJsUrl($source_path);
+
+        if ($minified_url === null) {
+            return $tag;
+        }
+
+        return str_replace($src, $minified_url, $tag);
+    }
+
     public function minifyStylesheetTag(string $html, string $handle, string $href, string $media): string
     {
         if (is_admin() || ! $this->settings->getBool('minify_external_css') || $href === '') {
@@ -59,7 +81,7 @@ final class Assets implements ModuleInterface
             return $html;
         }
 
-        $source_path = $this->resolveLocalCssPathFromUrl($href);
+        $source_path = $this->resolveLocalAssetPathFromUrl($href, 'css');
 
         if ($source_path === null || str_ends_with($source_path, '.min.css')) {
             return $html;
@@ -207,11 +229,11 @@ final class Assets implements ModuleInterface
         return (bool) preg_match($regex, $value);
     }
 
-    private function resolveLocalCssPathFromUrl(string $url): ?string
+    private function resolveLocalAssetPathFromUrl(string $url, string $extension): ?string
     {
         $path = (string) (wp_parse_url($url, PHP_URL_PATH) ?? '');
 
-        if ($path === '' || ! str_ends_with(strtolower($path), '.css')) {
+        if ($path === '' || ! str_ends_with(strtolower($path), '.' . strtolower($extension))) {
             return null;
         }
 
@@ -258,6 +280,38 @@ final class Assets implements ModuleInterface
 
         if (! is_file($target_path)) {
             $minified = self::minifyCss($content);
+
+            if ($minified === '') {
+                return null;
+            }
+
+            file_put_contents($target_path, $minified, LOCK_EX);
+        }
+
+        return $target_web;
+    }
+
+    private function buildMinifiedJsUrl(string $source_path): ?string
+    {
+        $content = file_get_contents($source_path);
+
+        if (! is_string($content) || $content === '') {
+            return null;
+        }
+
+        $cache_dir = WP_CONTENT_DIR . '/' . self::MINIFIED_ASSETS_SUBDIR;
+
+        if (! is_dir($cache_dir) && ! wp_mkdir_p($cache_dir)) {
+            return null;
+        }
+
+        $signature   = $source_path . '|' . (string) @filemtime($source_path) . '|' . (string) strlen($content);
+        $target_name = md5($signature) . '.min.js';
+        $target_path = $cache_dir . '/' . $target_name;
+        $target_web  = content_url(self::MINIFIED_ASSETS_SUBDIR . '/' . $target_name);
+
+        if (! is_file($target_path)) {
+            $minified = self::minifyJs($content);
 
             if ($minified === '') {
                 return null;
