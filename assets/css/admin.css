@@ -212,6 +212,34 @@
     font-size: 11px;
 }
 
+/* ── HTTP/1.1-only combination guidance ─────────────────────────────────── */
+.ptk-http11-only {
+    margin-top: 24px;
+    padding-top: 18px;
+    border-top: 1px solid #e2e4e7;
+}
+
+.ptk-http11-only h3 {
+    margin: 0 0 8px;
+    font-size: 14px;
+}
+
+.ptk-http11-warning {
+    margin-top: 10px;
+    padding: 10px 12px;
+    border: 1px solid #fcd34d;
+    background: #fffbeb;
+    border-radius: 6px;
+    color: #92400e;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+}
+
+.ptk-http11-note {
+    margin-top: 10px !important;
+}
+
 /* ── Database overview ──────────────────────────────────────────────────── */
 .ptk-db-stats {
     display: grid;

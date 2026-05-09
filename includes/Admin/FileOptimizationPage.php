@@ -150,6 +150,64 @@ final class FileOptimizationPage implements AdminPageInterface
                     <p><?php esc_html_e('Minifies inline script blocks in frontend HTML output.', 'performance-toolkit'); ?></p>
                 </div>
 
+                <div class="ptk-http11-only">
+                    <h3><?php esc_html_e('HTTP/1.1 only: File combination', 'performance-toolkit'); ?></h3>
+                    <p>
+                        <?php esc_html_e('Combining CSS/JS files is usually only beneficial on HTTP/1.1 servers. On HTTP/2 and HTTP/3, it often reduces cache efficiency and may hurt real-world performance.', 'performance-toolkit'); ?>
+                    </p>
+
+                    <div class="ptk-http11-warning">
+                        <strong><?php esc_html_e('Warning:', 'performance-toolkit'); ?></strong>
+                        <span><?php esc_html_e('File combination can break dependency order, plugin-specific assets, and conditional loading logic. Use only after testing key pages (home, shop, cart, checkout, account, blog, and landing pages).', 'performance-toolkit'); ?></span>
+                    </div>
+
+                    <div class="ptk-field" style="margin-top:14px;">
+                        <input type="hidden" name="<?php echo esc_attr($this->settings->optionKey()); ?>[combine_css]" value="0" />
+                        <label>
+                            <input type="checkbox" name="<?php echo esc_attr($this->settings->optionKey()); ?>[combine_css]" value="1" <?php checked((bool) $options['combine_css']); ?> />
+                            <span><?php esc_html_e('Combine external CSS files', 'performance-toolkit'); ?></span>
+                        </label>
+                        <p><?php esc_html_e('Merge eligible CSS files into fewer requests. Recommended only for HTTP/1.1 environments.', 'performance-toolkit'); ?></p>
+
+                        <label for="ptk-combine-css-exclusions" style="display:block;margin-top:10px;font-weight:600;">
+                            <?php esc_html_e('CSS combine exclusions', 'performance-toolkit'); ?>
+                        </label>
+                        <textarea
+                            id="ptk-combine-css-exclusions"
+                            name="<?php echo esc_attr($this->settings->optionKey()); ?>[combine_css_exclusions]"
+                            class="ptk-exclusions-textarea"
+                            rows="5"
+                            placeholder="<?php esc_attr_e("woocommerce-layout\nstyle.css\n/wp-content/themes/your-theme/css/*", 'performance-toolkit'); ?>"
+                            spellcheck="false"
+                        ><?php echo esc_textarea((string) $options['combine_css_exclusions']); ?></textarea>
+                    </div>
+
+                    <div class="ptk-field">
+                        <input type="hidden" name="<?php echo esc_attr($this->settings->optionKey()); ?>[combine_js]" value="0" />
+                        <label>
+                            <input type="checkbox" name="<?php echo esc_attr($this->settings->optionKey()); ?>[combine_js]" value="1" <?php checked((bool) $options['combine_js']); ?> />
+                            <span><?php esc_html_e('Combine external JavaScript files', 'performance-toolkit'); ?></span>
+                        </label>
+                        <p><?php esc_html_e('Merge eligible JS files into fewer requests. Recommended only for HTTP/1.1 environments.', 'performance-toolkit'); ?></p>
+
+                        <label for="ptk-combine-js-exclusions" style="display:block;margin-top:10px;font-weight:600;">
+                            <?php esc_html_e('JS combine exclusions', 'performance-toolkit'); ?>
+                        </label>
+                        <textarea
+                            id="ptk-combine-js-exclusions"
+                            name="<?php echo esc_attr($this->settings->optionKey()); ?>[combine_js_exclusions]"
+                            class="ptk-exclusions-textarea"
+                            rows="5"
+                            placeholder="<?php esc_attr_e("jquery-core\napp.js\n/wp-content/themes/your-theme/js/*", 'performance-toolkit'); ?>"
+                            spellcheck="false"
+                        ><?php echo esc_textarea((string) $options['combine_js_exclusions']); ?></textarea>
+                    </div>
+
+                    <p class="ptk-http11-note">
+                        <?php esc_html_e('Recommendation: keep minification enabled and only enable file combination when your origin truly serves HTTP/1.1 traffic.', 'performance-toolkit'); ?>
+                    </p>
+                </div>
+
                 <?php submit_button(__('Save changes', 'performance-toolkit')); ?>
             </form>
         </section>
