@@ -18,6 +18,10 @@ final class Settings
             'cache_ttl'            => 600,
             'max_cache_size_mb'    => 50,
             'cache_excluded_urls'  => '',
+            'cdn_provider'         => '',
+            'cloudflare_api_token' => '',
+            'cloudflare_zone_id'   => '',
+            'cloudflare_auto_purge' => false,
             'minify_html'          => false,
             'minify_css'           => false,
             'minify_external_css'  => false,
@@ -55,26 +59,39 @@ final class Settings
     public function sanitize($raw): array
     {
         $defaults = $this->defaults();
-        $raw = is_array($raw) ? $raw : array();
+        $raw      = is_array($raw) ? $raw : array();
+        $saved    = function_exists('get_option') ? get_option(self::OPTION_KEY, array()) : array();
+        $saved    = is_array($saved) ? $saved : array();
+        $base     = function_exists('wp_parse_args') ? wp_parse_args($saved, $defaults) : array_merge($defaults, $saved);
+
+        $provider = $this->sanitizeKey((string) ($raw['cdn_provider'] ?? $base['cdn_provider']));
+
+        if ($provider !== 'cloudflare') {
+            $provider = '';
+        }
 
         return array(
-            'enable_page_cache'   => ! empty($raw['enable_page_cache']),
-            'cache_ttl'           => max(60, (int) ($raw['cache_ttl'] ?? $defaults['cache_ttl'])),
-            'max_cache_size_mb'   => max(1, (int) ($raw['max_cache_size_mb'] ?? $defaults['max_cache_size_mb'])),
-            'cache_excluded_urls' => sanitize_textarea_field((string) ($raw['cache_excluded_urls'] ?? '')),
-            'minify_html'         => ! empty($raw['minify_html']),
-            'minify_css'          => ! empty($raw['minify_css']),
-            'minify_external_css' => ! empty($raw['minify_external_css']),
-            'minify_external_css_exclusions' => sanitize_textarea_field((string) ($raw['minify_external_css_exclusions'] ?? '')),
-            'minify_external_js'  => ! empty($raw['minify_external_js']),
-            'minify_external_js_exclusions' => sanitize_textarea_field((string) ($raw['minify_external_js_exclusions'] ?? '')),
-            'combine_css'         => ! empty($raw['combine_css']),
-            'combine_css_exclusions' => sanitize_textarea_field((string) ($raw['combine_css_exclusions'] ?? '')),
-            'combine_js'          => ! empty($raw['combine_js']),
-            'combine_js_exclusions' => sanitize_textarea_field((string) ($raw['combine_js_exclusions'] ?? '')),
-            'minify_js'           => ! empty($raw['minify_js']),
-            'defer_scripts'       => ! empty($raw['defer_scripts']),
-            'lazy_load_images'    => ! empty($raw['lazy_load_images']),
+            'enable_page_cache'   => array_key_exists('enable_page_cache', $raw) ? ! empty($raw['enable_page_cache']) : (bool) $base['enable_page_cache'],
+            'cache_ttl'           => max(60, (int) ($raw['cache_ttl'] ?? $base['cache_ttl'])),
+            'max_cache_size_mb'   => max(1, (int) ($raw['max_cache_size_mb'] ?? $base['max_cache_size_mb'])),
+            'cache_excluded_urls' => $this->sanitizeTextarea((string) ($raw['cache_excluded_urls'] ?? $base['cache_excluded_urls'])),
+            'cdn_provider'        => $provider,
+            'cloudflare_api_token' => $this->sanitizeText((string) ($raw['cloudflare_api_token'] ?? $base['cloudflare_api_token'])),
+            'cloudflare_zone_id'  => $this->sanitizeText((string) ($raw['cloudflare_zone_id'] ?? $base['cloudflare_zone_id'])),
+            'cloudflare_auto_purge' => array_key_exists('cloudflare_auto_purge', $raw) ? ! empty($raw['cloudflare_auto_purge']) : (bool) $base['cloudflare_auto_purge'],
+            'minify_html'         => array_key_exists('minify_html', $raw) ? ! empty($raw['minify_html']) : (bool) $base['minify_html'],
+            'minify_css'          => array_key_exists('minify_css', $raw) ? ! empty($raw['minify_css']) : (bool) $base['minify_css'],
+            'minify_external_css' => array_key_exists('minify_external_css', $raw) ? ! empty($raw['minify_external_css']) : (bool) $base['minify_external_css'],
+            'minify_external_css_exclusions' => $this->sanitizeTextarea((string) ($raw['minify_external_css_exclusions'] ?? $base['minify_external_css_exclusions'])),
+            'minify_external_js'  => array_key_exists('minify_external_js', $raw) ? ! empty($raw['minify_external_js']) : (bool) $base['minify_external_js'],
+            'minify_external_js_exclusions' => $this->sanitizeTextarea((string) ($raw['minify_external_js_exclusions'] ?? $base['minify_external_js_exclusions'])),
+            'combine_css'         => array_key_exists('combine_css', $raw) ? ! empty($raw['combine_css']) : (bool) $base['combine_css'],
+            'combine_css_exclusions' => $this->sanitizeTextarea((string) ($raw['combine_css_exclusions'] ?? $base['combine_css_exclusions'])),
+            'combine_js'          => array_key_exists('combine_js', $raw) ? ! empty($raw['combine_js']) : (bool) $base['combine_js'],
+            'combine_js_exclusions' => $this->sanitizeTextarea((string) ($raw['combine_js_exclusions'] ?? $base['combine_js_exclusions'])),
+            'minify_js'           => array_key_exists('minify_js', $raw) ? ! empty($raw['minify_js']) : (bool) $base['minify_js'],
+            'defer_scripts'       => array_key_exists('defer_scripts', $raw) ? ! empty($raw['defer_scripts']) : (bool) $base['defer_scripts'],
+            'lazy_load_images'    => array_key_exists('lazy_load_images', $raw) ? ! empty($raw['lazy_load_images']) : (bool) $base['lazy_load_images'],
         );
     }
 
@@ -90,6 +107,33 @@ final class Settings
         }
 
         return wp_parse_args($saved, $this->defaults());
+    }
+
+    private function sanitizeText(string $value): string
+    {
+        if (function_exists('sanitize_text_field')) {
+            return sanitize_text_field($value);
+        }
+
+        return trim(strip_tags($value));
+    }
+
+    private function sanitizeTextarea(string $value): string
+    {
+        if (function_exists('sanitize_textarea_field')) {
+            return sanitize_textarea_field($value);
+        }
+
+        return trim(str_replace("\r", '', strip_tags($value)));
+    }
+
+    private function sanitizeKey(string $value): string
+    {
+        if (function_exists('sanitize_key')) {
+            return sanitize_key($value);
+        }
+
+        return (string) preg_replace('/[^a-z0-9_\-]/', '', strtolower($value));
     }
 
     public function getBool(string $key): bool
