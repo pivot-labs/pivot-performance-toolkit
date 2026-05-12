@@ -6,6 +6,7 @@ namespace PerformanceToolkit\Cache;
 
 use PerformanceToolkit\Contracts\ModuleInterface;
 use PerformanceToolkit\Core\Settings;
+use PerformanceToolkit\Utils\FilesystemCheck;
 
 final class PageCache implements ModuleInterface
 {
@@ -34,7 +35,15 @@ final class PageCache implements ModuleInterface
 
     public function startBuffering(): void
     {
-        if (! $this->settings->getBool('enable_page_cache') || ! $this->isCacheableRequest()) {
+        if (! $this->settings->getBool('enable_page_cache')) {
+            $this->sendDebugHeaders('BYPASS', 'disabled');
+            return;
+        }
+
+        $bypass_reason = $this->bypassReason();
+
+        if ($bypass_reason !== null) {
+            $this->sendDebugHeaders('BYPASS', $bypass_reason);
             return;
         }
 
@@ -42,16 +51,30 @@ final class PageCache implements ModuleInterface
             wp_mkdir_p($this->cache_dir);
         }
 
+        // Check if cache directory is writable; if not, skip caching but don't break the site
+        if (! FilesystemCheck::isDirectoryWritable($this->cache_dir)) {
+            $this->sendDebugHeaders('BYPASS', 'fs_readonly');
+            FilesystemCheck::invalidateCache();
+            return;
+        }
+
         $cache_file = $this->cacheFilePath();
 
         ob_start(
-            static function (string $html) use ($cache_file): string {
+            function (string $html) use ($cache_file): string {
                 if ($html === '') {
                     return $html;
                 }
 
-                file_put_contents($cache_file, $html, LOCK_EX);
-                header('X-Performance-Toolkit-Cache: MISS');
+                // Attempt to write cache; fail gracefully
+                $written = @file_put_contents($cache_file, $html, LOCK_EX);
+
+                if ($written === false) {
+                    $this->sendDebugHeaders('BYPASS', 'fs_write_failed');
+                    FilesystemCheck::invalidateCache();
+                } else {
+                    $this->sendDebugHeaders('MISS');
+                }
 
                 return $html;
             }
@@ -79,26 +102,55 @@ final class PageCache implements ModuleInterface
             wp_mkdir_p($this->cache_dir);
         }
 
-        $enabled = $this->settings->getBool('enable_page_cache');
-        $ttl     = $this->settings->getInt('cache_ttl');
+        // Check writeability before attempting write
+        if (! FilesystemCheck::isDirectoryWritable($this->cache_dir)) {
+            FilesystemCheck::invalidateCache();
+            return;
+        }
 
-        $content = sprintf(
-            "<?php\nreturn array(\n    'enabled' => %s,\n    'ttl'     => %d,\n);\n",
-            $enabled ? 'true' : 'false',
-            $ttl
+        $config = array(
+            'enabled'        => $this->settings->getBool('enable_page_cache'),
+            'ttl'            => $this->settings->getInt('cache_ttl'),
+            'bypass_cookies' => $this->settings->getLines('cache_bypass_cookies'),
         );
 
-        file_put_contents($this->cache_dir . '/config.php', $content, LOCK_EX);
+        $content = "<?php\nreturn " . var_export($config, true) . ";\n";
+
+        $result = @file_put_contents($this->cache_dir . '/config.php', $content, LOCK_EX);
+
+        if ($result === false) {
+            FilesystemCheck::invalidateCache();
+        }
     }
 
-    private function isCacheableRequest(): bool
+    private function bypassReason(): ?string
     {
         if (is_admin() || is_user_logged_in() || is_preview() || is_feed() || is_404()) {
-            return false;
+            if (is_admin()) {
+                return 'admin';
+            }
+
+            if (is_user_logged_in()) {
+                return 'logged_in';
+            }
+
+            if (is_preview()) {
+                return 'preview';
+            }
+
+            if (is_feed()) {
+                return 'feed';
+            }
+
+            return '404';
         }
 
         if (! isset($_SERVER['REQUEST_METHOD']) || strtoupper((string) $_SERVER['REQUEST_METHOD']) !== 'GET') {
-            return false;
+            return 'method';
+        }
+
+        if ($this->hasBypassCookie()) {
+            return 'cookie_bypass';
         }
 
         $request_uri  = isset($_SERVER['REQUEST_URI']) ? (string) $_SERVER['REQUEST_URI'] : '/';
@@ -108,17 +160,71 @@ final class PageCache implements ModuleInterface
             if (strpos($pattern, '*') !== false) {
                 // Wildcard pattern — e.g. /my-account/*
                 if (fnmatch($pattern, $request_path)) {
-                    return false;
+                    return 'excluded_url';
                 }
             } else {
                 // Prefix match — /checkout matches /checkout, /checkout/, /checkout/step-2
                 if (strpos($request_path, rtrim($pattern, '/')) === 0) {
-                    return false;
+                    return 'excluded_url';
                 }
             }
         }
 
-        return true;
+        return null;
+    }
+
+    private function hasBypassCookie(): bool
+    {
+        $rules = $this->settings->getLines('cache_bypass_cookies');
+
+        if ($rules === array() || ! isset($_COOKIE) || ! is_array($_COOKIE)) {
+            return false;
+        }
+
+        $cookie_names = array_keys($_COOKIE);
+
+        foreach ($rules as $rule) {
+            $rule = trim($rule);
+
+            if ($rule === '') {
+                continue;
+            }
+
+            foreach ($cookie_names as $cookie_name) {
+                if (! is_string($cookie_name) || $cookie_name === '') {
+                    continue;
+                }
+
+                if (str_contains($rule, '*')) {
+                    if (fnmatch($rule, $cookie_name)) {
+                        return true;
+                    }
+
+                    continue;
+                }
+
+                if (strcasecmp($rule, $cookie_name) === 0) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private function sendDebugHeaders(string $status, ?string $reason = null): void
+    {
+        if (headers_sent()) {
+            return;
+        }
+
+        // Keep both names for compatibility while introducing short PTK header.
+        header('X-PTK-Cache: ' . $status);
+        header('X-Performance-Toolkit-Cache: ' . $status);
+
+        if ($reason !== null && $reason !== '') {
+            header('X-PTK-Cache-Reason: ' . $reason);
+        }
     }
 
     private function cacheFilePath(): string

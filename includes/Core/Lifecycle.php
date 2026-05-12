@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PerformanceToolkit\Core;
 
+use PerformanceToolkit\Utils\FilesystemCheck;
+
 final class Lifecycle
 {
     private static function dropinSource(): string
@@ -27,6 +29,10 @@ final class Lifecycle
         if (! file_exists(self::cacheDir())) {
             wp_mkdir_p(self::cacheDir());
         }
+
+        // Check filesystem status and cache it for admin display.
+        $fs_status = FilesystemCheck::checkCacheDirectories();
+        FilesystemCheck::setCachedStatus($fs_status);
 
         // Install the advanced-cache.php drop-in.
         self::installDropin();

@@ -11,9 +11,12 @@ final class LazyLoad implements ModuleInterface
 {
     private Settings $settings;
 
-    public function __construct(Settings $settings)
+    private ImageOptimizerDetector $optimizer_detector;
+
+    public function __construct(Settings $settings, ImageOptimizerDetector $optimizer_detector)
     {
-        $this->settings = $settings;
+        $this->settings           = $settings;
+        $this->optimizer_detector = $optimizer_detector;
     }
 
     public function register(): void
@@ -23,6 +26,10 @@ final class LazyLoad implements ModuleInterface
 
     public function addLazyLoadingToImages(string $content): string
     {
+        if ($this->optimizer_detector->hasExternalLazyLoadEnabled()) {
+            return $content;
+        }
+
         if (! $this->settings->getBool('lazy_load_images') || is_admin() || ! str_contains($content, '<img')) {
             return $content;
         }

@@ -6,6 +6,7 @@ namespace PerformanceToolkit\Optimization;
 
 use PerformanceToolkit\Contracts\ModuleInterface;
 use PerformanceToolkit\Core\Settings;
+use PerformanceToolkit\Utils\FilesystemCheck;
 
 final class Assets implements ModuleInterface
 {
@@ -297,6 +298,11 @@ final class Assets implements ModuleInterface
             return null;
         }
 
+        // Check if cache directory is writable
+        if (! FilesystemCheck::isDirectoryWritable($cache_dir)) {
+            return null;
+        }
+
         $signature     = $source_path . '|' . (string) @filemtime($source_path) . '|' . (string) strlen($content);
         $target_name   = md5($signature) . '.min.css';
         $target_path   = $cache_dir . '/' . $target_name;
@@ -309,7 +315,12 @@ final class Assets implements ModuleInterface
                 return null;
             }
 
-            file_put_contents($target_path, $minified, LOCK_EX);
+            $written = @file_put_contents($target_path, $minified, LOCK_EX);
+
+            if ($written === false) {
+                FilesystemCheck::invalidateCache();
+                return null;
+            }
         }
 
         return $target_web;
@@ -329,6 +340,11 @@ final class Assets implements ModuleInterface
             return null;
         }
 
+        // Check if cache directory is writable
+        if (! FilesystemCheck::isDirectoryWritable($cache_dir)) {
+            return null;
+        }
+
         $signature   = $source_path . '|' . (string) @filemtime($source_path) . '|' . (string) strlen($content);
         $target_name = md5($signature) . '.min.js';
         $target_path = $cache_dir . '/' . $target_name;
@@ -341,7 +357,12 @@ final class Assets implements ModuleInterface
                 return null;
             }
 
-            file_put_contents($target_path, $minified, LOCK_EX);
+            $written = @file_put_contents($target_path, $minified, LOCK_EX);
+
+            if ($written === false) {
+                FilesystemCheck::invalidateCache();
+                return null;
+            }
         }
 
         return $target_web;

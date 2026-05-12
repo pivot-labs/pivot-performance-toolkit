@@ -29,6 +29,7 @@ final class LucideIcons
         'dashicons-admin-tools' => '<path d="m14.7 6.3 3 3"></path><path d="m8 12 9.3-9.3a2.1 2.1 0 1 1 3 3L11 15"></path><path d="M9 7 4 12"></path><path d="m5 8 3 3"></path><path d="m2 17 3 3"></path><path d="m4 19 4-4"></path><path d="m7 22 7-7"></path>',
         'dashicons-media-document' => '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6"></path><path d="M8 13h8"></path><path d="M8 17h8"></path>',
         'dashicons-heart' => '<path d="M19.5 13.6 12 21l-7.5-7.4a4.8 4.8 0 0 1 6.7-6.9L12 7.5l.8-.8a4.8 4.8 0 1 1 6.7 6.9z"></path>',
+        'monitor-cog' => '<path d="M12 17v4"></path><path d="m14.305 7.53.923-.382"></path><path d="m15.228 4.852-.923-.383"></path><path d="m16.852 3.228-.383-.924"></path><path d="m16.852 8.772-.383.923"></path><path d="m19.148 3.228.383-.924"></path><path d="m19.53 9.696-.382-.924"></path><path d="m20.772 4.852.924-.383"></path><path d="m20.772 7.148.924.383"></path><path d="M22 13v2a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7"></path><path d="M8 21h8"></path><circle cx="18" cy="6" r="3"></circle>',
     );
 
     public static function render(string $icon_key): string

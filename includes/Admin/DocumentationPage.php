@@ -6,6 +6,8 @@ namespace PerformanceToolkit\Admin;
 
 final class DocumentationPage implements AdminPageInterface
 {
+    private const DOCS_URL = 'http://docs.wpperformancetoolkit.com';
+
     public function slug(): string
     {
         return 'performance-toolkit-documentation';
@@ -31,9 +33,18 @@ final class DocumentationPage implements AdminPageInterface
         ?>
         <section id="ptk-documentation" class="ptk-card">
             <h2><?php esc_html_e('Documentation', 'performance-toolkit'); ?></h2>
-            <p><?php esc_html_e('Documentation links and guidance will be added here.', 'performance-toolkit'); ?></p>
+            <p><?php esc_html_e('Full guides, setup instructions, and troubleshooting are available in the external documentation site.', 'performance-toolkit'); ?></p>
+            <p>
+                <a
+                    class="button button-primary"
+                    href="<?php echo esc_url(self::DOCS_URL); ?>"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <?php esc_html_e('Open Documentation', 'performance-toolkit'); ?>
+                </a>
+            </p>
         </section>
         <?php
     }
 }
-
