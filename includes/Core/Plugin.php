@@ -19,6 +19,7 @@ use PerformanceToolkit\Admin\ToolsPage;
 use PerformanceToolkit\Cache\PageCache;
 use PerformanceToolkit\Contracts\ModuleInterface;
 use PerformanceToolkit\Media\LazyLoad;
+use PerformanceToolkit\Integrations\CloudflareIntegration;
 use PerformanceToolkit\Optimization\Assets;
 
 final class Plugin
@@ -55,6 +56,7 @@ final class Plugin
 
         $this->booted = true;
         $this->settings = new Settings();
+        $cloudflare = new CloudflareIntegration($this->settings);
 
         add_action('admin_init', array($this->settings, 'register'));
 
@@ -66,7 +68,7 @@ final class Plugin
                     new FileOptimizationPage($this->settings),
                     new MediaOptimizationPage($this->settings),
                     new DatabasePage(new DatabaseOptimizer()),
-                    new CdnIntegrationsPage(),
+                    new CdnIntegrationsPage($this->settings, $cloudflare),
                     new AdvancedRulesPage($this->settings),
                     new ToolsPage(),
                     new DocumentationPage(),
@@ -80,6 +82,7 @@ final class Plugin
             new PageCache($this->settings),
             new Assets($this->settings),
             new LazyLoad($this->settings),
+            $cloudflare,
         );
 
         foreach ($this->modules as $module) {
