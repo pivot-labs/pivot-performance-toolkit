@@ -8,6 +8,8 @@ use PerformanceToolkit\Core\Settings;
 
 final class ToolsPage implements AdminPageInterface
 {
+    private const EXPORT_PLUGIN = 'performance-toolkit';
+    private const EXPORT_SCHEMA_VERSION = 1;
     private const CLEAR_MINIFIED_ACTION = 'performance_toolkit_clear_minified_assets';
     private const EXPORT_SETTINGS_ACTION = 'performance_toolkit_export_settings';
     private const IMPORT_SETTINGS_ACTION = 'performance_toolkit_import_settings';
@@ -113,7 +115,7 @@ final class ToolsPage implements AdminPageInterface
                 <h3 style="margin:0 0 8px;"><?php esc_html_e('Export settings', 'performance-toolkit'); ?></h3>
                 <p><?php esc_html_e('Download current Performance Toolkit settings as a JSON file.', 'performance-toolkit'); ?></p>
                 <p style="margin:8px 0 12px;padding:8px 12px;background-color:#f0f6fc;border-left:3px solid #0969da;color:#24292f;">
-                    <?php esc_html_e('Includes all settings: page cache, bypass cookies, assets optimization, CDN configuration, and more.', 'performance-toolkit'); ?>
+                    <?php esc_html_e('Includes all settings plus export metadata such as schema version, export timestamp, and plugin version.', 'performance-toolkit'); ?>
                 </p>
                 <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
                     <input type="hidden" name="action" value="<?php echo esc_attr(self::EXPORT_SETTINGS_ACTION); ?>" />
@@ -133,7 +135,7 @@ final class ToolsPage implements AdminPageInterface
                 <h3 style="margin:0 0 8px;"><?php esc_html_e('Import settings', 'performance-toolkit'); ?></h3>
                 <p><?php esc_html_e('Import settings from a previously exported JSON file.', 'performance-toolkit'); ?></p>
                 <p style="margin:8px 0 12px;padding:8px 12px;background-color:#f0f6fc;border-left:3px solid #0969da;color:#24292f;">
-                    <?php esc_html_e('This will import all cached settings including cache bypass cookies configuration, which helps with WooCommerce and other plugins that rely on cookies for personalization.', 'performance-toolkit'); ?>
+                    <?php esc_html_e('Imports settings with schema validation and a report showing how many keys were imported, ignored, or preserved.', 'performance-toolkit'); ?>
                 </p>
                 <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" enctype="multipart/form-data">
                     <input type="hidden" name="action" value="<?php echo esc_attr(self::IMPORT_SETTINGS_ACTION); ?>" />
@@ -234,7 +236,9 @@ final class ToolsPage implements AdminPageInterface
         }
 
         $payload = array(
-            'plugin'          => 'performance-toolkit',
+            'plugin'          => self::EXPORT_PLUGIN,
+            'schema_version'  => self::EXPORT_SCHEMA_VERSION,
+            'plugin_version'  => defined('PERFORMANCE_TOOLKIT_VERSION') ? PERFORMANCE_TOOLKIT_VERSION : '',
             'exported_at_gmt' => gmdate('c'),
             'include_secrets' => $include_secrets,
             'settings'        => $settings,
@@ -292,32 +296,66 @@ final class ToolsPage implements AdminPageInterface
             $this->redirectWithNotice(false, __('Import file is not valid JSON.', 'performance-toolkit'));
         }
 
-        $incoming = isset($decoded['settings']) && is_array($decoded['settings']) ? $decoded['settings'] : $decoded;
+        $has_envelope = array_key_exists('settings', $decoded)
+            || array_key_exists('schema_version', $decoded)
+            || array_key_exists('plugin', $decoded);
+
+        $schema_version = 0;
+        $incoming       = $decoded;
+
+        if ($has_envelope) {
+            $plugin = isset($decoded['plugin']) ? sanitize_key((string) $decoded['plugin']) : '';
+
+            if ($plugin !== '' && $plugin !== self::EXPORT_PLUGIN) {
+                $this->redirectWithNotice(false, __('Import file is not a Performance Toolkit export.', 'performance-toolkit'));
+            }
+
+            $schema_version = isset($decoded['schema_version']) ? max(0, (int) $decoded['schema_version']) : 0;
+
+            if (! $this->isSupportedSchemaVersion($schema_version)) {
+                $this->redirectWithNotice(
+                    false,
+                    sprintf(
+                        /* translators: %d: schema version */
+                        __('Unsupported import schema version: %d.', 'performance-toolkit'),
+                        $schema_version
+                    )
+                );
+            }
+
+            $incoming = isset($decoded['settings']) && is_array($decoded['settings']) ? $decoded['settings'] : null;
+        }
 
         if (! is_array($incoming)) {
             $this->redirectWithNotice(false, __('No settings payload found in import file.', 'performance-toolkit'));
         }
 
+        $allowed_keys        = array_fill_keys(array_keys($this->settings->defaults()), true);
+        $recognized_settings = array_intersect_key($incoming, $allowed_keys);
+        $ignored_keys        = array_values(array_diff(array_keys($incoming), array_keys($allowed_keys)));
+        $preserved_secrets   = 0;
+
         foreach (self::SECRET_KEYS as $secret_key) {
-            if (! array_key_exists($secret_key, $incoming)) {
+            if (! array_key_exists($secret_key, $recognized_settings)) {
                 continue;
             }
 
-            $value = (string) $incoming[$secret_key];
+            $value = (string) $recognized_settings[$secret_key];
 
             if ($value === '' || $value === self::REDACTED_VALUE) {
-                unset($incoming[$secret_key]);
+                unset($recognized_settings[$secret_key]);
+                ++$preserved_secrets;
             }
         }
 
-        $sanitized = $this->settings->sanitize($incoming);
+        $sanitized = $this->settings->sanitize($recognized_settings);
         update_option($this->settings->optionKey(), $sanitized);
 
-        $import_count = count(array_filter($incoming, static fn($key): bool => array_key_exists($key, $this->settings->defaults()), ARRAY_FILTER_USE_KEY));
-        $message = sprintf(
-            /* translators: %d: number of settings imported */
-            esc_html__('Settings imported successfully. %d setting(s) imported, including cache bypass cookies.', 'performance-toolkit'),
-            $import_count
+        $message = $this->buildImportReportMessage(
+            count($recognized_settings),
+            count($ignored_keys),
+            $preserved_secrets,
+            $schema_version
         );
 
         $this->redirectWithNotice(true, $message);
@@ -371,6 +409,46 @@ final class ToolsPage implements AdminPageInterface
 
         wp_safe_redirect($redirect_url);
         exit;
+    }
+
+    private function isSupportedSchemaVersion(int $schema_version): bool
+    {
+        return in_array($schema_version, array(0, self::EXPORT_SCHEMA_VERSION), true);
+    }
+
+    private function buildImportReportMessage(int $imported_count, int $ignored_count, int $preserved_secrets, int $schema_version): string
+    {
+        $parts = array();
+
+        $parts[] = $schema_version > 0
+            ? sprintf(
+                /* translators: %d: schema version */
+                __('Schema v%d accepted', 'performance-toolkit'),
+                $schema_version
+            )
+            : __('Legacy import format accepted', 'performance-toolkit');
+
+        $parts[] = sprintf(
+            /* translators: %d: number of recognized settings imported */
+            _n('%d key imported', '%d keys imported', $imported_count, 'performance-toolkit'),
+            $imported_count
+        );
+
+        $parts[] = sprintf(
+            /* translators: %d: number of ignored settings keys */
+            _n('%d key ignored', '%d keys ignored', $ignored_count, 'performance-toolkit'),
+            $ignored_count
+        );
+
+        if ($preserved_secrets > 0) {
+            $parts[] = sprintf(
+                /* translators: %d: number of preserved secret values */
+                _n('%d secret preserved', '%d secrets preserved', $preserved_secrets, 'performance-toolkit'),
+                $preserved_secrets
+            );
+        }
+
+        return __('Settings imported successfully.', 'performance-toolkit') . ' ' . implode(', ', $parts) . '.';
     }
 
     /**
