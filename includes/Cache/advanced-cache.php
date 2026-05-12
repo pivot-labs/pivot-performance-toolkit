@@ -42,6 +42,38 @@ if ( empty( $ptk_config['enabled'] ) ) {
     return;
 }
 
+$ptk_bypass_cookies = isset( $ptk_config['bypass_cookies'] ) && is_array( $ptk_config['bypass_cookies'] )
+    ? $ptk_config['bypass_cookies']
+    : array();
+
+if ( $ptk_bypass_cookies !== array() && isset( $_COOKIE ) && is_array( $_COOKIE ) ) {
+    foreach ( array_keys( $_COOKIE ) as $ptk_cookie_name ) {
+        if ( ! is_string( $ptk_cookie_name ) || $ptk_cookie_name === '' ) {
+            continue;
+        }
+
+        foreach ( $ptk_bypass_cookies as $ptk_rule ) {
+            $ptk_rule = trim( (string) $ptk_rule );
+
+            if ( $ptk_rule === '' ) {
+                continue;
+            }
+
+            if ( strpos( $ptk_rule, '*' ) !== false ) {
+                if ( fnmatch( $ptk_rule, $ptk_cookie_name ) ) {
+                    return;
+                }
+
+                continue;
+            }
+
+            if ( strcasecmp( $ptk_rule, $ptk_cookie_name ) === 0 ) {
+                return;
+            }
+        }
+    }
+}
+
 $ptk_ttl       = isset( $ptk_config['ttl'] ) ? (int) $ptk_config['ttl'] : 3600;
 $ptk_cache_dir = WP_CONTENT_DIR . '/cache/performance-toolkit';
 $ptk_scheme    = ( ! empty( $_SERVER['HTTPS'] ) && strtolower( (string) $_SERVER['HTTPS'] ) !== 'off' ) ? 'https' : 'http';
@@ -60,6 +92,7 @@ if ( ( (int) filemtime( $ptk_file ) + $ptk_ttl ) < time() ) {
     return;
 }
 
+header( 'X-PTK-Cache: HIT' );
 header( 'X-Performance-Toolkit-Cache: HIT' );
 readfile( $ptk_file );
 exit;

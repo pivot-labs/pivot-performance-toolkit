@@ -5,14 +5,18 @@ declare(strict_types=1);
 namespace PerformanceToolkit\Admin;
 
 use PerformanceToolkit\Core\Settings;
+use PerformanceToolkit\Media\ImageOptimizerDetector;
 
 final class MediaOptimizationPage implements AdminPageInterface
 {
     private Settings $settings;
 
-    public function __construct(Settings $settings)
+    private ImageOptimizerDetector $optimizer_detector;
+
+    public function __construct(Settings $settings, ImageOptimizerDetector $optimizer_detector)
     {
-        $this->settings = $settings;
+        $this->settings           = $settings;
+        $this->optimizer_detector = $optimizer_detector;
     }
 
     public function slug(): string
@@ -37,10 +41,39 @@ final class MediaOptimizationPage implements AdminPageInterface
 
     public function renderContent(): void
     {
-        $options = $this->settings->all();
+        $options             = $this->settings->all();
+        $active_optimizers   = $this->optimizer_detector->activeOptimizers();
+        $lazyload_providers  = $this->optimizer_detector->activeLazyLoadProviders();
+        $external_lazyload_on = $lazyload_providers !== array();
+        $optimizer_status    = $active_optimizers === array()
+            ? __('None detected', 'performance-toolkit')
+            : implode(', ', $active_optimizers);
         ?>
         <section id="ptk-media-optimization" class="ptk-card">
             <h2><?php esc_html_e('Media Optimization', 'performance-toolkit'); ?></h2>
+
+            <div class="ptk-field" style="border:1px solid #dcdcde;padding:12px;border-radius:6px;margin-bottom:16px;">
+                <strong><?php esc_html_e('Detected image optimizers', 'performance-toolkit'); ?></strong>
+                <p style="margin:6px 0 0;"><?php echo esc_html($optimizer_status); ?></p>
+                <?php if ($active_optimizers !== array()) : ?>
+                    <p style="margin:6px 0 0;color:#646970;">
+                        <?php esc_html_e('Compatibility mode: keep only one lazy-load system enabled to avoid duplicate behavior.', 'performance-toolkit'); ?>
+                    </p>
+                <?php endif; ?>
+
+                <?php if ($external_lazyload_on) : ?>
+                    <p style="margin:6px 0 0;color:#b32d2e;">
+                        <?php
+                        printf(
+                            /* translators: %s: plugin names */
+                            esc_html__('Lazy-load is currently managed by: %s. Performance Toolkit lazy-load is temporarily disabled to prevent conflicts.', 'performance-toolkit'),
+                            esc_html(implode(', ', $lazyload_providers))
+                        );
+                        ?>
+                    </p>
+                <?php endif; ?>
+            </div>
+
             <form method="post" action="<?php echo esc_url(admin_url('options.php')); ?>">
                 <?php settings_fields('performance_toolkit'); ?>
 
@@ -62,9 +95,13 @@ final class MediaOptimizationPage implements AdminPageInterface
                 <input type="hidden" name="<?php echo esc_attr($this->settings->optionKey()); ?>[defer_scripts]" value="<?php echo ! empty($options['defer_scripts']) ? '1' : '0'; ?>" />
 
                 <div class="ptk-field">
-                    <input type="hidden" name="<?php echo esc_attr($this->settings->optionKey()); ?>[lazy_load_images]" value="0" />
+                    <?php if ($external_lazyload_on) : ?>
+                        <input type="hidden" name="<?php echo esc_attr($this->settings->optionKey()); ?>[lazy_load_images]" value="<?php echo ! empty($options['lazy_load_images']) ? '1' : '0'; ?>" />
+                    <?php else : ?>
+                        <input type="hidden" name="<?php echo esc_attr($this->settings->optionKey()); ?>[lazy_load_images]" value="0" />
+                    <?php endif; ?>
                     <label>
-                        <input type="checkbox" name="<?php echo esc_attr($this->settings->optionKey()); ?>[lazy_load_images]" value="1" <?php checked((bool) $options['lazy_load_images']); ?> />
+                        <input type="checkbox" name="<?php echo esc_attr($this->settings->optionKey()); ?>[lazy_load_images]" value="1" <?php checked((bool) $options['lazy_load_images']); ?> <?php disabled($external_lazyload_on); ?> />
                         <span><?php esc_html_e('Lazy load content images', 'performance-toolkit'); ?></span>
                     </label>
                     <p><?php esc_html_e('Adds loading="lazy" to post content images missing the attribute.', 'performance-toolkit'); ?></p>

@@ -39,6 +39,13 @@ final class AdvancedRulesPage implements AdminPageInterface
     {
         $options = $this->settings->all();
         $key     = $this->settings->optionKey();
+        $woo_defaults = array(
+            '/cart',
+            '/checkout',
+            '/my-account',
+            '/wc-api/*',
+            '/?wc-ajax=*',
+        );
         ?>
         <section id="ptk-advanced-rules" class="ptk-card">
             <h2><?php esc_html_e('Cache exclusions', 'performance-toolkit'); ?></h2>
@@ -69,6 +76,11 @@ final class AdvancedRulesPage implements AdminPageInterface
                 <div class="ptk-field">
                     <label for="ptk-excluded-urls"><strong><?php esc_html_e('Never-cache URLs', 'performance-toolkit'); ?></strong></label>
                     <p><?php esc_html_e('Paths are matched from the start of the URL. Use * for wildcards.', 'performance-toolkit'); ?></p>
+                    <p>
+                        <button type="button" class="button-link" id="ptk-add-woo-exclusions">
+                            <?php esc_html_e('Add WooCommerce default exclusions', 'performance-toolkit'); ?>
+                        </button>
+                    </p>
                     <textarea
                         id="ptk-excluded-urls"
                         name="<?php echo esc_attr($key); ?>[cache_excluded_urls]"
@@ -90,8 +102,72 @@ final class AdvancedRulesPage implements AdminPageInterface
                     </p>
                 </div>
 
+                <div class="ptk-field">
+                    <label for="ptk-bypass-cookies"><strong><?php esc_html_e('Bypass cache when cookies exist', 'performance-toolkit'); ?></strong></label>
+                    <p><?php esc_html_e('One cookie name or wildcard pattern per line. If a request contains any matching cookie, page cache is bypassed.', 'performance-toolkit'); ?></p>
+                    <textarea
+                        id="ptk-bypass-cookies"
+                        name="<?php echo esc_attr($key); ?>[cache_bypass_cookies]"
+                        class="ptk-exclusions-textarea"
+                        rows="6"
+                        spellcheck="false"
+                    ><?php echo esc_textarea((string) $options['cache_bypass_cookies']); ?></textarea>
+                    <p class="ptk-exclusions-hint">
+                        <?php
+                        echo wp_kses(
+                            __('<strong>Examples:</strong> <code>woocommerce_items_in_cart</code>, <code>woocommerce_cart_hash</code>, <code>wp_woocommerce_session_*</code>.', 'performance-toolkit'),
+                            array(
+                                'strong' => array(),
+                                'code'   => array(),
+                            )
+                        );
+                        ?>
+                    </p>
+                </div>
+
                 <?php submit_button(__('Save changes', 'performance-toolkit')); ?>
             </form>
+
+            <script>
+                (function () {
+                    const addButton = document.getElementById('ptk-add-woo-exclusions');
+                    const textarea = document.getElementById('ptk-excluded-urls');
+                    const defaults = <?php echo wp_json_encode($woo_defaults); ?>;
+
+                    if (!addButton || !textarea || !Array.isArray(defaults)) {
+                        return;
+                    }
+
+                    addButton.addEventListener('click', function () {
+                        const existing = textarea.value
+                            .split('\n')
+                            .map(function (line) {
+                                return line.trim();
+                            })
+                            .filter(function (line) {
+                                return line !== '';
+                            });
+
+                        const normalized = new Set(existing.map(function (line) {
+                            return line.toLowerCase();
+                        }));
+
+                        defaults.forEach(function (rule) {
+                            if (typeof rule !== 'string') {
+                                return;
+                            }
+
+                            if (!normalized.has(rule.toLowerCase())) {
+                                existing.push(rule);
+                                normalized.add(rule.toLowerCase());
+                            }
+                        });
+
+                        textarea.value = existing.join('\n');
+                        textarea.focus();
+                    });
+                }());
+            </script>
         </section>
         <?php
     }
