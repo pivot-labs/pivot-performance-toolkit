@@ -97,8 +97,8 @@ final class Menu
             return;
         }
 
-        $style_path = PERFORMANCE_TOOLKIT_PATH . 'assets/css/admin.css';
-        $style_url = PERFORMANCE_TOOLKIT_URL . 'assets/css/admin.css';
+        $style_path = PERFORMANCE_TOOLKIT_PATH . 'dist/admin.css';
+        $style_url = PERFORMANCE_TOOLKIT_URL . 'dist/admin.css';
 
         wp_enqueue_style(
             'performance-toolkit-admin',
@@ -106,27 +106,13 @@ final class Menu
             array(),
             file_exists($style_path) ? (string) filemtime($style_path) : PERFORMANCE_TOOLKIT_VERSION
         );
-
-        $script_path = PERFORMANCE_TOOLKIT_PATH . 'assets/js/admin.js';
-        $script_url  = PERFORMANCE_TOOLKIT_URL . 'assets/js/admin.js';
-
-        wp_enqueue_script(
-            'performance-toolkit-admin',
-            $script_url,
-            array(),
-            file_exists($script_path) ? (string) filemtime($script_path) : PERFORMANCE_TOOLKIT_VERSION,
-            true
-        );
     }
 
     public function printMenuIconStyles(): void
     {
         $icon_url = esc_url(PERFORMANCE_TOOLKIT_URL . 'assets/img/performance-toolkit-currentcolor.svg');
 
-        printf(
-            '<style id="performance-toolkit-menu-icon">#adminmenu .toplevel_page_performance-toolkit .wp-menu-image img{display:none}#adminmenu .toplevel_page_performance-toolkit .wp-menu-image{color:inherit}#adminmenu .toplevel_page_performance-toolkit .wp-menu-image:before{content:"";display:block;width:28px;height:28px;margin:1px auto 0;transform:translateY(-4px);background-color:currentColor;-webkit-mask-image:url("%1$s");mask-image:url("%1$s");-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:28px 28px;mask-size:28px 28px}</style>',
-            $icon_url
-        );
+        echo '<style id="performance-toolkit-menu-icon">#adminmenu .toplevel_page_performance-toolkit .wp-menu-image img{display:none}#adminmenu .toplevel_page_performance-toolkit .wp-menu-image{color:inherit}#adminmenu .toplevel_page_performance-toolkit .wp-menu-image:before{content:"";display:block;width:28px;height:28px;margin:1px auto 0;transform:translateY(-4px);background-color:currentColor;-webkit-mask-image:url("' . $icon_url . '");mask-image:url("' . $icon_url . '");-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:28px 28px;mask-size:28px 28px}</style>';
     }
 }
 
