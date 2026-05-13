@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PerformanceToolkit\Admin;
 
 use PerformanceToolkit\Core\Settings;
+use PerformanceToolkit\Views\BladeEngine;
 
 final class AdvancedRulesPage implements AdminPageInterface
 {
@@ -37,139 +38,28 @@ final class AdvancedRulesPage implements AdminPageInterface
 
     public function renderContent(): void
     {
+        echo BladeEngine::view('admin.advanced-rules-page', $this->getViewData());
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function getViewData(): array
+    {
         $options = $this->settings->all();
-        $key     = $this->settings->optionKey();
-        $woo_defaults = array(
-            '/cart',
-            '/checkout',
-            '/my-account',
-            '/wc-api/*',
-            '/?wc-ajax=*',
+
+        return array(
+            'options' => $options,
+            'option_key' => $this->settings->optionKey(),
+            'settings_updated' => isset($_GET['settings-updated']) && (string) wp_unslash($_GET['settings-updated']) === 'true',
+            'woo_defaults' => array(
+                '/cart',
+                '/checkout',
+                '/my-account',
+                '/wc-api/*',
+                '/?wc-ajax=*',
+            ),
         );
-        ?>
-        <section id="ptk-advanced-rules" class="ptk-card">
-            <h2><?php esc_html_e('Cache exclusions', 'performance-toolkit'); ?></h2>
-            <p style="margin:0 0 16px;color:#646970">
-                <?php esc_html_e('Enter URLs or path patterns that should never be cached — one per line. Prefix matching is used by default; add a wildcard (*) for substring patterns.', 'performance-toolkit'); ?>
-            </p>
-
-            <form method="post" action="<?php echo esc_url(admin_url('options.php')); ?>">
-                <?php settings_fields('performance_toolkit'); ?>
-
-                <input type="hidden" name="<?php echo esc_attr($key); ?>[enable_page_cache]"  value="<?php echo ! empty($options['enable_page_cache']) ? '1' : '0'; ?>" />
-                <input type="hidden" name="<?php echo esc_attr($key); ?>[cache_ttl]"           value="<?php echo esc_attr((string) $options['cache_ttl']); ?>" />
-                <input type="hidden" name="<?php echo esc_attr($key); ?>[max_cache_size_mb]"   value="<?php echo esc_attr((string) $options['max_cache_size_mb']); ?>" />
-                <input type="hidden" name="<?php echo esc_attr($key); ?>[minify_html]"         value="<?php echo ! empty($options['minify_html']) ? '1' : '0'; ?>" />
-                <input type="hidden" name="<?php echo esc_attr($key); ?>[minify_css]"          value="<?php echo ! empty($options['minify_css']) ? '1' : '0'; ?>" />
-                <input type="hidden" name="<?php echo esc_attr($key); ?>[minify_external_css]" value="<?php echo ! empty($options['minify_external_css']) ? '1' : '0'; ?>" />
-                <input type="hidden" name="<?php echo esc_attr($key); ?>[minify_external_css_exclusions]" value="<?php echo esc_attr((string) $options['minify_external_css_exclusions']); ?>" />
-                <input type="hidden" name="<?php echo esc_attr($key); ?>[minify_external_js]" value="<?php echo ! empty($options['minify_external_js']) ? '1' : '0'; ?>" />
-                <input type="hidden" name="<?php echo esc_attr($key); ?>[minify_external_js_exclusions]" value="<?php echo esc_attr((string) $options['minify_external_js_exclusions']); ?>" />
-                <input type="hidden" name="<?php echo esc_attr($key); ?>[combine_css]" value="<?php echo ! empty($options['combine_css']) ? '1' : '0'; ?>" />
-                <input type="hidden" name="<?php echo esc_attr($key); ?>[combine_css_exclusions]" value="<?php echo esc_attr((string) $options['combine_css_exclusions']); ?>" />
-                <input type="hidden" name="<?php echo esc_attr($key); ?>[combine_js]" value="<?php echo ! empty($options['combine_js']) ? '1' : '0'; ?>" />
-                <input type="hidden" name="<?php echo esc_attr($key); ?>[combine_js_exclusions]" value="<?php echo esc_attr((string) $options['combine_js_exclusions']); ?>" />
-                <input type="hidden" name="<?php echo esc_attr($key); ?>[minify_js]"           value="<?php echo ! empty($options['minify_js']) ? '1' : '0'; ?>" />
-                <input type="hidden" name="<?php echo esc_attr($key); ?>[defer_scripts]"       value="<?php echo ! empty($options['defer_scripts']) ? '1' : '0'; ?>" />
-                <input type="hidden" name="<?php echo esc_attr($key); ?>[lazy_load_images]"    value="<?php echo ! empty($options['lazy_load_images']) ? '1' : '0'; ?>" />
-
-                <div class="ptk-field">
-                    <label for="ptk-excluded-urls"><strong><?php esc_html_e('Never-cache URLs', 'performance-toolkit'); ?></strong></label>
-                    <p><?php esc_html_e('Paths are matched from the start of the URL. Use * for wildcards.', 'performance-toolkit'); ?></p>
-                    <p>
-                        <button type="button" class="button-link" id="ptk-add-woo-exclusions">
-                            <?php esc_html_e('Add WooCommerce default exclusions', 'performance-toolkit'); ?>
-                        </button>
-                    </p>
-                    <textarea
-                        id="ptk-excluded-urls"
-                        name="<?php echo esc_attr($key); ?>[cache_excluded_urls]"
-                        class="ptk-exclusions-textarea"
-                        rows="10"
-                        placeholder="<?php esc_attr_e("/checkout\n/cart\n/my-account/*\n/wc-api/*", 'performance-toolkit'); ?>"
-                        spellcheck="false"
-                    ><?php echo esc_textarea((string) $options['cache_excluded_urls']); ?></textarea>
-                    <p class="ptk-exclusions-hint">
-                        <?php
-                        echo wp_kses(
-                            __('<strong>Examples:</strong> <code>/checkout</code> excludes all URLs starting with /checkout &nbsp;·&nbsp; <code>/my-account/*</code> uses a wildcard &nbsp;·&nbsp; One entry per line.', 'performance-toolkit'),
-                            array(
-                                'strong' => array(),
-                                'code'   => array(),
-                            )
-                        );
-                        ?>
-                    </p>
-                </div>
-
-                <div class="ptk-field">
-                    <label for="ptk-bypass-cookies"><strong><?php esc_html_e('Bypass cache when cookies exist', 'performance-toolkit'); ?></strong></label>
-                    <p><?php esc_html_e('One cookie name or wildcard pattern per line. If a request contains any matching cookie, page cache is bypassed.', 'performance-toolkit'); ?></p>
-                    <textarea
-                        id="ptk-bypass-cookies"
-                        name="<?php echo esc_attr($key); ?>[cache_bypass_cookies]"
-                        class="ptk-exclusions-textarea"
-                        rows="6"
-                        spellcheck="false"
-                    ><?php echo esc_textarea((string) $options['cache_bypass_cookies']); ?></textarea>
-                    <p class="ptk-exclusions-hint">
-                        <?php
-                        echo wp_kses(
-                            __('<strong>Examples:</strong> <code>woocommerce_items_in_cart</code>, <code>woocommerce_cart_hash</code>, <code>wp_woocommerce_session_*</code>.', 'performance-toolkit'),
-                            array(
-                                'strong' => array(),
-                                'code'   => array(),
-                            )
-                        );
-                        ?>
-                    </p>
-                </div>
-
-                <?php submit_button(__('Save changes', 'performance-toolkit')); ?>
-            </form>
-
-            <script>
-                (function () {
-                    const addButton = document.getElementById('ptk-add-woo-exclusions');
-                    const textarea = document.getElementById('ptk-excluded-urls');
-                    const defaults = <?php echo wp_json_encode($woo_defaults); ?>;
-
-                    if (!addButton || !textarea || !Array.isArray(defaults)) {
-                        return;
-                    }
-
-                    addButton.addEventListener('click', function () {
-                        const existing = textarea.value
-                            .split('\n')
-                            .map(function (line) {
-                                return line.trim();
-                            })
-                            .filter(function (line) {
-                                return line !== '';
-                            });
-
-                        const normalized = new Set(existing.map(function (line) {
-                            return line.toLowerCase();
-                        }));
-
-                        defaults.forEach(function (rule) {
-                            if (typeof rule !== 'string') {
-                                return;
-                            }
-
-                            if (!normalized.has(rule.toLowerCase())) {
-                                existing.push(rule);
-                                normalized.add(rule.toLowerCase());
-                            }
-                        });
-
-                        textarea.value = existing.join('\n');
-                        textarea.focus();
-                    });
-                }());
-            </script>
-        </section>
-        <?php
     }
 }
 
