@@ -41,11 +41,12 @@ final class CachePage implements AdminPageInterface
     public function renderContent(): void
     {
         $options       = $this->settings->all();
-        $cache_cleared = isset($_GET['ptk_cache_cleared']) && (string) $_GET['ptk_cache_cleared'] === '1';
+        $cache_cleared = isset($_GET['ptk_cache_cleared']) && (string) wp_unslash($_GET['ptk_cache_cleared']) === '1';
         $cache_dir     = WP_CONTENT_DIR . '/cache/performance-toolkit';
         $current_size  = $this->getCacheDirSize($cache_dir);
         $max_bytes     = (int) $options['max_cache_size_mb'] * 1048576;
         $usage_pct     = $max_bytes > 0 ? min(100, (int) round($current_size / $max_bytes * 100)) : 0;
+        $object_cache  = $this->getObjectCacheStatus();
         ?>
         <section id="ptk-cache" class="ptk-card">
             <h2><?php esc_html_e('Cache', 'performance-toolkit'); ?></h2>
@@ -114,6 +115,38 @@ final class CachePage implements AdminPageInterface
                 <?php submit_button(__('Clear cache', 'performance-toolkit'), 'secondary', 'submit', false); ?>
             </form>
         </section>
+
+        <section class="ptk-card ptk-object-cache-card" style="margin-top:16px;">
+            <h2><?php esc_html_e('Object cache', 'performance-toolkit'); ?></h2>
+            <p class="ptk-object-cache-description"><?php esc_html_e('Stores database query results and runtime objects in memory to reduce database load.', 'performance-toolkit'); ?></p>
+
+            <div class="ptk-object-cache-stats">
+                <div class="ptk-stat">
+                    <span class="ptk-stat-label"><?php esc_html_e('Status', 'performance-toolkit'); ?></span>
+                    <strong class="<?php echo $object_cache['active'] ? 'ptk-object-cache-active' : 'ptk-object-cache-inactive'; ?>"><?php echo esc_html($object_cache['status_label']); ?></strong>
+                </div>
+                <div class="ptk-stat">
+                    <span class="ptk-stat-label"><?php esc_html_e('Provider', 'performance-toolkit'); ?></span>
+                    <strong><?php echo esc_html($object_cache['provider']); ?></strong>
+                </div>
+                <div class="ptk-stat">
+                    <span class="ptk-stat-label"><?php esc_html_e('Drop-in', 'performance-toolkit'); ?></span>
+                    <strong><?php echo esc_html($object_cache['dropin_label']); ?></strong>
+                </div>
+                <div class="ptk-stat">
+                    <span class="ptk-stat-label"><?php esc_html_e('Size', 'performance-toolkit'); ?></span>
+                    <strong><?php echo esc_html(self::formatBytes((int) $object_cache['size_bytes'])); ?></strong>
+                </div>
+            </div>
+
+            <?php if ($object_cache['active']) : ?>
+                <div class="notice notice-success inline ptk-object-cache-notice"><p><?php esc_html_e('Object cache drop-in detected.', 'performance-toolkit'); ?></p></div>
+            <?php else : ?>
+                <div class="notice notice-warning inline ptk-object-cache-notice"><p><?php esc_html_e('No object cache drop-in detected.', 'performance-toolkit'); ?></p></div>
+            <?php endif; ?>
+
+            <p class="ptk-object-cache-note"><?php esc_html_e('Future versions can add Redis/Memcached controls and metrics here.', 'performance-toolkit'); ?></p>
+        </section>
         <?php
     }
 
@@ -154,6 +187,66 @@ final class CachePage implements AdminPageInterface
         }
 
         return $total;
+    }
+
+    /**
+     * @return array{active:bool,status_label:string,provider:string,dropin_label:string,size_bytes:int}
+     */
+    private function getObjectCacheStatus(): array
+    {
+        $dropin_path  = WP_CONTENT_DIR . '/object-cache.php';
+        $dropin_label = 'wp-content/object-cache.php';
+
+        if (! is_file($dropin_path)) {
+            return array(
+                'active'       => false,
+                'status_label' => __('Not detected', 'performance-toolkit'),
+                'provider'     => __('None', 'performance-toolkit'),
+                'dropin_label' => $dropin_label,
+                'size_bytes'   => 0,
+            );
+        }
+
+        $contents = is_readable($dropin_path) ? (string) file_get_contents($dropin_path) : '';
+
+        return array(
+            'active'       => true,
+            'status_label' => __('Active', 'performance-toolkit'),
+            'provider'     => $this->detectObjectCacheProvider($contents),
+            'dropin_label' => $dropin_label,
+            'size_bytes'   => (int) @filesize($dropin_path),
+        );
+    }
+
+    private function detectObjectCacheProvider(string $contents): string
+    {
+        $haystack = strtolower($contents);
+
+        if ($haystack === '') {
+            return __('Drop-in detected', 'performance-toolkit');
+        }
+
+        if (str_contains($haystack, 'memcached')) {
+            return __('Memcached', 'performance-toolkit');
+        }
+
+        if (str_contains($haystack, 'redis')) {
+            return __('Redis', 'performance-toolkit');
+        }
+
+        if (str_contains($haystack, 'w3 total cache') || str_contains($haystack, 'w3tc')) {
+            return __('W3 Total Cache', 'performance-toolkit');
+        }
+
+        if (str_contains($haystack, 'litespeed')) {
+            return __('LiteSpeed Cache', 'performance-toolkit');
+        }
+
+        if (str_contains($haystack, 'siteground') || str_contains($haystack, 'sg_cachepress')) {
+            return __('SiteGround Optimizer', 'performance-toolkit');
+        }
+
+        return __('Drop-in detected', 'performance-toolkit');
     }
 
     private static function formatBytes(int $bytes): string
