@@ -8,6 +8,9 @@
         "lint": "find includes -name '*.php' -print0 | xargs -0 -n1 php -l",
         "test:smoke": "php tests/smoke-settings.php"
     },
+    "require": {
+        "illuminate/view": "^11.0"
+    },
     "autoload": {
         "psr-4": {
             "PerformanceToolkit\\": "includes/"
