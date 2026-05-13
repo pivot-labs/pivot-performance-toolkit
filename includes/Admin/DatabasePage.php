@@ -42,8 +42,8 @@ final class DatabasePage implements AdminPageInterface
     {
         $stats          = $this->optimizer->getDatabaseStats();
         $table_stats    = $this->optimizer->getTableStats();
-        $cleaned_task   = isset($_GET['ptk_cleaned']) ? sanitize_key((string) $_GET['ptk_cleaned']) : '';
-        $cleaned_count  = isset($_GET['ptk_count']) ? (int) $_GET['ptk_count'] : 0;
+        $cleaned_task   = isset($_GET['ptk_cleaned']) ? sanitize_key((string) wp_unslash($_GET['ptk_cleaned'])) : '';
+        $cleaned_count  = isset($_GET['ptk_count']) ? (int) wp_unslash($_GET['ptk_count']) : 0;
 
         $cleanup_items = array(
             'revisions'        => array(
@@ -228,7 +228,7 @@ final class DatabasePage implements AdminPageInterface
 
         check_admin_referer('ptk_database_cleanup');
 
-        $task  = isset($_POST['ptk_task']) ? sanitize_key((string) $_POST['ptk_task']) : '';
+        $task  = isset($_POST['ptk_task']) ? sanitize_key((string) wp_unslash($_POST['ptk_task'])) : '';
         $count = 0;
 
         switch ($task) {
