@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PerformanceToolkit\Admin;
 
+use PerformanceToolkit\Views\BladeEngine;
+
 final class DocumentationPage implements AdminPageInterface
 {
     private const DOCS_URL = 'http://docs.wpperformancetoolkit.com';
@@ -30,21 +32,16 @@ final class DocumentationPage implements AdminPageInterface
 
     public function renderContent(): void
     {
-        ?>
-        <section id="ptk-documentation" class="ptk-card">
-            <h2><?php esc_html_e('Documentation', 'performance-toolkit'); ?></h2>
-            <p><?php esc_html_e('Full guides, setup instructions, and troubleshooting are available in the external documentation site.', 'performance-toolkit'); ?></p>
-            <p>
-                <a
-                    class="button button-primary"
-                    href="<?php echo esc_url(self::DOCS_URL); ?>"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <?php esc_html_e('Open Documentation', 'performance-toolkit'); ?>
-                </a>
-            </p>
-        </section>
-        <?php
+        echo BladeEngine::view('admin.documentation-page', $this->getViewData());
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    private function getViewData(): array
+    {
+        return array(
+            'docs_url' => self::DOCS_URL,
+        );
     }
 }
