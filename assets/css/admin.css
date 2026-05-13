@@ -2,7 +2,82 @@
 
 @layer utilities {
     .ptk-wrap {
-        @apply mt-4;
+        margin-top: 0;
+    }
+
+    .ptk-app {
+        max-width: 1480px;
+        margin: 0 auto;
+        padding: 24px 32px 48px;
+    }
+
+    .ptk-header {
+        @apply flex items-center justify-between gap-4;
+    }
+
+    .ptk-status-pill {
+        @apply inline-flex items-center rounded-full px-2 py-1 text-xs font-semibold text-gray-600 bg-gray-100;
+    }
+
+    .ptk-button {
+        @apply inline-flex items-center rounded-md border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 bg-white;
+    }
+
+    .ptk-primary-nav {
+        @apply mt-4 flex flex-wrap gap-x-6 border-b border-gray-200;
+    }
+
+    .ptk-primary-nav a {
+        @apply inline-flex items-center gap-1.5 pb-3 text-sm font-semibold text-gray-600 border-b-2 border-transparent transition-colors;
+    }
+
+    .ptk-primary-nav a:hover {
+        @apply text-gray-900;
+    }
+
+    .ptk-primary-nav a.is-active {
+        @apply text-indigo-600 border-indigo-500;
+    }
+
+    .ptk-page-header {
+        @apply mt-6;
+    }
+
+    .ptk-page-header h1 {
+        @apply m-0 text-2xl font-semibold text-gray-900;
+    }
+
+    .ptk-page-header p {
+        @apply m-0 mt-2 text-sm text-gray-500;
+    }
+
+    .ptk-secondary-nav {
+        @apply mt-4 flex flex-wrap gap-x-4 border-b border-gray-200;
+    }
+
+    .ptk-secondary-nav a {
+        @apply inline-flex pb-2 text-xs font-medium text-gray-500 border-b-2 border-transparent transition-colors;
+    }
+
+    .ptk-secondary-nav a:hover {
+        @apply text-gray-700;
+    }
+
+    .ptk-secondary-nav a.is-active {
+        @apply text-indigo-600 border-indigo-500;
+    }
+
+    .ptk-grid {
+        @apply mt-6 grid gap-6;
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .ptk-main {
+        @apply min-w-0;
+    }
+
+    .ptk-sidebar {
+        @apply min-w-0;
     }
 
     .ptk-wrap h1.ptk-page-title {
@@ -17,16 +92,12 @@
         @apply inline-block leading-none;
     }
 
-    .ptk-shell {
-        @apply block mt-4 max-w-5xl;
-    }
-
     .ptk-content {
-        @apply flex flex-col gap-4;
+        @apply block;
     }
 
     .ptk-card {
-        @apply bg-white border border-gray-300 rounded-lg p-4.5;
+        @apply bg-white border border-gray-200 rounded-xl p-6 shadow-xs;
     }
 
     .ptk-card h2 {
@@ -231,7 +302,17 @@
     }
 
     /* Responsive */
+    @media (width >= 1200px) {
+        .ptk-grid.has-sidebar {
+            grid-template-columns: minmax(0, 1fr) 320px;
+        }
+    }
+
     @media (max-width: 960px) {
+        .ptk-app {
+            padding: 20px 16px 32px;
+        }
+
         .ptk-stats-grid {
             @apply grid-cols-1;
         }
