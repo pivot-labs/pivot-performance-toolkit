@@ -45,6 +45,8 @@ final class Menu
             return;
         }
 
+        // Register only the root menu page. All other pages are routed internally
+        // via the ?section= query parameter.
         $top_level_hook = add_menu_page(
             $root_page->pageTitle(),
             __('Performance', 'performance-toolkit'),
@@ -58,21 +60,6 @@ final class Menu
         if (is_string($top_level_hook)) {
             $this->page_hooks[] = $top_level_hook;
         }
-
-        foreach ($this->pages as $slug => $page) {
-            $submenu_hook = add_submenu_page(
-                self::ROOT_SLUG,
-                $page->pageTitle(),
-                $page->menuTitle(),
-                'manage_options',
-                $slug,
-                array($this, 'renderCurrentPage')
-            );
-
-            if (is_string($submenu_hook)) {
-                $this->page_hooks[] = $submenu_hook;
-            }
-        }
     }
 
     public function renderCurrentPage(): void
@@ -81,14 +68,7 @@ final class Menu
             return;
         }
 
-        $page_slug = isset($_GET['page']) ? sanitize_key(wp_unslash((string) $_GET['page'])) : self::ROOT_SLUG;
-        $current_page = $this->pages[$page_slug] ?? ($this->pages[self::ROOT_SLUG] ?? null);
-
-        if (! $current_page instanceof AdminPageInterface) {
-            return;
-        }
-
-        AdminShell::render($current_page, $this->pages);
+        AdminShell::render($this->pages);
     }
 
     public function enqueueAssets(string $hook_suffix): void
