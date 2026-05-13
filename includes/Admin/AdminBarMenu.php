@@ -308,7 +308,7 @@ final class AdminBarMenu implements ModuleInterface
 
         check_admin_referer('ptk_adminbar_purge_page_cache');
 
-        $target_raw = isset($_REQUEST['ptk_target']) ? (string) wp_unslash($_REQUEST['ptk_target']) : '';
+        $target_raw = isset($_GET['ptk_target']) ? sanitize_text_field((string) wp_unslash($_GET['ptk_target'])) : '';
         $target_url = $target_raw !== '' ? rawurldecode($target_raw) : '';
 
         if ($target_url === '') {
@@ -338,11 +338,11 @@ final class AdminBarMenu implements ModuleInterface
             return;
         }
 
-        if (isset($_GET['ptk_cache_purged']) && (string) $_GET['ptk_cache_purged'] === '1') {
+        if (isset($_GET['ptk_cache_purged']) && (string) wp_unslash($_GET['ptk_cache_purged']) === '1') {
             echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__('Performance Toolkit cache was purged.', 'performance-toolkit') . '</p></div>';
         }
 
-        if (isset($_GET['ptk_page_cache_purged']) && (string) $_GET['ptk_page_cache_purged'] === '1') {
+        if (isset($_GET['ptk_page_cache_purged']) && (string) wp_unslash($_GET['ptk_page_cache_purged']) === '1') {
             echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__('This page\'s cache was purged.', 'performance-toolkit') . '</p></div>';
         }
 
