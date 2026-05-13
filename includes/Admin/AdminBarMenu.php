@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PerformanceToolkit\Admin;
 
 use PerformanceToolkit\Contracts\ModuleInterface;
+use PerformanceToolkit\Views\BladeEngine;
 use WP_Admin_Bar;
 
 final class AdminBarMenu implements ModuleInterface
@@ -338,34 +339,10 @@ final class AdminBarMenu implements ModuleInterface
             return;
         }
 
-        if (isset($_GET['ptk_cache_purged']) && (string) wp_unslash($_GET['ptk_cache_purged']) === '1') {
-            echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__('Performance Toolkit cache was purged.', 'performance-toolkit') . '</p></div>';
-        }
-
-        if (isset($_GET['ptk_page_cache_purged']) && (string) wp_unslash($_GET['ptk_page_cache_purged']) === '1') {
-            echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__('This page\'s cache was purged.', 'performance-toolkit') . '</p></div>';
-        }
-
-        // Add CSS for disabled menu items
-        echo '<style>
-            #wpadminbar .ptk-disabled {
-                opacity: 0.5;
-                pointer-events: none;
-                cursor: not-allowed;
-            }
-            #wpadminbar .ptk-cache-status {
-                font-weight: 600;
-            }
-            #wpadminbar .ptk-cache-status-hit {
-                color: #7bd88f;
-            }
-            #wpadminbar .ptk-cache-status-miss {
-                color: #ffce6a;
-            }
-            #wpadminbar .ptk-cache-status-bypass {
-                color: #a7aaad;
-            }
-        </style>';
+        echo BladeEngine::view('admin.admin-bar-notice', array(
+            'cache_purged'      => isset($_GET['ptk_cache_purged']) && (string) wp_unslash($_GET['ptk_cache_purged']) === '1',
+            'page_cache_purged' => isset($_GET['ptk_page_cache_purged']) && (string) wp_unslash($_GET['ptk_page_cache_purged']) === '1',
+        ));
     }
 }
 
