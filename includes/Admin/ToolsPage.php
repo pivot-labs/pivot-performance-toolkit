@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PerformanceToolkit\Admin;
 
 use PerformanceToolkit\Core\Settings;
+use PerformanceToolkit\Views\BladeEngine;
 
 final class ToolsPage implements AdminPageInterface
 {
@@ -62,123 +63,38 @@ final class ToolsPage implements AdminPageInterface
 
     public function renderContent(): void
     {
+        echo BladeEngine::view('admin.tools-page', $this->getViewData());
+    }
+
+    /**
+     * Gather all data needed for the view.
+     *
+     * @return array<string, mixed>
+     */
+    private function getViewData(): array
+    {
+        $stats         = $this->getMinifiedAssetStats();
         $cleared       = isset($_GET['ptk_minified_cleared']) && (string) $_GET['ptk_minified_cleared'] === '1';
         $removed_files = isset($_GET['ptk_minified_removed']) ? max(0, (int) $_GET['ptk_minified_removed']) : 0;
         $tools_notice  = isset($_GET['ptk_tools_notice']) ? sanitize_key((string) wp_unslash($_GET['ptk_tools_notice'])) : '';
         $tools_message = isset($_GET['ptk_tools_message']) ? sanitize_text_field((string) wp_unslash($_GET['ptk_tools_message'])) : '';
-        $stats         = $this->getMinifiedAssetStats();
-        $cleanup_on_uninstall = (bool) get_option(self::UNINSTALL_POLICY_OPTION, false);
-        ?>
-        <section id="ptk-tools" class="ptk-card">
-            <h2><?php esc_html_e('Tools', 'performance-toolkit'); ?></h2>
 
-            <?php if ($cleared) : ?>
-                <div class="notice notice-success is-dismissible">
-                    <p>
-                        <?php
-                        printf(
-                            /* translators: %d: number of deleted files */
-                            esc_html__('Cleared %d minified asset file(s).', 'performance-toolkit'),
-                            esc_html((string) $removed_files)
-                        );
-                        ?>
-                    </p>
-                </div>
-            <?php endif; ?>
-
-            <?php if ($tools_notice !== '' && $tools_message !== '') : ?>
-                <div class="notice <?php echo $tools_notice === 'success' ? 'notice-success' : 'notice-error'; ?> is-dismissible">
-                    <p><?php echo esc_html($tools_message); ?></p>
-                </div>
-            <?php endif; ?>
-
-            <div class="ptk-field">
-                <h3 style="margin:0 0 8px;"><?php esc_html_e('Minified CSS/JS cache', 'performance-toolkit'); ?></h3>
-                <p>
-                    <?php
-                    printf(
-                        /* translators: 1: file count, 2: formatted size */
-                        esc_html__('%1$d file(s), %2$s total.', 'performance-toolkit'),
-                        esc_html((string) $stats['count']),
-                        esc_html(self::formatBytes($stats['bytes']))
-                    );
-                    ?>
-                </p>
-                <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
-                    <input type="hidden" name="action" value="<?php echo esc_attr(self::CLEAR_MINIFIED_ACTION); ?>" />
-                    <?php wp_nonce_field('ptk_clear_minified_assets'); ?>
-                    <?php submit_button(__('Clear minified CSS/JS cache', 'performance-toolkit'), 'secondary', 'submit', false); ?>
-                </form>
-            </div>
-
-            <div class="ptk-field" style="margin-top:18px;">
-                <h3 style="margin:0 0 8px;"><?php esc_html_e('Export settings', 'performance-toolkit'); ?></h3>
-                <p><?php esc_html_e('Download current Performance Toolkit settings as a JSON file.', 'performance-toolkit'); ?></p>
-                <p style="margin:8px 0 12px;padding:8px 12px;background-color:#f0f6fc;border-left:3px solid #0969da;color:#24292f;">
-                    <?php esc_html_e('Includes all settings plus export metadata such as schema version, export timestamp, and plugin version.', 'performance-toolkit'); ?>
-                </p>
-                <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
-                    <input type="hidden" name="action" value="<?php echo esc_attr(self::EXPORT_SETTINGS_ACTION); ?>" />
-                    <?php wp_nonce_field('ptk_export_settings'); ?>
-                    <label style="display:block;margin:6px 0 10px;">
-                        <input type="checkbox" name="ptk_include_secrets" value="1" />
-                        <span><?php esc_html_e('Include secret API keys in export', 'performance-toolkit'); ?></span>
-                    </label>
-                    <p style="margin-top:-4px;color:#b32d2e;">
-                        <?php esc_html_e('Warning: exported files with secrets should be stored securely and never committed to version control.', 'performance-toolkit'); ?>
-                    </p>
-                    <?php submit_button(__('Export settings', 'performance-toolkit'), 'secondary', 'submit', false); ?>
-                </form>
-            </div>
-
-            <div class="ptk-field" style="margin-top:18px;">
-                <h3 style="margin:0 0 8px;"><?php esc_html_e('Import settings', 'performance-toolkit'); ?></h3>
-                <p><?php esc_html_e('Import settings from a previously exported JSON file.', 'performance-toolkit'); ?></p>
-                <p style="margin:8px 0 12px;padding:8px 12px;background-color:#f0f6fc;border-left:3px solid #0969da;color:#24292f;">
-                    <?php esc_html_e('Imports settings with schema validation and a report showing how many keys were imported, ignored, or preserved.', 'performance-toolkit'); ?>
-                </p>
-                <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" enctype="multipart/form-data">
-                    <input type="hidden" name="action" value="<?php echo esc_attr(self::IMPORT_SETTINGS_ACTION); ?>" />
-                    <?php wp_nonce_field('ptk_import_settings'); ?>
-                    <input type="file" name="ptk_settings_import_file" accept=".json,application/json" required />
-                    <div style="margin-top:10px;">
-                        <?php submit_button(__('Import settings', 'performance-toolkit'), 'secondary', 'submit', false); ?>
-                    </div>
-                </form>
-            </div>
-
-            <div class="ptk-field" style="margin-top:18px;">
-                <h3 style="margin:0 0 8px;"><?php esc_html_e('Uninstall cleanup policy', 'performance-toolkit'); ?></h3>
-                <p><?php esc_html_e('Choose whether plugin settings and cache data should be removed when the plugin is deleted from WordPress.', 'performance-toolkit'); ?></p>
-                <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
-                    <input type="hidden" name="action" value="<?php echo esc_attr(self::SET_UNINSTALL_POLICY_ACTION); ?>" />
-                    <?php wp_nonce_field('ptk_set_uninstall_policy'); ?>
-                    <label style="display:block;margin:6px 0 10px;">
-                        <input type="checkbox" name="ptk_remove_data_on_uninstall" value="1" <?php checked($cleanup_on_uninstall); ?> />
-                        <span><?php esc_html_e('Remove all Performance Toolkit data on uninstall', 'performance-toolkit'); ?></span>
-                    </label>
-                    <p style="margin-top:-4px;color:#646970;">
-                        <?php esc_html_e('If enabled, deleting the plugin removes its settings and cache files. If disabled, data is preserved for reinstall.', 'performance-toolkit'); ?>
-                    </p>
-                    <?php submit_button(__('Save uninstall policy', 'performance-toolkit'), 'secondary', 'submit', false); ?>
-                </form>
-            </div>
-
-            <div class="ptk-field" style="margin-top:18px; padding:12px; background-color:#fef5f5; border-left:4px solid #d63638;">
-                <h3 style="margin:0 0 8px; color:#d63638;"><?php esc_html_e('Reset to safe defaults', 'performance-toolkit'); ?></h3>
-                <p><?php esc_html_e('Reset all Performance Toolkit settings to their recommended safe defaults. This action cannot be undone.', 'performance-toolkit'); ?></p>
-                <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
-                    <input type="hidden" name="action" value="<?php echo esc_attr(self::RESET_TO_DEFAULTS_ACTION); ?>" />
-                    <?php wp_nonce_field('ptk_reset_to_defaults'); ?>
-                    <label style="display:block;margin:6px 0 10px;">
-                        <input type="checkbox" name="ptk_confirm_reset" value="1" required />
-                        <span><?php esc_html_e('I understand this will reset all settings and cannot be undone', 'performance-toolkit'); ?></span>
-                    </label>
-                    <?php submit_button(__('Reset to safe defaults', 'performance-toolkit'), 'delete', 'submit', false); ?>
-                </form>
-            </div>
-        </section>
-        <?php
+        return array(
+            'cleared'                  => $cleared,
+            'removed_files'            => $removed_files,
+            'tools_notice'             => $tools_notice,
+            'tools_message'            => $tools_message,
+            'stats'                    => array(
+                'count'          => $stats['count'],
+                'size_formatted' => self::formatBytes($stats['bytes']),
+            ),
+            'cleanup_on_uninstall'     => (bool) get_option(self::UNINSTALL_POLICY_OPTION, false),
+            'clear_minified_action'    => self::CLEAR_MINIFIED_ACTION,
+            'export_settings_action'   => self::EXPORT_SETTINGS_ACTION,
+            'import_settings_action'   => self::IMPORT_SETTINGS_ACTION,
+            'set_uninstall_policy_action' => self::SET_UNINSTALL_POLICY_ACTION,
+            'reset_to_defaults_action' => self::RESET_TO_DEFAULTS_ACTION,
+        );
     }
 
     public function handleClearMinifiedAssets(): void
