@@ -1,14 +1,32 @@
 @import "tailwindcss";
 
 @layer utilities {
+    body.toplevel_page_performance-toolkit #wpcontent {
+        padding-left: 0 !important;
+    }
+
     .ptk-wrap {
-        margin-top: 0;
+        margin: 0 !important;
     }
 
     .ptk-app {
+        padding: 24px 0 48px;
+    }
+
+    .ptk-chrome {
+        background: #fff;
+    }
+
+    .ptk-wrap > .ptk-chrome > .ptk-header,
+    .ptk-wrap > .ptk-chrome > .ptk-primary-nav,
+    .ptk-wrap > .ptk-app {
         max-width: 1480px;
         margin: 0 auto;
-        padding: 24px 32px 48px;
+        padding-inline: 32px;
+    }
+
+    .ptk-wrap > .ptk-chrome > .ptk-header {
+        padding-top: 24px;
     }
 
     .ptk-header {
@@ -23,8 +41,13 @@
         @apply inline-flex items-center rounded-md border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 bg-white;
     }
 
-    .ptk-primary-nav {
-        @apply mt-4 flex flex-wrap gap-x-6 border-b border-gray-200;
+    .ptk-wrap > .ptk-chrome > .ptk-primary-nav {
+        margin-top: 20px !important;
+        @apply flex flex-wrap gap-x-6 border-b border-gray-200;
+    }
+
+    .ptk-primary-nav-mobile {
+        display: none;
     }
 
     .ptk-primary-nav a {
@@ -80,16 +103,19 @@
         @apply min-w-0;
     }
 
-    .ptk-wrap h1.ptk-page-title {
-        @apply flex flex-nowrap items-center gap-2.5 leading-none;
+    .ptk-page-title {
+        @apply inline-flex items-center gap-2.5;
     }
 
     .ptk-page-title-icon {
         @apply w-9 h-9 rounded flex-shrink-0 self-center inline-block;
     }
 
-    .ptk-page-title span {
-        @apply inline-block leading-none;
+    .ptk-plugin-title {
+        font-size: 23px;
+        line-height: 1.3;
+        font-weight: 400;
+        color: #1d2327;
     }
 
     .ptk-content {
@@ -309,8 +335,18 @@
     }
 
     @media (max-width: 960px) {
+        .ptk-wrap > .ptk-chrome > .ptk-header,
+        .ptk-wrap > .ptk-chrome > .ptk-primary-nav,
+        .ptk-wrap > .ptk-app {
+            padding-inline: 16px;
+        }
+
+        .ptk-wrap > .ptk-chrome > .ptk-header {
+            padding-top: 20px;
+        }
+
         .ptk-app {
-            padding: 20px 16px 32px;
+            padding: 20px 0 32px;
         }
 
         .ptk-stats-grid {
@@ -319,6 +355,68 @@
 
         .ptk-object-cache-stats {
             @apply grid-cols-1;
+        }
+    }
+
+    @media (max-width: 730px) {
+        .ptk-wrap > .ptk-chrome > .ptk-primary-nav {
+            display: none;
+        }
+
+        .ptk-primary-nav-mobile {
+            display: block;
+            margin-top: 20px;
+            margin-left: 20px;
+            border-bottom: 1px solid var(--color-gray-200);
+            padding-bottom: 12px;
+        }
+
+        .ptk-primary-nav-mobile > summary {
+            list-style: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: #2271b1;
+            user-select: none;
+        }
+
+        .ptk-primary-nav-mobile > summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .ptk-primary-nav-mobile > summary::before {
+            content: "\2630";
+            font-size: 18px;
+            line-height: 1;
+            position: relative;
+            top: -2px;
+        }
+
+        .ptk-primary-nav-mobile[open] > summary::before {
+            content: "\2715";
+        }
+
+        .ptk-primary-nav-mobile nav {
+            margin-top: 12px;
+            display: grid;
+            gap: 8px;
+        }
+
+        .ptk-primary-nav-mobile a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: var(--text-sm);
+            color: #2271b1;
+            text-decoration: none;
+        }
+
+        .ptk-primary-nav-mobile a.is-active {
+            color: #135e96;
+            font-weight: 600;
         }
     }
 }
