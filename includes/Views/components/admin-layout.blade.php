@@ -6,11 +6,11 @@
 ])
 
 <div class="wrap ptk-wrap">
-    <div class="ptk-app">
+    <div class="ptk-chrome">
         <header class="ptk-header">
             <div class="ptk-page-title">
                 <img src="{{ esc_url($iconUrl) }}" alt="" class="ptk-page-title-icon" />
-                <span>{{ __('Performance Toolkit', 'performance-toolkit') }}</span>
+                    <span class="ptk-plugin-title">{{ __('Performance Toolkit', 'performance-toolkit') }}</span>
                 @if (is_string($version) && $version !== '')
                     <span class="ptk-status-pill">v{{ $version }}</span>
                 @endif
@@ -34,6 +34,26 @@
                 </a>
             @endforeach
         </nav>
+
+            <details class="ptk-primary-nav-mobile">
+                <summary>{{ __('Menu', 'performance-toolkit') }}</summary>
+                <nav aria-label="{{ esc_attr__('Primary', 'performance-toolkit') }}">
+                    @foreach ($primaryNav as $item)
+                        <a
+                            href="{{ (string) ($item['url'] ?? '#') }}"
+                            class="{{ !empty($item['active']) ? 'is-active' : '' }}"
+                        >
+                            @if (!empty($item['icon']))
+                                <span class="dashicons {{ esc_attr((string) $item['icon']) }}" aria-hidden="true"></span>
+                            @endif
+                            <span>{{ esc_html((string) ($item['label'] ?? '')) }}</span>
+                        </a>
+                    @endforeach
+                </nav>
+            </details>
+    </div>
+
+    <div class="ptk-app">
 
         <main class="ptk-content">
             {{ $slot }}
