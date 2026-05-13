@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PerformanceToolkit\Admin;
 
 use PerformanceToolkit\Database\DatabaseOptimizer;
+use PerformanceToolkit\Views\BladeEngine;
 
 final class DatabasePage implements AdminPageInterface
 {
@@ -39,6 +40,14 @@ final class DatabasePage implements AdminPageInterface
     }
 
     public function renderContent(): void
+    {
+        echo BladeEngine::view('admin.database-page', $this->getViewData());
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function getViewData(): array
     {
         $stats          = $this->optimizer->getDatabaseStats();
         $table_stats    = $this->optimizer->getTableStats();
@@ -87,137 +96,18 @@ final class DatabasePage implements AdminPageInterface
             'transients'     => __('Expired transients', 'performance-toolkit'),
             'optimize'       => __('Tables optimized', 'performance-toolkit'),
         );
-        ?>
 
-        <?php if ($cleaned_task) : ?>
-            <div class="notice notice-success is-dismissible">
-                <p>
-                    <?php if ($cleaned_task === 'optimize') : ?>
-                        <?php
-                        printf(
-                            /* translators: %d = number of tables */
-                            esc_html__('%d database table(s) optimized successfully.', 'performance-toolkit'),
-                            $cleaned_count
-                        );
-                        ?>
-                    <?php else : ?>
-                        <?php
-                        printf(
-                            /* translators: 1: item type label, 2: count */
-                            esc_html__('%1$s: %2$d item(s) removed successfully.', 'performance-toolkit'),
-                            esc_html($task_labels[$cleaned_task] ?? $cleaned_task),
-                            $cleaned_count
-                        );
-                        ?>
-                    <?php endif; ?>
-                </p>
-            </div>
-        <?php endif; ?>
-
-        <!-- Overview -->
-        <section class="ptk-card">
-            <h2><?php esc_html_e('Database overview', 'performance-toolkit'); ?></h2>
-            <div class="ptk-db-stats">
-                <div class="ptk-stat">
-                    <span class="ptk-stat-label"><?php esc_html_e('Total size', 'performance-toolkit'); ?></span>
-                    <strong><?php echo esc_html(DatabaseOptimizer::formatBytes($stats['size_bytes'])); ?></strong>
-                </div>
-                <?php if ($stats['myisam_overhead_bytes'] > 0) : ?>
-                <div class="ptk-stat">
-                    <span class="ptk-stat-label"><?php esc_html_e('Reclaimable (MyISAM)', 'performance-toolkit'); ?></span>
-                    <strong class="ptk-stat-warn"><?php echo esc_html(DatabaseOptimizer::formatBytes($stats['myisam_overhead_bytes'])); ?></strong>
-                </div>
-                <?php endif; ?>
-                <div class="ptk-stat">
-                    <span class="ptk-stat-label"><?php esc_html_e('Tables', 'performance-toolkit'); ?></span>
-                    <strong><?php echo esc_html((string) count($table_stats)); ?></strong>
-                </div>
-            </div>
-
-            <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
-                <input type="hidden" name="action" value="<?php echo esc_attr(self::CLEANUP_ACTION); ?>" />
-                <input type="hidden" name="ptk_task" value="optimize" />
-                <?php wp_nonce_field('ptk_database_cleanup'); ?>
-                <?php
-                submit_button(
-                    __('Optimize all tables', 'performance-toolkit'),
-                    'secondary',
-                    'submit',
-                    false
-                );
-                ?>
-            </form>
-        </section>
-
-        <!-- Cleanup -->
-        <section class="ptk-card">
-            <h2><?php esc_html_e('Cleanup', 'performance-toolkit'); ?></h2>
-            <p style="margin:0 0 16px;color:#646970"><?php esc_html_e('Remove unnecessary data to keep your database lean and fast.', 'performance-toolkit'); ?></p>
-
-            <div class="ptk-cleanup-list">
-                <?php foreach ($cleanup_items as $task => $item) : ?>
-                    <div class="ptk-cleanup-item">
-                        <div class="ptk-cleanup-item-info">
-                            <div class="ptk-cleanup-item-label"><?php echo esc_html($item['label']); ?></div>
-                            <div class="ptk-cleanup-item-desc"><?php echo esc_html($item['desc']); ?></div>
-                        </div>
-                        <span class="ptk-cleanup-badge <?php echo $item['count'] > 0 ? 'has-items' : ''; ?>">
-                            <?php echo esc_html(number_format_i18n($item['count'])); ?>
-                        </span>
-                        <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
-                            <input type="hidden" name="action" value="<?php echo esc_attr(self::CLEANUP_ACTION); ?>" />
-                            <input type="hidden" name="ptk_task" value="<?php echo esc_attr($task); ?>" />
-                            <?php wp_nonce_field('ptk_database_cleanup'); ?>
-                            <button
-                                type="submit"
-                                class="button button-secondary ptk-cleanup-btn"
-                                <?php disabled($item['count'] === 0); ?>
-                            >
-                                <?php esc_html_e('Clean', 'performance-toolkit'); ?>
-                            </button>
-                        </form>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        </section>
-
-        <!-- Table breakdown -->
-        <?php if (! empty($table_stats)) : ?>
-        <section class="ptk-card">
-            <h2><?php esc_html_e('Table breakdown', 'performance-toolkit'); ?></h2>
-            <table class="ptk-table-list">
-                <thead>
-                    <tr>
-                        <th><?php esc_html_e('Table', 'performance-toolkit'); ?></th>
-                        <th><?php esc_html_e('Engine', 'performance-toolkit'); ?></th>
-                        <th><?php esc_html_e('Rows', 'performance-toolkit'); ?></th>
-                        <th><?php esc_html_e('Size', 'performance-toolkit'); ?></th>
-                        <th><?php esc_html_e('Overhead', 'performance-toolkit'); ?></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($table_stats as $table) : ?>
-                        <tr>
-                            <td><code><?php echo esc_html($table['name']); ?></code></td>
-                            <td><span class="ptk-engine-badge"><?php echo esc_html($table['engine']); ?></span></td>
-                            <td><?php echo esc_html(number_format_i18n($table['rows'])); ?></td>
-                            <td><?php echo esc_html(DatabaseOptimizer::formatBytes($table['size_bytes'])); ?></td>
-                            <td>
-                                <?php if ($table['overhead_bytes'] > 0) : ?>
-                                    <span class="ptk-overhead-badge">
-                                        <?php echo esc_html(DatabaseOptimizer::formatBytes($table['overhead_bytes'])); ?>
-                                    </span>
-                                <?php else : ?>
-                                    <span class="ptk-overhead-ok">—</span>
-                                <?php endif; ?>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        </section>
-        <?php endif; ?>
-        <?php
+        return array(
+            'stats'               => $stats,
+            'table_stats'         => $table_stats,
+            'cleanup_items'       => $cleanup_items,
+            'task_labels'         => $task_labels,
+            'cleaned_task'        => $cleaned_task,
+            'cleaned_count'       => $cleaned_count,
+            'cleanup_action'      => self::CLEANUP_ACTION,
+            'db_size_formatted'   => DatabaseOptimizer::formatBytes((int) $stats['size_bytes']),
+            'myisam_reclaimable'  => DatabaseOptimizer::formatBytes((int) $stats['myisam_overhead_bytes']),
+        );
     }
 
     public function handleCleanup(): void
