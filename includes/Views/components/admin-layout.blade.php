@@ -17,7 +17,7 @@
             </div>
 
             @if (is_string($helpUrl) && $helpUrl !== '')
-                <a class="button ptk-button" href="{{ (string) $helpUrl }}">{{ __('Help', 'performance-toolkit') }}</a>
+                    <a class="button ptk-button" href="{{ esc_url((string) $helpUrl) }}" target="_blank" rel="noopener noreferrer">{{ __('Help', 'performance-toolkit') }}</a>
             @endif
         </header>
 
@@ -28,7 +28,7 @@
                     class="{{ !empty($item['active']) ? 'is-active' : '' }}"
                 >
                     @if (!empty($item['icon']))
-                        <span class="dashicons {{ esc_attr((string) $item['icon']) }}" aria-hidden="true"></span>
+                        <span class="ptk-nav-icon" aria-hidden="true">{!! \PerformanceToolkit\Admin\LucideIcons::render((string) $item['icon']) !!}</span>
                     @endif
                     <span>{{ esc_html((string) ($item['label'] ?? '')) }}</span>
                 </a>
@@ -44,7 +44,7 @@
                             class="{{ !empty($item['active']) ? 'is-active' : '' }}"
                         >
                             @if (!empty($item['icon']))
-                                <span class="dashicons {{ esc_attr((string) $item['icon']) }}" aria-hidden="true"></span>
+                                        <span class="ptk-nav-icon" aria-hidden="true">{!! \PerformanceToolkit\Admin\LucideIcons::render((string) $item['icon']) !!}</span>
                             @endif
                             <span>{{ esc_html((string) ($item['label'] ?? '')) }}</span>
                         </a>

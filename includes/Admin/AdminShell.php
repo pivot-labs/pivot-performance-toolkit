@@ -73,7 +73,7 @@ final class AdminShell
         $shell_data = array(
             'icon_url'         => PERFORMANCE_TOOLKIT_URL . 'assets/img/performance-toolkit.svg',
             'plugin_version'   => defined('PERFORMANCE_TOOLKIT_VERSION') ? PERFORMANCE_TOOLKIT_VERSION : '',
-            'help_url'         => add_query_arg('section', 'overview', admin_url('admin.php?page=performance-toolkit')),
+            'help_url'         => 'https://docs.wpperformancetoolkit.com/',
             'primary_nav'      => self::buildPrimaryNav($current_section),
             'secondary_nav'    => self::buildSecondaryNav($current_section, $current_page_slug),
             'page_heading'     => __(self::PAGE_HEADINGS[$current_page_slug] ?? (self::SECTION_LABELS[$current_section] ?? 'Overview'), 'performance-toolkit'),
@@ -101,12 +101,12 @@ final class AdminShell
     private static function buildPrimaryNav(string $current_section): array
     {
         $items = array(
-            array('key' => 'overview', 'label' => __('Overview', 'performance-toolkit'), 'icon' => 'dashicons-dashboard'),
-            array('key' => 'caching', 'label' => __('Caching', 'performance-toolkit'), 'icon' => 'dashicons-database'),
-            array('key' => 'optimization', 'label' => __('Optimization', 'performance-toolkit'), 'icon' => 'dashicons-performance'),
-            array('key' => 'database', 'label' => __('Database', 'performance-toolkit'), 'icon' => 'dashicons-database-view'),
-            array('key' => 'tools', 'label' => __('Tools', 'performance-toolkit'), 'icon' => 'dashicons-admin-tools'),
-            array('key' => 'system-status', 'label' => __('System Status', 'performance-toolkit'), 'icon' => 'dashicons-chart-area'),
+            array('key' => 'overview', 'label' => __('Overview', 'performance-toolkit'), 'icon' => 'layout-dashboard'),
+            array('key' => 'caching', 'label' => __('Caching', 'performance-toolkit'), 'icon' => 'rocket'),
+            array('key' => 'optimization', 'label' => __('Optimization', 'performance-toolkit'), 'icon' => 'sliders-horizontal'),
+            array('key' => 'database', 'label' => __('Database', 'performance-toolkit'), 'icon' => 'database'),
+            array('key' => 'tools', 'label' => __('Tools', 'performance-toolkit'), 'icon' => 'wrench'),
+            array('key' => 'system-status', 'label' => __('System Status', 'performance-toolkit'), 'icon' => 'activity'),
         );
 
         foreach ($items as &$item) {
