@@ -150,7 +150,7 @@ final class FileOptimizationPage implements AdminPageInterface
                     <p><?php esc_html_e('Minifies inline script blocks in frontend HTML output.', 'performance-toolkit'); ?></p>
                 </div>
 
-a                <div class="ptk-http11-only">
+               <div class="ptk-http11-only">
                     <h3><?php esc_html_e('HTTP/1.1 only: File combination', 'performance-toolkit'); ?></h3>
                     <p>
                         <?php esc_html_e('Combining CSS/JS files is usually only beneficial on HTTP/1.1 servers. On HTTP/2 and HTTP/3, it often reduces cache efficiency and may hurt real-world performance.', 'performance-toolkit'); ?>
