@@ -142,6 +142,43 @@
     margin: 6px 0 0 0;
 }
 
+.ptk-object-cache-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.ptk-object-cache-card h3 {
+    margin: 0;
+    font-size: 14px;
+}
+
+.ptk-object-cache-description,
+.ptk-object-cache-note {
+    margin: 0;
+    color: #646970;
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+.ptk-object-cache-stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.ptk-object-cache-notice {
+    margin: 0;
+}
+
+.ptk-object-cache-active {
+    color: #166534;
+}
+
+.ptk-object-cache-inactive {
+    color: #b45309;
+}
+
 /* ── Cache usage bar ─────────────────────────────────────────────────────── */
 .ptk-cache-usage {
     margin-top: 10px;
@@ -434,6 +471,10 @@
     }
 
     .ptk-stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ptk-object-cache-stats {
         grid-template-columns: 1fr;
     }
 }
