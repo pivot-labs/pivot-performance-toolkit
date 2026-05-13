@@ -6,11 +6,15 @@
     }
 
     .ptk-wrap h1.ptk-page-title {
-        @apply flex items-center gap-2.5 leading-none;
+        @apply flex flex-nowrap items-center gap-2.5 leading-none;
     }
 
     .ptk-page-title-icon {
-        @apply w-9 h-9 rounded flex-shrink-0 self-center block;
+        @apply w-9 h-9 rounded flex-shrink-0 self-center inline-block;
+    }
+
+    .ptk-page-title span {
+        @apply inline-block leading-none;
     }
 
     .ptk-shell {

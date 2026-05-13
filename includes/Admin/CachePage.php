@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace PerformanceToolkit\Admin;
 
 use PerformanceToolkit\Core\Settings;
-use PerformanceToolkit\Views\BladeEngine;
 
-final class CachePage implements AdminPageInterface
+final class CachePage extends BladeAdminPage
 {
     private const CLEAR_ACTION = 'performance_toolkit_clear_cache';
 
@@ -39,13 +38,9 @@ final class CachePage implements AdminPageInterface
         return 'rocket';
     }
 
-    public function renderContent(): void
+    public function view(): string
     {
-        // Gather all data for the view
-        $view_data = $this->getViewData();
-
-        // Render the Blade template
-        echo BladeEngine::view('admin.cache-page', $view_data);
+        return 'admin.cache-page';
     }
 
     /**
@@ -53,7 +48,7 @@ final class CachePage implements AdminPageInterface
      *
      * @return array<string, mixed>
      */
-    private function getViewData(): array
+    protected function buildViewData(): array
     {
         $options          = $this->settings->all();
         $settings_updated = isset($_GET['settings-updated']) && (string) wp_unslash($_GET['settings-updated']) === 'true';

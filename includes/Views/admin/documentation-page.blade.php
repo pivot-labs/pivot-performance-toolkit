@@ -1,4 +1,4 @@
-<x-card title="{{ __('Documentation', 'performance-toolkit') }}" id="ptk-documentation">
+<x-card :title="__('Documentation', 'performance-toolkit')" id="ptk-documentation">
     <p>{{ __('Full guides, setup instructions, and troubleshooting are available in the external documentation site.', 'performance-toolkit') }}</p>
     <p>
         <a

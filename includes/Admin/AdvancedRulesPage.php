@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace PerformanceToolkit\Admin;
 
 use PerformanceToolkit\Core\Settings;
-use PerformanceToolkit\Views\BladeEngine;
 
-final class AdvancedRulesPage implements AdminPageInterface
+final class AdvancedRulesPage extends BladeAdminPage
 {
     private Settings $settings;
 
@@ -36,15 +35,15 @@ final class AdvancedRulesPage implements AdminPageInterface
         return 'sliders-horizontal';
     }
 
-    public function renderContent(): void
+    public function view(): string
     {
-        echo BladeEngine::view('admin.advanced-rules-page', $this->getViewData());
+        return 'admin.advanced-rules-page';
     }
 
     /**
      * @return array<string, mixed>
      */
-    private function getViewData(): array
+    protected function buildViewData(): array
     {
         $options = $this->settings->all();
 

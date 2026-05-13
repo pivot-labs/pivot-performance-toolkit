@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace PerformanceToolkit\Admin;
 
 use PerformanceToolkit\Core\Settings;
-use PerformanceToolkit\Views\BladeEngine;
 
-final class ToolsPage implements AdminPageInterface
+final class ToolsPage extends BladeAdminPage
 {
     private const EXPORT_PLUGIN = 'performance-toolkit';
     private const EXPORT_SCHEMA_VERSION = 1;
@@ -61,9 +60,9 @@ final class ToolsPage implements AdminPageInterface
         return 'wrench';
     }
 
-    public function renderContent(): void
+    public function view(): string
     {
-        echo BladeEngine::view('admin.tools-page', $this->getViewData());
+        return 'admin.tools-page';
     }
 
     /**
@@ -71,7 +70,7 @@ final class ToolsPage implements AdminPageInterface
      *
      * @return array<string, mixed>
      */
-    private function getViewData(): array
+    protected function buildViewData(): array
     {
         $stats         = $this->getMinifiedAssetStats();
         $cleared       = isset($_GET['ptk_minified_cleared']) && (string) $_GET['ptk_minified_cleared'] === '1';

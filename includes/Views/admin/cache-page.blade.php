@@ -1,4 +1,4 @@
-<x-card title="{{ __('Cache', 'performance-toolkit') }}" id="ptk-cache">
+<x-card :title="__('Cache', 'performance-toolkit')" id="ptk-cache">
     @if ($settings_updated)
         <div class="notice notice-success is-dismissible">
             <p>{{ __('Settings saved successfully.', 'performance-toolkit') }}</p>

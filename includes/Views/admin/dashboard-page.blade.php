@@ -1,4 +1,4 @@
-<x-card title="{{ __('Optimization Overview', 'performance-toolkit') }}" id="ptk-dashboard">
+<x-card :title="__('Optimization Overview', 'performance-toolkit')" id="ptk-dashboard">
     @if (empty($fs_status['writable']))
         <div style="margin-bottom: 16px; padding: 12px; background-color: #fff3cd; border-left: 4px solid #ffc107;">
             <p style="margin: 0;">

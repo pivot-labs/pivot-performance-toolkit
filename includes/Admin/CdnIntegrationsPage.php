@@ -6,9 +6,8 @@ namespace PerformanceToolkit\Admin;
 
 use PerformanceToolkit\Core\Settings;
 use PerformanceToolkit\Integrations\CloudflareIntegration;
-use PerformanceToolkit\Views\BladeEngine;
 
-final class CdnIntegrationsPage implements AdminPageInterface
+final class CdnIntegrationsPage extends BladeAdminPage
 {
     private const TEST_ACTION = 'performance_toolkit_cloudflare_test';
     private const PURGE_ACTION = 'performance_toolkit_cloudflare_purge';
@@ -46,15 +45,15 @@ final class CdnIntegrationsPage implements AdminPageInterface
         return 'dashicons-admin-site-alt3';
     }
 
-    public function renderContent(): void
+    public function view(): string
     {
-        echo BladeEngine::view('admin.cdn-integrations-page', $this->getViewData());
+        return 'admin.cdn-integrations-page';
     }
 
     /**
      * @return array<string, mixed>
      */
-    private function getViewData(): array
+    protected function buildViewData(): array
     {
         return array(
             'options'          => $this->settings->all(),

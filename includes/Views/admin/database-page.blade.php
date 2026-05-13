@@ -17,7 +17,7 @@
     </div>
 @endif
 
-<x-card title="{{ __('Database overview', 'performance-toolkit') }}">
+<x-card :title="__('Database overview', 'performance-toolkit')">
     <div class="ptk-db-stats">
         <div class="ptk-stat">
             <span class="ptk-stat-label">{{ __('Total size', 'performance-toolkit') }}</span>
@@ -45,7 +45,7 @@
     </form>
 </x-card>
 
-<x-card title="{{ __('Cleanup', 'performance-toolkit') }}">
+<x-card :title="__('Cleanup', 'performance-toolkit')">
     <p style="margin:0 0 16px;color:#646970">{{ __('Remove unnecessary data to keep your database lean and fast.', 'performance-toolkit') }}</p>
 
     <div class="ptk-cleanup-list">
@@ -78,7 +78,7 @@
 </x-card>
 
 @if (!empty($table_stats))
-    <x-card title="{{ __('Table breakdown', 'performance-toolkit') }}">
+    <x-card :title="__('Table breakdown', 'performance-toolkit')">
         <table class="ptk-table-list">
             <thead>
                 <tr>
