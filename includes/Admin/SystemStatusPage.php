@@ -7,6 +7,7 @@ namespace PerformanceToolkit\Admin;
 use PerformanceToolkit\Core\Settings;
 use PerformanceToolkit\Media\ImageOptimizerDetector;
 use PerformanceToolkit\Utils\FilesystemCheck;
+use PerformanceToolkit\Views\BladeEngine;
 
 final class SystemStatusPage implements AdminPageInterface
 {
@@ -42,6 +43,16 @@ final class SystemStatusPage implements AdminPageInterface
 
     public function renderContent(): void
     {
+        echo BladeEngine::view('admin.system-status-page', $this->getViewData());
+    }
+
+    /**
+     * Gather all data needed for the view.
+     *
+     * @return array<string, mixed>
+     */
+    private function getViewData(): array
+    {
         global $wpdb;
 
         $wpdb_row = $wpdb->get_row(
@@ -67,7 +78,6 @@ final class SystemStatusPage implements AdminPageInterface
             esc_html($fs_status_label)
         );
 
-        // Get server software info
         $server_software = self::getServerSoftware();
         $object_cache_enabled = self::isObjectCacheEnabled();
 
@@ -115,53 +125,18 @@ final class SystemStatusPage implements AdminPageInterface
             ),
         );
 
-        // Add PHP Configuration section
-        $php_config = self::getPHPConfiguration();
-        foreach ($php_config as $config) {
+        foreach (self::getPHPConfiguration() as $config) {
             $rows[] = $config;
         }
 
-        // Add Server Configuration section
-        $server_config = self::getServerConfiguration();
-        foreach ($server_config as $config) {
+        foreach (self::getServerConfiguration() as $config) {
             $rows[] = $config;
         }
 
-        ?>
-        <section id="ptk-system-status" class="ptk-card">
-            <h2><?php esc_html_e('System Status', 'performance-toolkit'); ?></h2>
-
-            <?php if (! $fs_status['writable']) : ?>
-                <div style="margin-bottom: 16px; padding: 12px; background-color: #fff3cd; border-left: 4px solid #ffc107;">
-                    <p style="margin: 0 0 8px;">
-                        <strong><?php esc_html_e('⚠ Filesystem Warning', 'performance-toolkit'); ?></strong>
-                    </p>
-                    <p style="margin: 0;">
-                        <?php esc_html_e('The Performance Toolkit cache directory is not writable. Caching and minification are disabled. Contact your hosting provider to ensure the cache directory has write permissions.', 'performance-toolkit'); ?>
-                    </p>
-                </div>
-            <?php endif; ?>
-
-            <table class="ptk-table-list ptk-status-table">
-                <tbody>
-                    <?php foreach ($rows as $row) : ?>
-                        <tr>
-                            <th scope="row"><?php echo esc_html($row['label']); ?></th>
-                            <td>
-                                <?php
-                                if (isset($row['is_html']) && $row['is_html']) {
-                                    echo wp_kses_post($row['value']);
-                                } else {
-                                    echo esc_html((string) $row['value']);
-                                }
-                                ?>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        </section>
-        <?php
+        return array(
+            'rows'       => $rows,
+            'fs_writable' => $fs_status['writable'],
+        );
     }
 
     private static function formatBytes(int $bytes): string
