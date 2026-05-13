@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace PerformanceToolkit\Admin;
 
 use PerformanceToolkit\Core\Settings;
-use PerformanceToolkit\Views\BladeEngine;
 
-final class FileOptimizationPage implements AdminPageInterface
+final class FileOptimizationPage extends BladeAdminPage
 {
     private Settings $settings;
 
@@ -36,15 +35,15 @@ final class FileOptimizationPage implements AdminPageInterface
         return 'dashicons-media-code';
     }
 
-    public function renderContent(): void
+    public function view(): string
     {
-        echo BladeEngine::view('admin.file-optimization-page', $this->getViewData());
+        return 'admin.file-optimization-page';
     }
 
     /**
      * @return array<string, mixed>
      */
-    private function getViewData(): array
+    protected function buildViewData(): array
     {
         return array(
             'options'          => $this->settings->all(),

@@ -7,9 +7,8 @@ namespace PerformanceToolkit\Admin;
 use PerformanceToolkit\Core\Settings;
 use PerformanceToolkit\Media\ImageOptimizerDetector;
 use PerformanceToolkit\Utils\FilesystemCheck;
-use PerformanceToolkit\Views\BladeEngine;
 
-final class SystemStatusPage implements AdminPageInterface
+final class SystemStatusPage extends BladeAdminPage
 {
     private Settings $settings;
 
@@ -41,9 +40,10 @@ final class SystemStatusPage implements AdminPageInterface
         return 'activity';
     }
 
-    public function renderContent(): void
+
+    public function view(): string
     {
-        echo BladeEngine::view('admin.system-status-page', $this->getViewData());
+        return 'admin.system-status-page';
     }
 
     /**
@@ -51,7 +51,7 @@ final class SystemStatusPage implements AdminPageInterface
      *
      * @return array<string, mixed>
      */
-    private function getViewData(): array
+    protected function buildViewData(): array
     {
         global $wpdb;
 

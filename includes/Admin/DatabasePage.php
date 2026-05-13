@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace PerformanceToolkit\Admin;
 
 use PerformanceToolkit\Database\DatabaseOptimizer;
-use PerformanceToolkit\Views\BladeEngine;
 
-final class DatabasePage implements AdminPageInterface
+final class DatabasePage extends BladeAdminPage
 {
     private const CLEANUP_ACTION = 'ptk_database_cleanup';
 
@@ -39,15 +38,15 @@ final class DatabasePage implements AdminPageInterface
         return 'database-zap';
     }
 
-    public function renderContent(): void
+    public function view(): string
     {
-        echo BladeEngine::view('admin.database-page', $this->getViewData());
+        return 'admin.database-page';
     }
 
     /**
      * @return array<string, mixed>
      */
-    private function getViewData(): array
+    protected function buildViewData(): array
     {
         $stats          = $this->optimizer->getDatabaseStats();
         $table_stats    = $this->optimizer->getTableStats();

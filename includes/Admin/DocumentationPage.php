@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace PerformanceToolkit\Admin;
 
-use PerformanceToolkit\Views\BladeEngine;
-
-final class DocumentationPage implements AdminPageInterface
+final class DocumentationPage extends BladeAdminPage
 {
     private const DOCS_URL = 'http://docs.wpperformancetoolkit.com';
 
@@ -30,15 +28,16 @@ final class DocumentationPage implements AdminPageInterface
         return 'book-open';
     }
 
-    public function renderContent(): void
+
+    public function view(): string
     {
-        echo BladeEngine::view('admin.documentation-page', $this->getViewData());
+        return 'admin.documentation-page';
     }
 
     /**
      * @return array<string, string>
      */
-    private function getViewData(): array
+    protected function buildViewData(): array
     {
         return array(
             'docs_url' => self::DOCS_URL,

@@ -6,9 +6,8 @@ namespace PerformanceToolkit\Admin;
 
 use PerformanceToolkit\Core\Settings;
 use PerformanceToolkit\Media\ImageOptimizerDetector;
-use PerformanceToolkit\Views\BladeEngine;
 
-final class MediaOptimizationPage implements AdminPageInterface
+final class MediaOptimizationPage extends BladeAdminPage
 {
     private Settings $settings;
 
@@ -40,15 +39,15 @@ final class MediaOptimizationPage implements AdminPageInterface
         return 'image';
     }
 
-    public function renderContent(): void
+    public function view(): string
     {
-        echo BladeEngine::view('admin.media-optimization-page', $this->getViewData());
+        return 'admin.media-optimization-page';
     }
 
     /**
      * @return array<string, mixed>
      */
-    private function getViewData(): array
+    protected function buildViewData(): array
     {
         $active_optimizers  = $this->optimizer_detector->activeOptimizers();
         $lazyload_providers = $this->optimizer_detector->activeLazyLoadProviders();

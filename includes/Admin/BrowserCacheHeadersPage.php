@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace PerformanceToolkit\Admin;
 
 use PerformanceToolkit\Core\Settings;
-use PerformanceToolkit\Views\BladeEngine;
 
-final class BrowserCacheHeadersPage implements AdminPageInterface
+final class BrowserCacheHeadersPage extends BladeAdminPage
 {
     private Settings $settings;
 
@@ -36,15 +35,15 @@ final class BrowserCacheHeadersPage implements AdminPageInterface
         return 'monitor-cog';
     }
 
-    public function renderContent(): void
+    public function view(): string
     {
-        echo BladeEngine::view('admin.browser-cache-headers-page', $this->getViewData());
+        return 'admin.browser-cache-headers-page';
     }
 
     /**
      * @return array<string, string>
      */
-    private function getViewData(): array
+    protected function buildViewData(): array
     {
         $server_software = isset($_SERVER['SERVER_SOFTWARE']) ? (string) $_SERVER['SERVER_SOFTWARE'] : '';
 

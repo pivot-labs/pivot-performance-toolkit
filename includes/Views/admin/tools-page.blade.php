@@ -1,4 +1,4 @@
-<x-card title="{{ __('Tools', 'performance-toolkit') }}" id="ptk-tools">
+<x-card :title="__('Tools', 'performance-toolkit')" id="ptk-tools">
 
     @if ($cleared)
         <div class="notice notice-success is-dismissible">

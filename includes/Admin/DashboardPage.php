@@ -6,9 +6,8 @@ namespace PerformanceToolkit\Admin;
 
 use PerformanceToolkit\Core\Settings;
 use PerformanceToolkit\Utils\FilesystemCheck;
-use PerformanceToolkit\Views\BladeEngine;
 
-final class DashboardPage implements AdminPageInterface
+final class DashboardPage extends BladeAdminPage
 {
     private Settings $settings;
 
@@ -37,15 +36,16 @@ final class DashboardPage implements AdminPageInterface
         return 'layout-dashboard';
     }
 
-    public function renderContent(): void
+
+    public function view(): string
     {
-        echo BladeEngine::view('admin.dashboard-page', $this->getViewData());
+        return 'admin.dashboard-page';
     }
 
     /**
      * @return array<string, mixed>
      */
-    private function getViewData(): array
+    protected function buildViewData(): array
     {
         return array(
             'options' => $this->settings->all(),

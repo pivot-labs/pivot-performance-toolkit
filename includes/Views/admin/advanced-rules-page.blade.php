@@ -1,4 +1,4 @@
-<x-card title="{{ __('Cache exclusions', 'performance-toolkit') }}" id="ptk-advanced-rules">
+<x-card :title="__('Cache exclusions', 'performance-toolkit')" id="ptk-advanced-rules">
     @if ($settings_updated)
         <div class="notice notice-success is-dismissible">
             <p>{{ __('Settings saved successfully.', 'performance-toolkit') }}</p>

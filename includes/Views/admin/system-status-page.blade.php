@@ -1,5 +1,4 @@
-<section id="ptk-system-status" class="ptk-card">
-    <h2>{{ __('System Status', 'performance-toolkit') }}</h2>
+<x-card :title="__('System Status', 'performance-toolkit')" id="ptk-system-status">
 
     @if (!$fs_writable)
         <div style="margin-bottom: 16px; padding: 12px; background-color: #fff3cd; border-left: 4px solid #ffc107;">
@@ -28,5 +27,5 @@
             @endforeach
         </tbody>
     </table>
-</section>
+</x-card>
 

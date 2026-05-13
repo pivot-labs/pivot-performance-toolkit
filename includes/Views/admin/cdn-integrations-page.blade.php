@@ -1,4 +1,4 @@
-<x-card title="{{ __('CDN & Integrations', 'performance-toolkit') }}" id="ptk-cdn-integrations">
+<x-card :title="__('CDN & Integrations', 'performance-toolkit')" id="ptk-cdn-integrations">
     @if ($settings_updated)
         <div class="notice notice-success is-dismissible">
             <p>{{ __('Settings saved successfully.', 'performance-toolkit') }}</p>

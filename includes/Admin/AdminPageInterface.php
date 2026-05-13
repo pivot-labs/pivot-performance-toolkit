@@ -14,6 +14,12 @@ interface AdminPageInterface
 
     public function iconKey(): string;
 
+    /**
+     * Legacy rendering entry point.
+     *
+     * New pages should also implement AdminPageViewInterface so AdminShell can
+     * render them without output buffering.
+     */
     public function renderContent(): void;
 }
 
