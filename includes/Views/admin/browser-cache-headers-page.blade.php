@@ -1,3 +1,4 @@
+<div class="ptk-col ptk-col--main">
 <section id="ptk-browser-cache-test" class="ptk-card">
     <h2>{{ __('Browser Cache Test', 'performance-toolkit') }}</h2>
     <p>
@@ -339,4 +340,4 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 </script>
-
+</div>

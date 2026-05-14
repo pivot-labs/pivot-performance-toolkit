@@ -70,6 +70,13 @@ final class AdminShell
             return;
         }
 
+        $page_layout = 'two-col';
+        if ($current_page_slug === 'performance-toolkit') {
+            $page_layout = 'overview';
+        } elseif ($current_page_slug === 'performance-toolkit-tools') {
+            $page_layout = 'tools';
+        }
+
         $shell_data = array(
             'icon_url'         => PERFORMANCE_TOOLKIT_URL . 'assets/img/performance-toolkit.svg',
             'plugin_version'   => defined('PERFORMANCE_TOOLKIT_VERSION') ? PERFORMANCE_TOOLKIT_VERSION : '',
@@ -78,6 +85,7 @@ final class AdminShell
             'secondary_nav'    => self::buildSecondaryNav($current_section, $current_page_slug),
             'page_heading'     => __(self::PAGE_HEADINGS[$current_page_slug] ?? (self::SECTION_LABELS[$current_section] ?? 'Overview'), 'performance-toolkit'),
             'page_description' => __(self::PAGE_DESCRIPTIONS[$current_page_slug] ?? (self::SECTION_DESCRIPTIONS[$current_section] ?? ''), 'performance-toolkit'),
+            'page_layout'      => $page_layout,
             'page_view'        => null,
             'page_data'        => array(),
             'content'          => '',
@@ -142,6 +150,17 @@ final class AdminShell
                 array(
                     array('slug' => 'performance-toolkit-file-optimization', 'label' => __('Files', 'performance-toolkit')),
                     array('slug' => 'performance-toolkit-media-optimization', 'label' => __('Media', 'performance-toolkit')),
+                ),
+                $current_page_slug
+            );
+        }
+
+        if ($current_section === 'database') {
+            return self::withSecondaryState(
+                'database',
+                array(
+                    array('slug' => 'performance-toolkit-database', 'label' => __('Overview', 'performance-toolkit')),
+                    array('slug' => 'performance-toolkit-database-table', 'label' => __('Tables', 'performance-toolkit')),
                 ),
                 $current_page_slug
             );
