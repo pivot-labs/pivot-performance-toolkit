@@ -11,6 +11,7 @@ use PerformanceToolkit\Admin\CachePage;
 use PerformanceToolkit\Admin\CdnIntegrationsPage;
 use PerformanceToolkit\Admin\DashboardPage;
 use PerformanceToolkit\Admin\DatabasePage;
+use PerformanceToolkit\Admin\DatabaseTablePage;
 use PerformanceToolkit\Database\DatabaseOptimizer;
 use PerformanceToolkit\Admin\DocumentationPage;
 use PerformanceToolkit\Admin\FileOptimizationPage;
@@ -62,6 +63,7 @@ final class Plugin
         $this->settings = new Settings();
         $cloudflare = new CloudflareIntegration($this->settings);
         $image_optimizer_detector = new ImageOptimizerDetector();
+        $database_optimizer = new DatabaseOptimizer();
 
         add_action('admin_init', array($this->settings, 'register'));
 
@@ -72,7 +74,8 @@ final class Plugin
                     new CachePage($this->settings),
                     new FileOptimizationPage($this->settings),
                     new MediaOptimizationPage($this->settings, $image_optimizer_detector),
-                    new DatabasePage(new DatabaseOptimizer()),
+                    new DatabasePage($database_optimizer),
+                    new DatabaseTablePage($database_optimizer),
                     new BrowserCacheHeadersPage($this->settings),
                     new CdnIntegrationsPage($this->settings, $cloudflare),
                     new AdvancedRulesPage($this->settings),

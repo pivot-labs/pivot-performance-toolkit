@@ -48,10 +48,47 @@ final class DatabasePage extends BladeAdminPage
      */
     protected function buildViewData(): array
     {
+        $sort_by = isset($_GET['sort']) ? sanitize_key((string) wp_unslash($_GET['sort'])) : 'size';
+        $sort_dir = isset($_GET['sort_dir']) ? sanitize_key((string) wp_unslash($_GET['sort_dir'])) : 'desc';
+
+        if (! in_array($sort_by, array('name', 'engine', 'rows', 'size'), true)) {
+            $sort_by = 'size';
+        }
+
+        if (! in_array($sort_dir, array('asc', 'desc'), true)) {
+            $sort_dir = 'desc';
+        }
+
         $stats          = $this->optimizer->getDatabaseStats();
-        $table_stats    = $this->optimizer->getTableStats();
+        $table_stats    = $this->optimizer->getTableStats($sort_by, $sort_dir);
         $cleaned_task   = isset($_GET['ptk_cleaned']) ? sanitize_key((string) wp_unslash($_GET['ptk_cleaned'])) : '';
         $cleaned_count  = isset($_GET['ptk_count']) ? (int) wp_unslash($_GET['ptk_count']) : 0;
+        $show_overhead  = false;
+        $has_innodb     = false;
+        $has_myisam     = false;
+
+        foreach ($table_stats as $table) {
+            $engine = strtoupper((string) ($table['engine'] ?? ''));
+
+            if ($engine === 'MYISAM') {
+                $show_overhead = true;
+                $has_myisam = true;
+            }
+
+            if ($engine === 'INNODB') {
+                $has_innodb = true;
+            }
+        }
+
+        $engine_display = __('Unknown', 'performance-toolkit');
+
+        if ($has_innodb && $has_myisam) {
+            $engine_display = 'InnoDB, MyISAM';
+        } elseif ($has_innodb) {
+            $engine_display = 'InnoDB';
+        } elseif ($has_myisam) {
+            $engine_display = 'MyISAM';
+        }
 
         $cleanup_items = array(
             'revisions'        => array(
@@ -103,9 +140,29 @@ final class DatabasePage extends BladeAdminPage
             'task_labels'         => $task_labels,
             'cleaned_task'        => $cleaned_task,
             'cleaned_count'       => $cleaned_count,
+            'sort_by'             => $sort_by,
+            'sort_dir'            => $sort_dir,
+            'show_overhead'       => $show_overhead,
+            'engine_display'      => $engine_display,
             'cleanup_action'      => self::CLEANUP_ACTION,
             'db_size_formatted'   => DatabaseOptimizer::formatBytes((int) $stats['size_bytes']),
             'myisam_reclaimable'  => DatabaseOptimizer::formatBytes((int) $stats['myisam_overhead_bytes']),
+            'overview_url'        => add_query_arg(
+                array(
+                    'page' => 'performance-toolkit',
+                    'section' => 'database',
+                    'tab' => 'performance-toolkit-database',
+                ),
+                admin_url('admin.php')
+            ),
+            'tables_url'          => add_query_arg(
+                array(
+                    'page' => 'performance-toolkit',
+                    'section' => 'database',
+                    'tab' => 'performance-toolkit-database-table',
+                ),
+                admin_url('admin.php')
+            ),
         );
     }
 
@@ -150,7 +207,9 @@ final class DatabasePage extends BladeAdminPage
         wp_safe_redirect(
             add_query_arg(
                 array(
-                    'page'        => $this->slug(),
+                    'page'        => 'performance-toolkit',
+                    'section'     => 'database',
+                    'tab'         => 'performance-toolkit-database',
                     'ptk_cleaned' => $task,
                     'ptk_count'   => $count,
                 ),

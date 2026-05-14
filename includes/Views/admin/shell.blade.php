@@ -23,11 +23,13 @@
 
     <div class="ptk-grid">
         <div class="ptk-main">
-            @if (is_string($page_view) && $page_view !== '')
-                @include($page_view, is_array($page_data) ? $page_data : array())
-            @else
-                {!! $content !!}
-            @endif
+            <div class="ptk-page-layout ptk-page-layout--{{ esc_attr((string) ($page_layout ?? 'two-col')) }}">
+                @if (is_string($page_view) && $page_view !== '')
+                    @include($page_view, is_array($page_data) ? $page_data : array())
+                @else
+                    {!! $content !!}
+                @endif
+            </div>
         </div>
     </div>
 </x-admin-layout>

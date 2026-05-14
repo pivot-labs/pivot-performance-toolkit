@@ -221,9 +221,19 @@ final class DatabaseOptimizer
     /**
      * @return array<int, array{name: string, engine: string, rows: int, size_bytes: int, overhead_bytes: int}>
      */
-    public function getTableStats(): array
+    public function getTableStats(string $sort_by = 'size', string $sort_dir = 'desc'): array
     {
         global $wpdb;
+
+        $sortable_columns = array(
+            'name' => 'tbl_name',
+            'engine' => 'tbl_engine',
+            'rows' => 'tbl_rows',
+            'size' => 'tbl_size',
+        );
+
+        $order_by = $sortable_columns[$sort_by] ?? 'tbl_size';
+        $direction = strtolower($sort_dir) === 'asc' ? 'ASC' : 'DESC';
 
         $rows = $wpdb->get_results(
             "SELECT
@@ -234,7 +244,7 @@ final class DatabaseOptimizer
                 CASE WHEN engine = 'MyISAM' THEN data_free ELSE 0 END AS tbl_overhead
              FROM information_schema.TABLES
              WHERE table_schema = DATABASE()
-             ORDER BY tbl_size DESC"
+             ORDER BY {$order_by} {$direction}"
         ) ?: array();
 
         $result = array();
