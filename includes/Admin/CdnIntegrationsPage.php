@@ -23,6 +23,8 @@ final class CdnIntegrationsPage extends BladeAdminPage
 
         add_action('admin_post_' . self::TEST_ACTION, array($this, 'handleTestConnection'));
         add_action('admin_post_' . self::PURGE_ACTION, array($this, 'handlePurgeCache'));
+        add_action('wp_ajax_' . self::TEST_ACTION, array($this, 'handleAjaxTestConnection'));
+        add_action('wp_ajax_' . self::PURGE_ACTION, array($this, 'handleAjaxPurgeCache'));
     }
 
     public function slug(): string
@@ -63,6 +65,8 @@ final class CdnIntegrationsPage extends BladeAdminPage
             'settings_updated' => isset($_GET['settings-updated']) && (string) wp_unslash($_GET['settings-updated']) === 'true',
             'test_action'      => self::TEST_ACTION,
             'purge_action'     => self::PURGE_ACTION,
+            'test_nonce'       => wp_create_nonce('ptk_cloudflare_test'),
+            'purge_nonce'      => wp_create_nonce('ptk_cloudflare_purge'),
         );
     }
 
@@ -92,11 +96,45 @@ final class CdnIntegrationsPage extends BladeAdminPage
         $this->redirectWithNotice($result['success'], $result['message']);
     }
 
+    public function handleAjaxTestConnection(): void
+    {
+        if (! current_user_can('manage_options')) {
+            wp_send_json_error(
+                array('message' => __('You are not allowed to perform this action.', 'performance-toolkit')),
+                403
+            );
+        }
+
+        check_ajax_referer('ptk_cloudflare_test');
+
+        $result = $this->cloudflare->testConnection();
+
+        $this->sendAjaxResult($result['success'], $result['message']);
+    }
+
+    public function handleAjaxPurgeCache(): void
+    {
+        if (! current_user_can('manage_options')) {
+            wp_send_json_error(
+                array('message' => __('You are not allowed to perform this action.', 'performance-toolkit')),
+                403
+            );
+        }
+
+        check_ajax_referer('ptk_cloudflare_purge');
+
+        $result = $this->cloudflare->purgeCache();
+
+        $this->sendAjaxResult($result['success'], $result['message']);
+    }
+
     private function redirectWithNotice(bool $success, string $message): void
     {
         $redirect_url = add_query_arg(
             array(
-                'page'           => $this->slug(),
+                'page'           => 'performance-toolkit',
+                'section'        => 'caching',
+                'tab'            => $this->slug(),
                 'ptk_cf_notice'  => $success ? 'success' : 'error',
                 'ptk_cf_message' => $message,
             ),
@@ -105,6 +143,15 @@ final class CdnIntegrationsPage extends BladeAdminPage
 
         wp_safe_redirect($redirect_url);
         exit;
+    }
+
+    private function sendAjaxResult(bool $success, string $message): void
+    {
+        if ($success) {
+            wp_send_json_success(array('message' => $message));
+        }
+
+        wp_send_json_error(array('message' => $message));
     }
 }
 

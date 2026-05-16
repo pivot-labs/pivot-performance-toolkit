@@ -290,6 +290,14 @@
         max-width: 42rem;
     }
 
+    .ptk-card-notices {
+        margin-bottom: 16px;
+    }
+
+    .ptk-card-notices:empty {
+        display: none;
+    }
+
     .ptk-icon-select {
         position: relative;
         width: 100%;
