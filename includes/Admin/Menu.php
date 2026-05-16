@@ -108,6 +108,14 @@ final class Menu
                 'collapse'    => __('Hide Full Configuration', 'performance-toolkit'),
             )
         );
+
+        wp_localize_script(
+            'performance-toolkit-admin-js',
+            'ptkAdmin',
+            array(
+                'requestFailed' => __('Request failed.', 'performance-toolkit'),
+            )
+        );
     }
 
     public function printMenuIconStyles(): void

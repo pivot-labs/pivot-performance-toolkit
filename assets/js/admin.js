@@ -120,6 +120,62 @@
         });
     }
 
+    function bindAjaxActionForms() {
+        var i18n = (typeof window.ptkAdmin === 'object' && window.ptkAdmin) ? window.ptkAdmin : {};
+        var requestFailedMessage = i18n.requestFailed || 'Request failed.';
+
+        document.querySelectorAll('form[data-ajax-action-form]').forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                var submitButton = form.querySelector('button[type="submit"], input[type="submit"]');
+                var targetSelector = form.getAttribute('data-ajax-notice-target') || '';
+                var container = targetSelector !== ''
+                    ? document.querySelector(targetSelector)
+                    : (form.closest('.ptk-action-block') || form);
+                var body = new URLSearchParams(new FormData(form));
+
+                if (submitButton) {
+                    submitButton.disabled = true;
+                }
+
+                fetch(getAjaxUrl(), {
+                    method: 'POST',
+                    credentials: 'same-origin',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                    },
+                    body: body.toString()
+                })
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (payload) {
+                        var message = requestFailedMessage;
+
+                        if (payload && payload.data && payload.data.message) {
+                            message = payload.data.message;
+                        }
+
+                        if (payload && payload.success) {
+                            showQuickActionNotice(container, 'success', message);
+                            return;
+                        }
+
+                        showQuickActionNotice(container, 'error', message);
+                    })
+                    .catch(function () {
+                        showQuickActionNotice(container, 'error', requestFailedMessage);
+                    })
+                    .finally(function () {
+                        if (submitButton) {
+                            submitButton.disabled = false;
+                        }
+                    });
+            });
+        });
+    }
+
     function bindSnippetCopyButtons() {
         var i18n = (typeof window.ptkSnippet === 'object' && window.ptkSnippet) ? window.ptkSnippet : {};
         var copiedLabel     = i18n.copied      || 'Copied!';
@@ -353,6 +409,7 @@
         var shell  = document.querySelector('.ptk-shell');
 
         bindQuickActionButtons();
+        bindAjaxActionForms();
         bindSnippetCopyButtons();
         bindSnippetToggles();
         bindIconSelects();
