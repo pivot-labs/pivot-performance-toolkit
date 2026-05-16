@@ -86,6 +86,28 @@ final class Menu
             array(),
             file_exists($style_path) ? (string) filemtime($style_path) : PERFORMANCE_TOOLKIT_VERSION
         );
+
+        $script_path = PERFORMANCE_TOOLKIT_PATH . 'assets/js/admin.js';
+        $script_url  = PERFORMANCE_TOOLKIT_URL . 'assets/js/admin.js';
+
+        wp_enqueue_script(
+            'performance-toolkit-admin-js',
+            $script_url,
+            array(),
+            file_exists($script_path) ? (string) filemtime($script_path) : PERFORMANCE_TOOLKIT_VERSION,
+            true
+        );
+
+        wp_localize_script(
+            'performance-toolkit-admin-js',
+            'ptkSnippet',
+            array(
+                'copied'      => __('Copied!', 'performance-toolkit'),
+                'copyFailed'  => __('Failed to copy. Please try again.', 'performance-toolkit'),
+                'expand'      => __('Expand Full Configuration', 'performance-toolkit'),
+                'collapse'    => __('Hide Full Configuration', 'performance-toolkit'),
+            )
+        );
     }
 
     public function printMenuIconStyles(): void

@@ -1,7 +1,6 @@
 @props(['title' => '', 'id' => ''])
 
-<section id="{{ $id ?? '' }}" class="ptk-card ptk-info-card">
-    <h2 class="ptk-card-title ptk-info-card-title">{{ $title }}</h2>
+<x-card :title="$title" :id="$id" {{ $attributes->merge(array('class' => 'ptk-info-card')) }}>
     {{ $slot }}
-</section>
+</x-card>
 
