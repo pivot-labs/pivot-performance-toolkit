@@ -1,31 +1,15 @@
 <x-info-card :title="__('Why optimize your database?', 'performance-toolkit')">
+    @php
+        $benefits = array(
+            __('Improve overall site performance', 'performance-toolkit'),
+            __('Reduce database size', 'performance-toolkit'),
+            __('Speed up queries and page loads', 'performance-toolkit'),
+            __('Remove unnecessary clutter', 'performance-toolkit'),
+        );
+    @endphp
+
     <p style="margin:0 0 16px;color:#646970">{{ __('Regular database optimization can:', 'performance-toolkit') }}</p>
-    <ul class="ptk-why-list">
-        <li class="ptk-why-list-item">
-            <span class="ptk-why-check" aria-hidden="true">
-                {!! \PerformanceToolkit\Admin\LucideIcons::render('circle-check') !!}
-            </span>
-            <span>{{ __('Improve overall site performance', 'performance-toolkit') }}</span>
-        </li>
-        <li class="ptk-why-list-item">
-            <span class="ptk-why-check" aria-hidden="true">
-                {!! \PerformanceToolkit\Admin\LucideIcons::render('circle-check') !!}
-            </span>
-            <span>{{ __('Reduce database size', 'performance-toolkit') }}</span>
-        </li>
-        <li class="ptk-why-list-item">
-            <span class="ptk-why-check" aria-hidden="true">
-                {!! \PerformanceToolkit\Admin\LucideIcons::render('circle-check') !!}
-            </span>
-            <span>{{ __('Speed up queries and page loads', 'performance-toolkit') }}</span>
-        </li>
-        <li class="ptk-why-list-item">
-            <span class="ptk-why-check" aria-hidden="true">
-                {!! \PerformanceToolkit\Admin\LucideIcons::render('circle-check') !!}
-            </span>
-            <span>{{ __('Remove unnecessary clutter', 'performance-toolkit') }}</span>
-        </li>
-    </ul>
+    <x-info-list :items="$benefits" />
     <p style="margin:0;color:#646970">{{ __('Recommended: Optimize your database weekly.', 'performance-toolkit') }}</p>
 
     <form method="post" action="{{ esc_url(admin_url('admin-post.php')) }}" style="margin-top:16px;">
