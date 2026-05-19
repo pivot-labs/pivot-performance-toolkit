@@ -77,6 +77,7 @@ final class ToolsPage extends BladeAdminPage
         $removed_files = isset($_GET['ptk_minified_removed']) ? max(0, (int) $_GET['ptk_minified_removed']) : 0;
         $tools_notice  = isset($_GET['ptk_tools_notice']) ? sanitize_key((string) wp_unslash($_GET['ptk_tools_notice'])) : '';
         $tools_message = isset($_GET['ptk_tools_message']) ? sanitize_text_field((string) wp_unslash($_GET['ptk_tools_message'])) : '';
+        $last_exported = $this->settings->getString('last_settings_exported_at_gmt');
 
         return array(
             'cleared'                  => $cleared,
@@ -93,6 +94,7 @@ final class ToolsPage extends BladeAdminPage
             'import_settings_action'   => self::IMPORT_SETTINGS_ACTION,
             'set_uninstall_policy_action' => self::SET_UNINSTALL_POLICY_ACTION,
             'reset_to_defaults_action' => self::RESET_TO_DEFAULTS_ACTION,
+            'last_settings_exported_at_gmt' => $last_exported,
         );
     }
 
@@ -164,6 +166,10 @@ final class ToolsPage extends BladeAdminPage
         if (! is_string($json) || $json === '') {
             $this->redirectWithNotice(false, __('Could not generate export file.', 'performance-toolkit'));
         }
+
+        $settings = $this->settings->all();
+        $settings['last_settings_exported_at_gmt'] = $payload['exported_at_gmt'];
+        update_option($this->settings->optionKey(), $settings);
 
         $filename = 'performance-toolkit-settings-' . gmdate('Ymd-His') . '.json';
 
@@ -299,11 +305,6 @@ final class ToolsPage extends BladeAdminPage
 
         check_admin_referer('ptk_reset_to_defaults');
 
-        $confirm = isset($_POST['ptk_confirm_reset']) && ! empty($_POST['ptk_confirm_reset']);
-
-        if (! $confirm) {
-            $this->redirectWithNotice(false, __('Reset confirmation was not checked.', 'performance-toolkit'));
-        }
 
         $defaults = $this->settings->defaults();
         update_option($this->settings->optionKey(), $defaults);

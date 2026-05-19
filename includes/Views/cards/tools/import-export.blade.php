@@ -1,44 +1,56 @@
-<x-card :title="__('Import/Export', 'performance-toolkit')" id="ptk-tools">
 
+<x-card-sectioned-split
+        :title="__('Export / Import Configuration', 'performance-toolkit')"
+        :description="__('Transfer Performance Toolkit settings between websites or create reusable configuration backups for staging, migrations, and deployment workflows.', 'performance-toolkit')"
+        icon="arrow-up-down"
+        tone="blue"
+>
+    <x-card-section
+            :title="__('Export live configuration', 'performance-toolkit')"
+            :description="__('Download the current plugin settings as a portable JSON bundle before changing environments or trying a more aggressive performance profile.', 'performance-toolkit')"
+            noticeTone="info"
+            :noticeTitle="__('Includes metadata', 'performance-toolkit')"
+            :noticeText="__('Exports can include schema version, plugin version, and the export timestamp so support teams can review what was deployed.', 'performance-toolkit')"
+    >
+        <div class="space-y-4">
 
-{{-- Export settings --}}
-<div class="ptk-field" style="margin-top:18px;">
-    <h3 style="margin:0 0 8px;">{{ __('Export settings', 'performance-toolkit') }}</h3>
-    <p>{{ __('Download current Performance Toolkit settings as a JSON file.', 'performance-toolkit') }}</p>
-    <p style="margin:8px 0 12px;padding:8px 12px;background-color:#f0f6fc;border-left:3px solid #0969da;color:#24292f;">
-        {{ __('Includes all settings plus export metadata such as schema version, export timestamp, and plugin version.', 'performance-toolkit') }}
-    </p>
-    <form method="post" action="{{ esc_url(admin_url('admin-post.php')) }}">
-        <input type="hidden" name="action" value="{{ esc_attr($export_settings_action) }}" />
-        @php wp_nonce_field('ptk_export_settings'); @endphp
-        <label style="display:block;margin:6px 0 10px;">
-            <input type="checkbox" name="ptk_include_secrets" value="1" />
-            <span>{{ __('Include secret API keys in export', 'performance-toolkit') }}</span>
-        </label>
-        <p style="margin-top:-4px;color:#b32d2e;">
-            {{ __('Warning: exported files with secrets should be stored securely and never committed to version control.', 'performance-toolkit') }}
-        </p>
-        @php submit_button(__('Export settings', 'performance-toolkit'), 'secondary', 'submit', false); @endphp
-    </form>
-</div>
+            <form method="post" action="{{ esc_url(admin_url('admin-post.php')) }}">
+                <input type="hidden" name="action" value="{{ esc_attr($export_settings_action) }}" />
+                @php wp_nonce_field('ptk_export_settings'); @endphp
+                <label style="display:block;margin:6px 0 10px;">
+                    <input type="checkbox" name="ptk_include_secrets" value="1" />
+                    <span>{{ __('Include API tokens and secret integration keys', 'performance-toolkit') }}</span>
+                </label>
+                <p style="margin-top:-4px;color:#b32d2e;">
+                    {{ __('Warning: exported files with secrets should be stored securely and never committed to version control.', 'performance-toolkit') }}
+                </p>
+                @php submit_button(__('Export settings', 'performance-toolkit'), 'secondary', 'submit', false); @endphp
+            </form>
 
-{{-- Import settings --}}
-<div class="ptk-field" style="margin-top:18px;">
-    <h3 style="margin:0 0 8px;">{{ __('Import settings', 'performance-toolkit') }}</h3>
-    <p>{{ __('Import settings from a previously exported JSON file.', 'performance-toolkit') }}</p>
-    <p style="margin:8px 0 12px;padding:8px 12px;background-color:#f0f6fc;border-left:3px solid #0969da;color:#24292f;">
-        {{ __('Imports settings with schema validation and a report showing how many keys were imported, ignored, or preserved.', 'performance-toolkit') }}
-    </p>
-    <form method="post" action="{{ esc_url(admin_url('admin-post.php')) }}" enctype="multipart/form-data">
-        <input type="hidden" name="action" value="{{ esc_attr($import_settings_action) }}" />
-        @php wp_nonce_field('ptk_import_settings'); @endphp
-        <input type="file" name="ptk_settings_import_file" accept=".json,application/json" required />
-        <div style="margin-top:10px;">
-            @php submit_button(__('Import settings', 'performance-toolkit'), 'secondary', 'submit', false); @endphp
         </div>
-    </form>
-</div>
+    </x-card-section>
 
+    <x-card-section
+            :title="__('Import configuration package', 'performance-toolkit')"
+            :description="__('Apply a previously exported configuration file during migrations or when restoring a known-good setup on staging or production.', 'performance-toolkit')"
+            noticeTone="danger"
+            :noticeTitle="__('Validate before import', 'performance-toolkit')"
+            :noticeText="__('A malformed import can overwrite current settings. Always review the incoming environment and confirm it matches the current site before applying it.', 'performance-toolkit')"
+    >
+        <div class="space-y-4">
 
-</x-card>
+            <div class="flex flex-col gap-3 sm:flex-row">
+                <form method="post" action="{{ esc_url(admin_url('admin-post.php')) }}" enctype="multipart/form-data">
+                    <input type="hidden" name="action" value="{{ esc_attr($import_settings_action) }}" />
+                    @php wp_nonce_field('ptk_import_settings'); @endphp
+                    <input type="file" name="ptk_settings_import_file" accept=".json,application/json" required  class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700 file:mr-4 file:rounded-md file:border-0 file:bg-gray-100 file:px-3 file:py-2 file:text-sm file:font-medium file:text-gray-700 hover:file:bg-gray-200" />
 
+                    <div style="margin-top:10px;">
+                        @php submit_button(__('Import settings', 'performance-toolkit'), 'secondary', 'submit', false); @endphp
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </x-card-section>
+</x-card-sectioned-split>
