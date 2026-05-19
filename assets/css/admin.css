@@ -25,12 +25,10 @@
     }
 
     h2.ptk-card-title {
-        margin: 0 0 1em !important;
         @apply text-lg font-semibold;
     }
 
     h3.ptk-info-card-title {
-        margin: 0 0 1em !important;
         @apply mt-0 text-sm font-medium;
     }
 

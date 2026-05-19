@@ -1,21 +1,32 @@
-<x-card :title="__('Reset to safe defaults', 'performance-toolkit')" id="ptk-tools">
+<x-card-standard
+        :title="__('Reset to Safe Defaults', 'performance-toolkit')"
+        :description="__('Restore the plugin to a safe baseline when you want to roll back aggressive optimization changes or start a fresh round of testing.', 'performance-toolkit')"
+        icon="rotate-ccw"
+        tone="red"
+>
+    <div class="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm leading-6 text-red-900">
+        <p class="font-semibold">{{ __('Destructive Action', 'performance-toolkit') }}</p>
+        <p>{{ __('This resets cache, optimization, and media settings to recommended defaults. Export your configuration first if you may want to restore it later.', 'performance-toolkit') }}</p>
+    </div>
 
-
-{{-- Reset to safe defaults --}}
-<div class="ptk-field" style="margin-top:18px; padding:12px; background-color:#fef5f5; border-left:4px solid #d63638;">
-    <h3 style="margin:0 0 8px; color:#d63638;">{{ __('Reset to safe defaults', 'performance-toolkit') }}</h3>
-    <p>{{ __('Reset all Performance Toolkit settings to their recommended safe defaults. This action cannot be undone.', 'performance-toolkit') }}</p>
-    <form method="post" action="{{ esc_url(admin_url('admin-post.php')) }}">
-        <input type="hidden" name="action" value="{{ esc_attr($reset_to_defaults_action) }}" />
-        @php wp_nonce_field('ptk_reset_to_defaults'); @endphp
-        <label style="display:block;margin:6px 0 10px;">
-            <input type="checkbox" name="ptk_confirm_reset" value="1" required />
-            <span>{{ __('I understand this will reset all settings and cannot be undone', 'performance-toolkit') }}</span>
-        </label>
-        @php submit_button(__('Reset to safe defaults', 'performance-toolkit'), 'delete', 'submit', false); @endphp
-    </form>
-</div>
-
-
-
-</x-card>
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div class="text-sm text-gray-500">
+            @if (!empty($last_settings_exported_at_gmt))
+                @php
+                    $timestamp = strtotime($last_settings_exported_at_gmt);
+                    $formatted = wp_date(__('M j, Y \a\t g:i A', 'performance-toolkit'), $timestamp);
+                @endphp
+                {{ sprintf(__('Last configuration export: %s.', 'performance-toolkit'), $formatted) }}
+            @else
+                {{ __('No configuration export yet.', 'performance-toolkit') }}
+            @endif
+        </div>
+        <div class="flex flex-col gap-3 sm:flex-row">
+            <form method="post" action="{{ esc_url(admin_url('admin-post.php')) }}">
+                <input type="hidden" name="action" value="{{ esc_attr($reset_to_defaults_action) }}" />
+                @php wp_nonce_field('ptk_reset_to_defaults'); @endphp
+                @php submit_button(__('Reset to safe defaults', 'performance-toolkit'), 'secondary', 'submit', false, array('style' => 'background:#d63638;border-color:#d63638;color:#fff;')); @endphp
+            </form>
+        </div>
+    </div>
+</x-card-standard>
