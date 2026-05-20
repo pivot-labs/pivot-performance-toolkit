@@ -31,6 +31,35 @@
         container.insertBefore(notice, container.firstChild);
     }
 
+    function showToggleAutosaveStatus(form, type, message) {
+        if (!form) {
+            return false;
+        }
+
+        var status = form.querySelector('.ptk-toggle-status');
+
+        if (!status) {
+            return false;
+        }
+
+        if (form._ptkToggleStatusTimer) {
+            window.clearTimeout(form._ptkToggleStatusTimer);
+        }
+
+        status.textContent = message;
+        status.style.color = type === 'error' ? '#b91c1c' : '#15803d';
+        status.style.backgroundColor = type === 'error' ? '#fee2e2' : '#dcfce7';
+        status.style.transition = 'opacity 180ms ease-in-out';
+        status.style.opacity = '1';
+
+        form._ptkToggleStatusTimer = window.setTimeout(function () {
+            status.style.transition = 'opacity 900ms ease-in-out';
+            status.style.opacity = '0';
+        }, 3000);
+
+        return true;
+    }
+
     function updateCacheUsage(usage) {
         if (!usage || typeof usage.usage_pct === 'undefined') {
             return;
@@ -129,6 +158,8 @@
                 event.preventDefault();
 
                 var submitButton = form.querySelector('button[type="submit"], input[type="submit"]');
+                var controls = form.querySelectorAll('button, input, select, textarea');
+                var isAutosaveForm = form.hasAttribute('data-ajax-autosave-form');
                 var targetSelector = form.getAttribute('data-ajax-notice-target') || '';
                 var container = targetSelector !== ''
                     ? document.querySelector(targetSelector)
@@ -138,6 +169,10 @@
                 if (submitButton) {
                     submitButton.disabled = true;
                 }
+
+                controls.forEach(function (control) {
+                    control.disabled = true;
+                });
 
                 fetch(getAjaxUrl(), {
                     method: 'POST',
@@ -158,20 +193,55 @@
                         }
 
                         if (payload && payload.success) {
+                            if (isAutosaveForm && showToggleAutosaveStatus(form, 'success', form.getAttribute('data-ajax-success-label') || 'Saved')) {
+                                return;
+                            }
+
                             showQuickActionNotice(container, 'success', message);
+                            return;
+                        }
+
+                        if (isAutosaveForm && showToggleAutosaveStatus(form, 'error', 'Error')) {
                             return;
                         }
 
                         showQuickActionNotice(container, 'error', message);
                     })
                     .catch(function () {
+                        if (isAutosaveForm && showToggleAutosaveStatus(form, 'error', 'Error')) {
+                            return;
+                        }
+
                         showQuickActionNotice(container, 'error', requestFailedMessage);
                     })
                     .finally(function () {
+                        controls.forEach(function (control) {
+                            control.disabled = false;
+                        });
+
                         if (submitButton) {
                             submitButton.disabled = false;
                         }
                     });
+            });
+        });
+    }
+
+    function bindAjaxAutosaveForms() {
+        document.querySelectorAll('form[data-ajax-autosave-form]').forEach(function (form) {
+            form.addEventListener('change', function (event) {
+                var target = event.target;
+
+                if (!target || !target.matches('input, select, textarea')) {
+                    return;
+                }
+
+                if (typeof form.requestSubmit === 'function') {
+                    form.requestSubmit();
+                    return;
+                }
+
+                form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
             });
         });
     }
@@ -410,6 +480,7 @@
 
         bindQuickActionButtons();
         bindAjaxActionForms();
+        bindAjaxAutosaveForms();
         bindSnippetCopyButtons();
         bindSnippetToggles();
         bindIconSelects();
