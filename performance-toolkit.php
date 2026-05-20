@@ -1,14 +1,17 @@
 <?php
 /**
- * Plugin Name: Performance Toolkit
- * Plugin URI: https://www.digitalcanvas.com/plugins/performance-toolkit/
- * Description: WordPress performance optimization toolkit.
+ * Plugin Name: WP Performance Toolkit
+ * Plugin URI: https://www.wpperftoolkit.com
+ * Description: Performance optimization toolkit for WordPress.
  * Version: 0.1.0
- * Author: Jeffrey Shaikh
  * Requires at least: 6.5
  * Requires PHP: 8.2
- */
-
+ * Author: Digital Canvas
+ * Author URI: https://www.digitalcanvas.com
+ * License: GPLv2 or later
+ * Text Domain: performance-toolkit
+ * Domain Path: /languages
+*/
 if (! defined('ABSPATH')) {
     exit;
 }
