@@ -5,6 +5,8 @@
  * Description: WordPress performance optimization toolkit.
  * Version: 0.1.0
  * Author: Jeffrey Shaikh
+ * Text Domain: performance-toolkit
+ * Domain Path: /languages
  * Requires at least: 6.5
  * Requires PHP: 8.2
  */
@@ -29,6 +31,13 @@ register_deactivation_hook(__FILE__, array('\\PerformanceToolkit\\Core\\Lifecycl
 add_action(
     'plugins_loaded',
     static function (): void {
+        // Load plugin text domain for translations
+        load_plugin_textdomain(
+            'performance-toolkit',
+            false,
+            dirname(plugin_basename(__FILE__)) . '/languages/'
+        );
+
         if (! class_exists('\\PerformanceToolkit\\Core\\Plugin')) {
             return;
         }
