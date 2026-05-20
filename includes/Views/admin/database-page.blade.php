@@ -43,7 +43,7 @@
         'cleanup_action' => $cleanup_action,
     ))
 
-    @include('cards.database.info-why')
+    @include('cards.database.info.why')
 
 
  </div>

@@ -1,8 +1,8 @@
 <div class="ptk-col ptk-col--main">
-    @include('cards.cdn.integrations')
-    @include('cards.cdn.actions')
+    @include('cards.caching.cdn.integrations')
+    @include('cards.caching.cdn.actions')
 </div>
 <div class="ptk-col ptk-col--sidebar">
-    @include('cards.cdn.info-about-cdn')
-    @include('cards.cdn.info-auto-purge')
+    @include('cards.caching.cdn.info.about-cdn')
+    @include('cards.caching.cdn.info.auto-purge')
 </div>
