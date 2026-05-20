@@ -36,11 +36,11 @@ final class AdminShell
     );
 
     private const PAGE_HEADINGS = array(
-        // Section-based headings can be added here if different from SECTION_LABELS
+        'performance-toolkit-card-showcase' => 'Card Showcase',
     );
 
     private const PAGE_DESCRIPTIONS = array(
-        // Section-based descriptions can be added here if different from SECTION_DESCRIPTIONS
+        'performance-toolkit-card-showcase' => 'Preview reusable admin card layouts for settings, actions, and workflow-based interfaces.',
     );
 
     /**
@@ -75,6 +75,8 @@ final class AdminShell
             $page_layout = 'overview';
         } elseif ($current_page_slug === 'performance-toolkit-tools') {
             $page_layout = 'tools';
+        } elseif ($current_page_slug === 'performance-toolkit-card-showcase') {
+            $page_layout = 'overview';
         }
 
         $shell_data = array(
@@ -161,6 +163,17 @@ final class AdminShell
                 array(
                     array('slug' => 'performance-toolkit-database', 'label' => __('Overview', 'performance-toolkit')),
                     array('slug' => 'performance-toolkit-database-table', 'label' => __('Tables', 'performance-toolkit')),
+                ),
+                $current_page_slug
+            );
+        }
+
+        if ($current_section === 'tools') {
+            return self::withSecondaryState(
+                'tools',
+                array(
+                    array('slug' => 'performance-toolkit-tools', 'label' => __('Tools', 'performance-toolkit')),
+                    array('slug' => 'performance-toolkit-card-showcase', 'label' => __('Card Showcase', 'performance-toolkit')),
                 ),
                 $current_page_slug
             );

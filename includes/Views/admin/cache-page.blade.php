@@ -1,11 +1,11 @@
 <div class="ptk-col ptk-col--main">
-    @include('cards.caching.cache')
-    @include('cards.caching.object-cache')
+    @include('cards.caching.page.cache')
+    @include('cards.caching.page.object-cache')
 </div>
 
 <div class="ptk-col ptk-col--sidebar">
-    @include('cards.caching.info-about-cache')
-    @include('cards.caching.quick-actions', array(
+    @include('cards.caching.page.info.about')
+    @include('cards.caching.page.quick-actions', array(
         'clear_action' => $clear_action,
         'clear_minified_action' => $clear_minified_action,
         'ajax_clear_action' => $ajax_clear_action,
