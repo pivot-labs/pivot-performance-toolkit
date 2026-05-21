@@ -16,6 +16,7 @@
         @if ($external_lazyload_on)
             <p style="margin:6px 0 0;color:#b32d2e;">
                 {{ sprintf(
+                    /* translators: %s: Comma-separated list of plugins/providers currently controlling lazy-load. */
                     __('Lazy-load is currently managed by: %s. Performance Toolkit lazy-load is temporarily disabled to prevent conflicts.', 'performance-toolkit'),
                     implode(', ', $lazyload_providers)
                 ) }}
@@ -69,4 +70,3 @@
         @endphp
     </form>
 </x-card>
-
