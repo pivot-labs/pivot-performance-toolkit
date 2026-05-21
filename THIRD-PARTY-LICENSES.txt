@@ -21,3 +21,7 @@ Doctrine Inflector
 Copyright (c) Doctrine Project
 License: MIT
 https://github.com/doctrine/inflector
+
+Symfony
+License: MIT
+https://symfony.com/
