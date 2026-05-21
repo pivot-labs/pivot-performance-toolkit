@@ -1,4 +1,9 @@
 <?php
+/**
+ * Browser cache headers admin page.
+ *
+ * @package PerformanceToolkit
+ */
 
 declare(strict_types=1);
 
@@ -6,59 +11,51 @@ namespace PerformanceToolkit\Admin;
 
 use PerformanceToolkit\Core\Settings;
 
-final class BrowserCacheHeadersPage extends BladeAdminPage
-{
-    private Settings $settings;
+final class BrowserCacheHeadersPage extends BladeAdminPage {
 
-    public function __construct(Settings $settings)
-    {
-        $this->settings = $settings;
-    }
+	private Settings $settings;
 
-    public function slug(): string
-    {
-        return 'performance-toolkit-browser-cache';
-    }
+	public function __construct( Settings $settings ) {
+		$this->settings = $settings;
+	}
 
-    public function menuTitle(): string
-    {
-        return __('Browser Cache', 'performance-toolkit');
-    }
+	public function slug(): string {
+		return 'performance-toolkit-browser-cache';
+	}
 
-    public function pageTitle(): string
-    {
-        return __('Performance Toolkit – Browser Cache & Compression', 'performance-toolkit');
-    }
+	public function menuTitle(): string {
+		return __( 'Browser Cache', 'performance-toolkit' );
+	}
 
-    public function iconKey(): string
-    {
-        return 'monitor-cog';
-    }
+	public function pageTitle(): string {
+		return __( 'Performance Toolkit – Browser Cache & Compression', 'performance-toolkit' );
+	}
 
-    public function view(): string
-    {
-        return 'admin.browser-cache-headers-page';
-    }
+	public function iconKey(): string {
+		return 'monitor-cog';
+	}
 
-    /**
-     * @return array<string, string>
-     */
-    protected function buildViewData(): array
-    {
-        $server_software = isset($_SERVER['SERVER_SOFTWARE']) ? (string) $_SERVER['SERVER_SOFTWARE'] : '';
+	public function view(): string {
+		return 'admin.browser-cache-headers-page';
+	}
 
-        return array(
-            'htaccess_snippet' => $this->generateHtaccessSnippet(),
-            'nginx_snippet'    => $this->generateNginxSnippet(),
-            'server_software'  => $server_software,
-            'home_url'         => home_url(),
-            'option_key'       => $this->settings->optionKey(),
-        );
-    }
+	/**
+	 * @return array<string, string>
+	 */
+	protected function buildViewData(): array {
+		$server_software = isset( $_SERVER['SERVER_SOFTWARE'] ) ? (string) $_SERVER['SERVER_SOFTWARE'] : '';
 
-    private function generateHtaccessSnippet(): string
-    {
-        return '# BEGIN Performance Toolkit - Browser Cache & Compression
+		return array(
+			'htaccess_snippet' => $this->generateHtaccessSnippet(),
+			'nginx_snippet'    => $this->generateNginxSnippet(),
+			'server_software'  => $server_software,
+			'home_url'         => home_url(),
+			'option_key'       => $this->settings->optionKey(),
+		);
+	}
+
+	private function generateHtaccessSnippet(): string {
+		return '# BEGIN Performance Toolkit - Browser Cache & Compression
 <IfModule mod_expires.c>
     ExpiresActive On
 
@@ -125,11 +122,10 @@ final class BrowserCacheHeadersPage extends BladeAdminPage
     Header set X-Frame-Options "SAMEORIGIN"
 </IfModule>
 # END Performance Toolkit - Browser Cache & Compression';
-    }
+	}
 
-    private function generateNginxSnippet(): string
-    {
-        return '# BEGIN Performance Toolkit - Browser Cache & Compression
+	private function generateNginxSnippet(): string {
+		return '# BEGIN Performance Toolkit - Browser Cache & Compression
 
 # Gzip compression
 gzip on;
@@ -178,7 +174,5 @@ add_header X-Frame-Options "SAMEORIGIN";
 
 # Note: Add this configuration inside your server {} block in nginx.conf
 # Contact your hosting provider to apply these settings for you';
-    }
+	}
 }
-
-

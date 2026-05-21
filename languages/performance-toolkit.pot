@@ -1,0 +1,1484 @@
+# Copyright (C) 2026 Digital Canvas
+# This file is distributed under the GPLv2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Performance Toolkit 0.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/performance-toolkit\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-05-20T22:50:46+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: performance-toolkit\n"
+
+#. Plugin Name of the plugin
+#: performance-toolkit.php
+msgid "WP Performance Toolkit"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: performance-toolkit.php
+msgid "https://www.wpperformancetoolkit.com"
+msgstr ""
+
+#. Description of the plugin
+#: performance-toolkit.php
+msgid "Performance optimization toolkit for WordPress."
+msgstr ""
+
+#. Author of the plugin
+#: performance-toolkit.php
+msgid "Digital Canvas"
+msgstr ""
+
+#. Author URI of the plugin
+#: performance-toolkit.php
+msgid "https://www.digitalcanvas.com"
+msgstr ""
+
+#: includes/Admin/AdminBarMenu.php:44
+#: includes/Admin/Menu.php:52
+msgid "Performance"
+msgstr ""
+
+#: includes/Admin/AdminBarMenu.php:53
+msgid "Settings"
+msgstr ""
+
+#: includes/Admin/AdminBarMenu.php:62
+msgid "Purge all cache"
+msgstr ""
+
+#. translators: %s: cache status label
+#: includes/Admin/AdminBarMenu.php:75
+#, php-format
+msgid "Page cache: %s"
+msgstr ""
+
+#: includes/Admin/AdminBarMenu.php:104
+msgid "Purge this page"
+msgstr ""
+
+#: includes/Admin/AdminBarMenu.php:108
+msgid "Purge cache for this page"
+msgstr ""
+
+#: includes/Admin/AdminBarMenu.php:108
+msgid "Not on a cacheable page"
+msgstr ""
+
+#: includes/Admin/AdminBarMenu.php:157
+#: includes/Admin/AdminBarMenu.php:179
+msgid "Unavailable"
+msgstr ""
+
+#: includes/Admin/AdminBarMenu.php:168
+msgid "Not cacheable"
+msgstr ""
+
+#: includes/Admin/AdminBarMenu.php:188
+msgid "File missing"
+msgstr ""
+
+#: includes/Admin/AdminBarMenu.php:200
+msgid "File stale"
+msgstr ""
+
+#: includes/Admin/AdminBarMenu.php:208
+msgid "File present"
+msgstr ""
+
+#: includes/Admin/AdminBarMenu.php:277
+#: includes/Admin/AdminBarMenu.php:307
+#: includes/Admin/CdnIntegrationsPage.php:76
+#: includes/Admin/CdnIntegrationsPage.php:89
+#: includes/Admin/CdnIntegrationsPage.php:103
+#: includes/Admin/CdnIntegrationsPage.php:119
+#: includes/Admin/DatabasePage.php:172
+#: includes/Admin/ToolsPage.php:104
+#: includes/Admin/ToolsPage.php:139
+#: includes/Admin/ToolsPage.php:187
+#: includes/Admin/ToolsPage.php:288
+#: includes/Admin/ToolsPage.php:303
+msgid "You are not allowed to perform this action."
+msgstr ""
+
+#: includes/Admin/AdminShell.php:114
+#: includes/Admin/AdminShell.php:164
+msgid "Overview"
+msgstr ""
+
+#: includes/Admin/AdminShell.php:115
+msgid "Caching"
+msgstr ""
+
+#: includes/Admin/AdminShell.php:116
+msgid "Optimization"
+msgstr ""
+
+#: includes/Admin/AdminShell.php:117
+#: includes/Admin/AdminShell.php:191
+#: includes/Admin/DatabasePage.php:28
+msgid "Database"
+msgstr ""
+
+#: includes/Admin/AdminShell.php:118
+#: includes/Admin/AdminShell.php:175
+#: includes/Admin/ToolsPage.php:50
+msgid "Tools"
+msgstr ""
+
+#: includes/Admin/AdminShell.php:119
+#: includes/Admin/SystemStatusPage.php:30
+msgid "System Status"
+msgstr ""
+
+#: includes/Admin/AdminShell.php:140
+#: includes/Admin/SystemStatusPage.php:110
+msgid "Page Cache"
+msgstr ""
+
+#: includes/Admin/AdminShell.php:141
+#: includes/Admin/BrowserCacheHeadersPage.php:25
+msgid "Browser Cache"
+msgstr ""
+
+#: includes/Admin/AdminShell.php:142
+msgid "CDN"
+msgstr ""
+
+#: includes/Admin/AdminShell.php:143
+msgid "Rules"
+msgstr ""
+
+#: includes/Admin/AdminShell.php:153
+msgid "Files"
+msgstr ""
+
+#: includes/Admin/AdminShell.php:154
+msgid "Media"
+msgstr ""
+
+#: includes/Admin/AdminShell.php:165
+#: includes/Views/cards/database/overview.blade.php:14
+msgid "Tables"
+msgstr ""
+
+#: includes/Admin/AdminShell.php:176
+#: includes/Admin/CardShowcasePage.php:16
+msgid "Card Showcase"
+msgstr ""
+
+#: includes/Admin/AdminShell.php:186
+msgid "Summary"
+msgstr ""
+
+#: includes/Admin/AdminShell.php:187
+msgid "Server"
+msgstr ""
+
+#: includes/Admin/AdminShell.php:188
+msgid "WordPress"
+msgstr ""
+
+#: includes/Admin/AdminShell.php:189
+msgid "Directories & Permissions"
+msgstr ""
+
+#: includes/Admin/AdminShell.php:190
+msgid "PHP Info"
+msgstr ""
+
+#: includes/Admin/AdvancedRulesPage.php:25
+msgid "Advanced Rules"
+msgstr ""
+
+#: includes/Admin/AdvancedRulesPage.php:30
+msgid "Performance Toolkit Advanced Rules"
+msgstr ""
+
+#: includes/Admin/BrowserCacheHeadersPage.php:30
+msgid "Performance Toolkit – Browser Cache & Compression"
+msgstr ""
+
+#: includes/Admin/CachePage.php:36
+msgid "Cache"
+msgstr ""
+
+#: includes/Admin/CachePage.php:41
+msgid "Performance Toolkit Cache"
+msgstr ""
+
+#: includes/Admin/CachePage.php:89
+#: includes/Admin/CachePage.php:173
+#: includes/Views/cards/caching/page/cache.blade.php:10
+#: includes/Views/cards/caching/page/quick-actions.blade.php:8
+msgid "Cache cleared successfully."
+msgstr ""
+
+#: includes/Admin/CachePage.php:90
+#: includes/Admin/CachePage.php:189
+#: includes/Views/cards/caching/page/quick-actions.blade.php:22
+msgid "Minified CSS/JS cache cleared successfully."
+msgstr ""
+
+#: includes/Admin/CachePage.php:91
+#: includes/Admin/CachePage.php:203
+#: includes/Views/cards/caching/page/quick-actions.blade.php:37
+msgid "Preload cache is not implemented yet."
+msgstr ""
+
+#: includes/Admin/CachePage.php:107
+msgid "Active"
+msgstr ""
+
+#: includes/Admin/CachePage.php:107
+msgid "Inactive"
+msgstr ""
+
+#: includes/Admin/CachePage.php:108
+#: includes/Admin/DatabasePage.php:83
+#: includes/Admin/SystemStatusPage.php:99
+#: includes/Admin/SystemStatusPage.php:254
+#: includes/Admin/SystemStatusPage.php:261
+msgid "Unknown"
+msgstr ""
+
+#: includes/Admin/CachePage.php:109
+msgid "Installed"
+msgstr ""
+
+#: includes/Admin/CachePage.php:109
+msgid "Not installed"
+msgstr ""
+
+#: includes/Admin/CachePage.php:118
+#: includes/Admin/CachePage.php:142
+#: includes/Admin/CachePage.php:165
+#: includes/Admin/CachePage.php:181
+#: includes/Admin/CachePage.php:197
+#: includes/Admin/FileOptimizationPage.php:63
+msgid "Unauthorized"
+msgstr ""
+
+#: includes/Admin/CachePage.php:263
+#, php-format
+msgid "%1$s of %2$d MB used (%3$d%%)"
+msgstr ""
+
+#: includes/Admin/CardShowcasePage.php:21
+msgid "Performance Toolkit Card Showcase"
+msgstr ""
+
+#: includes/Admin/CdnIntegrationsPage.php:37
+msgid "CDN & Integrations"
+msgstr ""
+
+#: includes/Admin/CdnIntegrationsPage.php:42
+msgid "Performance Toolkit CDN & Integrations"
+msgstr ""
+
+#: includes/Admin/DashboardPage.php:26
+msgid "Dashboard"
+msgstr ""
+
+#: includes/Admin/DashboardPage.php:31
+msgid "Performance Toolkit Dashboard"
+msgstr ""
+
+#: includes/Admin/DatabasePage.php:33
+msgid "Performance Toolkit Database"
+msgstr ""
+
+#: includes/Admin/DatabasePage.php:95
+#: includes/Admin/DatabasePage.php:127
+msgid "Post revisions"
+msgstr ""
+
+#: includes/Admin/DatabasePage.php:96
+msgid "Saved history snapshots of edited posts and pages."
+msgstr ""
+
+#: includes/Admin/DatabasePage.php:100
+#: includes/Admin/DatabasePage.php:128
+msgid "Auto-drafts"
+msgstr ""
+
+#: includes/Admin/DatabasePage.php:101
+msgid "Unsaved draft posts created automatically by WordPress."
+msgstr ""
+
+#: includes/Admin/DatabasePage.php:105
+#: includes/Admin/DatabasePage.php:129
+msgid "Trashed posts"
+msgstr ""
+
+#: includes/Admin/DatabasePage.php:106
+msgid "Posts and pages sitting in the trash."
+msgstr ""
+
+#: includes/Admin/DatabasePage.php:110
+#: includes/Admin/DatabasePage.php:130
+msgid "Spam comments"
+msgstr ""
+
+#: includes/Admin/DatabasePage.php:111
+msgid "Comments marked as spam."
+msgstr ""
+
+#: includes/Admin/DatabasePage.php:115
+#: includes/Admin/DatabasePage.php:131
+msgid "Trashed comments"
+msgstr ""
+
+#: includes/Admin/DatabasePage.php:116
+msgid "Comments moved to the trash."
+msgstr ""
+
+#: includes/Admin/DatabasePage.php:120
+#: includes/Admin/DatabasePage.php:132
+msgid "Expired transients"
+msgstr ""
+
+#: includes/Admin/DatabasePage.php:121
+msgid "Cached data that has already passed its expiry time."
+msgstr ""
+
+#: includes/Admin/DatabasePage.php:133
+msgid "Tables optimized"
+msgstr ""
+
+#: includes/Admin/DatabaseTablePage.php:25
+msgid "Table Breakdown"
+msgstr ""
+
+#: includes/Admin/DatabaseTablePage.php:30
+msgid "Performance Toolkit Database Table Breakdown"
+msgstr ""
+
+#: includes/Admin/DocumentationPage.php:18
+msgid "Documentation"
+msgstr ""
+
+#: includes/Admin/DocumentationPage.php:23
+msgid "Performance Toolkit Documentation"
+msgstr ""
+
+#: includes/Admin/FileOptimizationPage.php:28
+msgid "File Optimization"
+msgstr ""
+
+#: includes/Admin/FileOptimizationPage.php:33
+msgid "Performance Toolkit File Optimization"
+msgstr ""
+
+#: includes/Admin/FileOptimizationPage.php:73
+msgid "Invalid setting."
+msgstr ""
+
+#: includes/Admin/FileOptimizationPage.php:82
+msgid "Quick optimization saved."
+msgstr ""
+
+#: includes/Admin/FilesystemNotices.php:38
+msgid "Performance Toolkit – Filesystem Issue"
+msgstr ""
+
+#: includes/Admin/FilesystemNotices.php:41
+msgid "The cache directory is not writable. Performance Toolkit will continue to work, but page caching and asset minification will be disabled until the issue is resolved."
+msgstr ""
+
+#. translators: %s: link to system status page
+#: includes/Admin/FilesystemNotices.php:52
+#, php-format
+msgid "For more details, visit the <a href=\"%s\">System Status page</a>."
+msgstr ""
+
+#: includes/Admin/FilesystemNotices.php:58
+msgid "<strong>To fix:</strong> Ensure the <code>wp-content/cache/performance-toolkit</code> directory exists and is writable by the web server. Usually: <code>chmod 755 wp-content/cache/performance-toolkit</code> or contact your hosting provider."
+msgstr ""
+
+#: includes/Admin/MediaOptimizationPage.php:29
+msgid "Media Optimization"
+msgstr ""
+
+#: includes/Admin/MediaOptimizationPage.php:34
+msgid "Performance Toolkit Media Optimization"
+msgstr ""
+
+#: includes/Admin/MediaOptimizationPage.php:63
+#: includes/Admin/SystemStatusPage.php:124
+msgid "None detected"
+msgstr ""
+
+#: includes/Admin/Menu.php:105
+msgid "Copied!"
+msgstr ""
+
+#: includes/Admin/Menu.php:106
+msgid "Failed to copy. Please try again."
+msgstr ""
+
+#: includes/Admin/Menu.php:107
+#: includes/Views/cards/caching/browser-cache-settings/apache.blade.php:20
+#: includes/Views/cards/caching/browser-cache-settings/nginx.blade.php:21
+msgid "Expand Full Configuration"
+msgstr ""
+
+#: includes/Admin/Menu.php:108
+msgid "Hide Full Configuration"
+msgstr ""
+
+#: includes/Admin/Menu.php:116
+msgid "Request failed."
+msgstr ""
+
+#: includes/Admin/SystemStatusPage.php:35
+msgid "Performance Toolkit System Status"
+msgstr ""
+
+#: includes/Admin/SystemStatusPage.php:71
+#: includes/Views/cards/overview/optimization-overview.blade.php:28
+msgid "Writable"
+msgstr ""
+
+#: includes/Admin/SystemStatusPage.php:72
+msgid "Read-only / Not writable"
+msgstr ""
+
+#: includes/Admin/SystemStatusPage.php:86
+msgid "PHP Version"
+msgstr ""
+
+#: includes/Admin/SystemStatusPage.php:90
+msgid "WordPress Version"
+msgstr ""
+
+#: includes/Admin/SystemStatusPage.php:94
+msgid "MySQL Version"
+msgstr ""
+
+#: includes/Admin/SystemStatusPage.php:98
+msgid "Plugin Version"
+msgstr ""
+
+#: includes/Admin/SystemStatusPage.php:102
+msgid "Server Software"
+msgstr ""
+
+#: includes/Admin/SystemStatusPage.php:106
+msgid "MySQL Size"
+msgstr ""
+
+#: includes/Admin/SystemStatusPage.php:111
+msgid "On"
+msgstr ""
+
+#: includes/Admin/SystemStatusPage.php:111
+msgid "Off"
+msgstr ""
+
+#: includes/Admin/SystemStatusPage.php:114
+msgid "Object Cache Enabled"
+msgstr ""
+
+#: includes/Admin/SystemStatusPage.php:115
+#: includes/Admin/SystemStatusPage.php:329
+#: includes/Admin/SystemStatusPage.php:337
+msgid "Yes"
+msgstr ""
+
+#: includes/Admin/SystemStatusPage.php:115
+#: includes/Admin/SystemStatusPage.php:329
+#: includes/Admin/SystemStatusPage.php:337
+msgid "No"
+msgstr ""
+
+#: includes/Admin/SystemStatusPage.php:118
+msgid "Cache Directory Status"
+msgstr ""
+
+#: includes/Admin/SystemStatusPage.php:123
+msgid "Image Optimizer Plugins"
+msgstr ""
+
+#: includes/Admin/SystemStatusPage.php:239
+msgid "PHP Memory Limit"
+msgstr ""
+
+#: includes/Admin/SystemStatusPage.php:240
+#: includes/Admin/SystemStatusPage.php:247
+msgid "Unlimited"
+msgstr ""
+
+#: includes/Admin/SystemStatusPage.php:246
+msgid "PHP Max Execution Time"
+msgstr ""
+
+#: includes/Admin/SystemStatusPage.php:253
+msgid "PHP Upload Max File Size"
+msgstr ""
+
+#: includes/Admin/SystemStatusPage.php:260
+msgid "PHP Post Max Size"
+msgstr ""
+
+#: includes/Admin/SystemStatusPage.php:267
+msgid "GZip Compression"
+msgstr ""
+
+#: includes/Admin/SystemStatusPage.php:268
+#: includes/Admin/SystemStatusPage.php:275
+#: includes/Admin/SystemStatusPage.php:295
+#: includes/Admin/SystemStatusPage.php:302
+#: includes/Admin/SystemStatusPage.php:309
+#: includes/Admin/SystemStatusPage.php:316
+#: includes/Views/cards/overview/optimization-overview.blade.php:15
+#: includes/Views/cards/overview/optimization-overview.blade.php:19
+#: includes/Views/cards/overview/optimization-overview.blade.php:23
+msgid "Enabled"
+msgstr ""
+
+#: includes/Admin/SystemStatusPage.php:268
+#: includes/Admin/SystemStatusPage.php:275
+#: includes/Admin/SystemStatusPage.php:295
+#: includes/Admin/SystemStatusPage.php:302
+#: includes/Admin/SystemStatusPage.php:309
+#: includes/Admin/SystemStatusPage.php:316
+#: includes/Views/cards/overview/optimization-overview.blade.php:15
+#: includes/Views/cards/overview/optimization-overview.blade.php:19
+#: includes/Views/cards/overview/optimization-overview.blade.php:23
+msgid "Disabled"
+msgstr ""
+
+#: includes/Admin/SystemStatusPage.php:274
+msgid "PHP OPcache"
+msgstr ""
+
+#: includes/Admin/SystemStatusPage.php:294
+msgid "Apache mod_rewrite"
+msgstr ""
+
+#: includes/Admin/SystemStatusPage.php:301
+msgid "Apache mod_expires"
+msgstr ""
+
+#: includes/Admin/SystemStatusPage.php:308
+msgid "Apache mod_deflate"
+msgstr ""
+
+#: includes/Admin/SystemStatusPage.php:315
+msgid "Apache mod_headers"
+msgstr ""
+
+#: includes/Admin/SystemStatusPage.php:320
+#: includes/Views/cards/caching/browser-cache-settings/nginx.blade.php:3
+#: includes/Views/cards/caching/browser/compression-settings.blade.php:9
+msgid "Nginx Configuration"
+msgstr ""
+
+#: includes/Admin/SystemStatusPage.php:321
+msgid "Please review your server configuration"
+msgstr ""
+
+#: includes/Admin/SystemStatusPage.php:328
+msgid "HTTPS Enabled"
+msgstr ""
+
+#: includes/Admin/SystemStatusPage.php:336
+msgid "Uploads Directory Writable"
+msgstr ""
+
+#: includes/Admin/ToolsPage.php:55
+msgid "Performance Toolkit Tools"
+msgstr ""
+
+#: includes/Admin/ToolsPage.php:167
+msgid "Could not generate export file."
+msgstr ""
+
+#: includes/Admin/ToolsPage.php:193
+msgid "No import file was uploaded."
+msgstr ""
+
+#: includes/Admin/ToolsPage.php:199
+msgid "Upload failed. Please try again with a valid JSON file."
+msgstr ""
+
+#: includes/Admin/ToolsPage.php:205
+msgid "Invalid uploaded file."
+msgstr ""
+
+#: includes/Admin/ToolsPage.php:211
+msgid "Import file is empty."
+msgstr ""
+
+#: includes/Admin/ToolsPage.php:217
+msgid "Import file is not valid JSON."
+msgstr ""
+
+#: includes/Admin/ToolsPage.php:231
+msgid "Import file is not a Performance Toolkit export."
+msgstr ""
+
+#. translators: %d: schema version
+#: includes/Admin/ToolsPage.php:241
+#, php-format
+msgid "Unsupported import schema version: %d."
+msgstr ""
+
+#: includes/Admin/ToolsPage.php:251
+msgid "No settings payload found in import file."
+msgstr ""
+
+#: includes/Admin/ToolsPage.php:297
+msgid "Uninstall cleanup policy saved."
+msgstr ""
+
+#: includes/Admin/ToolsPage.php:312
+msgid "All settings have been reset to safe defaults."
+msgstr ""
+
+#. translators: %d: schema version
+#: includes/Admin/ToolsPage.php:342
+#, php-format
+msgid "Schema v%d accepted"
+msgstr ""
+
+#: includes/Admin/ToolsPage.php:345
+msgid "Legacy import format accepted"
+msgstr ""
+
+#. translators: %d: number of recognized settings imported
+#: includes/Admin/ToolsPage.php:349
+#, php-format
+msgid "%d key imported"
+msgid_plural "%d keys imported"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of ignored settings keys
+#: includes/Admin/ToolsPage.php:355
+#, php-format
+msgid "%d key ignored"
+msgid_plural "%d keys ignored"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of preserved secret values
+#: includes/Admin/ToolsPage.php:362
+#, php-format
+msgid "%d secret preserved"
+msgid_plural "%d secrets preserved"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/Admin/ToolsPage.php:367
+msgid "Settings imported successfully."
+msgstr ""
+
+#: includes/Integrations/CloudflareIntegration.php:37
+#: includes/Integrations/CloudflareIntegration.php:64
+msgid "Cloudflare API token and Zone ID are required."
+msgstr ""
+
+#: includes/Integrations/CloudflareIntegration.php:46
+msgid "Cloudflare connection failed."
+msgstr ""
+
+#: includes/Integrations/CloudflareIntegration.php:52
+msgid "Cloudflare connection successful."
+msgstr ""
+
+#: includes/Integrations/CloudflareIntegration.php:77
+msgid "Cloudflare cache purge failed."
+msgstr ""
+
+#: includes/Integrations/CloudflareIntegration.php:83
+msgid "Cloudflare cache purged."
+msgstr ""
+
+#: includes/Integrations/CloudflareIntegration.php:155
+msgid "Unexpected response from Cloudflare API."
+msgstr ""
+
+#. translators: %s: directory path
+#: includes/Utils/FilesystemCheck.php:40
+#, php-format
+msgid "Cache directory not writable: %s"
+msgstr ""
+
+#: includes/Views/admin/admin-bar-notice.blade.php:3
+msgid "Performance Toolkit cache was purged."
+msgstr ""
+
+#: includes/Views/admin/admin-bar-notice.blade.php:9
+msgid "This page's cache was purged."
+msgstr ""
+
+#: includes/Views/admin/card-system-showcase.blade.php:9
+msgid "Destructive action"
+msgstr ""
+
+#: includes/Views/admin/card-system-showcase.blade.php:10
+#: includes/Views/cards/tools/reset.blade.php:9
+msgid "This resets cache, optimization, and media settings to recommended defaults. Export your configuration first if you may want to restore it later."
+msgstr ""
+
+#: includes/Views/admin/card-system-showcase.blade.php:15
+msgid "Last configuration export: 2 days ago · Safe defaults profile ready to apply."
+msgstr ""
+
+#: includes/Views/admin/card-system-showcase.blade.php:20
+msgid "Export current settings"
+msgstr ""
+
+#: includes/Views/admin/card-system-showcase.blade.php:24
+msgid "Reset to defaults"
+msgstr ""
+
+#: includes/Views/admin/card-system-showcase.blade.php:39
+#: includes/Views/cards/tools/minify.blade.php:11
+msgid "Current status"
+msgstr ""
+
+#: includes/Views/admin/card-system-showcase.blade.php:40
+#: includes/Views/cards/tools/minify.blade.php:22
+msgid "Page cache is enabled and serving 87% of anonymous requests from disk cache. Last cache clear was 14 minutes ago."
+msgstr ""
+
+#: includes/Views/admin/card-system-showcase.blade.php:46
+#: includes/Views/cards/tools/minify.blade.php:30
+msgid "Recommended: clear the cache after changing minification, defer, or CDN settings."
+msgstr ""
+
+#: includes/Views/admin/card-system-showcase.blade.php:51
+msgid "Clear page cache"
+msgstr ""
+
+#: includes/Views/admin/card-system-showcase.blade.php:56
+msgid "Preload homepage cache"
+msgstr ""
+
+#: includes/Views/admin/card-system-showcase.blade.php:61
+msgid "Buttons should expand full-width on mobile and remain visually grouped in the lighter right column on larger screens."
+msgstr ""
+
+#: includes/Views/admin/card-system-showcase.blade.php:84
+#: includes/Views/cards/tools/import-export.blade.php:22
+msgid "Include API tokens and secret integration keys"
+msgstr ""
+
+#: includes/Views/admin/card-system-showcase.blade.php:88
+msgid "Export settings JSON"
+msgstr ""
+
+#: includes/Views/admin/card-system-showcase.blade.php:106
+msgid "Validate import"
+msgstr ""
+
+#: includes/Views/admin/card-system-showcase.blade.php:110
+#: includes/Views/cards/tools/import-export.blade.php:50
+msgid "Import settings"
+msgstr ""
+
+#: includes/Views/admin/database-page.blade.php:7
+#, php-format
+msgid "%d database table(s) optimized successfully."
+msgstr ""
+
+#: includes/Views/admin/database-page.blade.php:13
+#, php-format
+msgid "%1$s: %2$d item(s) removed successfully."
+msgstr ""
+
+#: includes/Views/admin/documentation-page.blade.php:2
+msgid "Full guides, setup instructions, and troubleshooting are available in the external documentation site."
+msgstr ""
+
+#: includes/Views/admin/documentation-page.blade.php:10
+msgid "Open Documentation"
+msgstr ""
+
+#: includes/Views/admin/file-optimization-page.blade.php:4
+#: includes/Views/cards/caching/cdn/integrations.blade.php:4
+#: includes/Views/cards/caching/page/cache.blade.php:4
+#: includes/Views/cards/caching/rules/exclusions.blade.php:4
+#: includes/Views/cards/optimization/media-optimization.blade.php:4
+msgid "Settings saved successfully."
+msgstr ""
+
+#: includes/Views/admin/file-optimization-page.blade.php:16
+msgid "Optimization Targets"
+msgstr ""
+
+#: includes/Views/admin/shell.blade.php:15
+msgid "Section"
+msgstr ""
+
+#. translators: %d: number of deleted files
+#: includes/Views/admin/tools-page.blade.php:8
+#, php-format
+msgid "Cleared %d minified asset file(s)."
+msgstr ""
+
+#: includes/Views/cards/caching/browser-cache-settings/apache.blade.php:2
+#: includes/Views/cards/caching/browser/compression-settings.blade.php:8
+msgid "Apache .htaccess Configuration"
+msgstr ""
+
+#: includes/Views/cards/caching/browser-cache-settings/apache.blade.php:3
+msgid "Add this to your .htaccess file in the WordPress root directory. Most shared hosting uses Apache."
+msgstr ""
+
+#: includes/Views/cards/caching/browser-cache-settings/apache.blade.php:9
+#: includes/Views/cards/caching/browser-cache-settings/nginx.blade.php:10
+msgid "Copy-friendly snippet:"
+msgstr ""
+
+#: includes/Views/cards/caching/browser-cache-settings/apache.blade.php:11
+#: includes/Views/cards/caching/browser-cache-settings/nginx.blade.php:12
+msgid "Copy"
+msgstr ""
+
+#: includes/Views/cards/caching/browser-cache-settings/apache.blade.php:27
+#: includes/Views/cards/caching/browser-cache-settings/nginx.blade.php:28
+msgid "How to apply:"
+msgstr ""
+
+#: includes/Views/cards/caching/browser-cache-settings/apache.blade.php:29
+msgid "Connect via FTP/SFTP to your server"
+msgstr ""
+
+#: includes/Views/cards/caching/browser-cache-settings/apache.blade.php:30
+msgid "Navigate to your WordPress root (where wp-content, wp-admin, wp-includes are)"
+msgstr ""
+
+#: includes/Views/cards/caching/browser-cache-settings/apache.blade.php:31
+msgid "Open .htaccess (may be hidden file)"
+msgstr ""
+
+#: includes/Views/cards/caching/browser-cache-settings/apache.blade.php:32
+msgid "Add the above snippet (or replace entire file if new)"
+msgstr ""
+
+#: includes/Views/cards/caching/browser-cache-settings/apache.blade.php:33
+msgid "Save and clear your site cache"
+msgstr ""
+
+#: includes/Views/cards/caching/browser-cache-settings/nginx.blade.php:4
+msgid "Ask your hosting provider to add this to your Nginx server block configuration. Nginx is common on managed hosting and higher-tier plans."
+msgstr ""
+
+#: includes/Views/cards/caching/browser-cache-settings/nginx.blade.php:30
+msgid "Contact your hosting provider or VPS admin"
+msgstr ""
+
+#: includes/Views/cards/caching/browser-cache-settings/nginx.blade.php:31
+msgid "Share the above snippet and ask them to add it to your Nginx server block"
+msgstr ""
+
+#: includes/Views/cards/caching/browser-cache-settings/nginx.blade.php:32
+msgid "They will reload/restart Nginx to apply changes"
+msgstr ""
+
+#: includes/Views/cards/caching/browser-cache-settings/nginx.blade.php:33
+msgid "Clear your site cache to see effects"
+msgstr ""
+
+#: includes/Views/cards/caching/browser/compression-settings.blade.php:10
+msgid "Even if another server is detected, your hosting environment may use Apache or Nginx as a reverse proxy for static assets or PHP processing."
+msgstr ""
+
+#: includes/Views/cards/caching/browser/compression-settings.blade.php:14
+msgid "What this does:"
+msgstr ""
+
+#: includes/Views/cards/caching/browser/compression-settings.blade.php:16
+msgid "Sets browser cache expiration times (1 year for versioned assets, 1 month for images)"
+msgstr ""
+
+#: includes/Views/cards/caching/browser/compression-settings.blade.php:17
+msgid "Enables Gzip compression for HTML, CSS, and JavaScript"
+msgstr ""
+
+#: includes/Views/cards/caching/browser/compression-settings.blade.php:18
+msgid "Adds cache-control headers to improve hit rates"
+msgstr ""
+
+#: includes/Views/cards/caching/browser/compression-settings.blade.php:19
+msgid "Adds security headers to prevent MIME-sniffing"
+msgstr ""
+
+#: includes/Views/cards/caching/browser/detection.blade.php:13
+msgid "We detected your current web server software to help you choose the correct browser cache and compression configuration."
+msgstr ""
+
+#: includes/Views/cards/caching/browser/detection.blade.php:19
+msgid "Detected Environment:"
+msgstr ""
+
+#: includes/Views/cards/caching/browser/info/browser-caching.blade.php:4
+msgid "Faster repeat page loads for returning visitors"
+msgstr ""
+
+#: includes/Views/cards/caching/browser/info/browser-caching.blade.php:5
+msgid "Reduced bandwidth and server resource usage"
+msgstr ""
+
+#: includes/Views/cards/caching/browser/info/browser-caching.blade.php:6
+msgid "Improved Core Web Vitals and perceived performance"
+msgstr ""
+
+#: includes/Views/cards/caching/browser/info/browser-caching.blade.php:7
+msgid "Fewer HTTP requests for static assets"
+msgstr ""
+
+#: includes/Views/cards/caching/browser/info/browser-caching.blade.php:8
+msgid "Better scalability during traffic spikes"
+msgstr ""
+
+#: includes/Views/cards/caching/browser/info/browser-caching.blade.php:9
+msgid "Reduced load on shared hosting environments"
+msgstr ""
+
+#: includes/Views/cards/caching/browser/info/browser-caching.blade.php:14
+msgid "Browser caching stores static website assets like CSS, JavaScript, fonts, and images in a visitor’s browser so repeat visits load significantly faster and reduce server requests."
+msgstr ""
+
+#: includes/Views/cards/caching/browser/info/browser-caching.blade.php:18
+msgid "Benefits"
+msgstr ""
+
+#: includes/Views/cards/caching/browser/info/cache-busting.blade.php:3
+msgid "With 1-year browser cache on versioned assets (like style.css?v=123), you need a way to invalidate old versions when you update. WordPress theme/plugin versioning handles this automatically through query strings."
+msgstr ""
+
+#: includes/Views/cards/caching/browser/info/cache-busting.blade.php:8
+msgid "Always clear your server cache and CDN cache when updating themes, plugins, or custom code."
+msgstr ""
+
+#: includes/Views/cards/caching/browser/info/testing.blade.php:6
+msgid "(detailed waterfall + caching info)"
+msgstr ""
+
+#: includes/Views/cards/caching/browser/info/testing.blade.php:10
+msgid "(cache headers report)"
+msgstr ""
+
+#: includes/Views/cards/caching/browser/info/testing.blade.php:12
+msgid "Browser DevTools -> Network tab -> Response Headers"
+msgstr ""
+
+#: includes/Views/cards/caching/browser/info/testing.blade.php:16
+msgid "After applying these directives, test your headers using:"
+msgstr ""
+
+#: includes/Views/cards/caching/browser/test.blade.php:11
+msgid "Run Cache Test"
+msgstr ""
+
+#: includes/Views/cards/caching/browser/test.blade.php:16
+msgid "Testing..."
+msgstr ""
+
+#: includes/Views/cards/caching/browser/test.blade.php:25
+msgid "Asset"
+msgstr ""
+
+#: includes/Views/cards/caching/browser/test.blade.php:26
+msgid "Cache-Control"
+msgstr ""
+
+#: includes/Views/cards/caching/browser/test.blade.php:27
+msgid "Compression"
+msgstr ""
+
+#: includes/Views/cards/caching/browser/test.blade.php:28
+#: includes/Views/cards/caching/page/object-cache.blade.php:9
+msgid "Status"
+msgstr ""
+
+#: includes/Views/cards/caching/browser/test.blade.php:40
+msgid "Test Error:"
+msgstr ""
+
+#: includes/Views/cards/caching/browser/test.blade.php:48
+msgid "No testable assets found. Make sure your WordPress site is publicly accessible."
+msgstr ""
+
+#: includes/Views/cards/caching/browser/test.blade.php:49
+msgid "Results:"
+msgstr ""
+
+#: includes/Views/cards/caching/browser/test.blade.php:50
+msgid "assets have cache headers"
+msgstr ""
+
+#: includes/Views/cards/caching/browser/test.blade.php:51
+msgid "assets are compressed"
+msgstr ""
+
+#: includes/Views/cards/caching/browser/test.blade.php:52
+msgid "Browser cache configuration looks good!"
+msgstr ""
+
+#: includes/Views/cards/caching/browser/test.blade.php:53
+msgid "Not all assets have cache headers. Apply the configuration below."
+msgstr ""
+
+#: includes/Views/cards/caching/cdn/actions.blade.php:9
+msgid "Test Connection"
+msgstr ""
+
+#: includes/Views/cards/caching/cdn/actions.blade.php:22
+msgid "Purge Cache"
+msgstr ""
+
+#: includes/Views/cards/caching/cdn/integrations.blade.php:24
+#: includes/Views/cards/caching/page/object-cache.blade.php:16
+msgid "Provider"
+msgstr ""
+
+#: includes/Views/cards/caching/cdn/integrations.blade.php:39
+msgid "API token"
+msgstr ""
+
+#: includes/Views/cards/caching/cdn/integrations.blade.php:49
+msgid "API token with Zone:Read and Purge Cache permissions."
+msgstr ""
+
+#: includes/Views/cards/caching/cdn/integrations.blade.php:54
+msgid "Zone ID"
+msgstr ""
+
+#: includes/Views/cards/caching/cdn/integrations.blade.php:63
+msgid "Find your Zone ID in the Cloudflare dashboard."
+msgstr ""
+
+#: includes/Views/cards/caching/cdn/integrations.blade.php:81
+msgid "Auto-purge on content update"
+msgstr ""
+
+#: includes/Views/cards/caching/cdn/integrations.blade.php:82
+msgid "Automatically purge CDN cache when posts, pages or media are updated."
+msgstr ""
+
+#: includes/Views/cards/caching/cdn/integrations.blade.php:89
+#: includes/Views/cards/caching/page/cache.blade.php:90
+#: includes/Views/cards/caching/rules/exclusions.blade.php:81
+#: includes/Views/cards/optimization/media-optimization.blade.php:72
+msgid "Save changes"
+msgstr ""
+
+#: includes/Views/cards/caching/page/cache.blade.php:45
+msgid "Enable page cache"
+msgstr ""
+
+#: includes/Views/cards/caching/page/cache.blade.php:47
+msgid "Store and serve cache files for anonymous visitors."
+msgstr ""
+
+#: includes/Views/cards/caching/page/cache.blade.php:51
+msgid "Cache TTL (seconds)"
+msgstr ""
+
+#: includes/Views/cards/caching/page/cache.blade.php:64
+msgid "Max cache size (MB)"
+msgstr ""
+
+#: includes/Views/cards/caching/page/cache.blade.php:74
+msgid "When the cache folder exceeds this size the oldest files are pruned automatically."
+msgstr ""
+
+#: includes/Views/cards/caching/page/cache.blade.php:98
+msgid "Clear cache"
+msgstr ""
+
+#: includes/Views/cards/caching/page/info/about.blade.php:4
+msgid "Faster page load times"
+msgstr ""
+
+#: includes/Views/cards/caching/page/info/about.blade.php:5
+msgid "Reduced server load"
+msgstr ""
+
+#: includes/Views/cards/caching/page/info/about.blade.php:6
+msgid "Better user experience"
+msgstr ""
+
+#: includes/Views/cards/caching/page/info/about.blade.php:7
+msgid "Improved SEO rankings"
+msgstr ""
+
+#: includes/Views/cards/caching/page/object-cache.blade.php:3
+msgid "Stores database query results and runtime objects in memory to reduce database load."
+msgstr ""
+
+#: includes/Views/cards/caching/page/object-cache.blade.php:20
+msgid "Drop-in"
+msgstr ""
+
+#: includes/Views/cards/caching/page/object-cache.blade.php:24
+#: includes/Views/cards/database/table.blade.php:35
+msgid "Size"
+msgstr ""
+
+#: includes/Views/cards/caching/page/object-cache.blade.php:31
+msgid "Future versions can add Redis/Memcached controls and metrics here."
+msgstr ""
+
+#: includes/Views/cards/caching/page/quick-actions.blade.php:11
+msgid "Purge All Caches"
+msgstr ""
+
+#: includes/Views/cards/caching/page/quick-actions.blade.php:12
+msgid "Clear all cached files (page, minified assets, etc.)"
+msgstr ""
+
+#: includes/Views/cards/caching/page/quick-actions.blade.php:25
+msgid "Clear Minified CSS/JS Cache"
+msgstr ""
+
+#: includes/Views/cards/caching/page/quick-actions.blade.php:26
+msgid "Remove all cached minified CSS and JavaScript files"
+msgstr ""
+
+#: includes/Views/cards/caching/page/quick-actions.blade.php:40
+msgid "Preload Cache"
+msgstr ""
+
+#: includes/Views/cards/caching/page/quick-actions.blade.php:41
+msgid "Generate cache for your"
+msgstr ""
+
+#: includes/Views/cards/caching/rules/exclusions.blade.php:9
+msgid "Enter URLs or path patterns that should never be cached - one per line. Prefix matching is used by default; add a wildcard (*) for substring patterns."
+msgstr ""
+
+#: includes/Views/cards/caching/rules/exclusions.blade.php:36
+msgid "Never-cache URLs"
+msgstr ""
+
+#: includes/Views/cards/caching/rules/exclusions.blade.php:37
+msgid "Paths are matched from the start of the URL. Use * for wildcards."
+msgstr ""
+
+#: includes/Views/cards/caching/rules/exclusions.blade.php:40
+msgid "Add WooCommerce default exclusions"
+msgstr ""
+
+#: includes/Views/cards/caching/rules/exclusions.blade.php:54
+msgid "<strong>Examples:</strong> <code>/checkout</code> excludes all URLs starting with /checkout &nbsp;.&nbsp; <code>/my-account/*</code> uses a wildcard &nbsp;.&nbsp; One entry per line."
+msgstr ""
+
+#: includes/Views/cards/caching/rules/exclusions.blade.php:62
+msgid "Bypass cache when cookies exist"
+msgstr ""
+
+#: includes/Views/cards/caching/rules/exclusions.blade.php:63
+msgid "One cookie name or wildcard pattern per line. If a request contains any matching cookie, page cache is bypassed."
+msgstr ""
+
+#: includes/Views/cards/caching/rules/exclusions.blade.php:73
+msgid "<strong>Examples:</strong> <code>woocommerce_items_in_cart</code>, <code>woocommerce_cart_hash</code>, <code>wp_woocommerce_session_*</code>."
+msgstr ""
+
+#: includes/Views/cards/caching/rules/info/about-exclusions.blade.php:3
+msgid "Use exclusions to prevent caching of dynamic pages, user-specific content, and sensitive endpoints. This helps ensure correct content is served to your visitors."
+msgstr ""
+
+#: includes/Views/cards/caching/rules/info/need-help.blade.php:7
+msgid "Learn more about cache rules and exclusions."
+msgstr ""
+
+#: includes/Views/cards/caching/rules/info/need-help.blade.php:12
+msgid "View Documentation"
+msgstr ""
+
+#: includes/Views/cards/caching/rules/info/need-help.blade.php:19
+msgid "Cache Rule Examples"
+msgstr ""
+
+#: includes/Views/cards/caching/rules/info/need-help.blade.php:26
+msgid "Troubleshooting Guide"
+msgstr ""
+
+#: includes/Views/cards/database/cleanup.blade.php:2
+msgid "Remove unnecessary data to keep your database lean and fast."
+msgstr ""
+
+#: includes/Views/cards/database/cleanup.blade.php:28
+msgid "Clean"
+msgstr ""
+
+#: includes/Views/cards/database/info/why.blade.php:4
+msgid "Improve overall site performance"
+msgstr ""
+
+#: includes/Views/cards/database/info/why.blade.php:5
+msgid "Reduce database size"
+msgstr ""
+
+#: includes/Views/cards/database/info/why.blade.php:6
+msgid "Speed up queries and page loads"
+msgstr ""
+
+#: includes/Views/cards/database/info/why.blade.php:7
+msgid "Remove unnecessary clutter"
+msgstr ""
+
+#: includes/Views/cards/database/info/why.blade.php:11
+msgid "Regular database optimization can:"
+msgstr ""
+
+#: includes/Views/cards/database/info/why.blade.php:13
+msgid "Recommended: Optimize your database weekly."
+msgstr ""
+
+#: includes/Views/cards/database/info/why.blade.php:20
+#: includes/Views/cards/database/overview.blade.php:28
+msgid "Optimize all tables"
+msgstr ""
+
+#: includes/Views/cards/database/overview.blade.php:4
+msgid "Total size"
+msgstr ""
+
+#: includes/Views/cards/database/overview.blade.php:9
+msgid "Reclaimable (MyISAM)"
+msgstr ""
+
+#: includes/Views/cards/database/overview.blade.php:18
+msgid "DB Engine"
+msgstr ""
+
+#: includes/Views/cards/database/table.blade.php:30
+msgid "Table"
+msgstr ""
+
+#: includes/Views/cards/database/table.blade.php:31
+msgid "Engine"
+msgstr ""
+
+#: includes/Views/cards/database/table.blade.php:32
+msgid "Rows"
+msgstr ""
+
+#: includes/Views/cards/database/table.blade.php:40
+msgid "Overhead"
+msgstr ""
+
+#: includes/Views/cards/database/table.blade.php:81
+#, php-format
+msgid "Showing top %d tables by size."
+msgstr ""
+
+#: includes/Views/cards/database/table.blade.php:86
+msgid "See all tables"
+msgstr ""
+
+#: includes/Views/cards/database/table.blade.php:94
+msgid "No table statistics are available right now."
+msgstr ""
+
+#: includes/Views/cards/optimization/file/exclusions.blade.php:10
+msgid "External CSS exclusions"
+msgstr ""
+
+#: includes/Views/cards/optimization/file/exclusions.blade.php:13
+msgid "Prevent specific stylesheets from being minified by external CSS minification."
+msgstr ""
+
+#: includes/Views/cards/optimization/file/exclusions.blade.php:24
+msgid "<strong>One rule per line.</strong> You can exclude by stylesheet handle, file name, full path, or wildcard pattern. Examples: <code>woocommerce-layout</code>, <code>style.css</code>, <code>/wp-content/themes/your-theme/css/*</code>."
+msgstr ""
+
+#: includes/Views/cards/optimization/file/exclusions.blade.php:33
+msgid "External JavaScript exclusions"
+msgstr ""
+
+#: includes/Views/cards/optimization/file/exclusions.blade.php:36
+msgid "Prevent specific scripts from being minified by external JavaScript minification."
+msgstr ""
+
+#: includes/Views/cards/optimization/file/exclusions.blade.php:47
+msgid "<strong>One rule per line.</strong> You can exclude by script handle, file name, full path, or wildcard pattern. Examples: <code>jquery-core</code>, <code>app.js</code>, <code>/wp-content/themes/your-theme/js/*</code>."
+msgstr ""
+
+#: includes/Views/cards/optimization/file/exclusions.blade.php:55
+msgid "Save exclusions"
+msgstr ""
+
+#: includes/Views/cards/optimization/file/http11.blade.php:9
+msgid "Combining CSS/JS files is usually only beneficial on HTTP/1.1 servers. On HTTP/2 and HTTP/3, it often reduces cache efficiency and may hurt real-world performance."
+msgstr ""
+
+#: includes/Views/cards/optimization/file/http11.blade.php:14
+#: includes/Views/cards/overview/optimization-overview.blade.php:5
+msgid "Warning:"
+msgstr ""
+
+#: includes/Views/cards/optimization/file/http11.blade.php:15
+msgid "File combination can break dependency order, plugin-specific assets, and conditional loading logic. Use only after testing key pages (home, shop, cart, checkout, account, blog, and landing pages)."
+msgstr ""
+
+#: includes/Views/cards/optimization/file/http11.blade.php:22
+msgid "Combine external CSS files"
+msgstr ""
+
+#: includes/Views/cards/optimization/file/http11.blade.php:24
+msgid "Merge eligible CSS files into fewer requests. Recommended only for HTTP/1.1 environments."
+msgstr ""
+
+#: includes/Views/cards/optimization/file/http11.blade.php:27
+msgid "CSS combine exclusions"
+msgstr ""
+
+#: includes/Views/cards/optimization/file/http11.blade.php:46
+msgid "Combine external JavaScript files"
+msgstr ""
+
+#: includes/Views/cards/optimization/file/http11.blade.php:48
+msgid "Merge eligible JS files into fewer requests. Recommended only for HTTP/1.1 environments."
+msgstr ""
+
+#: includes/Views/cards/optimization/file/http11.blade.php:51
+msgid "JS combine exclusions"
+msgstr ""
+
+#: includes/Views/cards/optimization/file/http11.blade.php:67
+msgid "Recommendation: keep minification enabled and only enable file combination when your origin truly serves HTTP/1.1 traffic."
+msgstr ""
+
+#: includes/Views/cards/optimization/file/http11.blade.php:73
+msgid "Save HTTP/1.1 settings"
+msgstr ""
+
+#: includes/Views/cards/optimization/media-optimization.blade.php:9
+msgid "Detected image optimizers"
+msgstr ""
+
+#: includes/Views/cards/optimization/media-optimization.blade.php:13
+msgid "Compatibility mode: keep only one lazy-load system enabled to avoid duplicate behavior."
+msgstr ""
+
+#: includes/Views/cards/optimization/media-optimization.blade.php:20
+#, php-format
+msgid "Lazy-load is currently managed by: %s. Performance Toolkit lazy-load is temporarily disabled to prevent conflicts."
+msgstr ""
+
+#: includes/Views/cards/optimization/media-optimization.blade.php:66
+msgid "Lazy load content images"
+msgstr ""
+
+#: includes/Views/cards/optimization/media-optimization.blade.php:68
+msgid "Adds loading=\"lazy\" to post content images missing the attribute."
+msgstr ""
+
+#: includes/Views/cards/overview/optimization-overview.blade.php:6
+msgid "Cache directory not writable. Caching is disabled. See System Status for details."
+msgstr ""
+
+#: includes/Views/cards/overview/optimization-overview.blade.php:14
+msgid "Page cache"
+msgstr ""
+
+#: includes/Views/cards/overview/optimization-overview.blade.php:18
+msgid "Script defer"
+msgstr ""
+
+#: includes/Views/cards/overview/optimization-overview.blade.php:22
+msgid "Image lazy loading"
+msgstr ""
+
+#: includes/Views/cards/overview/optimization-overview.blade.php:26
+msgid "Cache directory"
+msgstr ""
+
+#: includes/Views/cards/overview/optimization-overview.blade.php:28
+msgid "Read-only"
+msgstr ""
+
+#: includes/Views/cards/status/system-status.blade.php:6
+msgid "⚠ Filesystem Warning"
+msgstr ""
+
+#: includes/Views/cards/status/system-status.blade.php:9
+msgid "The WP Performance Toolkit cache directory is not writable. Caching and minification are disabled. Contact your hosting provider to ensure the cache directory has write permissions."
+msgstr ""
+
+#: includes/Views/cards/tools/import-export.blade.php:25
+msgid "Warning: exported files with secrets should be stored securely and never committed to version control."
+msgstr ""
+
+#: includes/Views/cards/tools/import-export.blade.php:28
+msgid "Export settings"
+msgstr ""
+
+#. translators: 1: file count, 2: formatted size
+#: includes/Views/cards/tools/minify.blade.php:15
+#, php-format
+msgid "%1$d file(s), %2$s total."
+msgstr ""
+
+#: includes/Views/cards/tools/minify.blade.php:37
+msgid "Clear minified CSS/JS cache"
+msgstr ""
+
+#: includes/Views/cards/tools/reset.blade.php:8
+msgid "Destructive Action"
+msgstr ""
+
+#: includes/Views/cards/tools/reset.blade.php:17
+msgid "M j, Y \\a\\t g:i A"
+msgstr ""
+
+#: includes/Views/cards/tools/reset.blade.php:19
+#, php-format
+msgid "Last configuration export: %s."
+msgstr ""
+
+#: includes/Views/cards/tools/reset.blade.php:22
+msgid "No configuration export yet."
+msgstr ""
+
+#: includes/Views/cards/tools/reset.blade.php:30
+msgid "Reset to safe defaults"
+msgstr ""
+
+#: includes/Views/cards/tools/uninstall-policy.blade.php:14
+msgid "Remove all Performance Toolkit data on uninstall"
+msgstr ""
+
+#: includes/Views/cards/tools/uninstall-policy.blade.php:17
+msgid "If enabled, deleting the plugin removes its settings and cache files. If disabled, data is preserved for reinstall."
+msgstr ""
+
+#: includes/Views/cards/tools/uninstall-policy.blade.php:23
+msgid "Save uninstall policy"
+msgstr ""
+
+#: includes/Views/components/admin-layout.blade.php:13
+msgid "WP Performance Toolkit"
+msgstr ""
+
+#: includes/Views/components/admin-layout.blade.php:20
+msgid "Help"
+msgstr ""
+
+#: includes/Views/components/admin-layout.blade.php:24
+#: includes/Views/components/admin-layout.blade.php:41
+msgid "Primary"
+msgstr ""
+
+#: includes/Views/components/admin-layout.blade.php:40
+msgid "Menu"
+msgstr ""
+
+#: includes/Views/components/toggles/toggle.blade.php:22
+msgid "Saved"
+msgstr ""

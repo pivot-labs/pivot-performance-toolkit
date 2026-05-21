@@ -1,4 +1,9 @@
 <?php
+/**
+ * CDN integrations admin page.
+ *
+ * @package PerformanceToolkit
+ */
 
 declare(strict_types=1);
 
@@ -7,151 +12,137 @@ namespace PerformanceToolkit\Admin;
 use PerformanceToolkit\Core\Settings;
 use PerformanceToolkit\Integrations\CloudflareIntegration;
 
-final class CdnIntegrationsPage extends BladeAdminPage
-{
-    private const TEST_ACTION = 'performance_toolkit_cloudflare_test';
-    private const PURGE_ACTION = 'performance_toolkit_cloudflare_purge';
+final class CdnIntegrationsPage extends BladeAdminPage {
 
-    private Settings $settings;
+	private const TEST_ACTION  = 'performance_toolkit_cloudflare_test';
+	private const PURGE_ACTION = 'performance_toolkit_cloudflare_purge';
 
-    private CloudflareIntegration $cloudflare;
+	private Settings $settings;
 
-    public function __construct(Settings $settings, CloudflareIntegration $cloudflare)
-    {
-        $this->settings   = $settings;
-        $this->cloudflare = $cloudflare;
+	private CloudflareIntegration $cloudflare;
 
-        add_action('admin_post_' . self::TEST_ACTION, array($this, 'handleTestConnection'));
-        add_action('admin_post_' . self::PURGE_ACTION, array($this, 'handlePurgeCache'));
-        add_action('wp_ajax_' . self::TEST_ACTION, array($this, 'handleAjaxTestConnection'));
-        add_action('wp_ajax_' . self::PURGE_ACTION, array($this, 'handleAjaxPurgeCache'));
-    }
+	public function __construct( Settings $settings, CloudflareIntegration $cloudflare ) {
+		$this->settings   = $settings;
+		$this->cloudflare = $cloudflare;
 
-    public function slug(): string
-    {
-        return 'performance-toolkit-cdn-integrations';
-    }
+		add_action( 'admin_post_' . self::TEST_ACTION, array( $this, 'handleTestConnection' ) );
+		add_action( 'admin_post_' . self::PURGE_ACTION, array( $this, 'handlePurgeCache' ) );
+		add_action( 'wp_ajax_' . self::TEST_ACTION, array( $this, 'handleAjaxTestConnection' ) );
+		add_action( 'wp_ajax_' . self::PURGE_ACTION, array( $this, 'handleAjaxPurgeCache' ) );
+	}
 
-    public function menuTitle(): string
-    {
-        return __('CDN & Integrations', 'performance-toolkit');
-    }
+	public function slug(): string {
+		return 'performance-toolkit-cdn-integrations';
+	}
 
-    public function pageTitle(): string
-    {
-        return __('Performance Toolkit CDN & Integrations', 'performance-toolkit');
-    }
+	public function menuTitle(): string {
+		return __( 'CDN & Integrations', 'performance-toolkit' );
+	}
 
-    public function iconKey(): string
-    {
-        return 'dashicons-admin-site-alt3';
-    }
+	public function pageTitle(): string {
+		return __( 'Performance Toolkit CDN & Integrations', 'performance-toolkit' );
+	}
 
-    public function view(): string
-    {
-        return 'admin.cdn-integrations-page';
-    }
+	public function iconKey(): string {
+		return 'dashicons-admin-site-alt3';
+	}
 
-    /**
-     * @return array<string, mixed>
-     */
-    protected function buildViewData(): array
-    {
-        return array(
-            'options'          => $this->settings->all(),
-            'option_key'       => $this->settings->optionKey(),
-            'notice'           => isset($_GET['ptk_cf_notice']) ? sanitize_key(wp_unslash((string) $_GET['ptk_cf_notice'])) : '',
-            'message'          => isset($_GET['ptk_cf_message']) ? sanitize_text_field(wp_unslash((string) $_GET['ptk_cf_message'])) : '',
-            'settings_updated' => isset($_GET['settings-updated']) && (string) wp_unslash($_GET['settings-updated']) === 'true',
-            'test_action'      => self::TEST_ACTION,
-            'purge_action'     => self::PURGE_ACTION,
-            'test_nonce'       => wp_create_nonce('ptk_cloudflare_test'),
-            'purge_nonce'      => wp_create_nonce('ptk_cloudflare_purge'),
-        );
-    }
+	public function view(): string {
+		return 'admin.cdn-integrations-page';
+	}
 
-    public function handleTestConnection(): void
-    {
-        if (! current_user_can('manage_options')) {
-            wp_die(esc_html__('You are not allowed to perform this action.', 'performance-toolkit'));
-        }
+	/**
+	 * @return array<string, mixed>
+	 */
+	protected function buildViewData(): array {
+		return array(
+			'options'          => $this->settings->all(),
+			'option_key'       => $this->settings->optionKey(),
+			'notice'           => isset( $_GET['ptk_cf_notice'] ) ? sanitize_key( wp_unslash( (string) $_GET['ptk_cf_notice'] ) ) : '',
+			'message'          => isset( $_GET['ptk_cf_message'] ) ? sanitize_text_field( wp_unslash( (string) $_GET['ptk_cf_message'] ) ) : '',
+			'settings_updated' => isset( $_GET['settings-updated'] ) && (string) wp_unslash( $_GET['settings-updated'] ) === 'true',
+			'test_action'      => self::TEST_ACTION,
+			'purge_action'     => self::PURGE_ACTION,
+			'test_nonce'       => wp_create_nonce( 'ptk_cloudflare_test' ),
+			'purge_nonce'      => wp_create_nonce( 'ptk_cloudflare_purge' ),
+		);
+	}
 
-        check_admin_referer('ptk_cloudflare_test');
+	public function handleTestConnection(): void {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( esc_html__( 'You are not allowed to perform this action.', 'performance-toolkit' ) );
+		}
 
-        $result = $this->cloudflare->testConnection();
+		check_admin_referer( 'ptk_cloudflare_test' );
 
-        $this->redirectWithNotice($result['success'], $result['message']);
-    }
+		$result = $this->cloudflare->testConnection();
 
-    public function handlePurgeCache(): void
-    {
-        if (! current_user_can('manage_options')) {
-            wp_die(esc_html__('You are not allowed to perform this action.', 'performance-toolkit'));
-        }
+		$this->redirectWithNotice( $result['success'], $result['message'] );
+	}
 
-        check_admin_referer('ptk_cloudflare_purge');
+	public function handlePurgeCache(): void {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( esc_html__( 'You are not allowed to perform this action.', 'performance-toolkit' ) );
+		}
 
-        $result = $this->cloudflare->purgeCache();
+		check_admin_referer( 'ptk_cloudflare_purge' );
 
-        $this->redirectWithNotice($result['success'], $result['message']);
-    }
+		$result = $this->cloudflare->purgeCache();
 
-    public function handleAjaxTestConnection(): void
-    {
-        if (! current_user_can('manage_options')) {
-            wp_send_json_error(
-                array('message' => __('You are not allowed to perform this action.', 'performance-toolkit')),
-                403
-            );
-        }
+		$this->redirectWithNotice( $result['success'], $result['message'] );
+	}
 
-        check_ajax_referer('ptk_cloudflare_test');
+	public function handleAjaxTestConnection(): void {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error(
+				array( 'message' => __( 'You are not allowed to perform this action.', 'performance-toolkit' ) ),
+				403
+			);
+		}
 
-        $result = $this->cloudflare->testConnection();
+		check_ajax_referer( 'ptk_cloudflare_test' );
 
-        $this->sendAjaxResult($result['success'], $result['message']);
-    }
+		$result = $this->cloudflare->testConnection();
 
-    public function handleAjaxPurgeCache(): void
-    {
-        if (! current_user_can('manage_options')) {
-            wp_send_json_error(
-                array('message' => __('You are not allowed to perform this action.', 'performance-toolkit')),
-                403
-            );
-        }
+		$this->sendAjaxResult( $result['success'], $result['message'] );
+	}
 
-        check_ajax_referer('ptk_cloudflare_purge');
+	public function handleAjaxPurgeCache(): void {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error(
+				array( 'message' => __( 'You are not allowed to perform this action.', 'performance-toolkit' ) ),
+				403
+			);
+		}
 
-        $result = $this->cloudflare->purgeCache();
+		check_ajax_referer( 'ptk_cloudflare_purge' );
 
-        $this->sendAjaxResult($result['success'], $result['message']);
-    }
+		$result = $this->cloudflare->purgeCache();
 
-    private function redirectWithNotice(bool $success, string $message): void
-    {
-        $redirect_url = add_query_arg(
-            array(
-                'page'           => 'performance-toolkit',
-                'section'        => 'caching',
-                'tab'            => $this->slug(),
-                'ptk_cf_notice'  => $success ? 'success' : 'error',
-                'ptk_cf_message' => $message,
-            ),
-            admin_url('admin.php')
-        );
+		$this->sendAjaxResult( $result['success'], $result['message'] );
+	}
 
-        wp_safe_redirect($redirect_url);
-        exit;
-    }
+	private function redirectWithNotice( bool $success, string $message ): void {
+		$redirect_url = add_query_arg(
+			array(
+				'page'           => 'performance-toolkit',
+				'section'        => 'caching',
+				'tab'            => $this->slug(),
+				'ptk_cf_notice'  => $success ? 'success' : 'error',
+				'ptk_cf_message' => $message,
+			),
+			admin_url( 'admin.php' )
+		);
 
-    private function sendAjaxResult(bool $success, string $message): void
-    {
-        if ($success) {
-            wp_send_json_success(array('message' => $message));
-        }
+		wp_safe_redirect( $redirect_url );
+		exit;
+	}
 
-        wp_send_json_error(array('message' => $message));
-    }
+	private function sendAjaxResult( bool $success, string $message ): void {
+		if ( $success ) {
+			wp_send_json_success( array( 'message' => $message ) );
+		}
+
+		wp_send_json_error( array( 'message' => $message ) );
+	}
 }
-

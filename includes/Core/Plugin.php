@@ -1,4 +1,9 @@
 <?php
+/**
+ * Main plugin bootstrap.
+ *
+ * @package PerformanceToolkit
+ */
 
 declare(strict_types=1);
 
@@ -28,78 +33,75 @@ use PerformanceToolkit\Media\LazyLoad;
 use PerformanceToolkit\Integrations\CloudflareIntegration;
 use PerformanceToolkit\Optimization\Assets;
 
-final class Plugin
-{
-    private static ?self $instance = null;
+final class Plugin {
 
-    private bool $booted = false;
+	private static ?self $instance = null;
 
-    /**
-     * @var ModuleInterface[]
-     */
-    private array $modules = array();
+	private bool $booted = false;
 
-    private Settings $settings;
+	/**
+	 * @var ModuleInterface[]
+	 */
+	private array $modules = array();
 
-    private function __construct()
-    {
-    }
+	private Settings $settings;
 
-    public static function instance(): self
-    {
-        if (self::$instance === null) {
-            self::$instance = new self();
-        }
+	private function __construct() {
+	}
 
-        return self::$instance;
-    }
+	public static function instance(): self {
+		if ( self::null === $instance ) {
+			self::$instance = new self();
+		}
 
-    public function boot(): void
-    {
-        if ($this->booted) {
-            return;
-        }
+		return self::$instance;
+	}
 
-        $this->booted = true;
-        $this->settings = new Settings();
-        $cloudflare = new CloudflareIntegration($this->settings);
-        $image_optimizer_detector = new ImageOptimizerDetector();
-        $database_optimizer = new DatabaseOptimizer();
+	public function boot(): void {
+		if ( $this->booted ) {
+			return;
+		}
 
-        add_action('admin_init', array($this->settings, 'register'));
+		$this->booted             = true;
+		$this->settings           = new Settings();
+		$cloudflare               = new CloudflareIntegration( $this->settings );
+		$image_optimizer_detector = new ImageOptimizerDetector();
+		$database_optimizer       = new DatabaseOptimizer();
 
-        if (is_admin()) {
-            $menu = new Menu(
-                array(
-                    new DashboardPage($this->settings),
-                    new CachePage($this->settings),
-                    new FileOptimizationPage($this->settings),
-                    new MediaOptimizationPage($this->settings, $image_optimizer_detector),
-                    new DatabasePage($database_optimizer),
-                    new DatabaseTablePage($database_optimizer),
-                    new BrowserCacheHeadersPage($this->settings),
-                    new CdnIntegrationsPage($this->settings, $cloudflare),
-                    new AdvancedRulesPage($this->settings),
-                    new ToolsPage($this->settings),
-                    new CardShowcasePage(),
-                    new SystemStatusPage($this->settings, $image_optimizer_detector),
-                    new DocumentationPage(),
-                )
-            );
-            $menu->register();
-        }
+		add_action( 'admin_init', array( $this->settings, 'register' ) );
 
-        $this->modules = array(
-            new FilesystemNotices(),
-            new AdminBarMenu(),
-            new PageCache($this->settings),
-            new Assets($this->settings),
-            new LazyLoad($this->settings, $image_optimizer_detector),
-            $cloudflare,
-        );
+		if ( is_admin() ) {
+			$menu = new Menu(
+				array(
+					new DashboardPage( $this->settings ),
+					new CachePage( $this->settings ),
+					new FileOptimizationPage( $this->settings ),
+					new MediaOptimizationPage( $this->settings, $image_optimizer_detector ),
+					new DatabasePage( $database_optimizer ),
+					new DatabaseTablePage( $database_optimizer ),
+					new BrowserCacheHeadersPage( $this->settings ),
+					new CdnIntegrationsPage( $this->settings, $cloudflare ),
+					new AdvancedRulesPage( $this->settings ),
+					new ToolsPage( $this->settings ),
+					new CardShowcasePage(),
+					new SystemStatusPage( $this->settings, $image_optimizer_detector ),
+					new DocumentationPage(),
+				)
+			);
+			$menu->register();
+		}
 
-        foreach ($this->modules as $module) {
-            $module->register();
-        }
-    }
+		$this->modules = array(
+			new FilesystemNotices(),
+			new AdminBarMenu(),
+			new PageCache( $this->settings ),
+			new Assets( $this->settings ),
+			new LazyLoad( $this->settings, $image_optimizer_detector ),
+			$cloudflare,
+		);
+
+		foreach ( $this->modules as $module ) {
+			$module->register();
+		}
+	}
 }

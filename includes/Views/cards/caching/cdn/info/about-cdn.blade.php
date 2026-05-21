@@ -1,10 +1,10 @@
 <x-info-card :title="__('About CDN', 'performance-toolkit')" id="ptk-cdn-about">
     <p>
-        A CDN delivers your website's static files (CSS, JS, images, etc.) from global servers closer to your visitors for faster load times.
+        {{ __('A CDN delivers your website\'s static files (CSS, JS, images, etc.) from global servers closer to your visitors for faster load times.', 'performance-toolkit') }}
     </p>
 
 
-    <h4>Benefits:</h4>
+    <h4>{{ __('Benefits:', 'performance-toolkit') }}</h4>
 
     <x-list :items="[
         __('Faster global page load times', 'performance-toolkit'),

@@ -1,4 +1,9 @@
 <?php
+/**
+ * File optimization admin page.
+ *
+ * @package PerformanceToolkit
+ */
 
 declare(strict_types=1);
 
@@ -6,83 +11,76 @@ namespace PerformanceToolkit\Admin;
 
 use PerformanceToolkit\Core\Settings;
 
-final class FileOptimizationPage extends BladeAdminPage
-{
-    private const AJAX_SAVE_QUICK_TOGGLE_ACTION = 'performance_toolkit_ajax_save_file_quick_toggle';
+final class FileOptimizationPage extends BladeAdminPage {
 
-    private Settings $settings;
+	private const AJAX_SAVE_QUICK_TOGGLE_ACTION = 'performance_toolkit_ajax_save_file_quick_toggle';
 
-    public function __construct(Settings $settings)
-    {
-        $this->settings = $settings;
-        add_action('wp_ajax_' . self::AJAX_SAVE_QUICK_TOGGLE_ACTION, array($this, 'handleSaveQuickToggleAjax'));
-    }
+	private Settings $settings;
 
-    public function slug(): string
-    {
-        return 'performance-toolkit-file-optimization';
-    }
+	public function __construct( Settings $settings ) {
+		$this->settings = $settings;
+		add_action( 'wp_ajax_' . self::AJAX_SAVE_QUICK_TOGGLE_ACTION, array( $this, 'handleSaveQuickToggleAjax' ) );
+	}
 
-    public function menuTitle(): string
-    {
-        return __('File Optimization', 'performance-toolkit');
-    }
+	public function slug(): string {
+		return 'performance-toolkit-file-optimization';
+	}
 
-    public function pageTitle(): string
-    {
-        return __('Performance Toolkit File Optimization', 'performance-toolkit');
-    }
+	public function menuTitle(): string {
+		return __( 'File Optimization', 'performance-toolkit' );
+	}
 
-    public function iconKey(): string
-    {
-        return 'dashicons-media-code';
-    }
+	public function pageTitle(): string {
+		return __( 'Performance Toolkit File Optimization', 'performance-toolkit' );
+	}
 
-    public function view(): string
-    {
-        return 'admin.file-optimization-page';
-    }
+	public function iconKey(): string {
+		return 'dashicons-media-code';
+	}
 
-    /**
-     * @return array<string, mixed>
-     */
-    protected function buildViewData(): array
-    {
-        return array(
-            'options'          => $this->settings->all(),
-            'option_key'       => $this->settings->optionKey(),
-            'settings_updated' => isset($_GET['settings-updated']) && (string) wp_unslash($_GET['settings-updated']) === 'true',
-            'ajax_save_quick_toggle_action' => self::AJAX_SAVE_QUICK_TOGGLE_ACTION,
-            'ajax_save_quick_toggle_nonce' => wp_create_nonce('ptk_file_quick_toggle_ajax'),
-        );
-    }
+	public function view(): string {
+		return 'admin.file-optimization-page';
+	}
 
-    public function handleSaveQuickToggleAjax(): void
-    {
-        if (! current_user_can('manage_options')) {
-            wp_send_json_error(array('message' => __('Unauthorized', 'performance-toolkit')), 403);
-        }
+	/**
+	 * @return array<string, mixed>
+	 */
+	protected function buildViewData(): array {
+		return array(
+			'options'                       => $this->settings->all(),
+			'option_key'                    => $this->settings->optionKey(),
+			'settings_updated'              => isset( $_GET['settings-updated'] ) && (string) wp_unslash( $_GET['settings-updated'] ) === 'true',
+			'ajax_save_quick_toggle_action' => self::AJAX_SAVE_QUICK_TOGGLE_ACTION,
+			'ajax_save_quick_toggle_nonce'  => wp_create_nonce( 'ptk_file_quick_toggle_ajax' ),
+		);
+	}
 
-        check_ajax_referer('ptk_file_quick_toggle_ajax');
+	public function handleSaveQuickToggleAjax(): void {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array( 'message' => __( 'Unauthorized', 'performance-toolkit' ) ), 403 );
+		}
 
-        $setting_key = isset($_POST['setting_key']) ? sanitize_key(wp_unslash((string) $_POST['setting_key'])) : '';
+		check_ajax_referer( 'ptk_file_quick_toggle_ajax' );
 
-        $allowed_setting_keys = array('defer_scripts', 'minify_html', 'minify_css', 'minify_external_css', 'minify_external_js', 'minify_js');
+		$setting_key = isset( $_POST['setting_key'] ) ? sanitize_key( wp_unslash( (string) $_POST['setting_key'] ) ) : '';
 
-        if (! in_array($setting_key, $allowed_setting_keys, true)) {
-            wp_send_json_error(array('message' => __('Invalid setting.', 'performance-toolkit')), 400);
-        }
+		$allowed_setting_keys = array( 'defer_scripts', 'minify_html', 'minify_css', 'minify_external_css', 'minify_external_js', 'minify_js' );
 
-        $options               = $this->settings->all();
-        $options[$setting_key] = ! empty($_POST['setting_value']);
+		if ( ! in_array( $setting_key, $allowed_setting_keys, true ) ) {
+			wp_send_json_error( array( 'message' => __( 'Invalid setting.', 'performance-toolkit' ) ), 400 );
+		}
 
-        update_option($this->settings->optionKey(), $options);
+		$options                 = $this->settings->all();
+		$options[ $setting_key ] = ! empty( $_POST['setting_value'] );
 
-        wp_send_json_success(array(
-            'message' => __('Quick optimization saved.', 'performance-toolkit'),
-            'setting' => $setting_key,
-            'value'   => (bool) $options[$setting_key],
-        ));
-    }
+		update_option( $this->settings->optionKey(), $options );
+
+		wp_send_json_success(
+			array(
+				'message' => __( 'Quick optimization saved.', 'performance-toolkit' ),
+				'setting' => $setting_key,
+				'value'   => (bool) $options[ $setting_key ],
+			)
+		);
+	}
 }
-

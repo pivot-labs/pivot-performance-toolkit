@@ -1,9 +1,9 @@
 <x-card :title="__('Browser Cache Test', 'performance-toolkit')" id="ptk-browser-cache-test">
     <p>
-        Browser caching stores static assets locally to improve repeat visitor performance and reduce server load
+        {{ __('Browser caching stores static assets locally to improve repeat visitor performance and reduce server load.', 'performance-toolkit') }}
     </p>
     <p>
-        Test your current browser cache headers and compression configuration.
+        {{ __('Test your current browser cache headers and compression configuration.', 'performance-toolkit') }}
     </p>
 
     <div style="margin: 16px 0;">
@@ -49,6 +49,20 @@ document.addEventListener('DOMContentLoaded', function () {
     const assetsCompressedLabel = @json(__('assets are compressed', 'performance-toolkit'));
     const configGoodLabel = @json(__('Browser cache configuration looks good!', 'performance-toolkit'));
     const applyConfigLabel = @json(__('Not all assets have cache headers. Apply the configuration below.', 'performance-toolkit'));
+    const cacheNotSetLabel = @json(__('Not set', 'performance-toolkit'));
+    const cacheNoneLabel = @json(__('None', 'performance-toolkit'));
+    const cacheUnknownLabel = @json(__('Unknown', 'performance-toolkit'));
+    const cacheYesLabel = @json(__('Yes', 'performance-toolkit'));
+    const cacheErrorPrefixLabel = @json(__('Error:', 'performance-toolkit'));
+    const cacheNaLabel = @json(__('N/A', 'performance-toolkit'));
+    const cacheGoodLabel = @json(__('GOOD', 'performance-toolkit'));
+    const cacheCheckLabel = @json(__('CHECK', 'performance-toolkit'));
+    const cacheCompressionOkLabel = @json(__('OK', 'performance-toolkit'));
+    const cacheNotUsedLabel = @json(__('NOT USED', 'performance-toolkit'));
+    const cssLabel = @json(__('CSS', 'performance-toolkit'));
+    const jsLabel = @json(__('JavaScript', 'performance-toolkit'));
+    const imageLabel = @json(__('Image', 'performance-toolkit'));
+    const errorLabel = @json(__('Error', 'performance-toolkit'));
 
     const testButton = document.getElementById('ptk-run-cache-test');
     if (testButton) {
@@ -102,14 +116,14 @@ document.addEventListener('DOMContentLoaded', function () {
             doc.querySelectorAll('link[rel="stylesheet"]').forEach((link) => {
                 const href = link.getAttribute('href');
                 if (href && !href.includes('//fonts.')) {
-                    assets.push({ url: href, type: 'CSS', contentType: 'text/css' });
+                    assets.push({ url: href, type: cssLabel, contentType: 'text/css' });
                 }
             });
 
             doc.querySelectorAll('script[src]').forEach((script) => {
                 const src = script.getAttribute('src');
                 if (src && src.includes('.js') && !src.includes('//')) {
-                    assets.push({ url: src, type: 'JavaScript', contentType: 'application/javascript' });
+                    assets.push({ url: src, type: jsLabel, contentType: 'application/javascript' });
                 }
             });
 
@@ -117,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (img) {
                 const src = img.getAttribute('src');
                 if (src && !src.includes('//')) {
-                    assets.push({ url: src, type: 'Image', contentType: 'image' });
+                    assets.push({ url: src, type: imageLabel, contentType: 'image' });
                 }
             }
 
@@ -136,9 +150,9 @@ document.addEventListener('DOMContentLoaded', function () {
             const response = await fetch(asset.url, { signal: controller.signal });
             clearTimeout(timeoutId);
 
-            const cacheControl = response.headers.get('Cache-Control') || 'Not set';
-            const contentEncoding = response.headers.get('Content-Encoding') || 'None';
-            const contentLength = response.headers.get('Content-Length') || 'Unknown';
+            const cacheControl = response.headers.get('Cache-Control') || cacheNotSetLabel;
+            const contentEncoding = response.headers.get('Content-Encoding') || cacheNoneLabel;
+            const contentLength = response.headers.get('Content-Length') || cacheUnknownLabel;
             const etag = response.headers.get('ETag');
 
             return {
@@ -147,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 cacheControl: cacheControl,
                 encoding: contentEncoding,
                 size: contentLength,
-                etag: etag ? 'Yes' : 'No',
+                etag: etag ? cacheYesLabel : cacheNoneLabel,
                 status: response.status,
             };
         } catch (e) {
@@ -155,19 +169,19 @@ document.addEventListener('DOMContentLoaded', function () {
             return {
                 url: asset.url.split('/').pop(),
                 type: asset.type,
-                cacheControl: 'Error: ' + e.message,
-                encoding: 'N/A',
-                size: 'N/A',
-                etag: 'N/A',
-                status: 'Error',
+                cacheControl: cacheErrorPrefixLabel + ' ' + e.message,
+                encoding: cacheNaLabel,
+                size: cacheNaLabel,
+                etag: cacheNaLabel,
+                status: errorLabel,
             };
         }
     }
 
     function addResultRow(tbody, result) {
         const row = tbody.insertRow();
-        const cacheStatus = result.cacheControl !== 'Not set' && result.cacheControl !== 'Error' ? 'GOOD' : 'CHECK';
-        const compressionStatus = result.encoding !== 'None' && result.encoding !== 'N/A' ? 'OK ' + result.encoding : 'NOT USED';
+        const cacheStatus = result.cacheControl !== cacheNotSetLabel && result.cacheControl !== errorLabel ? cacheGoodLabel : cacheCheckLabel;
+        const compressionStatus = result.encoding !== cacheNoneLabel && result.encoding !== cacheNaLabel ? cacheCompressionOkLabel + ' ' + result.encoding : cacheNotUsedLabel;
 
         row.innerHTML = `
             <td><strong>${escapeHtml(result.type)}</strong><br><small>${escapeHtml(result.url)}</small></td>
@@ -183,8 +197,8 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        const good = results.filter((r) => r.cacheControl !== 'Not set' && r.cacheControl !== 'Error' && !r.cacheControl.includes('Error')).length;
-        const compressed = results.filter((r) => r.encoding !== 'None' && r.encoding !== 'N/A').length;
+        const good = results.filter((r) => r.cacheControl !== cacheNotSetLabel && r.cacheControl !== errorLabel && !r.cacheControl.includes(cacheErrorPrefixLabel)).length;
+        const compressed = results.filter((r) => r.encoding !== cacheNoneLabel && r.encoding !== cacheNaLabel).length;
 
         let summary = `<strong>${resultsLabel} ${good}/${results.length} ${assetsHaveHeadersLabel}</strong><br>`;
         summary += `${compressed}/${results.length} ${assetsCompressedLabel}`;
@@ -211,4 +225,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 </script>
+
+
 

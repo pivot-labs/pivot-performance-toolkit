@@ -6,7 +6,7 @@
                 <strong>{{ __('⚠ Filesystem Warning', 'performance-toolkit') }}</strong>
             </p>
             <p style="margin: 0;">
-                {{ __('The Performance Toolkit cache directory is not writable. Caching and minification are disabled. Contact your hosting provider to ensure the cache directory has write permissions.', 'performance-toolkit') }}
+                {{ __('The WP Performance Toolkit cache directory is not writable. Caching and minification are disabled. Contact your hosting provider to ensure the cache directory has write permissions.', 'performance-toolkit') }}
             </p>
         </div>
     @endif
