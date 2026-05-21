@@ -1,25 +1,29 @@
 <?php
+/**
+ * Admin page contract interface.
+ *
+ * @package PerformanceToolkit
+ */
 
 declare(strict_types=1);
 
 namespace PerformanceToolkit\Admin;
 
-interface AdminPageInterface
-{
-    public function slug(): string;
+interface AdminPageInterface {
 
-    public function menuTitle(): string;
+	public function slug(): string;
 
-    public function pageTitle(): string;
+	public function menuTitle(): string;
 
-    public function iconKey(): string;
+	public function pageTitle(): string;
 
-    /**
-     * Legacy rendering entry point.
-     *
-     * New pages should also implement AdminPageViewInterface so AdminShell can
-     * render them without output buffering.
-     */
-    public function renderContent(): void;
+	public function iconKey(): string;
+
+	/**
+	 * Legacy rendering entry point.
+	 *
+	 * New pages should also implement AdminPageViewInterface so AdminShell can
+	 * render them without output buffering.
+	 */
+	public function renderContent(): void;
 }
-

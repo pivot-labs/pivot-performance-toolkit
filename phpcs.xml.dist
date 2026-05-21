@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<ruleset name="Performance Toolkit">
+    <description>PHP_CodeSniffer rules for Performance Toolkit plugin.</description>
+
+    <arg name="basepath" value="."/>
+    <arg name="extensions" value="php"/>
+    <arg value="sp"/>
+
+    <file>performance-toolkit.php</file>
+    <file>includes</file>
+    <file>uninstall.php</file>
+    <file>tests</file>
+
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/node_modules/*</exclude-pattern>
+    <exclude-pattern>*/dist/*</exclude-pattern>
+    <exclude-pattern>*/references/*</exclude-pattern>
+    <exclude-pattern>*/wp-cache/*</exclude-pattern>
+    <exclude-pattern>*/tests/*</exclude-pattern>
+
+    <rule ref="WordPress-Core" />
+
+    <!--
+        PSR-4 autoloading requires PascalCase filenames that match class names.
+        Excluding WordPress file-naming rules that conflict with the autoloader.
+    -->
+    <rule ref="WordPress.Files.FileName">
+        <exclude-pattern>includes/*</exclude-pattern>
+    </rule>
+
+    <!--
+        This plugin follows PSR-1/PSR-12 naming conventions (camelCase methods).
+        Excluding the WordPress snake_case method-naming rule to avoid breaking
+        the entire codebase.
+    -->
+    <rule ref="WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid">
+        <severity>0</severity>
+    </rule>
+
+    <!--
+        PHPDoc on every method is not enforced in this codebase.
+        Public API methods carry doc blocks where useful; internal helpers do not.
+        Suppressing the blanket "missing function comment" sniff.
+    -->
+    <rule ref="Squiz.Commenting.FunctionComment.Missing">
+        <severity>0</severity>
+    </rule>
+
+    <!--
+        Every short ternary in this codebase uses the safe `expr ?: array()`
+        fallback pattern. The rule is over-broad; suppressing it here.
+    -->
+    <rule ref="Universal.Operators.DisallowShortTernary">
+        <severity>0</severity>
+    </rule>
+</ruleset>
+

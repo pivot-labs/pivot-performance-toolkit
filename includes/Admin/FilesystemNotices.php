@@ -1,4 +1,9 @@
 <?php
+/**
+ * Admin notices for filesystem permission issues.
+ *
+ * @package PerformanceToolkit
+ */
 
 declare(strict_types=1);
 
@@ -6,60 +11,129 @@ namespace PerformanceToolkit\Admin;
 
 use PerformanceToolkit\Contracts\ModuleInterface;
 use PerformanceToolkit\Utils\FilesystemCheck;
+use PerformanceToolkit\Views\BladeEngine;
 
-final class FilesystemNotices implements ModuleInterface
-{
-    public function register(): void
-    {
-        add_action('admin_notices', array($this, 'displayFilesystemNotice'));
-    }
+final class FilesystemNotices implements ModuleInterface {
 
-    public function displayFilesystemNotice(): void
-    {
-        if (! current_user_can('manage_options')) {
-            return;
-        }
+	private const DROPIN_INSTALL_NOTICE_TRANSIENT     = 'ptk_dropin_install_failure_notice';
+	private const DEACTIVATE_CLEANUP_NOTICE_TRANSIENT = 'ptk_deactivate_cleanup_failure_notice';
 
-        $status = FilesystemCheck::getCachedStatus();
+	public function register(): void {
+		add_action( 'admin_notices', array( $this, 'displayDropinInstallNotice' ) );
+		add_action( 'admin_notices', array( $this, 'displayDeactivateCleanupNotice' ) );
+		add_action( 'admin_notices', array( $this, 'displayFilesystemNotice' ) );
+	}
 
-        if ($status['writable']) {
-            return;
-        }
+	public function displayDropinInstallNotice(): void {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
 
-        $error_messages = $status['errors'] ?? array();
+		$notice = get_transient( self::DROPIN_INSTALL_NOTICE_TRANSIENT );
+		if ( ! is_array( $notice ) ) {
+			return;
+		}
 
-        if (empty($error_messages)) {
-            return;
-        }
+		$reason = isset( $notice['reason'] ) && is_string( $notice['reason'] ) ? $notice['reason'] : '';
+		$source = isset( $notice['source'] ) && is_string( $notice['source'] ) ? $notice['source'] : '';
+		$dest   = isset( $notice['dest'] ) && is_string( $notice['dest'] ) ? $notice['dest'] : '';
 
-        ?>
-        <div class="notice notice-error is-dismissible">
-            <p>
-                <strong><?php esc_html_e('Performance Toolkit – Filesystem Issue', 'performance-toolkit'); ?></strong>
-            </p>
-            <p>
-                <?php esc_html_e('The cache directory is not writable. Performance Toolkit will continue to work, but page caching and asset minification will be disabled until the issue is resolved.', 'performance-toolkit'); ?>
-            </p>
-            <ul style="margin: 8px 0 8px 20px; list-style-type: disc;">
-                <?php foreach ($error_messages as $error) : ?>
-                    <li><?php echo esc_html($error); ?></li>
-                <?php endforeach; ?>
-            </ul>
-            <p>
-                <?php
-                printf(
-                    /* translators: %s: link to system status page */
-                    wp_kses_post(__('For more details, visit the <a href="%s">System Status page</a>.', 'performance-toolkit')),
-                    esc_url(add_query_arg('page', 'performance-toolkit-system-status', admin_url('admin.php')))
-                );
-                ?>
-            </p>
-            <p style="color: #666; font-size: 0.9em;">
-                <?php echo wp_kses_post(__('<strong>To fix:</strong> Ensure the <code>wp-content/cache/performance-toolkit</code> directory exists and is writable by the web server. Usually: <code>chmod 755 wp-content/cache/performance-toolkit</code> or contact your hosting provider.', 'performance-toolkit')); ?>
-            </p>
-        </div>
-        <?php
-    }
+		delete_transient( self::DROPIN_INSTALL_NOTICE_TRANSIENT );
+
+		echo BladeEngine::view(
+			'admin.dropin-install-notice',
+			array(
+				'reason' => $reason,
+				'source' => $source,
+				'dest'   => $dest,
+			)
+		);
+	}
+
+	public function displayDeactivateCleanupNotice(): void {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		$notice = get_transient( self::DEACTIVATE_CLEANUP_NOTICE_TRANSIENT );
+		if ( ! is_array( $notice ) ) {
+			return;
+		}
+
+		$errors      = isset( $notice['errors'] ) && is_array( $notice['errors'] ) ? $notice['errors'] : array();
+		$cache_dir   = isset( $notice['cache_dir'] ) && is_string( $notice['cache_dir'] ) ? $notice['cache_dir'] : '';
+		$config_file = isset( $notice['config_file'] ) && is_string( $notice['config_file'] ) ? $notice['config_file'] : '';
+
+		$errors = array_values(
+			array_filter(
+				$errors,
+				static function ( $value ): bool {
+					return is_string( $value ) && '' !== $value;
+				}
+			)
+		);
+
+		if ( empty( $errors ) ) {
+			delete_transient( self::DEACTIVATE_CLEANUP_NOTICE_TRANSIENT );
+			return;
+		}
+
+		delete_transient( self::DEACTIVATE_CLEANUP_NOTICE_TRANSIENT );
+
+		echo BladeEngine::view(
+			'admin.deactivate-cleanup-notice',
+			array(
+				'errors'      => $errors,
+				'cache_dir'   => $cache_dir,
+				'config_file' => $config_file,
+			)
+		);
+	}
+
+	public function displayFilesystemNotice(): void {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		$status = FilesystemCheck::getCachedStatus();
+
+		if ( $status['writable'] ) {
+			return;
+		}
+
+		$error_messages = $status['errors'] ?? array();
+
+		if ( empty( $error_messages ) ) {
+			return;
+		}
+
+		?>
+		<div class="notice notice-error is-dismissible">
+			<p>
+				<strong><?php esc_html_e( 'Performance Toolkit – Filesystem Issue', 'performance-toolkit' ); ?></strong>
+			</p>
+			<p>
+				<?php esc_html_e( 'The cache directory is not writable. Performance Toolkit will continue to work, but page caching and asset minification will be disabled until the issue is resolved.', 'performance-toolkit' ); ?>
+			</p>
+			<ul style="margin: 8px 0 8px 20px; list-style-type: disc;">
+				<?php foreach ( $error_messages as $error ) : ?>
+					<li><?php echo esc_html( $error ); ?></li>
+				<?php endforeach; ?>
+			</ul>
+			<p>
+				<?php
+				printf(
+					/* translators: %s: link to system status page */
+					wp_kses_post( __( 'For more details, visit the <a href="%s">System Status page</a>.', 'performance-toolkit' ) ),
+					esc_url( add_query_arg( 'page', 'performance-toolkit-system-status', admin_url( 'admin.php' ) ) )
+				);
+				?>
+			</p>
+			<p style="color: #666; font-size: 0.9em;">
+				<?php echo wp_kses_post( __( '<strong>To fix:</strong> Ensure the <code>wp-content/cache/performance-toolkit</code> directory exists and is writable by the web server. Usually: <code>chmod 755 wp-content/cache/performance-toolkit</code> or contact your hosting provider.', 'performance-toolkit' ) ); ?>
+			</p>
+		</div>
+		<?php
+	}
 }
-
 

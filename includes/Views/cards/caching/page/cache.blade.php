@@ -79,8 +79,18 @@
                         style="width: {{ esc_attr((string) $usage_pct) }}%"
                     ></div>
                 </div>
+                @php
+                    $cache_limit_mb_label = number_format_i18n((int) $options['max_cache_size_mb']);
+                    $usage_pct_label = number_format_i18n((int) $usage_pct);
+                @endphp
                 <span class="ptk-cache-usage-label">
-                    {{ $cache_size_formatted }} of {{ $options['max_cache_size_mb'] }} MB used ({{ $usage_pct }}%)
+                    {{ sprintf(
+                        /* translators: 1: Used cache size in human-readable units, 2: Configured max cache size in MB, 3: Percentage of cache usage. */
+                        __('%1$s of %2$s MB used (%3$s%%)', 'performance-toolkit'),
+                        $cache_size_formatted,
+                        $cache_limit_mb_label,
+                        $usage_pct_label
+                    ) }}
                 </span>
             </div>
         </div>
@@ -98,4 +108,3 @@
         @endphp
     </form>
 </x-card>
-

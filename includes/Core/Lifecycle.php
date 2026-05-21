@@ -1,4 +1,9 @@
 <?php
+/**
+ * Plugin activation and deactivation lifecycle.
+ *
+ * @package PerformanceToolkit
+ */
 
 declare(strict_types=1);
 
@@ -6,157 +11,248 @@ namespace PerformanceToolkit\Core;
 
 use PerformanceToolkit\Utils\FilesystemCheck;
 
-final class Lifecycle
-{
-    private static function dropinSource(): string
-    {
-        return PERFORMANCE_TOOLKIT_PATH . 'includes/Cache/advanced-cache.php';
-    }
+final class Lifecycle {
 
-    private static function dropinDest(): string
-    {
-        return WP_CONTENT_DIR . '/advanced-cache.php';
-    }
+	private const DROPIN_INSTALL_NOTICE_TRANSIENT     = 'ptk_dropin_install_failure_notice';
+	private const DEACTIVATE_CLEANUP_NOTICE_TRANSIENT = 'ptk_deactivate_cleanup_failure_notice';
 
-    private static function cacheDir(): string
-    {
-        return WP_CONTENT_DIR . '/cache/performance-toolkit';
-    }
+	private static function dropinSource(): string {
+		return PERFORMANCE_TOOLKIT_PATH . 'includes/Cache/advanced-cache.php';
+	}
 
-    public static function activate(): void
-    {
-        // Create cache directory.
-        if (! file_exists(self::cacheDir())) {
-            wp_mkdir_p(self::cacheDir());
-        }
+	private static function dropinDest(): string {
+		return WP_CONTENT_DIR . '/advanced-cache.php';
+	}
 
-        // Check filesystem status and cache it for admin display.
-        $fs_status = FilesystemCheck::checkCacheDirectories();
-        FilesystemCheck::setCachedStatus($fs_status);
+	private static function cacheDir(): string {
+		return WP_CONTENT_DIR . '/cache/performance-toolkit';
+	}
 
-        // Install the advanced-cache.php drop-in.
-        self::installDropin();
+	public static function activate(): void {
+		// Create cache directory.
+		if ( ! file_exists( self::cacheDir() ) ) {
+			wp_mkdir_p( self::cacheDir() );
+		}
 
-        // Add WP_CACHE define to wp-config.php.
-        self::enableWpCache();
-    }
+		// Check filesystem status and cache it for admin display.
+		$fs_status = FilesystemCheck::checkCacheDirectories();
+		FilesystemCheck::setCachedStatus( $fs_status );
 
-    public static function deactivate(): void
-    {
-        // Remove the drop-in only if it was installed by us.
-        self::removeDropin();
+		// Install the advanced-cache.php drop-in.
+		$dropin_installed = self::installDropin();
 
-        // Remove WP_CACHE define we added.
-        self::disableWpCache();
+		// Add WP_CACHE define to wp-config.php only when the drop-in is available.
+		if ( true === $dropin_installed ) {
+			self::enableWpCache();
+		} else {
+			// Remove the plugin-managed define to avoid claiming cache support when the drop-in is missing.
+			self::disableWpCache();
+		}
+	}
 
-        // Purge all cached HTML files.
-        foreach (glob(self::cacheDir() . '/*.html') ?: array() as $file) {
-            @unlink($file);
-        }
+	public static function deactivate(): void {
+		// Remove the drop-in only if it was installed by us.
+		self::removeDropin();
 
-        // Remove the config file.
-        $config = self::cacheDir() . '/config.php';
-        if (file_exists($config)) {
-            @unlink($config);
-        }
-    }
+		// Remove WP_CACHE define we added.
+		self::disableWpCache();
 
-    // -------------------------------------------------------------------------
-    // Drop-in helpers
-    // -------------------------------------------------------------------------
+		$cleanup_errors = array();
 
-    private static function installDropin(): void
-    {
-        // Don't overwrite an existing drop-in that belongs to another plugin.
-        if (file_exists(self::dropinDest()) && ! self::dropinIsOurs()) {
-            return;
-        }
+		// Purge all cached HTML files.
+		$html_files = glob( self::cacheDir() . '/*.html' );
+		if ( false === $html_files ) {
+			$cleanup_errors[] = __( 'Could not list cached HTML files for cleanup.', 'performance-toolkit' );
+			$html_files       = array();
+		}
 
-        @copy(self::dropinSource(), self::dropinDest());
-    }
+		foreach ( $html_files as $file ) {
+			if ( ! is_string( $file ) || '' === $file || ! file_exists( $file ) ) {
+				continue;
+			}
 
-    private static function removeDropin(): void
-    {
-        if (file_exists(self::dropinDest()) && self::dropinIsOurs()) {
-            @unlink(self::dropinDest());
-        }
-    }
+			$deleted = unlink( $file );
+			if ( false === $deleted ) {
+				$cleanup_errors[] = sprintf(
+					/* translators: %s: absolute file path that could not be deleted during deactivation cleanup. */
+					__( 'Could not remove cached file: %s', 'performance-toolkit' ),
+					$file
+				);
+			}
+		}
 
-    /**
-     * Returns true if the installed advanced-cache.php was placed by this plugin.
-     */
-    private static function dropinIsOurs(): bool
-    {
-        if (! file_exists(self::dropinDest())) {
-            return false;
-        }
+		// Remove the config file.
+		$config = self::cacheDir() . '/config.php';
+		if ( file_exists( $config ) ) {
+			$config_deleted = unlink( $config );
+			if ( false === $config_deleted ) {
+				$cleanup_errors[] = sprintf(
+					/* translators: %s: absolute config file path that could not be deleted during deactivation cleanup. */
+					__( 'Could not remove cache config file: %s', 'performance-toolkit' ),
+					$config
+				);
+			}
+		}
 
-        $contents = (string) file_get_contents(self::dropinDest());
+		if ( ! empty( $cleanup_errors ) ) {
+			self::setDeactivateCleanupFailureNotice( $cleanup_errors );
+			return;
+		}
 
-        return str_contains($contents, 'Performance Toolkit');
-    }
+		delete_transient( self::DEACTIVATE_CLEANUP_NOTICE_TRANSIENT );
+	}
 
-    // -------------------------------------------------------------------------
-    // wp-config.php helpers
-    // -------------------------------------------------------------------------
+	// -------------------------------------------------------------------------
+	// Drop-in helpers
+	// -------------------------------------------------------------------------
 
-    private static function enableWpCache(): void
-    {
-        if (defined('WP_CACHE') && WP_CACHE) {
-            return; // Already enabled.
-        }
+	private static function installDropin(): bool {
+		$dropin_source = self::dropinSource();
+		$dropin_dest   = self::dropinDest();
 
-        $config = ABSPATH . 'wp-config.php';
+		// Don't overwrite an existing drop-in that belongs to another plugin.
+		if ( file_exists( $dropin_dest ) && ! self::dropinIsOurs() ) {
+			self::setDropinInstallFailureNotice(
+				__( 'Another plugin already manages wp-content/advanced-cache.php. Performance Toolkit did not overwrite it.', 'performance-toolkit' )
+			);
+			return false;
+		}
 
-        if (! is_writable($config)) {
-            return;
-        }
+		if ( ! file_exists( $dropin_source ) ) {
+			self::setDropinInstallFailureNotice(
+				__( 'The source drop-in file is missing from the plugin directory.', 'performance-toolkit' )
+			);
+			return false;
+		}
 
-        $contents = file_get_contents($config);
+		$dropin_dest_dir = dirname( $dropin_dest );
+		if ( ! is_dir( $dropin_dest_dir ) || ! is_writable( $dropin_dest_dir ) ) {
+			self::setDropinInstallFailureNotice(
+				__( 'The wp-content directory is not writable by PHP.', 'performance-toolkit' )
+			);
+			return false;
+		}
 
-        if ($contents === false) {
-            return;
-        }
+		$copied = copy( $dropin_source, $dropin_dest );
+		if ( false === $copied ) {
+			self::setDropinInstallFailureNotice(
+				__( 'PHP failed to copy advanced-cache.php into wp-content.', 'performance-toolkit' )
+			);
+			return false;
+		}
 
-        // Already present (maybe defined as false).
-        if (preg_match('/define\s*\(\s*[\'"]WP_CACHE[\'"]/', $contents)) {
-            return;
-        }
+		delete_transient( self::DROPIN_INSTALL_NOTICE_TRANSIENT );
 
-        // Insert before the "That's all, stop editing!" comment.
-        $new = preg_replace(
-            '/(\\/\\*\\s*That\'s all[^*]*\\*\\/)/i',
-            "define( 'WP_CACHE', true ); // Added by Performance Toolkit\n$1",
-            $contents
-        );
+		return true;
+	}
 
-        if ($new !== null && $new !== $contents) {
-            file_put_contents($config, $new, LOCK_EX);
-        }
-    }
+	private static function setDropinInstallFailureNotice( string $reason ): void {
+		set_transient(
+			self::DROPIN_INSTALL_NOTICE_TRANSIENT,
+			array(
+				'reason' => $reason,
+				'source' => self::dropinSource(),
+				'dest'   => self::dropinDest(),
+			),
+			DAY_IN_SECONDS
+		);
+	}
 
-    private static function disableWpCache(): void
-    {
-        $config = ABSPATH . 'wp-config.php';
+	private static function removeDropin(): void {
+		$dropin_dest = self::dropinDest();
 
-        if (! is_writable($config)) {
-            return;
-        }
+		if ( file_exists( $dropin_dest ) && self::dropinIsOurs() ) {
+			unlink( $dropin_dest );
+		}
+	}
 
-        $contents = file_get_contents($config);
+	/**
+	 * Returns true if the installed advanced-cache.php was placed by this plugin.
+	 */
+	private static function dropinIsOurs(): bool {
+		if ( ! file_exists( self::dropinDest() ) ) {
+			return false;
+		}
 
-        if ($contents === false) {
-            return;
-        }
+		$contents = (string) file_get_contents( self::dropinDest() );
 
-        $new = preg_replace(
-            '/^define\s*\(\s*\'WP_CACHE\'.*\/\/ Added by Performance Toolkit\r?\n/m',
-            '',
-            $contents
-        );
+		return str_contains( $contents, 'Performance Toolkit' );
+	}
 
-        if ($new !== null && $new !== $contents) {
-            file_put_contents($config, $new, LOCK_EX);
-        }
-    }
+	// -------------------------------------------------------------------------
+	// wp-config.php helpers
+	// -------------------------------------------------------------------------
+
+	private static function enableWpCache(): void {
+		if ( defined( 'WP_CACHE' ) && WP_CACHE ) {
+			return; // Already enabled.
+		}
+
+		$config = ABSPATH . 'wp-config.php';
+
+		if ( ! is_writable( $config ) ) {
+			return;
+		}
+
+		$contents = file_get_contents( $config );
+
+		if ( false === $contents ) {
+			return;
+		}
+
+		// Already present (maybe defined as false).
+		if ( preg_match( '/define\s*\(\s*[\'"]WP_CACHE[\'"]/', $contents ) ) {
+			return;
+		}
+
+		// Insert before the "That's all, stop editing!" comment.
+		$new = preg_replace(
+			'/(\\/\\*\\s*That\'s all[^*]*\\*\\/)/i',
+			"define( 'WP_CACHE', true ); // Added by Performance Toolkit\n$1",
+			$contents
+		);
+
+		if ( null !== $new && $new !== $contents ) {
+			file_put_contents( $config, $new, LOCK_EX );
+		}
+	}
+
+	private static function disableWpCache(): void {
+		$config = ABSPATH . 'wp-config.php';
+
+		if ( ! is_writable( $config ) ) {
+			return;
+		}
+
+		$contents = file_get_contents( $config );
+
+		if ( false === $contents ) {
+			return;
+		}
+
+		$new = preg_replace(
+			'/^define\s*\(\s*\'WP_CACHE\'.*\/\/ Added by Performance Toolkit\r?\n/m',
+			'',
+			$contents
+		);
+
+		if ( null !== $new && $new !== $contents ) {
+			file_put_contents( $config, $new, LOCK_EX );
+		}
+	}
+
+	/**
+	 * @param array<int, string> $errors
+	 */
+	private static function setDeactivateCleanupFailureNotice( array $errors ): void {
+		set_transient(
+			self::DEACTIVATE_CLEANUP_NOTICE_TRANSIENT,
+			array(
+				'errors'      => $errors,
+				'cache_dir'   => self::cacheDir(),
+				'config_file' => self::cacheDir() . '/config.php',
+			),
+			DAY_IN_SECONDS
+		);
+	}
 }

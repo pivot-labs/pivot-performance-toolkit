@@ -1,131 +1,126 @@
 <?php
+/**
+ * Admin menu registration.
+ *
+ * @package PerformanceToolkit
+ */
 
 declare(strict_types=1);
 
 namespace PerformanceToolkit\Admin;
 
-final class Menu
-{
-    private const ROOT_SLUG = 'performance-toolkit';
+final class Menu {
 
-    /**
-     * @var array<string, AdminPageInterface>
-     */
-    private array $pages;
+	private const ROOT_SLUG = 'performance-toolkit';
 
-    /**
-     * @var string[]
-     */
-    private array $page_hooks = array();
+	/**
+	 * @var array<string, AdminPageInterface>
+	 */
+	private array $pages;
 
-    /**
-     * @param AdminPageInterface[] $pages
-     */
-    public function __construct(array $pages)
-    {
-        $this->pages = array();
+	/**
+	 * @var string[]
+	 */
+	private array $page_hooks = array();
 
-        foreach ($pages as $page) {
-            $this->pages[$page->slug()] = $page;
-        }
-    }
+	/**
+	 * @param AdminPageInterface[] $pages
+	 */
+	public function __construct( array $pages ) {
+		$this->pages = array();
 
-    public function register(): void
-    {
-        add_action('admin_menu', array($this, 'addMenuPage'));
-        add_action('admin_enqueue_scripts', array($this, 'enqueueAssets'));
-        add_action('admin_head', array($this, 'printMenuIconStyles'));
-    }
+		foreach ( $pages as $page ) {
+			$this->pages[ $page->slug() ] = $page;
+		}
+	}
 
-    public function addMenuPage(): void
-    {
-        $root_page = $this->pages[self::ROOT_SLUG] ?? null;
+	public function register(): void {
+		add_action( 'admin_menu', array( $this, 'addMenuPage' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueueAssets' ) );
+		add_action( 'admin_head', array( $this, 'printMenuIconStyles' ) );
+	}
 
-        if (! $root_page instanceof AdminPageInterface) {
-            return;
-        }
+	public function addMenuPage(): void {
+		$root_page = $this->pages[ self::ROOT_SLUG ] ?? null;
 
-        // Register only the root menu page. All other pages are routed internally
-        // via the ?section= query parameter.
-        $top_level_hook = add_menu_page(
-            $root_page->pageTitle(),
-            __('Performance', 'performance-toolkit'),
-            'manage_options',
-            self::ROOT_SLUG,
-            array($this, 'renderCurrentPage'),
-            PERFORMANCE_TOOLKIT_URL . 'assets/img/performance-toolkit-currentcolor.svg',
-            81
-        );
+		if ( ! $root_page instanceof AdminPageInterface ) {
+			return;
+		}
 
-        if (is_string($top_level_hook)) {
-            $this->page_hooks[] = $top_level_hook;
-        }
-    }
+		// Register only the root menu page. All other pages are routed internally
+		// via the ?section= query parameter.
+		$top_level_hook = add_menu_page(
+			$root_page->pageTitle(),
+			__( 'Performance', 'performance-toolkit' ),
+			'manage_options',
+			self::ROOT_SLUG,
+			array( $this, 'renderCurrentPage' ),
+			PERFORMANCE_TOOLKIT_URL . 'assets/img/performance-toolkit-currentcolor.svg',
+			81
+		);
 
-    public function renderCurrentPage(): void
-    {
-        if (! current_user_can('manage_options')) {
-            return;
-        }
+		if ( is_string( $top_level_hook ) ) {
+			$this->page_hooks[] = $top_level_hook;
+		}
+	}
 
-        AdminShell::render($this->pages);
-    }
+	public function renderCurrentPage(): void {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
 
-    public function enqueueAssets(string $hook_suffix): void
-    {
-        if (! in_array($hook_suffix, $this->page_hooks, true)) {
-            return;
-        }
+		AdminShell::render( $this->pages );
+	}
 
-        $style_path = PERFORMANCE_TOOLKIT_PATH . 'dist/admin.css';
-        $style_url = PERFORMANCE_TOOLKIT_URL . 'dist/admin.css';
+	public function enqueueAssets( string $hook_suffix ): void {
+		if ( ! in_array( $hook_suffix, $this->page_hooks, true ) ) {
+			return;
+		}
 
-        wp_enqueue_style(
-            'performance-toolkit-admin',
-            $style_url,
-            array(),
-            file_exists($style_path) ? (string) filemtime($style_path) : PERFORMANCE_TOOLKIT_VERSION
-        );
+		$style_path = PERFORMANCE_TOOLKIT_PATH . 'dist/admin.css';
+		$style_url  = PERFORMANCE_TOOLKIT_URL . 'dist/admin.css';
 
-        $script_path = PERFORMANCE_TOOLKIT_PATH . 'assets/js/admin.js';
-        $script_url  = PERFORMANCE_TOOLKIT_URL . 'assets/js/admin.js';
+		wp_enqueue_style(
+			'performance-toolkit-admin',
+			$style_url,
+			array(),
+			file_exists( $style_path ) ? (string) filemtime( $style_path ) : PERFORMANCE_TOOLKIT_VERSION
+		);
 
-        wp_enqueue_script(
-            'performance-toolkit-admin-js',
-            $script_url,
-            array(),
-            file_exists($script_path) ? (string) filemtime($script_path) : PERFORMANCE_TOOLKIT_VERSION,
-            true
-        );
+		$script_path = PERFORMANCE_TOOLKIT_PATH . 'assets/js/admin.js';
+		$script_url  = PERFORMANCE_TOOLKIT_URL . 'assets/js/admin.js';
 
-        wp_localize_script(
-            'performance-toolkit-admin-js',
-            'ptkSnippet',
-            array(
-                'copied'      => __('Copied!', 'performance-toolkit'),
-                'copyFailed'  => __('Failed to copy. Please try again.', 'performance-toolkit'),
-                'expand'      => __('Expand Full Configuration', 'performance-toolkit'),
-                'collapse'    => __('Hide Full Configuration', 'performance-toolkit'),
-            )
-        );
+		wp_enqueue_script(
+			'performance-toolkit-admin-js',
+			$script_url,
+			array(),
+			file_exists( $script_path ) ? (string) filemtime( $script_path ) : PERFORMANCE_TOOLKIT_VERSION,
+			true
+		);
 
-        wp_localize_script(
-            'performance-toolkit-admin-js',
-            'ptkAdmin',
-            array(
-                'requestFailed' => __('Request failed.', 'performance-toolkit'),
-            )
-        );
-    }
+		wp_localize_script(
+			'performance-toolkit-admin-js',
+			'ptkSnippet',
+			array(
+				'copied'     => __( 'Copied!', 'performance-toolkit' ),
+				'copyFailed' => __( 'Failed to copy. Please try again.', 'performance-toolkit' ),
+				'expand'     => __( 'Expand Full Configuration', 'performance-toolkit' ),
+				'collapse'   => __( 'Hide Full Configuration', 'performance-toolkit' ),
+			)
+		);
 
-    public function printMenuIconStyles(): void
-    {
-        $icon_url = esc_url(PERFORMANCE_TOOLKIT_URL . 'assets/img/performance-toolkit-currentcolor.svg');
+		wp_localize_script(
+			'performance-toolkit-admin-js',
+			'ptkAdmin',
+			array(
+				'requestFailed' => __( 'Request failed.', 'performance-toolkit' ),
+			)
+		);
+	}
 
-        echo '<style id="performance-toolkit-menu-icon">#adminmenu .toplevel_page_performance-toolkit .wp-menu-image img{display:none}#adminmenu .toplevel_page_performance-toolkit .wp-menu-image{color:inherit}#adminmenu .toplevel_page_performance-toolkit .wp-menu-image:before{content:"";display:block;width:28px;height:28px;margin:1px auto 0;transform:translateY(-4px);background-color:currentColor;-webkit-mask-image:url("' . $icon_url . '");mask-image:url("' . $icon_url . '");-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:28px 28px;mask-size:28px 28px}</style>';
-    }
+	public function printMenuIconStyles(): void {
+		$icon_url = esc_url( PERFORMANCE_TOOLKIT_URL . 'assets/img/performance-toolkit-currentcolor.svg' );
+
+		echo '<style id="performance-toolkit-menu-icon">#adminmenu .toplevel_page_performance-toolkit .wp-menu-image img{display:none}#adminmenu .toplevel_page_performance-toolkit .wp-menu-image{color:inherit}#adminmenu .toplevel_page_performance-toolkit .wp-menu-image:before{content:"";display:block;width:28px;height:28px;margin:1px auto 0;transform:translateY(-4px);background-color:currentColor;-webkit-mask-image:url("' . $icon_url . '");mask-image:url("' . $icon_url . '");-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:28px 28px;mask-size:28px 28px}</style>';
+	}
 }
-
-
-
-

@@ -9,10 +9,10 @@
     @endphp
 
 <p>
-    Page caching stores a static version of your pages and serves it to visitors, reducing server load and improving response times.
+    {{ __('Page caching stores a static version of your pages and serves it to visitors, reducing server load and improving response times.', 'performance-toolkit') }}
 </p>
 
-    <h4>Benefits:</h4>
+    <h4>{{ __('Benefits:', 'performance-toolkit') }}</h4>
 
     <x-info-list :items="$benefits" />
 

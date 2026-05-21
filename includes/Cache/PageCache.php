@@ -1,4 +1,9 @@
 <?php
+/**
+ * Frontend full-page cache handler.
+ *
+ * @package PerformanceToolkit
+ */
 
 declare(strict_types=1);
 
@@ -8,233 +13,223 @@ use PerformanceToolkit\Contracts\ModuleInterface;
 use PerformanceToolkit\Core\Settings;
 use PerformanceToolkit\Utils\FilesystemCheck;
 
-final class PageCache implements ModuleInterface
-{
-    private Settings $settings;
+final class PageCache implements ModuleInterface {
 
-    private string $cache_dir;
+	private Settings $settings;
 
-    public function __construct(Settings $settings)
-    {
-        $this->settings = $settings;
-        $this->cache_dir = WP_CONTENT_DIR . '/cache/performance-toolkit';
-    }
+	private string $cache_dir;
 
-    public function register(): void
-    {
-        // Cache writing – fires after headers are sent but before output is flushed.
-        add_action('template_redirect', array($this, 'startBuffering'), 1);
+	public function __construct( Settings $settings ) {
+		$this->settings  = $settings;
+		$this->cache_dir = WP_CONTENT_DIR . '/cache/performance-toolkit';
+	}
 
-        // Invalidate cache when content changes.
-        add_action('save_post', array($this, 'purgeAll'));
-        add_action('deleted_post', array($this, 'purgeAll'));
+	public function register(): void {
+		// Cache writing – fires after headers are sent but before output is flushed.
+		add_action( 'template_redirect', array( $this, 'startBuffering' ), 1 );
 
-        // Refresh the flat config file whenever settings are saved.
-        add_action('update_option_' . $this->settings->optionKey(), array($this, 'writeConfigFile'));
-    }
+		// Invalidate cache when content changes.
+		add_action( 'save_post', array( $this, 'purgeAll' ) );
+		add_action( 'deleted_post', array( $this, 'purgeAll' ) );
 
-    public function startBuffering(): void
-    {
-        if (! $this->settings->getBool('enable_page_cache')) {
-            $this->sendDebugHeaders('BYPASS', 'disabled');
-            return;
-        }
+		// Refresh the flat config file whenever settings are saved.
+		add_action( 'update_option_' . $this->settings->optionKey(), array( $this, 'writeConfigFile' ) );
+	}
 
-        $bypass_reason = $this->bypassReason();
+	public function startBuffering(): void {
+		if ( ! $this->settings->getBool( 'enable_page_cache' ) ) {
+			$this->sendDebugHeaders( 'BYPASS', 'disabled' );
+			return;
+		}
 
-        if ($bypass_reason !== null) {
-            $this->sendDebugHeaders('BYPASS', $bypass_reason);
-            return;
-        }
+		$bypass_reason = $this->bypassReason();
 
-        if (! file_exists($this->cache_dir)) {
-            wp_mkdir_p($this->cache_dir);
-        }
+		if ( null !== $bypass_reason ) {
+			$this->sendDebugHeaders( 'BYPASS', $bypass_reason );
+			return;
+		}
 
-        // Check if cache directory is writable; if not, skip caching but don't break the site
-        if (! FilesystemCheck::isDirectoryWritable($this->cache_dir)) {
-            $this->sendDebugHeaders('BYPASS', 'fs_readonly');
-            FilesystemCheck::invalidateCache();
-            return;
-        }
+		if ( ! file_exists( $this->cache_dir ) ) {
+			wp_mkdir_p( $this->cache_dir );
+		}
 
-        $cache_file = $this->cacheFilePath();
+		// Check if cache directory is writable; if not, skip caching but don't break the site
+		if ( ! FilesystemCheck::isDirectoryWritable( $this->cache_dir ) ) {
+			$this->sendDebugHeaders( 'BYPASS', 'fs_readonly' );
+			FilesystemCheck::invalidateCache();
+			return;
+		}
 
-        ob_start(
-            function (string $html) use ($cache_file): string {
-                if ($html === '') {
-                    return $html;
-                }
+		$cache_file = $this->cacheFilePath();
 
-                // Attempt to write cache; fail gracefully
-                $written = @file_put_contents($cache_file, $html, LOCK_EX);
+		ob_start(
+			function ( string $html ) use ( $cache_file ): string {
+				if ( '' === $html ) {
+					return $html;
+				}
 
-                if ($written === false) {
-                    $this->sendDebugHeaders('BYPASS', 'fs_write_failed');
-                    FilesystemCheck::invalidateCache();
-                } else {
-                    $this->sendDebugHeaders('MISS');
-                }
+				// Attempt to write cache; fail gracefully
+					$written = file_put_contents( $cache_file, $html, LOCK_EX );
 
-                return $html;
-            }
-        );
-    }
+				if ( false === $written ) {
+					$this->sendDebugHeaders( 'BYPASS', 'fs_write_failed' );
+					FilesystemCheck::invalidateCache();
+				} else {
+					$this->sendDebugHeaders( 'MISS' );
+				}
 
-    public function purgeAll(): void
-    {
-        if (! is_dir($this->cache_dir)) {
-            return;
-        }
+				return $html;
+			}
+		);
+	}
 
-        foreach (glob($this->cache_dir . '/*.html') ?: array() as $file_path) {
-            @unlink($file_path);
-        }
-    }
+	public function purgeAll(): void {
+		if ( ! is_dir( $this->cache_dir ) ) {
+			return;
+		}
 
-    /**
-     * Write a flat PHP config file that the advanced-cache.php drop-in
-     * can read before WordPress is fully loaded.
-     */
-    public function writeConfigFile(): void
-    {
-        if (! file_exists($this->cache_dir)) {
-            wp_mkdir_p($this->cache_dir);
-        }
+		foreach ( glob( $this->cache_dir . '/*.html' ) ?: array() as $file_path ) {
+			@unlink( $file_path );
+		}
+	}
 
-        // Check writeability before attempting write
-        if (! FilesystemCheck::isDirectoryWritable($this->cache_dir)) {
-            FilesystemCheck::invalidateCache();
-            return;
-        }
+	/**
+	 * Write a flat PHP config file that the advanced-cache.php drop-in
+	 * can read before WordPress is fully loaded.
+	 */
+	public function writeConfigFile(): void {
+		if ( ! file_exists( $this->cache_dir ) ) {
+			wp_mkdir_p( $this->cache_dir );
+		}
 
-        $config = array(
-            'enabled'        => $this->settings->getBool('enable_page_cache'),
-            'ttl'            => $this->settings->getInt('cache_ttl'),
-            'bypass_cookies' => $this->settings->getLines('cache_bypass_cookies'),
-        );
+		// Check writeability before attempting write
+		if ( ! FilesystemCheck::isDirectoryWritable( $this->cache_dir ) ) {
+			FilesystemCheck::invalidateCache();
+			return;
+		}
 
-        $content = "<?php\nreturn " . var_export($config, true) . ";\n";
+		$config = array(
+			'enabled'        => $this->settings->getBool( 'enable_page_cache' ),
+			'ttl'            => $this->settings->getInt( 'cache_ttl' ),
+			'bypass_cookies' => $this->settings->getLines( 'cache_bypass_cookies' ),
+		);
 
-        $result = @file_put_contents($this->cache_dir . '/config.php', $content, LOCK_EX);
+		$content = "<?php\nreturn " . var_export( $config, true ) . ";\n";
 
-        if ($result === false) {
-            FilesystemCheck::invalidateCache();
-        }
-    }
+		$result = file_put_contents( $this->cache_dir . '/config.php', $content, LOCK_EX );
 
-    private function bypassReason(): ?string
-    {
-        if (is_admin() || is_user_logged_in() || is_preview() || is_feed() || is_404()) {
-            if (is_admin()) {
-                return 'admin';
-            }
+		if ( false === $result ) {
+			FilesystemCheck::invalidateCache();
+		}
+	}
 
-            if (is_user_logged_in()) {
-                return 'logged_in';
-            }
+	private function bypassReason(): ?string {
+		if ( is_admin() || is_user_logged_in() || is_preview() || is_feed() || is_404() ) {
+			if ( is_admin() ) {
+				return 'admin';
+			}
 
-            if (is_preview()) {
-                return 'preview';
-            }
+			if ( is_user_logged_in() ) {
+				return 'logged_in';
+			}
 
-            if (is_feed()) {
-                return 'feed';
-            }
+			if ( is_preview() ) {
+				return 'preview';
+			}
 
-            return '404';
-        }
+			if ( is_feed() ) {
+				return 'feed';
+			}
 
-        if (! isset($_SERVER['REQUEST_METHOD']) || strtoupper((string) $_SERVER['REQUEST_METHOD']) !== 'GET') {
-            return 'method';
-        }
+			return '404';
+		}
 
-        if ($this->hasBypassCookie()) {
-            return 'cookie_bypass';
-        }
+		if ( ! isset( $_SERVER['REQUEST_METHOD'] ) || strtoupper( (string) $_SERVER['REQUEST_METHOD'] ) !== 'GET' ) {
+			return 'method';
+		}
 
-        $request_uri  = isset($_SERVER['REQUEST_URI']) ? (string) $_SERVER['REQUEST_URI'] : '/';
-        $request_path = strtok($request_uri, '?') ?: '/';  // strip query string for matching
+		if ( $this->hasBypassCookie() ) {
+			return 'cookie_bypass';
+		}
 
-        foreach ($this->settings->getLines('cache_excluded_urls') as $pattern) {
-            if (strpos($pattern, '*') !== false) {
-                // Wildcard pattern — e.g. /my-account/*
-                if (fnmatch($pattern, $request_path)) {
-                    return 'excluded_url';
-                }
-            } else {
-                // Prefix match — /checkout matches /checkout, /checkout/, /checkout/step-2
-                if (strpos($request_path, rtrim($pattern, '/')) === 0) {
-                    return 'excluded_url';
-                }
-            }
-        }
+		$request_uri  = isset( $_SERVER['REQUEST_URI'] ) ? (string) $_SERVER['REQUEST_URI'] : '/';
+		$request_path = strtok( $request_uri, '?' ) ?: '/';  // strip query string for matching
 
-        return null;
-    }
+		foreach ( $this->settings->getLines( 'cache_excluded_urls' ) as $pattern ) {
+			if ( false !== strpos( $pattern, '*' ) ) {
+				// Wildcard pattern — e.g. /my-account/*
+				if ( fnmatch( $pattern, $request_path ) ) {
+					return 'excluded_url';
+				}
+			} else {
+				// Prefix match — /checkout matches /checkout, /checkout/, /checkout/step-2
+				if ( strpos( $request_path, rtrim( $pattern, '/' ) ) === 0 ) {
+					return 'excluded_url';
+				}
+			}
+		}
 
-    private function hasBypassCookie(): bool
-    {
-        $rules = $this->settings->getLines('cache_bypass_cookies');
+		return null;
+	}
 
-        if ($rules === array() || ! isset($_COOKIE) || ! is_array($_COOKIE)) {
-            return false;
-        }
+	private function hasBypassCookie(): bool {
+		$rules = $this->settings->getLines( 'cache_bypass_cookies' );
 
-        $cookie_names = array_keys($_COOKIE);
+		if ( array() === $rules || ! isset( $_COOKIE ) || ! is_array( $_COOKIE ) ) {
+			return false;
+		}
 
-        foreach ($rules as $rule) {
-            $rule = trim($rule);
+		$cookie_names = array_keys( $_COOKIE );
 
-            if ($rule === '') {
-                continue;
-            }
+		foreach ( $rules as $rule ) {
+			$rule = trim( $rule );
 
-            foreach ($cookie_names as $cookie_name) {
-                if (! is_string($cookie_name) || $cookie_name === '') {
-                    continue;
-                }
+			if ( '' === $rule ) {
+				continue;
+			}
 
-                if (str_contains($rule, '*')) {
-                    if (fnmatch($rule, $cookie_name)) {
-                        return true;
-                    }
+			foreach ( $cookie_names as $cookie_name ) {
+				if ( ! is_string( $cookie_name ) || '' === $cookie_name ) {
+					continue;
+				}
 
-                    continue;
-                }
+				if ( str_contains( $rule, '*' ) ) {
+					if ( fnmatch( $rule, $cookie_name ) ) {
+						return true;
+					}
 
-                if (strcasecmp($rule, $cookie_name) === 0) {
-                    return true;
-                }
-            }
-        }
+					continue;
+				}
 
-        return false;
-    }
+				if ( 0 === strcasecmp( $rule, $cookie_name ) ) {
+					return true;
+				}
+			}
+		}
 
-    private function sendDebugHeaders(string $status, ?string $reason = null): void
-    {
-        if (headers_sent()) {
-            return;
-        }
+		return false;
+	}
 
-        // Keep both names for compatibility while introducing short PTK header.
-        header('X-PTK-Cache: ' . $status);
-        header('X-Performance-Toolkit-Cache: ' . $status);
+	private function sendDebugHeaders( string $status, ?string $reason = null ): void {
+		if ( headers_sent() ) {
+			return;
+		}
 
-        if ($reason !== null && $reason !== '') {
-            header('X-PTK-Cache-Reason: ' . $reason);
-        }
-    }
+		// Keep both names for compatibility while introducing short PTK header.
+		header( 'X-PTK-Cache: ' . $status );
+		header( 'X-Performance-Toolkit-Cache: ' . $status );
 
-    private function cacheFilePath(): string
-    {
-        $scheme      = (! empty($_SERVER['HTTPS']) && strtolower((string) $_SERVER['HTTPS']) !== 'off') ? 'https' : 'http';
-        $host        = isset($_SERVER['HTTP_HOST']) ? (string) $_SERVER['HTTP_HOST'] : 'localhost';
-        $request_uri = isset($_SERVER['REQUEST_URI']) ? (string) $_SERVER['REQUEST_URI'] : '/';
-        $cache_key   = md5($scheme . '://' . $host . $request_uri);
+		if ( null !== $reason && '' !== $reason ) {
+			header( 'X-PTK-Cache-Reason: ' . $reason );
+		}
+	}
 
-        return $this->cache_dir . '/' . $cache_key . '.html';
-    }
+	private function cacheFilePath(): string {
+		$scheme      = ( ! empty( $_SERVER['HTTPS'] ) && strtolower( (string) $_SERVER['HTTPS'] ) !== 'off' ) ? 'https' : 'http';
+		$host        = isset( $_SERVER['HTTP_HOST'] ) ? (string) $_SERVER['HTTP_HOST'] : 'localhost';
+		$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? (string) $_SERVER['REQUEST_URI'] : '/';
+		$cache_key   = md5( $scheme . '://' . $host . $request_uri );
+
+		return $this->cache_dir . '/' . $cache_key . '.html';
+	}
 }
-
