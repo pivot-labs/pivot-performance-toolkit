@@ -16,7 +16,7 @@
             settings_fields('performance_toolkit');
 
             $provider_logos = array(
-                'cloudflare' => esc_url(PERFORMANCE_TOOLKIT_URL . 'assets/img/providers/cloudflare-svgrepo-com.svg'),
+                'cloudflare' => esc_url(PERFORMANCE_TOOLKIT_URL . 'src/img/providers/cloudflare-svgrepo-com.svg'),
             );
         @endphp
 

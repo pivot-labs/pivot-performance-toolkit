@@ -55,7 +55,7 @@ final class Menu {
 			'manage_options',
 			self::ROOT_SLUG,
 			array( $this, 'renderCurrentPage' ),
-			PERFORMANCE_TOOLKIT_URL . 'assets/img/performance-toolkit-currentcolor.svg',
+			PERFORMANCE_TOOLKIT_URL . 'src/img/performance-toolkit-currentcolor.svg',
 			81
 		);
 
@@ -87,8 +87,8 @@ final class Menu {
 			file_exists( $style_path ) ? (string) filemtime( $style_path ) : PERFORMANCE_TOOLKIT_VERSION
 		);
 
-		$script_path = PERFORMANCE_TOOLKIT_PATH . 'assets/js/admin.js';
-		$script_url  = PERFORMANCE_TOOLKIT_URL . 'assets/js/admin.js';
+		$script_path = PERFORMANCE_TOOLKIT_PATH . 'src/js/admin.js';
+		$script_url  = PERFORMANCE_TOOLKIT_URL . 'src/js/admin.js';
 
 		wp_enqueue_script(
 			'performance-toolkit-admin-js',
@@ -119,7 +119,7 @@ final class Menu {
 	}
 
 	public function printMenuIconStyles(): void {
-		$icon_url = esc_url( PERFORMANCE_TOOLKIT_URL . 'assets/img/performance-toolkit-currentcolor.svg' );
+		$icon_url = esc_url( PERFORMANCE_TOOLKIT_URL . 'src/img/performance-toolkit-currentcolor.svg' );
 
 		echo '<style id="performance-toolkit-menu-icon">#adminmenu .toplevel_page_performance-toolkit .wp-menu-image img{display:none}#adminmenu .toplevel_page_performance-toolkit .wp-menu-image{color:inherit}#adminmenu .toplevel_page_performance-toolkit .wp-menu-image:before{content:"";display:block;width:28px;height:28px;margin:1px auto 0;transform:translateY(-4px);background-color:currentColor;-webkit-mask-image:url("' . $icon_url . '");mask-image:url("' . $icon_url . '");-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:28px 28px;mask-size:28px 28px}</style>';
 	}
