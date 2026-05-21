@@ -87,8 +87,8 @@ final class Menu {
 			file_exists( $style_path ) ? (string) filemtime( $style_path ) : PERFORMANCE_TOOLKIT_VERSION
 		);
 
-		$script_path = PERFORMANCE_TOOLKIT_PATH . 'src/js/admin.js';
-		$script_url  = PERFORMANCE_TOOLKIT_URL . 'src/js/admin.js';
+		$script_path = PERFORMANCE_TOOLKIT_PATH . 'dist/admin-js.js';
+		$script_url  = PERFORMANCE_TOOLKIT_URL . 'dist/admin-js.js';
 
 		wp_enqueue_script(
 			'performance-toolkit-admin-js',

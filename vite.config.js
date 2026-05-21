@@ -9,6 +9,7 @@ export default defineConfig({
         rollupOptions: {
             input: {
                 admin: 'src/css/admin.css',
+                'admin-js': 'src/js/admin.js',
             },
             output: {
                 entryFileNames: '[name].js',
