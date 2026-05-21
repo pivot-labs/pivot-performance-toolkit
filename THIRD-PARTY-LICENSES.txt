@@ -1,0 +1,23 @@
+WP Performance Toolkit includes third-party libraries:
+
+Tailwind CSS
+Copyright Tailwind Labs, Inc.
+License: MIT
+https://github.com/tailwindlabs/tailwindcss
+
+Lucide Icons
+License: ISC
+https://lucide.dev/
+
+Bootstrap Icons
+License: MIT
+https://icons.getbootstrap.com/
+
+Laravel
+License: MIT
+https://laravel.com/
+
+Doctrine Inflector
+Copyright (c) Doctrine Project
+License: MIT
+https://github.com/doctrine/inflector

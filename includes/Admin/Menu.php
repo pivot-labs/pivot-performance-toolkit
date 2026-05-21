@@ -79,24 +79,18 @@ final class Menu {
 			return;
 		}
 
-		$style_path = PERFORMANCE_TOOLKIT_PATH . 'dist/admin.css';
-		$style_url  = PERFORMANCE_TOOLKIT_URL . 'dist/admin.css';
-
 		wp_enqueue_style(
 			'performance-toolkit-admin',
-			$style_url,
+			PERFORMANCE_TOOLKIT_URL . 'dist/admin.css',
 			array(),
-			file_exists( $style_path ) ? (string) filemtime( $style_path ) : PERFORMANCE_TOOLKIT_VERSION
+			PERFORMANCE_TOOLKIT_VERSION
 		);
-
-		$script_path = PERFORMANCE_TOOLKIT_PATH . 'dist/admin-js.js';
-		$script_url  = PERFORMANCE_TOOLKIT_URL . 'dist/admin-js.js';
 
 		wp_enqueue_script(
 			'performance-toolkit-admin-js',
-			$script_url,
+			PERFORMANCE_TOOLKIT_URL . 'dist/admin-js.js',
 			array(),
-			file_exists( $script_path ) ? (string) filemtime( $script_path ) : PERFORMANCE_TOOLKIT_VERSION,
+			PERFORMANCE_TOOLKIT_VERSION,
 			true
 		);
 
