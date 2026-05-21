@@ -1,4 +1,4 @@
-=== Performance Toolkit ===
+=== WP Performance Toolkit ===
 Contributors: jeffshaikh
 Tags: performance, cache, page cache, minify, lazy load, cloudflare
 Requires at least: 6.5
@@ -11,7 +11,6 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 A practical, safe-by-default WordPress performance plugin with page caching, minification, lazy loading, and Cloudflare integration.
 
 == Description ==
-
 Performance Toolkit helps speed up WordPress sites with focused optimizations that are easy to configure and safe to roll out.
 
 Core features in this version include:
@@ -45,7 +44,12 @@ Core features in this version include:
   * Optional "include secret API keys" export checkbox with warning
 * System status page with environment and database size details.
 
-Documentation: http://docs.wpperformancetoolkit.com
+Homepage:
+https://www.wpperformancetoolkit.com/
+
+Documentation:
+http://docs.wpperformancetoolkit.com/
+
 
 == Installation ==
 
@@ -80,6 +84,10 @@ No. Secret keys are redacted unless you explicitly check the "include secret API
 
 In `wp-content/cache/performance-toolkit/minified-assets`.
 
+= What happens if I enable a feature and it breaks the website? =
+
+We recommend enabling one feature at a time to validate the performance impact. If you encounter an issue, there is a the ability to disable the feature and clear the cache. Additionally there is a "Reset to Defaults" button in the Tools tab that will disable all features and clear caches if needed.
+
 == Screenshots ==
 
 1. Dashboard and module overview.
@@ -91,16 +99,9 @@ In `wp-content/cache/performance-toolkit/minified-assets`.
 
 == Changelog ==
 
-= 0.1.0 =
+= 1.0.0 =
 
 * Initial public release.
-* Added page cache with TTL, size limits, exclusions, and manual clear action.
-* Added file optimization controls for defer scripts and minification.
-* Added native lazy-loading support for images.
-* Added Cloudflare integration with test/purge actions and optional auto-purge.
-* Added database cleanup and table optimization tools.
-* Added tools for clearing minified asset cache and importing/exporting settings.
-* Added system status page.
 
 == Upgrade Notice ==
 
