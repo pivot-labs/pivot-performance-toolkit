@@ -12,6 +12,7 @@
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: performance-toolkit
  * Domain Path: /languages
+ * Network: false
  *
  * @package PerformanceToolkit
  */
@@ -41,6 +42,28 @@ add_action(
 			false,
 			dirname( plugin_basename( __FILE__ ) ) . '/languages/'
 		);
+
+		if ( is_multisite() ) {
+			$render_multisite_notice = static function (): void {
+				if ( ! current_user_can( 'manage_options' ) ) {
+					return;
+				}
+
+				echo '<div class="notice notice-warning"><p>';
+				esc_html_e(
+					'WP Performance Toolkit Free does not support WordPress Multisite. 
+					The free version uses a single-site cache architecture and cannot safely operate in a multisite network environment. 
+					Multisite support will be available in Pro.',
+					'performance-toolkit'
+				);
+				echo '</p></div>';
+			};
+
+			add_action( 'admin_notices', $render_multisite_notice );
+			add_action( 'network_admin_notices', $render_multisite_notice );
+
+			return;
+		}
 
 		if ( ! class_exists( '\\PerformanceToolkit\\Core\\Plugin' ) ) {
 			return;
