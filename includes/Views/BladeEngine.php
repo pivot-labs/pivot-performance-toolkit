@@ -39,7 +39,7 @@ final class BladeEngine {
 	 * Get or create the singleton instance.
 	 */
 	public static function getInstance(): self {
-		if ( self::null === $instance ) {
+		if ( self::$instance === null ) {
 			self::$instance = new self();
 		}
 
