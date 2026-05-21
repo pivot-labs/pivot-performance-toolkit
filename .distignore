@@ -25,6 +25,8 @@ docs/
 references/
 
 # Frontend build sources/config not required in the shipped package.
+src/css/
+src/js/
 package.json
 package-lock.json
 tailwind.config.js

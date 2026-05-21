@@ -2,7 +2,7 @@
     "name": "jeffshaikh/performance-toolkit",
     "description": "WordPress performance optimization toolkit",
     "type": "wordpress-plugin",
-    "license": "proprietary",
+    "license": "GPL-2.0-or-later",
     "version": "0.1.0",
     "scripts": {
         "lint": "find includes -name '*.php' -print0 | xargs -0 -n1 php -l",
