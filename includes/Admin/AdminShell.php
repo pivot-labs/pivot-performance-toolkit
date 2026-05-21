@@ -219,60 +219,13 @@ final class AdminShell {
 		}
 
 		if ( 'tools' === $current_section ) {
-			return self::withSecondaryState(
-				'tools',
-				array(
-					array(
-						'slug'  => 'performance-toolkit-tools',
-						'label' => __( 'Tools', 'performance-toolkit' ),
-					),
-					array(
-						'slug'  => 'performance-toolkit-card-showcase',
-						'label' => __( 'Card Showcase', 'performance-toolkit' ),
-					),
-				),
-				$current_page_slug
-			);
+			return array();
 		}
 
 		if ( 'system-status' === $current_section ) {
-			$base = add_query_arg( 'section', 'system-status', admin_url( 'admin.php?page=performance-toolkit' ) );
-
-			return array(
-				array(
-					'label'  => __( 'Summary', 'performance-toolkit' ),
-					'url'    => $base . '#summary',
-					'active' => true,
-				),
-				array(
-					'label'  => __( 'Server', 'performance-toolkit' ),
-					'url'    => $base . '#server',
-					'active' => false,
-				),
-				array(
-					'label'  => __( 'WordPress', 'performance-toolkit' ),
-					'url'    => $base . '#wordpress',
-					'active' => false,
-				),
-				array(
-					'label'  => __( 'Directories & Permissions', 'performance-toolkit' ),
-					'url'    => $base . '#directories',
-					'active' => false,
-				),
-				array(
-					'label'  => __( 'PHP Info', 'performance-toolkit' ),
-					'url'    => $base . '#php-info',
-					'active' => false,
-				),
-				array(
-					'label'  => __( 'Database', 'performance-toolkit' ),
-					'url'    => $base . '#database',
-					'active' => false,
-				),
-			);
-		}
-
-		return array();
+            return array();
+        }
+        return array();
 	}
 
 	/**

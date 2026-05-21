@@ -1,5 +1,5 @@
 <x-card :title="__('Quick Optimizations', 'performance-toolkit')" id="ptk-file-quick">
-    <ul role="list" class="space-y-5">
+    <ul role="list" class="grid grid-cols-1 gap-4 items-stretch">
         <x-toggles.defer
             :checked="!empty($options['defer_scripts'])"
             :action="$ajax_save_quick_toggle_action"

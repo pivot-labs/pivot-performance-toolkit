@@ -13,7 +13,6 @@ use PerformanceToolkit\Admin\AdminBarMenu;
 use PerformanceToolkit\Admin\AdvancedRulesPage;
 use PerformanceToolkit\Admin\BrowserCacheHeadersPage;
 use PerformanceToolkit\Admin\CachePage;
-use PerformanceToolkit\Admin\CardShowcasePage;
 use PerformanceToolkit\Admin\CdnIntegrationsPage;
 use PerformanceToolkit\Admin\DashboardPage;
 use PerformanceToolkit\Admin\DatabasePage;
@@ -83,7 +82,6 @@ final class Plugin {
 					new CdnIntegrationsPage( $this->settings, $cloudflare ),
 					new AdvancedRulesPage( $this->settings ),
 					new ToolsPage( $this->settings ),
-					new CardShowcasePage(),
 					new SystemStatusPage( $this->settings, $image_optimizer_detector ),
 					new DocumentationPage(),
 				)

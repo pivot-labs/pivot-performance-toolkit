@@ -12,12 +12,13 @@
 
 
 <div class="ptk-col ptk-col--sidebar">
-    <div class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
-        <p class="mb-3 text-sm font-semibold text-gray-900">{{ __('Optimization Targets', 'performance-toolkit') }}</p>
-        <div class="grid grid-cols-3 gap-3">
-            <x-icons.css />
-            <x-icons.html />
-            <x-icons.js />
-        </div>
-    </div>
+
+@include('cards.optimization.file.info.about')
+
+@include('cards.optimization.file.info.recommendations')
+
+
+
+
+
 </div>

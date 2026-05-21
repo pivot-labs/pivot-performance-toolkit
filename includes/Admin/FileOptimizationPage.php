@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace PerformanceToolkit\Admin;
 
 use PerformanceToolkit\Core\Settings;
+use PerformanceToolkit\Utils\HttpProtocolDetector;
 
 final class FileOptimizationPage extends BladeAdminPage {
 
@@ -46,12 +47,17 @@ final class FileOptimizationPage extends BladeAdminPage {
 	 * @return array<string, mixed>
 	 */
 	protected function buildViewData(): array {
+		$http_protocol = HttpProtocolDetector::detect();
+
 		return array(
 			'options'                       => $this->settings->all(),
 			'option_key'                    => $this->settings->optionKey(),
 			'settings_updated'              => isset( $_GET['settings-updated'] ) && (string) wp_unslash( $_GET['settings-updated'] ) === 'true',
 			'ajax_save_quick_toggle_action' => self::AJAX_SAVE_QUICK_TOGGLE_ACTION,
 			'ajax_save_quick_toggle_nonce'  => wp_create_nonce( 'ptk_file_quick_toggle_ajax' ),
+			'http_protocol_version'         => $http_protocol['version'],
+			'is_http11'                     => $http_protocol['is_http11'],
+			'http_protocol_source'          => $http_protocol['source'],
 		);
 	}
 
