@@ -27,7 +27,11 @@
         </div>
     @elseif (!empty($http_protocol_version) && 'unknown' !== strtolower((string) $http_protocol_version))
         <div class="rounded-md border border-amber-300 p-2.5 mt-5 bg-amber-50">
-            <p class="font-bold text-amber-700">{{ sprintf(__('HTTP/%s Detected', 'performance-toolkit'), (string) $http_protocol_version) }}</p>
+            <p class="font-bold text-amber-700">{{ sprintf(
+                /* translators: %s: Detected HTTP protocol version (for example, 2 or 3). */
+                __('HTTP/%s Detected', 'performance-toolkit'),
+                (string) $http_protocol_version
+            ) }}</p>
             <p class="text-amber-700">
                 {{ __('Your server appears to support HTTP/2 or HTTP/3. File combination is generally not recommended on modern protocols, as parallel asset loading is already optimized by the browser and server.', 'performance-toolkit') }}
             </p>

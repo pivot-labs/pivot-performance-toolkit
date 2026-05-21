@@ -75,6 +75,7 @@
             @endphp
             <p style="margin-top:8px;font-size:12px;color:#646970;">
                 {{ sprintf(
+                    /* translators: %d: Number of tables shown in the list. */
                     __('Showing top %d tables by size.', 'performance-toolkit'),
                     count($display_rows),
                 ) }}
@@ -89,4 +90,3 @@
         <p>{{ __('No table statistics are available right now.', 'performance-toolkit') }}</p>
     @endif
 </x-card>
-

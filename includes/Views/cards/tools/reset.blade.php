@@ -16,7 +16,11 @@
                     $timestamp = strtotime($last_settings_exported_at_gmt);
                     $formatted = wp_date(__('M j, Y \a\t g:i A', 'performance-toolkit'), $timestamp);
                 @endphp
-                {{ sprintf(__('Last configuration export: %s.', 'performance-toolkit'), $formatted) }}
+                {{ sprintf(
+                    /* translators: %s: Human-readable date/time of the most recent configuration export. */
+                    __('Last configuration export: %s.', 'performance-toolkit'),
+                    $formatted
+                ) }}
             @else
                 {{ __('No configuration export yet.', 'performance-toolkit') }}
             @endif

@@ -4,11 +4,13 @@
             <p>
                 @if ($cleaned_task === 'optimize')
                     {{ sprintf(
+                        /* translators: %d: Number of database tables optimized. */
                         __('%d database table(s) optimized successfully.', 'performance-toolkit'),
                         $cleaned_count
                     ) }}
                 @else
                     {{ sprintf(
+                        /* translators: 1: Cleanup task label, 2: Number of items removed. */
                         __('%1$s: %2$d item(s) removed successfully.', 'performance-toolkit'),
                         $task_labels[$cleaned_task] ?? $cleaned_task,
                         $cleaned_count
@@ -47,5 +49,9 @@
 
 
  </div>
+
+
+
+
 
 

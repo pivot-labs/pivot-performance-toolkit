@@ -14,7 +14,11 @@
             </div>
 
             <p class="text-xs text-gray-500 mt-3">
-                {{ sprintf(__('Detected protocol: HTTP/%s', 'performance-toolkit'), !empty($http_protocol_version) ? (string) $http_protocol_version : __('unknown', 'performance-toolkit')) }}
+                {{ sprintf(
+                    /* translators: %s: Detected HTTP protocol version (for example, 1.1, 2, or 3). */
+                    __('Detected protocol: HTTP/%s', 'performance-toolkit'),
+                    !empty($http_protocol_version) ? (string) $http_protocol_version : __('unknown', 'performance-toolkit')
+                ) }}
             </p>
 
      <style>
