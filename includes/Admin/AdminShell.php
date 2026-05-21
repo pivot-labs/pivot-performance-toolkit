@@ -84,7 +84,7 @@ final class AdminShell {
 		}
 
 		$shell_data = array(
-			'icon_url'         => PERFORMANCE_TOOLKIT_URL . 'assets/img/performance-toolkit.svg',
+			'icon_url'         => PERFORMANCE_TOOLKIT_URL . 'src/img/performance-toolkit.svg',
 			'plugin_version'   => defined( 'PERFORMANCE_TOOLKIT_VERSION' ) ? PERFORMANCE_TOOLKIT_VERSION : '',
 			'help_url'         => 'https://docs.wpperformancetoolkit.com/',
 			'primary_nav'      => self::buildPrimaryNav( $current_section ),

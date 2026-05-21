@@ -1,6 +1,5 @@
 /vendor
 /node_modules
 /wp-cache
-/references/ui/
 .DS_Store
 .idea

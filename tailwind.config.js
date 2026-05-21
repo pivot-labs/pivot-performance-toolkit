@@ -2,7 +2,7 @@
 export default {
   content: [
     './includes/**/*.{php,js}',
-    './assets/js/**/*.{js,vue}',
+    './src/js/**/*.{js,vue}',
   ],
   theme: {
     extend: {},

@@ -8,7 +8,7 @@ export default defineConfig({
         emptyOutDir: true,
         rollupOptions: {
             input: {
-                admin: 'assets/css/admin.css',
+                admin: 'src/css/admin.css',
             },
             output: {
                 entryFileNames: '[name].js',
