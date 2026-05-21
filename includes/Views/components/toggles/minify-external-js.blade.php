@@ -9,12 +9,12 @@
     :checked="$checked"
     :action="$action"
     :nonce="$nonce"
-    :label="__('Minify external JavaScript files', 'performance-toolkit')"
+    :label="__('Minify JavaScript files', 'performance-toolkit')"
     :description="__('Creates cached minified copies of local enqueued JavaScript files and rewrites their URLs.', 'performance-toolkit')"
 >
     <x-slot name="icon">
         <x-icons.js
-            class="shrink-0 border-gray-200 bg-gray-100 text-gray-600"
+            class="shrink-0"
             style="width: 32px; height: 32px; padding: 4px; box-sizing: border-box; border-radius: 8px;"
         />
     </x-slot>

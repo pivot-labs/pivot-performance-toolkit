@@ -14,7 +14,7 @@
 >
     <x-slot name="icon">
         <x-icons.css
-            class="shrink-0 border-gray-200 bg-gray-100 text-gray-600"
+            class="shrink-0"
             style="width: 32px; height: 32px; padding: 4px; box-sizing: border-box; border-radius: 8px;"
         />
     </x-slot>

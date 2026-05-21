@@ -586,9 +586,15 @@
         @apply bg-gray-100 px-1.25 py-0.5 rounded text-xs;
     }
 
+    .ptk-collapsible-section {
+        @apply mt-2.5 pt-2.5 border-t border-gray-200;
+    }
+
     /* HTTP/1.1-only combination guidance */
-    .ptk-http11-only {
-        @apply mt-6 pt-4.5 border-t border-gray-200;
+    .ptk-http11-only { }
+
+    .ptk-collapse-trigger{
+        @apply mt-2.5;
     }
 
     .ptk-http11-only h3 {

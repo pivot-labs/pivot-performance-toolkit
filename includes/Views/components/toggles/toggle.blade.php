@@ -13,10 +13,11 @@
     }
 </style>
 
-<li>
+<li class="h-full">
     <form
         method="post"
         action="{{ esc_url(admin_url('admin-ajax.php')) }}"
+        class="h-full"
         data-ajax-action-form
         data-ajax-autosave-form
         data-ajax-success-label="{{ esc_attr__('Saved', 'performance-toolkit') }}"
@@ -26,13 +27,13 @@
         <input type="hidden" name="setting_key" value="{{ esc_attr((string) $settingKey) }}" />
         <input type="hidden" name="setting_value" value="0" />
 
-        <div class="flex items-center justify-between gap-x-6">
-            <div class="flex min-w-0 items-center gap-x-4">
+        <div class="flex h-full items-start justify-between gap-x-6">
+            <div class="flex min-w-0 items-start gap-x-4">
                 {{ $icon ?? '' }}
                 <div class="min-w-0">
-                    <p class="text-sm/6 font-semibold text-gray-900">{{ $label }}</p>
+                    <div class="text-sm/6 font-semibold text-gray-900">{{ $label }}</div>
                     @if ($description)
-                        <p class="mt-1 text-xs/5 text-gray-500">{{ $description }}</p>
+                        <div class="mt-3 text-xs/5 text-gray-500">{{ $description }}</div>
                     @endif
                 </div>
             </div>
