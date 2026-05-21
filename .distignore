@@ -1,5 +1,45 @@
 node_modules/
-vendor/
-references/
-wordpress-6.9.4.zip
+.wp-env/
 
+# Dev-only Composer packages (require-dev).
+vendor/squizlabs/
+vendor/wp-coding-standards/
+vendor/phpcompatibility/
+vendor/phpcsstandards/
+vendor/wp-cli/
+vendor/dealerdirect/
+vendor/bin/
+
+# VCS and local metadata.
+.git/
+.gitignore
+.gitmodules
+.DS_Store
+.idea/
+
+# Build/test tooling (not needed at runtime).
+phpcs.xml.dist
+phpcs.log
+tests/
+docs/
+references/
+
+# Frontend build sources/config not required in the shipped package.
+package.json
+package-lock.json
+tailwind.config.js
+vite.config.js
+
+# Composer manifests are not required when shipping vendor.
+composer.json
+composer.lock
+
+# Project docs not used by WordPress runtime.
+README.md
+WordPress.md
+
+# WordPress.org assets metadata folder.
+.wordpress-org/
+
+# Local cache/artifacts.
+wp-cache/

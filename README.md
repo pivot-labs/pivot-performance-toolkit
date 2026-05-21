@@ -71,5 +71,22 @@ composer test:smoke
 3. Add integration tests with a WordPress test bootstrap.
 
 
+# Vendor Bundles
+
+### For Production
+```aiignore
+composer install --no-dev --optimize-autoloader
+```
+
+### For Development 
+```aiignore
+composer install --optimize-autoloader
+```
+* Make sure to run `composer dump-autoload` after any changes to class files or namespaces to keep the autoloader up to date.
+* Make sure to add any dev bundles to the .distignore file in the root of the project.
+
+
+
+
 
 
