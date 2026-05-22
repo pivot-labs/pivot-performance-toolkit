@@ -3,7 +3,7 @@
  * Plugin Name: WP Performance Toolkit
  * Plugin URI: https://www.wpperformancetoolkit.com
  * Description: Performance optimization toolkit for WordPress.
- * Version: 0.1.0
+ * Version: 1.0.0
  * Requires at least: 6.5
  * Requires PHP: 8.2
  * Author: Digital Canvas
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'PERFORMANCE_TOOLKIT_VERSION', '0.1.0' );
+define( 'PERFORMANCE_TOOLKIT_VERSION', '1.0.0' );
 define( 'PERFORMANCE_TOOLKIT_PATH', plugin_dir_path( __FILE__ ) );
 define( 'PERFORMANCE_TOOLKIT_URL', plugin_dir_url( __FILE__ ) );
 
