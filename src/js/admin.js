@@ -474,7 +474,15 @@
 
     // provider select legacy helper removed; icon-select component is used instead
 
-    document.addEventListener('DOMContentLoaded', function () {
+    function onDomReady(fn) {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', fn);
+        } else {
+            fn();
+        }
+    }
+
+    onDomReady(function () {
         var toggle = document.getElementById('ptk-sidebar-toggle');
         var shell  = document.querySelector('.ptk-shell');
 

@@ -94,6 +94,8 @@ final class Menu {
 			true
 		);
 
+		wp_script_add_data( 'performance-toolkit-admin-js', 'type', 'module' );
+
 		wp_localize_script(
 			'performance-toolkit-admin-js',
 			'ptkSnippet',
@@ -112,6 +114,18 @@ final class Menu {
 				'requestFailed' => __( 'Request failed.', 'performance-toolkit' ),
 			)
 		);
+	}
+
+	/**
+	 * Add type="module" to the admin JS script tag so the ES-module
+	 * output produced by Vite is loaded correctly by the browser.
+	 */
+	public function addModuleTypeToAdminJs( string $tag, string $handle ): string {
+		if ( 'performance-toolkit-admin-js' !== $handle ) {
+			return $tag;
+		}
+
+		return str_replace( ' src=', ' type="module" src=', $tag );
 	}
 
 	public function printMenuIconStyles(): void {
