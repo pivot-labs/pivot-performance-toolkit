@@ -12,8 +12,10 @@
                 <img src="{{ esc_url($iconUrl) }}" alt="" class="ptk-page-title-icon" />
                     <span class="ptk-plugin-title">{{ __('WP Performance Toolkit', 'performance-toolkit') }}</span>
                 @if (is_string($version) && $version !== '')
-                    <span class="ptk-status-pill">v{{ $version }}</span>
+                    <span class="ptk-status-pill bg-gray-100">v {{ $version }}</span>
                 @endif
+                <?php do_action( 'ptk_after_version_display' ); ?>
+
             </div>
 
             @if (is_string($helpUrl) && $helpUrl !== '')

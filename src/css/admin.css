@@ -37,7 +37,7 @@
     }
 
     .ptk-status-pill {
-        @apply inline-flex items-center rounded-full px-2 py-1 text-xs font-semibold text-gray-600 bg-gray-100;
+        @apply inline-flex items-center rounded-full px-2 py-1 text-xs font-semibold text-gray-600 ;
     }
 
     .ptk-button {
