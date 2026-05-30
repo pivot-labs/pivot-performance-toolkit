@@ -22,6 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 define( 'PERFORMANCE_TOOLKIT_VERSION', '1.0.0' );
+define( 'PERFORMANCE_TOOLKIT_PLUGIN_FILE', __FILE__ );
 define( 'PERFORMANCE_TOOLKIT_PATH', plugin_dir_path( __FILE__ ) );
 define( 'PERFORMANCE_TOOLKIT_URL', plugin_dir_url( __FILE__ ) );
 
@@ -33,6 +34,13 @@ if ( file_exists( $autoload_file ) ) {
 
 register_activation_hook( __FILE__, array( '\\PerformanceToolkit\\Core\\Lifecycle', 'activate' ) );
 register_deactivation_hook( __FILE__, array( '\\PerformanceToolkit\\Core\\Lifecycle', 'deactivate' ) );
+function ptk_is_pro_active(): bool {
+    return defined( 'PERFORMANCE_TOOLKIT_PRO_VERSION' );
+}
+
+function ptk_has_pro(): bool {
+    return apply_filters( 'ptk_has_pro', ptk_is_pro_active() );
+}
 
 add_action(
 	'plugins_loaded',
