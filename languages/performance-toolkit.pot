@@ -2,16 +2,16 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Performance Toolkit 0.1.0\n"
+"Project-Id-Version: WP Performance Toolkit 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/performance-toolkit\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-05-21T22:22:11+00:00\n"
+"POT-Creation-Date: 2026-06-08T18:25:32+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.12.0\n"
+"X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: performance-toolkit\n"
 
 #. Plugin Name of the plugin
@@ -41,11 +41,18 @@ msgid "https://www.digitalcanvas.com"
 msgstr ""
 
 #: includes/Admin/AdminBarMenu.php:47
+#: includes/Admin/AdminShell.php:201
+#: includes/Admin/AdminShell.php:291
 #: includes/Admin/Menu.php:56
+#: includes/Admin/PerformancePage.php:19
 msgid "Performance"
 msgstr ""
 
 #: includes/Admin/AdminBarMenu.php:56
+#: includes/Admin/AdminShell.php:144
+#: includes/Admin/AdminShell.php:299
+#: includes/Admin/AdminShell.php:310
+#: includes/Admin/SettingsPage.php:41
 msgid "Settings"
 msgstr ""
 
@@ -55,7 +62,6 @@ msgstr ""
 
 #. translators: %s: cache status label
 #: includes/Admin/AdminBarMenu.php:78
-#, php-format
 msgid "Page cache: %s"
 msgstr ""
 
@@ -99,50 +105,46 @@ msgstr ""
 #: includes/Admin/CdnIntegrationsPage.php:98
 #: includes/Admin/CdnIntegrationsPage.php:113
 #: includes/Admin/DatabasePage.php:169
-#: includes/Admin/ToolsPage.php:101
-#: includes/Admin/ToolsPage.php:135
-#: includes/Admin/ToolsPage.php:182
-#: includes/Admin/ToolsPage.php:282
-#: includes/Admin/ToolsPage.php:296
+#: includes/Admin/SettingsPage.php:83
+#: includes/Admin/ToolsPage.php:132
+#: includes/Admin/ToolsPage.php:166
+#: includes/Admin/ToolsPage.php:213
+#: includes/Admin/ToolsPage.php:314
+#: includes/Admin/ToolsPage.php:328
 msgid "You are not allowed to perform this action."
 msgstr ""
 
 #: includes/Admin/AdminShell.php:119
-#: includes/Admin/AdminShell.php:210
-#: includes/Admin/AdminShell.php:265
+#: includes/Admin/AdminShell.php:218
+#: includes/Admin/AdminShell.php:315
 msgid "Overview"
 msgstr ""
 
 #: includes/Admin/AdminShell.php:124
-#: includes/Admin/AdminShell.php:254
+#: includes/Admin/AdminShell.php:304
 msgid "Caching"
 msgstr ""
 
 #: includes/Admin/AdminShell.php:129
-#: includes/Admin/AdminShell.php:256
+#: includes/Admin/AdminShell.php:306
 msgid "Optimization"
 msgstr ""
 
 #: includes/Admin/AdminShell.php:134
-#: includes/Admin/AdminShell.php:258
+#: includes/Admin/AdminShell.php:308
 #: includes/Admin/DatabasePage.php:30
 msgid "Database"
 msgstr ""
 
 #: includes/Admin/AdminShell.php:139
-#: includes/Admin/AdminShell.php:260
-#: includes/Admin/ToolsPage.php:52
-msgid "Tools"
-msgstr ""
-
-#: includes/Admin/AdminShell.php:144
-#: includes/Admin/AdminShell.php:262
-#: includes/Admin/SystemStatusPage.php:32
-msgid "System Status"
+#: includes/Admin/AdminShell.php:312
+msgid "System"
 msgstr ""
 
 #: includes/Admin/AdminShell.php:168
 #: includes/Admin/SystemStatusPage.php:108
+#: includes/Views/components/performance-snapshot.blade.php:52
+#: includes/Views/components/performance-snapshot.blade.php:110
 msgid "Page Cache"
 msgstr ""
 
@@ -167,41 +169,92 @@ msgstr ""
 msgid "Media"
 msgstr ""
 
-#: includes/Admin/AdminShell.php:214
+#: includes/Admin/AdminShell.php:205
+#: includes/Admin/AdminShell.php:295
+#: includes/Admin/AssetsPage.php:29
+msgid "Assets"
+msgstr ""
+
+#: includes/Admin/AdminShell.php:222
 #: includes/Views/cards/database/overview.blade.php:14
 msgid "Tables"
 msgstr ""
 
-#: includes/Admin/AdminShell.php:249
+#: includes/Admin/AdminShell.php:235
+#: includes/Views/components/performance-snapshot.blade.php:94
+#: includes/Views/cards/caching/browser/test.blade.php:30
+#: includes/Views/cards/caching/page/object-cache.blade.php:9
+msgid "Status"
+msgstr ""
+
+#: includes/Admin/AdminShell.php:239
+#: includes/Admin/AdminShell.php:283
+#: includes/Admin/ToolsPage.php:72
+msgid "Import/Export"
+msgstr ""
+
+#: includes/Admin/AdminShell.php:243
+#: includes/Admin/AdminShell.php:287
+#: includes/Admin/ToolsPage.php:75
+msgid "Maintenance"
+msgstr ""
+
+#: includes/Admin/AdminShell.php:275
 #: includes/Admin/CardShowcasePage.php:19
 msgid "Card Showcase"
 msgstr ""
 
-#: includes/Admin/AdminShell.php:271
+#: includes/Admin/AdminShell.php:279
+#: includes/Admin/SystemStatusPage.php:32
+msgid "System Status"
+msgstr ""
+
+#: includes/Admin/AdminShell.php:321
 msgid "Preview reusable admin card layouts for settings, actions, and workflow-based interfaces."
 msgstr ""
 
-#: includes/Admin/AdminShell.php:276
-msgid "Configure page and browser caching behavior for faster page delivery."
-msgstr ""
-
-#: includes/Admin/AdminShell.php:278
-msgid "Tune file and media optimization settings to reduce payload size."
-msgstr ""
-
-#: includes/Admin/AdminShell.php:280
-msgid "Review and clean database overhead to keep queries fast."
-msgstr ""
-
-#: includes/Admin/AdminShell.php:282
-msgid "Export, import, and maintenance utilities for advanced site operations."
-msgstr ""
-
-#: includes/Admin/AdminShell.php:284
+#: includes/Admin/AdminShell.php:325
 msgid "Inspect runtime, server, and filesystem health signals for troubleshooting."
 msgstr ""
 
-#: includes/Admin/AdminShell.php:287
+#: includes/Admin/AdminShell.php:329
+msgid "Export and import configuration packages for migrations, backups, and standardized deployments."
+msgstr ""
+
+#: includes/Admin/AdminShell.php:333
+msgid "Run maintenance operations such as clearing generated assets, setting uninstall policy, and resetting defaults."
+msgstr ""
+
+#: includes/Admin/AdminShell.php:337
+msgid "Run website statistics tests and review performance metrics for selected pages and posts."
+msgstr ""
+
+#: includes/Admin/AdminShell.php:341
+msgid "Configure CSS and JavaScript delivery rules, exclusions, and optimization behavior."
+msgstr ""
+
+#: includes/Admin/AdminShell.php:345
+#: includes/Admin/AdminShell.php:356
+msgid "Manage global plugin settings and defaults."
+msgstr ""
+
+#: includes/Admin/AdminShell.php:350
+msgid "Configure page and browser caching behavior for faster page delivery."
+msgstr ""
+
+#: includes/Admin/AdminShell.php:352
+msgid "Tune file and media optimization settings to reduce payload size."
+msgstr ""
+
+#: includes/Admin/AdminShell.php:354
+msgid "Review and clean database overhead to keep queries fast."
+msgstr ""
+
+#: includes/Admin/AdminShell.php:358
+msgid "Export, import, and maintenance utilities for advanced site operations."
+msgstr ""
+
+#: includes/Admin/AdminShell.php:361
 msgid "View performance highlights and quick status details for your site."
 msgstr ""
 
@@ -211,6 +264,53 @@ msgstr ""
 
 #: includes/Admin/AdvancedRulesPage.php:31
 msgid "Performance Toolkit Advanced Rules"
+msgstr ""
+
+#: includes/Admin/AssetsPage.php:33
+msgid "Performance Toolkit Assets"
+msgstr ""
+
+#: includes/Admin/AssetsPage.php:53
+msgid "Select a page or post, then run detection to list loaded assets."
+msgstr ""
+
+#: includes/Admin/AssetsPage.php:59
+#: includes/Admin/CachePage.php:114
+#: includes/Admin/CachePage.php:132
+#: includes/Admin/CachePage.php:149
+#: includes/Admin/CachePage.php:166
+#: includes/Admin/CachePage.php:183
+#: includes/Admin/FileOptimizationPage.php:66
+msgid "Unauthorized"
+msgstr ""
+
+#: includes/Admin/AssetsPage.php:67
+msgid "Please select a valid URL."
+msgstr ""
+
+#: includes/Admin/AssetsPage.php:71
+msgid "Only URLs from this site are allowed."
+msgstr ""
+
+#. translators: %d: HTTP status code.
+#: includes/Admin/AssetsPage.php:97
+msgid "Page request failed with HTTP %d."
+msgstr ""
+
+#: includes/Admin/AssetsPage.php:106
+msgid "No HTML was returned for this URL."
+msgstr ""
+
+#. translators: 1: total assets, 2: local assets, 3: external assets.
+#: includes/Admin/AssetsPage.php:119
+msgid "Detected %1$d assets (%2$d local, %3$d external)."
+msgstr ""
+
+#. translators: %d: post ID.
+#: includes/Admin/AssetsPage.php:324
+#: includes/Admin/PerformancePage.php:93
+#: includes/Admin/PerformanceTest.php:317
+msgid "Untitled #%d"
 msgstr ""
 
 #: includes/Admin/BrowserCacheHeadersPage.php:31
@@ -226,22 +326,20 @@ msgid "Performance Toolkit Cache"
 msgstr ""
 
 #: includes/Admin/CachePage.php:87
-#: includes/Admin/CachePage.php:168
+#: includes/Admin/CachePage.php:158
 #: includes/Views/cards/caching/page/cache.blade.php:10
 #: includes/Views/cards/caching/page/quick-actions.blade.php:8
 msgid "Cache cleared successfully."
 msgstr ""
 
 #: includes/Admin/CachePage.php:88
-#: includes/Admin/CachePage.php:185
+#: includes/Admin/CachePage.php:175
 #: includes/Views/cards/caching/page/quick-actions.blade.php:22
 msgid "Minified CSS/JS cache cleared successfully."
 msgstr ""
 
 #: includes/Admin/CachePage.php:89
-#: includes/Admin/CachePage.php:200
-#: includes/Views/cards/caching/page/quick-actions.blade.php:37
-msgid "Preload cache is not implemented yet."
+msgid "Preload started. This can take a moment."
 msgstr ""
 
 #: includes/Admin/CachePage.php:104
@@ -270,18 +368,26 @@ msgstr ""
 msgid "Not installed"
 msgstr ""
 
-#: includes/Admin/CachePage.php:114
-#: includes/Admin/CachePage.php:137
-#: includes/Admin/CachePage.php:159
-#: includes/Admin/CachePage.php:176
-#: includes/Admin/CachePage.php:193
-#: includes/Admin/FileOptimizationPage.php:66
-msgid "Unauthorized"
+#: includes/Admin/CachePage.php:191
+msgid "Enable page cache before running preload."
+msgstr ""
+
+#: includes/Admin/CachePage.php:203
+msgid "No preloadable URLs found."
+msgstr ""
+
+#. translators: 1: Successful preload requests, 2: Total preload requests, 3: Failed preload requests.
+#: includes/Admin/CachePage.php:212
+msgid "Preload complete: %1$d/%2$d URLs cached (%3$d failed)."
+msgstr ""
+
+#. translators: %s: first preload failure reason.
+#: includes/Admin/CachePage.php:220
+msgid "First error: %s"
 msgstr ""
 
 #. translators: 1: Used cache size in human-readable units, 2: Configured max cache size in MB, 3: Percentage of cache usage.
-#: includes/Admin/CachePage.php:258
-#, php-format
+#: includes/Admin/CachePage.php:478
 msgid "%1$s of %2$d MB used (%3$d%%)"
 msgstr ""
 
@@ -409,7 +515,6 @@ msgstr ""
 
 #. translators: %s: link to system status page
 #: includes/Admin/FilesystemNotices.php:127
-#, php-format
 msgid "For more details, visit the <a href=\"%s\">System Status page</a>."
 msgstr ""
 
@@ -430,26 +535,169 @@ msgstr ""
 msgid "None detected"
 msgstr ""
 
-#: includes/Admin/Menu.php:101
+#: includes/Admin/Menu.php:103
 msgid "Copied!"
 msgstr ""
 
-#: includes/Admin/Menu.php:102
+#: includes/Admin/Menu.php:104
 msgid "Failed to copy. Please try again."
 msgstr ""
 
-#: includes/Admin/Menu.php:103
+#: includes/Admin/Menu.php:105
 #: includes/Views/cards/caching/browser-cache-settings/apache.blade.php:20
 #: includes/Views/cards/caching/browser-cache-settings/nginx.blade.php:21
 msgid "Expand Full Configuration"
 msgstr ""
 
-#: includes/Admin/Menu.php:104
+#: includes/Admin/Menu.php:106
 msgid "Hide Full Configuration"
 msgstr ""
 
-#: includes/Admin/Menu.php:112
+#: includes/Admin/Menu.php:114
+#: includes/Admin/PerformanceTest.php:104
 msgid "Request failed."
+msgstr ""
+
+#: includes/Admin/Menu.php:115
+#: includes/Views/components/toggles/toggle.blade.php:23
+msgid "Saved"
+msgstr ""
+
+#: includes/Admin/Menu.php:116
+#: includes/Views/cards/caching/browser/test.blade.php:69
+msgid "Error"
+msgstr ""
+
+#: includes/Admin/PerformancePage.php:23
+msgid "Performance Toolkit Performance"
+msgstr ""
+
+#: includes/Admin/PerformanceTest.php:99
+msgid "Starting test..."
+msgstr ""
+
+#: includes/Admin/PerformanceTest.php:100
+msgid "Loading target URL and collecting metrics..."
+msgstr ""
+
+#: includes/Admin/PerformanceTest.php:101
+msgid "Test complete."
+msgstr ""
+
+#: includes/Admin/PerformanceTest.php:102
+msgid "Timed out waiting for test result."
+msgstr ""
+
+#: includes/Admin/PerformanceTest.php:103
+msgid "Could not run test."
+msgstr ""
+
+#: includes/Admin/PerformanceTest.php:105
+msgid "Your page is being served from cache."
+msgstr ""
+
+#: includes/Admin/PerformanceTest.php:106
+msgid "Your page is not being served from cache."
+msgstr ""
+
+#: includes/Admin/PerformanceTest.php:107
+#: includes/Admin/PerformanceTest.php:112
+msgid "Excellent"
+msgstr ""
+
+#: includes/Admin/PerformanceTest.php:108
+#: includes/Admin/PerformanceTest.php:114
+msgid "Good"
+msgstr ""
+
+#: includes/Admin/PerformanceTest.php:109
+msgid "Needs Improvement"
+msgstr ""
+
+#: includes/Admin/PerformanceTest.php:110
+#: includes/Admin/PerformanceTest.php:119
+msgid "Poor"
+msgstr ""
+
+#: includes/Admin/PerformanceTest.php:111
+msgid "Score"
+msgstr ""
+
+#: includes/Admin/PerformanceTest.php:113
+#: includes/Admin/PerformanceTest.php:123
+msgid "HIT"
+msgstr ""
+
+#: includes/Admin/PerformanceTest.php:115
+msgid "Okay"
+msgstr ""
+
+#: includes/Admin/PerformanceTest.php:116
+msgid "Needs improvement"
+msgstr ""
+
+#: includes/Admin/PerformanceTest.php:117
+msgid "Slow"
+msgstr ""
+
+#: includes/Admin/PerformanceTest.php:118
+msgid "Moderate"
+msgstr ""
+
+#: includes/Admin/PerformanceTest.php:120
+#: includes/Admin/PerformanceTest.php:124
+msgid "MISS"
+msgstr ""
+
+#: includes/Admin/PerformanceTest.php:121
+msgid "Heavy"
+msgstr ""
+
+#: includes/Admin/PerformanceTest.php:122
+msgid "High"
+msgstr ""
+
+#: includes/Admin/PerformanceTest.php:171
+msgid "Please provide a valid URL on this site."
+msgstr ""
+
+#: includes/Admin/PerformanceTest.php:196
+#: includes/Admin/PerformanceTest.php:224
+msgid "Missing test token."
+msgstr ""
+
+#: includes/Admin/PerformanceTest.php:202
+#: includes/Admin/PerformanceTest.php:230
+msgid "Test token is invalid or expired."
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:45
+msgid "Performance Toolkit Settings"
+msgstr ""
+
+#. translators: %s: profile label e.g. "Standard"
+#: includes/Admin/SettingsPage.php:101
+msgid "Website profile changed to %s."
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:112
+#: includes/Utils/ProfileDetector.php:52
+msgid "Standard"
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:113
+#: includes/Utils/ProfileDetector.php:45
+msgid "WooCommerce"
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:114
+#: includes/Utils/ProfileDetector.php:35
+msgid "Membership / LMS"
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:115
+#: includes/Utils/ProfileDetector.php:25
+msgid "Page Builder Heavy"
 msgstr ""
 
 #: includes/Admin/SystemStatusPage.php:36
@@ -609,91 +857,90 @@ msgstr ""
 msgid "Uploads Directory Writable"
 msgstr ""
 
-#: includes/Admin/ToolsPage.php:56
-msgid "Performance Toolkit Tools"
+#: includes/Admin/ToolsPage.php:80
+msgid "Performance Toolkit Import/Export"
 msgstr ""
 
-#: includes/Admin/ToolsPage.php:163
-msgid "Could not generate export file."
-msgstr ""
-
-#: includes/Admin/ToolsPage.php:188
-msgid "No import file was uploaded."
+#: includes/Admin/ToolsPage.php:83
+msgid "Performance Toolkit Maintenance"
 msgstr ""
 
 #: includes/Admin/ToolsPage.php:194
+msgid "Could not generate export file."
+msgstr ""
+
+#: includes/Admin/ToolsPage.php:219
+msgid "No import file was uploaded."
+msgstr ""
+
+#: includes/Admin/ToolsPage.php:225
 msgid "Upload failed. Please try again with a valid JSON file."
 msgstr ""
 
-#: includes/Admin/ToolsPage.php:200
+#: includes/Admin/ToolsPage.php:231
 msgid "Invalid uploaded file."
 msgstr ""
 
-#: includes/Admin/ToolsPage.php:206
+#: includes/Admin/ToolsPage.php:237
 msgid "Import file is empty."
 msgstr ""
 
-#: includes/Admin/ToolsPage.php:212
+#: includes/Admin/ToolsPage.php:243
 msgid "Import file is not valid JSON."
 msgstr ""
 
-#: includes/Admin/ToolsPage.php:226
+#: includes/Admin/ToolsPage.php:257
 msgid "Import file is not a Performance Toolkit export."
 msgstr ""
 
 #. translators: %d: schema version
-#: includes/Admin/ToolsPage.php:236
-#, php-format
+#: includes/Admin/ToolsPage.php:267
 msgid "Unsupported import schema version: %d."
 msgstr ""
 
-#: includes/Admin/ToolsPage.php:246
+#: includes/Admin/ToolsPage.php:278
 msgid "No settings payload found in import file."
 msgstr ""
 
-#: includes/Admin/ToolsPage.php:291
+#: includes/Admin/ToolsPage.php:323
 msgid "Uninstall cleanup policy saved."
 msgstr ""
 
-#: includes/Admin/ToolsPage.php:304
+#: includes/Admin/ToolsPage.php:336
 msgid "All settings have been reset to safe defaults."
 msgstr ""
 
 #. translators: %d: schema version
-#: includes/Admin/ToolsPage.php:331
-#, php-format
+#: includes/Admin/ToolsPage.php:363
 msgid "Schema v%d accepted"
 msgstr ""
 
-#: includes/Admin/ToolsPage.php:334
+#: includes/Admin/ToolsPage.php:366
 msgid "Legacy import format accepted"
 msgstr ""
 
 #. translators: %d: number of recognized settings imported
-#: includes/Admin/ToolsPage.php:338
-#, php-format
+#: includes/Admin/ToolsPage.php:370
 msgid "%d key imported"
 msgid_plural "%d keys imported"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of ignored settings keys
-#: includes/Admin/ToolsPage.php:344
-#, php-format
+#: includes/Admin/ToolsPage.php:376
 msgid "%d key ignored"
 msgid_plural "%d keys ignored"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of preserved secret values
-#: includes/Admin/ToolsPage.php:351
-#, php-format
+#: includes/Admin/ToolsPage.php:383
 msgid "%d secret preserved"
 msgid_plural "%d secrets preserved"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/Admin/ToolsPage.php:356
+#: includes/Admin/ToolsPage.php:388
 msgid "Settings imported successfully."
 msgstr ""
 
@@ -703,13 +950,11 @@ msgstr ""
 
 #. translators: %s: absolute file path that could not be deleted during deactivation cleanup.
 #: includes/Core/Lifecycle.php:78
-#, php-format
 msgid "Could not remove cached file: %s"
 msgstr ""
 
 #. translators: %s: absolute config file path that could not be deleted during deactivation cleanup.
 #: includes/Core/Lifecycle.php:91
-#, php-format
 msgid "Could not remove cache config file: %s"
 msgstr ""
 
@@ -756,8 +1001,175 @@ msgstr ""
 
 #. translators: %s: directory path
 #: includes/Utils/FilesystemCheck.php:44
-#, php-format
 msgid "Cache directory not writable: %s"
+msgstr ""
+
+#: includes/Views/admin/assets-page.blade.php:97
+#: includes/Views/admin/assets-page.blade.php:99
+#: includes/Views/cards/caching/browser/test.blade.php:66
+msgid "CSS"
+msgstr ""
+
+#: includes/Views/admin/assets-page.blade.php:98
+#: includes/Views/admin/assets-page.blade.php:100
+#: includes/Views/cards/caching/browser/test.blade.php:67
+msgid "JavaScript"
+msgstr ""
+
+#: includes/Views/admin/assets-page.blade.php:99
+#: includes/Views/admin/assets-page.blade.php:101
+msgid "Fonts"
+msgstr ""
+
+#: includes/Views/admin/assets-page.blade.php:100
+#: includes/Views/components/performance-snapshot.blade.php:105
+#: includes/Views/admin/assets-page.blade.php:102
+msgid "Images"
+msgstr ""
+
+#: includes/Views/admin/assets-page.blade.php:101
+#: includes/Views/admin/assets-page.blade.php:56
+#: includes/Views/admin/assets-page.blade.php:103
+msgid "Other"
+msgstr ""
+
+#: includes/Views/admin/assets-page.blade.php:103
+#: includes/Views/admin/assets-page.blade.php:105
+msgid "Detected:"
+msgstr ""
+
+#: includes/Views/admin/assets-page.blade.php:213
+#: includes/Views/admin/assets-page.blade.php:215
+msgid "Please select a URL first."
+msgstr ""
+
+#: includes/Views/admin/assets-page.blade.php:219
+#: includes/Views/admin/assets-page.blade.php:221
+msgid "Detecting assets..."
+msgstr ""
+
+#: includes/Views/admin/assets-page.blade.php:237
+#: includes/Views/admin/assets-page.blade.php:261
+#: includes/Views/admin/assets-page.blade.php:239
+#: includes/Views/admin/assets-page.blade.php:263
+msgid "Detection failed."
+msgstr ""
+
+#: includes/Views/admin/assets-page.blade.php:245
+#: includes/Views/admin/assets-page.blade.php:247
+msgid "Detection complete. No assets found."
+msgstr ""
+
+#: includes/Views/admin/assets-page.blade.php:258
+#: includes/Views/admin/assets-page.blade.php:260
+msgid "Detection complete."
+msgstr ""
+
+#: includes/Views/components/performance-snapshot.blade.php:13
+msgid "Performance Snapshot"
+msgstr ""
+
+#: includes/Views/components/performance-snapshot.blade.php:14
+#: includes/Views/admin/assets-page.blade.php:38
+msgid "Idle"
+msgstr ""
+
+#: includes/Views/components/performance-snapshot.blade.php:16
+msgid "Quick test from dashboard. Open Performance page for full report."
+msgstr ""
+
+#: includes/Views/components/performance-snapshot.blade.php:19
+msgid "Open Full Test"
+msgstr ""
+
+#: includes/Views/components/performance-snapshot.blade.php:35
+msgid "Measured URL"
+msgstr ""
+
+#: includes/Views/components/performance-snapshot.blade.php:42
+msgid "Measured At"
+msgstr ""
+
+#: includes/Views/components/performance-snapshot.blade.php:65
+msgid "Test Content"
+msgstr ""
+
+#: includes/Views/components/performance-snapshot.blade.php:67
+#: includes/Views/admin/assets-page.blade.php:17
+msgid "Homepage"
+msgstr ""
+
+#: includes/Views/components/performance-snapshot.blade.php:69
+#: includes/Views/admin/assets-page.blade.php:19
+msgid "Pages"
+msgstr ""
+
+#: includes/Views/components/performance-snapshot.blade.php:76
+#: includes/Views/admin/assets-page.blade.php:27
+msgid "Posts"
+msgstr ""
+
+#: includes/Views/components/performance-snapshot.blade.php:83
+msgid "Run Test"
+msgstr ""
+
+#: includes/Views/components/performance-snapshot.blade.php:92
+msgid "Metric"
+msgstr ""
+
+#: includes/Views/components/performance-snapshot.blade.php:93
+msgid "Value"
+msgstr ""
+
+#: includes/Views/components/performance-snapshot.blade.php:98
+msgid "Page Load Time"
+msgstr ""
+
+#: includes/Views/components/performance-snapshot.blade.php:99
+msgid "Largest Contentful Paint (LCP)"
+msgstr ""
+
+#: includes/Views/components/performance-snapshot.blade.php:100
+msgid "Time To First Byte (TTFB)"
+msgstr ""
+
+#: includes/Views/components/performance-snapshot.blade.php:101
+msgid "First Contentful Paint (FCP)"
+msgstr ""
+
+#: includes/Views/components/performance-snapshot.blade.php:102
+msgid "DOM Content Loaded"
+msgstr ""
+
+#: includes/Views/components/performance-snapshot.blade.php:103
+msgid "Resource Count"
+msgstr ""
+
+#: includes/Views/components/performance-snapshot.blade.php:104
+msgid "Total Image Size"
+msgstr ""
+
+#: includes/Views/components/performance-snapshot.blade.php:106
+msgid "Total JS Size"
+msgstr ""
+
+#: includes/Views/components/performance-snapshot.blade.php:107
+msgid "JS Scripts"
+msgstr ""
+
+#: includes/Views/components/performance-snapshot.blade.php:108
+msgid "Total CSS Size"
+msgstr ""
+
+#: includes/Views/components/performance-snapshot.blade.php:109
+msgid "CSS Stylesheets"
+msgstr ""
+
+#: performance-toolkit.php:61
+msgid ""
+"WP Performance Toolkit Free does not support WordPress Multisite. \n"
+"\t\t\t\t\tThe free version uses a single-site cache architecture and cannot safely operate in a multisite network environment. \n"
+"\t\t\t\t\tMultisite support will be available in Pro."
 msgstr ""
 
 #: includes/Views/admin/admin-bar-notice.blade.php:3
@@ -766,6 +1178,71 @@ msgstr ""
 
 #: includes/Views/admin/admin-bar-notice.blade.php:9
 msgid "This page's cache was purged."
+msgstr ""
+
+#: includes/Views/admin/assets-page.blade.php:4
+#: includes/Views/admin/file-optimization-page.blade.php:4
+#: includes/Views/cards/caching/cdn/integrations.blade.php:4
+#: includes/Views/cards/caching/page/cache.blade.php:4
+#: includes/Views/cards/caching/rules/exclusions.blade.php:4
+#: includes/Views/cards/optimization/media/media-optimization.blade.php:4
+msgid "Settings saved successfully."
+msgstr ""
+
+#: includes/Views/admin/assets-page.blade.php:9
+msgid "Assets Detector"
+msgstr ""
+
+#: includes/Views/admin/assets-page.blade.php:15
+msgid "Select content to scan"
+msgstr ""
+
+#: includes/Views/admin/assets-page.blade.php:35
+msgid "Detect Assets"
+msgstr ""
+
+#: includes/Views/admin/assets-page.blade.php:43
+msgid "How it works"
+msgstr ""
+
+#: includes/Views/admin/assets-page.blade.php:44
+msgid "The detector requests the selected URL, reads the returned HTML, and lists script, stylesheet, and image URLs found on that page."
+msgstr ""
+
+#: includes/Views/admin/assets-page.blade.php:50
+msgid "Filter:"
+msgstr ""
+
+#: includes/Views/admin/assets-page.blade.php:51
+msgid "All"
+msgstr ""
+
+#: includes/Views/admin/assets-page.blade.php:52
+msgid "Theme"
+msgstr ""
+
+#: includes/Views/admin/assets-page.blade.php:53
+msgid "Plugin"
+msgstr ""
+
+#: includes/Views/admin/assets-page.blade.php:54
+msgid "External"
+msgstr ""
+
+#: includes/Views/admin/assets-page.blade.php:55
+msgid "Core (WP)"
+msgstr ""
+
+#: includes/Views/admin/assets-page.blade.php:67
+msgid "Type"
+msgstr ""
+
+#: includes/Views/admin/assets-page.blade.php:68
+msgid "Asset URL"
+msgstr ""
+
+#: includes/Views/admin/assets-page.blade.php:69
+msgid "Category"
 msgstr ""
 
 #: includes/Views/admin/card-system-showcase.blade.php:9
@@ -836,13 +1313,11 @@ msgstr ""
 
 #. translators: %d: Number of database tables optimized.
 #: includes/Views/admin/database-page.blade.php:8
-#, php-format
 msgid "%d database table(s) optimized successfully."
 msgstr ""
 
 #. translators: 1: Cleanup task label, 2: Number of items removed.
 #: includes/Views/admin/database-page.blade.php:15
-#, php-format
 msgid "%1$s: %2$d item(s) removed successfully."
 msgstr ""
 
@@ -860,13 +1335,11 @@ msgstr ""
 
 #. translators: %s: absolute cache directory path.
 #: includes/Views/admin/deactivate-cleanup-notice.blade.php:21
-#, php-format
 msgid "Delete stale HTML cache files from <code>%s</code>."
 msgstr ""
 
 #. translators: %s: absolute cache config file path.
 #: includes/Views/admin/deactivate-cleanup-notice.blade.php:31
-#, php-format
 msgid "If it still exists, remove <code>%s</code>."
 msgstr ""
 
@@ -892,7 +1365,6 @@ msgstr ""
 
 #. translators: %s: reason the drop-in install failed.
 #: includes/Views/admin/dropin-install-notice.blade.php:13
-#, php-format
 msgid "Reason: %s"
 msgstr ""
 
@@ -906,7 +1378,6 @@ msgstr ""
 
 #. translators: 1: source file path, 2: destination file path.
 #: includes/Views/admin/dropin-install-notice.blade.php:26
-#, php-format
 msgid "Manually copy <code>%1$s</code> to <code>%2$s</code>."
 msgstr ""
 
@@ -914,21 +1385,13 @@ msgstr ""
 msgid "After fixing this, reactivate the plugin or toggle cache settings to retry installation."
 msgstr ""
 
-#: includes/Views/admin/file-optimization-page.blade.php:4
-#: includes/Views/cards/caching/cdn/integrations.blade.php:4
-#: includes/Views/cards/caching/page/cache.blade.php:4
-#: includes/Views/cards/caching/rules/exclusions.blade.php:4
-#: includes/Views/cards/optimization/media/media-optimization.blade.php:4
-msgid "Settings saved successfully."
-msgstr ""
-
 #: includes/Views/admin/shell.blade.php:15
 msgid "Section"
 msgstr ""
 
 #. translators: %d: number of deleted files
+#: includes/Views/admin/system-maintenance-page.blade.php:8
 #: includes/Views/admin/tools-page.blade.php:8
-#, php-format
 msgid "Cleared %d minified asset file(s)."
 msgstr ""
 
@@ -1126,11 +1589,6 @@ msgstr ""
 msgid "Compression"
 msgstr ""
 
-#: includes/Views/cards/caching/browser/test.blade.php:30
-#: includes/Views/cards/caching/page/object-cache.blade.php:9
-msgid "Status"
-msgstr ""
-
 #: includes/Views/cards/caching/browser/test.blade.php:42
 msgid "Test Error:"
 msgstr ""
@@ -1191,20 +1649,8 @@ msgstr ""
 msgid "NOT USED"
 msgstr ""
 
-#: includes/Views/cards/caching/browser/test.blade.php:66
-msgid "CSS"
-msgstr ""
-
-#: includes/Views/cards/caching/browser/test.blade.php:67
-msgid "JavaScript"
-msgstr ""
-
 #: includes/Views/cards/caching/browser/test.blade.php:68
 msgid "Image"
-msgstr ""
-
-#: includes/Views/cards/caching/browser/test.blade.php:69
-msgid "Error"
 msgstr ""
 
 #: includes/Views/cards/caching/cdn/actions.blade.php:9
@@ -1270,7 +1716,7 @@ msgid "Automatically purge CDN cache when posts, pages or media are updated."
 msgstr ""
 
 #: includes/Views/cards/caching/cdn/integrations.blade.php:89
-#: includes/Views/cards/caching/page/cache.blade.php:101
+#: includes/Views/cards/caching/page/cache.blade.php:104
 #: includes/Views/cards/caching/rules/exclusions.blade.php:81
 #: includes/Views/cards/optimization/media/media-optimization.blade.php:73
 msgid "Save changes"
@@ -1298,11 +1744,10 @@ msgstr ""
 
 #. translators: 1: Used cache size in human-readable units, 2: Configured max cache size in MB, 3: Percentage of cache usage.
 #: includes/Views/cards/caching/page/cache.blade.php:90
-#, php-format
 msgid "%1$s of %2$s MB used (%3$s%%)"
 msgstr ""
 
-#: includes/Views/cards/caching/page/cache.blade.php:109
+#: includes/Views/cards/caching/page/cache.blade.php:112
 msgid "Clear cache"
 msgstr ""
 
@@ -1361,12 +1806,16 @@ msgstr ""
 msgid "Remove all cached minified CSS and JavaScript files"
 msgstr ""
 
+#: includes/Views/cards/caching/page/quick-actions.blade.php:37
+msgid "Preload cache is not implemented yet."
+msgstr ""
+
 #: includes/Views/cards/caching/page/quick-actions.blade.php:40
 msgid "Preload Cache"
 msgstr ""
 
 #: includes/Views/cards/caching/page/quick-actions.blade.php:41
-msgid "Generate cache for your"
+msgid "Generate cache files for your most visited pages."
 msgstr ""
 
 #: includes/Views/cards/caching/rules/exclusions.blade.php:9
@@ -1488,7 +1937,6 @@ msgstr ""
 
 #. translators: %d: Number of tables shown in the list.
 #: includes/Views/cards/database/table.blade.php:82
-#, php-format
 msgid "Showing top %d tables by size."
 msgstr ""
 
@@ -1552,7 +2000,6 @@ msgstr ""
 
 #. translators: %s: Detected HTTP protocol version (for example, 1.1, 2, or 3).
 #: includes/Views/cards/optimization/file/http11.blade.php:20
-#, php-format
 msgid "Detected protocol: HTTP/%s"
 msgstr ""
 
@@ -1638,7 +2085,6 @@ msgstr ""
 
 #. translators: %s: Detected HTTP protocol version (for example, 2 or 3).
 #: includes/Views/cards/optimization/file/info/recommendations.blade.php:35
-#, php-format
 msgid "HTTP/%s Detected"
 msgstr ""
 
@@ -1700,7 +2146,6 @@ msgstr ""
 
 #. translators: %s: Comma-separated list of plugins/providers currently controlling lazy-load.
 #: includes/Views/cards/optimization/media/media-optimization.blade.php:21
-#, php-format
 msgid "Lazy-load is currently managed by: %s. Performance Toolkit lazy-load is temporarily disabled to prevent conflicts."
 msgstr ""
 
@@ -1736,6 +2181,39 @@ msgstr ""
 msgid "Read-only"
 msgstr ""
 
+#: includes/Views/cards/settings/uninstall-policy.blade.php:14
+msgid "Remove all Performance Toolkit data on uninstall"
+msgstr ""
+
+#: includes/Views/cards/settings/uninstall-policy.blade.php:17
+msgid "If enabled, deleting the plugin removes its settings and cache files. If disabled, data is preserved for reinstall."
+msgstr ""
+
+#: includes/Views/cards/settings/uninstall-policy.blade.php:23
+msgid "Save uninstall policy"
+msgstr ""
+
+#: includes/Views/cards/settings/website-profile.blade.php:17
+msgid "Recommended profile"
+msgstr ""
+
+#. translators: %s: comma separated detected plugin names
+#: includes/Views/cards/settings/website-profile.blade.php:21
+msgid "Detected signals: %s"
+msgstr ""
+
+#: includes/Views/cards/settings/website-profile.blade.php:25
+msgid "This is a recommendation only and does not automatically change your selected profile."
+msgstr ""
+
+#: includes/Views/cards/settings/website-profile.blade.php:40
+msgid "Site type"
+msgstr ""
+
+#: includes/Views/cards/settings/website-profile.blade.php:55
+msgid "Save profile"
+msgstr ""
+
 #: includes/Views/cards/status/system-status.blade.php:6
 msgid "⚠ Filesystem Warning"
 msgstr ""
@@ -1754,7 +2232,6 @@ msgstr ""
 
 #. translators: 1: file count, 2: formatted size
 #: includes/Views/cards/tools/minify.blade.php:15
-#, php-format
 msgid "%1$d file(s), %2$s total."
 msgstr ""
 
@@ -1772,7 +2249,6 @@ msgstr ""
 
 #. translators: %s: Human-readable date/time of the most recent configuration export.
 #: includes/Views/cards/tools/reset.blade.php:21
-#, php-format
 msgid "Last configuration export: %s."
 msgstr ""
 
@@ -1784,31 +2260,15 @@ msgstr ""
 msgid "Reset to safe defaults"
 msgstr ""
 
-#: includes/Views/cards/tools/uninstall-policy.blade.php:14
-msgid "Remove all Performance Toolkit data on uninstall"
-msgstr ""
-
-#: includes/Views/cards/tools/uninstall-policy.blade.php:17
-msgid "If enabled, deleting the plugin removes its settings and cache files. If disabled, data is preserved for reinstall."
-msgstr ""
-
-#: includes/Views/cards/tools/uninstall-policy.blade.php:23
-msgid "Save uninstall policy"
-msgstr ""
-
-#: includes/Views/components/admin-layout.blade.php:20
+#: includes/Views/components/admin-layout.blade.php:22
 msgid "Help"
 msgstr ""
 
-#: includes/Views/components/admin-layout.blade.php:24
-#: includes/Views/components/admin-layout.blade.php:41
+#: includes/Views/components/admin-layout.blade.php:26
+#: includes/Views/components/admin-layout.blade.php:43
 msgid "Primary"
 msgstr ""
 
-#: includes/Views/components/admin-layout.blade.php:40
+#: includes/Views/components/admin-layout.blade.php:42
 msgid "Menu"
-msgstr ""
-
-#: includes/Views/components/toggles/toggle.blade.php:23
-msgid "Saved"
 msgstr ""

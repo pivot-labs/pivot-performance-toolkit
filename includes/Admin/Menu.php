@@ -88,7 +88,7 @@ final class Menu {
 
 		wp_enqueue_script(
 			'performance-toolkit-admin-js',
-			PERFORMANCE_TOOLKIT_URL . 'dist/admin-js.js',
+			PERFORMANCE_TOOLKIT_URL . 'src/js/admin.js',
 			array(),
 			PERFORMANCE_TOOLKIT_VERSION,
 			true
@@ -112,6 +112,8 @@ final class Menu {
 			'ptkAdmin',
 			array(
 				'requestFailed' => __( 'Request failed.', 'performance-toolkit' ),
+				'saved'         => __( 'Saved', 'performance-toolkit' ),
+				'error'         => __( 'Error', 'performance-toolkit' ),
 			)
 		);
 	}

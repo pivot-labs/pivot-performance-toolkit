@@ -207,8 +207,8 @@ final class CachePage extends BladeAdminPage {
 			);
 		}
 
-		/* translators: 1: Successful preload requests, 2: Total preload requests, 3: Failed preload requests. */
 		$message = sprintf(
+			/* translators: 1: Successful preload requests, 2: Total preload requests, 3: Failed preload requests. */
 			__( 'Preload complete: %1$d/%2$d URLs cached (%3$d failed).', 'performance-toolkit' ),
 			(int) $summary['success'],
 			(int) $summary['total'],

@@ -30,6 +30,13 @@
         image_size: 'total_image_size_bytes'
     };
 
+    var TEST_I18N = {};
+
+    function tr(key, fallback) {
+        var value = TEST_I18N && TEST_I18N[key];
+        return (typeof value === 'string' && value !== '') ? value : fallback;
+    }
+
     function bySelector(root, selector) {
         return root ? root.querySelector(selector) : null;
     }
@@ -93,12 +100,12 @@
         }
 
         if (Number.isFinite(n) && n > 0) {
-            target.textContent = 'Your page is being served from cache.';
+            target.textContent = tr('cacheServed', 'Your page is being served from cache.');
             return;
         }
 
         if (Number.isFinite(n)) {
-            target.textContent = 'Your page is not being served from cache.';
+            target.textContent = tr('cacheNotServed', 'Your page is not being served from cache.');
             return;
         }
 
@@ -137,7 +144,7 @@
 
         if (n >= 90) {
             return {
-                label: 'Excellent',
+                label: tr('bandExcellent', 'Excellent'),
                 color: '#10b981',
                 glow: 'rgba(16, 185, 129, .35)'
             };
@@ -145,7 +152,7 @@
 
         if (n >= 75) {
             return {
-                label: 'Good',
+                label: tr('bandGood', 'Good'),
                 color: '#2563eb',
                 glow: 'rgba(37, 99, 235, .35)'
             };
@@ -153,14 +160,14 @@
 
         if (n >= 50) {
             return {
-                label: 'Needs Improvement',
+                label: tr('bandNeedsImprovement', 'Needs Improvement'),
                 color: '#d97706',
                 glow: 'rgba(217, 119, 6, .35)'
             };
         }
 
         return {
-            label: 'Poor',
+            label: tr('bandPoor', 'Poor'),
             color: '#dc2626',
             glow: 'rgba(220, 38, 38, .35)'
         };
@@ -180,7 +187,7 @@
         target.style.setProperty('--donut-color', band.color);
         target.style.setProperty('--donut-glow', band.glow);
         target.setAttribute('role', 'img');
-        target.setAttribute('aria-label', 'Score ' + normalized + ', ' + band.label);
+        target.setAttribute('aria-label', tr('scoreAriaPrefix', 'Score') + ' ' + normalized + ', ' + band.label);
 
         var valueEl = bySelector(target, '.label strong');
         var labelEl = bySelector(target, '.label span');
@@ -207,47 +214,47 @@
         var lower = raw.toLowerCase();
 
         if (lower === 'excellent') {
-            return { label: 'Excellent', tone: 'emerald' };
+            return { label: tr('statusExcellent', 'Excellent'), tone: 'emerald' };
         }
 
         if (lower === 'hit') {
-            return { label: 'HIT', tone: 'emerald' };
+            return { label: tr('statusHit', 'HIT'), tone: 'emerald' };
         }
 
         if (lower === 'good') {
-            return { label: 'Good', tone: 'blue' };
+            return { label: tr('statusGood', 'Good'), tone: 'blue' };
         }
 
         if (lower === 'okay') {
-            return { label: 'Okay', tone: 'blue' };
+            return { label: tr('statusOkay', 'Okay'), tone: 'blue' };
         }
 
         if (lower === 'needs improvement') {
-            return { label: 'Needs improvement', tone: 'amber' };
+            return { label: tr('statusNeedsImprovement', 'Needs improvement'), tone: 'amber' };
         }
 
         if (lower === 'slow') {
-            return { label: 'Slow', tone: 'amber' };
+            return { label: tr('statusSlow', 'Slow'), tone: 'amber' };
         }
 
         if (lower === 'moderate') {
-            return { label: 'Moderate', tone: 'blue' };
+            return { label: tr('statusModerate', 'Moderate'), tone: 'blue' };
         }
 
         if (lower === 'poor') {
-            return { label: 'Poor', tone: 'red' };
+            return { label: tr('statusPoor', 'Poor'), tone: 'red' };
         }
 
         if (lower === 'miss') {
-            return { label: 'MISS', tone: 'red' };
+            return { label: tr('statusMiss', 'MISS'), tone: 'red' };
         }
 
         if (lower === 'heavy') {
-            return { label: 'Heavy', tone: 'red' };
+            return { label: tr('statusHeavy', 'Heavy'), tone: 'red' };
         }
 
         if (lower === 'high') {
-            return { label: 'High', tone: 'red' };
+            return { label: tr('statusHigh', 'High'), tone: 'red' };
         }
 
         return {
@@ -337,8 +344,8 @@
 
         wrapper.className = 'inline-flex items-center';
         wrapper.style.color = isHit ? '#10b981' : '#dc2626';
-        wrapper.setAttribute('title', isHit ? 'HIT' : 'MISS');
-        wrapper.setAttribute('aria-label', isHit ? 'HIT' : 'MISS');
+        wrapper.setAttribute('title', isHit ? tr('cacheHit', 'HIT') : tr('cacheMiss', 'MISS'));
+        wrapper.setAttribute('aria-label', isHit ? tr('cacheHit', 'HIT') : tr('cacheMiss', 'MISS'));
 
         svg.setAttribute('viewBox', '0 0 24 24');
         svg.setAttribute('fill', 'none');
@@ -749,7 +756,7 @@
         return fetch(url, options).then(function (response) {
             return response.json().then(function (payload) {
                 if (!response.ok) {
-                    var message = (payload && payload.message) ? payload.message : 'Request failed.';
+                    var message = (payload && payload.message) ? payload.message : tr('requestFailed', 'Request failed.');
                     throw new Error(message);
                 }
 
@@ -814,6 +821,8 @@
         var cfg = (typeof window.ptkPerfTest === 'object' && window.ptkPerfTest) ? window.ptkPerfTest : null;
         var card = document.querySelector('[data-ptk-performance-test]');
 
+        TEST_I18N = (cfg && cfg.i18n && typeof cfg.i18n === 'object') ? cfg.i18n : {};
+
         if (!cfg || !card) {
             return;
         }
@@ -834,20 +843,20 @@
             var targetUrl = (urlInput.value || cfg.defaultUrl || '').trim();
 
             if (!targetUrl) {
-                setStatus(statusEl, cfg.i18n.failed || 'Could not run test.', true);
+                setStatus(statusEl, tr('failed', 'Could not run test.'), true);
                 return;
             }
 
             runButton.disabled = true;
-            setStatus(statusEl, cfg.i18n.starting || 'Starting test...', false);
+            setStatus(statusEl, tr('starting', 'Starting test...'), false);
 
             request(cfg.restRoot + 'start', 'POST', { targetUrl: targetUrl }, cfg.nonce)
                 .then(function (startPayload) {
                     if (!startPayload || !startPayload.token || !startPayload.testUrl) {
-                        throw new Error(cfg.i18n.failed || 'Could not run test.');
+                        throw new Error(tr('failed', 'Could not run test.'));
                     }
 
-                    setStatus(statusEl, cfg.i18n.running || 'Running test...', false);
+                    setStatus(statusEl, tr('running', 'Running test...'), false);
 
                     var token = startPayload.token;
 
@@ -879,7 +888,7 @@
                                     if (probeWindow && !probeWindow.closed) {
                                         probeWindow.close();
                                     }
-                                    setStatus(statusEl, cfg.i18n.done || 'Test complete.', false);
+                                    setStatus(statusEl, tr('done', 'Test complete.'), false);
                                     runButton.disabled = false;
                                     return;
                                 }
@@ -890,7 +899,7 @@
                                     if (probeWindow && !probeWindow.closed) {
                                         probeWindow.close();
                                     }
-                                    setStatus(statusEl, cfg.i18n.timeout || 'Timed out waiting for test result.', true);
+                                    setStatus(statusEl, tr('timeout', 'Timed out waiting for test result.'), true);
                                     runButton.disabled = false;
                                 }
                             })
@@ -901,14 +910,14 @@
                                     if (probeWindow && !probeWindow.closed) {
                                         probeWindow.close();
                                     }
-                                    setStatus(statusEl, cfg.i18n.timeout || 'Timed out waiting for test result.', true);
+                                    setStatus(statusEl, tr('timeout', 'Timed out waiting for test result.'), true);
                                     runButton.disabled = false;
                                 }
                             });
                     }, pollMs);
                 })
                 .catch(function (error) {
-                    setStatus(statusEl, error && error.message ? error.message : (cfg.i18n.failed || 'Could not run test.'), true);
+                    setStatus(statusEl, error && error.message ? error.message : tr('failed', 'Could not run test.'), true);
                     runButton.disabled = false;
                 });
         });
