@@ -18,7 +18,7 @@ final class Settings {
 	 */
 	public function defaults(): array {
 		return array(
-			'website_profile'               => 'standard',
+			'website_profile'                => 'standard',
 			'enable_page_cache'              => true,
 			'cache_ttl'                      => 600,
 			'max_cache_size_mb'              => 50,
@@ -76,7 +76,7 @@ final class Settings {
 		}
 
 		return array(
-			'website_profile'               => $this->sanitizeWebsiteProfile( (string) ( $raw['website_profile'] ?? $base['website_profile'] ) ),
+			'website_profile'                => $this->sanitizeWebsiteProfile( (string) ( $raw['website_profile'] ?? $base['website_profile'] ) ),
 			'enable_page_cache'              => array_key_exists( 'enable_page_cache', $raw ) ? ! empty( $raw['enable_page_cache'] ) : (bool) $base['enable_page_cache'],
 			'cache_ttl'                      => max( 60, (int) ( $raw['cache_ttl'] ?? $base['cache_ttl'] ) ),
 			'max_cache_size_mb'              => max( 1, (int) ( $raw['max_cache_size_mb'] ?? $base['max_cache_size_mb'] ) ),

@@ -14,30 +14,30 @@ use PerformanceToolkit\Views\BladeEngine;
 final class AdminShell {
 
 	private const PAGE_BY_SECTION = array(
-		'overview'      => 'performance-toolkit',
-		'caching'       => 'performance-toolkit-cache',
-		'optimization'  => 'performance-toolkit-file-optimization',
-		'database'      => 'performance-toolkit-database',
-		'settings'      => 'performance-toolkit-settings',
-		'system'        => 'performance-toolkit-system-status',
+		'overview'     => 'performance-toolkit',
+		'caching'      => 'performance-toolkit-cache',
+		'optimization' => 'performance-toolkit-file-optimization',
+		'database'     => 'performance-toolkit-database',
+		'settings'     => 'performance-toolkit-settings',
+		'system'       => 'performance-toolkit-system-status',
 	);
 
 	private const SECTION_LABELS = array(
-		'overview'      => 'Overview',
-		'caching'       => 'Caching',
-		'optimization'  => 'Optimization',
-		'database'      => 'Database',
-		'settings'      => 'Settings',
-		'system'        => 'System',
+		'overview'     => 'Overview',
+		'caching'      => 'Caching',
+		'optimization' => 'Optimization',
+		'database'     => 'Database',
+		'settings'     => 'Settings',
+		'system'       => 'System',
 	);
 
 	private const SECTION_DESCRIPTIONS = array(
-		'overview'      => 'View performance highlights and quick status details for your site.',
-		'caching'       => 'Configure page and browser caching behavior for faster page delivery.',
-		'optimization'  => 'Tune file and media optimization settings to reduce payload size.',
-		'database'      => 'Review and clean database overhead to keep queries fast.',
-		'settings'      => 'Manage global plugin settings and defaults.',
-		'system'        => 'Inspect status and manage import/export or maintenance operations.',
+		'overview'     => 'View performance highlights and quick status details for your site.',
+		'caching'      => 'Configure page and browser caching behavior for faster page delivery.',
+		'optimization' => 'Tune file and media optimization settings to reduce payload size.',
+		'database'     => 'Review and clean database overhead to keep queries fast.',
+		'settings'     => 'Manage global plugin settings and defaults.',
+		'system'       => 'Inspect status and manage import/export or maintenance operations.',
 	);
 
 	private const PAGE_HEADINGS = array(
@@ -200,10 +200,10 @@ final class AdminShell {
 						'slug'  => 'performance-toolkit-performance',
 						'label' => __( 'Performance', 'performance-toolkit' ),
 					),
-                    array(
-                        'slug'  => 'performance-toolkit-assets',
-                        'label' => __( 'Assets', 'performance-toolkit' ),
-                    ),
+					array(
+						'slug'  => 'performance-toolkit-assets',
+						'label' => __( 'Assets', 'performance-toolkit' ),
+					),
 				),
 				$current_page_slug
 			);

@@ -71,7 +71,10 @@ final class HttpProtocolDetector {
 	 */
 	private static function detectFromLoopbackRequest(): array {
 		if ( ! function_exists( 'wp_remote_head' ) || ! function_exists( 'home_url' ) ) {
-			return array( 'version' => '', 'source' => '' );
+			return array(
+				'version' => '',
+				'source'  => '',
+			);
 		}
 
 		$response = wp_remote_head(
@@ -83,22 +86,34 @@ final class HttpProtocolDetector {
 		);
 
 		if ( is_wp_error( $response ) ) {
-			return array( 'version' => '', 'source' => '' );
+			return array(
+				'version' => '',
+				'source'  => '',
+			);
 		}
 
 		$http_response = isset( $response['http_response'] ) ? $response['http_response'] : null;
 		if ( ! is_object( $http_response ) || ! method_exists( $http_response, 'get_response_object' ) ) {
-			return array( 'version' => '', 'source' => '' );
+			return array(
+				'version' => '',
+				'source'  => '',
+			);
 		}
 
 		$response_object = $http_response->get_response_object();
 		if ( ! is_object( $response_object ) || ! isset( $response_object->protocol_version ) ) {
-			return array( 'version' => '', 'source' => '' );
+			return array(
+				'version' => '',
+				'source'  => '',
+			);
 		}
 
 		$version = self::normalizeVersion( (string) $response_object->protocol_version );
 		if ( '' === $version ) {
-			return array( 'version' => '', 'source' => '' );
+			return array(
+				'version' => '',
+				'source'  => '',
+			);
 		}
 
 		return array(
@@ -128,11 +143,10 @@ final class HttpProtocolDetector {
 		$is_modern = in_array( $version, array( '2', '2.0', '3', '3.0' ), true );
 
 		return array(
-			'version'    => $version,
-			'is_http11'  => $is_http11,
-			'is_modern'  => $is_modern,
-			'source'     => $source,
+			'version'   => $version,
+			'is_http11' => $is_http11,
+			'is_modern' => $is_modern,
+			'source'    => $source,
 		);
 	}
 }
-

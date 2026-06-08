@@ -114,7 +114,7 @@ if ( $ptk_is_probe ) {
 		$ptk_safe_token = json_encode( $ptk_probe_token );
 		$ptk_safe_url   = json_encode( $ptk_collect_url );
 
-		$ptk_script  = "\n<script>\n(function(){\nvar token=" . $ptk_safe_token . ";var collectUrl=" . $ptk_safe_url . ";";
+		$ptk_script  = "\n<script>\n(function(){\nvar token=" . $ptk_safe_token . ';var collectUrl=' . $ptk_safe_url . ';';
 		$ptk_script .= "document.cookie='ptk_perf_probe=;path=/;SameSite=Lax;max-age=0;expires=Thu, 01 Jan 1970 00:00:00 GMT';";
 		$ptk_script .= "try{window.name='';}catch(e){}";
 		$ptk_script .= 'var sentKey="ptk_perf_sent_"+token;';

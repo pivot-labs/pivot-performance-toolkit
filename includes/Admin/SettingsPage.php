@@ -57,23 +57,23 @@ final class SettingsPage extends BladeAdminPage {
 	 * @return array<string, mixed>
 	 */
 	protected function buildViewData(): array {
-		$tools_notice  = isset( $_GET[ self::TOOLS_NOTICE_QUERY_KEY ] ) ? sanitize_key( (string) wp_unslash( $_GET[ self::TOOLS_NOTICE_QUERY_KEY ] ) ) : '';
-		$tools_message = isset( $_GET[ self::TOOLS_MESSAGE_QUERY_KEY ] ) ? sanitize_text_field( (string) wp_unslash( $_GET[ self::TOOLS_MESSAGE_QUERY_KEY ] ) ) : '';
+		$tools_notice     = isset( $_GET[ self::TOOLS_NOTICE_QUERY_KEY ] ) ? sanitize_key( (string) wp_unslash( $_GET[ self::TOOLS_NOTICE_QUERY_KEY ] ) ) : '';
+		$tools_message    = isset( $_GET[ self::TOOLS_MESSAGE_QUERY_KEY ] ) ? sanitize_text_field( (string) wp_unslash( $_GET[ self::TOOLS_MESSAGE_QUERY_KEY ] ) ) : '';
 		$settings_notice  = isset( $_GET[ self::SETTINGS_NOTICE_QUERY_KEY ] ) ? sanitize_key( (string) wp_unslash( $_GET[ self::SETTINGS_NOTICE_QUERY_KEY ] ) ) : '';
 		$settings_message = isset( $_GET[ self::SETTINGS_MESSAGE_QUERY_KEY ] ) ? sanitize_text_field( (string) wp_unslash( $_GET[ self::SETTINGS_MESSAGE_QUERY_KEY ] ) ) : '';
 		$current_settings = $this->settings->all();
 		$recommendation   = ProfileDetector::detectRecommendation();
 
 		return array(
-			'tools_notice'                => $tools_notice,
-			'tools_message'               => $tools_message,
-			'settings_notice'             => $settings_notice,
-			'settings_message'            => $settings_message,
-			'cleanup_on_uninstall'        => (bool) get_option( 'performance_toolkit_remove_data_on_uninstall', false ),
-			'set_uninstall_policy_action' => self::SET_UNINSTALL_POLICY_ACTION,
-			'website_profile'             => (string) ( $current_settings['website_profile'] ?? 'standard' ),
-			'website_profile_action'      => self::SET_WEBSITE_PROFILE_ACTION,
-			'website_profile_options'     => self::websiteProfileOptions(),
+			'tools_notice'                   => $tools_notice,
+			'tools_message'                  => $tools_message,
+			'settings_notice'                => $settings_notice,
+			'settings_message'               => $settings_message,
+			'cleanup_on_uninstall'           => (bool) get_option( 'performance_toolkit_remove_data_on_uninstall', false ),
+			'set_uninstall_policy_action'    => self::SET_UNINSTALL_POLICY_ACTION,
+			'website_profile'                => (string) ( $current_settings['website_profile'] ?? 'standard' ),
+			'website_profile_action'         => self::SET_WEBSITE_PROFILE_ACTION,
+			'website_profile_options'        => self::websiteProfileOptions(),
 			'website_profile_recommendation' => $recommendation,
 		);
 	}
@@ -95,13 +95,15 @@ final class SettingsPage extends BladeAdminPage {
 		$options = self::websiteProfileOptions();
 		$label   = isset( $options[ $profile ] ) ? $options[ $profile ] : $profile;
 
-		wp_send_json_success( array(
-			'message' => sprintf(
+		wp_send_json_success(
+			array(
+				'message' => sprintf(
 				/* translators: %s: profile label e.g. "Standard" */
-				__( 'Website profile changed to %s.', 'performance-toolkit' ),
-				$label
-			),
-		) );
+					__( 'Website profile changed to %s.', 'performance-toolkit' ),
+					$label
+				),
+			)
+		);
 	}
 
 	/**
@@ -116,5 +118,3 @@ final class SettingsPage extends BladeAdminPage {
 		);
 	}
 }
-
-

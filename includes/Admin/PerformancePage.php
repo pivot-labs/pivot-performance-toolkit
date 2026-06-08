@@ -89,8 +89,14 @@ final class PerformancePage extends BladeAdminPage {
 
 				$title = get_the_title( (int) $post_id );
 
+				$label = is_string( $title ) && '' !== trim( $title ) ? $title : sprintf(
+					/* translators: %d: post ID. */
+					__( 'Untitled #%d', 'performance-toolkit' ),
+					(int) $post_id
+				);
+
 				$result[ $bucket ][] = array(
-					'label' => is_string( $title ) && '' !== trim( $title ) ? $title : sprintf( __( 'Untitled #%d', 'performance-toolkit' ), (int) $post_id ),
+					'label' => $label,
 					'url'   => $url,
 				);
 			}
@@ -106,4 +112,3 @@ final class PerformancePage extends BladeAdminPage {
 		return $result;
 	}
 }
-

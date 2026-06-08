@@ -62,11 +62,11 @@ final class ProfileDetector {
 		$active  = self::activePluginFiles();
 
 		$plugin_map = array(
-			'elementor/elementor.php'       => 'Elementor',
-			'bb-plugin/fl-builder.php'      => 'Beaver Builder',
-			'js_composer/js_composer.php'   => 'WPBakery',
-			'oxygen/functions.php'          => 'Oxygen',
-			'bricks/bricks.php'             => 'Bricks',
+			'elementor/elementor.php'           => 'Elementor',
+			'bb-plugin/fl-builder.php'          => 'Beaver Builder',
+			'js_composer/js_composer.php'       => 'WPBakery',
+			'oxygen/functions.php'              => 'Oxygen',
+			'bricks/bricks.php'                 => 'Bricks',
 			'et-core-plugin/et-core-plugin.php' => 'Divi',
 		);
 
@@ -119,14 +119,14 @@ final class ProfileDetector {
 		$active  = self::activePluginFiles();
 
 		$plugin_map = array(
-			'sfwd-lms/sfwd_lms.php'                                   => 'LearnDash',
-			'lifterlms/lifterlms.php'                                 => 'LifterLMS',
-			'tutor/tutor.php'                                         => 'Tutor LMS',
-			'sensei-lms/sensei-lms.php'                               => 'Sensei',
-			'memberpress/memberpress.php'                             => 'MemberPress',
-			'paid-memberships-pro/paid-memberships-pro.php'           => 'Paid Memberships Pro',
-			'restrict-content-pro/restrict-content-pro.php'           => 'Restrict Content Pro',
-			'wishlist-member/wlmapi.php'                              => 'WishList Member',
+			'sfwd-lms/sfwd_lms.php'       => 'LearnDash',
+			'lifterlms/lifterlms.php'     => 'LifterLMS',
+			'tutor/tutor.php'             => 'Tutor LMS',
+			'sensei-lms/sensei-lms.php'   => 'Sensei',
+			'memberpress/memberpress.php' => 'MemberPress',
+			'paid-memberships-pro/paid-memberships-pro.php' => 'Paid Memberships Pro',
+			'restrict-content-pro/restrict-content-pro.php' => 'Restrict Content Pro',
+			'wishlist-member/wlmapi.php'  => 'WishList Member',
 		);
 
 		foreach ( $plugin_map as $plugin_file => $label ) {
@@ -197,9 +197,3 @@ final class ProfileDetector {
 		return $lookup;
 	}
 }
-
-
-
-
-
-

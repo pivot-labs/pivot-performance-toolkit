@@ -11,7 +11,7 @@ namespace PerformanceToolkit\Admin;
 
 final class Menu {
 
-	private const ROOT_SLUG = 'performance-toolkit';
+	private const ROOT_SLUG               = 'performance-toolkit';
 	private const PLUGIN_NAMESPACE_PREFIX = 'PerformanceToolkit\\';
 
 	/**

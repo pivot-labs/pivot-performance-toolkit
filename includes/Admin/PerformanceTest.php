@@ -80,27 +80,27 @@ final class PerformanceTest implements ModuleInterface {
 			'performance-toolkit-performance-test',
 			'ptkPerfTest',
 			array(
-				'restRoot'     => esc_url_raw( rest_url( 'ptk/v1/performance-tests/' ) ),
-				'nonce'        => wp_create_nonce( 'wp_rest' ),
-				'defaultUrl'   => esc_url_raw( home_url( '/' ) ),
-				'websiteProfile' => $this->settings->getString( 'website_profile' ) ?: 'standard',
-				'profileBands'  => array(
+				'restRoot'         => esc_url_raw( rest_url( 'ptk/v1/performance-tests/' ) ),
+				'nonce'            => wp_create_nonce( 'wp_rest' ),
+				'defaultUrl'       => esc_url_raw( home_url( '/' ) ),
+				'websiteProfile'   => $this->settings->getString( 'website_profile' ) ?: 'standard',
+				'profileBands'     => array(
 					'resourceCount' => PerformanceProfileBands::resourceCount(),
 					'cssSize'       => PerformanceProfileBands::cssSize(),
 					'jsSize'        => PerformanceProfileBands::jsSize(),
 					'imageSize'     => PerformanceProfileBands::imageSize(),
 				),
-				'scoreWeights'    => self::SCORE_WEIGHTS,
+				'scoreWeights'     => self::SCORE_WEIGHTS,
 				'scoreMultipliers' => self::SCORE_MULTIPLIERS,
-				'pollInterval' => 1000,
-				'timeoutMs'    => 45000,
-				'lastResult'   => is_array( $last_result ) ? $last_result : array(),
-				'i18n'         => array(
-					'starting' => __( 'Starting test...', 'performance-toolkit' ),
-					'running'  => __( 'Loading target URL and collecting metrics...', 'performance-toolkit' ),
-					'done'     => __( 'Test complete.', 'performance-toolkit' ),
-					'timeout'  => __( 'Timed out waiting for test result.', 'performance-toolkit' ),
-					'failed'   => __( 'Could not run test.', 'performance-toolkit' ),
+				'pollInterval'     => 1000,
+				'timeoutMs'        => 45000,
+				'lastResult'       => is_array( $last_result ) ? $last_result : array(),
+				'i18n'             => array(
+					'starting'               => __( 'Starting test...', 'performance-toolkit' ),
+					'running'                => __( 'Loading target URL and collecting metrics...', 'performance-toolkit' ),
+					'done'                   => __( 'Test complete.', 'performance-toolkit' ),
+					'timeout'                => __( 'Timed out waiting for test result.', 'performance-toolkit' ),
+					'failed'                 => __( 'Could not run test.', 'performance-toolkit' ),
 					'requestFailed'          => __( 'Request failed.', 'performance-toolkit' ),
 					'cacheServed'            => __( 'Your page is being served from cache.', 'performance-toolkit' ),
 					'cacheNotServed'         => __( 'Your page is not being served from cache.', 'performance-toolkit' ),
@@ -313,8 +313,14 @@ final class PerformanceTest implements ModuleInterface {
 
 				$title = get_the_title( (int) $post_id );
 
+				$label = is_string( $title ) && '' !== trim( $title ) ? $title : sprintf(
+					/* translators: %d: post ID. */
+					__( 'Untitled #%d', 'performance-toolkit' ),
+					(int) $post_id
+				);
+
 				$result[ $bucket ][] = array(
-					'label' => is_string( $title ) && '' !== trim( $title ) ? $title : sprintf( __( 'Untitled #%d', 'performance-toolkit' ), (int) $post_id ),
+					'label' => $label,
 					'url'   => $url,
 				);
 			}
@@ -577,4 +583,3 @@ final class PerformanceTest implements ModuleInterface {
 		return 'poor';
 	}
 }
-
