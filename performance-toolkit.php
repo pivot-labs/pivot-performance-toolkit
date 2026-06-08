@@ -35,11 +35,11 @@ if ( file_exists( $autoload_file ) ) {
 register_activation_hook( __FILE__, array( '\\PerformanceToolkit\\Core\\Lifecycle', 'activate' ) );
 register_deactivation_hook( __FILE__, array( '\\PerformanceToolkit\\Core\\Lifecycle', 'deactivate' ) );
 function ptk_is_pro_active(): bool {
-    return defined( 'PERFORMANCE_TOOLKIT_PRO_VERSION' );
+	return defined( 'PERFORMANCE_TOOLKIT_PRO_VERSION' );
 }
 
 function ptk_has_pro(): bool {
-    return apply_filters( 'ptk_has_pro', ptk_is_pro_active() );
+	return apply_filters( 'ptk_has_pro', ptk_is_pro_active() );
 }
 
 add_action(

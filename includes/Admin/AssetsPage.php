@@ -330,5 +330,3 @@ final class AssetsPage extends BladeAdminPage {
 		return $result;
 	}
 }
-
-
