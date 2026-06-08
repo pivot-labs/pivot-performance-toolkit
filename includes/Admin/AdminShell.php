@@ -18,8 +18,8 @@ final class AdminShell {
 		'caching'       => 'performance-toolkit-cache',
 		'optimization'  => 'performance-toolkit-file-optimization',
 		'database'      => 'performance-toolkit-database',
-		'tools'         => 'performance-toolkit-tools',
-		'system-status' => 'performance-toolkit-system-status',
+		'settings'      => 'performance-toolkit-settings',
+		'system'        => 'performance-toolkit-system-status',
 	);
 
 	private const SECTION_LABELS = array(
@@ -27,8 +27,8 @@ final class AdminShell {
 		'caching'       => 'Caching',
 		'optimization'  => 'Optimization',
 		'database'      => 'Database',
-		'tools'         => 'Tools',
-		'system-status' => 'System Status',
+		'settings'      => 'Settings',
+		'system'        => 'System',
 	);
 
 	private const SECTION_DESCRIPTIONS = array(
@@ -36,8 +36,8 @@ final class AdminShell {
 		'caching'       => 'Configure page and browser caching behavior for faster page delivery.',
 		'optimization'  => 'Tune file and media optimization settings to reduce payload size.',
 		'database'      => 'Review and clean database overhead to keep queries fast.',
-		'tools'         => 'Export, import, and maintenance utilities for advanced site operations.',
-		'system-status' => 'Inspect runtime, server, and filesystem health signals for troubleshooting.',
+		'settings'      => 'Manage global plugin settings and defaults.',
+		'system'        => 'Inspect status and manage import/export or maintenance operations.',
 	);
 
 	private const PAGE_HEADINGS = array(
@@ -77,7 +77,7 @@ final class AdminShell {
 		$page_layout = 'two-col';
 		if ( 'performance-toolkit' === $current_page_slug ) {
 			$page_layout = 'overview';
-		} elseif ( 'performance-toolkit-tools' === $current_page_slug ) {
+		} elseif ( in_array( $current_page_slug, array( 'performance-toolkit-system-import-export', 'performance-toolkit-system-maintenance' ), true ) ) {
 			$page_layout = 'tools';
 		} elseif ( 'performance-toolkit-card-showcase' === $current_page_slug ) {
 			$page_layout = 'overview';
@@ -135,14 +135,14 @@ final class AdminShell {
 				'icon'  => 'database',
 			),
 			array(
-				'key'   => 'tools',
-				'label' => __( 'Tools', 'performance-toolkit' ),
+				'key'   => 'system',
+				'label' => __( 'System', 'performance-toolkit' ),
 				'icon'  => 'wrench',
 			),
 			array(
-				'key'   => 'system-status',
-				'label' => __( 'System Status', 'performance-toolkit' ),
-				'icon'  => 'activity',
+				'key'   => 'settings',
+				'label' => __( 'Settings', 'performance-toolkit' ),
+				'icon'  => 'dashicons-admin-settings',
 			),
 		);
 
@@ -196,6 +196,14 @@ final class AdminShell {
 						'slug'  => 'performance-toolkit-media-optimization',
 						'label' => __( 'Media', 'performance-toolkit' ),
 					),
+					array(
+						'slug'  => 'performance-toolkit-performance',
+						'label' => __( 'Performance', 'performance-toolkit' ),
+					),
+                    array(
+                        'slug'  => 'performance-toolkit-assets',
+                        'label' => __( 'Assets', 'performance-toolkit' ),
+                    ),
 				),
 				$current_page_slug
 			);
@@ -218,14 +226,32 @@ final class AdminShell {
 			);
 		}
 
-		if ( 'tools' === $current_section ) {
+		if ( 'system' === $current_section ) {
+			return self::withSecondaryState(
+				'system',
+				array(
+					array(
+						'slug'  => 'performance-toolkit-system-status',
+						'label' => __( 'Status', 'performance-toolkit' ),
+					),
+					array(
+						'slug'  => 'performance-toolkit-system-import-export',
+						'label' => __( 'Import/Export', 'performance-toolkit' ),
+					),
+					array(
+						'slug'  => 'performance-toolkit-system-maintenance',
+						'label' => __( 'Maintenance', 'performance-toolkit' ),
+					),
+				),
+				$current_page_slug
+			);
+		}
+
+		if ( 'settings' === $current_section ) {
 			return array();
 		}
 
-		if ( 'system-status' === $current_section ) {
-            return array();
-        }
-        return array();
+		return array();
 	}
 
 	/**
@@ -249,6 +275,30 @@ final class AdminShell {
 			return __( 'Card Showcase', 'performance-toolkit' );
 		}
 
+		if ( 'performance-toolkit-system-status' === $current_page_slug ) {
+			return __( 'System Status', 'performance-toolkit' );
+		}
+
+		if ( 'performance-toolkit-system-import-export' === $current_page_slug ) {
+			return __( 'Import/Export', 'performance-toolkit' );
+		}
+
+		if ( 'performance-toolkit-system-maintenance' === $current_page_slug ) {
+			return __( 'Maintenance', 'performance-toolkit' );
+		}
+
+		if ( 'performance-toolkit-performance' === $current_page_slug ) {
+			return __( 'Performance', 'performance-toolkit' );
+		}
+
+		if ( 'performance-toolkit-assets' === $current_page_slug ) {
+			return __( 'Assets', 'performance-toolkit' );
+		}
+
+		if ( 'performance-toolkit-settings' === $current_page_slug ) {
+			return __( 'Settings', 'performance-toolkit' );
+		}
+
 		switch ( $current_section ) {
 			case 'caching':
 				return __( 'Caching', 'performance-toolkit' );
@@ -256,10 +306,10 @@ final class AdminShell {
 				return __( 'Optimization', 'performance-toolkit' );
 			case 'database':
 				return __( 'Database', 'performance-toolkit' );
-			case 'tools':
-				return __( 'Tools', 'performance-toolkit' );
-			case 'system-status':
-				return __( 'System Status', 'performance-toolkit' );
+			case 'settings':
+				return __( 'Settings', 'performance-toolkit' );
+			case 'system':
+				return __( 'System', 'performance-toolkit' );
 			case 'overview':
 			default:
 				return __( 'Overview', 'performance-toolkit' );
@@ -271,6 +321,30 @@ final class AdminShell {
 			return __( 'Preview reusable admin card layouts for settings, actions, and workflow-based interfaces.', 'performance-toolkit' );
 		}
 
+		if ( 'performance-toolkit-system-status' === $current_page_slug ) {
+			return __( 'Inspect runtime, server, and filesystem health signals for troubleshooting.', 'performance-toolkit' );
+		}
+
+		if ( 'performance-toolkit-system-import-export' === $current_page_slug ) {
+			return __( 'Export and import configuration packages for migrations, backups, and standardized deployments.', 'performance-toolkit' );
+		}
+
+		if ( 'performance-toolkit-system-maintenance' === $current_page_slug ) {
+			return __( 'Run maintenance operations such as clearing generated assets, setting uninstall policy, and resetting defaults.', 'performance-toolkit' );
+		}
+
+		if ( 'performance-toolkit-performance' === $current_page_slug ) {
+			return __( 'Run website statistics tests and review performance metrics for selected pages and posts.', 'performance-toolkit' );
+		}
+
+		if ( 'performance-toolkit-assets' === $current_page_slug ) {
+			return __( 'Configure CSS and JavaScript delivery rules, exclusions, and optimization behavior.', 'performance-toolkit' );
+		}
+
+		if ( 'performance-toolkit-settings' === $current_page_slug ) {
+			return __( 'Manage global plugin settings and defaults.', 'performance-toolkit' );
+		}
+
 		switch ( $current_section ) {
 			case 'caching':
 				return __( 'Configure page and browser caching behavior for faster page delivery.', 'performance-toolkit' );
@@ -278,10 +352,10 @@ final class AdminShell {
 				return __( 'Tune file and media optimization settings to reduce payload size.', 'performance-toolkit' );
 			case 'database':
 				return __( 'Review and clean database overhead to keep queries fast.', 'performance-toolkit' );
-			case 'tools':
+			case 'settings':
+				return __( 'Manage global plugin settings and defaults.', 'performance-toolkit' );
+			case 'system':
 				return __( 'Export, import, and maintenance utilities for advanced site operations.', 'performance-toolkit' );
-			case 'system-status':
-				return __( 'Inspect runtime, server, and filesystem health signals for troubleshooting.', 'performance-toolkit' );
 			case 'overview':
 			default:
 				return __( 'View performance highlights and quick status details for your site.', 'performance-toolkit' );

@@ -45,9 +45,14 @@ final class DashboardPage extends BladeAdminPage {
 	 * @return array<string, mixed>
 	 */
 	protected function buildViewData(): array {
+		$last_result = get_option( 'ptk_last_performance_result', array() );
+		$last_score  = PerformanceTest::calculateOverallScoreFromResult( is_array( $last_result ) ? $last_result : array() );
+
 		return array(
-			'options'   => $this->settings->all(),
-			'fs_status' => FilesystemCheck::getCachedStatus(),
+			'options'                  => $this->settings->all(),
+			'fs_status'                => FilesystemCheck::getCachedStatus(),
+			'performance_test_options' => PerformanceTest::getTestableContentOptions(),
+			'last_score'               => $last_score,
 		);
 	}
 }

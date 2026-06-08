@@ -38,7 +38,7 @@
 		>
 			<span class="ptk-action-text">
 				<span class="ptk-action-title">{{ __('Preload Cache', 'performance-toolkit') }}</span>
-				<span class="ptk-action-desc">{{ __('Generate cache for your', 'performance-toolkit') }}</span>
+				<span class="ptk-action-desc">{{ __('Generate cache files for your most visited pages.', 'performance-toolkit') }}</span>
 			</span>
 			<span class="ptk-action-arrow" aria-hidden="true">&gt;</span>
 		</a>

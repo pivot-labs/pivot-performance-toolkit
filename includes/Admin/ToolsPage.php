@@ -13,6 +13,13 @@ use PerformanceToolkit\Core\Settings;
 
 final class ToolsPage extends BladeAdminPage {
 
+	public const MODE_IMPORT_EXPORT = 'import-export';
+	public const MODE_MAINTENANCE   = 'maintenance';
+
+	private const SLUG_IMPORT_EXPORT = 'performance-toolkit-system-import-export';
+	private const SLUG_MAINTENANCE   = 'performance-toolkit-system-maintenance';
+	private const SLUG_SETTINGS      = 'performance-toolkit-settings';
+
 	private const EXPORT_PLUGIN               = 'performance-toolkit';
 	private const EXPORT_SCHEMA_VERSION       = 1;
 	private const CLEAR_MINIFIED_ACTION       = 'performance_toolkit_clear_minified_assets';
@@ -34,26 +41,46 @@ final class ToolsPage extends BladeAdminPage {
 
 	private Settings $settings;
 
-	public function __construct( Settings $settings ) {
-		$this->settings = $settings;
+	private string $mode;
 
-		add_action( 'admin_post_' . self::CLEAR_MINIFIED_ACTION, array( $this, 'handleClearMinifiedAssets' ) );
-		add_action( 'admin_post_' . self::EXPORT_SETTINGS_ACTION, array( $this, 'handleExportSettings' ) );
-		add_action( 'admin_post_' . self::IMPORT_SETTINGS_ACTION, array( $this, 'handleImportSettings' ) );
-		add_action( 'admin_post_' . self::SET_UNINSTALL_POLICY_ACTION, array( $this, 'handleSetUninstallPolicy' ) );
-		add_action( 'admin_post_' . self::RESET_TO_DEFAULTS_ACTION, array( $this, 'handleResetToDefaults' ) );
+	private static bool $actions_registered = false;
+
+	public function __construct( Settings $settings, string $mode = self::MODE_MAINTENANCE ) {
+		$this->settings = $settings;
+		$this->mode     = in_array( $mode, array( self::MODE_IMPORT_EXPORT, self::MODE_MAINTENANCE ), true ) ? $mode : self::MODE_MAINTENANCE;
+
+		if ( ! self::$actions_registered ) {
+			self::$actions_registered = true;
+			add_action( 'admin_post_' . self::CLEAR_MINIFIED_ACTION, array( $this, 'handleClearMinifiedAssets' ) );
+			add_action( 'admin_post_' . self::EXPORT_SETTINGS_ACTION, array( $this, 'handleExportSettings' ) );
+			add_action( 'admin_post_' . self::IMPORT_SETTINGS_ACTION, array( $this, 'handleImportSettings' ) );
+			add_action( 'admin_post_' . self::SET_UNINSTALL_POLICY_ACTION, array( $this, 'handleSetUninstallPolicy' ) );
+			add_action( 'admin_post_' . self::RESET_TO_DEFAULTS_ACTION, array( $this, 'handleResetToDefaults' ) );
+		}
 	}
 
 	public function slug(): string {
-		return 'performance-toolkit-tools';
+		if ( self::MODE_IMPORT_EXPORT === $this->mode ) {
+			return self::SLUG_IMPORT_EXPORT;
+		}
+
+		return self::SLUG_MAINTENANCE;
 	}
 
 	public function menuTitle(): string {
-		return __( 'Tools', 'performance-toolkit' );
+		if ( self::MODE_IMPORT_EXPORT === $this->mode ) {
+			return __( 'Import/Export', 'performance-toolkit' );
+		}
+
+		return __( 'Maintenance', 'performance-toolkit' );
 	}
 
 	public function pageTitle(): string {
-		return __( 'Performance Toolkit Tools', 'performance-toolkit' );
+		if ( self::MODE_IMPORT_EXPORT === $this->mode ) {
+			return __( 'Performance Toolkit Import/Export', 'performance-toolkit' );
+		}
+
+		return __( 'Performance Toolkit Maintenance', 'performance-toolkit' );
 	}
 
 	public function iconKey(): string {
@@ -61,7 +88,11 @@ final class ToolsPage extends BladeAdminPage {
 	}
 
 	public function view(): string {
-		return 'admin.tools-page';
+		if ( self::MODE_IMPORT_EXPORT === $this->mode ) {
+			return 'admin.system-import-export-page';
+		}
+
+		return 'admin.system-maintenance-page';
 	}
 
 	/**
@@ -119,7 +150,7 @@ final class ToolsPage extends BladeAdminPage {
 
 		$redirect_url = add_query_arg(
 			array(
-				'page'                 => $this->slug(),
+				'page'                 => self::SLUG_MAINTENANCE,
 				'ptk_minified_cleared' => '1',
 				'ptk_minified_removed' => (string) $removed,
 			),
@@ -160,7 +191,7 @@ final class ToolsPage extends BladeAdminPage {
 		$json = wp_json_encode( $payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
 
 		if ( ! is_string( $json ) || '' === $json ) {
-			$this->redirectWithNotice( false, __( 'Could not generate export file.', 'performance-toolkit' ) );
+			$this->redirectWithNotice( false, __( 'Could not generate export file.', 'performance-toolkit' ), self::SLUG_IMPORT_EXPORT );
 		}
 
 		$settings                                  = $this->settings->all();
@@ -185,31 +216,31 @@ final class ToolsPage extends BladeAdminPage {
 		check_admin_referer( 'ptk_import_settings' );
 
 		if ( ! isset( $_FILES['ptk_settings_import_file'] ) || ! is_array( $_FILES['ptk_settings_import_file'] ) ) {
-			$this->redirectWithNotice( false, __( 'No import file was uploaded.', 'performance-toolkit' ) );
+			$this->redirectWithNotice( false, __( 'No import file was uploaded.', 'performance-toolkit' ), self::SLUG_IMPORT_EXPORT );
 		}
 
 		$file = $_FILES['ptk_settings_import_file'];
 
 		if ( (int) ( $file['error'] ?? UPLOAD_ERR_NO_FILE ) !== UPLOAD_ERR_OK ) {
-			$this->redirectWithNotice( false, __( 'Upload failed. Please try again with a valid JSON file.', 'performance-toolkit' ) );
+			$this->redirectWithNotice( false, __( 'Upload failed. Please try again with a valid JSON file.', 'performance-toolkit' ), self::SLUG_IMPORT_EXPORT );
 		}
 
 		$tmp_name = (string) ( $file['tmp_name'] ?? '' );
 
 		if ( '' === $tmp_name || ! is_uploaded_file( $tmp_name ) ) {
-			$this->redirectWithNotice( false, __( 'Invalid uploaded file.', 'performance-toolkit' ) );
+			$this->redirectWithNotice( false, __( 'Invalid uploaded file.', 'performance-toolkit' ), self::SLUG_IMPORT_EXPORT );
 		}
 
 		$raw = file_get_contents( $tmp_name );
 
 		if ( ! is_string( $raw ) || '' === trim( $raw ) ) {
-			$this->redirectWithNotice( false, __( 'Import file is empty.', 'performance-toolkit' ) );
+			$this->redirectWithNotice( false, __( 'Import file is empty.', 'performance-toolkit' ), self::SLUG_IMPORT_EXPORT );
 		}
 
 		$decoded = json_decode( $raw, true );
 
 		if ( ! is_array( $decoded ) ) {
-			$this->redirectWithNotice( false, __( 'Import file is not valid JSON.', 'performance-toolkit' ) );
+			$this->redirectWithNotice( false, __( 'Import file is not valid JSON.', 'performance-toolkit' ), self::SLUG_IMPORT_EXPORT );
 		}
 
 		$has_envelope = array_key_exists( 'settings', $decoded )
@@ -223,7 +254,7 @@ final class ToolsPage extends BladeAdminPage {
 			$plugin = isset( $decoded['plugin'] ) ? sanitize_key( (string) $decoded['plugin'] ) : '';
 
 			if ( '' !== $plugin && self::EXPORT_PLUGIN !== $plugin ) {
-				$this->redirectWithNotice( false, __( 'Import file is not a Performance Toolkit export.', 'performance-toolkit' ) );
+				$this->redirectWithNotice( false, __( 'Import file is not a Performance Toolkit export.', 'performance-toolkit' ), self::SLUG_IMPORT_EXPORT );
 			}
 
 			$schema_version = isset( $decoded['schema_version'] ) ? max( 0, (int) $decoded['schema_version'] ) : 0;
@@ -235,7 +266,8 @@ final class ToolsPage extends BladeAdminPage {
 						/* translators: %d: schema version */
 						__( 'Unsupported import schema version: %d.', 'performance-toolkit' ),
 						$schema_version
-					)
+					),
+					self::SLUG_IMPORT_EXPORT
 				);
 			}
 
@@ -243,7 +275,7 @@ final class ToolsPage extends BladeAdminPage {
 		}
 
 		if ( ! is_array( $incoming ) ) {
-			$this->redirectWithNotice( false, __( 'No settings payload found in import file.', 'performance-toolkit' ) );
+			$this->redirectWithNotice( false, __( 'No settings payload found in import file.', 'performance-toolkit' ), self::SLUG_IMPORT_EXPORT );
 		}
 
 		$allowed_keys        = array_fill_keys( array_keys( $this->settings->defaults() ), true );
@@ -274,7 +306,7 @@ final class ToolsPage extends BladeAdminPage {
 			$schema_version
 		);
 
-		$this->redirectWithNotice( true, $message );
+		$this->redirectWithNotice( true, $message, self::SLUG_IMPORT_EXPORT );
 	}
 
 	public function handleSetUninstallPolicy(): void {
@@ -288,7 +320,7 @@ final class ToolsPage extends BladeAdminPage {
 
 		update_option( self::UNINSTALL_POLICY_OPTION, $remove_data ? '1' : '0' );
 
-		$this->redirectWithNotice( true, __( 'Uninstall cleanup policy saved.', 'performance-toolkit' ) );
+		$this->redirectWithNotice( true, __( 'Uninstall cleanup policy saved.', 'performance-toolkit' ), self::SLUG_SETTINGS );
 	}
 
 	public function handleResetToDefaults(): void {
@@ -301,13 +333,13 @@ final class ToolsPage extends BladeAdminPage {
 		$defaults = $this->settings->defaults();
 		update_option( $this->settings->optionKey(), $defaults );
 
-		$this->redirectWithNotice( true, __( 'All settings have been reset to safe defaults.', 'performance-toolkit' ) );
+		$this->redirectWithNotice( true, __( 'All settings have been reset to safe defaults.', 'performance-toolkit' ), self::SLUG_MAINTENANCE );
 	}
 
-	private function redirectWithNotice( bool $success, string $message ): void {
+	private function redirectWithNotice( bool $success, string $message, string $page_slug ): void {
 		$redirect_url = add_query_arg(
 			array(
-				'page'              => $this->slug(),
+				'page'              => $page_slug,
 				'ptk_tools_notice'  => $success ? 'success' : 'error',
 				'ptk_tools_message' => $message,
 			),

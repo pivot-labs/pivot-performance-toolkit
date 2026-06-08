@@ -18,6 +18,9 @@
         var existing = container.querySelector('.ptk-quick-action-notice');
 
         if (existing) {
+            if (existing._ptkDismissTimer) {
+                window.clearTimeout(existing._ptkDismissTimer);
+            }
             existing.remove();
         }
 
@@ -29,6 +32,19 @@
         notice.appendChild(p);
 
         container.insertBefore(notice, container.firstChild);
+
+        // Auto-dismiss success notices; errors stay until replaced.
+        if (type !== 'error') {
+            notice._ptkDismissTimer = window.setTimeout(function () {
+                notice.style.transition = 'opacity 600ms ease-in-out';
+                notice.style.opacity = '0';
+                window.setTimeout(function () {
+                    if (notice.parentNode) {
+                        notice.parentNode.removeChild(notice);
+                    }
+                }, 620);
+            }, 4000);
+        }
     }
 
     function showToggleAutosaveStatus(form, type, message) {
