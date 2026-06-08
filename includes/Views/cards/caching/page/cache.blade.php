@@ -11,7 +11,7 @@
         </div>
     @endif
 
-    <form method="post" action="{{ esc_url(admin_url('options.php')) }}">
+    <form id="ptk-cache-settings-form" method="post" action="{{ esc_url(admin_url('options.php')) }}">
         @php
             settings_fields('performance_toolkit');
 
@@ -95,16 +95,19 @@
             </div>
         </div>
 
-        @php
-            submit_button(__('Save changes', 'performance-toolkit'));
-        @endphp
     </form>
 
-    <form method="post" action="{{ esc_url(admin_url('admin-post.php')) }}" style="margin-top: 10px;">
-        <input type="hidden" name="action" value="{{ esc_attr($clear_action) }}" />
-        @php
-            wp_nonce_field('ptk_clear_cache');
-            submit_button(__('Clear cache', 'performance-toolkit'), 'secondary', 'submit', false);
-        @endphp
-    </form>
+    <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 10px;">
+        <button type="submit" form="ptk-cache-settings-form" class="button button-primary">
+            {{ __('Save changes', 'performance-toolkit') }}
+        </button>
+
+        <form method="post" action="{{ esc_url(admin_url('admin-post.php')) }}">
+            <input type="hidden" name="action" value="{{ esc_attr($clear_action) }}" />
+            @php
+                wp_nonce_field('ptk_clear_cache');
+                submit_button(__('Clear cache', 'performance-toolkit'), 'secondary', 'submit', false);
+            @endphp
+        </form>
+    </div>
 </x-card>

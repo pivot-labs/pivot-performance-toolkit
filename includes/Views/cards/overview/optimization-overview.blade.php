@@ -30,3 +30,6 @@
     </div>
 </x-card>
 
+
+<?php do_action( 'ptk_render_pro_overview_cards' ); ?>
+

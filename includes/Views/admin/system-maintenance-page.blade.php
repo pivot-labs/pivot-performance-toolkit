@@ -21,9 +21,7 @@
 
     @include('cards.tools.minify')
 
-    @include('cards.tools.import-export')
-
-
     @include('cards.tools.reset')
-
 </div>
+
+

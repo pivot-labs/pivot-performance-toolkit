@@ -86,7 +86,7 @@ final class CachePage extends BladeAdminPage {
 			'ajax_refresh_usage_nonce'        => wp_create_nonce( 'ptk_refresh_cache_usage_ajax' ),
 			'cache_cleared_message'           => __( 'Cache cleared successfully.', 'performance-toolkit' ),
 			'minified_cache_cleared_message'  => __( 'Minified CSS/JS cache cleared successfully.', 'performance-toolkit' ),
-			'preload_not_implemented_message' => __( 'Preload cache is not implemented yet.', 'performance-toolkit' ),
+			'preload_not_implemented_message' => __( 'Preload started. This can take a moment.', 'performance-toolkit' ),
 			'object_cache'                    => $object_cache,
 		);
 	}
@@ -121,12 +121,7 @@ final class CachePage extends BladeAdminPage {
 		// Keep this notice to one redirect only.
 		set_transient( 'performance_toolkit_cache_cleared', true, 30 );
 
-		$redirect = add_query_arg(
-			array(
-				'page' => $this->slug(),
-			),
-			admin_url( 'admin.php' )
-		);
+		$redirect = $this->cacheSectionUrl();
 
 		wp_safe_redirect( $redirect );
 		exit;
@@ -143,12 +138,7 @@ final class CachePage extends BladeAdminPage {
 
 		set_transient( 'performance_toolkit_cache_cleared', true, 30 );
 
-		$redirect = add_query_arg(
-			array(
-				'page' => $this->slug(),
-			),
-			admin_url( 'admin.php' )
-		);
+		$redirect = $this->cacheSectionUrl();
 
 		wp_safe_redirect( $redirect );
 		exit;
@@ -195,12 +185,231 @@ final class CachePage extends BladeAdminPage {
 
 		check_ajax_referer( 'ptk_refresh_cache_usage_ajax' );
 
+		if ( ! $this->settings->getBool( 'enable_page_cache' ) ) {
+			wp_send_json_error(
+				array(
+					'message' => __( 'Enable page cache before running preload.', 'performance-toolkit' ),
+					'usage'   => $this->getUsagePayload(),
+				),
+				400
+			);
+		}
+
+		$summary = $this->preloadCache();
+
+		if ( 0 === $summary['total'] ) {
+			wp_send_json_error(
+				array(
+					'message' => __( 'No preloadable URLs found.', 'performance-toolkit' ),
+					'usage'   => $this->getUsagePayload(),
+				),
+				400
+			);
+		}
+
+		/* translators: 1: Successful preload requests, 2: Total preload requests, 3: Failed preload requests. */
+		$message = sprintf(
+			__( 'Preload complete: %1$d/%2$d URLs cached (%3$d failed).', 'performance-toolkit' ),
+			(int) $summary['success'],
+			(int) $summary['total'],
+			(int) $summary['failed']
+		);
+
+		if ( ! empty( $summary['first_error'] ) ) {
+			/* translators: %s: first preload failure reason. */
+			$message .= ' ' . sprintf( __( 'First error: %s', 'performance-toolkit' ), (string) $summary['first_error'] );
+		}
+
 		wp_send_json_success(
 			array(
-				'message' => __( 'Preload cache is not implemented yet.', 'performance-toolkit' ),
+				'message' => $message,
+				'preload' => $summary,
 				'usage'   => $this->getUsagePayload(),
 			)
 		);
+	}
+
+	/**
+	 * Warm cache files by requesting a list of internal URLs.
+	 *
+	 * @return array<string, int|string>
+	 */
+	private function preloadCache(): array {
+		$urls    = $this->buildPreloadUrls();
+		$success = 0;
+		$failed  = 0;
+		$first_error = '';
+
+		foreach ( $urls as $url ) {
+			$result = $this->preloadUrl( $url );
+
+			if ( ! empty( $result['ok'] ) ) {
+				++$success;
+				continue;
+			}
+
+			++$failed;
+
+			if ( '' === $first_error && ! empty( $result['error'] ) ) {
+				$first_error = (string) $result['error'];
+			}
+		}
+
+		return array(
+			'total'   => count( $urls ),
+			'success' => $success,
+			'failed'  => $failed,
+			'first_error' => $first_error,
+		);
+	}
+
+	/**
+	 * Build a deterministic list of internal URLs to warm.
+	 *
+	 * @return string[]
+	 */
+	private function buildPreloadUrls(): array {
+		$max_urls = (int) apply_filters( 'performance_toolkit_preload_max_urls', 30 );
+		$max_urls = max( 1, min( 200, $max_urls ) );
+
+		$urls = array( home_url( '/' ) );
+
+		$front_page_id = (int) get_option( 'page_on_front' );
+		$posts_page_id = (int) get_option( 'page_for_posts' );
+
+		if ( $front_page_id > 0 ) {
+			$front_url = get_permalink( $front_page_id );
+			if ( is_string( $front_url ) && '' !== $front_url ) {
+				$urls[] = $front_url;
+			}
+		}
+
+		if ( $posts_page_id > 0 ) {
+			$posts_url = get_permalink( $posts_page_id );
+			if ( is_string( $posts_url ) && '' !== $posts_url ) {
+				$urls[] = $posts_url;
+			}
+		}
+
+		$post_ids = get_posts(
+			array(
+				'post_type'           => array( 'page', 'post' ),
+				'post_status'         => 'publish',
+				'fields'              => 'ids',
+				'posts_per_page'      => $max_urls,
+				'orderby'             => 'modified',
+				'order'               => 'DESC',
+				'ignore_sticky_posts' => true,
+				'no_found_rows'       => true,
+			)
+		);
+
+		if ( is_array( $post_ids ) ) {
+			foreach ( $post_ids as $post_id ) {
+				$post_url = get_permalink( (int) $post_id );
+
+				if ( is_string( $post_url ) && '' !== $post_url ) {
+					$urls[] = $post_url;
+				}
+			}
+		}
+
+		$urls = array_slice( array_values( array_unique( $urls ) ), 0, $max_urls );
+
+		return array_values(
+			array_filter(
+				$urls,
+				static function ( $url ): bool {
+					if ( ! is_string( $url ) || '' === $url ) {
+						return false;
+					}
+
+					$host = wp_parse_url( $url, PHP_URL_HOST );
+					return is_string( $host ) && $host === wp_parse_url( home_url( '/' ), PHP_URL_HOST );
+				}
+			)
+		);
+	}
+
+	/**
+	 * @return array{ok: bool, error: string}
+	 */
+	private function preloadUrl( string $url ): array {
+		$timeout = (float) apply_filters( 'performance_toolkit_preload_request_timeout', 8 );
+		$args    = array(
+			'timeout'     => max( 1.0, $timeout ),
+			'redirection' => 3,
+			'headers'     => array(
+				'X-PTK-Preload' => '1',
+			),
+			'user-agent'  => 'Performance Toolkit Cache Preload',
+			'sslverify'   => ! $this->isLocalOrNonProductionSite( $url ),
+		);
+
+		$response = wp_remote_get( $url, $args );
+
+		if ( is_wp_error( $response ) ) {
+			$error_message = $response->get_error_message();
+
+			// Local HTTPS setups commonly fail on loopback cert verification.
+			if ( str_starts_with( $url, 'https://' ) ) {
+				$fallback_url      = 'http://' . substr( $url, 8 );
+				$fallback_response = wp_remote_get( $fallback_url, $args );
+
+				if ( ! is_wp_error( $fallback_response ) ) {
+					$fallback_code = (int) wp_remote_retrieve_response_code( $fallback_response );
+
+					if ( $fallback_code >= 200 && $fallback_code < 400 ) {
+						return array(
+							'ok'    => true,
+							'error' => '',
+						);
+					}
+
+					return array(
+						'ok'    => false,
+						'error' => sprintf( 'HTTP fallback returned %d for %s', $fallback_code, $fallback_url ),
+					);
+				}
+			}
+
+			return array(
+				'ok'    => false,
+				'error' => sprintf( '%s (%s)', (string) $error_message, $url ),
+			);
+		}
+
+		$status_code = (int) wp_remote_retrieve_response_code( $response );
+
+		if ( $status_code >= 200 && $status_code < 400 ) {
+			return array(
+				'ok'    => true,
+				'error' => '',
+			);
+		}
+
+		return array(
+			'ok'    => false,
+			'error' => sprintf( 'HTTP %d for %s', $status_code, $url ),
+		);
+	}
+
+	private function isLocalOrNonProductionSite( string $url ): bool {
+		$environment = function_exists( 'wp_get_environment_type' ) ? wp_get_environment_type() : 'production';
+
+		if ( 'production' !== $environment ) {
+			return true;
+		}
+
+		$host = wp_parse_url( $url, PHP_URL_HOST );
+
+		if ( ! is_string( $host ) || '' === $host ) {
+			return false;
+		}
+
+		return in_array( $host, array( 'localhost', '127.0.0.1', '::1' ), true )
+			|| str_ends_with( $host, '.test' )
+			|| str_ends_with( $host, '.local' );
 	}
 
 	private function clearPageCacheFiles(): void {
@@ -209,6 +418,17 @@ final class CachePage extends BladeAdminPage {
 		foreach ( glob( $cache_dir . '/*.html' ) ?: array() as $file_path ) {
 			@unlink( $file_path );
 		}
+	}
+
+	private function cacheSectionUrl(): string {
+		return add_query_arg(
+			array(
+				'page'    => 'performance-toolkit',
+				'section' => 'caching',
+				'tab'     => $this->slug(),
+			),
+			admin_url( 'admin.php' )
+		);
 	}
 
 	private function clearMinifiedCacheFiles(): void {

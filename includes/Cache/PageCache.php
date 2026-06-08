@@ -112,6 +112,7 @@ final class PageCache implements ModuleInterface {
 			'enabled'        => $this->settings->getBool( 'enable_page_cache' ),
 			'ttl'            => $this->settings->getInt( 'cache_ttl' ),
 			'bypass_cookies' => $this->settings->getLines( 'cache_bypass_cookies' ),
+			'collect_url'    => rest_url( 'ptk/v1/performance-tests/collect' ),
 		);
 
 		$content = "<?php\nreturn " . var_export( $config, true ) . ";\n";
@@ -124,12 +125,14 @@ final class PageCache implements ModuleInterface {
 	}
 
 	private function bypassReason(): ?string {
-		if ( is_admin() || is_user_logged_in() || is_preview() || is_feed() || is_404() ) {
+		$is_probe_request = $this->isProbeRequest();
+
+		if ( is_admin() || ( is_user_logged_in() && ! $is_probe_request ) || is_preview() || is_feed() || is_404() ) {
 			if ( is_admin() ) {
 				return 'admin';
 			}
 
-			if ( is_user_logged_in() ) {
+			if ( is_user_logged_in() && ! $is_probe_request ) {
 				return 'logged_in';
 			}
 
@@ -148,7 +151,7 @@ final class PageCache implements ModuleInterface {
 			return 'method';
 		}
 
-		if ( $this->hasBypassCookie() ) {
+		if ( ! $is_probe_request && $this->hasBypassCookie() ) {
 			return 'cookie_bypass';
 		}
 
@@ -208,6 +211,16 @@ final class PageCache implements ModuleInterface {
 		}
 
 		return false;
+	}
+
+	private function isProbeRequest(): bool {
+		if ( ! isset( $_COOKIE ) || ! is_array( $_COOKIE ) ) {
+			return false;
+		}
+
+		$token = isset( $_COOKIE['ptk_perf_probe'] ) ? trim( (string) $_COOKIE['ptk_perf_probe'] ) : '';
+
+		return strlen( $token ) >= 20;
 	}
 
 	private function sendDebugHeaders( string $status, ?string $reason = null ): void {
