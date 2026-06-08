@@ -106,6 +106,8 @@
     }
 
     function bindQuickActionButtons() {
+        var i18n = (typeof window.ptkAdmin === 'object' && window.ptkAdmin) ? window.ptkAdmin : {};
+        var requestFailedMessage = i18n.requestFailed || '';
         var buttons = document.querySelectorAll('.ptk-action-btn[data-ajax-action]');
 
         buttons.forEach(function (button) {
@@ -153,10 +155,10 @@
                             return;
                         }
 
-                        showQuickActionNotice(list, 'error', message || 'Request failed.');
+                        showQuickActionNotice(list, 'error', message || requestFailedMessage);
                     })
                     .catch(function () {
-                        showQuickActionNotice(list, 'error', 'Request failed.');
+                        showQuickActionNotice(list, 'error', requestFailedMessage);
                     })
                     .finally(function () {
                         button.disabled = false;
@@ -167,7 +169,9 @@
 
     function bindAjaxActionForms() {
         var i18n = (typeof window.ptkAdmin === 'object' && window.ptkAdmin) ? window.ptkAdmin : {};
-        var requestFailedMessage = i18n.requestFailed || 'Request failed.';
+        var requestFailedMessage = i18n.requestFailed || '';
+        var savedMessage = i18n.saved || '';
+        var errorMessage = i18n.error || '';
 
         document.querySelectorAll('form[data-ajax-action-form]').forEach(function (form) {
             form.addEventListener('submit', function (event) {
@@ -209,7 +213,7 @@
                         }
 
                         if (payload && payload.success) {
-                            if (isAutosaveForm && showToggleAutosaveStatus(form, 'success', form.getAttribute('data-ajax-success-label') || 'Saved')) {
+                            if (isAutosaveForm && showToggleAutosaveStatus(form, 'success', form.getAttribute('data-ajax-success-label') || savedMessage)) {
                                 return;
                             }
 
@@ -217,14 +221,14 @@
                             return;
                         }
 
-                        if (isAutosaveForm && showToggleAutosaveStatus(form, 'error', 'Error')) {
+                        if (isAutosaveForm && showToggleAutosaveStatus(form, 'error', errorMessage)) {
                             return;
                         }
 
                         showQuickActionNotice(container, 'error', message);
                     })
                     .catch(function () {
-                        if (isAutosaveForm && showToggleAutosaveStatus(form, 'error', 'Error')) {
+                        if (isAutosaveForm && showToggleAutosaveStatus(form, 'error', errorMessage)) {
                             return;
                         }
 
@@ -264,8 +268,8 @@
 
     function bindSnippetCopyButtons() {
         var i18n = (typeof window.ptkSnippet === 'object' && window.ptkSnippet) ? window.ptkSnippet : {};
-        var copiedLabel     = i18n.copied      || 'Copied!';
-        var copyFailedLabel = i18n.copyFailed  || 'Failed to copy. Please try again.';
+        var copiedLabel     = i18n.copied || '';
+        var copyFailedLabel = i18n.copyFailed || '';
 
         document.querySelectorAll('.ptk-copy-snippet').forEach(function (btn) {
             btn.addEventListener('click', function (e) {
@@ -292,8 +296,8 @@
 
     function bindSnippetToggles() {
         var i18n = (typeof window.ptkSnippet === 'object' && window.ptkSnippet) ? window.ptkSnippet : {};
-        var expandLabel   = i18n.expand   || 'Expand Full Configuration';
-        var collapseLabel = i18n.collapse  || 'Hide Full Configuration';
+        var expandLabel   = i18n.expand || '';
+        var collapseLabel = i18n.collapse || '';
 
         document.querySelectorAll('.ptk-snippet-toggle').forEach(function (btn) {
             btn.addEventListener('click', function () {

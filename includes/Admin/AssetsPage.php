@@ -320,6 +320,7 @@ final class AssetsPage extends BladeAdminPage {
 				$title = get_the_title( (int) $post_id );
 
 				$result[ $bucket ][] = array(
+					/* translators: %d: post ID. */
 					'label' => is_string( $title ) && '' !== trim( $title ) ? $title : sprintf( __( 'Untitled #%d', 'performance-toolkit' ), (int) $post_id ),
 					'url'   => $url,
 				);

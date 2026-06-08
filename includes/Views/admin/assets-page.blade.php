@@ -93,15 +93,23 @@
 
     var activeFilter = 'all';
     var typeCounts = { css: 0, javascript: 0, fonts: 0, images: 0, other: 0 };
+    var summaryLabels = {
+        css: '<?php echo esc_js( __( 'CSS', 'performance-toolkit' ) ); ?>',
+        javascript: '<?php echo esc_js( __( 'JavaScript', 'performance-toolkit' ) ); ?>',
+        fonts: '<?php echo esc_js( __( 'Fonts', 'performance-toolkit' ) ); ?>',
+        images: '<?php echo esc_js( __( 'Images', 'performance-toolkit' ) ); ?>',
+        other: '<?php echo esc_js( __( 'Other', 'performance-toolkit' ) ); ?>'
+    };
+    var detectedLabel = '<?php echo esc_js( __( 'Detected:', 'performance-toolkit' ) ); ?>';
 
     function updateSummaryDisplay() {
         var parts = [];
-        if (typeCounts.css > 0) parts.push(typeCounts.css + ' CSS');
-        if (typeCounts.javascript > 0) parts.push(typeCounts.javascript + ' JavaScript');
-        if (typeCounts.fonts > 0) parts.push(typeCounts.fonts + ' Fonts');
-        if (typeCounts.images > 0) parts.push(typeCounts.images + ' Images');
-        if (typeCounts.other > 0) parts.push(typeCounts.other + ' Other');
-        summary.textContent = parts.length > 0 ? 'Detected: ' + parts.join(', ') : '';
+        if (typeCounts.css > 0) parts.push(typeCounts.css + ' ' + summaryLabels.css);
+        if (typeCounts.javascript > 0) parts.push(typeCounts.javascript + ' ' + summaryLabels.javascript);
+        if (typeCounts.fonts > 0) parts.push(typeCounts.fonts + ' ' + summaryLabels.fonts);
+        if (typeCounts.images > 0) parts.push(typeCounts.images + ' ' + summaryLabels.images);
+        if (typeCounts.other > 0) parts.push(typeCounts.other + ' ' + summaryLabels.other);
+        summary.textContent = parts.length > 0 ? detectedLabel + ' ' + parts.join(', ') : '';
     }
 
     function setStatus(message, isError) {
