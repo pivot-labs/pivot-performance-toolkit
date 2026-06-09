@@ -10,8 +10,8 @@
 		<div class="flex flex-wrap items-start justify-between gap-3">
 			<div>
 				<div class="flex items-center gap-3">
-					<h3 class="m-0"><?php esc_html_e( 'Performance Snapshot', 'performance-toolkit' ); ?></h3>
-					<p data-ptk-status class="m-0 rounded bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-600"><?php esc_html_e( 'Idle', 'performance-toolkit' ); ?></p>
+					<h2 class="ptk-card-title"><?php esc_html_e( 'Performance Snapshot', 'performance-toolkit' ); ?></h2>
+					<div data-ptk-status class="mb-4 rounded bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-600"><?php esc_html_e( 'Idle', 'performance-toolkit' ); ?></div>
 				</div>
 				<p class="mt-1.5 mb-0 text-gray-500"><?php esc_html_e( 'Quick test from dashboard. Open Performance page for full report.', 'performance-toolkit' ); ?></p>
 			</div>

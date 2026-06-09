@@ -1,6 +1,14 @@
 <div class="ptk-col ptk-col--main">
-    @include('cards.caching.page.cache')
-    @include('cards.caching.page.object-cache')
+	@include('cards.caching.page.cache')
+	@include('cards.caching.page.object-cache', array(
+		'object_cache'                     => $object_cache,
+		'ajax_enable_object_cache_action'  => $ajax_enable_object_cache_action,
+		'ajax_disable_object_cache_action' => $ajax_disable_object_cache_action,
+		'ajax_flush_object_cache_action'   => $ajax_flush_object_cache_action,
+		'ajax_enable_object_cache_nonce'   => $ajax_enable_object_cache_nonce,
+		'ajax_disable_object_cache_nonce'  => $ajax_disable_object_cache_nonce,
+		'ajax_flush_object_cache_nonce'    => $ajax_flush_object_cache_nonce,
+	))
 </div>
 
 <div class="ptk-col ptk-col--sidebar">

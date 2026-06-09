@@ -502,6 +502,71 @@
         }
     }
 
+    function bindObjectCacheButtons() {
+        var i18n = (typeof window.ptkAdmin === 'object' && window.ptkAdmin) ? window.ptkAdmin : {};
+        var requestFailedMessage = i18n.requestFailed || '';
+
+        document.querySelectorAll('.ptk-oc-btn[data-oc-action]').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var action  = btn.getAttribute('data-oc-action');
+                var nonce   = btn.getAttribute('data-oc-nonce') || '';
+                var reload  = btn.getAttribute('data-oc-reload') === '1';
+                var card    = btn.closest('#ptk-object-cache-card');
+                var notice  = card ? card.querySelector('.ptk-oc-notice') : null;
+
+                if (!action) {
+                    return;
+                }
+
+                card && card.querySelectorAll('.ptk-oc-btn').forEach(function (b) { b.disabled = true; });
+
+                var body = new URLSearchParams();
+                body.set('action', action);
+                body.set('_ajax_nonce', nonce);
+
+                fetch(getAjaxUrl(), {
+                    method: 'POST',
+                    credentials: 'same-origin',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+                    body: body.toString()
+                })
+                    .then(function (r) { return r.json(); })
+                    .then(function (payload) {
+                        var message = (payload && payload.data && payload.data.message)
+                            ? payload.data.message
+                            : (payload && payload.success ? '' : requestFailedMessage);
+
+                        if (payload && payload.success) {
+                            if (reload) {
+                                window.location.reload();
+                                return;
+                            }
+                            if (notice) {
+                                showObjectCacheNotice(notice, 'success', message);
+                            }
+                        } else {
+                            if (notice) {
+                                showObjectCacheNotice(notice, 'error', message);
+                            }
+                            card && card.querySelectorAll('.ptk-oc-btn').forEach(function (b) { b.disabled = false; });
+                        }
+                    })
+                    .catch(function () {
+                        if (notice) {
+                            showObjectCacheNotice(notice, 'error', requestFailedMessage);
+                        }
+                        card && card.querySelectorAll('.ptk-oc-btn').forEach(function (b) { b.disabled = false; });
+                    });
+            });
+        });
+    }
+
+    function showObjectCacheNotice(el, type, message) {
+        el.textContent = message;
+        el.className   = 'ptk-oc-notice notice notice-' + (type === 'success' ? 'success' : 'error') + ' inline mt-3';
+        el.style.display = '';
+    }
+
     onDomReady(function () {
         var toggle = document.getElementById('ptk-sidebar-toggle');
         var shell  = document.querySelector('.ptk-shell');
@@ -512,6 +577,7 @@
         bindSnippetCopyButtons();
         bindSnippetToggles();
         bindIconSelects();
+        bindObjectCacheButtons();
 
         if (toggle && shell) {
             toggle.addEventListener('click', function () {

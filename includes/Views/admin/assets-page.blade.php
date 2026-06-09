@@ -6,7 +6,7 @@
 	@endif
 
 	<section class="ptk-card" data-ptk-assets-detector data-ajax-action="{{ esc_attr((string) $ajax_detect_action) }}" data-ajax-nonce="{{ esc_attr((string) $ajax_detect_nonce) }}">
-		<h3 class="m-0">{{ __('Assets Detector', 'performance-toolkit') }}</h3>
+		<h2 class="ptk-card-title">{{ __('Assets Detector', 'performance-toolkit') }}</h2>
 		<div class="mt-4 grid gap-4 md:grid-cols-[minmax(0,1.8fr)_minmax(280px,1fr)] md:items-start">
 			<div id="ptk-assets-detector-controls">
 				<p class="mt-0">{{ $assets_detector_message }}</p>
