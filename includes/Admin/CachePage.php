@@ -9,25 +9,34 @@ declare(strict_types=1);
 
 namespace PerformanceToolkit\Admin;
 
+use PerformanceToolkit\Cache\ObjectCacheManager;
 use PerformanceToolkit\Core\Settings;
 
 final class CachePage extends BladeAdminPage {
 
-	private const CLEAR_ACTION               = 'performance_toolkit_clear_cache';
-	private const CLEAR_MINIFIED_ACTION      = 'performance_toolkit_clear_minified_cache';
-	private const AJAX_CLEAR_ACTION          = 'performance_toolkit_ajax_clear_cache';
-	private const AJAX_CLEAR_MINIFIED_ACTION = 'performance_toolkit_ajax_clear_minified_cache';
-	private const AJAX_REFRESH_USAGE_ACTION  = 'performance_toolkit_ajax_refresh_cache_usage';
+	private const CLEAR_ACTION                     = 'performance_toolkit_clear_cache';
+	private const CLEAR_MINIFIED_ACTION            = 'performance_toolkit_clear_minified_cache';
+	private const AJAX_CLEAR_ACTION                = 'performance_toolkit_ajax_clear_cache';
+	private const AJAX_CLEAR_MINIFIED_ACTION       = 'performance_toolkit_ajax_clear_minified_cache';
+	private const AJAX_REFRESH_USAGE_ACTION        = 'performance_toolkit_ajax_refresh_cache_usage';
+	private const AJAX_ENABLE_OBJECT_CACHE_ACTION  = 'performance_toolkit_ajax_enable_object_cache';
+	private const AJAX_DISABLE_OBJECT_CACHE_ACTION = 'performance_toolkit_ajax_disable_object_cache';
+	private const AJAX_FLUSH_OBJECT_CACHE_ACTION   = 'performance_toolkit_ajax_flush_object_cache';
 
 	private Settings $settings;
+	private ObjectCacheManager $object_cache_manager;
 
-	public function __construct( Settings $settings ) {
-		$this->settings = $settings;
+	public function __construct( Settings $settings, ObjectCacheManager $object_cache_manager ) {
+		$this->settings             = $settings;
+		$this->object_cache_manager = $object_cache_manager;
 		add_action( 'admin_post_' . self::CLEAR_ACTION, array( $this, 'handleClearCache' ) );
 		add_action( 'admin_post_' . self::CLEAR_MINIFIED_ACTION, array( $this, 'handleClearMinifiedCache' ) );
 		add_action( 'wp_ajax_' . self::AJAX_CLEAR_ACTION, array( $this, 'handleClearCacheAjax' ) );
 		add_action( 'wp_ajax_' . self::AJAX_CLEAR_MINIFIED_ACTION, array( $this, 'handleClearMinifiedCacheAjax' ) );
 		add_action( 'wp_ajax_' . self::AJAX_REFRESH_USAGE_ACTION, array( $this, 'handleRefreshCacheUsageAjax' ) );
+		add_action( 'wp_ajax_' . self::AJAX_ENABLE_OBJECT_CACHE_ACTION, array( $this, 'handleEnableObjectCacheAjax' ) );
+		add_action( 'wp_ajax_' . self::AJAX_DISABLE_OBJECT_CACHE_ACTION, array( $this, 'handleDisableObjectCacheAjax' ) );
+		add_action( 'wp_ajax_' . self::AJAX_FLUSH_OBJECT_CACHE_ACTION, array( $this, 'handleFlushObjectCacheAjax' ) );
 	}
 
 	public function slug(): string {
@@ -65,29 +74,34 @@ final class CachePage extends BladeAdminPage {
 		}
 
 		$usage_snapshot = $this->getCacheUsageSnapshot( $options );
-		$object_cache   = $this->getObjectCacheStatus();
 
 		return array(
-			'options'                         => $options,
-			'settings_updated'                => $settings_updated,
-			'cache_cleared'                   => $cache_cleared,
-			'cache_size'                      => $usage_snapshot['cache_size'],
-			'cache_size_formatted'            => $usage_snapshot['cache_size_formatted'],
-			'max_cache_bytes'                 => $usage_snapshot['max_cache_bytes'],
-			'usage_pct'                       => $usage_snapshot['usage_pct'],
-			'option_key'                      => $this->settings->optionKey(),
-			'clear_action'                    => self::CLEAR_ACTION,
-			'clear_minified_action'           => self::CLEAR_MINIFIED_ACTION,
-			'ajax_clear_action'               => self::AJAX_CLEAR_ACTION,
-			'ajax_clear_minified_action'      => self::AJAX_CLEAR_MINIFIED_ACTION,
-			'ajax_refresh_usage_action'       => self::AJAX_REFRESH_USAGE_ACTION,
-			'ajax_clear_nonce'                => wp_create_nonce( 'ptk_clear_cache_ajax' ),
-			'ajax_clear_minified_nonce'       => wp_create_nonce( 'ptk_clear_minified_cache_ajax' ),
-			'ajax_refresh_usage_nonce'        => wp_create_nonce( 'ptk_refresh_cache_usage_ajax' ),
-			'cache_cleared_message'           => __( 'Cache cleared successfully.', 'performance-toolkit' ),
-			'minified_cache_cleared_message'  => __( 'Minified CSS/JS cache cleared successfully.', 'performance-toolkit' ),
-			'preload_not_implemented_message' => __( 'Preload started. This can take a moment.', 'performance-toolkit' ),
-			'object_cache'                    => $object_cache,
+			'options'                          => $options,
+			'settings_updated'                 => $settings_updated,
+			'cache_cleared'                    => $cache_cleared,
+			'cache_size'                       => $usage_snapshot['cache_size'],
+			'cache_size_formatted'             => $usage_snapshot['cache_size_formatted'],
+			'max_cache_bytes'                  => $usage_snapshot['max_cache_bytes'],
+			'usage_pct'                        => $usage_snapshot['usage_pct'],
+			'option_key'                       => $this->settings->optionKey(),
+			'clear_action'                     => self::CLEAR_ACTION,
+			'clear_minified_action'            => self::CLEAR_MINIFIED_ACTION,
+			'ajax_clear_action'                => self::AJAX_CLEAR_ACTION,
+			'ajax_clear_minified_action'       => self::AJAX_CLEAR_MINIFIED_ACTION,
+			'ajax_refresh_usage_action'        => self::AJAX_REFRESH_USAGE_ACTION,
+			'ajax_clear_nonce'                 => wp_create_nonce( 'ptk_clear_cache_ajax' ),
+			'ajax_clear_minified_nonce'        => wp_create_nonce( 'ptk_clear_minified_cache_ajax' ),
+			'ajax_refresh_usage_nonce'         => wp_create_nonce( 'ptk_refresh_cache_usage_ajax' ),
+			'cache_cleared_message'            => __( 'Cache cleared successfully.', 'performance-toolkit' ),
+			'minified_cache_cleared_message'   => __( 'Minified CSS/JS cache cleared successfully.', 'performance-toolkit' ),
+			'preload_not_implemented_message'  => __( 'Preload started. This can take a moment.', 'performance-toolkit' ),
+			'object_cache'                     => $this->getObjectCacheStatus(),
+			'ajax_enable_object_cache_action'  => self::AJAX_ENABLE_OBJECT_CACHE_ACTION,
+			'ajax_disable_object_cache_action' => self::AJAX_DISABLE_OBJECT_CACHE_ACTION,
+			'ajax_flush_object_cache_action'   => self::AJAX_FLUSH_OBJECT_CACHE_ACTION,
+			'ajax_enable_object_cache_nonce'   => wp_create_nonce( 'ptk_enable_object_cache_ajax' ),
+			'ajax_disable_object_cache_nonce'  => wp_create_nonce( 'ptk_disable_object_cache_ajax' ),
+			'ajax_flush_object_cache_nonce'    => wp_create_nonce( 'ptk_flush_object_cache_ajax' ),
 		);
 	}
 
@@ -97,15 +111,23 @@ final class CachePage extends BladeAdminPage {
 	 * @return array<string, mixed>
 	 */
 	private function getObjectCacheStatus(): array {
-		$dropin_path = WP_CONTENT_DIR . '/object-cache.php';
+		$is_our_dropin = $this->object_cache_manager->isOurDropin();
+		$has_foreign   = $this->object_cache_manager->hasForeignDropin();
+		$is_installed  = $this->object_cache_manager->isDropinInstalled();
+		$can_install   = $this->object_cache_manager->canInstall();
+		$stats         = $is_our_dropin ? $this->object_cache_manager->getStats() : array();
 
 		return array(
-			'active'         => file_exists( $dropin_path ),
-			'status_label'   => file_exists( $dropin_path ) ? __( 'Active', 'performance-toolkit' ) : __( 'Inactive', 'performance-toolkit' ),
-			'provider'       => defined( 'WP_REDIS_CLUSTER' ) ? 'Redis Cluster' : ( defined( 'WP_REDIS_HOST' ) ? 'Redis' : __( 'Unknown', 'performance-toolkit' ) ),
-			'dropin_label'   => file_exists( $dropin_path ) ? __( 'Installed', 'performance-toolkit' ) : __( 'Not installed', 'performance-toolkit' ),
-			'size_bytes'     => wp_cache_get( '_stats', '' )['bytes'] ?? 0,
-			'size_formatted' => self::formatBytes( wp_cache_get( '_stats', '' )['bytes'] ?? 0 ),
+			'active'         => $is_installed,
+			'is_our_dropin'  => $is_our_dropin,
+			'has_foreign'    => $has_foreign,
+			'can_enable'     => $can_install,
+			'status_label'   => $is_installed ? __( 'Active', 'performance-toolkit' ) : __( 'Inactive', 'performance-toolkit' ),
+			'provider'       => $this->object_cache_manager->detectProvider(),
+			'dropin_label'   => $is_installed ? __( 'Installed', 'performance-toolkit' ) : __( 'Not installed', 'performance-toolkit' ),
+			'entry_count'    => (int) ( $stats['entry_count'] ?? 0 ),
+			'size_bytes'     => (int) ( $stats['size_bytes'] ?? 0 ),
+			'size_formatted' => (string) ( $stats['size_formatted'] ?? '0 B' ),
 		);
 	}
 
@@ -227,6 +249,50 @@ final class CachePage extends BladeAdminPage {
 				'usage'   => $this->getUsagePayload(),
 			)
 		);
+	}
+
+	public function handleEnableObjectCacheAjax(): void {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array( 'message' => __( 'Unauthorized', 'performance-toolkit' ) ), 403 );
+		}
+
+		check_ajax_referer( 'ptk_enable_object_cache_ajax' );
+
+		$result = $this->object_cache_manager->install();
+
+		if ( $result['ok'] ) {
+			wp_send_json_success( array( 'message' => $result['message'] ) );
+		} else {
+			wp_send_json_error( array( 'message' => $result['message'] ), 500 );
+		}
+	}
+
+	public function handleDisableObjectCacheAjax(): void {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array( 'message' => __( 'Unauthorized', 'performance-toolkit' ) ), 403 );
+		}
+
+		check_ajax_referer( 'ptk_disable_object_cache_ajax' );
+
+		$result = $this->object_cache_manager->remove();
+
+		if ( $result['ok'] ) {
+			wp_send_json_success( array( 'message' => $result['message'] ) );
+		} else {
+			wp_send_json_error( array( 'message' => $result['message'] ), 500 );
+		}
+	}
+
+	public function handleFlushObjectCacheAjax(): void {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array( 'message' => __( 'Unauthorized', 'performance-toolkit' ) ), 403 );
+		}
+
+		check_ajax_referer( 'ptk_flush_object_cache_ajax' );
+
+		$result = $this->object_cache_manager->flush();
+
+		wp_send_json_success( array( 'message' => $result['message'] ) );
 	}
 
 	/**

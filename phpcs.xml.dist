@@ -17,6 +17,12 @@
     <exclude-pattern>*/references/*</exclude-pattern>
     <exclude-pattern>*/wp-cache/*</exclude-pattern>
     <exclude-pattern>*/tests/*</exclude-pattern>
+    <!--
+        WordPress drop-in templates must follow WP Core's API contracts
+        (no namespace, WP_Object_Cache class with camelCase methods).
+        These files are excluded from standard plugin code style checks.
+    -->
+    <exclude-pattern>includes/Cache/object-cache.php</exclude-pattern>
 
     <rule ref="WordPress-Core" />
 

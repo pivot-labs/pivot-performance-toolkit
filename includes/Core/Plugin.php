@@ -29,6 +29,7 @@ use PerformanceToolkit\Admin\PerformancePage;
 use PerformanceToolkit\Admin\SettingsPage;
 use PerformanceToolkit\Admin\SystemStatusPage;
 use PerformanceToolkit\Admin\ToolsPage;
+use PerformanceToolkit\Cache\ObjectCacheManager;
 use PerformanceToolkit\Cache\PageCache;
 use PerformanceToolkit\Contracts\ModuleInterface;
 use PerformanceToolkit\Media\ImageOptimizerDetector;
@@ -70,6 +71,7 @@ final class Plugin {
 		$cloudflare               = new CloudflareIntegration( $this->settings );
 		$image_optimizer_detector = new ImageOptimizerDetector();
 		$database_optimizer       = new DatabaseOptimizer();
+		$object_cache_manager     = new ObjectCacheManager();
 
 		add_action( 'admin_init', array( $this->settings, 'register' ) );
 
@@ -77,7 +79,7 @@ final class Plugin {
 			$menu = new Menu(
 				array(
 					new DashboardPage( $this->settings ),
-					new CachePage( $this->settings ),
+					new CachePage( $this->settings, $object_cache_manager ),
 					new FileOptimizationPage( $this->settings ),
 					new AssetsPage( $this->settings ),
 					new MediaOptimizationPage( $this->settings, $image_optimizer_detector ),
