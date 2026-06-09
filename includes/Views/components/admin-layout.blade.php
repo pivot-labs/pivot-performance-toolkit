@@ -9,8 +9,7 @@
 	<div class="ptk-chrome">
 		<header class="ptk-header">
 			<div class="ptk-page-title">
-				<img src="{{ esc_url($iconUrl) }}" alt="" class="ptk-page-title-icon" />
-					<span class="ptk-plugin-title">{{ __('WP Performance Toolkit', 'performance-toolkit') }}</span>
+				<img src="{{ esc_url($iconUrl) }}" alt="{{ __('WP Performance Toolkit', 'performance-toolkit') }}" class="ptk-page-title-icon" />
 				@if (is_string($version) && $version !== '')
 					<span class="ptk-status-pill bg-gray-100">v {{ $version }}</span>
 				@endif

@@ -198,7 +198,7 @@
     }
 
     .ptk-page-title-icon {
-        @apply w-9 h-9 rounded flex-shrink-0 self-center inline-block;
+        @apply flex-shrink-0 w-60 self-center inline-block;
     }
 
     .ptk-plugin-title {
