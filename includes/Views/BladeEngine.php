@@ -9,16 +9,16 @@ declare(strict_types=1);
 
 namespace PerformanceToolkit\Views;
 
-use Illuminate\Container\Container;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory as ViewFactoryContract;
-use Illuminate\Events\Dispatcher;
-use Illuminate\Filesystem\Filesystem;
-use Illuminate\View\Factory;
-use Illuminate\View\FileViewFinder;
-use Illuminate\View\Engines\CompilerEngine;
-use Illuminate\View\Engines\EngineResolver;
-use Illuminate\View\Compilers\BladeCompiler;
+use PerformanceToolkit\Vendor\Illuminate\Container\Container;
+use PerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application;
+use PerformanceToolkit\Vendor\Illuminate\Contracts\View\Factory as ViewFactoryContract;
+use PerformanceToolkit\Vendor\Illuminate\Events\Dispatcher;
+use PerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem;
+use PerformanceToolkit\Vendor\Illuminate\View\Factory;
+use PerformanceToolkit\Vendor\Illuminate\View\FileViewFinder;
+use PerformanceToolkit\Vendor\Illuminate\View\Engines\CompilerEngine;
+use PerformanceToolkit\Vendor\Illuminate\View\Engines\EngineResolver;
+use PerformanceToolkit\Vendor\Illuminate\View\Compilers\BladeCompiler;
 
 /**
  * Blade templating engine for the plugin.
@@ -69,6 +69,7 @@ final class BladeEngine {
 
 		// Register the Blade compiler
 		$blade_compiler = new BladeCompiler( $filesystem, $cache_path );
+		$blade_compiler->setEchoFormat( 'performancetoolkit_vendor_e(%s)' );
 		$resolver->register(
 			'blade',
 			function () use ( $blade_compiler ) {

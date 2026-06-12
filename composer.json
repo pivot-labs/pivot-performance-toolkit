@@ -6,7 +6,21 @@
     "version": "1.0.0",
     "scripts": {
         "lint": "find includes -name '*.php' -print0 | xargs -0 -n1 php -l",
-        "test:smoke": "php tests/smoke-settings.php"
+        "test:smoke": "php tests/smoke-settings.php",
+        "strauss": [
+            "sh -c 'test -f ./bin/strauss.phar || curl -o bin/strauss.phar -L -C - https://github.com/BrianHenryIE/strauss/releases/latest/download/strauss.phar'",
+            "@php bin/strauss.phar",
+            "@composer dump-autoload"
+        ],
+        "post-install-cmd": ["@strauss"],
+        "post-update-cmd": ["@strauss"],
+        "build:dist": [
+            "@composer install --no-dev --prefer-dist --optimize-autoloader",
+            "sh -c 'test -f ./bin/strauss.phar || curl -o bin/strauss.phar -L -C - https://github.com/BrianHenryIE/strauss/releases/latest/download/strauss.phar'",
+            "@php bin/strauss.phar",
+            "sh bin/dist-clean.sh",
+            "@composer dump-autoload --optimize"
+        ]
     },
     "require": {
         "illuminate/view": "^11.0"
@@ -32,6 +46,17 @@
     "config": {
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "extra": {
+        "strauss": {
+            "target_directory": "includes/Vendor",
+            "namespace_prefix": "PerformanceToolkit\\Vendor\\",
+            "classmap_prefix": "PerformanceToolkit_Vendor_",
+            "constant_prefix": "PTK_VENDOR_",
+            "packages": [
+                "illuminate/view"
+            ]
         }
     }
 }

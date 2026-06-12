@@ -74,6 +74,7 @@ final class Plugin {
 		$object_cache_manager     = new ObjectCacheManager();
 
 		add_action( 'admin_init', array( $this->settings, 'register' ) );
+		add_action( 'admin_init', array( Lifecycle::class, 'maybeUpdateDropin' ) );
 
 		if ( is_admin() ) {
 			$menu = new Menu(
