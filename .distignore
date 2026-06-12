@@ -38,7 +38,7 @@ composer.lock
 
 # Project docs not used by WordPress runtime.
 README.md
-WordPress.md
+.dev/
 
 # WordPress.org assets metadata folder.
 .wordpress-org/

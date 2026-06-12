@@ -105,6 +105,28 @@ final class Lifecycle {
 		delete_transient( self::DEACTIVATE_CLEANUP_NOTICE_TRANSIENT );
 	}
 
+	/**
+	 * Update the installed drop-in if it is ours but outdated (e.g. after a plugin update).
+	 */
+	public static function maybeUpdateDropin(): void {
+		$source = self::dropinSource();
+		$dest   = self::dropinDest();
+
+		if ( ! file_exists( $dest ) || ! self::dropinIsOurs() ) {
+			return;
+		}
+
+		if ( ! file_exists( $source ) ) {
+			return;
+		}
+
+		if ( sha1_file( $source ) === sha1_file( $dest ) ) {
+			return;
+		}
+
+		copy( $source, $dest );
+	}
+
 	// -------------------------------------------------------------------------
 	// Drop-in helpers
 	// -------------------------------------------------------------------------

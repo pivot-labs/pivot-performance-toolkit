@@ -32,6 +32,13 @@ if ( file_exists( $autoload_file ) ) {
 	require_once $autoload_file;
 }
 
+// Strauss-scoped vendor dependencies (prevents class conflicts with other plugins).
+$scoped_autoload = PERFORMANCE_TOOLKIT_PATH . 'includes/Vendor/autoload.php';
+
+if ( file_exists( $scoped_autoload ) ) {
+	require_once $scoped_autoload;
+}
+
 register_activation_hook( __FILE__, array( '\\PerformanceToolkit\\Core\\Lifecycle', 'activate' ) );
 register_deactivation_hook( __FILE__, array( '\\PerformanceToolkit\\Core\\Lifecycle', 'deactivate' ) );
 function ptk_is_pro_active(): bool {
