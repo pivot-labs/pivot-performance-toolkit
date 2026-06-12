@@ -3,3 +3,4 @@
 /wp-cache
 .DS_Store
 .idea
+/bin/strauss.phar

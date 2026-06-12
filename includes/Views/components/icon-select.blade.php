@@ -7,7 +7,7 @@
 ])
 
 @php
-    $selected = collect($options)->firstWhere('value', $value) ?? null;
+    $selected = array_values(array_filter($options, fn($o) => ($o['value'] ?? null) === $value))[0] ?? null;
 @endphp
 
 <div
