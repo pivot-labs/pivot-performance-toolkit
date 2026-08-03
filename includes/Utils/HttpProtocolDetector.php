@@ -15,10 +15,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 final class HttpProtocolDetector {
 
+	private const LOOPBACK_TRANSIENT = 'pivot_performance_toolkit_http_protocol';
+
 	/**
 	 * @return array{version:string,is_http11:bool,is_modern:bool,source:string}
 	 */
 	public static function detect(): array {
+		$cached = get_transient( self::LOOPBACK_TRANSIENT );
+		if ( self::isValidResult( $cached ) ) {
+			return $cached;
+		}
+
 		$from_server = self::detectFromServerGlobals();
 		if ( '' !== $from_server['version'] ) {
 			return self::buildResult( $from_server['version'], $from_server['source'] );
@@ -26,10 +33,30 @@ final class HttpProtocolDetector {
 
 		$from_loopback = self::detectFromLoopbackRequest();
 		if ( '' !== $from_loopback['version'] ) {
-			return self::buildResult( $from_loopback['version'], $from_loopback['source'] );
+			$result = self::buildResult( $from_loopback['version'], $from_loopback['source'] );
+
+			// Only the loopback result is cached: it's the expensive path (a real HTTP
+			// request). Failures are intentionally left uncached so the next page load
+			// retries instead of being stuck with a negative result for an hour.
+			set_transient( self::LOOPBACK_TRANSIENT, $result, HOUR_IN_SECONDS );
+
+			return $result;
 		}
 
 		return self::buildResult( 'unknown', 'none' );
+	}
+
+	/**
+	 * @param mixed $value
+	 * @phpstan-assert-if-true array{version:string,is_http11:bool,is_modern:bool,source:string} $value
+	 */
+	private static function isValidResult( $value ): bool {
+		return is_array( $value )
+			&& isset( $value['version'], $value['is_http11'], $value['is_modern'], $value['source'] )
+			&& is_string( $value['version'] )
+			&& is_bool( $value['is_http11'] )
+			&& is_bool( $value['is_modern'] )
+			&& is_string( $value['source'] );
 	}
 
 	/**
