@@ -1,9 +1,9 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Filesystem;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Filesystem;
 
 use Illuminate\Http\Request;
-use PerformanceToolkit\Vendor\Illuminate\Support\Facades\Storage;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades\Storage;
 use League\Flysystem\PathTraversalDetected;
 
 class ServeFile
@@ -36,7 +36,7 @@ class ServeFile
                 'Content-Security-Policy' => "default-src 'none'; style-src 'unsafe-inline'; sandbox",
             ];
 
-            return performancetoolkit_vendor_tap(
+            return pivotperformancetoolkit_vendor_tap(
                 Storage::disk($this->disk)->serve($request, $path, headers: $headers),
                 function ($response) use ($headers) {
                     if (! $response->headers->has('Content-Security-Policy')) {

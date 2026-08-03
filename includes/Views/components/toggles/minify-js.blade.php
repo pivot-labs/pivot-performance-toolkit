@@ -9,8 +9,8 @@
     :checked="$checked"
     :action="$action"
     :nonce="$nonce"
-    :label="__('Minify inline JavaScript', 'performance-toolkit')"
-    :description="__('Minifies inline script blocks in frontend HTML output.', 'performance-toolkit')"
+    :label="__('Minify inline JavaScript', 'pivot-performance-toolkit')"
+    :description="__('Minifies inline script blocks in frontend HTML output.', 'pivot-performance-toolkit')"
 >
     <x-slot name="icon">
         <x-icons.js

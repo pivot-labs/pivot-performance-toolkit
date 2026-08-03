@@ -1,4 +1,4 @@
-<x-card :title="__('Table breakdown', 'performance-toolkit')">
+<x-card :title="__('Table breakdown', 'pivot-performance-toolkit')">
     @php
         $show_overhead = (bool) ($show_overhead ?? false);
         $max_rows = isset($max_rows) ? (int) $max_rows : 0;
@@ -8,7 +8,7 @@
         $next_size_dir = ($sort_by === 'size' && $sort_dir === 'asc') ? 'desc' : 'asc';
         $size_sort_url = add_query_arg(
             array(
-                'page' => isset($_GET['page']) ? sanitize_key((string) wp_unslash($_GET['page'])) : 'performance-toolkit',
+                'page' => isset($_GET['page']) ? sanitize_key((string) wp_unslash($_GET['page'])) : 'pivot-performance-toolkit',
                 'section' => isset($_GET['section']) ? sanitize_key((string) wp_unslash($_GET['section'])) : 'database',
                 'tab' => isset($_GET['tab']) ? sanitize_key((string) wp_unslash($_GET['tab'])) : '',
                 'sort' => 'size',
@@ -24,19 +24,19 @@
     @endphp
 
     @if (!empty($display_rows))
-        <table class="ptk-table-list">
+        <table class="pivot-performance-toolkit-table-list">
             <thead>
                 <tr>
-                    <th>{{ __('Table', 'performance-toolkit') }}</th>
-                    <th>{{ __('Engine', 'performance-toolkit') }}</th>
-                    <th>{{ __('Rows', 'performance-toolkit') }}</th>
+                    <th>{{ __('Table', 'pivot-performance-toolkit') }}</th>
+                    <th>{{ __('Engine', 'pivot-performance-toolkit') }}</th>
+                    <th>{{ __('Rows', 'pivot-performance-toolkit') }}</th>
                     <th>
                         <a href="{!! esc_url($size_sort_url) !!}" style="text-decoration:none;">
-                            {{ __('Size', 'performance-toolkit') }}{{ $size_sort_indicator }}
+                            {{ __('Size', 'pivot-performance-toolkit') }}{{ $size_sort_indicator }}
                         </a>
                     </th>
                     @if ($show_overhead)
-                        <th>{{ __('Overhead', 'performance-toolkit') }}</th>
+                        <th>{{ __('Overhead', 'pivot-performance-toolkit') }}</th>
                     @endif
                 </tr>
             </thead>
@@ -44,17 +44,17 @@
                 @foreach ($display_rows as $table)
                     <tr>
                         <td><code>{{ $table['name'] }}</code></td>
-                        <td><span class="ptk-engine-badge">{{ $table['engine'] }}</span></td>
+                        <td><span class="pivot-performance-toolkit-engine-badge">{{ $table['engine'] }}</span></td>
                         <td>{{ number_format_i18n((int) $table['rows']) }}</td>
-                        <td>{{ \PerformanceToolkit\Database\DatabaseOptimizer::formatBytes((int) $table['size_bytes']) }}</td>
+                        <td>{{ \PivotPerformanceToolkit\Database\DatabaseOptimizer::formatBytes((int) $table['size_bytes']) }}</td>
                         @if ($show_overhead)
                             <td>
                                 @if ((int) $table['overhead_bytes'] > 0)
-                                    <span class="ptk-overhead-badge">
-                                        {{ \PerformanceToolkit\Database\DatabaseOptimizer::formatBytes((int) $table['overhead_bytes']) }}
+                                    <span class="pivot-performance-toolkit-overhead-badge">
+                                        {{ \PivotPerformanceToolkit\Database\DatabaseOptimizer::formatBytes((int) $table['overhead_bytes']) }}
                                     </span>
                                 @else
-                                    <span class="ptk-overhead-ok">-</span>
+                                    <span class="pivot-performance-toolkit-overhead-ok">-</span>
                                 @endif
                             </td>
                         @endif
@@ -66,9 +66,9 @@
             @php
                 $view_all_url = add_query_arg(
                     array(
-                        'page' => 'performance-toolkit',
+                        'page' => 'pivot-performance-toolkit',
                         'section' => 'database',
-                        'tab' => 'performance-toolkit-database-table',
+                        'tab' => 'pivot-performance-toolkit-database-table',
                     ),
                     admin_url('admin.php')
                 );
@@ -76,17 +76,17 @@
             <p style="margin-top:8px;font-size:12px;color:#646970;">
                 {{ sprintf(
                     /* translators: %d: Number of tables shown in the list. */
-                    __('Showing top %d tables by size.', 'performance-toolkit'),
+                    __('Showing top %d tables by size.', 'pivot-performance-toolkit'),
                     count($display_rows),
                 ) }}
                 <a href="{!! esc_url($view_all_url) !!}" style="color:#646970;text-decoration:underline;">
-                    {{ __('See all tables', 'performance-toolkit') }}
+                    {{ __('See all tables', 'pivot-performance-toolkit') }}
                 </a>
             </p>
         @endif
 
 
     @else
-        <p>{{ __('No table statistics are available right now.', 'performance-toolkit') }}</p>
+        <p>{{ __('No table statistics are available right now.', 'pivot-performance-toolkit') }}</p>
     @endif
 </x-card>

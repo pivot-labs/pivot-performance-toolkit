@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\View;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\View;
 
 class AnonymousComponent extends Component
 {

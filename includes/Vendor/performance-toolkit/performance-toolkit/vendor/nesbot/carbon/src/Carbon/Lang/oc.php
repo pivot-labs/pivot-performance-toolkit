@@ -15,9 +15,9 @@
  * - Quentin PAGÈS
  */
 // @codeCoverageIgnoreStart
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\PluralizationRules;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\PluralizationRules;
 
-if (class_exists('PerformanceToolkit\\Vendor\\Symfony\\Component\\Translation\\PluralizationRules')) {
+if (class_exists('PivotPerformanceToolkit\\Vendor\\Symfony\\Component\\Translation\\PluralizationRules')) {
     PluralizationRules::set(static function ($number) {
         return $number == 1 ? 0 : 1;
     }, 'oc');

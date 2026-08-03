@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation\Dumper;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Dumper;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\InvalidArgumentException;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogue;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\InvalidArgumentException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogue;
 
 /**
  * XliffFileDumper generates xliff files from a message catalogue.

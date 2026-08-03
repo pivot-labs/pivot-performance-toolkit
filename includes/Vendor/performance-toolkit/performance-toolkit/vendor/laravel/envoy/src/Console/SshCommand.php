@@ -1,14 +1,14 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Laravel\Envoy\Console;
+namespace PivotPerformanceToolkit\Vendor\Laravel\Envoy\Console;
 
 use InvalidArgumentException;
-use PerformanceToolkit\Vendor\Laravel\Envoy\Compiler;
-use PerformanceToolkit\Vendor\Laravel\Envoy\ConfigurationParser;
-use PerformanceToolkit\Vendor\Laravel\Envoy\TaskContainer;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Command\Command as SymfonyCommand;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputArgument;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputOption;
+use PivotPerformanceToolkit\Vendor\Laravel\Envoy\Compiler;
+use PivotPerformanceToolkit\Vendor\Laravel\Envoy\ConfigurationParser;
+use PivotPerformanceToolkit\Vendor\Laravel\Envoy\TaskContainer;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Command\Command as SymfonyCommand;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputArgument;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputOption;
 
 class SshCommand extends SymfonyCommand
 {
@@ -45,7 +45,7 @@ class SshCommand extends SymfonyCommand
     /**
      * Get the server from the task container.
      *
-     * @param  \PerformanceToolkit\Vendor\Laravel\Envoy\TaskContainer  $container
+     * @param  \PivotPerformanceToolkit\Vendor\Laravel\Envoy\TaskContainer  $container
      * @return string
      *
      * @throws \InvalidArgumentException
@@ -64,7 +64,7 @@ class SshCommand extends SymfonyCommand
     /**
      * Load the task container instance with the Envoy file.
      *
-     * @return \PerformanceToolkit\Vendor\Laravel\Envoy\TaskContainer
+     * @return \PivotPerformanceToolkit\Vendor\Laravel\Envoy\TaskContainer
      */
     protected function loadTaskContainer()
     {

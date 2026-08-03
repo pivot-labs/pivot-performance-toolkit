@@ -11,16 +11,16 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Carbon;
+namespace PivotPerformanceToolkit\Vendor\Carbon;
 
-use PerformanceToolkit\Vendor\Carbon\MessageFormatter\MessageFormatterMapper;
+use PivotPerformanceToolkit\Vendor\Carbon\MessageFormatter\MessageFormatterMapper;
 use Closure;
 use ReflectionException;
 use ReflectionFunction;
 use ReflectionProperty;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Formatter\MessageFormatterInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Loader\ArrayLoader;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Translator as SymfonyTranslator;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Formatter\MessageFormatterInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Loader\ArrayLoader;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Translator as SymfonyTranslator;
 use Throwable;
 
 abstract class AbstractTranslator extends SymfonyTranslator

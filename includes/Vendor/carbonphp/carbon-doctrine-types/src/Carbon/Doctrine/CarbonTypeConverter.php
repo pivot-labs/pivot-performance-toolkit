@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Vendor\Carbon\Doctrine;
+namespace PivotPerformanceToolkit\Vendor\Carbon\Doctrine;
 
-use PerformanceToolkit\Vendor\Carbon\Carbon;
-use PerformanceToolkit\Vendor\Carbon\CarbonInterface;
+use PivotPerformanceToolkit\Vendor\Carbon\Carbon;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface;
 use DateTimeInterface;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Platforms\DB2Platform;
@@ -75,7 +75,7 @@ trait CarbonTypeConverter
         throw InvalidType::new(
             $value,
             static::class,
-            ['null', 'DateTime', 'PerformanceToolkit\Vendor\Carbon']
+            ['null', 'DateTime', 'PivotPerformanceToolkit\Vendor\Carbon']
         );
     }
 

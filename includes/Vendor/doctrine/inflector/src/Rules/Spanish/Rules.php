@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Spanish;
+namespace PivotPerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Spanish;
 
-use PerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Patterns;
-use PerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Ruleset;
-use PerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Substitutions;
-use PerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Transformations;
+use PivotPerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Patterns;
+use PivotPerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Ruleset;
+use PivotPerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Substitutions;
+use PivotPerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Transformations;
 
 final class Rules
 {

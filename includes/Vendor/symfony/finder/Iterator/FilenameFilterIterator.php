@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Finder\Iterator;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Finder\Iterator;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Finder\Glob;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Finder\Glob;
 
 /**
  * FilenameFilterIterator filters files by patterns (a regexp, a glob, or a string).

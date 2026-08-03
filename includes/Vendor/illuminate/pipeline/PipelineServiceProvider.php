@@ -1,10 +1,10 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Pipeline;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Pipeline;
 
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Pipeline\Hub as PipelineHubContract;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\DeferrableProvider;
-use PerformanceToolkit\Vendor\Illuminate\Support\ServiceProvider;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Pipeline\Hub as PipelineHubContract;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\DeferrableProvider;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\ServiceProvider;
 
 class PipelineServiceProvider extends ServiceProvider implements DeferrableProvider
 {

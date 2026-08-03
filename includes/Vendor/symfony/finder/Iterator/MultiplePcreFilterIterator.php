@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Finder\Iterator;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Finder\Iterator;
 
 /**
  * MultiplePcreFilterIterator filters files using patterns (regexps, globs or strings).

@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Tester;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Tester;
 
 use PHPUnit\Framework\Assert;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Output\ConsoleOutput;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Output\StreamOutput;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Tester\Constraint\CommandIsSuccessful;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\ConsoleOutput;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\StreamOutput;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Tester\Constraint\CommandIsSuccessful;
 
 /**
  * @author Amrouche Hamza <hamza.simperfit@gmail.com>

@@ -1,20 +1,20 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\View;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\View;
 
 use ArrayAccess;
 use BadMethodCallException;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\MessageProvider;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Renderable;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\View\Engine;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\View\View as ViewContract;
-use PerformanceToolkit\Vendor\Illuminate\Support\Collection;
-use PerformanceToolkit\Vendor\Illuminate\Support\MessageBag;
-use PerformanceToolkit\Vendor\Illuminate\Support\Str;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
-use PerformanceToolkit\Vendor\Illuminate\Support\ViewErrorBag;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\MessageProvider;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Renderable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View\Engine;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View\View as ViewContract;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\MessageBag;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Str;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\ViewErrorBag;
 use Stringable;
 use Throwable;
 
@@ -27,14 +27,14 @@ class View implements ArrayAccess, Htmlable, Stringable, ViewContract
     /**
      * The view factory instance.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\View\Factory
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\View\Factory
      */
     protected $factory;
 
     /**
      * The engine implementation.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Contracts\View\Engine
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View\Engine
      */
     protected $engine;
 
@@ -62,8 +62,8 @@ class View implements ArrayAccess, Htmlable, Stringable, ViewContract
     /**
      * Create a new view instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\View\Factory  $factory
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\View\Engine  $engine
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\View\Factory  $factory
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View\Engine  $engine
      * @param  string  $view
      * @param  string  $path
      * @param  mixed  $data
@@ -114,7 +114,7 @@ class View implements ArrayAccess, Htmlable, Stringable, ViewContract
      */
     public function fragmentIf($boolean, $fragment)
     {
-        if (performancetoolkit_vendor_value($boolean)) {
+        if (pivotperformancetoolkit_vendor_value($boolean)) {
             return $this->fragment($fragment);
         }
 
@@ -130,7 +130,7 @@ class View implements ArrayAccess, Htmlable, Stringable, ViewContract
      */
     public function fragmentsIf($boolean, ?array $fragments = null)
     {
-        if (performancetoolkit_vendor_value($boolean)) {
+        if (pivotperformancetoolkit_vendor_value($boolean)) {
             return $this->fragments($fragments);
         }
 
@@ -275,7 +275,7 @@ class View implements ArrayAccess, Htmlable, Stringable, ViewContract
     /**
      * Add validation errors to the view.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\MessageProvider|array|string  $provider
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\MessageProvider|array|string  $provider
      * @param  string  $bag
      * @return $this
      */
@@ -289,8 +289,8 @@ class View implements ArrayAccess, Htmlable, Stringable, ViewContract
     /**
      * Parse the given errors into an appropriate value.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\MessageProvider|array|string  $provider
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\MessageBag
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\MessageProvider|array|string  $provider
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\MessageBag
      */
     protected function formatErrors($provider)
     {
@@ -353,7 +353,7 @@ class View implements ArrayAccess, Htmlable, Stringable, ViewContract
     /**
      * Get the view factory instance.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\View\Factory
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\View\Factory
      */
     public function getFactory()
     {
@@ -363,7 +363,7 @@ class View implements ArrayAccess, Htmlable, Stringable, ViewContract
     /**
      * Get the view's rendering engine.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\View\Engine
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View\Engine
      */
     public function getEngine()
     {
@@ -465,7 +465,7 @@ class View implements ArrayAccess, Htmlable, Stringable, ViewContract
      *
      * @param  string  $method
      * @param  array  $parameters
-     * @return \PerformanceToolkit\Vendor\Illuminate\View\View
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\View\View
      *
      * @throws \BadMethodCallException
      */

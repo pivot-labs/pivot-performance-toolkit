@@ -2,15 +2,19 @@
 /**
  * Dashboard admin page.
  *
- * @package PerformanceToolkit
+ * @package PivotPerformanceToolkit
  */
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Admin;
+namespace PivotPerformanceToolkit\Admin;
 
-use PerformanceToolkit\Core\Settings;
-use PerformanceToolkit\Utils\FilesystemCheck;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+use PivotPerformanceToolkit\Core\Settings;
+use PivotPerformanceToolkit\Utils\FilesystemCheck;
 
 final class DashboardPage extends BladeAdminPage {
 
@@ -21,15 +25,15 @@ final class DashboardPage extends BladeAdminPage {
 	}
 
 	public function slug(): string {
-		return 'performance-toolkit';
+		return 'pivot-performance-toolkit';
 	}
 
 	public function menuTitle(): string {
-		return __( 'Dashboard', 'performance-toolkit' );
+		return __( 'Dashboard', 'pivot-performance-toolkit' );
 	}
 
 	public function pageTitle(): string {
-		return __( 'Performance Toolkit Dashboard', 'performance-toolkit' );
+		return __( 'Pivot Performance Toolkit Dashboard', 'pivot-performance-toolkit' );
 	}
 
 	public function iconKey(): string {
@@ -45,7 +49,7 @@ final class DashboardPage extends BladeAdminPage {
 	 * @return array<string, mixed>
 	 */
 	protected function buildViewData(): array {
-		$last_result = get_option( 'ptk_last_performance_result', array() );
+		$last_result = get_option( 'pivot_performance_toolkit_last_performance_result', array() );
 		$last_score  = PerformanceTest::calculateOverallScoreFromResult( is_array( $last_result ) ? $last_result : array() );
 
 		return array(

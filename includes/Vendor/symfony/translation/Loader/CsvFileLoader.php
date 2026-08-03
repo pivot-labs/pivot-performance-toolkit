@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation\Loader;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Loader;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\NotFoundResourceException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\NotFoundResourceException;
 
 /**
  * CsvFileLoader loads translations from CSV files.
@@ -61,7 +61,7 @@ class CsvFileLoader extends FileLoader
         $this->delimiter = $delimiter;
         $this->enclosure = $enclosure;
         if ('' !== $escape) {
-            performancetoolkit_vendor_trigger_deprecation('symfony/translation', '7.2', 'The "escape" parameter of the "%s" method is deprecated. It will be removed in 8.0.', __METHOD__);
+            pivotperformancetoolkit_vendor_trigger_deprecation('symfony/translation', '7.2', 'The "escape" parameter of the "%s" method is deprecated. It will be removed in 8.0.', __METHOD__);
         }
 
         $this->escape = $escape;

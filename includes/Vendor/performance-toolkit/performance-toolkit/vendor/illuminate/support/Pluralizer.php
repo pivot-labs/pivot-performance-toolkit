@@ -1,8 +1,8 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
-use PerformanceToolkit\Vendor\Doctrine\Inflector\InflectorFactory;
+use PivotPerformanceToolkit\Vendor\Doctrine\Inflector\InflectorFactory;
 
 class Pluralizer
 {
@@ -101,7 +101,7 @@ class Pluralizer
     /**
      * Get the inflector instance.
      *
-     * @return \PerformanceToolkit\Vendor\Doctrine\Inflector\Inflector
+     * @return \PivotPerformanceToolkit\Vendor\Doctrine\Inflector\Inflector
      */
     public static function inflector()
     {

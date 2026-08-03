@@ -22,7 +22,7 @@
  * - atakigawa
  */
 
-use PerformanceToolkit\Vendor\Carbon\CarbonInterface;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface;
 
 return [
     'year' => ':count年',
@@ -59,7 +59,7 @@ return [
     'calendar' => [
         'sameDay' => '[今日] LT',
         'nextDay' => '[明日] LT',
-        'nextWeek' => static function (CarbonInterface $current, \PerformanceToolkit\Vendor\Carbon\CarbonInterface $other) {
+        'nextWeek' => static function (CarbonInterface $current, \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface $other) {
             if ($other->week !== $current->week) {
                 return '[来週]dddd LT';
             }
@@ -67,7 +67,7 @@ return [
             return 'dddd LT';
         },
         'lastDay' => '[昨日] LT',
-        'lastWeek' => static function (CarbonInterface $current, \PerformanceToolkit\Vendor\Carbon\CarbonInterface $other) {
+        'lastWeek' => static function (CarbonInterface $current, \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface $other) {
             if ($other->week !== $current->week) {
                 return '[先週]dddd LT';
             }

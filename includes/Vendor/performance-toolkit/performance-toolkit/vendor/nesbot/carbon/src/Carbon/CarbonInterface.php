@@ -9,20 +9,20 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace PerformanceToolkit\Vendor\Carbon;
+namespace PivotPerformanceToolkit\Vendor\Carbon;
 
 use BadMethodCallException;
-use PerformanceToolkit\Vendor\Carbon\Constants\DiffOptions;
-use PerformanceToolkit\Vendor\Carbon\Constants\Format;
-use PerformanceToolkit\Vendor\Carbon\Constants\TranslationOptions;
-use PerformanceToolkit\Vendor\Carbon\Constants\UnitValue;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\BadComparisonUnitException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\ImmutableException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\InvalidDateException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\InvalidFormatException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\UnknownGetterException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\UnknownMethodException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\UnknownSetterException;
+use PivotPerformanceToolkit\Vendor\Carbon\Constants\DiffOptions;
+use PivotPerformanceToolkit\Vendor\Carbon\Constants\Format;
+use PivotPerformanceToolkit\Vendor\Carbon\Constants\TranslationOptions;
+use PivotPerformanceToolkit\Vendor\Carbon\Constants\UnitValue;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\BadComparisonUnitException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\ImmutableException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\InvalidDateException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\InvalidFormatException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\UnknownGetterException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\UnknownMethodException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\UnknownSetterException;
 use Closure;
 use DateInterval;
 use DateTime;
@@ -32,7 +32,7 @@ use DateTimeZone;
 use JsonSerializable;
 use ReflectionException;
 use ReturnTypeWillChange;
-use PerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatorInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatorInterface;
 use Throwable;
 /**
  * Common interface for Carbon and CarbonImmutable.
@@ -1017,7 +1017,7 @@ interface CarbonInterface extends DateTimeInterface, JsonSerializable, DiffOptio
      * Modify the current instance to the average of a given instance (default now) and the current instance
      * (second-precision).
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|null $date
      *
      * @return static
      */
@@ -1098,7 +1098,7 @@ interface CarbonInterface extends DateTimeInterface, JsonSerializable, DiffOptio
      * Return the Carbon instance passed through, a now instance in the same timezone
      * if null given or parse the input if string given.
      *
-     * @param \Carbon|\PerformanceToolkit\Vendor\Carbon\CarbonPeriod|\PerformanceToolkit\Vendor\Carbon\CarbonInterval|\DateInterval|\DatePeriod|DateTimeInterface|string|null $date
+     * @param \Carbon|\PivotPerformanceToolkit\Vendor\Carbon\CarbonPeriod|\PivotPerformanceToolkit\Vendor\Carbon\CarbonInterval|\DateInterval|\DatePeriod|DateTimeInterface|string|null $date
      *
      * @return static
      */
@@ -1161,8 +1161,8 @@ interface CarbonInterface extends DateTimeInterface, JsonSerializable, DiffOptio
     /**
      * Get the closest date from the instance (second-precision).
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|mixed $date1
-     * @param \PerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|mixed $date2
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|mixed $date1
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|mixed $date2
      *
      * @return static
      */
@@ -1390,7 +1390,7 @@ interface CarbonInterface extends DateTimeInterface, JsonSerializable, DiffOptio
      * Return relative interval (negative if $absolute flag is not set to true and the given date is before
      * current one).
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      *
      * @return \CarbonInterval
@@ -1401,7 +1401,7 @@ interface CarbonInterface extends DateTimeInterface, JsonSerializable, DiffOptio
      * Return relative interval (negative if $absolute flag is not set to true and the given date is before
      * current one).
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      *
      * @return DateInterval
@@ -1412,7 +1412,7 @@ interface CarbonInterface extends DateTimeInterface, JsonSerializable, DiffOptio
      *
      * @param \CarbonInterval                                         $ci       An interval to traverse by
      * @param Closure                                                $callback
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      *
      * @return int
@@ -1472,7 +1472,7 @@ interface CarbonInterface extends DateTimeInterface, JsonSerializable, DiffOptio
     /**
      * Get the difference in days.
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      * @param bool                                                   $utc      Always convert dates to UTC before comparing (if not set, it will do it only if timezones are different)
      *
@@ -1483,7 +1483,7 @@ interface CarbonInterface extends DateTimeInterface, JsonSerializable, DiffOptio
      * Get the difference in days using a filter closure.
      *
      * @param Closure                                                $callback
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      *
      * @return int
@@ -1492,7 +1492,7 @@ interface CarbonInterface extends DateTimeInterface, JsonSerializable, DiffOptio
     /**
      * Get the difference in hours.
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      *
      * @return float
@@ -1502,7 +1502,7 @@ interface CarbonInterface extends DateTimeInterface, JsonSerializable, DiffOptio
      * Get the difference in hours using a filter closure.
      *
      * @param Closure                                                $callback
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      *
      * @return int
@@ -1511,7 +1511,7 @@ interface CarbonInterface extends DateTimeInterface, JsonSerializable, DiffOptio
     /**
      * Get the difference in microseconds.
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      *
      * @return float
@@ -1520,7 +1520,7 @@ interface CarbonInterface extends DateTimeInterface, JsonSerializable, DiffOptio
     /**
      * Get the difference in milliseconds.
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      *
      * @return float
@@ -1529,7 +1529,7 @@ interface CarbonInterface extends DateTimeInterface, JsonSerializable, DiffOptio
     /**
      * Get the difference in minutes.
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      *
      * @return float
@@ -1538,7 +1538,7 @@ interface CarbonInterface extends DateTimeInterface, JsonSerializable, DiffOptio
     /**
      * Get the difference in months.
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      * @param bool                                                   $utc      Always convert dates to UTC before comparing (if not set, it will do it only if timezones are different)
      *
@@ -1548,7 +1548,7 @@ interface CarbonInterface extends DateTimeInterface, JsonSerializable, DiffOptio
     /**
      * Get the difference in quarters.
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      * @param bool                                                   $utc      Always convert dates to UTC before comparing (if not set, it will do it only if timezones are different)
      *
@@ -1558,7 +1558,7 @@ interface CarbonInterface extends DateTimeInterface, JsonSerializable, DiffOptio
     /**
      * Get the difference in seconds.
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      *
      * @return float
@@ -1568,7 +1568,7 @@ interface CarbonInterface extends DateTimeInterface, JsonSerializable, DiffOptio
      * @param Unit|string                                            $unit     microsecond, millisecond, second, minute,
      *                                                                         hour, day, week, month, quarter, year,
      *                                                                         century, millennium
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      * @param bool                                                   $utc      Always convert dates to UTC before comparing (if not set, it will do it only if timezones are different)
      *
@@ -1578,7 +1578,7 @@ interface CarbonInterface extends DateTimeInterface, JsonSerializable, DiffOptio
     /**
      * Get the difference in weekdays.
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      *
      * @return int
@@ -1587,7 +1587,7 @@ interface CarbonInterface extends DateTimeInterface, JsonSerializable, DiffOptio
     /**
      * Get the difference in weekend days using a filter.
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      *
      * @return int
@@ -1596,7 +1596,7 @@ interface CarbonInterface extends DateTimeInterface, JsonSerializable, DiffOptio
     /**
      * Get the difference in weeks.
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      * @param bool                                                   $utc      Always convert dates to UTC before comparing (if not set, it will do it only if timezones are different)
      *
@@ -1606,7 +1606,7 @@ interface CarbonInterface extends DateTimeInterface, JsonSerializable, DiffOptio
     /**
      * Get the difference in years
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      * @param bool                                                   $utc      Always convert dates to UTC before comparing (if not set, it will do it only if timezones are different)
      *
@@ -1805,8 +1805,8 @@ interface CarbonInterface extends DateTimeInterface, JsonSerializable, DiffOptio
     /**
      * Get the farthest date from the instance (second-precision).
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|mixed $date1
-     * @param \PerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|mixed $date2
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|mixed $date1
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|mixed $date2
      *
      * @return static
      */
@@ -3054,7 +3054,7 @@ interface CarbonInterface extends DateTimeInterface, JsonSerializable, DiffOptio
     /**
      * Get the maximum instance between a given instance (default now) and the current instance.
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|mixed $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|mixed $date
      *
      * @return static
      */
@@ -3062,7 +3062,7 @@ interface CarbonInterface extends DateTimeInterface, JsonSerializable, DiffOptio
     /**
      * Get the maximum instance between a given instance (default now) and the current instance.
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|mixed $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|mixed $date
      *
      * @see max()
      *
@@ -3084,7 +3084,7 @@ interface CarbonInterface extends DateTimeInterface, JsonSerializable, DiffOptio
     /**
      * Get the minimum instance between a given instance (default now) and the current instance.
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|mixed $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|mixed $date
      *
      * @return static
      */
@@ -3092,7 +3092,7 @@ interface CarbonInterface extends DateTimeInterface, JsonSerializable, DiffOptio
     /**
      * Get the minimum instance between a given instance (default now) and the current instance.
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|mixed $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|mixed $date
      *
      * @see min()
      *

@@ -1,9 +1,9 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Laravel\Envoy\Console;
+namespace PivotPerformanceToolkit\Vendor\Laravel\Envoy\Console;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Command\Command as SymfonyCommand;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputArgument;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Command\Command as SymfonyCommand;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputArgument;
 
 class InitCommand extends SymfonyCommand
 {

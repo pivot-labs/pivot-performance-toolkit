@@ -9,16 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Attribute;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Attribute;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Attribute\Reflection\ReflectionMember;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Completion\CompletionInput;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Completion\Suggestion;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\InvalidOptionException;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\LogicException;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputOption;
-use PerformanceToolkit\Vendor\Symfony\Component\String\UnicodeString;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Attribute\Reflection\ReflectionMember;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Completion\CompletionInput;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Completion\Suggestion;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\InvalidOptionException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\LogicException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputOption;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\String\UnicodeString;
 
 #[\Attribute(\Attribute::TARGET_PARAMETER | \Attribute::TARGET_PROPERTY)]
 class Option

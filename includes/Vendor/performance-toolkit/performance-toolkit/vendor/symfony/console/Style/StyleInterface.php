@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Style;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Style;
 
 /**
  * Output style helpers.

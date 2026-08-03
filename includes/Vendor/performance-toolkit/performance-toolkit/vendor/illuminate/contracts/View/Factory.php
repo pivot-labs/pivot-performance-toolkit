@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\View;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View;
 
 interface Factory
 {
@@ -16,9 +16,9 @@ interface Factory
      * Get the evaluated view contents for the given path.
      *
      * @param  string  $path
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable|array  $data
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable|array  $data
      * @param  array  $mergeData
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\View\View
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View\View
      */
     public function file($path, $data = [], $mergeData = []);
 
@@ -26,9 +26,9 @@ interface Factory
      * Get the evaluated view contents for the given view.
      *
      * @param  string  $view
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable|array  $data
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable|array  $data
      * @param  array  $mergeData
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\View\View
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View\View
      */
     public function make($view, $data = [], $mergeData = []);
 

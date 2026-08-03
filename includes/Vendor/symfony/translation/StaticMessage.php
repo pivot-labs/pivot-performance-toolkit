@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation;
 
-use PerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatableInterface;
-use PerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatorInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatableInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatorInterface;
 
 final class StaticMessage implements TranslatableInterface
 {

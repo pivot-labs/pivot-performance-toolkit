@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes;
 
 use Closure;
 
@@ -27,7 +27,7 @@ class ChainedBatchTruthTest
     /**
      * Invoke the truth test with the given pending batch.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch  $pendingBatch
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch  $pendingBatch
      * @return bool
      */
     public function __invoke($pendingBatch)

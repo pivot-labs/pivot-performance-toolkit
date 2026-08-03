@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
 
 use Illuminate\Database\Console\Migrations\FreshCommand;
 use Illuminate\Database\Console\Migrations\RefreshCommand;
@@ -25,7 +25,7 @@ use Illuminate\Database\Console\WipeCommand;
  * @method static void forgetExtension(string $name)
  * @method static array<string, \Illuminate\Database\Connection> getConnections()
  * @method static void setReconnector(callable $reconnector)
- * @method static \Illuminate\Database\DatabaseManager setApplication(\PerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application $app)
+ * @method static \Illuminate\Database\DatabaseManager setApplication(\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application $app)
  * @method static void macro(string $name, object|callable $macro)
  * @method static void mixin(object $mixin, bool $replace = true)
  * @method static bool hasMacro(string $name)
@@ -35,7 +35,7 @@ use Illuminate\Database\Console\WipeCommand;
  * @method static void useDefaultSchemaGrammar()
  * @method static void useDefaultPostProcessor()
  * @method static \Illuminate\Database\Schema\Builder getSchemaBuilder()
- * @method static \Illuminate\Database\Query\Builder table(\Closure|\Illuminate\Database\Query\Builder|\PerformanceToolkit\Vendor\Illuminate\Contracts\Database\Query\Expression|\UnitEnum|string $table, string|null $as = null)
+ * @method static \Illuminate\Database\Query\Builder table(\Closure|\Illuminate\Database\Query\Builder|\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Database\Query\Expression|\UnitEnum|string $table, string|null $as = null)
  * @method static \Illuminate\Database\Query\Builder query()
  * @method static mixed selectOne(string $query, array $bindings = [], bool $useReadPdo = true)
  * @method static mixed scalar(string $query, array $bindings = [], bool $useReadPdo = true)
@@ -55,7 +55,7 @@ use Illuminate\Database\Console\WipeCommand;
  * @method static void bindValues(\PDOStatement $statement, array $bindings)
  * @method static array prepareBindings(array $bindings)
  * @method static void logQuery(string $query, array $bindings, float|null $time = null)
- * @method static void whenQueryingForLongerThan(\DateTimeInterface|\PerformanceToolkit\Vendor\Carbon\CarbonInterval|float|int $threshold, callable $handler)
+ * @method static void whenQueryingForLongerThan(\DateTimeInterface|\PivotPerformanceToolkit\Vendor\Carbon\CarbonInterval|float|int $threshold, callable $handler)
  * @method static void allowQueryDurationHandlersToRunAgain()
  * @method static float totalQueryDuration()
  * @method static void resetTotalQueryDuration()
@@ -63,7 +63,7 @@ use Illuminate\Database\Console\WipeCommand;
  * @method static \Illuminate\Database\Connection beforeStartingTransaction(\Closure $callback)
  * @method static \Illuminate\Database\Connection beforeExecuting(\Closure $callback)
  * @method static void listen(\Closure $callback)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Database\Query\Expression raw(mixed|int|float $value)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Database\Query\Expression raw(mixed|int|float $value)
  * @method static string escape(string|float|int|bool|null $value, bool $binary = false)
  * @method static bool hasModifiedRecords()
  * @method static void recordsHaveBeenModified(bool $value = true)
@@ -88,8 +88,8 @@ use Illuminate\Database\Console\WipeCommand;
  * @method static \Illuminate\Database\Connection setSchemaGrammar(\Illuminate\Database\Schema\Grammars\Grammar $grammar)
  * @method static \Illuminate\Database\Query\Processors\Processor getPostProcessor()
  * @method static \Illuminate\Database\Connection setPostProcessor(\Illuminate\Database\Query\Processors\Processor $processor)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher|null getEventDispatcher()
- * @method static \Illuminate\Database\Connection setEventDispatcher(\PerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher $events)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher|null getEventDispatcher()
+ * @method static \Illuminate\Database\Connection setEventDispatcher(\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher $events)
  * @method static void unsetEventDispatcher()
  * @method static \Illuminate\Database\Connection setTransactionManager(\Illuminate\Database\DatabaseTransactionsManager $manager)
  * @method static void unsetTransactionManager()

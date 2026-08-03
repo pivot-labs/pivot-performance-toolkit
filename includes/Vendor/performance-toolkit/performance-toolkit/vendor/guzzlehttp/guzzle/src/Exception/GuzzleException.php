@@ -1,8 +1,8 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp\Exception;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp\Exception;
 
-use PerformanceToolkit\Vendor\Psr\Http\Client\ClientExceptionInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Client\ClientExceptionInterface;
 
 interface GuzzleException extends ClientExceptionInterface
 {

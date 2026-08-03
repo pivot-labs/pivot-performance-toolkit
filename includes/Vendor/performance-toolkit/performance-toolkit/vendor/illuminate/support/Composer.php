@@ -1,19 +1,19 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
 use Closure;
-use PerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem;
+use PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem;
 use RuntimeException;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Process\Process;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Process\Process;
 
 class Composer
 {
     /**
      * The filesystem instance.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem
      */
     protected $files;
 
@@ -27,7 +27,7 @@ class Composer
     /**
      * Create a new Composer manager instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem  $files
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem  $files
      * @param  string|null  $workingPath
      */
     public function __construct(Filesystem $files, $workingPath = null)
@@ -57,7 +57,7 @@ class Composer
      *
      * @param  array<int, string>  $packages
      * @param  bool  $dev
-     * @param  \Closure|\PerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface|null  $output
+     * @param  \Closure|\PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface|null  $output
      * @param  string|null  $composerBinary
      * @return bool
      */
@@ -86,7 +86,7 @@ class Composer
      *
      * @param  array<int, string>  $packages
      * @param  bool  $dev
-     * @param  \Closure|\PerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface|null  $output
+     * @param  \Closure|\PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface|null  $output
      * @param  string|null  $composerBinary
      * @return bool
      */
@@ -210,7 +210,7 @@ class Composer
      *
      * @param  array<string>  $command
      * @param  array<string, string>  $env
-     * @return \PerformanceToolkit\Vendor\Symfony\Component\Process\Process
+     * @return \PivotPerformanceToolkit\Vendor\Symfony\Component\Process\Process
      */
     protected function getProcess(array $command, array $env = [])
     {

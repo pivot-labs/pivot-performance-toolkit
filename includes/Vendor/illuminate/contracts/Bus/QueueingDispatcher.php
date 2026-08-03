@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Bus;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Bus;
 
 interface QueueingDispatcher extends Dispatcher
 {
@@ -8,15 +8,15 @@ interface QueueingDispatcher extends Dispatcher
      * Attempt to find the batch with the given ID.
      *
      * @param  string  $batchId
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\Batch|null
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\Batch|null
      */
     public function findBatch(string $batchId);
 
     /**
      * Create a new batch of queueable jobs.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Support\Collection|array  $jobs
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection|array  $jobs
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch
      */
     public function batch($jobs);
 

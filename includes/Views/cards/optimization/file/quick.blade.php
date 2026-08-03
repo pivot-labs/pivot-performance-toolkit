@@ -1,4 +1,4 @@
-<x-card :title="__('Quick Optimizations', 'performance-toolkit')" id="ptk-file-quick">
+<x-card :title="__('Quick Optimizations', 'pivot-performance-toolkit')" id="pivot-performance-toolkit-file-quick">
     <ul role="list" class="grid grid-cols-1 gap-4 items-stretch">
         <x-toggles.defer
             :checked="!empty($options['defer_scripts'])"

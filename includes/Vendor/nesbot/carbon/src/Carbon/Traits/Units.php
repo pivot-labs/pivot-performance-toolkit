@@ -11,16 +11,16 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Carbon\Traits;
+namespace PivotPerformanceToolkit\Vendor\Carbon\Traits;
 
-use PerformanceToolkit\Vendor\Carbon\CarbonConverterInterface;
-use PerformanceToolkit\Vendor\Carbon\CarbonInterface;
-use PerformanceToolkit\Vendor\Carbon\CarbonInterval;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\InvalidFormatException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\InvalidIntervalException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\UnitException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\UnsupportedUnitException;
-use PerformanceToolkit\Vendor\Carbon\Unit;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonConverterInterface;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterval;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\InvalidFormatException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\InvalidIntervalException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\UnitException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\UnsupportedUnitException;
+use PivotPerformanceToolkit\Vendor\Carbon\Unit;
 use Closure;
 use DateInterval;
 use DateMalformedStringException;

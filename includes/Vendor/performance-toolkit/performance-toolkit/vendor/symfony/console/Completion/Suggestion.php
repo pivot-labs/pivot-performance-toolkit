@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Completion;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Completion;
 
 /**
  * Represents a single suggested value.

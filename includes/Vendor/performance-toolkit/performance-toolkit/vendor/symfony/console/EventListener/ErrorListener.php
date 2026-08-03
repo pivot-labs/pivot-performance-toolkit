@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\EventListener;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\EventListener;
 
 use Psr\Log\LoggerInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\ConsoleEvents;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Event\ConsoleErrorEvent;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Event\ConsoleEvent;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Event\ConsoleTerminateEvent;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\ConsoleEvents;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Event\ConsoleErrorEvent;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Event\ConsoleEvent;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Event\ConsoleTerminateEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**

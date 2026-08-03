@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Traits;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits;
 
 use Illuminate\Database\Eloquent\Attributes\UseResource;
 use Illuminate\Database\Eloquent\Attributes\UseResourceCollection;

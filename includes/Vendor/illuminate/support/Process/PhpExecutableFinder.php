@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Process;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Process;
 
 use Symfony\Component\Process\ExecutableFinder;
 use Symfony\Component\Process\PhpExecutableFinder as SymfonyPhpExecutableFinder;

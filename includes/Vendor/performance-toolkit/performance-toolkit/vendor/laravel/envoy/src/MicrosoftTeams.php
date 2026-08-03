@@ -1,8 +1,8 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Laravel\Envoy;
+namespace PivotPerformanceToolkit\Vendor\Laravel\Envoy;
 
-use PerformanceToolkit\Vendor\GuzzleHttp\Client;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Client;
 
 class MicrosoftTeams
 {
@@ -67,7 +67,7 @@ class MicrosoftTeams
      * @param  string  $message
      * @param  string  $theme
      * @param  array  $options
-     * @return \PerformanceToolkit\Vendor\Laravel\Envoy\MicrosoftTeams
+     * @return \PivotPerformanceToolkit\Vendor\Laravel\Envoy\MicrosoftTeams
      */
     public static function make($hook, $message = null, $theme = 'success', $options = [])
     {

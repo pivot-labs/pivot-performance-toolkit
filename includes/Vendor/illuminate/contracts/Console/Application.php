@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Console;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Console;
 
 interface Application
 {

@@ -19,4 +19,4 @@ if (PHP_VERSION_ID < 50600) {
 
 require_once __DIR__ . '/composer/autoload_real.php';
 
-return PerformanceToolkit_Vendor_ComposerAutoloaderInit43482ed2622bfe07e1674c445993a8b5::getLoader();
+return PivotPerformanceToolkit_Vendor_ComposerAutoloaderInit43482ed2622bfe07e1674c445993a8b5::getLoader();

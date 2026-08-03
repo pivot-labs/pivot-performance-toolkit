@@ -9,10 +9,10 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace PerformanceToolkit\Vendor\Carbon\Traits;
+namespace PivotPerformanceToolkit\Vendor\Carbon\Traits;
 
-use PerformanceToolkit\Vendor\Carbon\CarbonInterface;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\InvalidFormatException;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\InvalidFormatException;
 use ReturnTypeWillChange;
 /**
  * Trait Modifiers.
@@ -300,7 +300,7 @@ trait Modifiers
      * Modify the current instance to the average of a given instance (default now) and the current instance
      * (second-precision).
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|null $date
      *
      * @return static
      */
@@ -311,8 +311,8 @@ trait Modifiers
     /**
      * Get the closest date from the instance (second-precision).
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|mixed $date1
-     * @param \PerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|mixed $date2
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|mixed $date1
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|mixed $date2
      *
      * @return static
      */
@@ -323,8 +323,8 @@ trait Modifiers
     /**
      * Get the farthest date from the instance (second-precision).
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|mixed $date1
-     * @param \PerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|mixed $date2
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|mixed $date1
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|mixed $date2
      *
      * @return static
      */
@@ -335,7 +335,7 @@ trait Modifiers
     /**
      * Get the minimum instance between a given instance (default now) and the current instance.
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|mixed $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|mixed $date
      *
      * @return static
      */
@@ -347,7 +347,7 @@ trait Modifiers
     /**
      * Get the minimum instance between a given instance (default now) and the current instance.
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|mixed $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|mixed $date
      *
      * @see min()
      *
@@ -360,7 +360,7 @@ trait Modifiers
     /**
      * Get the maximum instance between a given instance (default now) and the current instance.
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|mixed $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|mixed $date
      *
      * @return static
      */
@@ -372,7 +372,7 @@ trait Modifiers
     /**
      * Get the maximum instance between a given instance (default now) and the current instance.
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|mixed $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|mixed $date
      *
      * @see max()
      *

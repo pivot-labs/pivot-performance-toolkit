@@ -1,14 +1,14 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
 
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Notifications\ChannelManager;
-use PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\NotificationFake;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\NotificationFake;
 
 /**
- * @method static void send(\PerformanceToolkit\Vendor\Illuminate\Support\Collection|array|mixed $notifiables, mixed $notification)
- * @method static void sendNow(\PerformanceToolkit\Vendor\Illuminate\Support\Collection|array|mixed $notifiables, mixed $notification, array|null $channels = null)
+ * @method static void send(\PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection|array|mixed $notifiables, mixed $notification)
+ * @method static void sendNow(\PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection|array|mixed $notifiables, mixed $notification, array|null $channels = null)
  * @method static mixed channel(string|null $name = null)
  * @method static string getDefaultDriver()
  * @method static string deliversVia()
@@ -17,8 +17,8 @@ use PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\NotificationFake;
  * @method static mixed driver(string|null $driver = null)
  * @method static \Illuminate\Notifications\ChannelManager extend(string $driver, \Closure $callback)
  * @method static array getDrivers()
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container getContainer()
- * @method static \Illuminate\Notifications\ChannelManager setContainer(\PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container $container)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container getContainer()
+ * @method static \Illuminate\Notifications\ChannelManager setContainer(\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container $container)
  * @method static \Illuminate\Notifications\ChannelManager forgetDrivers()
  * @method static void assertSentOnDemand(string|\Closure $notification, callable|null $callback = null)
  * @method static void assertSentTo(mixed $notifiable, string|\Closure $notification, callable|null $callback = null)
@@ -29,9 +29,9 @@ use PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\NotificationFake;
  * @method static void assertNothingSentTo(mixed $notifiable)
  * @method static void assertSentTimes(string $notification, int $expectedCount)
  * @method static void assertCount(int $expectedCount)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Collection sent(mixed $notifiable, string $notification, callable|null $callback = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection sent(mixed $notifiable, string $notification, callable|null $callback = null)
  * @method static bool hasSent(mixed $notifiable, string $notification)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\NotificationFake serializeAndRestore(bool $serializeAndRestore = true)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\NotificationFake serializeAndRestore(bool $serializeAndRestore = true)
  * @method static array sentNotifications()
  * @method static void macro(string $name, object|callable $macro)
  * @method static void mixin(object $mixin, bool $replace = true)
@@ -39,18 +39,18 @@ use PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\NotificationFake;
  * @method static void flushMacros()
  *
  * @see \Illuminate\Notifications\ChannelManager
- * @see \PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\NotificationFake
+ * @see \PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\NotificationFake
  */
 class Notification extends Facade
 {
     /**
      * Replace the bound instance with a fake.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\NotificationFake
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\NotificationFake
      */
     public static function fake()
     {
-        return performancetoolkit_vendor_tap(new NotificationFake, function ($fake) {
+        return pivotperformancetoolkit_vendor_tap(new NotificationFake, function ($fake) {
             static::swap($fake);
         });
     }

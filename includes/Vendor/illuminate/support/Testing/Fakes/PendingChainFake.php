@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes;
 
 use Closure;
 use Illuminate\Foundation\Bus\PendingChain;
@@ -11,14 +11,14 @@ class PendingChainFake extends PendingChain
     /**
      * The fake bus instance.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\BusFake
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\BusFake
      */
     protected $bus;
 
     /**
      * Create a new pending chain instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\BusFake  $bus
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\BusFake  $bus
      * @param  mixed  $job
      * @param  array  $chain
      * @return void

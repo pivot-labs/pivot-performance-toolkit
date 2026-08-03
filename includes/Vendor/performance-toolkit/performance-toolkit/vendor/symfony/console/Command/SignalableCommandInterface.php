@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Command;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Command;
 
 /**
  * Interface for command reacting to signal.

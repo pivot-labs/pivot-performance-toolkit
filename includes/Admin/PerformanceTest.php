@@ -2,22 +2,26 @@
 /**
  * Basic performance test feature.
  *
- * @package PerformanceToolkit
+ * @package PivotPerformanceToolkit
  */
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Admin;
+namespace PivotPerformanceToolkit\Admin;
 
-use PerformanceToolkit\Contracts\ModuleInterface;
-use PerformanceToolkit\Core\Settings;
-use PerformanceToolkit\Utils\PerformanceProfileBands;
-use PerformanceToolkit\Views\BladeEngine;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+use PivotPerformanceToolkit\Contracts\ModuleInterface;
+use PivotPerformanceToolkit\Core\Settings;
+use PivotPerformanceToolkit\Utils\PerformanceProfileBands;
+use PivotPerformanceToolkit\Views\BladeEngine;
 
 final class PerformanceTest implements ModuleInterface {
 
-	private const LAST_RESULT_OPTION = 'ptk_last_performance_result';
-	private const TRANSIENT_PREFIX   = 'ptk_test_';
+	private const LAST_RESULT_OPTION = 'pivot_performance_toolkit_last_performance_result';
+	private const TRANSIENT_PREFIX   = 'pivot_performance_toolkit_test_';
 	private const SCORE_WEIGHTS      = array(
 		'page_load_time' => 25,
 		'lcp'            => 25,
@@ -62,22 +66,22 @@ final class PerformanceTest implements ModuleInterface {
 	}
 
 	public function enqueueAdminAssets( string $hook_suffix ): void {
-		if ( 'toplevel_page_performance-toolkit' !== $hook_suffix ) {
+		if ( 'toplevel_page_pivot-performance-toolkit' !== $hook_suffix ) {
 			return;
 		}
 
 		$last_result = get_option( self::LAST_RESULT_OPTION, array() );
 
 		wp_enqueue_script(
-			'performance-toolkit-performance-test',
-			PERFORMANCE_TOOLKIT_URL . 'src/js/performance-test.js',
+			'pivot-performance-toolkit-performance-test',
+			PIVOT_PERFORMANCE_TOOLKIT_URL . 'src/js/performance-test.js',
 			array(),
-			PERFORMANCE_TOOLKIT_VERSION,
+			PIVOT_PERFORMANCE_TOOLKIT_VERSION,
 			true
 		);
 
 		wp_localize_script(
-			'performance-toolkit-performance-test',
+			'pivot-performance-toolkit-performance-test',
 			'ptkPerfTest',
 			array(
 				'restRoot'         => esc_url_raw( rest_url( 'ptk/v1/performance-tests/' ) ),
@@ -96,32 +100,32 @@ final class PerformanceTest implements ModuleInterface {
 				'timeoutMs'        => 45000,
 				'lastResult'       => is_array( $last_result ) ? $last_result : array(),
 				'i18n'             => array(
-					'starting'               => __( 'Starting test...', 'performance-toolkit' ),
-					'running'                => __( 'Loading target URL and collecting metrics...', 'performance-toolkit' ),
-					'done'                   => __( 'Test complete.', 'performance-toolkit' ),
-					'timeout'                => __( 'Timed out waiting for test result.', 'performance-toolkit' ),
-					'failed'                 => __( 'Could not run test.', 'performance-toolkit' ),
-					'requestFailed'          => __( 'Request failed.', 'performance-toolkit' ),
-					'cacheServed'            => __( 'Your page is being served from cache.', 'performance-toolkit' ),
-					'cacheNotServed'         => __( 'Your page is not being served from cache.', 'performance-toolkit' ),
-					'bandExcellent'          => __( 'Excellent', 'performance-toolkit' ),
-					'bandGood'               => __( 'Good', 'performance-toolkit' ),
-					'bandNeedsImprovement'   => __( 'Needs Improvement', 'performance-toolkit' ),
-					'bandPoor'               => __( 'Poor', 'performance-toolkit' ),
-					'scoreAriaPrefix'        => __( 'Score', 'performance-toolkit' ),
-					'statusExcellent'        => __( 'Excellent', 'performance-toolkit' ),
-					'statusHit'              => __( 'HIT', 'performance-toolkit' ),
-					'statusGood'             => __( 'Good', 'performance-toolkit' ),
-					'statusOkay'             => __( 'Okay', 'performance-toolkit' ),
-					'statusNeedsImprovement' => __( 'Needs improvement', 'performance-toolkit' ),
-					'statusSlow'             => __( 'Slow', 'performance-toolkit' ),
-					'statusModerate'         => __( 'Moderate', 'performance-toolkit' ),
-					'statusPoor'             => __( 'Poor', 'performance-toolkit' ),
-					'statusMiss'             => __( 'MISS', 'performance-toolkit' ),
-					'statusHeavy'            => __( 'Heavy', 'performance-toolkit' ),
-					'statusHigh'             => __( 'High', 'performance-toolkit' ),
-					'cacheHit'               => __( 'HIT', 'performance-toolkit' ),
-					'cacheMiss'              => __( 'MISS', 'performance-toolkit' ),
+					'starting'               => __( 'Starting test...', 'pivot-performance-toolkit' ),
+					'running'                => __( 'Loading target URL and collecting metrics...', 'pivot-performance-toolkit' ),
+					'done'                   => __( 'Test complete.', 'pivot-performance-toolkit' ),
+					'timeout'                => __( 'Timed out waiting for test result.', 'pivot-performance-toolkit' ),
+					'failed'                 => __( 'Could not run test.', 'pivot-performance-toolkit' ),
+					'requestFailed'          => __( 'Request failed.', 'pivot-performance-toolkit' ),
+					'cacheServed'            => __( 'Your page is being served from cache.', 'pivot-performance-toolkit' ),
+					'cacheNotServed'         => __( 'Your page is not being served from cache.', 'pivot-performance-toolkit' ),
+					'bandExcellent'          => __( 'Excellent', 'pivot-performance-toolkit' ),
+					'bandGood'               => __( 'Good', 'pivot-performance-toolkit' ),
+					'bandNeedsImprovement'   => __( 'Needs Improvement', 'pivot-performance-toolkit' ),
+					'bandPoor'               => __( 'Poor', 'pivot-performance-toolkit' ),
+					'scoreAriaPrefix'        => __( 'Score', 'pivot-performance-toolkit' ),
+					'statusExcellent'        => __( 'Excellent', 'pivot-performance-toolkit' ),
+					'statusHit'              => __( 'HIT', 'pivot-performance-toolkit' ),
+					'statusGood'             => __( 'Good', 'pivot-performance-toolkit' ),
+					'statusOkay'             => __( 'Okay', 'pivot-performance-toolkit' ),
+					'statusNeedsImprovement' => __( 'Needs improvement', 'pivot-performance-toolkit' ),
+					'statusSlow'             => __( 'Slow', 'pivot-performance-toolkit' ),
+					'statusModerate'         => __( 'Moderate', 'pivot-performance-toolkit' ),
+					'statusPoor'             => __( 'Poor', 'pivot-performance-toolkit' ),
+					'statusMiss'             => __( 'MISS', 'pivot-performance-toolkit' ),
+					'statusHeavy'            => __( 'Heavy', 'pivot-performance-toolkit' ),
+					'statusHigh'             => __( 'High', 'pivot-performance-toolkit' ),
+					'cacheHit'               => __( 'HIT', 'pivot-performance-toolkit' ),
+					'cacheMiss'              => __( 'MISS', 'pivot-performance-toolkit' ),
 				),
 			)
 		);
@@ -168,7 +172,7 @@ final class PerformanceTest implements ModuleInterface {
 		$target_url = self::normalizeTargetUrl( $raw_target );
 
 		if ( '' === $target_url || ! self::isSameHostUrl( $target_url ) ) {
-			return new \WP_Error( 'ptk_invalid_target', __( 'Please provide a valid URL on this site.', 'performance-toolkit' ), array( 'status' => 400 ) );
+			return new \WP_Error( 'pivot_performance_toolkit_invalid_target', __( 'Please provide a valid URL on this site.', 'pivot-performance-toolkit' ), array( 'status' => 400 ) );
 		}
 
 		$token = wp_generate_password( 40, false, false );
@@ -193,13 +197,13 @@ final class PerformanceTest implements ModuleInterface {
 		$token = sanitize_text_field( (string) $request->get_param( 'token' ) );
 
 		if ( '' === $token ) {
-			return new \WP_Error( 'ptk_missing_token', __( 'Missing test token.', 'performance-toolkit' ), array( 'status' => 400 ) );
+			return new \WP_Error( 'pivot_performance_toolkit_missing_token', __( 'Missing test token.', 'pivot-performance-toolkit' ), array( 'status' => 400 ) );
 		}
 
 		$state = get_transient( self::TRANSIENT_PREFIX . $token );
 
 		if ( ! is_array( $state ) || empty( $state['status'] ) ) {
-			return new \WP_Error( 'ptk_unknown_token', __( 'Test token is invalid or expired.', 'performance-toolkit' ), array( 'status' => 404 ) );
+			return new \WP_Error( 'pivot_performance_toolkit_unknown_token', __( 'Test token is invalid or expired.', 'pivot-performance-toolkit' ), array( 'status' => 404 ) );
 		}
 
 		$result = array(
@@ -221,13 +225,13 @@ final class PerformanceTest implements ModuleInterface {
 		$token = sanitize_text_field( (string) $request->get_param( 'token' ) );
 
 		if ( '' === $token ) {
-			return new \WP_Error( 'ptk_missing_token', __( 'Missing test token.', 'performance-toolkit' ), array( 'status' => 400 ) );
+			return new \WP_Error( 'pivot_performance_toolkit_missing_token', __( 'Missing test token.', 'pivot-performance-toolkit' ), array( 'status' => 400 ) );
 		}
 
 		$state = get_transient( self::TRANSIENT_PREFIX . $token );
 
 		if ( ! is_array( $state ) ) {
-			return new \WP_Error( 'ptk_unknown_token', __( 'Test token is invalid or expired.', 'performance-toolkit' ), array( 'status' => 404 ) );
+			return new \WP_Error( 'pivot_performance_toolkit_unknown_token', __( 'Test token is invalid or expired.', 'pivot-performance-toolkit' ), array( 'status' => 404 ) );
 		}
 
 		return rest_ensure_response( $state );
@@ -247,9 +251,9 @@ final class PerformanceTest implements ModuleInterface {
 		echo "\n<script>\n";
 		echo '(function(){';
 		echo 'var collectUrl=' . $safe_url . ';';
-		echo 'function getToken(){var token="";try{token=String(window.name||"").trim();}catch(e){}if(token&&token.length>=20){return token;}try{var m=document.cookie.match(/(?:^|;\\s*)ptk_perf_probe=([^;]+)/);if(m){token=String(m[1]||"").trim();if(token.length>=20){return token;}}}catch(e){}return "";}';
+		echo 'function getToken(){var token="";try{token=String(window.name||"").trim();}catch(e){}if(token&&token.length>=20){return token;}try{var m=document.cookie.match(/(?:^|;\\s*)pivot_performance_toolkit_perf_probe=([^;]+)/);if(m){token=String(m[1]||"").trim();if(token.length>=20){return token;}}}catch(e){}return "";}';
 		echo 'var token=getToken();';
-		echo 'var sentKey=token?"ptk_perf_sent_"+token:"";';
+		echo 'var sentKey=token?"pivot_performance_toolkit_perf_sent_"+token:"";';
 		echo 'if(!token){return;}';
 		echo 'try{if(window.sessionStorage&&window.sessionStorage.getItem(sentKey)==="1"){return;}}catch(e){}';
 		echo 'var fcp=0;';
@@ -261,8 +265,8 @@ final class PerformanceTest implements ModuleInterface {
 		echo 'function getCssMetrics(){var links=document.querySelectorAll("link[rel=\"stylesheet\"]")||[];var count=links.length;var totalSize=0;var resources=performance.getEntriesByType("resource")||[];resources.forEach(function(r){if(r.name&&(r.name.endsWith(".css")||r.initiatorType==="link")){var size=r.transferSize||r.encodedBodySize||0;totalSize+=size;}});return{total_css_count:count,total_css_size_bytes:totalSize};}';
 		echo 'function getImageMetrics(){var images=document.querySelectorAll("img")||[];var count=images.length;var totalSize=0;var resources=performance.getEntriesByType("resource")||[];resources.forEach(function(r){var name=String(r&&r.name?r.name:"").toLowerCase();var type=String(r&&r.initiatorType?r.initiatorType:"").toLowerCase();if(type==="img"||/\.(avif|bmp|gif|heic|heif|ico|jpe?g|png|svg|webp|tif|tiff)(\?|#|$)/i.test(name)){var size=r.transferSize||r.encodedBodySize||0;totalSize+=size;}});return{total_image_count:count,total_image_size_bytes:totalSize};}';
 		echo 'function collect(){var nav=(performance.getEntriesByType("navigation")[0]||null);if(!fcp){fcp=getFcpMetric();}if(!lcp){var lcpEntries=performance.getEntriesByType("largest-contentful-paint")||[];if(lcpEntries.length){lcp=lcpEntries[lcpEntries.length-1].startTime||0;}}var jsMetrics=getJsMetrics();var cssMetrics=getCssMetrics();var imageMetrics=getImageMetrics();var resources=performance.getEntriesByType("resource")||[];var metrics={ttfb_ms:num(nav&&nav.responseStart?nav.responseStart:0),fcp_ms:num(fcp),lcp_ms:num(lcp),dom_content_loaded_ms:num(nav&&nav.domContentLoadedEventEnd?nav.domContentLoadedEventEnd:0),load_event_ms:num(nav&&nav.loadEventEnd?nav.loadEventEnd:0),total_resource_count:resources.length,total_js_count:jsMetrics.total_js_count,total_js_size_bytes:jsMetrics.total_js_size_bytes,total_css_count:cssMetrics.total_css_count,total_css_size_bytes:cssMetrics.total_css_size_bytes,total_image_count:imageMetrics.total_image_count,total_image_size_bytes:imageMetrics.total_image_size_bytes};return metrics;}';
-		echo 'function getCacheHit(){return fetch(window.location.href,{method:"GET",credentials:"same-origin",cache:"no-store"}).then(function(response){var cacheStatus=String(response.headers.get("x-performance-toolkit-cache")||"").toUpperCase();return cacheStatus==="HIT"?1:0;}).catch(function(){return 0;});}';
-		echo 'function send(){return getCacheHit().then(function(cacheHit){document.cookie="ptk_perf_probe=;path=/;SameSite=Lax;max-age=0;expires=Thu, 01 Jan 1970 00:00:00 GMT";var metrics=collect();metrics.page_cache_hit=cacheHit;var payload={token:token,pageUrl:window.location.href,metrics:metrics};return fetch(collectUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload),keepalive:true,credentials:"omit"}).then(function(){try{if(window.sessionStorage){window.sessionStorage.setItem(sentKey,"1");}}catch(e){}try{window.name="";}catch(e){} });}).catch(function(){});}';
+		echo 'function getCacheHit(){return fetch(window.location.href,{method:"GET",credentials:"same-origin",cache:"no-store"}).then(function(response){var cacheStatus=String(response.headers.get("x-pivot-performance-toolkit-cache")||"").toUpperCase();return cacheStatus==="HIT"?1:0;}).catch(function(){return 0;});}';
+		echo 'function send(){return getCacheHit().then(function(cacheHit){document.cookie="pivot_performance_toolkit_perf_probe=;path=/;SameSite=Lax;max-age=0;expires=Thu, 01 Jan 1970 00:00:00 GMT";var metrics=collect();metrics.page_cache_hit=cacheHit;var payload={token:token,pageUrl:window.location.href,metrics:metrics};return fetch(collectUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload),keepalive:true,credentials:"omit"}).then(function(){try{if(window.sessionStorage){window.sessionStorage.setItem(sentKey,"1");}}catch(e){}try{window.name="";}catch(e){} });}).catch(function(){});}';
 		echo 'window.addEventListener("load",function(){window.setTimeout(send,300);});';
 		echo '})();';
 		echo "\n</script>\n";
@@ -315,7 +319,7 @@ final class PerformanceTest implements ModuleInterface {
 
 				$label = is_string( $title ) && '' !== trim( $title ) ? $title : sprintf(
 					/* translators: %d: post ID. */
-					__( 'Untitled #%d', 'performance-toolkit' ),
+					__( 'Untitled #%d', 'pivot-performance-toolkit' ),
 					(int) $post_id
 				);
 
@@ -408,7 +412,7 @@ final class PerformanceTest implements ModuleInterface {
 			return '';
 		}
 
-		return (string) remove_query_arg( array( 'ptk_perf_probe', 'ptk_perf_token' ), $sanitized );
+		return (string) remove_query_arg( array( 'pivot_performance_toolkit_perf_probe', 'pivot_performance_toolkit_perf_token' ), $sanitized );
 	}
 
 	/**

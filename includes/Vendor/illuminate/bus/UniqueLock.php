@@ -1,22 +1,22 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Bus;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Bus;
 
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Cache\Repository as Cache;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Cache\Repository as Cache;
 
 class UniqueLock
 {
     /**
      * The cache repository implementation.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Contracts\Cache\Repository
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Cache\Repository
      */
     protected $cache;
 
     /**
      * Create a new unique lock manager instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Cache\Repository  $cache
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Cache\Repository  $cache
      * @return void
      */
     public function __construct(Cache $cache)

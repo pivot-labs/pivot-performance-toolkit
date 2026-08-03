@@ -9,19 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation\Command;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Command;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Attribute\AsCommand;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Command\Command;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Completion\CompletionInput;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Completion\CompletionSuggestions;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputOption;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Style\SymfonyStyle;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\ExceptionInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\TranslatorBagInterface;
-use PerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatorInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Attribute\AsCommand;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Command\Command;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Completion\CompletionInput;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Completion\CompletionSuggestions;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputOption;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Style\SymfonyStyle;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\ExceptionInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\TranslatorBagInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Lint translations files syntax and outputs encountered errors.

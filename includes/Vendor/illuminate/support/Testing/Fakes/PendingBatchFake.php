@@ -1,24 +1,24 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes;
 
-use PerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch;
-use PerformanceToolkit\Vendor\Illuminate\Support\Collection;
+use PivotPerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection;
 
 class PendingBatchFake extends PendingBatch
 {
     /**
      * The fake bus instance.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\BusFake
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\BusFake
      */
     protected $bus;
 
     /**
      * Create a new pending batch instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\BusFake  $bus
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Support\Collection  $jobs
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\BusFake  $bus
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection  $jobs
      * @return void
      */
     public function __construct(BusFake $bus, Collection $jobs)
@@ -30,7 +30,7 @@ class PendingBatchFake extends PendingBatch
     /**
      * Dispatch the batch.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\Batch
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\Batch
      */
     public function dispatch()
     {
@@ -40,7 +40,7 @@ class PendingBatchFake extends PendingBatch
     /**
      * Dispatch the batch after the response is sent to the browser.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\Batch
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\Batch
      */
     public function dispatchAfterResponse()
     {

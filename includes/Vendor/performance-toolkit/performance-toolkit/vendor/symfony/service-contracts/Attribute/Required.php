@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Contracts\Service\Attribute;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Contracts\Service\Attribute;
 
 /**
  * A required dependency.

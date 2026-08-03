@@ -22,7 +22,7 @@
  * - qcardona
  */
 
-use PerformanceToolkit\Vendor\Carbon\CarbonInterface;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface;
 
 return [
     'year' => ':count any|:count anys',

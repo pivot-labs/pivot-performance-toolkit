@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation\Dumper;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Dumper;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Loader\MoFileLoader;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogue;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Loader\MoFileLoader;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogue;
 
 /**
  * MoFileDumper generates a gettext formatted string representation of a message catalogue.

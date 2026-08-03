@@ -2,28 +2,32 @@
 /**
  * Settings admin page.
  *
- * @package PerformanceToolkit
+ * @package PivotPerformanceToolkit
  */
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Admin;
+namespace PivotPerformanceToolkit\Admin;
 
-use PerformanceToolkit\Core\Settings;
-use PerformanceToolkit\Utils\ProfileDetector;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+use PivotPerformanceToolkit\Core\Settings;
+use PivotPerformanceToolkit\Utils\ProfileDetector;
 
 final class SettingsPage extends BladeAdminPage {
 
-	private const SET_UNINSTALL_POLICY_ACTION = 'performance_toolkit_set_uninstall_policy';
-	private const SET_WEBSITE_PROFILE_ACTION  = 'performance_toolkit_set_website_profile';
+	private const SET_UNINSTALL_POLICY_ACTION = 'pivot_performance_toolkit_set_uninstall_policy';
+	private const SET_WEBSITE_PROFILE_ACTION  = 'pivot_performance_toolkit_set_website_profile';
 
-	private const TOOLS_NOTICE_QUERY_KEY = 'ptk_tools_notice';
+	private const TOOLS_NOTICE_QUERY_KEY = 'pivot_performance_toolkit_tools_notice';
 
-	private const TOOLS_MESSAGE_QUERY_KEY = 'ptk_tools_message';
+	private const TOOLS_MESSAGE_QUERY_KEY = 'pivot_performance_toolkit_tools_message';
 
-	private const SETTINGS_NOTICE_QUERY_KEY = 'ptk_settings_notice';
+	private const SETTINGS_NOTICE_QUERY_KEY = 'pivot_performance_toolkit_settings_notice';
 
-	private const SETTINGS_MESSAGE_QUERY_KEY = 'ptk_settings_message';
+	private const SETTINGS_MESSAGE_QUERY_KEY = 'pivot_performance_toolkit_settings_message';
 
 	private Settings $settings;
 
@@ -34,15 +38,15 @@ final class SettingsPage extends BladeAdminPage {
 	}
 
 	public function slug(): string {
-		return 'performance-toolkit-settings';
+		return 'pivot-performance-toolkit-settings';
 	}
 
 	public function menuTitle(): string {
-		return __( 'Settings', 'performance-toolkit' );
+		return __( 'Settings', 'pivot-performance-toolkit' );
 	}
 
 	public function pageTitle(): string {
-		return __( 'Performance Toolkit Settings', 'performance-toolkit' );
+		return __( 'Pivot Performance Toolkit Settings', 'pivot-performance-toolkit' );
 	}
 
 	public function iconKey(): string {
@@ -69,7 +73,7 @@ final class SettingsPage extends BladeAdminPage {
 			'tools_message'                  => $tools_message,
 			'settings_notice'                => $settings_notice,
 			'settings_message'               => $settings_message,
-			'cleanup_on_uninstall'           => (bool) get_option( 'performance_toolkit_remove_data_on_uninstall', false ),
+			'cleanup_on_uninstall'           => (bool) get_option( 'pivot_performance_toolkit_remove_data_on_uninstall', false ),
 			'set_uninstall_policy_action'    => self::SET_UNINSTALL_POLICY_ACTION,
 			'website_profile'                => (string) ( $current_settings['website_profile'] ?? 'standard' ),
 			'website_profile_action'         => self::SET_WEBSITE_PROFILE_ACTION,
@@ -80,12 +84,12 @@ final class SettingsPage extends BladeAdminPage {
 
 	public function handleSetWebsiteProfile(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => __( 'You are not allowed to perform this action.', 'performance-toolkit' ) ), 403 );
+			wp_send_json_error( array( 'message' => __( 'You are not allowed to perform this action.', 'pivot-performance-toolkit' ) ), 403 );
 		}
 
-		check_ajax_referer( 'ptk_set_website_profile' );
+		check_ajax_referer( 'pivot_performance_toolkit_set_website_profile' );
 
-		$profile = isset( $_POST['ptk_website_profile'] ) ? sanitize_key( (string) wp_unslash( $_POST['ptk_website_profile'] ) ) : '';
+		$profile = isset( $_POST['pivot_performance_toolkit_website_profile'] ) ? sanitize_key( (string) wp_unslash( $_POST['pivot_performance_toolkit_website_profile'] ) ) : '';
 
 		$settings                    = $this->settings->all();
 		$settings['website_profile'] = $profile;
@@ -99,7 +103,7 @@ final class SettingsPage extends BladeAdminPage {
 			array(
 				'message' => sprintf(
 				/* translators: %s: profile label e.g. "Standard" */
-					__( 'Website profile changed to %s.', 'performance-toolkit' ),
+					__( 'Website profile changed to %s.', 'pivot-performance-toolkit' ),
 					$label
 				),
 			)
@@ -111,10 +115,10 @@ final class SettingsPage extends BladeAdminPage {
 	 */
 	private static function websiteProfileOptions(): array {
 		return array(
-			'standard'           => __( 'Standard', 'performance-toolkit' ),
-			'woocommerce'        => __( 'WooCommerce', 'performance-toolkit' ),
-			'membership-lms'     => __( 'Membership / LMS', 'performance-toolkit' ),
-			'page-builder-heavy' => __( 'Page Builder Heavy', 'performance-toolkit' ),
+			'standard'           => __( 'Standard', 'pivot-performance-toolkit' ),
+			'woocommerce'        => __( 'WooCommerce', 'pivot-performance-toolkit' ),
+			'membership-lms'     => __( 'Membership / LMS', 'pivot-performance-toolkit' ),
+			'page-builder-heavy' => __( 'Page Builder Heavy', 'pivot-performance-toolkit' ),
 		);
 	}
 }

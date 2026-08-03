@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Polyfill\Mbstring;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Polyfill\Mbstring;
 
 /**
  * Partial mbstring implementation in PHP, iconv based, UTF-8 centric.

@@ -1,16 +1,16 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Container;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Container;
 
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Container\ContextualBindingBuilder as ContextualBindingBuilderContract;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\ContextualBindingBuilder as ContextualBindingBuilderContract;
 
 class ContextualBindingBuilder implements ContextualBindingBuilderContract
 {
     /**
      * The underlying container instance.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container
      */
     protected $container;
 
@@ -31,7 +31,7 @@ class ContextualBindingBuilder implements ContextualBindingBuilderContract
     /**
      * Create a new contextual binding builder.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container  $container
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container  $container
      * @param  string|array  $concrete
      * @return void
      */

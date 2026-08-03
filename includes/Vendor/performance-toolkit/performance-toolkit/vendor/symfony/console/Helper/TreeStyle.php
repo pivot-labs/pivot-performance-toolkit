@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Helper;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Helper;
 
 /**
  * Configures the output of the Tree helper.

@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation\Extractor;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Extractor;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogue;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogue;
 
 /**
  * ChainExtractor extracts translation messages from template files.

@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Input;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\InvalidArgumentException;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\RuntimeException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\InvalidArgumentException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\RuntimeException;
 
 /**
  * InputInterface is the interface implemented by all input classes.

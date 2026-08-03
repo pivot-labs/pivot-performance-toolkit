@@ -11,9 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Carbon;
+namespace PivotPerformanceToolkit\Vendor\Carbon;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogueInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogueInterface;
 
 /**
  * Mark translator using strong type from symfony/translation >= 6.

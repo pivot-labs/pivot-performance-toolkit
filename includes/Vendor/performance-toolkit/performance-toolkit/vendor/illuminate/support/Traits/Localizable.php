@@ -1,8 +1,8 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Traits;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits;
 
-use PerformanceToolkit\Vendor\Illuminate\Container\Container;
+use PivotPerformanceToolkit\Vendor\Illuminate\Container\Container;
 
 trait Localizable
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
 
 use Illuminate\Concurrency\ConcurrencyManager;
 
@@ -16,9 +16,9 @@ use Illuminate\Concurrency\ConcurrencyManager;
  * @method static \Illuminate\Concurrency\ConcurrencyManager forgetInstance(array|string|null $name = null)
  * @method static void purge(string|null $name = null)
  * @method static \Illuminate\Concurrency\ConcurrencyManager extend(string $name, \Closure $callback)
- * @method static \Illuminate\Concurrency\ConcurrencyManager setApplication(\PerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application $app)
+ * @method static \Illuminate\Concurrency\ConcurrencyManager setApplication(\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application $app)
  * @method static array run(\Closure|array $tasks)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Defer\DeferredCallback defer(\Closure|array $tasks)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Defer\DeferredCallback defer(\Closure|array $tasks)
  *
  * @see \Illuminate\Concurrency\ConcurrencyManager
  */

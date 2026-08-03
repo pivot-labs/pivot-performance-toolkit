@@ -2,12 +2,16 @@
 /**
  * Detects HTTP protocol version for current/admin context.
  *
- * @package PerformanceToolkit
+ * @package PivotPerformanceToolkit
  */
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Utils;
+namespace PivotPerformanceToolkit\Utils;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 final class HttpProtocolDetector {
 

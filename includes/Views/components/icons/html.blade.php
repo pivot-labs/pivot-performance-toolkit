@@ -1,7 +1,7 @@
 @props([])
 
 @php
-    $svg = \PerformanceToolkit\Admin\LucideIcons::render('html');
+    $svg = \PivotPerformanceToolkit\Admin\LucideIcons::render('html');
     $svg = str_replace('<svg ', '<svg class="h-7 w-7" ', $svg);
 @endphp
 

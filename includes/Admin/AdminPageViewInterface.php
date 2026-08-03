@@ -2,12 +2,16 @@
 /**
  * Admin page view contract.
  *
- * @package PerformanceToolkit
+ * @package PivotPerformanceToolkit
  */
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Admin;
+namespace PivotPerformanceToolkit\Admin;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 interface AdminPageViewInterface {
 

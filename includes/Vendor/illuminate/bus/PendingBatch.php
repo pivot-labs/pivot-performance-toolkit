@@ -1,19 +1,19 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Bus;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Bus;
 
 use Closure;
-use PerformanceToolkit\Vendor\Illuminate\Bus\Events\BatchDispatched;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher as EventDispatcher;
-use PerformanceToolkit\Vendor\Illuminate\Support\Arr;
-use PerformanceToolkit\Vendor\Illuminate\Support\Collection;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Conditionable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Bus\Events\BatchDispatched;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher as EventDispatcher;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Arr;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Conditionable;
 use Laravel\SerializableClosure\SerializableClosure;
 use RuntimeException;
 use Throwable;
 
-use function PerformanceToolkit\Vendor\Illuminate\Support\enum_value;
+use function PivotPerformanceToolkit\Vendor\Illuminate\Support\enum_value;
 
 class PendingBatch
 {
@@ -22,7 +22,7 @@ class PendingBatch
     /**
      * The IoC container instance.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container
      */
     protected $container;
 
@@ -36,7 +36,7 @@ class PendingBatch
     /**
      * The jobs that belong to the batch.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Support\Collection
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection
      */
     public $jobs;
 
@@ -57,8 +57,8 @@ class PendingBatch
     /**
      * Create a new pending batch instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container  $container
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Support\Collection  $jobs
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container  $container
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection  $jobs
      * @return void
      */
     public function __construct(Container $container, Collection $jobs)
@@ -102,7 +102,7 @@ class PendingBatch
                 return;
             }
 
-            if (! (static::$batchableClasses[$job::class] ?? false) && ! in_array(Batchable::class, performancetoolkit_vendor_class_uses_recursive($job))) {
+            if (! (static::$batchableClasses[$job::class] ?? false) && ! in_array(Batchable::class, pivotperformancetoolkit_vendor_class_uses_recursive($job))) {
                 static::$batchableClasses[$job::class] = false;
 
                 throw new RuntimeException(sprintf('Attempted to batch job [%s], but it does not use the Batchable trait.', $job::class));
@@ -336,7 +336,7 @@ class PendingBatch
     /**
      * Dispatch the batch.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\Batch
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\Batch
      *
      * @throws \Throwable
      */
@@ -366,7 +366,7 @@ class PendingBatch
     /**
      * Dispatch the batch after the response is sent to the browser.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\Batch
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\Batch
      */
     public function dispatchAfterResponse()
     {
@@ -386,7 +386,7 @@ class PendingBatch
     /**
      * Dispatch an existing batch.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Bus\Batch  $batch
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Bus\Batch  $batch
      * @return void
      *
      * @throws \Throwable
@@ -410,29 +410,29 @@ class PendingBatch
      * Dispatch the batch if the given truth test passes.
      *
      * @param  bool|\Closure  $boolean
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\Batch|null
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\Batch|null
      */
     public function dispatchIf($boolean)
     {
-        return performancetoolkit_vendor_value($boolean) ? $this->dispatch() : null;
+        return pivotperformancetoolkit_vendor_value($boolean) ? $this->dispatch() : null;
     }
 
     /**
      * Dispatch the batch unless the given truth test passes.
      *
      * @param  bool|\Closure  $boolean
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\Batch|null
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\Batch|null
      */
     public function dispatchUnless($boolean)
     {
-        return ! performancetoolkit_vendor_value($boolean) ? $this->dispatch() : null;
+        return ! pivotperformancetoolkit_vendor_value($boolean) ? $this->dispatch() : null;
     }
 
     /**
      * Store the batch using the given repository.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Bus\BatchRepository  $repository
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\Batch
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Bus\BatchRepository  $repository
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\Batch
      */
     protected function store($repository)
     {

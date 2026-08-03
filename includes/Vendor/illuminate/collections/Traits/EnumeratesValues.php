@@ -1,17 +1,17 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Traits;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits;
 
 use BackedEnum;
 use CachingIterator;
 use Closure;
 use Exception;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Jsonable;
-use PerformanceToolkit\Vendor\Illuminate\Support\Arr;
-use PerformanceToolkit\Vendor\Illuminate\Support\Collection;
-use PerformanceToolkit\Vendor\Illuminate\Support\Enumerable;
-use PerformanceToolkit\Vendor\Illuminate\Support\HigherOrderCollectionProxy;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Jsonable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Arr;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Enumerable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\HigherOrderCollectionProxy;
 use InvalidArgumentException;
 use JsonSerializable;
 use Traversable;
@@ -19,7 +19,7 @@ use UnexpectedValueException;
 use UnitEnum;
 use WeakMap;
 
-use function PerformanceToolkit\Vendor\Illuminate\Support\enum_value;
+use function PivotPerformanceToolkit\Vendor\Illuminate\Support\enum_value;
 
 /**
  * @template TKey of array-key
@@ -112,7 +112,7 @@ trait EnumeratesValues
      * @template TMakeKey of array-key
      * @template TMakeValue
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TMakeKey, TMakeValue>|iterable<TMakeKey, TMakeValue>|null  $items
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TMakeKey, TMakeValue>|iterable<TMakeKey, TMakeValue>|null  $items
      * @return static<TMakeKey, TMakeValue>
      */
     public static function make($items = [])
@@ -331,10 +331,10 @@ trait EnumeratesValues
     public function value($key, $default = null)
     {
         if ($value = $this->firstWhere($key)) {
-            return performancetoolkit_vendor_data_get($value, $key, $default);
+            return pivotperformancetoolkit_vendor_data_get($value, $key, $default);
         }
 
-        return performancetoolkit_vendor_value($default);
+        return pivotperformancetoolkit_vendor_value($default);
     }
 
     /**
@@ -423,7 +423,7 @@ trait EnumeratesValues
      * @template TFlatMapKey of array-key
      * @template TFlatMapValue
      *
-     * @param  callable(TValue, TKey): (\PerformanceToolkit\Vendor\Illuminate\Support\Collection<TFlatMapKey, TFlatMapValue>|array<TFlatMapKey, TFlatMapValue>)  $callback
+     * @param  callable(TValue, TKey): (\PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection<TFlatMapKey, TFlatMapValue>|array<TFlatMapKey, TFlatMapValue>)  $callback
      * @return static<TFlatMapKey, TFlatMapValue>
      */
     public function flatMap(callable $callback)
@@ -663,7 +663,7 @@ trait EnumeratesValues
      * Filter items by the given key value pair.
      *
      * @param  string  $key
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable|iterable  $values
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable|iterable  $values
      * @param  bool  $strict
      * @return static
      */
@@ -671,14 +671,14 @@ trait EnumeratesValues
     {
         $values = $this->getArrayableItems($values);
 
-        return $this->filter(fn ($item) => in_array(performancetoolkit_vendor_data_get($item, $key), $values, $strict));
+        return $this->filter(fn ($item) => in_array(pivotperformancetoolkit_vendor_data_get($item, $key), $values, $strict));
     }
 
     /**
      * Filter items by the given key value pair using strict comparison.
      *
      * @param  string  $key
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable|iterable  $values
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable|iterable  $values
      * @return static
      */
     public function whereInStrict($key, $values)
@@ -690,7 +690,7 @@ trait EnumeratesValues
      * Filter items such that the value of the given key is between the given values.
      *
      * @param  string  $key
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable|iterable  $values
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable|iterable  $values
      * @return static
      */
     public function whereBetween($key, $values)
@@ -702,13 +702,13 @@ trait EnumeratesValues
      * Filter items such that the value of the given key is not between the given values.
      *
      * @param  string  $key
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable|iterable  $values
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable|iterable  $values
      * @return static
      */
     public function whereNotBetween($key, $values)
     {
         return $this->filter(
-            fn ($item) => performancetoolkit_vendor_data_get($item, $key) < reset($values) || performancetoolkit_vendor_data_get($item, $key) > end($values)
+            fn ($item) => pivotperformancetoolkit_vendor_data_get($item, $key) < reset($values) || pivotperformancetoolkit_vendor_data_get($item, $key) > end($values)
         );
     }
 
@@ -716,7 +716,7 @@ trait EnumeratesValues
      * Filter items by the given key value pair.
      *
      * @param  string  $key
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable|iterable  $values
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable|iterable  $values
      * @param  bool  $strict
      * @return static
      */
@@ -724,14 +724,14 @@ trait EnumeratesValues
     {
         $values = $this->getArrayableItems($values);
 
-        return $this->reject(fn ($item) => in_array(performancetoolkit_vendor_data_get($item, $key), $values, $strict));
+        return $this->reject(fn ($item) => in_array(pivotperformancetoolkit_vendor_data_get($item, $key), $values, $strict));
     }
 
     /**
      * Filter items by the given key value pair using strict comparison.
      *
      * @param  string  $key
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable|iterable  $values
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable|iterable  $values
      * @return static
      */
     public function whereNotInStrict($key, $values)
@@ -844,7 +844,7 @@ trait EnumeratesValues
             if (! is_array($result)) {
                 throw new UnexpectedValueException(sprintf(
                     "%s::reduceSpread expects reducer to return an array, but got a '%s' instead.",
-                    performancetoolkit_vendor_class_basename(static::class), gettype($result)
+                    pivotperformancetoolkit_vendor_class_basename(static::class), gettype($result)
                 ));
             }
         }
@@ -933,7 +933,7 @@ trait EnumeratesValues
     /**
      * Collect the values into a collection.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Collection<TKey, TValue>
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection<TKey, TValue>
      */
     public function collect()
     {
@@ -1000,7 +1000,7 @@ trait EnumeratesValues
     public function __toString()
     {
         return $this->escapeWhenCastingToString
-                    ? performancetoolkit_vendor_e($this->toJson())
+                    ? pivotperformancetoolkit_vendor_e($this->toJson())
                     : $this->toJson();
     }
 
@@ -1096,7 +1096,7 @@ trait EnumeratesValues
         }
 
         return function ($item) use ($key, $operator, $value) {
-            $retrieved = enum_value(performancetoolkit_vendor_data_get($item, $key));
+            $retrieved = enum_value(pivotperformancetoolkit_vendor_data_get($item, $key));
             $value = enum_value($value);
 
             $strings = array_filter([$retrieved, $value], function ($value) {
@@ -1151,7 +1151,7 @@ trait EnumeratesValues
             return $value;
         }
 
-        return fn ($item) => performancetoolkit_vendor_data_get($item, $value);
+        return fn ($item) => pivotperformancetoolkit_vendor_data_get($item, $value);
     }
 
     /**

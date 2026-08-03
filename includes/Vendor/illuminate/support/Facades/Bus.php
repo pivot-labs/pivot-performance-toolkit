@@ -1,26 +1,26 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
 
-use PerformanceToolkit\Vendor\Illuminate\Bus\BatchRepository;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Bus\Dispatcher as BusDispatcherContract;
+use PivotPerformanceToolkit\Vendor\Illuminate\Bus\BatchRepository;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Bus\Dispatcher as BusDispatcherContract;
 use Illuminate\Foundation\Bus\PendingChain;
-use PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\BusFake;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\BusFake;
 
 /**
  * @method static mixed dispatch(mixed $command)
  * @method static mixed dispatchSync(mixed $command, mixed $handler = null)
  * @method static mixed dispatchNow(mixed $command, mixed $handler = null)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Bus\Batch|null findBatch(string $batchId)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch batch(\PerformanceToolkit\Vendor\Illuminate\Support\Collection|array|mixed $jobs)
- * @method static \Illuminate\Foundation\Bus\PendingChain chain(\PerformanceToolkit\Vendor\Illuminate\Support\Collection|array $jobs)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Bus\Batch|null findBatch(string $batchId)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch batch(\PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection|array|mixed $jobs)
+ * @method static \Illuminate\Foundation\Bus\PendingChain chain(\PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection|array $jobs)
  * @method static bool hasCommandHandler(mixed $command)
  * @method static bool|mixed getCommandHandler(mixed $command)
  * @method static mixed dispatchToQueue(mixed $command)
  * @method static void dispatchAfterResponse(mixed $command, mixed $handler = null)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Bus\Dispatcher pipeThrough(array $pipes)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Bus\Dispatcher map(array $map)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\BusFake except(array|string $jobsToDispatch)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Bus\Dispatcher pipeThrough(array $pipes)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Bus\Dispatcher map(array $map)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\BusFake except(array|string $jobsToDispatch)
  * @method static void assertDispatched(string|\Closure $command, callable|int|null $callback = null)
  * @method static void assertDispatchedTimes(string|\Closure $command, int $times = 1)
  * @method static void assertNotDispatched(string|\Closure $command, callable|null $callback = null)
@@ -34,25 +34,25 @@ use PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\BusFake;
  * @method static void assertChained(array $expectedChain)
  * @method static void assertNothingChained()
  * @method static void assertDispatchedWithoutChain(string|\Closure $command, callable|null $callback = null)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\ChainedBatchTruthTest chainedBatch(\Closure $callback)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\ChainedBatchTruthTest chainedBatch(\Closure $callback)
  * @method static void assertBatched(callable $callback)
  * @method static void assertBatchCount(int $count)
  * @method static void assertNothingBatched()
  * @method static void assertNothingPlaced()
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Collection dispatched(string $command, callable|null $callback = null)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Collection dispatchedSync(string $command, callable|null $callback = null)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Collection dispatchedAfterResponse(string $command, callable|null $callback = null)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Collection batched(callable $callback)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection dispatched(string $command, callable|null $callback = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection dispatchedSync(string $command, callable|null $callback = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection dispatchedAfterResponse(string $command, callable|null $callback = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection batched(callable $callback)
  * @method static bool hasDispatched(string $command)
  * @method static bool hasDispatchedSync(string $command)
  * @method static bool hasDispatchedAfterResponse(string $command)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Bus\Batch dispatchFakeBatch(string $name = '')
- * @method static \PerformanceToolkit\Vendor\Illuminate\Bus\Batch recordPendingBatch(\PerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch $pendingBatch)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\BusFake serializeAndRestore(bool $serializeAndRestore = true)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Bus\Batch dispatchFakeBatch(string $name = '')
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Bus\Batch recordPendingBatch(\PivotPerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch $pendingBatch)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\BusFake serializeAndRestore(bool $serializeAndRestore = true)
  * @method static array dispatchedBatches()
  *
- * @see \PerformanceToolkit\Vendor\Illuminate\Bus\Dispatcher
- * @see \PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\BusFake
+ * @see \PivotPerformanceToolkit\Vendor\Illuminate\Bus\Dispatcher
+ * @see \PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\BusFake
  */
 class Bus extends Facade
 {
@@ -60,8 +60,8 @@ class Bus extends Facade
      * Replace the bound instance with a fake.
      *
      * @param  array|string  $jobsToFake
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Bus\BatchRepository|null  $batchRepository
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\BusFake
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Bus\BatchRepository|null  $batchRepository
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\BusFake
      */
     public static function fake($jobsToFake = [], ?BatchRepository $batchRepository = null)
     {
@@ -69,7 +69,7 @@ class Bus extends Facade
                 ? static::getFacadeRoot()->dispatcher
                 : static::getFacadeRoot();
 
-        return performancetoolkit_vendor_tap(new BusFake($actualDispatcher, $jobsToFake, $batchRepository), function ($fake) {
+        return pivotperformancetoolkit_vendor_tap(new BusFake($actualDispatcher, $jobsToFake, $batchRepository), function ($fake) {
             static::swap($fake);
         });
     }

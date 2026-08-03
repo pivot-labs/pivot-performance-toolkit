@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Exceptions;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Exceptions;
 
 use RuntimeException;
 

@@ -1,15 +1,15 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Bus;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Bus;
 
-use PerformanceToolkit\Vendor\Carbon\CarbonImmutable;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable;
 use Closure;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Factory as QueueFactory;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Factory as QueueFactory;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Queue\CallQueuedClosure;
 use Illuminate\Queue\SyncQueue;
-use PerformanceToolkit\Vendor\Illuminate\Support\Arr;
-use PerformanceToolkit\Vendor\Illuminate\Support\Collection;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Arr;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection;
 use JsonSerializable;
 use Throwable;
 
@@ -18,14 +18,14 @@ class Batch implements Arrayable, JsonSerializable
     /**
      * The queue factory implementation.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Factory
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Factory
      */
     protected $queue;
 
     /**
      * The repository implementation.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Bus\BatchRepository
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Bus\BatchRepository
      */
     protected $repository;
 
@@ -81,29 +81,29 @@ class Batch implements Arrayable, JsonSerializable
     /**
      * The date indicating when the batch was created.
      *
-     * @var \PerformanceToolkit\Vendor\Carbon\CarbonImmutable
+     * @var \PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable
      */
     public $createdAt;
 
     /**
      * The date indicating when the batch was cancelled.
      *
-     * @var \PerformanceToolkit\Vendor\Carbon\CarbonImmutable|null
+     * @var \PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable|null
      */
     public $cancelledAt;
 
     /**
      * The date indicating when the batch was finished.
      *
-     * @var \PerformanceToolkit\Vendor\Carbon\CarbonImmutable|null
+     * @var \PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable|null
      */
     public $finishedAt;
 
     /**
      * Create a new batch instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Factory  $queue
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Bus\BatchRepository  $repository
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Factory  $queue
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Bus\BatchRepository  $repository
      * @param  string  $id
      * @param  string  $name
      * @param  int  $totalJobs
@@ -111,9 +111,9 @@ class Batch implements Arrayable, JsonSerializable
      * @param  int  $failedJobs
      * @param  array  $failedJobIds
      * @param  array  $options
-     * @param  \PerformanceToolkit\Vendor\Carbon\CarbonImmutable  $createdAt
-     * @param  \PerformanceToolkit\Vendor\Carbon\CarbonImmutable|null  $cancelledAt
-     * @param  \PerformanceToolkit\Vendor\Carbon\CarbonImmutable|null  $finishedAt
+     * @param  \PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable  $createdAt
+     * @param  \PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable|null  $cancelledAt
+     * @param  \PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable|null  $finishedAt
      * @return void
      */
     public function __construct(
@@ -157,7 +157,7 @@ class Batch implements Arrayable, JsonSerializable
     /**
      * Add additional jobs to the batch.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Support\Enumerable|object|array  $jobs
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Support\Enumerable|object|array  $jobs
      * @return self
      */
     public function add($jobs)
@@ -170,7 +170,7 @@ class Batch implements Arrayable, JsonSerializable
             if (is_array($job)) {
                 $count += count($job);
 
-                return performancetoolkit_vendor_with($this->prepareBatchedChain($job), function ($chain) {
+                return pivotperformancetoolkit_vendor_with($this->prepareBatchedChain($job), function ($chain) {
                     return $chain->first()
                         ->allOnQueue($this->options['queue'] ?? null)
                         ->allOnConnection($this->options['connection'] ?? null)
@@ -217,7 +217,7 @@ class Batch implements Arrayable, JsonSerializable
      * Prepare a chain that exists within the jobs being added.
      *
      * @param  array  $chain
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Collection
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection
      */
     protected function prepareBatchedChain(array $chain)
     {
@@ -291,7 +291,7 @@ class Batch implements Arrayable, JsonSerializable
      * Decrement the pending jobs for the batch.
      *
      * @param  string  $jobId
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\UpdatedBatchJobCounts
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\UpdatedBatchJobCounts
      */
     public function decrementPendingJobs(string $jobId)
     {
@@ -392,7 +392,7 @@ class Batch implements Arrayable, JsonSerializable
      * Increment the failed jobs for the batch.
      *
      * @param  string  $jobId
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\UpdatedBatchJobCounts
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\UpdatedBatchJobCounts
      */
     public function incrementFailedJobs(string $jobId)
     {
@@ -463,7 +463,7 @@ class Batch implements Arrayable, JsonSerializable
      * Invoke a batch callback handler.
      *
      * @param  callable  $handler
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Bus\Batch  $batch
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Bus\Batch  $batch
      * @param  \Throwable|null  $e
      * @return void
      */

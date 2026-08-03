@@ -10,7 +10,7 @@
  */
 
 if (\PHP_VERSION_ID < 80100) {
-    final class PerformanceToolkit_Vendor_RoundingMode
+    final class PivotPerformanceToolkit_Vendor_RoundingMode
     {
         const HalfAwayFromZero = 0;
         const HalfTowardsZero = 1;
@@ -40,5 +40,5 @@ if (\PHP_VERSION_ID < 80100) {
         }
     }
 } elseif (\PHP_VERSION_ID < 80400) {
-    require dirname(__DIR__).'/PerformanceToolkit_Vendor_RoundingMode.php';
+    require dirname(__DIR__).'/PivotPerformanceToolkit_Vendor_RoundingMode.php';
 }

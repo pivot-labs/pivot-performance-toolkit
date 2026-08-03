@@ -1,20 +1,20 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
 class AggregateServiceProvider extends ServiceProvider
 {
     /**
      * The provider class names.
      *
-     * @var array<int, class-string<\PerformanceToolkit\Vendor\Illuminate\Support\ServiceProvider>>
+     * @var array<int, class-string<\PivotPerformanceToolkit\Vendor\Illuminate\Support\ServiceProvider>>
      */
     protected $providers = [];
 
     /**
      * An array of the service provider instances.
      *
-     * @var array<int, \PerformanceToolkit\Vendor\Illuminate\Support\ServiceProvider>
+     * @var array<int, \PivotPerformanceToolkit\Vendor\Illuminate\Support\ServiceProvider>
      */
     protected $instances = [];
 

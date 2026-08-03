@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp\Psr7;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7;
 
 /**
  * @internal

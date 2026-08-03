@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp\Psr7;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7;
 
-use PerformanceToolkit\Vendor\Psr\Http\Message\ResponseInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\StreamInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\ResponseInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\StreamInterface;
 
 /**
  * PSR-7 response implementation.

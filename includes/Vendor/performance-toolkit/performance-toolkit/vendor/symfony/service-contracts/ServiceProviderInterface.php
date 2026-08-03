@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Contracts\Service;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Contracts\Service;
 
-use PerformanceToolkit\Vendor\Psr\Container\ContainerInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Container\ContainerInterface;
 
 /**
  * A ServiceProviderInterface exposes the identifiers and the types of services provided by a container.

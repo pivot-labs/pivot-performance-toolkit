@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Queue;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue;
 
 interface Queue
 {
@@ -78,7 +78,7 @@ interface Queue
      * Pop the next job off of the queue.
      *
      * @param  string|null  $queue
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Job|null
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Job|null
      */
     public function pop($queue = null);
 

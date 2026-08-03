@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp\Psr7;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7;
 
-use PerformanceToolkit\Vendor\Psr\Http\Message\MessageInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\ResponseInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\MessageInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\ResponseInterface;
 
 final class Message
 {

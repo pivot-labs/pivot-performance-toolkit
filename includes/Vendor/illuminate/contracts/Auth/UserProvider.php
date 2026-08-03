@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Auth;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Auth;
 
 interface UserProvider
 {
@@ -8,7 +8,7 @@ interface UserProvider
      * Retrieve a user by their unique identifier.
      *
      * @param  mixed  $identifier
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\Auth\Authenticatable|null
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Auth\Authenticatable|null
      */
     public function retrieveById($identifier);
 
@@ -17,14 +17,14 @@ interface UserProvider
      *
      * @param  mixed  $identifier
      * @param  string  $token
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\Auth\Authenticatable|null
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Auth\Authenticatable|null
      */
     public function retrieveByToken($identifier, #[\SensitiveParameter] $token);
 
     /**
      * Update the "remember me" token for the given user in storage.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Auth\Authenticatable  $user
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Auth\Authenticatable  $user
      * @param  string  $token
      * @return void
      */
@@ -34,14 +34,14 @@ interface UserProvider
      * Retrieve a user by the given credentials.
      *
      * @param  array  $credentials
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\Auth\Authenticatable|null
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Auth\Authenticatable|null
      */
     public function retrieveByCredentials(#[\SensitiveParameter] array $credentials);
 
     /**
      * Validate a user against the given credentials.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Auth\Authenticatable  $user
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Auth\Authenticatable  $user
      * @param  array  $credentials
      * @return bool
      */
@@ -50,7 +50,7 @@ interface UserProvider
     /**
      * Rehash the user's password if required and supported.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Auth\Authenticatable  $user
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Auth\Authenticatable  $user
      * @param  array  $credentials
      * @param  bool  $force
      * @return void

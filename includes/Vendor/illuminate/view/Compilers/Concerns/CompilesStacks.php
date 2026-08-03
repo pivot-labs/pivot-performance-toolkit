@@ -1,8 +1,8 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns;
 
-use PerformanceToolkit\Vendor\Illuminate\Support\Str;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Str;
 
 trait CompilesStacks
 {

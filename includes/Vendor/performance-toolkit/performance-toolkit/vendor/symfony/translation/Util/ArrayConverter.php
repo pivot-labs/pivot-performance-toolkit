@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation\Util;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Util;
 
 /**
  * ArrayConverter generates tree like structure from a message catalogue.

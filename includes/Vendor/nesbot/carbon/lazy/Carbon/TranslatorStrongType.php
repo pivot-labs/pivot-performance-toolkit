@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Carbon;
+namespace PivotPerformanceToolkit\Vendor\Carbon;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogueInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogueInterface;
 
 if (!class_exists(LazyTranslator::class, false)) {
     class LazyTranslator extends AbstractTranslator implements TranslatorStrongTypeInterface

@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation;
 
-use PerformanceToolkit\Vendor\Symfony\Contracts\Translation\LocaleAwareInterface;
-use PerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatorInterface;
-use PerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatorTrait;
+use PivotPerformanceToolkit\Vendor\Symfony\Contracts\Translation\LocaleAwareInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatorInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatorTrait;
 
 /**
  * IdentityTranslator does not translate anything.

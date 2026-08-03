@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Config;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Config;
 
 interface Repository
 {

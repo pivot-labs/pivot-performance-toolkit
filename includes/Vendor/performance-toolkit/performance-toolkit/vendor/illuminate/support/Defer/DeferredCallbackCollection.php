@@ -1,11 +1,11 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Defer;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Defer;
 
 use ArrayAccess;
 use Closure;
 use Countable;
-use PerformanceToolkit\Vendor\Illuminate\Support\Collection;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection;
 
 class DeferredCallbackCollection implements ArrayAccess, Countable
 {

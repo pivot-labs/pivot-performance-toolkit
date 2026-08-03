@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp\Psr7;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7;
 
-use PerformanceToolkit\Vendor\Psr\Http\Message\StreamInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\StreamInterface;
 
 /**
  * Uses PHP's zlib.inflate filter to inflate zlib (HTTP deflate, RFC1950) or gzipped (RFC1952) content.

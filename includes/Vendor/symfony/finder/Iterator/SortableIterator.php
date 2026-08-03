@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Finder\Iterator;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Finder\Iterator;
 
 /**
  * SortableIterator applies a sort on a given Iterator.

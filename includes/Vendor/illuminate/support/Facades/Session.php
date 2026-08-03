@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
 
 /**
  * @method static bool shouldBlock()
@@ -13,8 +13,8 @@ namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
  * @method static mixed driver(string|null $driver = null)
  * @method static \Illuminate\Session\SessionManager extend(string $driver, \Closure $callback)
  * @method static array getDrivers()
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container getContainer()
- * @method static \Illuminate\Session\SessionManager setContainer(\PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container $container)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container getContainer()
+ * @method static \Illuminate\Session\SessionManager setContainer(\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container $container)
  * @method static \Illuminate\Session\SessionManager forgetDrivers()
  * @method static bool start()
  * @method static void save()
@@ -58,7 +58,7 @@ namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
  * @method static string token()
  * @method static void regenerateToken()
  * @method static bool hasPreviousUri()
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Uri previousUri()
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Uri previousUri()
  * @method static string|null previousUrl()
  * @method static void setPreviousUrl(string $url)
  * @method static void passwordConfirmed()

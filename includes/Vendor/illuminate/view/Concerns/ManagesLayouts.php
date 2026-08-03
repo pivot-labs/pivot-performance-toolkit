@@ -1,9 +1,9 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\View\Concerns;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\View\Concerns;
 
-use PerformanceToolkit\Vendor\Illuminate\Contracts\View\View;
-use PerformanceToolkit\Vendor\Illuminate\Support\Str;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View\View;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Str;
 use InvalidArgumentException;
 
 trait ManagesLayouts
@@ -50,7 +50,7 @@ trait ManagesLayouts
                 $this->sectionStack[] = $section;
             }
         } else {
-            $this->extendSection($section, $content instanceof View ? $content : performancetoolkit_vendor_e($content));
+            $this->extendSection($section, $content instanceof View ? $content : pivotperformancetoolkit_vendor_e($content));
         }
     }
 
@@ -154,7 +154,7 @@ trait ManagesLayouts
      */
     public function yieldContent($section, $default = '')
     {
-        $sectionContent = $default instanceof View ? $default : performancetoolkit_vendor_e($default);
+        $sectionContent = $default instanceof View ? $default : pivotperformancetoolkit_vendor_e($default);
 
         if (isset($this->sections[$section])) {
             $sectionContent = $this->sections[$section];

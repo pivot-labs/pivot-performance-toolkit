@@ -11,7 +11,7 @@
 
 if (\PHP_VERSION_ID < 80100) {
     #[Attribute(Attribute::TARGET_METHOD | Attribute::TARGET_FUNCTION | Attribute::TARGET_CLASS_CONSTANT)]
-    final class PerformanceToolkit_Vendor_Deprecated
+    final class PivotPerformanceToolkit_Vendor_Deprecated
     {
         /**
          * @readonly
@@ -30,5 +30,5 @@ if (\PHP_VERSION_ID < 80100) {
         }
     }
 } elseif (\PHP_VERSION_ID < 80400) {
-    require dirname(__DIR__).'/PerformanceToolkit_Vendor_Deprecated.php';
+    require dirname(__DIR__).'/PivotPerformanceToolkit_Vendor_Deprecated.php';
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Laravel\Envoy;
+namespace PivotPerformanceToolkit\Vendor\Laravel\Envoy;
 
 class Task
 {

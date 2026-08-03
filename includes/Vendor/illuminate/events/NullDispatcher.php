@@ -1,9 +1,9 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Events;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Events;
 
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\ForwardsCalls;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\ForwardsCalls;
 
 class NullDispatcher implements DispatcherContract
 {
@@ -12,14 +12,14 @@ class NullDispatcher implements DispatcherContract
     /**
      * The underlying event dispatcher instance.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher
      */
     protected $dispatcher;
 
     /**
      * Create a new event dispatcher instance that does not fire.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher  $dispatcher
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher  $dispatcher
      * @return void
      */
     public function __construct(DispatcherContract $dispatcher)

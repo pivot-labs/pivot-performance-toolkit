@@ -1,8 +1,8 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
 
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Routing\ResponseFactory as ResponseFactoryContract;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Routing\ResponseFactory as ResponseFactoryContract;
 
 /**
  * @method static \Illuminate\Http\Response make(mixed $content = '', int $status = 200, array $headers = [])

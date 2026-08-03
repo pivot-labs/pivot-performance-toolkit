@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Helper;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Helper;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\InvalidArgumentException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\InvalidArgumentException;
 
 /**
  * HelperSet represents a set of helpers to be used with a command.

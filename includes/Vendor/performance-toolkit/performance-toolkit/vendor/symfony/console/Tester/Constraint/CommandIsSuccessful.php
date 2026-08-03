@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Tester\Constraint;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Tester\Constraint;
 
 use PHPUnit\Framework\Constraint\Constraint;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Command\Command;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Command\Command;
 
 final class CommandIsSuccessful extends Constraint
 {

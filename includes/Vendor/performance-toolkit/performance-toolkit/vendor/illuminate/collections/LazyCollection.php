@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
 use ArrayIterator;
 use Closure;
@@ -8,9 +8,9 @@ use DateInterval;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Generator;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\CanBeEscapedWhenCastToString;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\EnumeratesValues;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\CanBeEscapedWhenCastToString;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\EnumeratesValues;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
 use InvalidArgumentException;
 use IteratorAggregate;
 use stdClass;
@@ -21,12 +21,12 @@ use Traversable;
  *
  * @template-covariant TValue
  *
- * @implements \PerformanceToolkit\Vendor\Illuminate\Support\Enumerable<TKey, TValue>
+ * @implements \PivotPerformanceToolkit\Vendor\Illuminate\Support\Enumerable<TKey, TValue>
  */
 class LazyCollection implements CanBeEscapedWhenCastToString, Enumerable
 {
     /**
-     * @use \PerformanceToolkit\Vendor\Illuminate\Support\Traits\EnumeratesValues<TKey, TValue>
+     * @use \PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\EnumeratesValues<TKey, TValue>
      */
     use EnumeratesValues, Macroable;
 
@@ -40,7 +40,7 @@ class LazyCollection implements CanBeEscapedWhenCastToString, Enumerable
     /**
      * Create a new lazy collection instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, TValue>|iterable<TKey, TValue>|(Closure(): \Generator<TKey, TValue, mixed, void>)|self<TKey, TValue>|array<TKey, TValue>|null  $source
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, TValue>|iterable<TKey, TValue>|(Closure(): \Generator<TKey, TValue, mixed, void>)|self<TKey, TValue>|array<TKey, TValue>|null  $source
      *
      * @throws \InvalidArgumentException
      */
@@ -62,7 +62,7 @@ class LazyCollection implements CanBeEscapedWhenCastToString, Enumerable
     /**
      * Create a new instance of the collection.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, TValue>|iterable<TKey, TValue>|(Closure(): \Generator<TKey, TValue, mixed, void>)|self<TKey, TValue>|array<TKey, TValue>|null  $items
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, TValue>|iterable<TKey, TValue>|(Closure(): \Generator<TKey, TValue, mixed, void>)|self<TKey, TValue>|array<TKey, TValue>|null  $items
      * @return static
      */
     protected function newInstance($items = [])
@@ -76,7 +76,7 @@ class LazyCollection implements CanBeEscapedWhenCastToString, Enumerable
      * @template TMakeKey of array-key
      * @template TMakeValue
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TMakeKey, TMakeValue>|iterable<TMakeKey, TMakeValue>|(Closure(): \Generator<TMakeKey, TMakeValue, mixed, void>)|self<TMakeKey, TMakeValue>|array<TMakeKey, TMakeValue>|null  $items
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TMakeKey, TMakeValue>|iterable<TMakeKey, TMakeValue>|(Closure(): \Generator<TMakeKey, TMakeValue, mixed, void>)|self<TMakeKey, TMakeValue>|array<TMakeKey, TMakeValue>|null  $items
      * @return static<TMakeKey, TMakeValue>
      */
     public static function make($items = [], ...$args)
@@ -937,7 +937,7 @@ class LazyCollection implements CanBeEscapedWhenCastToString, Enumerable
     /**
      * Get the items with the specified keys.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Support\Enumerable<array-key, TKey>|array<array-key, TKey>|string  $keys
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Support\Enumerable<array-key, TKey>|array<array-key, TKey>|string  $keys
      * @return static
      */
     public function only($keys)
@@ -972,7 +972,7 @@ class LazyCollection implements CanBeEscapedWhenCastToString, Enumerable
     /**
      * Select specific values from the items within the collection.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Support\Enumerable<array-key, TKey>|array<array-key, TKey>|string  $keys
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Support\Enumerable<array-key, TKey>|array<array-key, TKey>|string  $keys
      * @return static
      */
     public function select($keys)
@@ -1040,7 +1040,7 @@ class LazyCollection implements CanBeEscapedWhenCastToString, Enumerable
     /**
      * Replace the collection items with the given items.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, TValue>|iterable<TKey, TValue>  $items
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, TValue>|iterable<TKey, TValue>  $items
      * @return static
      */
     public function replace($items)
@@ -1322,8 +1322,8 @@ class LazyCollection implements CanBeEscapedWhenCastToString, Enumerable
      * @param  mixed  $value
      * @return TValue
      *
-     * @throws \PerformanceToolkit\Vendor\Illuminate\Support\ItemNotFoundException
-     * @throws \PerformanceToolkit\Vendor\Illuminate\Support\MultipleItemsFoundException
+     * @throws \PivotPerformanceToolkit\Vendor\Illuminate\Support\ItemNotFoundException
+     * @throws \PivotPerformanceToolkit\Vendor\Illuminate\Support\MultipleItemsFoundException
      */
     public function sole($key = null, $operator = null, $value = null)
     {
@@ -1368,7 +1368,7 @@ class LazyCollection implements CanBeEscapedWhenCastToString, Enumerable
      * @param  mixed  $value
      * @return TValue
      *
-     * @throws \PerformanceToolkit\Vendor\Illuminate\Support\ItemNotFoundException
+     * @throws \PivotPerformanceToolkit\Vendor\Illuminate\Support\ItemNotFoundException
      */
     public function firstOrFail($key = null, $operator = null, $value = null)
     {
@@ -1800,7 +1800,7 @@ class LazyCollection implements CanBeEscapedWhenCastToString, Enumerable
      *
      * @template TZipValue
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<array-key, TZipValue>|iterable<array-key, TZipValue>  ...$items
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<array-key, TZipValue>|iterable<array-key, TZipValue>  ...$items
      * @return static<int, static<int, TValue|TZipValue>>
      */
     public function zip($items)

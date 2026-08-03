@@ -1,9 +1,9 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Container;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Container;
 
 use Closure;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Container\ContextualAttribute;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\ContextualAttribute;
 use ReflectionAttribute;
 use ReflectionNamedType;
 

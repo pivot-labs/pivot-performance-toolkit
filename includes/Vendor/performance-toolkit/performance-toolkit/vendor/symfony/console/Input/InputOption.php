@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Input;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Command\Command;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Completion\CompletionInput;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Completion\CompletionSuggestions;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Completion\Suggestion;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\InvalidArgumentException;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\LogicException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Command\Command;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Completion\CompletionInput;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Completion\CompletionSuggestions;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Completion\Suggestion;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\InvalidArgumentException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\LogicException;
 
 /**
  * Represents a command line option.

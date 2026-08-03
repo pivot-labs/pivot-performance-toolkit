@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Exception;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception;
 
 /**
  * Represents an incorrect option name or value typed in the console.

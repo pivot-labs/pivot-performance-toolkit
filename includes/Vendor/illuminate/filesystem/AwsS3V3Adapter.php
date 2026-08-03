@@ -1,9 +1,9 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Filesystem;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Filesystem;
 
 use Aws\S3\S3Client;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Conditionable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Conditionable;
 use League\Flysystem\AwsS3V3\AwsS3V3Adapter as S3Adapter;
 use League\Flysystem\FilesystemOperator;
 

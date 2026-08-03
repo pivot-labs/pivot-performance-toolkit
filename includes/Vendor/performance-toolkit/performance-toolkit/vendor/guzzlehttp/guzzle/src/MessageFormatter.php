@@ -1,10 +1,10 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp;
 
-use PerformanceToolkit\Vendor\Psr\Http\Message\MessageInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\ResponseInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\MessageInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\ResponseInterface;
 /**
  * Formats log messages using variable substitutions for requests, responses,
  * and other transactional data.
@@ -75,10 +75,10 @@ class MessageFormatter implements MessageFormatterInterface
             $result = '';
             switch ($matches[1]) {
                 case 'request':
-                    $result = \PerformanceToolkit\Vendor\GuzzleHttp\Psr7\Message::toString($request);
+                    $result = \PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7\Message::toString($request);
                     break;
                 case 'response':
-                    $result = $response ? \PerformanceToolkit\Vendor\GuzzleHttp\Psr7\Message::toString($response) : '';
+                    $result = $response ? \PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7\Message::toString($response) : '';
                     break;
                 case 'req_headers':
                     $result = \trim($request->getMethod() . ' ' . $request->getRequestTarget()) . ' HTTP/' . $request->getProtocolVersion() . "\r\n" . $this->headers($request);

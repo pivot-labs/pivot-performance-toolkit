@@ -1,11 +1,11 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp;
 
-use PerformanceToolkit\Vendor\GuzzleHttp\Promise as P;
-use PerformanceToolkit\Vendor\GuzzleHttp\Promise\PromiseInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\ResponseInterface;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Promise as P;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Promise\PromiseInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\ResponseInterface;
 
 /**
  * Middleware that retries requests based on the boolean result of

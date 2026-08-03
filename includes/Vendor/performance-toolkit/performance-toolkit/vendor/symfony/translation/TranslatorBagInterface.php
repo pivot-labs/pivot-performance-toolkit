@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\InvalidArgumentException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\InvalidArgumentException;
 
 /**
  * @author Abdellatif Ait boudad <a.aitboudad@gmail.com>

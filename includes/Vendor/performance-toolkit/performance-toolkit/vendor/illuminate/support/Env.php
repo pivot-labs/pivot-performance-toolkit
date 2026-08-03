@@ -1,11 +1,11 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
 use Closure;
 use Dotenv\Repository\Adapter\PutenvAdapter;
 use Dotenv\Repository\RepositoryBuilder;
-use PerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem;
+use PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem;
 use PhpOption\Option;
 use RuntimeException;
 
@@ -126,7 +126,7 @@ class Env
      * @return void
      *
      * @throws \RuntimeException
-     * @throws \PerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem\FileNotFoundException
+     * @throws \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public static function writeVariables(array $variables, string $pathToFile, bool $overwrite = false): void
     {
@@ -155,7 +155,7 @@ class Env
      * @return void
      *
      * @throws \RuntimeException
-     * @throws \PerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem\FileNotFoundException
+     * @throws \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public static function writeVariable(string $key, mixed $value, string $pathToFile, bool $overwrite = false): void
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Bus;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Bus;
 
 use Closure;
 
@@ -11,7 +11,7 @@ interface BatchRepository
      *
      * @param  int  $limit
      * @param  mixed  $before
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\Batch[]
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\Batch[]
      */
     public function get($limit, $before);
 
@@ -19,15 +19,15 @@ interface BatchRepository
      * Retrieve information about an existing batch.
      *
      * @param  string  $batchId
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\Batch|null
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\Batch|null
      */
     public function find(string $batchId);
 
     /**
      * Store a new pending batch.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch  $batch
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\Batch
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch  $batch
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\Batch
      */
     public function store(PendingBatch $batch);
 
@@ -45,7 +45,7 @@ interface BatchRepository
      *
      * @param  string  $batchId
      * @param  string  $jobId
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\UpdatedBatchJobCounts
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\UpdatedBatchJobCounts
      */
     public function decrementPendingJobs(string $batchId, string $jobId);
 
@@ -54,7 +54,7 @@ interface BatchRepository
      *
      * @param  string  $batchId
      * @param  string  $jobId
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\UpdatedBatchJobCounts
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\UpdatedBatchJobCounts
      */
     public function incrementFailedJobs(string $batchId, string $jobId);
 

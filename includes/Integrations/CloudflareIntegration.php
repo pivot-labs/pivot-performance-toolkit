@@ -2,15 +2,19 @@
 /**
  * Cloudflare CDN integration.
  *
- * @package PerformanceToolkit
+ * @package PivotPerformanceToolkit
  */
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Integrations;
+namespace PivotPerformanceToolkit\Integrations;
 
-use PerformanceToolkit\Contracts\ModuleInterface;
-use PerformanceToolkit\Core\Settings;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+use PivotPerformanceToolkit\Contracts\ModuleInterface;
+use PivotPerformanceToolkit\Core\Settings;
 
 final class CloudflareIntegration implements ModuleInterface {
 
@@ -36,7 +40,7 @@ final class CloudflareIntegration implements ModuleInterface {
 		if ( ! $this->hasCredentials() ) {
 			return array(
 				'success' => false,
-				'message' => __( 'Cloudflare API token and Zone ID are required.', 'performance-toolkit' ),
+				'message' => __( 'Cloudflare API token and Zone ID are required.', 'pivot-performance-toolkit' ),
 			);
 		}
 
@@ -45,13 +49,13 @@ final class CloudflareIntegration implements ModuleInterface {
 		if ( ! $result['success'] ) {
 			return array(
 				'success' => false,
-				'message' => '' !== $result['message'] ? $result['message'] : __( 'Cloudflare connection failed.', 'performance-toolkit' ),
+				'message' => '' !== $result['message'] ? $result['message'] : __( 'Cloudflare connection failed.', 'pivot-performance-toolkit' ),
 			);
 		}
 
 		return array(
 			'success' => true,
-			'message' => __( 'Cloudflare connection successful.', 'performance-toolkit' ),
+			'message' => __( 'Cloudflare connection successful.', 'pivot-performance-toolkit' ),
 		);
 	}
 
@@ -62,7 +66,7 @@ final class CloudflareIntegration implements ModuleInterface {
 		if ( ! $this->hasCredentials() ) {
 			return array(
 				'success' => false,
-				'message' => __( 'Cloudflare API token and Zone ID are required.', 'performance-toolkit' ),
+				'message' => __( 'Cloudflare API token and Zone ID are required.', 'pivot-performance-toolkit' ),
 			);
 		}
 
@@ -75,13 +79,13 @@ final class CloudflareIntegration implements ModuleInterface {
 		if ( ! $result['success'] ) {
 			return array(
 				'success' => false,
-				'message' => '' !== $result['message'] ? $result['message'] : __( 'Cloudflare cache purge failed.', 'performance-toolkit' ),
+				'message' => '' !== $result['message'] ? $result['message'] : __( 'Cloudflare cache purge failed.', 'pivot-performance-toolkit' ),
 			);
 		}
 
 		return array(
 			'success' => true,
-			'message' => __( 'Cloudflare cache purged.', 'performance-toolkit' ),
+			'message' => __( 'Cloudflare cache purged.', 'pivot-performance-toolkit' ),
 		);
 	}
 
@@ -149,7 +153,7 @@ final class CloudflareIntegration implements ModuleInterface {
 		if ( ! is_array( $decoded ) || ! array_key_exists( 'success', $decoded ) ) {
 			return array(
 				'success' => false,
-				'message' => __( 'Unexpected response from Cloudflare API.', 'performance-toolkit' ),
+				'message' => __( 'Unexpected response from Cloudflare API.', 'pivot-performance-toolkit' ),
 			);
 		}
 

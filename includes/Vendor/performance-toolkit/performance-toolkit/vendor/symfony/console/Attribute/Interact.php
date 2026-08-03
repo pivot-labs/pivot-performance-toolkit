@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Attribute;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Attribute;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\LogicException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\LogicException;
 
 #[\Attribute(\Attribute::TARGET_METHOD)]
 class Interact implements InteractiveAttributeInterface

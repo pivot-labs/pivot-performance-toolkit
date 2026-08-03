@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
 
 /**
  * @method static \Illuminate\Foundation\Configuration\ApplicationBuilder configure(string|null $basePath = null)
@@ -46,10 +46,10 @@ namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
  * @method static bool hasDebugModeEnabled()
  * @method static void registered(callable $callback)
  * @method static void registerConfiguredProviders()
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\ServiceProvider register(\PerformanceToolkit\Vendor\Illuminate\Support\ServiceProvider|string $provider, bool $force = false)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\ServiceProvider|null getProvider(\PerformanceToolkit\Vendor\Illuminate\Support\ServiceProvider|string $provider)
- * @method static array getProviders(\PerformanceToolkit\Vendor\Illuminate\Support\ServiceProvider|string $provider)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\ServiceProvider resolveProvider(string $provider)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\ServiceProvider register(\PivotPerformanceToolkit\Vendor\Illuminate\Support\ServiceProvider|string $provider, bool $force = false)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\ServiceProvider|null getProvider(\PivotPerformanceToolkit\Vendor\Illuminate\Support\ServiceProvider|string $provider)
+ * @method static array getProviders(\PivotPerformanceToolkit\Vendor\Illuminate\Support\ServiceProvider|string $provider)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\ServiceProvider resolveProvider(string $provider)
  * @method static void loadDeferredProviders()
  * @method static void loadDeferredProvider(string $service)
  * @method static void registerDeferredProvider(string $provider, string|null $service = null)
@@ -61,7 +61,7 @@ namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
  * @method static void booted(callable $callback)
  * @method static \Symfony\Component\HttpFoundation\Response handle(\Symfony\Component\HttpFoundation\Request $request, int $type = 1, bool $catch = true)
  * @method static void handleRequest(\Illuminate\Http\Request $request)
- * @method static int handleCommand(\PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface $input)
+ * @method static int handleCommand(\PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface $input)
  * @method static bool shouldMergeFrameworkConfiguration()
  * @method static \Illuminate\Foundation\Application dontMergeFrameworkConfiguration()
  * @method static bool shouldSkipMiddleware()
@@ -74,7 +74,7 @@ namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
  * @method static bool eventsAreCached()
  * @method static string getCachedEventsPath()
  * @method static \Illuminate\Foundation\Application addAbsoluteCachePathPrefix(string $prefix)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\MaintenanceMode maintenanceMode()
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\MaintenanceMode maintenanceMode()
  * @method static bool isDownForMaintenance()
  * @method static never abort(int $code, string $message = '', array $headers = [])
  * @method static \Illuminate\Foundation\Application terminating(callable|string $callback)
@@ -96,7 +96,7 @@ namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
  * @method static void registerCoreContainerAliases()
  * @method static void flush()
  * @method static string getNamespace()
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\ContextualBindingBuilder when(array|string $concrete)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\ContextualBindingBuilder when(array|string $concrete)
  * @method static void whenHasAttribute(string $attribute, \Closure $handler)
  * @method static bool has(string $id)
  * @method static bool isShared(string $abstract)
@@ -140,7 +140,7 @@ namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
  * @method static void resolveEnvironmentUsing(callable|string|null $callback)
  * @method static bool currentEnvironmentIs(array<int, string>|string $environments)
  * @method static \Illuminate\Foundation\Application getInstance()
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container|\Illuminate\Foundation\Application setInstance(\PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container|null $container = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container|\Illuminate\Foundation\Application setInstance(\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container|null $container = null)
  * @method static void macro(string $name, object|callable $macro)
  * @method static void mixin(object $mixin, bool $replace = true)
  * @method static bool hasMacro(string $name)

@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
-<ruleset name="Performance Toolkit">
-    <description>PHP_CodeSniffer rules for Performance Toolkit plugin.</description>
+<ruleset name="Pivot Performance Toolkit">
+    <description>PHP_CodeSniffer rules for Pivot Performance Toolkit plugin.</description>
 
     <arg name="basepath" value="."/>
     <arg name="extensions" value="php"/>
     <arg value="sp"/>
 
-    <file>performance-toolkit.php</file>
+    <file>pivot-performance-toolkit.php</file>
     <file>includes</file>
     <file>uninstall.php</file>
     <file>tests</file>

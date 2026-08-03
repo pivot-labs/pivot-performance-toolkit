@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Psr\Http\Message;
+namespace PivotPerformanceToolkit\Vendor\Psr\Http\Message;
 
 /**
  * Value object representing a file uploaded through an HTTP request.

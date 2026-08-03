@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Vendor\Doctrine\Inflector;
+namespace PivotPerformanceToolkit\Vendor\Doctrine\Inflector;
 
-use PerformanceToolkit\Vendor\Doctrine\Inflector\Rules\English;
-use PerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Esperanto;
-use PerformanceToolkit\Vendor\Doctrine\Inflector\Rules\French;
-use PerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Italian;
-use PerformanceToolkit\Vendor\Doctrine\Inflector\Rules\NorwegianBokmal;
-use PerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Portuguese;
-use PerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Spanish;
-use PerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Turkish;
+use PivotPerformanceToolkit\Vendor\Doctrine\Inflector\Rules\English;
+use PivotPerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Esperanto;
+use PivotPerformanceToolkit\Vendor\Doctrine\Inflector\Rules\French;
+use PivotPerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Italian;
+use PivotPerformanceToolkit\Vendor\Doctrine\Inflector\Rules\NorwegianBokmal;
+use PivotPerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Portuguese;
+use PivotPerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Spanish;
+use PivotPerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Turkish;
 use InvalidArgumentException;
 
 use function sprintf;

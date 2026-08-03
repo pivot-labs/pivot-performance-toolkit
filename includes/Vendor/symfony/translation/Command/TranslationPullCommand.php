@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation\Command;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Command;
 
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -20,11 +20,11 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Catalogue\TargetOperation;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogue;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Provider\TranslationProviderCollection;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Reader\TranslationReaderInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Writer\TranslationWriterInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Catalogue\TargetOperation;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogue;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Provider\TranslationProviderCollection;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Reader\TranslationReaderInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Writer\TranslationWriterInterface;
 
 /**
  * @author Mathieu Santostefano <msantostefano@protonmail.com>

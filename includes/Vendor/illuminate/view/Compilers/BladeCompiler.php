@@ -1,21 +1,21 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\View\Compilers;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers;
 
-use PerformanceToolkit\Vendor\Illuminate\Container\Container;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\View\Factory as ViewFactory;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\View\View;
-use PerformanceToolkit\Vendor\Illuminate\Support\Arr;
-use PerformanceToolkit\Vendor\Illuminate\Support\Collection;
-use PerformanceToolkit\Vendor\Illuminate\Support\Str;
-use PerformanceToolkit\Vendor\Illuminate\Support\Stringable;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\ReflectsClosures;
-use PerformanceToolkit\Vendor\Illuminate\View\Component;
+use PivotPerformanceToolkit\Vendor\Illuminate\Container\Container;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View\Factory as ViewFactory;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View\View;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Arr;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Str;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Stringable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\ReflectsClosures;
+use PivotPerformanceToolkit\Vendor\Illuminate\View\Component;
 use InvalidArgumentException;
 class BladeCompiler extends Compiler implements CompilerInterface
 {
-    use \PerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesAuthorizations, \PerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesClasses, \PerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesComments, \PerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesComponents, \PerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesConditionals, \PerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesEchos, \PerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesErrors, \PerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesFragments, \PerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesHelpers, \PerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesIncludes, \PerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesInjections, \PerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesJson, \PerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesJs, \PerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesLayouts, \PerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesLoops, \PerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesRawPhp, \PerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesSessions, \PerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesStacks, \PerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesStyles, \PerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesTranslations, \PerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesUseStatements, ReflectsClosures;
+    use \PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesAuthorizations, \PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesClasses, \PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesComments, \PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesComponents, \PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesConditionals, \PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesEchos, \PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesErrors, \PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesFragments, \PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesHelpers, \PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesIncludes, \PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesInjections, \PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesJson, \PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesJs, \PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesLayouts, \PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesLoops, \PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesRawPhp, \PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesSessions, \PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesStacks, \PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesStyles, \PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesTranslations, \PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns\CompilesUseStatements, ReflectsClosures;
     /**
      * All of the registered extensions.
      *
@@ -167,7 +167,7 @@ class BladeCompiler extends Compiler implements CompilerInterface
      * Get the open and closing PHP tag tokens from the given string.
      *
      * @param  string  $contents
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Collection
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection
      */
     protected function getOpenAndClosingPhpTokens($contents)
     {
@@ -257,7 +257,7 @@ class BladeCompiler extends Compiler implements CompilerInterface
             }
         };
         $view = Container::getInstance()->make(ViewFactory::class)->make($component->resolveView(), $data);
-        return performancetoolkit_vendor_tap($view->render(), function () use ($view, $deleteCachedView) {
+        return pivotperformancetoolkit_vendor_tap($view->render(), function () use ($view, $deleteCachedView) {
             if ($deleteCachedView) {
                 @unlink($view->getPath());
             }
@@ -266,13 +266,13 @@ class BladeCompiler extends Compiler implements CompilerInterface
     /**
      * Render a component instance to HTML.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\View\Component  $component
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\View\Component  $component
      * @return string
      */
     public static function renderComponent(Component $component)
     {
         $data = $component->data();
-        $view = performancetoolkit_vendor_value($component->resolveView(), $data);
+        $view = pivotperformancetoolkit_vendor_value($component->resolveView(), $data);
         if ($view instanceof View) {
             return $view->with($data)->render();
         } elseif ($view instanceof Htmlable) {
@@ -560,13 +560,13 @@ class BladeCompiler extends Compiler implements CompilerInterface
     {
         $this->conditions[$name] = $callback;
         $this->directive($name, function ($expression) use ($name) {
-            return $expression !== '' ? "<?php if (\\PerformanceToolkit\\Vendor\\Illuminate\\Support\\Facades\\Blade::check('{$name}', {$expression})): ?>" : "<?php if (\\PerformanceToolkit\\Vendor\\Illuminate\\Support\\Facades\\Blade::check('{$name}')): ?>";
+            return $expression !== '' ? "<?php if (\\PivotPerformanceToolkit\\Vendor\\Illuminate\\Support\\Facades\\Blade::check('{$name}', {$expression})): ?>" : "<?php if (\\PivotPerformanceToolkit\\Vendor\\Illuminate\\Support\\Facades\\Blade::check('{$name}')): ?>";
         });
         $this->directive('unless' . $name, function ($expression) use ($name) {
-            return $expression !== '' ? "<?php if (! \\PerformanceToolkit\\Vendor\\Illuminate\\Support\\Facades\\Blade::check('{$name}', {$expression})): ?>" : "<?php if (! \\PerformanceToolkit\\Vendor\\Illuminate\\Support\\Facades\\Blade::check('{$name}')): ?>";
+            return $expression !== '' ? "<?php if (! \\PivotPerformanceToolkit\\Vendor\\Illuminate\\Support\\Facades\\Blade::check('{$name}', {$expression})): ?>" : "<?php if (! \\PivotPerformanceToolkit\\Vendor\\Illuminate\\Support\\Facades\\Blade::check('{$name}')): ?>";
         });
         $this->directive('else' . $name, function ($expression) use ($name) {
-            return $expression !== '' ? "<?php elseif (\\PerformanceToolkit\\Vendor\\Illuminate\\Support\\Facades\\Blade::check('{$name}', {$expression})): ?>" : "<?php elseif (\\PerformanceToolkit\\Vendor\\Illuminate\\Support\\Facades\\Blade::check('{$name}')): ?>";
+            return $expression !== '' ? "<?php elseif (\\PivotPerformanceToolkit\\Vendor\\Illuminate\\Support\\Facades\\Blade::check('{$name}', {$expression})): ?>" : "<?php elseif (\\PivotPerformanceToolkit\\Vendor\\Illuminate\\Support\\Facades\\Blade::check('{$name}')): ?>";
         });
         $this->directive('end' . $name, function () {
             return '<?php endif; ?>';
@@ -599,7 +599,7 @@ class BladeCompiler extends Compiler implements CompilerInterface
         if (is_null($alias)) {
             $alias = str_contains($class, '\View\Components\\') ? (new Collection(explode('\\', Str::after($class, '\View\Components\\'))))->map(function ($segment) {
                 return Str::kebab($segment);
-            })->implode(':') : Str::kebab(performancetoolkit_vendor_class_basename($class));
+            })->implode(':') : Str::kebab(pivotperformancetoolkit_vendor_class_basename($class));
         }
         if (!empty($prefix)) {
             $alias = $prefix . '-' . $alias;

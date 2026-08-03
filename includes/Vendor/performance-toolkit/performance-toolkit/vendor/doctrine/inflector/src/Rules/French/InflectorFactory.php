@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Vendor\Doctrine\Inflector\Rules\French;
+namespace PivotPerformanceToolkit\Vendor\Doctrine\Inflector\Rules\French;
 
-use PerformanceToolkit\Vendor\Doctrine\Inflector\GenericLanguageInflectorFactory;
-use PerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Ruleset;
+use PivotPerformanceToolkit\Vendor\Doctrine\Inflector\GenericLanguageInflectorFactory;
+use PivotPerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Ruleset;
 
 final class InflectorFactory extends GenericLanguageInflectorFactory
 {

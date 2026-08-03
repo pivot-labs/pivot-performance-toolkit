@@ -23,7 +23,7 @@
  * - Pete Scopes (pdscopes)
  */
 
-use PerformanceToolkit\Vendor\Carbon\CarbonInterface;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface;
 
 return [
     'year' => ':count anno|:count anni',

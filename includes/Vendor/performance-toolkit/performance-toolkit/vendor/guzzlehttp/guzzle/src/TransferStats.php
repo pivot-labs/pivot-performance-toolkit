@@ -1,10 +1,10 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp;
 
-use PerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\ResponseInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\UriInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\ResponseInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\UriInterface;
 
 /**
  * Represents data at the point after it was transferred either successfully

@@ -11,9 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Carbon\Exceptions;
+namespace PivotPerformanceToolkit\Vendor\Carbon\Exceptions;
 
-use PerformanceToolkit\Vendor\Carbon\CarbonInterface;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface;
 use InvalidArgumentException as BaseInvalidArgumentException;
 use Throwable;
 

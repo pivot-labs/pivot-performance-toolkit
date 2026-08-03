@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Queue;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue;
 
 interface Job
 {

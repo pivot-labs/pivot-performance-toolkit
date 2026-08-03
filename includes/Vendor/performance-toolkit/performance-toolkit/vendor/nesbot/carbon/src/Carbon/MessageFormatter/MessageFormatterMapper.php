@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Carbon\MessageFormatter;
+namespace PivotPerformanceToolkit\Vendor\Carbon\MessageFormatter;
 
 use ReflectionMethod;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Formatter\MessageFormatter;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Formatter\MessageFormatterInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Formatter\MessageFormatter;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Formatter\MessageFormatterInterface;
 
 // @codeCoverageIgnoreStart
 $transMethod = new ReflectionMethod(MessageFormatterInterface::class, 'format');

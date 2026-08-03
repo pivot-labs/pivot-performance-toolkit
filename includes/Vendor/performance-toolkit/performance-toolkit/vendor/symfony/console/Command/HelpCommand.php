@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Command;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Command;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Descriptor\ApplicationDescription;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Helper\DescriptorHelper;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputArgument;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputOption;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Descriptor\ApplicationDescription;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Helper\DescriptorHelper;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputArgument;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputOption;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * HelpCommand displays the help for a given command.

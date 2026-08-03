@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Contracts\Translation\Test;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Contracts\Translation\Test;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\RequiresPhpExtension;
 use PHPUnit\Framework\TestCase;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\TranslatableMessage;
-use PerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatorInterface;
-use PerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatorTrait;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\TranslatableMessage;
+use PivotPerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatorInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatorTrait;
 
 /**
  * Test should cover all languages mentioned on http://translate.sourceforge.net/wiki/l10n/pluralforms

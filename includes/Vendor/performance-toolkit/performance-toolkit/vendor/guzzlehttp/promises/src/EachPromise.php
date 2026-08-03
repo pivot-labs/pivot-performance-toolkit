@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp\Promise;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp\Promise;
 
 /**
  * Represents a promise that iterates over many promises and invokes

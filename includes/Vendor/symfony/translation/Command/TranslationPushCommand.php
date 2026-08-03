@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation\Command;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Command;
 
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -21,10 +21,10 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Provider\FilteringProvider;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Provider\TranslationProviderCollection;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Reader\TranslationReaderInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\TranslatorBag;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Provider\FilteringProvider;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Provider\TranslationProviderCollection;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Reader\TranslationReaderInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\TranslatorBag;
 
 /**
  * @author Mathieu Santostefano <msantostefano@protonmail.com>

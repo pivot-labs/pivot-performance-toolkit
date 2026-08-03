@@ -11,18 +11,18 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Carbon\Traits;
+namespace PivotPerformanceToolkit\Vendor\Carbon\Traits;
 
-use PerformanceToolkit\Vendor\Carbon\CarbonInterface;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\InvalidTypeException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\NotLocaleAwareException;
-use PerformanceToolkit\Vendor\Carbon\Language;
-use PerformanceToolkit\Vendor\Carbon\Translator;
-use PerformanceToolkit\Vendor\Carbon\TranslatorStrongTypeInterface;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\InvalidTypeException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\NotLocaleAwareException;
+use PivotPerformanceToolkit\Vendor\Carbon\Language;
+use PivotPerformanceToolkit\Vendor\Carbon\Translator;
+use PivotPerformanceToolkit\Vendor\Carbon\TranslatorStrongTypeInterface;
 use Closure;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\TranslatorBagInterface;
-use PerformanceToolkit\Vendor\Symfony\Contracts\Translation\LocaleAwareInterface;
-use PerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatorInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\TranslatorBagInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Contracts\Translation\LocaleAwareInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Trait Localization.
@@ -652,7 +652,7 @@ trait Localization
 
     /**
      * @param mixed                                                    $translator
-     * @param \PerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogueInterface $catalogue
+     * @param \PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogueInterface $catalogue
      *
      * @return mixed
      */

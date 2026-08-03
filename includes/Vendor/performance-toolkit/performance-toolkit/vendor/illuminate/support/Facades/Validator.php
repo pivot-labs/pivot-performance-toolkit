@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
 
 /**
  * @method static \Illuminate\Validation\Validator make(array $data, array $rules, array $messages = [], array $attributes = [])
@@ -12,11 +12,11 @@ namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
  * @method static void includeUnvalidatedArrayKeys()
  * @method static void excludeUnvalidatedArrayKeys()
  * @method static void resolver(\Closure $resolver)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Translation\Translator getTranslator()
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Translation\Translator getTranslator()
  * @method static \Illuminate\Validation\PresenceVerifierInterface getPresenceVerifier()
  * @method static void setPresenceVerifier(\Illuminate\Validation\PresenceVerifierInterface $presenceVerifier)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container|null getContainer()
- * @method static \Illuminate\Validation\Factory setContainer(\PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container $container)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container|null getContainer()
+ * @method static \Illuminate\Validation\Factory setContainer(\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container $container)
  *
  * @see \Illuminate\Validation\Factory
  */

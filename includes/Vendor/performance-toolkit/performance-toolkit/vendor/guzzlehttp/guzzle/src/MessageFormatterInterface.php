@@ -1,9 +1,9 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp;
 
-use PerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\ResponseInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\ResponseInterface;
 
 interface MessageFormatterInterface
 {

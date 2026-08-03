@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Vendor\Doctrine\Inflector\Rules;
+namespace PivotPerformanceToolkit\Vendor\Doctrine\Inflector\Rules;
 
 class Word
 {

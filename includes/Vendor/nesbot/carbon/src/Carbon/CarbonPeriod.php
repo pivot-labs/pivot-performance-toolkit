@@ -9,25 +9,25 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace PerformanceToolkit\Vendor\Carbon;
+namespace PivotPerformanceToolkit\Vendor\Carbon;
 
-use PerformanceToolkit\Vendor\Carbon\Constants\UnitValue;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\EndLessPeriodException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\InvalidCastException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\InvalidIntervalException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\InvalidPeriodDateException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\InvalidPeriodParameterException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\NotACarbonClassException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\NotAPeriodException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\UnknownGetterException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\UnknownMethodException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\UnreachableException;
-use PerformanceToolkit\Vendor\Carbon\Traits\DeprecatedPeriodProperties;
-use PerformanceToolkit\Vendor\Carbon\Traits\IntervalRounding;
-use PerformanceToolkit\Vendor\Carbon\Traits\LocalFactory;
-use PerformanceToolkit\Vendor\Carbon\Traits\Mixin;
-use PerformanceToolkit\Vendor\Carbon\Traits\Options;
-use PerformanceToolkit\Vendor\Carbon\Traits\ToStringFormat;
+use PivotPerformanceToolkit\Vendor\Carbon\Constants\UnitValue;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\EndLessPeriodException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\InvalidCastException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\InvalidIntervalException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\InvalidPeriodDateException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\InvalidPeriodParameterException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\NotACarbonClassException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\NotAPeriodException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\UnknownGetterException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\UnknownMethodException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\UnreachableException;
+use PivotPerformanceToolkit\Vendor\Carbon\Traits\DeprecatedPeriodProperties;
+use PivotPerformanceToolkit\Vendor\Carbon\Traits\IntervalRounding;
+use PivotPerformanceToolkit\Vendor\Carbon\Traits\LocalFactory;
+use PivotPerformanceToolkit\Vendor\Carbon\Traits\Mixin;
+use PivotPerformanceToolkit\Vendor\Carbon\Traits\Options;
+use PivotPerformanceToolkit\Vendor\Carbon\Traits\ToStringFormat;
 use Closure;
 use Countable;
 use DateInterval;
@@ -2021,9 +2021,9 @@ class CarbonPeriod extends DatePeriodBase implements Countable, JsonSerializable
      * Return the Carbon instance passed through, a now instance in the same timezone
      * if null given or parse the input if string given.
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\Carbon|\PerformanceToolkit\Vendor\Carbon\CarbonPeriod|\PerformanceToolkit\Vendor\Carbon\CarbonInterval|\DateInterval|\DatePeriod|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\Carbon|\PivotPerformanceToolkit\Vendor\Carbon\CarbonPeriod|\PivotPerformanceToolkit\Vendor\Carbon\CarbonInterval|\DateInterval|\DatePeriod|\DateTimeInterface|string|null $date
      *
-     * @return \PerformanceToolkit\Vendor\Carbon\CarbonInterface
+     * @return \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface
      */
     protected function resolveCarbon($date = null)
     {

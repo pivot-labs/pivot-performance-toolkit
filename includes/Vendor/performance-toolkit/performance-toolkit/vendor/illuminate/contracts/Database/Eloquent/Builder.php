@@ -1,8 +1,8 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Database\Eloquent;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Database\Eloquent;
 
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Database\Query\Builder as BaseContract;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Database\Query\Builder as BaseContract;
 
 /**
  * This interface is intentionally empty and exists to improve IDE support.

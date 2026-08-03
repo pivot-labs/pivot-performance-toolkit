@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Input;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input;
 
 /**
  * StreamableInputInterface is the interface implemented by all input classes

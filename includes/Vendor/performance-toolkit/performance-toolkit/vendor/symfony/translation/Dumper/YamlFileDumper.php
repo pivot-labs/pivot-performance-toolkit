@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation\Dumper;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Dumper;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\LogicException;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogue;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Util\ArrayConverter;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\LogicException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogue;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Util\ArrayConverter;
 use Symfony\Component\Yaml\Yaml;
 
 /**

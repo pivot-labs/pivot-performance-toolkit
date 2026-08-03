@@ -1,10 +1,10 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
 use ArgumentCountError;
 use ArrayAccess;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
 use InvalidArgumentException;
 use Random\Randomizer;
 
@@ -194,14 +194,14 @@ class Arr
     {
         if (is_null($callback)) {
             if (empty($array)) {
-                return performancetoolkit_vendor_value($default);
+                return pivotperformancetoolkit_vendor_value($default);
             }
 
             foreach ($array as $item) {
                 return $item;
             }
 
-            return performancetoolkit_vendor_value($default);
+            return pivotperformancetoolkit_vendor_value($default);
         }
 
         foreach ($array as $key => $value) {
@@ -210,7 +210,7 @@ class Arr
             }
         }
 
-        return performancetoolkit_vendor_value($default);
+        return pivotperformancetoolkit_vendor_value($default);
     }
 
     /**
@@ -228,7 +228,7 @@ class Arr
     public static function last($array, ?callable $callback = null, $default = null)
     {
         if (is_null($callback)) {
-            return empty($array) ? performancetoolkit_vendor_value($default) : end($array);
+            return empty($array) ? pivotperformancetoolkit_vendor_value($default) : end($array);
         }
 
         return static::first(array_reverse($array, true), $callback, $default);
@@ -335,7 +335,7 @@ class Arr
     public static function get($array, $key, $default = null)
     {
         if (! static::accessible($array)) {
-            return performancetoolkit_vendor_value($default);
+            return pivotperformancetoolkit_vendor_value($default);
         }
 
         if (is_null($key)) {
@@ -347,14 +347,14 @@ class Arr
         }
 
         if (! str_contains($key, '.')) {
-            return $array[$key] ?? performancetoolkit_vendor_value($default);
+            return $array[$key] ?? pivotperformancetoolkit_vendor_value($default);
         }
 
         foreach (explode('.', $key) as $segment) {
             if (static::accessible($array) && static::exists($array, $segment)) {
                 $array = $array[$segment];
             } else {
-                return performancetoolkit_vendor_value($default);
+                return pivotperformancetoolkit_vendor_value($default);
             }
         }
 
@@ -557,7 +557,7 @@ class Arr
         [$value, $key] = static::explodePluckParameters($value, $key);
 
         foreach ($array as $item) {
-            $itemValue = performancetoolkit_vendor_data_get($item, $value);
+            $itemValue = pivotperformancetoolkit_vendor_data_get($item, $value);
 
             // If the key is "null", we will just append the value to the array and keep
             // looping. Otherwise we will key the array using the value of the key we
@@ -565,7 +565,7 @@ class Arr
             if (is_null($key)) {
                 $results[] = $itemValue;
             } else {
-                $itemKey = performancetoolkit_vendor_data_get($item, $key);
+                $itemKey = pivotperformancetoolkit_vendor_data_get($item, $key);
 
                 if (is_object($itemKey) && method_exists($itemKey, '__toString')) {
                     $itemKey = (string) $itemKey;

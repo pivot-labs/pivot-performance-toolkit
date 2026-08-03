@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Psr\SimpleCache;
+namespace PivotPerformanceToolkit\Vendor\Psr\SimpleCache;
 
 /**
  * Exception interface for invalid cache arguments.

@@ -1,10 +1,10 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Laravel\Envoy;
+namespace PivotPerformanceToolkit\Vendor\Laravel\Envoy;
 
 use Closure;
 use Exception;
-use PerformanceToolkit\Vendor\Illuminate\Support\Arr;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Arr;
 use InvalidArgumentException;
 
 class TaskContainer
@@ -106,7 +106,7 @@ class TaskContainer
      * No data is needed.
      *
      * @param  string  $path
-     * @param  \PerformanceToolkit\Vendor\Laravel\Envoy\Compiler  $compiler
+     * @param  \PivotPerformanceToolkit\Vendor\Laravel\Envoy\Compiler  $compiler
      * @return void
      */
     public function loadServers($path, Compiler $compiler)
@@ -118,7 +118,7 @@ class TaskContainer
      * Load the Envoy file into the container.
      *
      * @param  string  $__path
-     * @param  \PerformanceToolkit\Vendor\Laravel\Envoy\Compiler  $__compiler
+     * @param  \PivotPerformanceToolkit\Vendor\Laravel\Envoy\Compiler  $__compiler
      * @param  array  $__data
      * @param  bool  $__serversOnly
      * @return void
@@ -153,7 +153,7 @@ class TaskContainer
     /**
      * Write the compiled Envoy file to disk.
      *
-     * @param  \PerformanceToolkit\Vendor\Laravel\Envoy\Compiler  $compiler
+     * @param  \PivotPerformanceToolkit\Vendor\Laravel\Envoy\Compiler  $compiler
      * @param  string  $path
      * @param  bool  $serversOnly
      * @return string
@@ -335,7 +335,7 @@ class TaskContainer
      *
      * @param  string  $task
      * @param  array  $macroOptions
-     * @return \PerformanceToolkit\Vendor\Laravel\Envoy\Task
+     * @return \PivotPerformanceToolkit\Vendor\Laravel\Envoy\Task
      *
      * @throws \Exception
      */

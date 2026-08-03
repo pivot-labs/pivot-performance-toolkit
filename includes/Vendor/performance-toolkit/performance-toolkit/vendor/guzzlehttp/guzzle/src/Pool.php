@@ -1,12 +1,12 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp;
 
-use PerformanceToolkit\Vendor\GuzzleHttp\Promise as P;
-use PerformanceToolkit\Vendor\GuzzleHttp\Promise\EachPromise;
-use PerformanceToolkit\Vendor\GuzzleHttp\Promise\PromiseInterface;
-use PerformanceToolkit\Vendor\GuzzleHttp\Promise\PromisorInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Promise as P;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Promise\EachPromise;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Promise\PromiseInterface;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Promise\PromisorInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
 
 /**
  * Sends an iterator of requests concurrently using a capped pool size.

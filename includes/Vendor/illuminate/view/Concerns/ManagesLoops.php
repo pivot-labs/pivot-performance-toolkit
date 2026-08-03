@@ -1,9 +1,9 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\View\Concerns;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\View\Concerns;
 
-use PerformanceToolkit\Vendor\Illuminate\Support\Arr;
-use PerformanceToolkit\Vendor\Illuminate\Support\LazyCollection;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Arr;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\LazyCollection;
 
 trait ManagesLoops
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Laravel\Envoy;
+namespace PivotPerformanceToolkit\Vendor\Laravel\Envoy;
 
-use PerformanceToolkit\Vendor\GuzzleHttp\Client;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Client;
 
 class Slack
 {
@@ -67,7 +67,7 @@ class Slack
      * @param  mixed  $channel
      * @param  string  $message
      * @param  array  $options
-     * @return \PerformanceToolkit\Vendor\Laravel\Envoy\Slack
+     * @return \PivotPerformanceToolkit\Vendor\Laravel\Envoy\Slack
      */
     public static function make($hook, $channel = '', $message = null, $options = [])
     {

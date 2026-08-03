@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Validation;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Validation;
 
 use Illuminate\Validation\Validator;
 

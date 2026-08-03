@@ -37,7 +37,7 @@
  * - Sergey Danilchenko
  */
 
-use PerformanceToolkit\Vendor\Carbon\CarbonInterface;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface;
 
 $transformDiff = static fn (string $input) => strtr($input, [
     'неделя' => 'неделю',
@@ -96,7 +96,7 @@ return [
     'calendar' => [
         'sameDay' => '[Сегодня, в] LT',
         'nextDay' => '[Завтра, в] LT',
-        'nextWeek' => static function (CarbonInterface $current, \PerformanceToolkit\Vendor\Carbon\CarbonInterface $other) {
+        'nextWeek' => static function (CarbonInterface $current, \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface $other) {
             if ($current->week !== $other->week) {
                 switch ($current->dayOfWeek) {
                     case 0:
@@ -119,7 +119,7 @@ return [
             return '[В] dddd, [в] LT';
         },
         'lastDay' => '[Вчера, в] LT',
-        'lastWeek' => static function (CarbonInterface $current, \PerformanceToolkit\Vendor\Carbon\CarbonInterface $other) {
+        'lastWeek' => static function (CarbonInterface $current, \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface $other) {
             if ($current->week !== $other->week) {
                 switch ($current->dayOfWeek) {
                     case 0:

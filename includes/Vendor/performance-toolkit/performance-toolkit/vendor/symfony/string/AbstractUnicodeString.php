@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\String;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\String;
 
-use PerformanceToolkit\Vendor\Symfony\Component\String\Exception\ExceptionInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\String\Exception\InvalidArgumentException;
-use PerformanceToolkit\Vendor\Symfony\Component\String\Exception\RuntimeException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\String\Exception\ExceptionInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\String\Exception\InvalidArgumentException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\String\Exception\RuntimeException;
 
 /**
  * Represents a string of abstract Unicode characters.

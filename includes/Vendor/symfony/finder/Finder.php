@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace PerformanceToolkit\Vendor\Symfony\Component\Finder;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Finder;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Finder\Comparator\DateComparator;
-use PerformanceToolkit\Vendor\Symfony\Component\Finder\Comparator\NumberComparator;
-use PerformanceToolkit\Vendor\Symfony\Component\Finder\Exception\DirectoryNotFoundException;
-use PerformanceToolkit\Vendor\Symfony\Component\Finder\Iterator\CustomFilterIterator;
-use PerformanceToolkit\Vendor\Symfony\Component\Finder\Iterator\DateRangeFilterIterator;
-use PerformanceToolkit\Vendor\Symfony\Component\Finder\Iterator\DepthRangeFilterIterator;
-use PerformanceToolkit\Vendor\Symfony\Component\Finder\Iterator\ExcludeDirectoryFilterIterator;
-use PerformanceToolkit\Vendor\Symfony\Component\Finder\Iterator\FilecontentFilterIterator;
-use PerformanceToolkit\Vendor\Symfony\Component\Finder\Iterator\FilenameFilterIterator;
-use PerformanceToolkit\Vendor\Symfony\Component\Finder\Iterator\LazyIterator;
-use PerformanceToolkit\Vendor\Symfony\Component\Finder\Iterator\SizeRangeFilterIterator;
-use PerformanceToolkit\Vendor\Symfony\Component\Finder\Iterator\SortableIterator;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Finder\Comparator\DateComparator;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Finder\Comparator\NumberComparator;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Finder\Exception\DirectoryNotFoundException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Finder\Iterator\CustomFilterIterator;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Finder\Iterator\DateRangeFilterIterator;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Finder\Iterator\DepthRangeFilterIterator;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Finder\Iterator\ExcludeDirectoryFilterIterator;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Finder\Iterator\FilecontentFilterIterator;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Finder\Iterator\FilenameFilterIterator;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Finder\Iterator\LazyIterator;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Finder\Iterator\SizeRangeFilterIterator;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Finder\Iterator\SortableIterator;
 /**
  * Finder allows to build rules to find files and directories.
  *
@@ -83,7 +83,7 @@ class Finder implements \IteratorAggregate, \Countable
      */
     public function directories(): static
     {
-        $this->mode = \PerformanceToolkit\Vendor\Symfony\Component\Finder\Iterator\FileTypeFilterIterator::ONLY_DIRECTORIES;
+        $this->mode = \PivotPerformanceToolkit\Vendor\Symfony\Component\Finder\Iterator\FileTypeFilterIterator::ONLY_DIRECTORIES;
         return $this;
     }
     /**
@@ -93,7 +93,7 @@ class Finder implements \IteratorAggregate, \Countable
      */
     public function files(): static
     {
-        $this->mode = \PerformanceToolkit\Vendor\Symfony\Component\Finder\Iterator\FileTypeFilterIterator::ONLY_FILES;
+        $this->mode = \PivotPerformanceToolkit\Vendor\Symfony\Component\Finder\Iterator\FileTypeFilterIterator::ONLY_FILES;
         return $this;
     }
     /**

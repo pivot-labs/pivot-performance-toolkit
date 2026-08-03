@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Contracts\Service;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Contracts\Service;
 
 /**
  * A ServiceProviderInterface that is also countable and iterable.

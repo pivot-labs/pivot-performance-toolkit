@@ -1,8 +1,8 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\View;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\View;
 
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable;
 use InvalidArgumentException;
 use Stringable;
 
@@ -11,7 +11,7 @@ class ComponentSlot implements Htmlable, Stringable
     /**
      * The slot attribute bag.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\View\ComponentAttributeBag
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\View\ComponentAttributeBag
      */
     public $attributes;
 

@@ -25,7 +25,7 @@
  * - Levan Velijanashvili (Stichoza)
  */
 
-use PerformanceToolkit\Vendor\Carbon\CarbonInterface;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface;
 
 return [
     'year' => ':count წელი',
@@ -152,7 +152,7 @@ return [
     'calendar' => [
         'sameDay' => '[დღეს], LT[-ზე]',
         'nextDay' => '[ხვალ], LT[-ზე]',
-        'nextWeek' => static function (CarbonInterface $current, \PerformanceToolkit\Vendor\Carbon\CarbonInterface $other) {
+        'nextWeek' => static function (CarbonInterface $current, \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface $other) {
             return ($current->isSameWeek($other) ? '' : '[შემდეგ] ').'dddd, LT[-ზე]';
         },
         'lastDay' => '[გუშინ], LT[-ზე]',

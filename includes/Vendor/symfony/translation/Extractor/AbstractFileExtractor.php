@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation\Extractor;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Extractor;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\InvalidArgumentException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\InvalidArgumentException;
 
 /**
  * Base class used by classes that extract translation messages from files.

@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Output;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Formatter\OutputFormatterInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Helper\Helper;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Terminal;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Helper\Helper;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Terminal;
 
 /**
  * @author Pierre du Plessis <pdples@gmail.com>

@@ -2,40 +2,44 @@
 /**
  * Main plugin bootstrap.
  *
- * @package PerformanceToolkit
+ * @package PivotPerformanceToolkit
  */
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Core;
+namespace PivotPerformanceToolkit\Core;
 
-use PerformanceToolkit\Admin\AdminBarMenu;
-use PerformanceToolkit\Admin\AdvancedRulesPage;
-use PerformanceToolkit\Admin\AssetsPage;
-use PerformanceToolkit\Admin\BrowserCacheHeadersPage;
-use PerformanceToolkit\Admin\CachePage;
-use PerformanceToolkit\Admin\CdnIntegrationsPage;
-use PerformanceToolkit\Admin\DashboardPage;
-use PerformanceToolkit\Admin\DatabasePage;
-use PerformanceToolkit\Admin\DatabaseTablePage;
-use PerformanceToolkit\Database\DatabaseOptimizer;
-use PerformanceToolkit\Admin\DocumentationPage;
-use PerformanceToolkit\Admin\FileOptimizationPage;
-use PerformanceToolkit\Admin\FilesystemNotices;
-use PerformanceToolkit\Admin\MediaOptimizationPage;
-use PerformanceToolkit\Admin\Menu;
-use PerformanceToolkit\Admin\PerformanceTest;
-use PerformanceToolkit\Admin\PerformancePage;
-use PerformanceToolkit\Admin\SettingsPage;
-use PerformanceToolkit\Admin\SystemStatusPage;
-use PerformanceToolkit\Admin\ToolsPage;
-use PerformanceToolkit\Cache\ObjectCacheManager;
-use PerformanceToolkit\Cache\PageCache;
-use PerformanceToolkit\Contracts\ModuleInterface;
-use PerformanceToolkit\Media\ImageOptimizerDetector;
-use PerformanceToolkit\Media\LazyLoad;
-use PerformanceToolkit\Integrations\CloudflareIntegration;
-use PerformanceToolkit\Optimization\Assets;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+use PivotPerformanceToolkit\Admin\AdminBarMenu;
+use PivotPerformanceToolkit\Admin\AdvancedRulesPage;
+use PivotPerformanceToolkit\Admin\AssetsPage;
+use PivotPerformanceToolkit\Admin\BrowserCacheHeadersPage;
+use PivotPerformanceToolkit\Admin\CachePage;
+use PivotPerformanceToolkit\Admin\CdnIntegrationsPage;
+use PivotPerformanceToolkit\Admin\DashboardPage;
+use PivotPerformanceToolkit\Admin\DatabasePage;
+use PivotPerformanceToolkit\Admin\DatabaseTablePage;
+use PivotPerformanceToolkit\Database\DatabaseOptimizer;
+use PivotPerformanceToolkit\Admin\DocumentationPage;
+use PivotPerformanceToolkit\Admin\FileOptimizationPage;
+use PivotPerformanceToolkit\Admin\FilesystemNotices;
+use PivotPerformanceToolkit\Admin\MediaOptimizationPage;
+use PivotPerformanceToolkit\Admin\Menu;
+use PivotPerformanceToolkit\Admin\PerformanceTest;
+use PivotPerformanceToolkit\Admin\PerformancePage;
+use PivotPerformanceToolkit\Admin\SettingsPage;
+use PivotPerformanceToolkit\Admin\SystemStatusPage;
+use PivotPerformanceToolkit\Admin\ToolsPage;
+use PivotPerformanceToolkit\Cache\ObjectCacheManager;
+use PivotPerformanceToolkit\Cache\PageCache;
+use PivotPerformanceToolkit\Contracts\ModuleInterface;
+use PivotPerformanceToolkit\Media\ImageOptimizerDetector;
+use PivotPerformanceToolkit\Media\LazyLoad;
+use PivotPerformanceToolkit\Integrations\CloudflareIntegration;
+use PivotPerformanceToolkit\Optimization\Assets;
 
 final class Plugin {
 
@@ -67,6 +71,9 @@ final class Plugin {
 		}
 
 		$this->booted             = true;
+
+		Lifecycle::maybeMigrateLegacyOptionKeys();
+
 		$this->settings           = new Settings();
 		$cloudflare               = new CloudflareIntegration( $this->settings );
 		$image_optimizer_detector = new ImageOptimizerDetector();

@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Database;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Database;
 
 use Throwable;
 

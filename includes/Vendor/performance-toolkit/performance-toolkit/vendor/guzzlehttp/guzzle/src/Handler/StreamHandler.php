@@ -1,19 +1,19 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp\Handler;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp\Handler;
 
-use PerformanceToolkit\Vendor\GuzzleHttp\Exception\ConnectException;
-use PerformanceToolkit\Vendor\GuzzleHttp\Exception\RequestException;
-use PerformanceToolkit\Vendor\GuzzleHttp\Promise as P;
-use PerformanceToolkit\Vendor\GuzzleHttp\Promise\FulfilledPromise;
-use PerformanceToolkit\Vendor\GuzzleHttp\Promise\PromiseInterface;
-use PerformanceToolkit\Vendor\GuzzleHttp\Psr7;
-use PerformanceToolkit\Vendor\GuzzleHttp\TransferStats;
-use PerformanceToolkit\Vendor\GuzzleHttp\Utils;
-use PerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\ResponseInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\StreamInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\UriInterface;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Exception\ConnectException;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Exception\RequestException;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Promise as P;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Promise\FulfilledPromise;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Promise\PromiseInterface;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\TransferStats;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Utils;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\ResponseInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\StreamInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\UriInterface;
 
 /**
  * HTTP handler that uses PHP's HTTP stream wrapper.

@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Psr\Container;
+namespace PivotPerformanceToolkit\Vendor\Psr\Container;
 
 /**
  * No entry was found in the container.

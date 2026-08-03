@@ -1,8 +1,8 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
 
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Auth\Access\Gate as GateContract;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Auth\Access\Gate as GateContract;
 
 /**
  * @method static bool has(string|array $ability)
@@ -24,11 +24,11 @@ use PerformanceToolkit\Vendor\Illuminate\Contracts\Auth\Access\Gate as GateContr
  * @method static mixed getPolicyFor(object|string $class)
  * @method static \Illuminate\Auth\Access\Gate guessPolicyNamesUsing(callable $callback)
  * @method static mixed resolvePolicy(object|string $class)
- * @method static \Illuminate\Auth\Access\Gate forUser(\PerformanceToolkit\Vendor\Illuminate\Contracts\Auth\Authenticatable|mixed $user)
+ * @method static \Illuminate\Auth\Access\Gate forUser(\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Auth\Authenticatable|mixed $user)
  * @method static array abilities()
  * @method static array policies()
  * @method static \Illuminate\Auth\Access\Gate defaultDenialResponse(\Illuminate\Auth\Access\Response $response)
- * @method static \Illuminate\Auth\Access\Gate setContainer(\PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container $container)
+ * @method static \Illuminate\Auth\Access\Gate setContainer(\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container $container)
  * @method static \Illuminate\Auth\Access\Response denyWithStatus(int $status, string|null $message = null, int|null $code = null)
  * @method static \Illuminate\Auth\Access\Response denyAsNotFound(string|null $message = null, int|null $code = null)
  *

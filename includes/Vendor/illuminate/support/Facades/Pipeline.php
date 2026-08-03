@@ -1,20 +1,20 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
 
 /**
- * @method static \PerformanceToolkit\Vendor\Illuminate\Pipeline\Pipeline send(mixed $passable)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Pipeline\Pipeline through(array|mixed $pipes)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Pipeline\Pipeline pipe(array|mixed $pipes)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Pipeline\Pipeline via(string $method)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Pipeline\Pipeline send(mixed $passable)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Pipeline\Pipeline through(array|mixed $pipes)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Pipeline\Pipeline pipe(array|mixed $pipes)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Pipeline\Pipeline via(string $method)
  * @method static mixed then(\Closure $destination)
  * @method static mixed thenReturn()
- * @method static \PerformanceToolkit\Vendor\Illuminate\Pipeline\Pipeline finally(\Closure $callback)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Pipeline\Pipeline setContainer(\PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container $container)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Pipeline\Pipeline|mixed when(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Pipeline\Pipeline|mixed unless(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Pipeline\Pipeline finally(\Closure $callback)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Pipeline\Pipeline setContainer(\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container $container)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Pipeline\Pipeline|mixed when(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Pipeline\Pipeline|mixed unless(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
  *
- * @see \PerformanceToolkit\Vendor\Illuminate\Pipeline\Pipeline
+ * @see \PivotPerformanceToolkit\Vendor\Illuminate\Pipeline\Pipeline
  */
 class Pipeline extends Facade
 {

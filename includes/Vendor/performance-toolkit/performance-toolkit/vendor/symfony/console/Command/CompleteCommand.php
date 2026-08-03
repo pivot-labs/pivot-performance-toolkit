@@ -9,20 +9,20 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Command;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Command;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Attribute\AsCommand;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Completion\CompletionInput;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Completion\CompletionSuggestions;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Completion\Output\BashCompletionOutput;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Completion\Output\CompletionOutputInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Completion\Output\FishCompletionOutput;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Completion\Output\ZshCompletionOutput;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\CommandNotFoundException;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\ExceptionInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputOption;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Attribute\AsCommand;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Completion\CompletionInput;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Completion\CompletionSuggestions;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Completion\Output\BashCompletionOutput;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Completion\Output\CompletionOutputInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Completion\Output\FishCompletionOutput;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Completion\Output\ZshCompletionOutput;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\CommandNotFoundException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\ExceptionInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputOption;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Responsible for providing the values to the shell completion.

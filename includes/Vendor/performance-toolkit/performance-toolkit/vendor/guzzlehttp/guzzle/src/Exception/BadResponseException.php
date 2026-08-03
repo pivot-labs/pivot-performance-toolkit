@@ -1,9 +1,9 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp\Exception;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp\Exception;
 
-use PerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\ResponseInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\ResponseInterface;
 
 /**
  * Exception when an HTTP error occurs (4xx or 5xx error)

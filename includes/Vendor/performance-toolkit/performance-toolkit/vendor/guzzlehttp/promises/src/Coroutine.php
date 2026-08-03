@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp\Promise;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp\Promise;
 
 use Generator;
 use Throwable;
@@ -18,7 +18,7 @@ use Throwable;
  * This can lead to less verbose code when doing lots of sequential async calls
  * with minimal processing in between.
  *
- *     use PerformanceToolkit\Vendor\GuzzleHttp\Promise;
+ *     use PivotPerformanceToolkit\Vendor\GuzzleHttp\Promise;
  *
  *     function createPromise($value) {
  *         return new Promise\FulfilledPromise($value);

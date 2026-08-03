@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Auth;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Auth;
 
 interface Guard
 {
@@ -21,7 +21,7 @@ interface Guard
     /**
      * Get the currently authenticated user.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\Auth\Authenticatable|null
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Auth\Authenticatable|null
      */
     public function user();
 
@@ -50,7 +50,7 @@ interface Guard
     /**
      * Set the current user.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Auth\Authenticatable  $user
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Auth\Authenticatable  $user
      * @return $this
      */
     public function setUser(Authenticatable $user);

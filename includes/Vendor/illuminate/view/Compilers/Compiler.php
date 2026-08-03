@@ -1,10 +1,10 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\View\Compilers;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers;
 
 use ErrorException;
-use PerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem;
-use PerformanceToolkit\Vendor\Illuminate\Support\Str;
+use PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Str;
 use InvalidArgumentException;
 
 abstract class Compiler
@@ -12,7 +12,7 @@ abstract class Compiler
     /**
      * The filesystem instance.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem
      */
     protected $files;
 
@@ -47,7 +47,7 @@ abstract class Compiler
     /**
      * Create a new compiler instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem  $files
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem  $files
      * @param  string  $cachePath
      * @param  string  $basePath
      * @param  bool  $shouldCache

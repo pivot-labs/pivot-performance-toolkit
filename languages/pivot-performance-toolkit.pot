@@ -2,8 +2,8 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Performance Toolkit 1.0.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/performance-toolkit\n"
+"Project-Id-Version: Pivot Performance Toolkit 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/pivot-performance-toolkit\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -12,31 +12,31 @@ msgstr ""
 "POT-Creation-Date: 2026-06-08T18:25:32+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
-"X-Domain: performance-toolkit\n"
+"X-Domain: pivot-performance-toolkit\n"
 
 #. Plugin Name of the plugin
-#: performance-toolkit.php
+#: pivot-performance-toolkit.php
 #: includes/Views/components/admin-layout.blade.php:13
-msgid "WP Performance Toolkit"
+msgid "Pivot Performance Toolkit"
 msgstr ""
 
 #. Plugin URI of the plugin
-#: performance-toolkit.php
+#: pivot-performance-toolkit.php
 msgid "https://www.wpperformancetoolkit.com"
 msgstr ""
 
 #. Description of the plugin
-#: performance-toolkit.php
+#: pivot-performance-toolkit.php
 msgid "Performance optimization toolkit for WordPress."
 msgstr ""
 
 #. Author of the plugin
-#: performance-toolkit.php
+#: pivot-performance-toolkit.php
 msgid "Digital Canvas"
 msgstr ""
 
 #. Author URI of the plugin
-#: performance-toolkit.php
+#: pivot-performance-toolkit.php
 msgid "https://www.digitalcanvas.com"
 msgstr ""
 
@@ -263,11 +263,11 @@ msgid "Advanced Rules"
 msgstr ""
 
 #: includes/Admin/AdvancedRulesPage.php:31
-msgid "Performance Toolkit Advanced Rules"
+msgid "Pivot Performance Toolkit Advanced Rules"
 msgstr ""
 
 #: includes/Admin/AssetsPage.php:33
-msgid "Performance Toolkit Assets"
+msgid "Pivot Performance Toolkit Assets"
 msgstr ""
 
 #: includes/Admin/AssetsPage.php:53
@@ -314,7 +314,7 @@ msgid "Untitled #%d"
 msgstr ""
 
 #: includes/Admin/BrowserCacheHeadersPage.php:31
-msgid "Performance Toolkit – Browser Cache & Compression"
+msgid "Pivot Performance Toolkit – Browser Cache & Compression"
 msgstr ""
 
 #: includes/Admin/CachePage.php:38
@@ -322,7 +322,7 @@ msgid "Cache"
 msgstr ""
 
 #: includes/Admin/CachePage.php:42
-msgid "Performance Toolkit Cache"
+msgid "Pivot Performance Toolkit Cache"
 msgstr ""
 
 #: includes/Admin/CachePage.php:87
@@ -392,7 +392,7 @@ msgid "%1$s of %2$d MB used (%3$d%%)"
 msgstr ""
 
 #: includes/Admin/CardShowcasePage.php:23
-msgid "Performance Toolkit Card Showcase"
+msgid "Pivot Performance Toolkit Card Showcase"
 msgstr ""
 
 #: includes/Admin/CdnIntegrationsPage.php:39
@@ -400,7 +400,7 @@ msgid "CDN & Integrations"
 msgstr ""
 
 #: includes/Admin/CdnIntegrationsPage.php:43
-msgid "Performance Toolkit CDN & Integrations"
+msgid "Pivot Performance Toolkit CDN & Integrations"
 msgstr ""
 
 #: includes/Admin/DashboardPage.php:28
@@ -408,11 +408,11 @@ msgid "Dashboard"
 msgstr ""
 
 #: includes/Admin/DashboardPage.php:32
-msgid "Performance Toolkit Dashboard"
+msgid "Pivot Performance Toolkit Dashboard"
 msgstr ""
 
 #: includes/Admin/DatabasePage.php:34
-msgid "Performance Toolkit Database"
+msgid "Pivot Performance Toolkit Database"
 msgstr ""
 
 #: includes/Admin/DatabasePage.php:93
@@ -478,7 +478,7 @@ msgid "Table Breakdown"
 msgstr ""
 
 #: includes/Admin/DatabaseTablePage.php:31
-msgid "Performance Toolkit Database Table Breakdown"
+msgid "Pivot Performance Toolkit Database Table Breakdown"
 msgstr ""
 
 #: includes/Admin/DocumentationPage.php:21
@@ -486,7 +486,7 @@ msgid "Documentation"
 msgstr ""
 
 #: includes/Admin/DocumentationPage.php:25
-msgid "Performance Toolkit Documentation"
+msgid "Pivot Performance Toolkit Documentation"
 msgstr ""
 
 #: includes/Admin/FileOptimizationPage.php:31
@@ -494,7 +494,7 @@ msgid "File Optimization"
 msgstr ""
 
 #: includes/Admin/FileOptimizationPage.php:35
-msgid "Performance Toolkit File Optimization"
+msgid "Pivot Performance Toolkit File Optimization"
 msgstr ""
 
 #: includes/Admin/FileOptimizationPage.php:76
@@ -506,11 +506,11 @@ msgid "Quick optimization saved."
 msgstr ""
 
 #: includes/Admin/FilesystemNotices.php:113
-msgid "Performance Toolkit – Filesystem Issue"
+msgid "Pivot Performance Toolkit – Filesystem Issue"
 msgstr ""
 
 #: includes/Admin/FilesystemNotices.php:116
-msgid "The cache directory is not writable. Performance Toolkit will continue to work, but page caching and asset minification will be disabled until the issue is resolved."
+msgid "The cache directory is not writable. Pivot Performance Toolkit will continue to work, but page caching and asset minification will be disabled until the issue is resolved."
 msgstr ""
 
 #. translators: %s: link to system status page
@@ -519,7 +519,7 @@ msgid "For more details, visit the <a href=\"%s\">System Status page</a>."
 msgstr ""
 
 #: includes/Admin/FilesystemNotices.php:133
-msgid "<strong>To fix:</strong> Ensure the <code>wp-content/cache/performance-toolkit</code> directory exists and is writable by the web server. Usually: <code>chmod 755 wp-content/cache/performance-toolkit</code> or contact your hosting provider."
+msgid "<strong>To fix:</strong> Ensure the <code>wp-content/cache/pivot-performance-toolkit</code> directory exists and is writable by the web server. Usually: <code>chmod 755 wp-content/cache/pivot-performance-toolkit</code> or contact your hosting provider."
 msgstr ""
 
 #: includes/Admin/MediaOptimizationPage.php:31
@@ -527,7 +527,7 @@ msgid "Media Optimization"
 msgstr ""
 
 #: includes/Admin/MediaOptimizationPage.php:35
-msgid "Performance Toolkit Media Optimization"
+msgid "Pivot Performance Toolkit Media Optimization"
 msgstr ""
 
 #: includes/Admin/MediaOptimizationPage.php:61
@@ -569,7 +569,7 @@ msgid "Error"
 msgstr ""
 
 #: includes/Admin/PerformancePage.php:23
-msgid "Performance Toolkit Performance"
+msgid "Pivot Performance Toolkit Performance"
 msgstr ""
 
 #: includes/Admin/PerformanceTest.php:99
@@ -672,7 +672,7 @@ msgid "Test token is invalid or expired."
 msgstr ""
 
 #: includes/Admin/SettingsPage.php:45
-msgid "Performance Toolkit Settings"
+msgid "Pivot Performance Toolkit Settings"
 msgstr ""
 
 #. translators: %s: profile label e.g. "Standard"
@@ -701,7 +701,7 @@ msgid "Page Builder Heavy"
 msgstr ""
 
 #: includes/Admin/SystemStatusPage.php:36
-msgid "Performance Toolkit System Status"
+msgid "Pivot Performance Toolkit System Status"
 msgstr ""
 
 #: includes/Admin/SystemStatusPage.php:69
@@ -858,11 +858,11 @@ msgid "Uploads Directory Writable"
 msgstr ""
 
 #: includes/Admin/ToolsPage.php:80
-msgid "Performance Toolkit Import/Export"
+msgid "Pivot Performance Toolkit Import/Export"
 msgstr ""
 
 #: includes/Admin/ToolsPage.php:83
-msgid "Performance Toolkit Maintenance"
+msgid "Pivot Performance Toolkit Maintenance"
 msgstr ""
 
 #: includes/Admin/ToolsPage.php:194
@@ -890,7 +890,7 @@ msgid "Import file is not valid JSON."
 msgstr ""
 
 #: includes/Admin/ToolsPage.php:257
-msgid "Import file is not a Performance Toolkit export."
+msgid "Import file is not a Pivot Performance Toolkit export."
 msgstr ""
 
 #. translators: %d: schema version
@@ -959,7 +959,7 @@ msgid "Could not remove cache config file: %s"
 msgstr ""
 
 #: includes/Core/Lifecycle.php:116
-msgid "Another plugin already manages wp-content/advanced-cache.php. Performance Toolkit did not overwrite it."
+msgid "Another plugin already manages wp-content/advanced-cache.php. Pivot Performance Toolkit did not overwrite it."
 msgstr ""
 
 #: includes/Core/Lifecycle.php:123
@@ -1165,15 +1165,15 @@ msgstr ""
 msgid "CSS Stylesheets"
 msgstr ""
 
-#: performance-toolkit.php:61
+#: pivot-performance-toolkit.php:61
 msgid ""
-"WP Performance Toolkit Free does not support WordPress Multisite. \n"
+"Pivot Performance Toolkit Free does not support WordPress Multisite. \n"
 "\t\t\t\t\tThe free version uses a single-site cache architecture and cannot safely operate in a multisite network environment. \n"
 "\t\t\t\t\tMultisite support will be available in Pro."
 msgstr ""
 
 #: includes/Views/admin/admin-bar-notice.blade.php:3
-msgid "Performance Toolkit cache was purged."
+msgid "Pivot Performance Toolkit cache was purged."
 msgstr ""
 
 #: includes/Views/admin/admin-bar-notice.blade.php:9
@@ -1322,7 +1322,7 @@ msgid "%1$s: %2$d item(s) removed successfully."
 msgstr ""
 
 #: includes/Views/admin/deactivate-cleanup-notice.blade.php:3
-msgid "Performance Toolkit – Deactivation Cleanup Incomplete"
+msgid "Pivot Performance Toolkit – Deactivation Cleanup Incomplete"
 msgstr ""
 
 #: includes/Views/admin/deactivate-cleanup-notice.blade.php:6
@@ -1356,11 +1356,11 @@ msgid "Open Documentation"
 msgstr ""
 
 #: includes/Views/admin/dropin-install-notice.blade.php:3
-msgid "Performance Toolkit – Drop-in Installation Failed"
+msgid "Pivot Performance Toolkit – Drop-in Installation Failed"
 msgstr ""
 
 #: includes/Views/admin/dropin-install-notice.blade.php:6
-msgid "Performance Toolkit could not install the page cache drop-in file. Page caching is currently disabled."
+msgid "Pivot Performance Toolkit could not install the page cache drop-in file. Page caching is currently disabled."
 msgstr ""
 
 #. translators: %s: reason the drop-in install failed.
@@ -2146,7 +2146,7 @@ msgstr ""
 
 #. translators: %s: Comma-separated list of plugins/providers currently controlling lazy-load.
 #: includes/Views/cards/optimization/media/media-optimization.blade.php:21
-msgid "Lazy-load is currently managed by: %s. Performance Toolkit lazy-load is temporarily disabled to prevent conflicts."
+msgid "Lazy-load is currently managed by: %s. Pivot Performance Toolkit lazy-load is temporarily disabled to prevent conflicts."
 msgstr ""
 
 #: includes/Views/cards/optimization/media/media-optimization.blade.php:67
@@ -2182,7 +2182,7 @@ msgid "Read-only"
 msgstr ""
 
 #: includes/Views/cards/settings/uninstall-policy.blade.php:14
-msgid "Remove all Performance Toolkit data on uninstall"
+msgid "Remove all Pivot Performance Toolkit data on uninstall"
 msgstr ""
 
 #: includes/Views/cards/settings/uninstall-policy.blade.php:17
@@ -2219,7 +2219,7 @@ msgid "⚠ Filesystem Warning"
 msgstr ""
 
 #: includes/Views/cards/status/system-status.blade.php:9
-msgid "The WP Performance Toolkit cache directory is not writable. Caching and minification are disabled. Contact your hosting provider to ensure the cache directory has write permissions."
+msgid "The Pivot Performance Toolkit cache directory is not writable. Caching and minification are disabled. Contact your hosting provider to ensure the cache directory has write permissions."
 msgstr ""
 
 #: includes/Views/cards/tools/import-export.blade.php:25

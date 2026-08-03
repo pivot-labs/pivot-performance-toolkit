@@ -1,9 +1,9 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Laravel\Envoy;
+namespace PivotPerformanceToolkit\Vendor\Laravel\Envoy;
 
 use Closure;
-use PerformanceToolkit\Vendor\Symfony\Component\Process\Process;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Process\Process;
 
 class ParallelSSH extends RemoteProcessor
 {
@@ -12,7 +12,7 @@ class ParallelSSH extends RemoteProcessor
     /**
      * Run the given task over SSH.
      *
-     * @param  \PerformanceToolkit\Vendor\Laravel\Envoy\Task  $task
+     * @param  \PivotPerformanceToolkit\Vendor\Laravel\Envoy\Task  $task
      * @param  \Closure|null  $callback
      * @return int
      */

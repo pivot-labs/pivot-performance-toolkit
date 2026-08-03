@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Completion\Output;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Completion\Output;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Completion\CompletionSuggestions;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Completion\CompletionSuggestions;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * @author Guillaume Aveline <guillaume.aveline@pm.me>

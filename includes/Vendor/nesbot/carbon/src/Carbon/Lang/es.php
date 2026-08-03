@@ -29,7 +29,7 @@
  * - gam04
  */
 
-use PerformanceToolkit\Vendor\Carbon\CarbonInterface;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface;
 
 return [
     'year' => ':count año|:count años',

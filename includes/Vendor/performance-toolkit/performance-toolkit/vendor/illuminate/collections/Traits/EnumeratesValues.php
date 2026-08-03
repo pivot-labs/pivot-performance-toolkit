@@ -1,22 +1,22 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Traits;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits;
 
 use BackedEnum;
 use CachingIterator;
 use Closure;
 use Exception;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Jsonable;
-use PerformanceToolkit\Vendor\Illuminate\Support\Arr;
-use PerformanceToolkit\Vendor\Illuminate\Support\Collection;
-use PerformanceToolkit\Vendor\Illuminate\Support\Enumerable;
-use PerformanceToolkit\Vendor\Illuminate\Support\HigherOrderCollectionProxy;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Jsonable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Arr;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Enumerable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\HigherOrderCollectionProxy;
 use JsonSerializable;
 use UnexpectedValueException;
 use UnitEnum;
 
-use function PerformanceToolkit\Vendor\Illuminate\Support\enum_value;
+use function PivotPerformanceToolkit\Vendor\Illuminate\Support\enum_value;
 
 /**
  * @template TKey of array-key
@@ -113,7 +113,7 @@ trait EnumeratesValues
      * @template TMakeKey of array-key
      * @template TMakeValue
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TMakeKey, TMakeValue>|iterable<TMakeKey, TMakeValue>|null  $items
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TMakeKey, TMakeValue>|iterable<TMakeKey, TMakeValue>|null  $items
      * @return static<TMakeKey, TMakeValue>
      */
     public static function make($items = [], ...$args)
@@ -458,7 +458,7 @@ trait EnumeratesValues
      * @template TFlatMapKey of array-key
      * @template TFlatMapValue
      *
-     * @param  callable(TValue, TKey): (\PerformanceToolkit\Vendor\Illuminate\Support\Collection<TFlatMapKey, TFlatMapValue>|array<TFlatMapKey, TFlatMapValue>)  $callback
+     * @param  callable(TValue, TKey): (\PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection<TFlatMapKey, TFlatMapValue>|array<TFlatMapKey, TFlatMapValue>)  $callback
      * @return static<TFlatMapKey, TFlatMapValue>
      */
     public function flatMap(callable $callback)
@@ -691,7 +691,7 @@ trait EnumeratesValues
      * Filter items by the given key value pair.
      *
      * @param  string  $key
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable|iterable  $values
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable|iterable  $values
      * @param  bool  $strict
      * @return static
      */
@@ -706,7 +706,7 @@ trait EnumeratesValues
      * Filter items by the given key value pair using strict comparison.
      *
      * @param  string  $key
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable|iterable  $values
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable|iterable  $values
      * @return static
      */
     public function whereInStrict($key, $values)
@@ -718,7 +718,7 @@ trait EnumeratesValues
      * Filter items such that the value of the given key is between the given values.
      *
      * @param  string  $key
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable|iterable  $values
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable|iterable  $values
      * @return static
      */
     public function whereBetween($key, $values)
@@ -730,7 +730,7 @@ trait EnumeratesValues
      * Filter items such that the value of the given key is not between the given values.
      *
      * @param  string  $key
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable|iterable  $values
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable|iterable  $values
      * @return static
      */
     public function whereNotBetween($key, $values)
@@ -744,7 +744,7 @@ trait EnumeratesValues
      * Filter items by the given key value pair.
      *
      * @param  string  $key
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable|iterable  $values
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable|iterable  $values
      * @param  bool  $strict
      * @return static
      */
@@ -759,7 +759,7 @@ trait EnumeratesValues
      * Filter items by the given key value pair using strict comparison.
      *
      * @param  string  $key
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable|iterable  $values
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable|iterable  $values
      * @return static
      */
     public function whereNotInStrict($key, $values)
@@ -961,7 +961,7 @@ trait EnumeratesValues
     /**
      * Collect the values into a collection.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Collection<TKey, TValue>
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection<TKey, TValue>
      */
     public function collect()
     {

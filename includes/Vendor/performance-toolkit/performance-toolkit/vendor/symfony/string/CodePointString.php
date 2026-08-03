@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\String;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\String;
 
-use PerformanceToolkit\Vendor\Symfony\Component\String\Exception\ExceptionInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\String\Exception\InvalidArgumentException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\String\Exception\ExceptionInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\String\Exception\InvalidArgumentException;
 
 /**
  * Represents a string of Unicode code points encoded as UTF-8.

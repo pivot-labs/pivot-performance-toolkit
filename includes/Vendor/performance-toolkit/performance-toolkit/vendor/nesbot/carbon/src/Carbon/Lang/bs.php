@@ -20,7 +20,7 @@
  * - Ademir Šehić
  */
 
-use PerformanceToolkit\Vendor\Carbon\CarbonInterface;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface;
 
 return [
     'year' => ':count godina|:count godine|:count godina',

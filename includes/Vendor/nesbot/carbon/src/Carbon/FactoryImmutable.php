@@ -9,14 +9,14 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace PerformanceToolkit\Vendor\Carbon;
+namespace PivotPerformanceToolkit\Vendor\Carbon;
 
 use Closure;
 use DateTimeInterface;
 use DateTimeZone;
-use PerformanceToolkit\Vendor\Symfony\Component\Clock\ClockInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Clock\NativeClock;
-use PerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatorInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Clock\ClockInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Clock\NativeClock;
+use PivotPerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatorInterface;
 /**
  * A factory to generate CarbonImmutable instances with common settings.
  *

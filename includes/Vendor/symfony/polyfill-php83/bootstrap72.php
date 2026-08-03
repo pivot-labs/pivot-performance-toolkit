@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use PerformanceToolkit\Vendor\Symfony\Polyfill\Php83 as p;
+use PivotPerformanceToolkit\Vendor\Symfony\Polyfill\Php83 as p;
 
 if (extension_loaded('mbstring')) {
     if (!function_exists('mb_str_pad')) {

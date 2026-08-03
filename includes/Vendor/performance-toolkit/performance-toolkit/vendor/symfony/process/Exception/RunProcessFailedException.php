@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Process\Exception;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Process\Exception;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Process\Messenger\RunProcessContext;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Process\Messenger\RunProcessContext;
 
 /**
  * @author Kevin Bond <kevinbond@gmail.com>

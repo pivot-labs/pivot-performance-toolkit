@@ -9,30 +9,30 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Style;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Style;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\InvalidArgumentException;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\RuntimeException;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Formatter\OutputFormatter;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Helper\Helper;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Helper\OutputWrapper;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Helper\ProgressBar;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Helper\SymfonyQuestionHelper;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Helper\Table;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Helper\TableCell;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Helper\TableSeparator;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Helper\TreeHelper;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Helper\TreeNode;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Helper\TreeStyle;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Output\ConsoleSectionOutput;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Output\TrimmedBufferOutput;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Question\ChoiceQuestion;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Question\ConfirmationQuestion;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Question\Question;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Terminal;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\InvalidArgumentException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\RuntimeException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Formatter\OutputFormatter;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Helper\Helper;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Helper\OutputWrapper;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Helper\ProgressBar;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Helper\SymfonyQuestionHelper;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Helper\Table;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Helper\TableCell;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Helper\TableSeparator;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Helper\TreeHelper;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Helper\TreeNode;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Helper\TreeStyle;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\ConsoleSectionOutput;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\TrimmedBufferOutput;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Question\ChoiceQuestion;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Question\ConfirmationQuestion;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Question\Question;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Terminal;
 
 /**
  * Output decorator helpers for the Symfony Style Guide.

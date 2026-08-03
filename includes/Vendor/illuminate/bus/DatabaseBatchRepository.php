@@ -1,14 +1,14 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Bus;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Bus;
 
-use PerformanceToolkit\Vendor\Carbon\CarbonImmutable;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable;
 use Closure;
 use DateTimeInterface;
 use Illuminate\Database\Connection;
 use Illuminate\Database\PostgresConnection;
 use Illuminate\Database\Query\Expression;
-use PerformanceToolkit\Vendor\Illuminate\Support\Str;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Str;
 use Throwable;
 
 class DatabaseBatchRepository implements PrunableBatchRepository
@@ -16,7 +16,7 @@ class DatabaseBatchRepository implements PrunableBatchRepository
     /**
      * The batch factory instance.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Bus\BatchFactory
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Bus\BatchFactory
      */
     protected $factory;
 
@@ -37,7 +37,7 @@ class DatabaseBatchRepository implements PrunableBatchRepository
     /**
      * Create a new batch repository instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Bus\BatchFactory  $factory
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Bus\BatchFactory  $factory
      * @param  \Illuminate\Database\Connection  $connection
      * @param  string  $table
      */
@@ -53,7 +53,7 @@ class DatabaseBatchRepository implements PrunableBatchRepository
      *
      * @param  int  $limit
      * @param  mixed  $before
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\Batch[]
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\Batch[]
      */
     public function get($limit = 50, $before = null)
     {
@@ -72,7 +72,7 @@ class DatabaseBatchRepository implements PrunableBatchRepository
      * Retrieve information about an existing batch.
      *
      * @param  string  $batchId
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\Batch|null
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\Batch|null
      */
     public function find(string $batchId)
     {
@@ -89,8 +89,8 @@ class DatabaseBatchRepository implements PrunableBatchRepository
     /**
      * Store a new pending batch.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch  $batch
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\Batch
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch  $batch
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\Batch
      */
     public function store(PendingBatch $batch)
     {
@@ -133,7 +133,7 @@ class DatabaseBatchRepository implements PrunableBatchRepository
      *
      * @param  string  $batchId
      * @param  string  $jobId
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\UpdatedBatchJobCounts
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\UpdatedBatchJobCounts
      */
     public function decrementPendingJobs(string $batchId, string $jobId)
     {
@@ -156,7 +156,7 @@ class DatabaseBatchRepository implements PrunableBatchRepository
      *
      * @param  string  $batchId
      * @param  string  $jobId
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\UpdatedBatchJobCounts
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\UpdatedBatchJobCounts
      */
     public function incrementFailedJobs(string $batchId, string $jobId)
     {
@@ -188,7 +188,7 @@ class DatabaseBatchRepository implements PrunableBatchRepository
                 ->lockForUpdate()
                 ->first();
 
-            return is_null($batch) ? [] : performancetoolkit_vendor_tap($callback($batch), function ($values) use ($batchId) {
+            return is_null($batch) ? [] : pivotperformancetoolkit_vendor_tap($callback($batch), function ($values) use ($batchId) {
                 $this->connection->table($this->table)->where('id', $batchId)->update($values);
             });
         });
@@ -361,7 +361,7 @@ class DatabaseBatchRepository implements PrunableBatchRepository
      * Convert the given raw batch to a Batch object.
      *
      * @param  object  $batch
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\Batch
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\Batch
      */
     protected function toBatch($batch)
     {

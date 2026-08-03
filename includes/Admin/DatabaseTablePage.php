@@ -2,14 +2,18 @@
 /**
  * Database table admin page.
  *
- * @package PerformanceToolkit
+ * @package PivotPerformanceToolkit
  */
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Admin;
+namespace PivotPerformanceToolkit\Admin;
 
-use PerformanceToolkit\Database\DatabaseOptimizer;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+use PivotPerformanceToolkit\Database\DatabaseOptimizer;
 
 final class DatabaseTablePage extends BladeAdminPage {
 
@@ -20,15 +24,15 @@ final class DatabaseTablePage extends BladeAdminPage {
 	}
 
 	public function slug(): string {
-		return 'performance-toolkit-database-table';
+		return 'pivot-performance-toolkit-database-table';
 	}
 
 	public function menuTitle(): string {
-		return __( 'Table Breakdown', 'performance-toolkit' );
+		return __( 'Table Breakdown', 'pivot-performance-toolkit' );
 	}
 
 	public function pageTitle(): string {
-		return __( 'Performance Toolkit Database Table Breakdown', 'performance-toolkit' );
+		return __( 'Pivot Performance Toolkit Database Table Breakdown', 'pivot-performance-toolkit' );
 	}
 
 	public function iconKey(): string {
@@ -71,17 +75,17 @@ final class DatabaseTablePage extends BladeAdminPage {
 			'sort_dir'      => $sort_dir,
 			'overview_url'  => add_query_arg(
 				array(
-					'page'    => 'performance-toolkit',
+					'page'    => 'pivot-performance-toolkit',
 					'section' => 'database',
-					'tab'     => 'performance-toolkit-database',
+					'tab'     => 'pivot-performance-toolkit-database',
 				),
 				admin_url( 'admin.php' )
 			),
 			'tables_url'    => add_query_arg(
 				array(
-					'page'    => 'performance-toolkit',
+					'page'    => 'pivot-performance-toolkit',
 					'section' => 'database',
-					'tab'     => 'performance-toolkit-database-table',
+					'tab'     => 'pivot-performance-toolkit-database-table',
 				),
 				admin_url( 'admin.php' )
 			),

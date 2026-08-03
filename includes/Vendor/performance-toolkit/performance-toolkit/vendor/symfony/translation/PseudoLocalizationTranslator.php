@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\LogicException;
-use PerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatorInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\LogicException;
+use PivotPerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * This translator should only be used in a development environment.

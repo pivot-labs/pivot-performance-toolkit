@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Console;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Console;
 
 interface Application
 {
@@ -9,7 +9,7 @@ interface Application
      *
      * @param  string  $command
      * @param  array  $parameters
-     * @param  \PerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface|null  $outputBuffer
+     * @param  \PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface|null  $outputBuffer
      * @return int
      */
     public function call($command, array $parameters = [], $outputBuffer = null);

@@ -2,14 +2,18 @@
 /**
  * Browser cache headers admin page.
  *
- * @package PerformanceToolkit
+ * @package PivotPerformanceToolkit
  */
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Admin;
+namespace PivotPerformanceToolkit\Admin;
 
-use PerformanceToolkit\Core\Settings;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+use PivotPerformanceToolkit\Core\Settings;
 
 final class BrowserCacheHeadersPage extends BladeAdminPage {
 
@@ -20,15 +24,15 @@ final class BrowserCacheHeadersPage extends BladeAdminPage {
 	}
 
 	public function slug(): string {
-		return 'performance-toolkit-browser-cache';
+		return 'pivot-performance-toolkit-browser-cache';
 	}
 
 	public function menuTitle(): string {
-		return __( 'Browser Cache', 'performance-toolkit' );
+		return __( 'Browser Cache', 'pivot-performance-toolkit' );
 	}
 
 	public function pageTitle(): string {
-		return __( 'Performance Toolkit – Browser Cache & Compression', 'performance-toolkit' );
+		return __( 'Pivot Performance Toolkit – Browser Cache & Compression', 'pivot-performance-toolkit' );
 	}
 
 	public function iconKey(): string {
@@ -55,7 +59,7 @@ final class BrowserCacheHeadersPage extends BladeAdminPage {
 	}
 
 	private function generateHtaccessSnippet(): string {
-		return '# BEGIN Performance Toolkit - Browser Cache & Compression
+		return '# BEGIN Pivot Performance Toolkit - Browser Cache & Compression
 <IfModule mod_expires.c>
     ExpiresActive On
 
@@ -121,11 +125,11 @@ final class BrowserCacheHeadersPage extends BladeAdminPage {
     Header set X-Content-Type-Options "nosniff"
     Header set X-Frame-Options "SAMEORIGIN"
 </IfModule>
-# END Performance Toolkit - Browser Cache & Compression';
+# END Pivot Performance Toolkit - Browser Cache & Compression';
 	}
 
 	private function generateNginxSnippet(): string {
-		return '# BEGIN Performance Toolkit - Browser Cache & Compression
+		return '# BEGIN Pivot Performance Toolkit - Browser Cache & Compression
 
 # Gzip compression
 gzip on;
@@ -170,7 +174,7 @@ location ~ \.html$ {
 add_header X-Content-Type-Options "nosniff";
 add_header X-Frame-Options "SAMEORIGIN";
 
-# END Performance Toolkit - Browser Cache & Compression
+# END Pivot Performance Toolkit - Browser Cache & Compression
 
 # Note: Add this configuration inside your server {} block in nginx.conf
 # Contact your hosting provider to apply these settings for you';

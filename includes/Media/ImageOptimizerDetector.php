@@ -2,12 +2,16 @@
 /**
  * Image optimizer plugin detector.
  *
- * @package PerformanceToolkit
+ * @package PivotPerformanceToolkit
  */
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Media;
+namespace PivotPerformanceToolkit\Media;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 final class ImageOptimizerDetector {
 
@@ -79,7 +83,7 @@ final class ImageOptimizerDetector {
 		 *
 		 * @param string[] $providers
 		 */
-		$providers = apply_filters( 'performance_toolkit_active_lazyload_providers', $providers );
+		$providers = apply_filters( 'pivot_performance_toolkit_active_lazyload_providers', $providers );
 
 		if ( ! is_array( $providers ) ) {
 			return array();

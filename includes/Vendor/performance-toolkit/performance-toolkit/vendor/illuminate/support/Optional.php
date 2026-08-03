@@ -1,10 +1,10 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
 use ArrayAccess;
 use ArrayObject;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
 
 class Optional implements ArrayAccess
 {

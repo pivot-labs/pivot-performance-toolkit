@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Helper;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Helper;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputAwareInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputAwareInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface;
 
 /**
  * An implementation of InputAwareInterface for Helpers.

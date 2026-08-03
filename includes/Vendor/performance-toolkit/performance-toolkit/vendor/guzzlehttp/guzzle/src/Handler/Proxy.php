@@ -1,10 +1,10 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp\Handler;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp\Handler;
 
-use PerformanceToolkit\Vendor\GuzzleHttp\Promise\PromiseInterface;
-use PerformanceToolkit\Vendor\GuzzleHttp\RequestOptions;
-use PerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Promise\PromiseInterface;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\RequestOptions;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
 
 /**
  * Provides basic proxies for handlers.

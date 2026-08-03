@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Carbon\Traits;
+namespace PivotPerformanceToolkit\Vendor\Carbon\Traits;
 
-use PerformanceToolkit\Vendor\Carbon\Exceptions\UnknownUnitException;
-use PerformanceToolkit\Vendor\Carbon\Unit;
-use PerformanceToolkit\Vendor\Carbon\WeekDay;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\UnknownUnitException;
+use PivotPerformanceToolkit\Vendor\Carbon\Unit;
+use PivotPerformanceToolkit\Vendor\Carbon\WeekDay;
 
 /**
  * Trait Boundaries.

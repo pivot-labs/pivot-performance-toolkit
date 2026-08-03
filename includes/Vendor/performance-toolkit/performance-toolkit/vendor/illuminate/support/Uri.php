@@ -1,16 +1,16 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
 use Closure;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Routing\UrlRoutable;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Responsable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Routing\UrlRoutable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\RedirectResponse;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Conditionable;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Dumpable;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Tappable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Conditionable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Dumpable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Tappable;
 use JsonSerializable;
 use League\Uri\Contracts\UriInterface;
 use League\Uri\Uri as LeagueUri;
@@ -353,7 +353,7 @@ class Uri implements Htmlable, JsonSerializable, Responsable, Stringable
     /**
      * Get the URI as a Stringable instance.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Stringable
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Stringable
      */
     public function toStringable()
     {

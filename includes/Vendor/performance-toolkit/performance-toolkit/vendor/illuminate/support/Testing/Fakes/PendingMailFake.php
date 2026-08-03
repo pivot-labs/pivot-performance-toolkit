@@ -1,8 +1,8 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes;
 
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailable;
 use Illuminate\Mail\PendingMail;
 
 class PendingMailFake extends PendingMail
@@ -10,7 +10,7 @@ class PendingMailFake extends PendingMail
     /**
      * Create a new instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\MailFake  $mailer
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\MailFake  $mailer
      */
     public function __construct($mailer)
     {
@@ -20,7 +20,7 @@ class PendingMailFake extends PendingMail
     /**
      * Send a new mailable message instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailable  $mailable
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailable  $mailable
      * @return void
      */
     public function send(Mailable $mailable)
@@ -31,7 +31,7 @@ class PendingMailFake extends PendingMail
     /**
      * Send a new mailable message instance synchronously.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailable  $mailable
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailable  $mailable
      * @return void
      */
     public function sendNow(Mailable $mailable)
@@ -42,7 +42,7 @@ class PendingMailFake extends PendingMail
     /**
      * Push the given mailable onto the queue.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailable  $mailable
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailable  $mailable
      * @return mixed
      */
     public function queue(Mailable $mailable)

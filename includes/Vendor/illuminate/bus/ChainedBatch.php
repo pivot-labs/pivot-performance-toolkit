@@ -1,13 +1,13 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Bus;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Bus;
 
-use PerformanceToolkit\Vendor\Illuminate\Container\Container;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Bus\Dispatcher;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Queue\ShouldQueue;
+use PivotPerformanceToolkit\Vendor\Illuminate\Container\Container;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Bus\Dispatcher;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
-use PerformanceToolkit\Vendor\Illuminate\Support\Collection;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection;
 use Throwable;
 
 class ChainedBatch implements ShouldQueue
@@ -17,7 +17,7 @@ class ChainedBatch implements ShouldQueue
     /**
      * The collection of batched jobs.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Support\Collection
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection
      */
     public Collection $jobs;
 
@@ -38,7 +38,7 @@ class ChainedBatch implements ShouldQueue
     /**
      * Create a new chained batch instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch  $batch
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch  $batch
      * @return void
      */
     public function __construct(PendingBatch $batch)
@@ -52,8 +52,8 @@ class ChainedBatch implements ShouldQueue
     /**
      * Prepare any nested batches within the given collection of jobs.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Support\Collection  $jobs
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Collection
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection  $jobs
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection
      */
     public static function prepareNestedBatches(Collection $jobs): Collection
     {
@@ -80,7 +80,7 @@ class ChainedBatch implements ShouldQueue
     /**
      * Convert the chained batch instance into a pending batch.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch
      */
     public function toPendingBatch()
     {
@@ -111,8 +111,8 @@ class ChainedBatch implements ShouldQueue
     /**
      * Move the remainder of the chain to a "finally" batch callback.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch  $batch
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch  $batch
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch
      */
     protected function attachRemainderOfChainToEndOfBatch(PendingBatch $batch)
     {

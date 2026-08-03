@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Tester;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Tester;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Command\Command;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\ArrayInput;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Command\Command;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\ArrayInput;
 
 /**
  * Eases the testing of console commands.

@@ -1,9 +1,9 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Container;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container;
 
 use Closure;
-use PerformanceToolkit\Vendor\Psr\Container\ContainerInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Container\ContainerInterface;
 
 interface Container extends ContainerInterface
 {
@@ -154,7 +154,7 @@ interface Container extends ContainerInterface
      * Define a contextual binding.
      *
      * @param  string|array  $concrete
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\ContextualBindingBuilder
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\ContextualBindingBuilder
      */
     public function when($concrete);
 
@@ -184,7 +184,7 @@ interface Container extends ContainerInterface
      * @param  array  $parameters
      * @return ($abstract is class-string<TClass> ? TClass : mixed)
      *
-     * @throws \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\BindingResolutionException
+     * @throws \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\BindingResolutionException
      */
     public function make($abstract, array $parameters = []);
 

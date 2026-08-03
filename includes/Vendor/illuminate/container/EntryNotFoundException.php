@@ -1,9 +1,9 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Container;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Container;
 
 use Exception;
-use PerformanceToolkit\Vendor\Psr\Container\NotFoundExceptionInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Container\NotFoundExceptionInterface;
 
 class EntryNotFoundException extends Exception implements NotFoundExceptionInterface
 {

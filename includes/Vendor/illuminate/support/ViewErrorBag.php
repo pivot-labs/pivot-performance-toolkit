@@ -1,13 +1,13 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
 use Countable;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\MessageBag as MessageBagContract;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\MessageBag as MessageBagContract;
 use Stringable;
 
 /**
- * @mixin \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\MessageBag
+ * @mixin \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\MessageBag
  */
 class ViewErrorBag implements Countable, Stringable
 {
@@ -33,7 +33,7 @@ class ViewErrorBag implements Countable, Stringable
      * Get a MessageBag instance from the bags.
      *
      * @param  string  $key
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\MessageBag
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\MessageBag
      */
     public function getBag($key)
     {
@@ -54,7 +54,7 @@ class ViewErrorBag implements Countable, Stringable
      * Add a new MessageBag instance to the bags.
      *
      * @param  string  $key
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\MessageBag  $bag
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\MessageBag  $bag
      * @return $this
      */
     public function put($key, MessageBagContract $bag)
@@ -100,7 +100,7 @@ class ViewErrorBag implements Countable, Stringable
      * Dynamically access a view error bag.
      *
      * @param  string  $key
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\MessageBag
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\MessageBag
      */
     public function __get($key)
     {
@@ -111,7 +111,7 @@ class ViewErrorBag implements Countable, Stringable
      * Dynamically set a view error bag.
      *
      * @param  string  $key
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\MessageBag  $value
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\MessageBag  $value
      * @return void
      */
     public function __set($key, $value)

@@ -1,8 +1,8 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
-if (! function_exists('PerformanceToolkit\Vendor\Illuminate\Support\enum_value')) {
+if (! function_exists('PivotPerformanceToolkit\Vendor\Illuminate\Support\enum_value')) {
     /**
      * Return a scalar value for the given value that might be an enum.
      *
@@ -21,7 +21,7 @@ if (! function_exists('PerformanceToolkit\Vendor\Illuminate\Support\enum_value')
             $value instanceof \BackedEnum => $value->value,
             $value instanceof \UnitEnum => $value->name,
 
-            default => $value ?? performancetoolkit_vendor_value($default),
+            default => $value ?? pivotperformancetoolkit_vendor_value($default),
         };
     }
 }

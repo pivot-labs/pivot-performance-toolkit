@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp\Promise;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp\Promise;
 
 /**
  * A task queue that executes tasks in a FIFO order.

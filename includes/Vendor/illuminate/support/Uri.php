@@ -1,15 +1,15 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
 use Closure;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Routing\UrlRoutable;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Responsable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Routing\UrlRoutable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\RedirectResponse;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Conditionable;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Dumpable;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Tappable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Conditionable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Dumpable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Tappable;
 use League\Uri\Contracts\UriInterface;
 use League\Uri\Uri as LeagueUri;
 use SensitiveParameter;
@@ -223,7 +223,7 @@ class Uri implements Htmlable, Responsable, Stringable
             $mergedQuery = $this->query()->all();
 
             foreach ($query as $key => $value) {
-                performancetoolkit_vendor_data_set($mergedQuery, $key, $value);
+                pivotperformancetoolkit_vendor_data_set($mergedQuery, $key, $value);
             }
 
             $newQuery = $mergedQuery;
@@ -231,7 +231,7 @@ class Uri implements Htmlable, Responsable, Stringable
             $newQuery = [];
 
             foreach ($query as $key => $value) {
-                performancetoolkit_vendor_data_set($newQuery, $key, $value);
+                pivotperformancetoolkit_vendor_data_set($newQuery, $key, $value);
             }
         }
 
@@ -259,7 +259,7 @@ class Uri implements Htmlable, Responsable, Stringable
      */
     public function pushOntoQuery(string $key, mixed $value): static
     {
-        $currentValue = performancetoolkit_vendor_data_get($this->query()->all(), $key);
+        $currentValue = pivotperformancetoolkit_vendor_data_get($this->query()->all(), $key);
 
         $values = Arr::wrap($value);
 

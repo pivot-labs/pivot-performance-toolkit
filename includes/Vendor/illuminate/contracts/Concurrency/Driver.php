@@ -1,9 +1,9 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Concurrency;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Concurrency;
 
 use Closure;
-use PerformanceToolkit\Vendor\Illuminate\Support\Defer\DeferredCallback;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Defer\DeferredCallback;
 
 interface Driver
 {

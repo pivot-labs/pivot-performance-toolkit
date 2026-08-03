@@ -32,7 +32,7 @@
     );
 
     $variant = $tones[$tone] ?? $tones['blue'];
-    $iconSvg = \PerformanceToolkit\Admin\LucideIcons::render((string) $icon);
+    $iconSvg = \PivotPerformanceToolkit\Admin\LucideIcons::render((string) $icon);
     $iconSvg = str_replace('<svg ', '<svg class="h-5 w-5" ', $iconSvg);
 @endphp
 

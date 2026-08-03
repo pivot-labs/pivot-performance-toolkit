@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Helper;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Helper;
 
 /**
  * Simple output wrapper for "tagged outputs" instead of wordwrap(). This solution is based on a StackOverflow

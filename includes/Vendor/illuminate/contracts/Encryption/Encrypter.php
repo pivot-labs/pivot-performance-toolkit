@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Encryption;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Encryption;
 
 interface Encrypter
 {
@@ -11,7 +11,7 @@ interface Encrypter
      * @param  bool  $serialize
      * @return string
      *
-     * @throws \PerformanceToolkit\Vendor\Illuminate\Contracts\Encryption\EncryptException
+     * @throws \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Encryption\EncryptException
      */
     public function encrypt(#[\SensitiveParameter] $value, $serialize = true);
 
@@ -22,7 +22,7 @@ interface Encrypter
      * @param  bool  $unserialize
      * @return mixed
      *
-     * @throws \PerformanceToolkit\Vendor\Illuminate\Contracts\Encryption\DecryptException
+     * @throws \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Encryption\DecryptException
      */
     public function decrypt($payload, $unserialize = true);
 

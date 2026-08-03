@@ -1,13 +1,13 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp\Handler;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp\Handler;
 
 use Closure;
-use PerformanceToolkit\Vendor\GuzzleHttp\Promise as P;
-use PerformanceToolkit\Vendor\GuzzleHttp\Promise\Promise;
-use PerformanceToolkit\Vendor\GuzzleHttp\Promise\PromiseInterface;
-use PerformanceToolkit\Vendor\GuzzleHttp\Utils;
-use PerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Promise as P;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Promise\Promise;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Promise\PromiseInterface;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Utils;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
 
 /**
  * Returns an asynchronous response using curl_multi_* functions.

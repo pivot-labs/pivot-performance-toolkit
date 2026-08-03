@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace PerformanceToolkit\Vendor\Carbon\Doctrine;
+namespace PivotPerformanceToolkit\Vendor\Carbon\Doctrine;
 
-use PerformanceToolkit\Vendor\Carbon\CarbonImmutable;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable;
 use DateTimeImmutable;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\VarDateTimeImmutableType;

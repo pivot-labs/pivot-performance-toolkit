@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Output;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\InvalidArgumentException;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\InvalidArgumentException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Formatter\OutputFormatterInterface;
 
 /**
  * StreamOutput writes the output to a given stream.
@@ -82,7 +82,7 @@ class StreamOutput extends Output
      * This is tricky on Windows, because Cygwin, Msys2 etc emulate pseudo
      * terminals via named pipes, so we can only check the environment.
      *
-     * Reference: PerformanceToolkit\Vendor\Composer\XdebugHandler\Process::supportsColor
+     * Reference: PivotPerformanceToolkit\Vendor\Composer\XdebugHandler\Process::supportsColor
      * https://github.com/composer/xdebug-handler
      *
      * @return bool true if the stream supports colorization, false otherwise

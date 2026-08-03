@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation\Extractor\Visitor;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Extractor\Visitor;
 
 use PhpParser\Node;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogue;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogue;
 
 /**
  * @author Mathieu Santostefano <msantostefano@protonmail.com>

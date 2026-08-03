@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation\Formatter;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Formatter;
 
 /**
  * Formats ICU message patterns.

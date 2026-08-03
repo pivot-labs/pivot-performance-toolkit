@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation\Command;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Command;
 
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\CI\GithubActionReporter;
@@ -22,8 +22,8 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\InvalidArgumentException;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Util\XliffUtils;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\InvalidArgumentException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Util\XliffUtils;
 
 /**
  * Validates XLIFF files syntax and outputs encountered errors.

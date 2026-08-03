@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Pdo;
+namespace PivotPerformanceToolkit\Vendor\Pdo;
 
 if (\PHP_VERSION_ID < 80400 && \extension_loaded('pdo_pgsql')) {
     class Pgsql extends \PDO
@@ -21,7 +21,7 @@ if (\PHP_VERSION_ID < 80400 && \extension_loaded('pdo_pgsql')) {
             parent::__construct($dsn, $username, $password, $options);
 
             if ('pgsql' !== $driver = $this->getAttribute(\PDO::ATTR_DRIVER_NAME)) {
-                throw new \PDOException(\sprintf('PerformanceToolkit\Vendor\Pdo\Pgsql::__construct() cannot be used for connecting to the "%s" driver', $driver));
+                throw new \PDOException(\sprintf('PivotPerformanceToolkit\Vendor\Pdo\Pgsql::__construct() cannot be used for connecting to the "%s" driver', $driver));
             }
         }
 
@@ -30,7 +30,7 @@ if (\PHP_VERSION_ID < 80400 && \extension_loaded('pdo_pgsql')) {
             try {
                 return new self($dsn, $username, $password, $options);
             } catch (\PDOException $e) {
-                throw preg_match('/^Pdo\\\\Pgsql::__construct\(\) cannot be used for connecting to the "([a-z]+)" driver/', $e->getMessage(), $matches) ? new \PDOException(\sprintf('PerformanceToolkit\Vendor\Pdo\Pgsql::connect() cannot be used for connecting to the "%s" driver', $matches[1])) : $e;
+                throw preg_match('/^Pdo\\\\Pgsql::__construct\(\) cannot be used for connecting to the "([a-z]+)" driver/', $e->getMessage(), $matches) ? new \PDOException(\sprintf('PivotPerformanceToolkit\Vendor\Pdo\Pgsql::connect() cannot be used for connecting to the "%s" driver', $matches[1])) : $e;
             }
         }
 

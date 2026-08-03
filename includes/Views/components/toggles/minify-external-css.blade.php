@@ -9,8 +9,8 @@
     :checked="$checked"
     :action="$action"
     :nonce="$nonce"
-    :label="__('Minify CSS files', 'performance-toolkit')"
-    :description="__('Creates cached minified copies of local enqueued stylesheet files and rewrites their URLs.', 'performance-toolkit')"
+    :label="__('Minify CSS files', 'pivot-performance-toolkit')"
+    :description="__('Creates cached minified copies of local enqueued stylesheet files and rewrites their URLs.', 'pivot-performance-toolkit')"
 >
     <x-slot name="icon">
         <x-icons.css

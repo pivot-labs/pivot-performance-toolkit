@@ -1,18 +1,18 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes;
 
 use Closure;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Factory;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailable;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailer;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Mail\MailQueue;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Queue\ShouldQueue;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Factory;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailer;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Mail\MailQueue;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\MailManager;
-use PerformanceToolkit\Vendor\Illuminate\Support\Arr;
-use PerformanceToolkit\Vendor\Illuminate\Support\Collection;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\ForwardsCalls;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\ReflectsClosures;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Arr;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\ForwardsCalls;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\ReflectsClosures;
 use PHPUnit\Framework\Assert as PHPUnit;
 
 class MailFake implements Factory, Fake, Mailer, MailQueue
@@ -329,7 +329,7 @@ class MailFake implements Factory, Fake, Mailer, MailQueue
      *
      * @param  string|\Closure  $mailable
      * @param  callable|null  $callback
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Collection
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection
      */
     public function sent($mailable, $callback = null)
     {
@@ -360,7 +360,7 @@ class MailFake implements Factory, Fake, Mailer, MailQueue
      *
      * @param  string|\Closure  $mailable
      * @param  callable|null  $callback
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Collection
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection
      */
     public function queued($mailable, $callback = null)
     {
@@ -390,7 +390,7 @@ class MailFake implements Factory, Fake, Mailer, MailQueue
      * Get all of the mailed mailables for a given type.
      *
      * @param  string  $type
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Collection
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection
      */
     protected function mailablesOf($type)
     {
@@ -401,7 +401,7 @@ class MailFake implements Factory, Fake, Mailer, MailQueue
      * Get all of the mailed mailables for a given type.
      *
      * @param  string  $type
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Collection
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection
      */
     protected function queuedMailablesOf($type)
     {
@@ -412,7 +412,7 @@ class MailFake implements Factory, Fake, Mailer, MailQueue
      * Get a mailer instance by name.
      *
      * @param  string|null  $name
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailer
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailer
      */
     public function mailer($name = null)
     {
@@ -469,7 +469,7 @@ class MailFake implements Factory, Fake, Mailer, MailQueue
     /**
      * Send a new message using a view.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailable|string|array  $view
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailable|string|array  $view
      * @param  array  $data
      * @param  \Closure|string|null  $callback
      * @return mixed|void
@@ -482,7 +482,7 @@ class MailFake implements Factory, Fake, Mailer, MailQueue
     /**
      * Send a new message synchronously using a view.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailable|string|array  $mailable
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailable|string|array  $mailable
      * @param  array  $data
      * @param  \Closure|string|null  $callback
      * @return void
@@ -495,7 +495,7 @@ class MailFake implements Factory, Fake, Mailer, MailQueue
     /**
      * Send a new message using a view.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailable|string|array  $view
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailable|string|array  $view
      * @param  bool  $shouldQueue
      * @return mixed|void
      */
@@ -519,7 +519,7 @@ class MailFake implements Factory, Fake, Mailer, MailQueue
     /**
      * Queue a new message for sending.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailable|string|array  $view
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailable|string|array  $view
      * @param  string|null  $queue
      * @return mixed
      */
@@ -540,7 +540,7 @@ class MailFake implements Factory, Fake, Mailer, MailQueue
      * Queue a new e-mail message for sending after (n) seconds.
      *
      * @param  \DateTimeInterface|\DateInterval|int  $delay
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailable|string|array  $view
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailable|string|array  $view
      * @param  string|null  $queue
      * @return mixed
      */

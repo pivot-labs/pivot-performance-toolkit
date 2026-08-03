@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp\Promise;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp\Promise;
 
 /**
  * Interface used with classes that return a promise.

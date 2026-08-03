@@ -2,26 +2,30 @@
 /**
  * Cache settings admin page.
  *
- * @package PerformanceToolkit
+ * @package PivotPerformanceToolkit
  */
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Admin;
+namespace PivotPerformanceToolkit\Admin;
 
-use PerformanceToolkit\Cache\ObjectCacheManager;
-use PerformanceToolkit\Core\Settings;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+use PivotPerformanceToolkit\Cache\ObjectCacheManager;
+use PivotPerformanceToolkit\Core\Settings;
 
 final class CachePage extends BladeAdminPage {
 
-	private const CLEAR_ACTION                     = 'performance_toolkit_clear_cache';
-	private const CLEAR_MINIFIED_ACTION            = 'performance_toolkit_clear_minified_cache';
-	private const AJAX_CLEAR_ACTION                = 'performance_toolkit_ajax_clear_cache';
-	private const AJAX_CLEAR_MINIFIED_ACTION       = 'performance_toolkit_ajax_clear_minified_cache';
-	private const AJAX_REFRESH_USAGE_ACTION        = 'performance_toolkit_ajax_refresh_cache_usage';
-	private const AJAX_ENABLE_OBJECT_CACHE_ACTION  = 'performance_toolkit_ajax_enable_object_cache';
-	private const AJAX_DISABLE_OBJECT_CACHE_ACTION = 'performance_toolkit_ajax_disable_object_cache';
-	private const AJAX_FLUSH_OBJECT_CACHE_ACTION   = 'performance_toolkit_ajax_flush_object_cache';
+	private const CLEAR_ACTION                     = 'pivot_performance_toolkit_clear_cache';
+	private const CLEAR_MINIFIED_ACTION            = 'pivot_performance_toolkit_clear_minified_cache';
+	private const AJAX_CLEAR_ACTION                = 'pivot_performance_toolkit_ajax_clear_cache';
+	private const AJAX_CLEAR_MINIFIED_ACTION       = 'pivot_performance_toolkit_ajax_clear_minified_cache';
+	private const AJAX_REFRESH_USAGE_ACTION        = 'pivot_performance_toolkit_ajax_refresh_cache_usage';
+	private const AJAX_ENABLE_OBJECT_CACHE_ACTION  = 'pivot_performance_toolkit_ajax_enable_object_cache';
+	private const AJAX_DISABLE_OBJECT_CACHE_ACTION = 'pivot_performance_toolkit_ajax_disable_object_cache';
+	private const AJAX_FLUSH_OBJECT_CACHE_ACTION   = 'pivot_performance_toolkit_ajax_flush_object_cache';
 
 	private Settings $settings;
 	private ObjectCacheManager $object_cache_manager;
@@ -40,15 +44,15 @@ final class CachePage extends BladeAdminPage {
 	}
 
 	public function slug(): string {
-		return 'performance-toolkit-cache';
+		return 'pivot-performance-toolkit-cache';
 	}
 
 	public function menuTitle(): string {
-		return __( 'Cache', 'performance-toolkit' );
+		return __( 'Cache', 'pivot-performance-toolkit' );
 	}
 
 	public function pageTitle(): string {
-		return __( 'Performance Toolkit Cache', 'performance-toolkit' );
+		return __( 'Pivot Performance Toolkit Cache', 'pivot-performance-toolkit' );
 	}
 
 	public function iconKey(): string {
@@ -67,10 +71,10 @@ final class CachePage extends BladeAdminPage {
 	protected function buildViewData(): array {
 		$options          = $this->settings->all();
 		$settings_updated = isset( $_GET['settings-updated'] ) && (string) wp_unslash( $_GET['settings-updated'] ) === 'true';
-		$cache_cleared    = (bool) get_transient( 'performance_toolkit_cache_cleared' );
+		$cache_cleared    = (bool) get_transient( 'pivot_performance_toolkit_cache_cleared' );
 
 		if ( $cache_cleared ) {
-			delete_transient( 'performance_toolkit_cache_cleared' );
+			delete_transient( 'pivot_performance_toolkit_cache_cleared' );
 		}
 
 		$usage_snapshot = $this->getCacheUsageSnapshot( $options );
@@ -89,19 +93,19 @@ final class CachePage extends BladeAdminPage {
 			'ajax_clear_action'                => self::AJAX_CLEAR_ACTION,
 			'ajax_clear_minified_action'       => self::AJAX_CLEAR_MINIFIED_ACTION,
 			'ajax_refresh_usage_action'        => self::AJAX_REFRESH_USAGE_ACTION,
-			'ajax_clear_nonce'                 => wp_create_nonce( 'ptk_clear_cache_ajax' ),
-			'ajax_clear_minified_nonce'        => wp_create_nonce( 'ptk_clear_minified_cache_ajax' ),
-			'ajax_refresh_usage_nonce'         => wp_create_nonce( 'ptk_refresh_cache_usage_ajax' ),
-			'cache_cleared_message'            => __( 'Cache cleared successfully.', 'performance-toolkit' ),
-			'minified_cache_cleared_message'   => __( 'Minified CSS/JS cache cleared successfully.', 'performance-toolkit' ),
-			'preload_not_implemented_message'  => __( 'Preload started. This can take a moment.', 'performance-toolkit' ),
+			'ajax_clear_nonce'                 => wp_create_nonce( 'pivot_performance_toolkit_clear_cache_ajax' ),
+			'ajax_clear_minified_nonce'        => wp_create_nonce( 'pivot_performance_toolkit_clear_minified_cache_ajax' ),
+			'ajax_refresh_usage_nonce'         => wp_create_nonce( 'pivot_performance_toolkit_refresh_cache_usage_ajax' ),
+			'cache_cleared_message'            => __( 'Cache cleared successfully.', 'pivot-performance-toolkit' ),
+			'minified_cache_cleared_message'   => __( 'Minified CSS/JS cache cleared successfully.', 'pivot-performance-toolkit' ),
+			'preload_not_implemented_message'  => __( 'Preload started. This can take a moment.', 'pivot-performance-toolkit' ),
 			'object_cache'                     => $this->getObjectCacheStatus(),
 			'ajax_enable_object_cache_action'  => self::AJAX_ENABLE_OBJECT_CACHE_ACTION,
 			'ajax_disable_object_cache_action' => self::AJAX_DISABLE_OBJECT_CACHE_ACTION,
 			'ajax_flush_object_cache_action'   => self::AJAX_FLUSH_OBJECT_CACHE_ACTION,
-			'ajax_enable_object_cache_nonce'   => wp_create_nonce( 'ptk_enable_object_cache_ajax' ),
-			'ajax_disable_object_cache_nonce'  => wp_create_nonce( 'ptk_disable_object_cache_ajax' ),
-			'ajax_flush_object_cache_nonce'    => wp_create_nonce( 'ptk_flush_object_cache_ajax' ),
+			'ajax_enable_object_cache_nonce'   => wp_create_nonce( 'pivot_performance_toolkit_enable_object_cache_ajax' ),
+			'ajax_disable_object_cache_nonce'  => wp_create_nonce( 'pivot_performance_toolkit_disable_object_cache_ajax' ),
+			'ajax_flush_object_cache_nonce'    => wp_create_nonce( 'pivot_performance_toolkit_flush_object_cache_ajax' ),
 		);
 	}
 
@@ -122,9 +126,9 @@ final class CachePage extends BladeAdminPage {
 			'is_our_dropin'  => $is_our_dropin,
 			'has_foreign'    => $has_foreign,
 			'can_enable'     => $can_install,
-			'status_label'   => $is_installed ? __( 'Active', 'performance-toolkit' ) : __( 'Inactive', 'performance-toolkit' ),
+			'status_label'   => $is_installed ? __( 'Active', 'pivot-performance-toolkit' ) : __( 'Inactive', 'pivot-performance-toolkit' ),
 			'provider'       => $this->object_cache_manager->detectProvider(),
-			'dropin_label'   => $is_installed ? __( 'Installed', 'performance-toolkit' ) : __( 'Not installed', 'performance-toolkit' ),
+			'dropin_label'   => $is_installed ? __( 'Installed', 'pivot-performance-toolkit' ) : __( 'Not installed', 'pivot-performance-toolkit' ),
 			'entry_count'    => (int) ( $stats['entry_count'] ?? 0 ),
 			'size_bytes'     => (int) ( $stats['size_bytes'] ?? 0 ),
 			'size_formatted' => (string) ( $stats['size_formatted'] ?? '0 B' ),
@@ -133,15 +137,15 @@ final class CachePage extends BladeAdminPage {
 
 	public function handleClearCache(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( __( 'Unauthorized', 'performance-toolkit' ) );
+			wp_die( __( 'Unauthorized', 'pivot-performance-toolkit' ) );
 		}
 
-		check_admin_referer( 'ptk_clear_cache' );
+		check_admin_referer( 'pivot_performance_toolkit_clear_cache' );
 
 		$this->clearPageCacheFiles();
 
 		// Keep this notice to one redirect only.
-		set_transient( 'performance_toolkit_cache_cleared', true, 30 );
+		set_transient( 'pivot_performance_toolkit_cache_cleared', true, 30 );
 
 		$redirect = $this->cacheSectionUrl();
 
@@ -151,14 +155,14 @@ final class CachePage extends BladeAdminPage {
 
 	public function handleClearMinifiedCache(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( __( 'Unauthorized', 'performance-toolkit' ) );
+			wp_die( __( 'Unauthorized', 'pivot-performance-toolkit' ) );
 		}
 
-		check_admin_referer( 'ptk_clear_minified_cache' );
+		check_admin_referer( 'pivot_performance_toolkit_clear_minified_cache' );
 
 		$this->clearMinifiedCacheFiles();
 
-		set_transient( 'performance_toolkit_cache_cleared', true, 30 );
+		set_transient( 'pivot_performance_toolkit_cache_cleared', true, 30 );
 
 		$redirect = $this->cacheSectionUrl();
 
@@ -168,16 +172,16 @@ final class CachePage extends BladeAdminPage {
 
 	public function handleClearCacheAjax(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => __( 'Unauthorized', 'performance-toolkit' ) ), 403 );
+			wp_send_json_error( array( 'message' => __( 'Unauthorized', 'pivot-performance-toolkit' ) ), 403 );
 		}
 
-		check_ajax_referer( 'ptk_clear_cache_ajax' );
+		check_ajax_referer( 'pivot_performance_toolkit_clear_cache_ajax' );
 
 		$this->clearPageCacheFiles();
 
 		wp_send_json_success(
 			array(
-				'message' => __( 'Cache cleared successfully.', 'performance-toolkit' ),
+				'message' => __( 'Cache cleared successfully.', 'pivot-performance-toolkit' ),
 				'usage'   => $this->getUsagePayload(),
 			)
 		);
@@ -185,16 +189,16 @@ final class CachePage extends BladeAdminPage {
 
 	public function handleClearMinifiedCacheAjax(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => __( 'Unauthorized', 'performance-toolkit' ) ), 403 );
+			wp_send_json_error( array( 'message' => __( 'Unauthorized', 'pivot-performance-toolkit' ) ), 403 );
 		}
 
-		check_ajax_referer( 'ptk_clear_minified_cache_ajax' );
+		check_ajax_referer( 'pivot_performance_toolkit_clear_minified_cache_ajax' );
 
 		$this->clearMinifiedCacheFiles();
 
 		wp_send_json_success(
 			array(
-				'message' => __( 'Minified CSS/JS cache cleared successfully.', 'performance-toolkit' ),
+				'message' => __( 'Minified CSS/JS cache cleared successfully.', 'pivot-performance-toolkit' ),
 				'usage'   => $this->getUsagePayload(),
 			)
 		);
@@ -202,15 +206,15 @@ final class CachePage extends BladeAdminPage {
 
 	public function handleRefreshCacheUsageAjax(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => __( 'Unauthorized', 'performance-toolkit' ) ), 403 );
+			wp_send_json_error( array( 'message' => __( 'Unauthorized', 'pivot-performance-toolkit' ) ), 403 );
 		}
 
-		check_ajax_referer( 'ptk_refresh_cache_usage_ajax' );
+		check_ajax_referer( 'pivot_performance_toolkit_refresh_cache_usage_ajax' );
 
 		if ( ! $this->settings->getBool( 'enable_page_cache' ) ) {
 			wp_send_json_error(
 				array(
-					'message' => __( 'Enable page cache before running preload.', 'performance-toolkit' ),
+					'message' => __( 'Enable page cache before running preload.', 'pivot-performance-toolkit' ),
 					'usage'   => $this->getUsagePayload(),
 				),
 				400
@@ -222,7 +226,7 @@ final class CachePage extends BladeAdminPage {
 		if ( 0 === $summary['total'] ) {
 			wp_send_json_error(
 				array(
-					'message' => __( 'No preloadable URLs found.', 'performance-toolkit' ),
+					'message' => __( 'No preloadable URLs found.', 'pivot-performance-toolkit' ),
 					'usage'   => $this->getUsagePayload(),
 				),
 				400
@@ -231,7 +235,7 @@ final class CachePage extends BladeAdminPage {
 
 		$message = sprintf(
 			/* translators: 1: Successful preload requests, 2: Total preload requests, 3: Failed preload requests. */
-			__( 'Preload complete: %1$d/%2$d URLs cached (%3$d failed).', 'performance-toolkit' ),
+			__( 'Preload complete: %1$d/%2$d URLs cached (%3$d failed).', 'pivot-performance-toolkit' ),
 			(int) $summary['success'],
 			(int) $summary['total'],
 			(int) $summary['failed']
@@ -239,7 +243,7 @@ final class CachePage extends BladeAdminPage {
 
 		if ( ! empty( $summary['first_error'] ) ) {
 			/* translators: %s: first preload failure reason. */
-			$message .= ' ' . sprintf( __( 'First error: %s', 'performance-toolkit' ), (string) $summary['first_error'] );
+			$message .= ' ' . sprintf( __( 'First error: %s', 'pivot-performance-toolkit' ), (string) $summary['first_error'] );
 		}
 
 		wp_send_json_success(
@@ -253,10 +257,10 @@ final class CachePage extends BladeAdminPage {
 
 	public function handleEnableObjectCacheAjax(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => __( 'Unauthorized', 'performance-toolkit' ) ), 403 );
+			wp_send_json_error( array( 'message' => __( 'Unauthorized', 'pivot-performance-toolkit' ) ), 403 );
 		}
 
-		check_ajax_referer( 'ptk_enable_object_cache_ajax' );
+		check_ajax_referer( 'pivot_performance_toolkit_enable_object_cache_ajax' );
 
 		$result = $this->object_cache_manager->install();
 
@@ -269,10 +273,10 @@ final class CachePage extends BladeAdminPage {
 
 	public function handleDisableObjectCacheAjax(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => __( 'Unauthorized', 'performance-toolkit' ) ), 403 );
+			wp_send_json_error( array( 'message' => __( 'Unauthorized', 'pivot-performance-toolkit' ) ), 403 );
 		}
 
-		check_ajax_referer( 'ptk_disable_object_cache_ajax' );
+		check_ajax_referer( 'pivot_performance_toolkit_disable_object_cache_ajax' );
 
 		$result = $this->object_cache_manager->remove();
 
@@ -285,10 +289,10 @@ final class CachePage extends BladeAdminPage {
 
 	public function handleFlushObjectCacheAjax(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => __( 'Unauthorized', 'performance-toolkit' ) ), 403 );
+			wp_send_json_error( array( 'message' => __( 'Unauthorized', 'pivot-performance-toolkit' ) ), 403 );
 		}
 
-		check_ajax_referer( 'ptk_flush_object_cache_ajax' );
+		check_ajax_referer( 'pivot_performance_toolkit_flush_object_cache_ajax' );
 
 		$result = $this->object_cache_manager->flush();
 
@@ -335,7 +339,7 @@ final class CachePage extends BladeAdminPage {
 	 * @return string[]
 	 */
 	private function buildPreloadUrls(): array {
-		$max_urls = (int) apply_filters( 'performance_toolkit_preload_max_urls', 30 );
+		$max_urls = (int) apply_filters( 'pivot_performance_toolkit_preload_max_urls', 30 );
 		$max_urls = max( 1, min( 200, $max_urls ) );
 
 		$urls = array( home_url( '/' ) );
@@ -401,14 +405,14 @@ final class CachePage extends BladeAdminPage {
 	 * @return array{ok: bool, error: string}
 	 */
 	private function preloadUrl( string $url ): array {
-		$timeout = (float) apply_filters( 'performance_toolkit_preload_request_timeout', 8 );
+		$timeout = (float) apply_filters( 'pivot_performance_toolkit_preload_request_timeout', 8 );
 		$args    = array(
 			'timeout'     => max( 1.0, $timeout ),
 			'redirection' => 3,
 			'headers'     => array(
 				'X-PTK-Preload' => '1',
 			),
-			'user-agent'  => 'Performance Toolkit Cache Preload',
+			'user-agent'  => 'Pivot Performance Toolkit Cache Preload',
 			'sslverify'   => ! $this->isLocalOrNonProductionSite( $url ),
 		);
 
@@ -479,7 +483,7 @@ final class CachePage extends BladeAdminPage {
 	}
 
 	private function clearPageCacheFiles(): void {
-		$cache_dir = WP_CONTENT_DIR . '/cache/performance-toolkit';
+		$cache_dir = WP_CONTENT_DIR . '/cache/pivot-performance-toolkit';
 
 		foreach ( glob( $cache_dir . '/*.html' ) ?: array() as $file_path ) {
 			@unlink( $file_path );
@@ -489,7 +493,7 @@ final class CachePage extends BladeAdminPage {
 	private function cacheSectionUrl(): string {
 		return add_query_arg(
 			array(
-				'page'    => 'performance-toolkit',
+				'page'    => 'pivot-performance-toolkit',
 				'section' => 'caching',
 				'tab'     => $this->slug(),
 			),
@@ -498,7 +502,7 @@ final class CachePage extends BladeAdminPage {
 	}
 
 	private function clearMinifiedCacheFiles(): void {
-		$cache_dir = WP_CONTENT_DIR . '/cache/performance-toolkit/minified-assets';
+		$cache_dir = WP_CONTENT_DIR . '/cache/pivot-performance-toolkit/minified-assets';
 
 		foreach ( glob( $cache_dir . '/*.min.css' ) ?: array() as $file_path ) {
 			@unlink( $file_path );
@@ -527,7 +531,7 @@ final class CachePage extends BladeAdminPage {
 	 * @return array<string, int|string>
 	 */
 	private function getCacheUsageSnapshot( array $options ): array {
-		$cache_dir         = WP_CONTENT_DIR . '/cache/performance-toolkit';
+		$cache_dir         = WP_CONTENT_DIR . '/cache/pivot-performance-toolkit';
 		$cache_size        = $this->getCacheDirSize( $cache_dir );
 		$max_cache_size_mb = (int) ( $options['max_cache_size_mb'] ?? 0 );
 		$max_cache_bytes   = $max_cache_size_mb * 1048576;
@@ -541,7 +545,7 @@ final class CachePage extends BladeAdminPage {
 			'usage_pct'            => $usage_pct,
 			'cache_usage_label'    => sprintf(
 				/* translators: 1: Used cache size in human-readable units, 2: Configured max cache size in MB, 3: Percentage of cache usage. */
-				__( '%1$s of %2$d MB used (%3$d%%)', 'performance-toolkit' ),
+				__( '%1$s of %2$d MB used (%3$d%%)', 'pivot-performance-toolkit' ),
 				self::formatBytes( $cache_size ),
 				$max_cache_size_mb,
 				$usage_pct

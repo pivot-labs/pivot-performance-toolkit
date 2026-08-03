@@ -9,7 +9,7 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace PerformanceToolkit\Vendor\Carbon;
+namespace PivotPerformanceToolkit\Vendor\Carbon;
 
 use Closure;
 use DateTimeImmutable;
@@ -18,7 +18,7 @@ use DateTimeZone;
 use InvalidArgumentException;
 use ReflectionMethod;
 use RuntimeException;
-use PerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatorInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatorInterface;
 use Throwable;
 /**
  * A factory to generate Carbon instances with common settings.

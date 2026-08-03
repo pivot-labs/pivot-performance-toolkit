@@ -2,17 +2,21 @@
 /**
  * Admin menu registration.
  *
- * @package PerformanceToolkit
+ * @package PivotPerformanceToolkit
  */
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Admin;
+namespace PivotPerformanceToolkit\Admin;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 final class Menu {
 
-	private const ROOT_SLUG               = 'performance-toolkit';
-	private const PLUGIN_NAMESPACE_PREFIX = 'PerformanceToolkit\\';
+	private const ROOT_SLUG               = 'pivot-performance-toolkit';
+	private const PLUGIN_NAMESPACE_PREFIX = 'PivotPerformanceToolkit\\';
 
 	/**
 	 * @var array<string, AdminPageInterface>
@@ -53,11 +57,11 @@ final class Menu {
 		// via the ?section= query parameter.
 		$top_level_hook = add_menu_page(
 			$root_page->pageTitle(),
-			__( 'Performance', 'performance-toolkit' ),
+			__( 'Performance', 'pivot-performance-toolkit' ),
 			'manage_options',
 			self::ROOT_SLUG,
 			array( $this, 'renderCurrentPage' ),
-			PERFORMANCE_TOOLKIT_URL . 'src/img/ptk-logo-white.svg',
+			PIVOT_PERFORMANCE_TOOLKIT_URL . 'src/img/pivot-performance-toolkit-logo-white.svg',
 			81
 		);
 
@@ -80,60 +84,46 @@ final class Menu {
 		}
 
 		wp_enqueue_style(
-			'performance-toolkit-admin',
-			PERFORMANCE_TOOLKIT_URL . 'dist/admin.css',
+			'pivot-performance-toolkit-admin',
+			PIVOT_PERFORMANCE_TOOLKIT_URL . 'dist/admin.css',
 			array(),
-			PERFORMANCE_TOOLKIT_VERSION
+			PIVOT_PERFORMANCE_TOOLKIT_VERSION
 		);
 
 		wp_enqueue_script(
-			'performance-toolkit-admin-js',
-			PERFORMANCE_TOOLKIT_URL . 'src/js/admin.js',
+			'pivot-performance-toolkit-admin-js',
+			PIVOT_PERFORMANCE_TOOLKIT_URL . 'dist/admin-js.js',
 			array(),
-			PERFORMANCE_TOOLKIT_VERSION,
+			PIVOT_PERFORMANCE_TOOLKIT_VERSION,
 			true
 		);
 
-		wp_script_add_data( 'performance-toolkit-admin-js', 'type', 'module' );
-
 		wp_localize_script(
-			'performance-toolkit-admin-js',
+			'pivot-performance-toolkit-admin-js',
 			'ptkSnippet',
 			array(
-				'copied'     => __( 'Copied!', 'performance-toolkit' ),
-				'copyFailed' => __( 'Failed to copy. Please try again.', 'performance-toolkit' ),
-				'expand'     => __( 'Expand Full Configuration', 'performance-toolkit' ),
-				'collapse'   => __( 'Hide Full Configuration', 'performance-toolkit' ),
+				'copied'     => __( 'Copied!', 'pivot-performance-toolkit' ),
+				'copyFailed' => __( 'Failed to copy. Please try again.', 'pivot-performance-toolkit' ),
+				'expand'     => __( 'Expand Full Configuration', 'pivot-performance-toolkit' ),
+				'collapse'   => __( 'Hide Full Configuration', 'pivot-performance-toolkit' ),
 			)
 		);
 
 		wp_localize_script(
-			'performance-toolkit-admin-js',
+			'pivot-performance-toolkit-admin-js',
 			'ptkAdmin',
 			array(
-				'requestFailed' => __( 'Request failed.', 'performance-toolkit' ),
-				'saved'         => __( 'Saved', 'performance-toolkit' ),
-				'error'         => __( 'Error', 'performance-toolkit' ),
+				'requestFailed' => __( 'Request failed.', 'pivot-performance-toolkit' ),
+				'saved'         => __( 'Saved', 'pivot-performance-toolkit' ),
+				'error'         => __( 'Error', 'pivot-performance-toolkit' ),
 			)
 		);
-	}
-
-	/**
-	 * Add type="module" to the admin JS script tag so the ES-module
-	 * output produced by Vite is loaded correctly by the browser.
-	 */
-	public function addModuleTypeToAdminJs( string $tag, string $handle ): string {
-		if ( 'performance-toolkit-admin-js' !== $handle ) {
-			return $tag;
-		}
-
-		return str_replace( ' src=', ' type="module" src=', $tag );
 	}
 
 	public function printMenuIconStyles(): void {
-		$icon_url = esc_url( PERFORMANCE_TOOLKIT_URL . 'src/img/ptk-logo-white.svg' );
+		$icon_url = esc_url( PIVOT_PERFORMANCE_TOOLKIT_URL . 'src/img/pivot-performance-toolkit-logo-white.svg' );
 
-		echo '<style id="performance-toolkit-menu-icon">#adminmenu .toplevel_page_performance-toolkit .wp-menu-image img{display:none}#adminmenu .toplevel_page_performance-toolkit .wp-menu-image{color:inherit}#adminmenu .toplevel_page_performance-toolkit .wp-menu-image:before{content:"";display:block;width:20px;height:20px;margin:1px auto 0;transform:translateY(-1px);background-color:currentColor;-webkit-mask-image:url("' . $icon_url . '");mask-image:url("' . $icon_url . '");-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:20px 20px;mask-size:20px 20px}#adminmenu .toplevel_page_performance-toolkit.wp-has-current-submenu .wp-menu-image:before,#adminmenu .toplevel_page_performance-toolkit.current .wp-menu-image:before{transform:translateY(5px)}</style>';
+		echo '<style id="pivot-performance-toolkit-menu-icon">#adminmenu .toplevel_page_pivot-performance-toolkit .wp-menu-image img{display:none}#adminmenu .toplevel_page_pivot-performance-toolkit .wp-menu-image{color:inherit}#adminmenu .toplevel_page_pivot-performance-toolkit .wp-menu-image:before{content:"";display:block;width:20px;height:20px;margin:1px auto 0;transform:translateY(-1px);background-color:currentColor;-webkit-mask-image:url("' . $icon_url . '");mask-image:url("' . $icon_url . '");-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:20px 20px;mask-size:20px 20px}#adminmenu .toplevel_page_pivot-performance-toolkit.wp-has-current-submenu .wp-menu-image:before,#adminmenu .toplevel_page_pivot-performance-toolkit.current .wp-menu-image:before{transform:translateY(5px)}</style>';
 	}
 
 	/**
@@ -166,7 +156,7 @@ final class Menu {
 	}
 
 	/**
-	 * Keep only Performance Toolkit callbacks on the notice hook.
+	 * Keep only Pivot Performance Toolkit callbacks on the notice hook.
 	 *
 	 * @param string $hook_name Hook name.
 	 */
@@ -202,7 +192,7 @@ final class Menu {
 			}
 		}
 
-		if ( is_string( $callback ) && str_starts_with( $callback, 'performance_toolkit_' ) ) {
+		if ( is_string( $callback ) && str_starts_with( $callback, 'pivot_performance_toolkit_' ) ) {
 			return true;
 		}
 
@@ -213,7 +203,7 @@ final class Menu {
 			return true;
 		}
 
-		if ( str_starts_with( $callback_file, PERFORMANCE_TOOLKIT_PATH ) ) {
+		if ( str_starts_with( $callback_file, PIVOT_PERFORMANCE_TOOLKIT_PATH ) ) {
 			return true;
 		}
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Psr\Http\Client;
+namespace PivotPerformanceToolkit\Vendor\Psr\Http\Client;
 
-use PerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\ResponseInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\ResponseInterface;
 
 interface ClientInterface
 {
@@ -14,7 +14,7 @@ interface ClientInterface
      *
      * @return ResponseInterface
      *
-     * @throws \PerformanceToolkit\Vendor\Psr\Http\Client\ClientExceptionInterface If an error happens while processing the request.
+     * @throws \PivotPerformanceToolkit\Vendor\Psr\Http\Client\ClientExceptionInterface If an error happens while processing the request.
      */
     public function sendRequest(RequestInterface $request): ResponseInterface;
 }

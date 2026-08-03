@@ -9,17 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Process;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Process;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Process\Exception\InvalidArgumentException;
-use PerformanceToolkit\Vendor\Symfony\Component\Process\Exception\LogicException;
-use PerformanceToolkit\Vendor\Symfony\Component\Process\Exception\ProcessFailedException;
-use PerformanceToolkit\Vendor\Symfony\Component\Process\Exception\ProcessSignaledException;
-use PerformanceToolkit\Vendor\Symfony\Component\Process\Exception\ProcessStartFailedException;
-use PerformanceToolkit\Vendor\Symfony\Component\Process\Exception\ProcessTimedOutException;
-use PerformanceToolkit\Vendor\Symfony\Component\Process\Exception\RuntimeException;
-use PerformanceToolkit\Vendor\Symfony\Component\Process\Pipes\UnixPipes;
-use PerformanceToolkit\Vendor\Symfony\Component\Process\Pipes\WindowsPipes;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Process\Exception\InvalidArgumentException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Process\Exception\LogicException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Process\Exception\ProcessFailedException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Process\Exception\ProcessSignaledException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Process\Exception\ProcessStartFailedException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Process\Exception\ProcessTimedOutException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Process\Exception\RuntimeException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Process\Pipes\UnixPipes;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Process\Pipes\WindowsPipes;
 
 /**
  * Process is a thin wrapper around proc_* functions to easily

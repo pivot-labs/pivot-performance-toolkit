@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Completion;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Completion;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\RuntimeException;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\ArgvInput;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputDefinition;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputOption;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\RuntimeException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\ArgvInput;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputDefinition;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputOption;
 
 /**
  * An input specialized for shell completion.

@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp\Exception;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp\Exception;
 
 /**
  * Exception when a server error is encountered (5xx codes)

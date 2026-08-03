@@ -11,19 +11,19 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Carbon\Traits;
+namespace PivotPerformanceToolkit\Vendor\Carbon\Traits;
 
-use PerformanceToolkit\Vendor\Carbon\Carbon;
-use PerformanceToolkit\Vendor\Carbon\CarbonImmutable;
-use PerformanceToolkit\Vendor\Carbon\CarbonInterface;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\InvalidDateException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\InvalidFormatException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\InvalidTimeZoneException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\OutOfRangeException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\UnitException;
-use PerformanceToolkit\Vendor\Carbon\Month;
-use PerformanceToolkit\Vendor\Carbon\Translator;
-use PerformanceToolkit\Vendor\Carbon\WeekDay;
+use PivotPerformanceToolkit\Vendor\Carbon\Carbon;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\InvalidDateException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\InvalidFormatException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\InvalidTimeZoneException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\OutOfRangeException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\UnitException;
+use PivotPerformanceToolkit\Vendor\Carbon\Month;
+use PivotPerformanceToolkit\Vendor\Carbon\Translator;
+use PivotPerformanceToolkit\Vendor\Carbon\WeekDay;
 use Closure;
 use DateMalformedStringException;
 use DateTimeImmutable;
@@ -31,7 +31,7 @@ use DateTimeInterface;
 use DateTimeZone;
 use Exception;
 use ReturnTypeWillChange;
-use PerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatorInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Trait Creator.
@@ -584,7 +584,7 @@ trait Creator
         // First attempt to create an instance, so that error messages are based on the unmodified format.
         $date = self::createFromFormatAndTimezone($format, $time, $timezone);
         $lastErrors = parent::getLastErrors();
-        /** @var \PerformanceToolkit\Vendor\Carbon\CarbonImmutable|\PerformanceToolkit\Vendor\Carbon\Carbon|null $mock */
+        /** @var \PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable|\PivotPerformanceToolkit\Vendor\Carbon\Carbon|null $mock */
         $mock = static::getMockedTestNow($timezone);
 
         if ($mock && $date instanceof DateTimeInterface) {

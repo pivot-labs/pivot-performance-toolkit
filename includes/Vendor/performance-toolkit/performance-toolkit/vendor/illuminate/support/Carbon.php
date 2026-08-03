@@ -1,11 +1,11 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
-use PerformanceToolkit\Vendor\Carbon\Carbon as BaseCarbon;
-use PerformanceToolkit\Vendor\Carbon\CarbonImmutable as BaseCarbonImmutable;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Conditionable;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Dumpable;
+use PivotPerformanceToolkit\Vendor\Carbon\Carbon as BaseCarbon;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable as BaseCarbonImmutable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Conditionable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Dumpable;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Uid\Ulid;
 

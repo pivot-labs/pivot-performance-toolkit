@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Pipeline;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Pipeline;
 
 use Closure;
 

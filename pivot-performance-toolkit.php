@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: WP Performance Toolkit
+ * Plugin Name: Pivot Performance Toolkit
  * Plugin URI: https://www.wpperformancetoolkit.com
  * Description: Performance optimization toolkit for WordPress.
  * Version: 1.0.0
@@ -10,50 +10,50 @@
  * Author URI: https://www.digitalcanvas.com
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: performance-toolkit
+ * Text Domain: pivot-performance-toolkit
  * Domain Path: /languages
  * Network: false
  *
- * @package PerformanceToolkit
+ * @package PivotPerformanceToolkit
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'PERFORMANCE_TOOLKIT_VERSION', '1.0.0' );
-define( 'PERFORMANCE_TOOLKIT_PLUGIN_FILE', __FILE__ );
-define( 'PERFORMANCE_TOOLKIT_PATH', plugin_dir_path( __FILE__ ) );
-define( 'PERFORMANCE_TOOLKIT_URL', plugin_dir_url( __FILE__ ) );
+define( 'PIVOT_PERFORMANCE_TOOLKIT_VERSION', '1.0.0' );
+define( 'PIVOT_PERFORMANCE_TOOLKIT_PLUGIN_FILE', __FILE__ );
+define( 'PIVOT_PERFORMANCE_TOOLKIT_PATH', plugin_dir_path( __FILE__ ) );
+define( 'PIVOT_PERFORMANCE_TOOLKIT_URL', plugin_dir_url( __FILE__ ) );
 
-$autoload_file = PERFORMANCE_TOOLKIT_PATH . 'vendor/autoload.php';
+$autoload_file = PIVOT_PERFORMANCE_TOOLKIT_PATH . 'vendor/autoload.php';
 
 if ( file_exists( $autoload_file ) ) {
 	require_once $autoload_file;
 }
 
 // Strauss-scoped vendor dependencies (prevents class conflicts with other plugins).
-$scoped_autoload = PERFORMANCE_TOOLKIT_PATH . 'includes/Vendor/autoload.php';
+$scoped_autoload = PIVOT_PERFORMANCE_TOOLKIT_PATH . 'includes/Vendor/autoload.php';
 
 if ( file_exists( $scoped_autoload ) ) {
 	require_once $scoped_autoload;
 }
 
-register_activation_hook( __FILE__, array( '\\PerformanceToolkit\\Core\\Lifecycle', 'activate' ) );
-register_deactivation_hook( __FILE__, array( '\\PerformanceToolkit\\Core\\Lifecycle', 'deactivate' ) );
-function ptk_is_pro_active(): bool {
-	return defined( 'PERFORMANCE_TOOLKIT_PRO_VERSION' );
+register_activation_hook( __FILE__, array( '\\PivotPerformanceToolkit\\Core\\Lifecycle', 'activate' ) );
+register_deactivation_hook( __FILE__, array( '\\PivotPerformanceToolkit\\Core\\Lifecycle', 'deactivate' ) );
+function pivot_performance_toolkit_is_pro_active(): bool {
+	return defined( 'PIVOT_PERFORMANCE_TOOLKIT_PRO_VERSION' );
 }
 
-function ptk_has_pro(): bool {
-	return apply_filters( 'ptk_has_pro', ptk_is_pro_active() );
+function pivot_performance_toolkit_has_pro(): bool {
+	return apply_filters( 'pivot_performance_toolkit_has_pro', pivot_performance_toolkit_is_pro_active() );
 }
 
 add_action(
 	'plugins_loaded',
 	static function (): void {
 		load_plugin_textdomain(
-			'performance-toolkit',
+			'pivot-performance-toolkit',
 			false,
 			dirname( plugin_basename( __FILE__ ) ) . '/languages/'
 		);
@@ -66,10 +66,10 @@ add_action(
 
 				echo '<div class="notice notice-warning"><p>';
 				esc_html_e(
-					'WP Performance Toolkit Free does not support WordPress Multisite. 
+					'Pivot Performance Toolkit Free does not support WordPress Multisite. 
 					The free version uses a single-site cache architecture and cannot safely operate in a multisite network environment. 
 					Multisite support will be available in Pro.',
-					'performance-toolkit'
+					'pivot-performance-toolkit'
 				);
 				echo '</p></div>';
 			};
@@ -80,10 +80,10 @@ add_action(
 			return;
 		}
 
-		if ( ! class_exists( '\\PerformanceToolkit\\Core\\Plugin' ) ) {
+		if ( ! class_exists( '\\PivotPerformanceToolkit\\Core\\Plugin' ) ) {
 			return;
 		}
 
-		\PerformanceToolkit\Core\Plugin::instance()->boot();
+		\PivotPerformanceToolkit\Core\Plugin::instance()->boot();
 	}
 );

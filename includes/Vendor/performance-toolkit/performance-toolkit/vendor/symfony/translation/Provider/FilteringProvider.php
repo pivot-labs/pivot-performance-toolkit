@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation\Provider;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Provider;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\TranslatorBag;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\TranslatorBagInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\TranslatorBag;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\TranslatorBagInterface;
 
 /**
  * Filters domains and locales between the Translator config values and those specific to each provider.

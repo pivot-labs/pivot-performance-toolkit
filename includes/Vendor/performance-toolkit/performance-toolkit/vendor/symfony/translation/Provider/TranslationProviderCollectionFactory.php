@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation\Provider;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Provider;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\UnsupportedSchemeException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\UnsupportedSchemeException;
 
 /**
  * @author Mathieu Santostefano <msantostefano@protonmail.com>

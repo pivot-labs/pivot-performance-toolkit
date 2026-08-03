@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Clock;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Clock;
 
-use PerformanceToolkit\Vendor\Psr\Clock\ClockInterface;
-use PerformanceToolkit\Vendor\Symfony\Contracts\Service\Attribute\Required;
+use PivotPerformanceToolkit\Vendor\Psr\Clock\ClockInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Contracts\Service\Attribute\Required;
 
 /**
  * A trait to help write time-sensitive classes.

@@ -1,14 +1,14 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
 
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Console\Kernel as ConsoleKernelContract;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Console\Kernel as ConsoleKernelContract;
 
 /**
  * @method static int handle(\Symfony\Component\Console\Input\InputInterface $input, \Symfony\Component\Console\Output\OutputInterface|null $output = null)
  * @method static void terminate(\Symfony\Component\Console\Input\InputInterface $input, int $status)
- * @method static void whenCommandLifecycleIsLongerThan(\DateTimeInterface|\PerformanceToolkit\Vendor\Carbon\CarbonInterval|float|int $threshold, callable $handler)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Carbon|null commandStartedAt()
+ * @method static void whenCommandLifecycleIsLongerThan(\DateTimeInterface|\PivotPerformanceToolkit\Vendor\Carbon\CarbonInterval|float|int $threshold, callable $handler)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon|null commandStartedAt()
  * @method static \Illuminate\Console\Scheduling\Schedule resolveConsoleSchedule()
  * @method static \Illuminate\Foundation\Console\ClosureCommand command(string $signature, \Closure $callback)
  * @method static void registerCommand(\Symfony\Component\Console\Command\Command $command)

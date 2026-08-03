@@ -1,8 +1,8 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Laravel\Envoy;
+namespace PivotPerformanceToolkit\Vendor\Laravel\Envoy;
 
-use PerformanceToolkit\Vendor\GuzzleHttp\Client;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Client;
 
 class Discord
 {
@@ -57,7 +57,7 @@ class Discord
      * @param  string  $hook
      * @param  string  $message
      * @param  array  $options
-     * @return \PerformanceToolkit\Vendor\Laravel\Envoy\Discord
+     * @return \PivotPerformanceToolkit\Vendor\Laravel\Envoy\Discord
      */
     public static function make($hook, $message = null, $options = [])
     {

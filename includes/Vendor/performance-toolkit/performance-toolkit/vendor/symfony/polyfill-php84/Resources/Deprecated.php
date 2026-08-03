@@ -11,7 +11,7 @@
 
 if (\PHP_VERSION_ID < 80400) {
     #[Attribute(Attribute::TARGET_METHOD | Attribute::TARGET_FUNCTION | Attribute::TARGET_CLASS_CONSTANT)]
-    final class PerformanceToolkit_Vendor_Deprecated
+    final class PivotPerformanceToolkit_Vendor_Deprecated
     {
         public readonly ?string $message;
         public readonly ?string $since;

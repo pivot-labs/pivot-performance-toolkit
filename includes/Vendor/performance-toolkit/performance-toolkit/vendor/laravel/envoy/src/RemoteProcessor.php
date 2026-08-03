@@ -1,9 +1,9 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Laravel\Envoy;
+namespace PivotPerformanceToolkit\Vendor\Laravel\Envoy;
 
 use Closure;
-use PerformanceToolkit\Vendor\Symfony\Component\Process\Process;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Process\Process;
 
 /**
  * @method string|null getConfiguredServer()
@@ -13,7 +13,7 @@ abstract class RemoteProcessor
     /**
      * Run the given task over SSH.
      *
-     * @param  \PerformanceToolkit\Vendor\Laravel\Envoy\Task  $task
+     * @param  \PivotPerformanceToolkit\Vendor\Laravel\Envoy\Task  $task
      * @param  \Closure|null  $callback
      * @return int
      */
@@ -23,7 +23,7 @@ abstract class RemoteProcessor
      * Run the given script on the given host.
      *
      * @param  string  $host
-     * @param  \PerformanceToolkit\Vendor\Laravel\Envoy\Task  $task
+     * @param  \PivotPerformanceToolkit\Vendor\Laravel\Envoy\Task  $task
      * @return array
      */
     protected function getProcess($host, Task $task)

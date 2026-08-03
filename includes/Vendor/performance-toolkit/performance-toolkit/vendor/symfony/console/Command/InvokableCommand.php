@@ -9,22 +9,22 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Command;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Command;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Application;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Attribute\Argument;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Attribute\Interact;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Attribute\MapInput;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Attribute\Option;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Cursor;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\LogicException;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\RuntimeException;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputArgument;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputDefinition;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Interaction\Interaction;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Style\SymfonyStyle;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Application;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Attribute\Argument;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Attribute\Interact;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Attribute\MapInput;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Attribute\Option;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Cursor;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\LogicException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\RuntimeException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputArgument;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputDefinition;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Interaction\Interaction;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
  * Represents an invokable command.

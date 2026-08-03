@@ -30,7 +30,7 @@
  * - burut13
  */
 
-use PerformanceToolkit\Vendor\Carbon\CarbonInterface;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface;
 
 return [
     'year' => ':count leto|:count leti|:count leta|:count let',

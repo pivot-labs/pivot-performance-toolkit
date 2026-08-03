@@ -1,23 +1,23 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Bus;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Bus;
 
-use PerformanceToolkit\Vendor\Carbon\CarbonImmutable;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Factory as QueueFactory;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Factory as QueueFactory;
 
 class BatchFactory
 {
     /**
      * The queue factory implementation.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Factory
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Factory
      */
     protected $queue;
 
     /**
      * Create a new batch factory instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Factory  $queue
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Factory  $queue
      * @return void
      */
     public function __construct(QueueFactory $queue)
@@ -28,7 +28,7 @@ class BatchFactory
     /**
      * Create a new batch instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Bus\BatchRepository  $repository
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Bus\BatchRepository  $repository
      * @param  string  $id
      * @param  string  $name
      * @param  int  $totalJobs
@@ -36,10 +36,10 @@ class BatchFactory
      * @param  int  $failedJobs
      * @param  array  $failedJobIds
      * @param  array  $options
-     * @param  \PerformanceToolkit\Vendor\Carbon\CarbonImmutable  $createdAt
-     * @param  \PerformanceToolkit\Vendor\Carbon\CarbonImmutable|null  $cancelledAt
-     * @param  \PerformanceToolkit\Vendor\Carbon\CarbonImmutable|null  $finishedAt
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\Batch
+     * @param  \PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable  $createdAt
+     * @param  \PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable|null  $cancelledAt
+     * @param  \PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable|null  $finishedAt
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\Batch
      */
     public function make(BatchRepository $repository,
                          string $id,

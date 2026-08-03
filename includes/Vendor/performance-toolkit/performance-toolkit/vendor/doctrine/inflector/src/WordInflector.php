@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Vendor\Doctrine\Inflector;
+namespace PivotPerformanceToolkit\Vendor\Doctrine\Inflector;
 
 interface WordInflector
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem;
 
 interface Filesystem
 {
@@ -54,7 +54,7 @@ interface Filesystem
      * Write the contents of a file.
      *
      * @param  string  $path
-     * @param  \PerformanceToolkit\Vendor\Psr\Http\Message\StreamInterface|\Illuminate\Http\File|\Illuminate\Http\UploadedFile|string|resource  $contents
+     * @param  \PivotPerformanceToolkit\Vendor\Psr\Http\Message\StreamInterface|\Illuminate\Http\File|\Illuminate\Http\UploadedFile|string|resource  $contents
      * @param  mixed  $options
      * @return bool
      */

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Polyfill\Php85;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Polyfill\Php85;
 
 /**
  * @author Pierre Ambroise <pierre27.ambroise@gmail.com>

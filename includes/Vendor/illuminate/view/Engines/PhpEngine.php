@@ -1,9 +1,9 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\View\Engines;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\View\Engines;
 
-use PerformanceToolkit\Vendor\Illuminate\Contracts\View\Engine;
-use PerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View\Engine;
+use PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem;
 use Throwable;
 
 class PhpEngine implements Engine
@@ -11,14 +11,14 @@ class PhpEngine implements Engine
     /**
      * The filesystem instance.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem
      */
     protected $files;
 
     /**
      * Create a new file engine instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem  $files
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem  $files
      * @return void
      */
     public function __construct(Filesystem $files)

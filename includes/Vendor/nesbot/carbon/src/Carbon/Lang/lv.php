@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use PerformanceToolkit\Vendor\Carbon\CarbonInterface;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface;
 
 /**
  * This file is part of the Carbon package.

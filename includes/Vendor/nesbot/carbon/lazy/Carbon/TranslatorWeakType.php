@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Carbon;
+namespace PivotPerformanceToolkit\Vendor\Carbon;
 
 if (!class_exists(LazyTranslator::class, false)) {
     class LazyTranslator extends AbstractTranslator

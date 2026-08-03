@@ -1,9 +1,9 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Filesystem;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Filesystem;
 
 use Closure;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Conditionable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Conditionable;
 use RuntimeException;
 
 class LocalFilesystemAdapter extends FilesystemAdapter

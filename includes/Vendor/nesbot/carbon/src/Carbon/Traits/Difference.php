@@ -9,15 +9,15 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace PerformanceToolkit\Vendor\Carbon\Traits;
+namespace PivotPerformanceToolkit\Vendor\Carbon\Traits;
 
-use PerformanceToolkit\Vendor\Carbon\Carbon;
-use PerformanceToolkit\Vendor\Carbon\CarbonImmutable;
-use PerformanceToolkit\Vendor\Carbon\CarbonInterface;
-use PerformanceToolkit\Vendor\Carbon\CarbonInterval;
-use PerformanceToolkit\Vendor\Carbon\CarbonPeriod;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\UnknownUnitException;
-use PerformanceToolkit\Vendor\Carbon\Unit;
+use PivotPerformanceToolkit\Vendor\Carbon\Carbon;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterval;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonPeriod;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\UnknownUnitException;
+use PivotPerformanceToolkit\Vendor\Carbon\Unit;
 use Closure;
 use DateInterval;
 use DateTimeInterface;
@@ -37,7 +37,7 @@ trait Difference
      * Return relative interval (negative if $absolute flag is not set to true and the given date is before
      * current one).
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      *
      * @return DateInterval
@@ -59,7 +59,7 @@ trait Difference
      * Return relative interval (negative if $absolute flag is not set to true and the given date is before
      * current one).
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      *
      * @return \CarbonInterval
@@ -75,7 +75,7 @@ trait Difference
      * Return relative interval (negative if $absolute flag is not set to true and the given date is before
      * current one).
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      *
      * @return \CarbonInterval
@@ -88,7 +88,7 @@ trait Difference
      * @param Unit|string                                            $unit     microsecond, millisecond, second, minute,
      *                                                                         hour, day, week, month, quarter, year,
      *                                                                         century, millennium
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      * @param bool                                                   $utc      Always convert dates to UTC before comparing (if not set, it will do it only if timezones are different)
      *
@@ -106,7 +106,7 @@ trait Difference
     /**
      * Get the difference in years
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      * @param bool                                                   $utc      Always convert dates to UTC before comparing (if not set, it will do it only if timezones are different)
      *
@@ -140,7 +140,7 @@ trait Difference
     /**
      * Get the difference in quarters.
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      * @param bool                                                   $utc      Always convert dates to UTC before comparing (if not set, it will do it only if timezones are different)
      *
@@ -153,7 +153,7 @@ trait Difference
     /**
      * Get the difference in months.
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      * @param bool                                                   $utc      Always convert dates to UTC before comparing (if not set, it will do it only if timezones are different)
      *
@@ -196,7 +196,7 @@ trait Difference
     /**
      * Get the difference in weeks.
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      * @param bool                                                   $utc      Always convert dates to UTC before comparing (if not set, it will do it only if timezones are different)
      *
@@ -209,7 +209,7 @@ trait Difference
     /**
      * Get the difference in days.
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      * @param bool                                                   $utc      Always convert dates to UTC before comparing (if not set, it will do it only if timezones are different)
      *
@@ -239,7 +239,7 @@ trait Difference
      * Get the difference in days using a filter closure.
      *
      * @param Closure                                                $callback
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      *
      * @return int
@@ -252,7 +252,7 @@ trait Difference
      * Get the difference in hours using a filter closure.
      *
      * @param Closure                                                $callback
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      *
      * @return int
@@ -266,7 +266,7 @@ trait Difference
      *
      * @param \CarbonInterval                                         $ci       An interval to traverse by
      * @param Closure                                                $callback
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      *
      * @return int
@@ -288,7 +288,7 @@ trait Difference
     /**
      * Get the difference in weekdays.
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      *
      * @return int
@@ -300,7 +300,7 @@ trait Difference
     /**
      * Get the difference in weekend days using a filter.
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      *
      * @return int
@@ -312,7 +312,7 @@ trait Difference
     /**
      * Get the difference in hours.
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      *
      * @return float
@@ -324,7 +324,7 @@ trait Difference
     /**
      * Get the difference in minutes.
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      *
      * @return float
@@ -336,7 +336,7 @@ trait Difference
     /**
      * Get the difference in seconds.
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      *
      * @return float
@@ -348,7 +348,7 @@ trait Difference
     /**
      * Get the difference in microseconds.
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      *
      * @return float
@@ -363,7 +363,7 @@ trait Difference
     /**
      * Get the difference in milliseconds.
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface|\DateTimeInterface|string|null $date
      * @param bool                                                   $absolute Get the absolute of the difference
      *
      * @return float

@@ -1,14 +1,14 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Container;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Container;
 
 use ArrayAccess;
 use Closure;
 use Exception;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Container\BindingResolutionException;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Container\CircularDependencyException;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container as ContainerContract;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Container\ContextualAttribute;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\BindingResolutionException;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\CircularDependencyException;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container as ContainerContract;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\ContextualAttribute;
 use LogicException;
 use ReflectionAttribute;
 use ReflectionClass;
@@ -177,7 +177,7 @@ class Container implements ArrayAccess, ContainerContract
      * Define a contextual binding.
      *
      * @param  array|string  $concrete
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\ContextualBindingBuilder
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\ContextualBindingBuilder
      */
     public function when($concrete)
     {
@@ -740,7 +740,7 @@ class Container implements ArrayAccess, ContainerContract
      * @param  array  $parameters
      * @return ($abstract is class-string<TClass> ? TClass : mixed)
      *
-     * @throws \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\BindingResolutionException
+     * @throws \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\BindingResolutionException
      */
     public function makeWith($abstract, array $parameters = [])
     {
@@ -756,7 +756,7 @@ class Container implements ArrayAccess, ContainerContract
      * @param  array  $parameters
      * @return ($abstract is class-string<TClass> ? TClass : mixed)
      *
-     * @throws \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\BindingResolutionException
+     * @throws \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\BindingResolutionException
      */
     public function make($abstract, array $parameters = [])
     {
@@ -794,8 +794,8 @@ class Container implements ArrayAccess, ContainerContract
      * @param  bool  $raiseEvents
      * @return ($abstract is class-string<TClass> ? TClass : mixed)
      *
-     * @throws \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\BindingResolutionException
-     * @throws \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\CircularDependencyException
+     * @throws \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\BindingResolutionException
+     * @throws \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\CircularDependencyException
      */
     protected function resolve($abstract, $parameters = [], $raiseEvents = true)
     {
@@ -937,8 +937,8 @@ class Container implements ArrayAccess, ContainerContract
      * @param  \Closure(static, array): TClass|class-string<TClass>  $concrete
      * @return TClass
      *
-     * @throws \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\BindingResolutionException
-     * @throws \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\CircularDependencyException
+     * @throws \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\BindingResolutionException
+     * @throws \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\CircularDependencyException
      */
     public function build($concrete)
     {
@@ -1013,7 +1013,7 @@ class Container implements ArrayAccess, ContainerContract
      * @param  \ReflectionParameter[]  $dependencies
      * @return array
      *
-     * @throws \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\BindingResolutionException
+     * @throws \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\BindingResolutionException
      */
     protected function resolveDependencies(array $dependencies)
     {
@@ -1094,7 +1094,7 @@ class Container implements ArrayAccess, ContainerContract
      * @param  \ReflectionParameter  $parameter
      * @return mixed
      *
-     * @throws \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\BindingResolutionException
+     * @throws \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\BindingResolutionException
      */
     protected function resolvePrimitive(ReflectionParameter $parameter)
     {
@@ -1123,7 +1123,7 @@ class Container implements ArrayAccess, ContainerContract
      * @param  \ReflectionParameter  $parameter
      * @return mixed
      *
-     * @throws \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\BindingResolutionException
+     * @throws \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\BindingResolutionException
      */
     protected function resolveClass(ReflectionParameter $parameter)
     {
@@ -1201,7 +1201,7 @@ class Container implements ArrayAccess, ContainerContract
      * @param  string  $concrete
      * @return void
      *
-     * @throws \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\BindingResolutionException
+     * @throws \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\BindingResolutionException
      */
     protected function notInstantiable($concrete)
     {
@@ -1222,7 +1222,7 @@ class Container implements ArrayAccess, ContainerContract
      * @param  \ReflectionParameter  $parameter
      * @return void
      *
-     * @throws \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\BindingResolutionException
+     * @throws \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\BindingResolutionException
      */
     protected function unresolvablePrimitive(ReflectionParameter $parameter)
     {
@@ -1550,8 +1550,8 @@ class Container implements ArrayAccess, ContainerContract
     /**
      * Set the shared instance of the container.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container|null  $container
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container|static
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container|null  $container
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container|static
      */
     public static function setInstance(?ContainerContract $container = null)
     {

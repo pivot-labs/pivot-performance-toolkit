@@ -1,6 +1,6 @@
 <?php
 
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\ReflectsClosures;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\ReflectsClosures;
 
 if (! function_exists('lazy')) {
     /**

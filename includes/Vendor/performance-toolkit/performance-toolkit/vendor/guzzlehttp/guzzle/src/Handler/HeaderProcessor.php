@@ -1,8 +1,8 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp\Handler;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp\Handler;
 
-use PerformanceToolkit\Vendor\GuzzleHttp\Utils;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Utils;
 
 /**
  * @internal

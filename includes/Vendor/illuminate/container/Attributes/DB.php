@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Container\Attributes;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Container\Attributes;
 
 use Attribute;
 

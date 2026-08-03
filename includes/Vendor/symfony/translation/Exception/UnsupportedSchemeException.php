@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation\Exception;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Exception;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Bridge;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Provider\Dsn;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Bridge;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Provider\Dsn;
 
 class UnsupportedSchemeException extends LogicException
 {

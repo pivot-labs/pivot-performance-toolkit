@@ -1,8 +1,8 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Queue\Concerns;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Queue\Concerns;
 
-use PerformanceToolkit\Vendor\Illuminate\Container\Container;
+use PivotPerformanceToolkit\Vendor\Illuminate\Container\Container;
 use Illuminate\Queue\QueueRoutes;
 
 trait ResolvesQueueRoutes

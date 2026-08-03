@@ -9,15 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Descriptor;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Descriptor;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Application;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Command\Command;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\InvalidArgumentException;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputArgument;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputDefinition;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputOption;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Application;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Command\Command;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\InvalidArgumentException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputArgument;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputDefinition;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputOption;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * @author Jean-François Simon <jeanfrancois.simon@sensiolabs.com>

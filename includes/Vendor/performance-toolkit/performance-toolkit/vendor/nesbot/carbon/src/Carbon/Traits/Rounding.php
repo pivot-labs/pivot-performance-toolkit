@@ -9,11 +9,11 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace PerformanceToolkit\Vendor\Carbon\Traits;
+namespace PivotPerformanceToolkit\Vendor\Carbon\Traits;
 
-use PerformanceToolkit\Vendor\Carbon\CarbonInterface;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\UnknownUnitException;
-use PerformanceToolkit\Vendor\Carbon\WeekDay;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\UnknownUnitException;
+use PivotPerformanceToolkit\Vendor\Carbon\WeekDay;
 use DateInterval;
 /**
  * Trait Rounding.

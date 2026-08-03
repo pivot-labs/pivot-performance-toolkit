@@ -1,24 +1,24 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\View\Middleware;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\View\Middleware;
 
 use Closure;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\View\Factory as ViewFactory;
-use PerformanceToolkit\Vendor\Illuminate\Support\ViewErrorBag;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View\Factory as ViewFactory;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\ViewErrorBag;
 
 class ShareErrorsFromSession
 {
     /**
      * The view factory implementation.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Contracts\View\Factory
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View\Factory
      */
     protected $view;
 
     /**
      * Create a new error binder instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\View\Factory  $view
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View\Factory  $view
      * @return void
      */
     public function __construct(ViewFactory $view)

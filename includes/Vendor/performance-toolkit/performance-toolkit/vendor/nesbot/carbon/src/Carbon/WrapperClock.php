@@ -11,15 +11,15 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Carbon;
+namespace PivotPerformanceToolkit\Vendor\Carbon;
 
 use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
 use DateTimeZone;
-use PerformanceToolkit\Vendor\Psr\Clock\ClockInterface as PsrClockInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Clock\ClockInterface as PsrClockInterface;
 use RuntimeException;
-use PerformanceToolkit\Vendor\Symfony\Component\Clock\ClockInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Clock\ClockInterface;
 
 final class WrapperClock implements ClockInterface
 {

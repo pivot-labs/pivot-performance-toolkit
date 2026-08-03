@@ -1,10 +1,10 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\View\Concerns;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\View\Concerns;
 
 use Closure;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\View\View as ViewContract;
-use PerformanceToolkit\Vendor\Illuminate\Support\Str;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View\View as ViewContract;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Str;
 
 trait ManagesEvents
 {
@@ -169,7 +169,7 @@ trait ManagesEvents
     /**
      * Call the composer for a given view.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\View\View  $view
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View\View  $view
      * @return void
      */
     public function callComposer(ViewContract $view)
@@ -182,7 +182,7 @@ trait ManagesEvents
     /**
      * Call the creator for a given view.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\View\View  $view
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View\View  $view
      * @return void
      */
     public function callCreator(ViewContract $view)

@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
 
 use Illuminate\Http\Client\Factory;
 
@@ -21,9 +21,9 @@ use Illuminate\Http\Client\Factory;
  * @method static void assertNothingSent()
  * @method static void assertSentCount(int $count)
  * @method static void assertSequencesAreEmpty()
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Collection recorded(callable $callback = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection recorded(callable $callback = null)
  * @method static \Illuminate\Http\Client\PendingRequest createPendingRequest()
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher|null getDispatcher()
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher|null getDispatcher()
  * @method static array getGlobalMiddleware()
  * @method static void macro(string $name, object|callable $macro)
  * @method static void mixin(object $mixin, bool $replace = true)
@@ -115,7 +115,7 @@ class Http extends Facade
      */
     public static function fake($callback = null)
     {
-        return performancetoolkit_vendor_tap(static::getFacadeRoot(), function ($fake) use ($callback) {
+        return pivotperformancetoolkit_vendor_tap(static::getFacadeRoot(), function ($fake) use ($callback) {
             static::swap($fake->fake($callback));
         });
     }
@@ -128,7 +128,7 @@ class Http extends Facade
      */
     public static function fakeSequence(string $urlPattern = '*')
     {
-        $fake = performancetoolkit_vendor_tap(static::getFacadeRoot(), function ($fake) {
+        $fake = pivotperformancetoolkit_vendor_tap(static::getFacadeRoot(), function ($fake) {
             static::swap($fake);
         });
 
@@ -143,7 +143,7 @@ class Http extends Facade
      */
     public static function preventStrayRequests($prevent = true)
     {
-        return performancetoolkit_vendor_tap(static::getFacadeRoot(), function ($fake) use ($prevent) {
+        return pivotperformancetoolkit_vendor_tap(static::getFacadeRoot(), function ($fake) use ($prevent) {
             static::swap($fake->preventStrayRequests($prevent));
         });
     }
@@ -157,7 +157,7 @@ class Http extends Facade
      */
     public static function stubUrl($url, $callback)
     {
-        return performancetoolkit_vendor_tap(static::getFacadeRoot(), function ($fake) use ($url, $callback) {
+        return pivotperformancetoolkit_vendor_tap(static::getFacadeRoot(), function ($fake) use ($url, $callback) {
             static::swap($fake->stubUrl($url, $callback));
         });
     }

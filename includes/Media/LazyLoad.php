@@ -2,15 +2,19 @@
 /**
  * Lazy load image handler.
  *
- * @package PerformanceToolkit
+ * @package PivotPerformanceToolkit
  */
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Media;
+namespace PivotPerformanceToolkit\Media;
 
-use PerformanceToolkit\Contracts\ModuleInterface;
-use PerformanceToolkit\Core\Settings;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+use PivotPerformanceToolkit\Contracts\ModuleInterface;
+use PivotPerformanceToolkit\Core\Settings;
 
 final class LazyLoad implements ModuleInterface {
 

@@ -1,15 +1,15 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Mail;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Mail;
 
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Factory as Queue;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Factory as Queue;
 
 interface Mailable
 {
     /**
      * Send the message using the given mailer.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Factory|\PerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailer  $mailer
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Factory|\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailer  $mailer
      * @return \Illuminate\Mail\SentMessage|null
      */
     public function send($mailer);
@@ -17,7 +17,7 @@ interface Mailable
     /**
      * Queue the given message.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Factory  $queue
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Factory  $queue
      * @return mixed
      */
     public function queue(Queue $queue);
@@ -26,7 +26,7 @@ interface Mailable
      * Deliver the queued message after (n) seconds.
      *
      * @param  \DateTimeInterface|\DateInterval|int  $delay
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Factory  $queue
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Factory  $queue
      * @return mixed
      */
     public function later($delay, Queue $queue);

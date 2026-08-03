@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Process\Pipes;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Process\Pipes;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Process\Exception\InvalidArgumentException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Process\Exception\InvalidArgumentException;
 
 /**
  * @author Romain Neutron <imprec@gmail.com>

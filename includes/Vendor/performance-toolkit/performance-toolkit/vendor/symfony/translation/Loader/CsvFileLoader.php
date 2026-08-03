@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation\Loader;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Loader;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\NotFoundResourceException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\NotFoundResourceException;
 
 /**
  * CsvFileLoader loads translations from CSV files.

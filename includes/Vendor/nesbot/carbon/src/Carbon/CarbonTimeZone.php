@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Carbon;
+namespace PivotPerformanceToolkit\Vendor\Carbon;
 
-use PerformanceToolkit\Vendor\Carbon\Exceptions\InvalidCastException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\InvalidTimeZoneException;
-use PerformanceToolkit\Vendor\Carbon\Traits\LocalFactory;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\InvalidCastException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\InvalidTimeZoneException;
+use PivotPerformanceToolkit\Vendor\Carbon\Traits\LocalFactory;
 use DateTimeImmutable;
 use DateTimeInterface;
 use DateTimeZone;

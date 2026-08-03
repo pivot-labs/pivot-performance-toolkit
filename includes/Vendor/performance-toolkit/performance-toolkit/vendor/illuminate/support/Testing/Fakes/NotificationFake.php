@@ -1,18 +1,18 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes;
 
 use Closure;
 use Exception;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Notifications\Dispatcher as NotificationDispatcher;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Notifications\Factory as NotificationFactory;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Queue\ShouldQueue;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Translation\HasLocalePreference;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Notifications\Dispatcher as NotificationDispatcher;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Notifications\Factory as NotificationFactory;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue\ShouldQueue;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Notifications\AnonymousNotifiable;
-use PerformanceToolkit\Vendor\Illuminate\Support\Collection;
-use PerformanceToolkit\Vendor\Illuminate\Support\Str;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\ReflectsClosures;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Str;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\ReflectsClosures;
 use PHPUnit\Framework\Assert as PHPUnit;
 
 class NotificationFake implements Fake, NotificationDispatcher, NotificationFactory
@@ -245,7 +245,7 @@ class NotificationFake implements Fake, NotificationDispatcher, NotificationFact
      * @param  mixed  $notifiable
      * @param  string  $notification
      * @param  callable|null  $callback
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Collection
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection
      */
     public function sent($notifiable, $notification, $callback = null)
     {
@@ -289,7 +289,7 @@ class NotificationFake implements Fake, NotificationDispatcher, NotificationFact
     /**
      * Send the given notification to the given notifiable entities.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Support\Collection|mixed  $notifiables
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection|mixed  $notifiables
      * @param  mixed  $notification
      * @return void
      */
@@ -301,7 +301,7 @@ class NotificationFake implements Fake, NotificationDispatcher, NotificationFact
     /**
      * Send the given notification immediately.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Support\Collection|mixed  $notifiables
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection|mixed  $notifiables
      * @param  mixed  $notification
      * @param  array|null  $channels
      * @return void

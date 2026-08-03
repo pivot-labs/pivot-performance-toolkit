@@ -2,17 +2,21 @@
 /**
  * Assets optimization admin page.
  *
- * @package PerformanceToolkit
+ * @package PivotPerformanceToolkit
  */
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Admin;
+namespace PivotPerformanceToolkit\Admin;
 
-use PerformanceToolkit\Core\Settings;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+use PivotPerformanceToolkit\Core\Settings;
 
 final class AssetsPage extends BladeAdminPage {
-	private const AJAX_DETECT_ASSETS_ACTION = 'performance_toolkit_ajax_detect_assets';
+	private const AJAX_DETECT_ASSETS_ACTION = 'pivot_performance_toolkit_ajax_detect_assets';
 
 	private Settings $settings;
 
@@ -22,15 +26,15 @@ final class AssetsPage extends BladeAdminPage {
 	}
 
 	public function slug(): string {
-		return 'performance-toolkit-assets';
+		return 'pivot-performance-toolkit-assets';
 	}
 
 	public function menuTitle(): string {
-		return __( 'Assets', 'performance-toolkit' );
+		return __( 'Assets', 'pivot-performance-toolkit' );
 	}
 
 	public function pageTitle(): string {
-		return __( 'Performance Toolkit Assets', 'performance-toolkit' );
+		return __( 'Pivot Performance Toolkit Assets', 'pivot-performance-toolkit' );
 	}
 
 	public function iconKey(): string {
@@ -49,26 +53,26 @@ final class AssetsPage extends BladeAdminPage {
 			'settings_updated'        => isset( $_GET['settings-updated'] ) && (string) wp_unslash( $_GET['settings-updated'] ) === 'true',
 			'content_options'         => self::getDetectableContentOptions(),
 			'ajax_detect_action'      => self::AJAX_DETECT_ASSETS_ACTION,
-			'ajax_detect_nonce'       => wp_create_nonce( 'ptk_assets_detect_ajax' ),
-			'assets_detector_message' => __( 'Select a page or post, then run detection to list loaded assets.', 'performance-toolkit' ),
+			'ajax_detect_nonce'       => wp_create_nonce( 'pivot_performance_toolkit_assets_detect_ajax' ),
+			'assets_detector_message' => __( 'Select a page or post, then run detection to list loaded assets.', 'pivot-performance-toolkit' ),
 		);
 	}
 
 	public function handleDetectAssetsAjax(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => __( 'Unauthorized', 'performance-toolkit' ) ), 403 );
+			wp_send_json_error( array( 'message' => __( 'Unauthorized', 'pivot-performance-toolkit' ) ), 403 );
 		}
 
-		check_ajax_referer( 'ptk_assets_detect_ajax' );
+		check_ajax_referer( 'pivot_performance_toolkit_assets_detect_ajax' );
 
 		$target_url = isset( $_POST['target_url'] ) ? esc_url_raw( wp_unslash( (string) $_POST['target_url'] ) ) : '';
 
 		if ( '' === $target_url ) {
-			wp_send_json_error( array( 'message' => __( 'Please select a valid URL.', 'performance-toolkit' ) ), 400 );
+			wp_send_json_error( array( 'message' => __( 'Please select a valid URL.', 'pivot-performance-toolkit' ) ), 400 );
 		}
 
 		if ( ! $this->isAllowedTargetUrl( $target_url ) ) {
-			wp_send_json_error( array( 'message' => __( 'Only URLs from this site are allowed.', 'performance-toolkit' ) ), 400 );
+			wp_send_json_error( array( 'message' => __( 'Only URLs from this site are allowed.', 'pivot-performance-toolkit' ) ), 400 );
 		}
 
 		$response = wp_remote_get(
@@ -80,7 +84,7 @@ final class AssetsPage extends BladeAdminPage {
 				'headers'     => array(
 					'X-PTK-Asset-Detector' => '1',
 				),
-				'user-agent'  => 'Performance Toolkit Assets Detector',
+				'user-agent'  => 'Pivot Performance Toolkit Assets Detector',
 			)
 		);
 
@@ -94,7 +98,7 @@ final class AssetsPage extends BladeAdminPage {
 			wp_send_json_error(
 				array(
 					/* translators: %d: HTTP status code. */
-					'message' => sprintf( __( 'Page request failed with HTTP %d.', 'performance-toolkit' ), $status_code ),
+					'message' => sprintf( __( 'Page request failed with HTTP %d.', 'pivot-performance-toolkit' ), $status_code ),
 				),
 				500
 			);
@@ -103,7 +107,7 @@ final class AssetsPage extends BladeAdminPage {
 		$html = (string) wp_remote_retrieve_body( $response );
 
 		if ( '' === trim( $html ) ) {
-			wp_send_json_error( array( 'message' => __( 'No HTML was returned for this URL.', 'performance-toolkit' ) ), 500 );
+			wp_send_json_error( array( 'message' => __( 'No HTML was returned for this URL.', 'pivot-performance-toolkit' ) ), 500 );
 		}
 
 		$rows         = $this->extractAssetRows( $html, $target_url );
@@ -116,7 +120,7 @@ final class AssetsPage extends BladeAdminPage {
 				'rows'         => $rows,
 				'summary_text' => sprintf(
 					/* translators: 1: total assets, 2: local assets, 3: external assets. */
-					__( 'Detected %1$d assets (%2$d local, %3$d external).', 'performance-toolkit' ),
+					__( 'Detected %1$d assets (%2$d local, %3$d external).', 'pivot-performance-toolkit' ),
 					$total_assets,
 					$local_assets,
 					$external
@@ -321,7 +325,7 @@ final class AssetsPage extends BladeAdminPage {
 
 				$result[ $bucket ][] = array(
 					/* translators: %d: post ID. */
-					'label' => is_string( $title ) && '' !== trim( $title ) ? $title : sprintf( __( 'Untitled #%d', 'performance-toolkit' ), (int) $post_id ),
+					'label' => is_string( $title ) && '' !== trim( $title ) ? $title : sprintf( __( 'Untitled #%d', 'pivot-performance-toolkit' ), (int) $post_id ),
 					'url'   => $url,
 				);
 			}

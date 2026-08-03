@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation\Loader;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Loader;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\InvalidResourceException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\InvalidResourceException;
 
 /**
  * @copyright Copyright (c) 2010, Union of RAD http://union-of-rad.org (http://lithify.me/)

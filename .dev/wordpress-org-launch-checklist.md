@@ -1,5 +1,5 @@
-# WP Performance Toolkit — WordPress.org Launch Checklist
-_Audit date: June 12, 2026. Plugin: performance-toolkit v1.0.0_
+# Pivot Performance Toolkit — WordPress.org Launch Checklist
+_Audit date: June 12, 2026. Plugin: pivot-performance-toolkit v1.0.0_
 
 ## Blockers — fix before submission
 
@@ -7,9 +7,9 @@ _Audit date: June 12, 2026. Plugin: performance-toolkit v1.0.0_
 **Problem:** vendor/ ships illuminate/view + symfony, nesbot/carbon, doctrine, voku, psr unprefixed. If another active plugin loads a different version of these (common), the site fatals. Reviewers reject for this.
 
 - [x] Add Strauss (brianhenryie/strauss) as a dev dependency / build step
-- [x] Configure target namespace, e.g. `PerformanceToolkit\Vendor\`, output to `includes/Vendor/`
+- [x] Configure target namespace, e.g. `PivotPerformanceToolkit\Vendor\`, output to `includes/Vendor/`
 - [x] Handle Illuminate global helper functions (`collect()`, `e()`, `view()`, etc.) — these live in unprefixed helper files Strauss does NOT namespace. Exclude or alias them (known Strauss + Laravel issue; check Strauss docs `exclude_from_copy` / `override_autoload`)
-- [x] Update autoloader references in performance-toolkit.php
+- [x] Update autoloader references in pivot-performance-toolkit.php
 - [x] Verify Blade compiled-view cache path is writable and outside the plugin dir
 - [ ] Smoke-test every admin page renders after scoping
 - [ ] Decision noted: keep Blade for launch; consider gradual migration to plain PHP templates post-launch (would cut ~10MB of admin-side vendor weight)
@@ -39,11 +39,11 @@ This is the code path reviewers read line-by-line for caching plugins.
 - Nonces (wp_verify_nonce/check_admin_referer) + current_user_can across all admin pages
 - No unescaped `echo $var` output found; Blade `{{ }}` auto-escapes
 - Opt-in uninstall data removal (off by default)
-- Prefixing: `ptk_` functions, `PerformanceToolkit\` namespace, prefixed options
+- Prefixing: `ptk_` functions, `PivotPerformanceToolkit\` namespace, prefixed options
 - .distignore correctly excludes dev junk (tests, docs, node_modules, build configs, dev-only vendor)
 - GPL-2.0+ license, license.txt, THIRD-PARTY-LICENSES.txt present
 - index.php silence files throughout
-- Text domain matches slug (`performance-toolkit`), Domain Path set
+- Text domain matches slug (`pivot-performance-toolkit`), Domain Path set
 
 ## Submission process (after fixes)
 - [ ] Build the dist zip (respecting .distignore — `wp dist-archive` is already in require-dev)
@@ -55,4 +55,4 @@ This is the code path reviewers read line-by-line for caching plugins.
 - [ ] Use review wait time to: finish wpperformancetoolkit.com one-pager with email capture, plan Pro infrastructure
 
 ## Slug note
-Plugin folder is `performance-toolkit` but the brand is "WP Performance Toolkit." The wordpress.org slug is assigned at submission from your requested name and is permanent — decide before submitting whether you want `performance-toolkit` or `wp-performance-toolkit`. ("WP" prefix is allowed; "WordPress" is not.)
+Plugin folder is `pivot-performance-toolkit` but the brand is "Pivot Performance Toolkit." The wordpress.org slug is assigned at submission from your requested name and is permanent — decide before submitting whether you want `pivot-performance-toolkit` or `wp-pivot-performance-toolkit`. ("WP" prefix is allowed; "WordPress" is not.)

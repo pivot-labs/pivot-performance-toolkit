@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Process\Exception;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Process\Exception;
 
 /**
  * Marker Interface for the Process Component.

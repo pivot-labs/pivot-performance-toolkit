@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Encryption;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Encryption;
 
 use RuntimeException;
 

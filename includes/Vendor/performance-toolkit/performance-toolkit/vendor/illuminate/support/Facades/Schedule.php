@@ -1,18 +1,18 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
 
 use Illuminate\Console\Scheduling\Schedule as ConsoleSchedule;
 
 /**
  * @method static \Illuminate\Console\Scheduling\CallbackEvent call(string|callable $callback, array $parameters = [])
- * @method static \Illuminate\Console\Scheduling\Event command(\PerformanceToolkit\Vendor\Symfony\Component\Console\Command\Command|string $command, array $parameters = [])
+ * @method static \Illuminate\Console\Scheduling\Event command(\PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Command\Command|string $command, array $parameters = [])
  * @method static \Illuminate\Console\Scheduling\CallbackEvent job(object|string $job, \UnitEnum|string|null $queue = null, \UnitEnum|string|null $connection = null)
  * @method static \Illuminate\Console\Scheduling\Event exec(string $command, array $parameters = [])
  * @method static void group(\Closure $events)
  * @method static string compileArrayInput(string|int $key, array $value)
  * @method static bool serverShouldRun(\Illuminate\Console\Scheduling\Event $event, \DateTimeInterface $time)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Collection dueEvents(\PerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application $app)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection dueEvents(\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application $app)
  * @method static \Illuminate\Console\Scheduling\Event[] events()
  * @method static \Illuminate\Console\Scheduling\Schedule useCache(\UnitEnum|string $store)
  * @method static void macro(string $name, object|callable $macro)

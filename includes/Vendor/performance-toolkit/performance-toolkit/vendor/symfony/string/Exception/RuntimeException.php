@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\String\Exception;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\String\Exception;
 
 class RuntimeException extends \RuntimeException implements ExceptionInterface
 {

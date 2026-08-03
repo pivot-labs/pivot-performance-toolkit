@@ -2,19 +2,23 @@
 /**
  * File optimization admin page.
  *
- * @package PerformanceToolkit
+ * @package PivotPerformanceToolkit
  */
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Admin;
+namespace PivotPerformanceToolkit\Admin;
 
-use PerformanceToolkit\Core\Settings;
-use PerformanceToolkit\Utils\HttpProtocolDetector;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+use PivotPerformanceToolkit\Core\Settings;
+use PivotPerformanceToolkit\Utils\HttpProtocolDetector;
 
 final class FileOptimizationPage extends BladeAdminPage {
 
-	private const AJAX_SAVE_QUICK_TOGGLE_ACTION = 'performance_toolkit_ajax_save_file_quick_toggle';
+	private const AJAX_SAVE_QUICK_TOGGLE_ACTION = 'pivot_performance_toolkit_ajax_save_file_quick_toggle';
 
 	private Settings $settings;
 
@@ -24,15 +28,15 @@ final class FileOptimizationPage extends BladeAdminPage {
 	}
 
 	public function slug(): string {
-		return 'performance-toolkit-file-optimization';
+		return 'pivot-performance-toolkit-file-optimization';
 	}
 
 	public function menuTitle(): string {
-		return __( 'File Optimization', 'performance-toolkit' );
+		return __( 'File Optimization', 'pivot-performance-toolkit' );
 	}
 
 	public function pageTitle(): string {
-		return __( 'Performance Toolkit File Optimization', 'performance-toolkit' );
+		return __( 'Pivot Performance Toolkit File Optimization', 'pivot-performance-toolkit' );
 	}
 
 	public function iconKey(): string {
@@ -54,7 +58,7 @@ final class FileOptimizationPage extends BladeAdminPage {
 			'option_key'                    => $this->settings->optionKey(),
 			'settings_updated'              => isset( $_GET['settings-updated'] ) && (string) wp_unslash( $_GET['settings-updated'] ) === 'true',
 			'ajax_save_quick_toggle_action' => self::AJAX_SAVE_QUICK_TOGGLE_ACTION,
-			'ajax_save_quick_toggle_nonce'  => wp_create_nonce( 'ptk_file_quick_toggle_ajax' ),
+			'ajax_save_quick_toggle_nonce'  => wp_create_nonce( 'pivot_performance_toolkit_file_quick_toggle_ajax' ),
 			'http_protocol_version'         => $http_protocol['version'],
 			'is_http11'                     => $http_protocol['is_http11'],
 			'http_protocol_source'          => $http_protocol['source'],
@@ -63,17 +67,17 @@ final class FileOptimizationPage extends BladeAdminPage {
 
 	public function handleSaveQuickToggleAjax(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => __( 'Unauthorized', 'performance-toolkit' ) ), 403 );
+			wp_send_json_error( array( 'message' => __( 'Unauthorized', 'pivot-performance-toolkit' ) ), 403 );
 		}
 
-		check_ajax_referer( 'ptk_file_quick_toggle_ajax' );
+		check_ajax_referer( 'pivot_performance_toolkit_file_quick_toggle_ajax' );
 
 		$setting_key = isset( $_POST['setting_key'] ) ? sanitize_key( wp_unslash( (string) $_POST['setting_key'] ) ) : '';
 
 		$allowed_setting_keys = array( 'defer_scripts', 'minify_html', 'minify_css', 'minify_external_css', 'minify_external_js', 'minify_js' );
 
 		if ( ! in_array( $setting_key, $allowed_setting_keys, true ) ) {
-			wp_send_json_error( array( 'message' => __( 'Invalid setting.', 'performance-toolkit' ) ), 400 );
+			wp_send_json_error( array( 'message' => __( 'Invalid setting.', 'pivot-performance-toolkit' ) ), 400 );
 		}
 
 		$options                 = $this->settings->all();
@@ -83,7 +87,7 @@ final class FileOptimizationPage extends BladeAdminPage {
 
 		wp_send_json_success(
 			array(
-				'message' => __( 'Quick optimization saved.', 'performance-toolkit' ),
+				'message' => __( 'Quick optimization saved.', 'pivot-performance-toolkit' ),
 				'setting' => $setting_key,
 				'value'   => (bool) $options[ $setting_key ],
 			)

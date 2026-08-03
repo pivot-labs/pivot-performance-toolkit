@@ -1,8 +1,8 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Laravel\Envoy;
+namespace PivotPerformanceToolkit\Vendor\Laravel\Envoy;
 
-use PerformanceToolkit\Vendor\Illuminate\Support\Str;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Str;
 
 trait ConfigurationParser
 {
@@ -23,7 +23,7 @@ trait ConfigurationParser
      * Get the SSH configuration file instance.
      *
      * @param  string  $user
-     * @return \PerformanceToolkit\Vendor\Laravel\Envoy\SSHConfigFile|null
+     * @return \PivotPerformanceToolkit\Vendor\Laravel\Envoy\SSHConfigFile|null
      */
     protected function getSshConfig($user)
     {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp\Psr7;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7;
 
-use PerformanceToolkit\Vendor\Psr\Http\Message\StreamInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\StreamInterface;
 
 /**
  * Provides a buffer stream that can be written to to fill a buffer, and read

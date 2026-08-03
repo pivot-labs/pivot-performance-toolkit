@@ -9,15 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation\Extractor;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Extractor;
 
 use PhpParser\NodeTraverser;
 use PhpParser\NodeVisitor;
 use PhpParser\Parser;
 use PhpParser\ParserFactory;
-use PerformanceToolkit\Vendor\Symfony\Component\Finder\Finder;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Extractor\Visitor\AbstractVisitor;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogue;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Finder\Finder;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Extractor\Visitor\AbstractVisitor;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogue;
 
 /**
  * PhpAstExtractor extracts translation messages from a PHP AST.

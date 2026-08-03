@@ -9,17 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation\Loader;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Loader;
 
 use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\Config\Util\Exception\InvalidXmlException;
 use Symfony\Component\Config\Util\Exception\XmlParsingException;
 use Symfony\Component\Config\Util\XmlUtils;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\InvalidResourceException;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\NotFoundResourceException;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\RuntimeException;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogue;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Util\XliffUtils;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\InvalidResourceException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\NotFoundResourceException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\RuntimeException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogue;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Util\XliffUtils;
 
 /**
  * XliffFileLoader loads translations from XLIFF files.

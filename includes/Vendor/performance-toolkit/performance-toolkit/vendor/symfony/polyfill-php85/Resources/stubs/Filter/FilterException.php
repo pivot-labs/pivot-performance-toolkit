@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Filter;
+namespace PivotPerformanceToolkit\Vendor\Filter;
 
 if (\PHP_VERSION_ID < 80500) {
     class FilterException extends \Exception

@@ -1,27 +1,27 @@
 <?php
 
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\DeferringDisplayableValue;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\DeferringDisplayableValue;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
-use PerformanceToolkit\Vendor\Illuminate\Support\Arr;
-use PerformanceToolkit\Vendor\Illuminate\Support\Env;
-use PerformanceToolkit\Vendor\Illuminate\Support\Fluent;
-use PerformanceToolkit\Vendor\Illuminate\Support\HigherOrderTapProxy;
-use PerformanceToolkit\Vendor\Illuminate\Support\Once;
-use PerformanceToolkit\Vendor\Illuminate\Support\Onceable;
-use PerformanceToolkit\Vendor\Illuminate\Support\Optional;
-use PerformanceToolkit\Vendor\Illuminate\Support\Sleep;
-use PerformanceToolkit\Vendor\Illuminate\Support\Str;
-use PerformanceToolkit\Vendor\Illuminate\Support\Stringable as SupportStringable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Arr;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Env;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Fluent;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\HigherOrderTapProxy;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Once;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Onceable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Optional;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Sleep;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Str;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Stringable as SupportStringable;
 
-if (! function_exists('performancetoolkit_vendor_append_config')) {
+if (! function_exists('pivotperformancetoolkit_vendor_append_config')) {
     /**
      * Assign high numeric IDs to a config item to force appending.
      *
      * @param  array  $array
      * @return array
      */
-    function performancetoolkit_vendor_append_config(array $array)
+    function pivotperformancetoolkit_vendor_append_config(array $array)
     {
         $start = 9999;
 
@@ -37,7 +37,7 @@ if (! function_exists('performancetoolkit_vendor_append_config')) {
     }
 }
 
-if (! function_exists('performancetoolkit_vendor_blank')) {
+if (! function_exists('pivotperformancetoolkit_vendor_blank')) {
     /**
      * Determine if the given value is "blank".
      *
@@ -48,7 +48,7 @@ if (! function_exists('performancetoolkit_vendor_blank')) {
      * @param  mixed  $value
      * @return bool
      */
-    function performancetoolkit_vendor_blank($value)
+    function pivotperformancetoolkit_vendor_blank($value)
     {
         if (is_null($value)) {
             return true;
@@ -78,14 +78,14 @@ if (! function_exists('performancetoolkit_vendor_blank')) {
     }
 }
 
-if (! function_exists('performancetoolkit_vendor_class_basename')) {
+if (! function_exists('pivotperformancetoolkit_vendor_class_basename')) {
     /**
      * Get the class "basename" of the given object / class.
      *
      * @param  string|object  $class
      * @return string
      */
-    function performancetoolkit_vendor_class_basename($class)
+    function pivotperformancetoolkit_vendor_class_basename($class)
     {
         $class = is_object($class) ? get_class($class) : $class;
 
@@ -93,14 +93,14 @@ if (! function_exists('performancetoolkit_vendor_class_basename')) {
     }
 }
 
-if (! function_exists('performancetoolkit_vendor_class_uses_recursive')) {
+if (! function_exists('pivotperformancetoolkit_vendor_class_uses_recursive')) {
     /**
      * Returns all traits used by a class, its parent classes and trait of their traits.
      *
      * @param  object|string  $class
      * @return array
      */
-    function performancetoolkit_vendor_class_uses_recursive($class)
+    function pivotperformancetoolkit_vendor_class_uses_recursive($class)
     {
         if (is_object($class)) {
             $class = get_class($class);
@@ -109,22 +109,22 @@ if (! function_exists('performancetoolkit_vendor_class_uses_recursive')) {
         $results = [];
 
         foreach (array_reverse(class_parents($class) ?: []) + [$class => $class] as $class) {
-            $results += performancetoolkit_vendor_trait_uses_recursive($class);
+            $results += pivotperformancetoolkit_vendor_trait_uses_recursive($class);
         }
 
         return array_unique($results);
     }
 }
 
-if (! function_exists('performancetoolkit_vendor_e')) {
+if (! function_exists('pivotperformancetoolkit_vendor_e')) {
     /**
      * Encode HTML special characters in a string.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\DeferringDisplayableValue|\PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable|\BackedEnum|string|int|float|null  $value
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\DeferringDisplayableValue|\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable|\BackedEnum|string|int|float|null  $value
      * @param  bool  $doubleEncode
      * @return string
      */
-    function performancetoolkit_vendor_e($value, $doubleEncode = true)
+    function pivotperformancetoolkit_vendor_e($value, $doubleEncode = true)
     {
         if ($value instanceof DeferringDisplayableValue) {
             $value = $value->resolveDisplayableValue();
@@ -142,7 +142,7 @@ if (! function_exists('performancetoolkit_vendor_e')) {
     }
 }
 
-if (! function_exists('performancetoolkit_vendor_env')) {
+if (! function_exists('pivotperformancetoolkit_vendor_env')) {
     /**
      * Gets the value of an environment variable.
      *
@@ -150,13 +150,13 @@ if (! function_exists('performancetoolkit_vendor_env')) {
      * @param  mixed  $default
      * @return mixed
      */
-    function performancetoolkit_vendor_env($key, $default = null)
+    function pivotperformancetoolkit_vendor_env($key, $default = null)
     {
         return Env::get($key, $default);
     }
 }
 
-if (! function_exists('performancetoolkit_vendor_filled')) {
+if (! function_exists('pivotperformancetoolkit_vendor_filled')) {
     /**
      * Determine if a value is "filled".
      *
@@ -167,32 +167,32 @@ if (! function_exists('performancetoolkit_vendor_filled')) {
      * @param  mixed  $value
      * @return bool
      */
-    function performancetoolkit_vendor_filled($value)
+    function pivotperformancetoolkit_vendor_filled($value)
     {
-        return ! performancetoolkit_vendor_blank($value);
+        return ! pivotperformancetoolkit_vendor_blank($value);
     }
 }
 
-if (! function_exists('performancetoolkit_vendor_fluent')) {
+if (! function_exists('pivotperformancetoolkit_vendor_fluent')) {
     /**
      * Create a Fluent object from the given value.
      *
      * @param  object|array  $value
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Fluent
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Fluent
      */
-    function performancetoolkit_vendor_fluent($value)
+    function pivotperformancetoolkit_vendor_fluent($value)
     {
         return new Fluent($value);
     }
 }
 
-if (! function_exists('performancetoolkit_vendor_literal')) {
+if (! function_exists('pivotperformancetoolkit_vendor_literal')) {
     /**
      * Return a new literal or anonymous object using named arguments.
      *
      * @return \stdClass
      */
-    function performancetoolkit_vendor_literal(...$arguments)
+    function pivotperformancetoolkit_vendor_literal(...$arguments)
     {
         if (count($arguments) === 1 && array_is_list($arguments)) {
             return $arguments[0];
@@ -202,7 +202,7 @@ if (! function_exists('performancetoolkit_vendor_literal')) {
     }
 }
 
-if (! function_exists('performancetoolkit_vendor_object_get')) {
+if (! function_exists('pivotperformancetoolkit_vendor_object_get')) {
     /**
      * Get an item from an object using "dot" notation.
      *
@@ -213,7 +213,7 @@ if (! function_exists('performancetoolkit_vendor_object_get')) {
      * @param  mixed  $default
      * @return ($key is empty ? TValue : mixed)
      */
-    function performancetoolkit_vendor_object_get($object, $key, $default = null)
+    function pivotperformancetoolkit_vendor_object_get($object, $key, $default = null)
     {
         if (is_null($key) || trim($key) === '') {
             return $object;
@@ -221,7 +221,7 @@ if (! function_exists('performancetoolkit_vendor_object_get')) {
 
         foreach (explode('.', $key) as $segment) {
             if (! is_object($object) || ! isset($object->{$segment})) {
-                return performancetoolkit_vendor_value($default);
+                return pivotperformancetoolkit_vendor_value($default);
             }
 
             $object = $object->{$segment};
@@ -231,20 +231,20 @@ if (! function_exists('performancetoolkit_vendor_object_get')) {
     }
 }
 
-if (! function_exists('performancetoolkit_vendor_laravel_cloud')) {
+if (! function_exists('pivotperformancetoolkit_vendor_laravel_cloud')) {
     /**
      * Determine if the application is running on Laravel Cloud.
      *
      * @return bool
      */
-    function performancetoolkit_vendor_laravel_cloud()
+    function pivotperformancetoolkit_vendor_laravel_cloud()
     {
         return ($_ENV['LARAVEL_CLOUD'] ?? false) === '1' ||
                ($_SERVER['LARAVEL_CLOUD'] ?? false) === '1';
     }
 }
 
-if (! function_exists('performancetoolkit_vendor_once')) {
+if (! function_exists('pivotperformancetoolkit_vendor_once')) {
     /**
      * Ensures a callable is only called once, and returns the result on subsequent calls.
      *
@@ -253,7 +253,7 @@ if (! function_exists('performancetoolkit_vendor_once')) {
      * @param  callable(): TReturnType  $callback
      * @return TReturnType
      */
-    function performancetoolkit_vendor_once(callable $callback)
+    function pivotperformancetoolkit_vendor_once(callable $callback)
     {
         $onceable = Onceable::tryFromTrace(
             debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT, 2),
@@ -264,7 +264,7 @@ if (! function_exists('performancetoolkit_vendor_once')) {
     }
 }
 
-if (! function_exists('performancetoolkit_vendor_optional')) {
+if (! function_exists('pivotperformancetoolkit_vendor_optional')) {
     /**
      * Provide access to optional objects.
      *
@@ -273,9 +273,9 @@ if (! function_exists('performancetoolkit_vendor_optional')) {
      *
      * @param  TValue  $value
      * @param  (callable(TValue): TReturn)|null  $callback
-     * @return ($callback is null ? \PerformanceToolkit\Vendor\Illuminate\Support\Optional : ($value is null ? null : TReturn))
+     * @return ($callback is null ? \PivotPerformanceToolkit\Vendor\Illuminate\Support\Optional : ($value is null ? null : TReturn))
      */
-    function performancetoolkit_vendor_optional($value = null, ?callable $callback = null)
+    function pivotperformancetoolkit_vendor_optional($value = null, ?callable $callback = null)
     {
         if (is_null($callback)) {
             return new Optional($value);
@@ -285,7 +285,7 @@ if (! function_exists('performancetoolkit_vendor_optional')) {
     }
 }
 
-if (! function_exists('performancetoolkit_vendor_preg_replace_array')) {
+if (! function_exists('pivotperformancetoolkit_vendor_preg_replace_array')) {
     /**
      * Replace a given pattern with each value in the array in sequentially.
      *
@@ -294,7 +294,7 @@ if (! function_exists('performancetoolkit_vendor_preg_replace_array')) {
      * @param  string  $subject
      * @return string
      */
-    function performancetoolkit_vendor_preg_replace_array($pattern, array $replacements, $subject)
+    function pivotperformancetoolkit_vendor_preg_replace_array($pattern, array $replacements, $subject)
     {
         return preg_replace_callback($pattern, function () use (&$replacements) {
             foreach ($replacements as $value) {
@@ -304,7 +304,7 @@ if (! function_exists('performancetoolkit_vendor_preg_replace_array')) {
     }
 }
 
-if (! function_exists('performancetoolkit_vendor_retry')) {
+if (! function_exists('pivotperformancetoolkit_vendor_retry')) {
     /**
      * Retry an operation a given number of times.
      *
@@ -318,7 +318,7 @@ if (! function_exists('performancetoolkit_vendor_retry')) {
      *
      * @throws \Throwable
      */
-    function performancetoolkit_vendor_retry($times, callable $callback, $sleepMilliseconds = 0, $when = null)
+    function pivotperformancetoolkit_vendor_retry($times, callable $callback, $sleepMilliseconds = 0, $when = null)
     {
         $attempts = 0;
 
@@ -344,7 +344,7 @@ if (! function_exists('performancetoolkit_vendor_retry')) {
             $sleepMilliseconds = $backoff[$attempts - 1] ?? $sleepMilliseconds;
 
             if ($sleepMilliseconds) {
-                Sleep::usleep(performancetoolkit_vendor_value($sleepMilliseconds, $attempts, $e) * 1000);
+                Sleep::usleep(pivotperformancetoolkit_vendor_value($sleepMilliseconds, $attempts, $e) * 1000);
             }
 
             goto beginning;
@@ -352,14 +352,14 @@ if (! function_exists('performancetoolkit_vendor_retry')) {
     }
 }
 
-if (! function_exists('performancetoolkit_vendor_str')) {
+if (! function_exists('pivotperformancetoolkit_vendor_str')) {
     /**
      * Get a new stringable object from the given string.
      *
      * @param  string|null  $string
-     * @return ($string is null ? object : \PerformanceToolkit\Vendor\Illuminate\Support\Stringable)
+     * @return ($string is null ? object : \PivotPerformanceToolkit\Vendor\Illuminate\Support\Stringable)
      */
-    function performancetoolkit_vendor_str($string = null)
+    function pivotperformancetoolkit_vendor_str($string = null)
     {
         if (func_num_args() === 0) {
             return new class
@@ -380,7 +380,7 @@ if (! function_exists('performancetoolkit_vendor_str')) {
     }
 }
 
-if (! function_exists('performancetoolkit_vendor_tap')) {
+if (! function_exists('pivotperformancetoolkit_vendor_tap')) {
     /**
      * Call the given Closure with the given value then return the value.
      *
@@ -388,9 +388,9 @@ if (! function_exists('performancetoolkit_vendor_tap')) {
      *
      * @param  TValue  $value
      * @param  (callable(TValue): mixed)|null  $callback
-     * @return ($callback is null ? \PerformanceToolkit\Vendor\Illuminate\Support\HigherOrderTapProxy : TValue)
+     * @return ($callback is null ? \PivotPerformanceToolkit\Vendor\Illuminate\Support\HigherOrderTapProxy : TValue)
      */
-    function performancetoolkit_vendor_tap($value, $callback = null)
+    function pivotperformancetoolkit_vendor_tap($value, $callback = null)
     {
         if (is_null($callback)) {
             return new HigherOrderTapProxy($value);
@@ -402,7 +402,7 @@ if (! function_exists('performancetoolkit_vendor_tap')) {
     }
 }
 
-if (! function_exists('performancetoolkit_vendor_throw_if')) {
+if (! function_exists('pivotperformancetoolkit_vendor_throw_if')) {
     /**
      * Throw the given exception if the given condition is true.
      *
@@ -416,7 +416,7 @@ if (! function_exists('performancetoolkit_vendor_throw_if')) {
      *
      * @throws TException
      */
-    function performancetoolkit_vendor_throw_if($condition, $exception = 'RuntimeException', ...$parameters)
+    function pivotperformancetoolkit_vendor_throw_if($condition, $exception = 'RuntimeException', ...$parameters)
     {
         if ($condition) {
             if (is_string($exception) && class_exists($exception)) {
@@ -430,7 +430,7 @@ if (! function_exists('performancetoolkit_vendor_throw_if')) {
     }
 }
 
-if (! function_exists('performancetoolkit_vendor_throw_unless')) {
+if (! function_exists('pivotperformancetoolkit_vendor_throw_unless')) {
     /**
      * Throw the given exception unless the given condition is true.
      *
@@ -444,34 +444,34 @@ if (! function_exists('performancetoolkit_vendor_throw_unless')) {
      *
      * @throws TException
      */
-    function performancetoolkit_vendor_throw_unless($condition, $exception = 'RuntimeException', ...$parameters)
+    function pivotperformancetoolkit_vendor_throw_unless($condition, $exception = 'RuntimeException', ...$parameters)
     {
-        performancetoolkit_vendor_throw_if(! $condition, $exception, ...$parameters);
+        pivotperformancetoolkit_vendor_throw_if(! $condition, $exception, ...$parameters);
 
         return $condition;
     }
 }
 
-if (! function_exists('performancetoolkit_vendor_trait_uses_recursive')) {
+if (! function_exists('pivotperformancetoolkit_vendor_trait_uses_recursive')) {
     /**
      * Returns all traits used by a trait and its traits.
      *
      * @param  object|string  $trait
      * @return array
      */
-    function performancetoolkit_vendor_trait_uses_recursive($trait)
+    function pivotperformancetoolkit_vendor_trait_uses_recursive($trait)
     {
         $traits = class_uses($trait) ?: [];
 
         foreach ($traits as $trait) {
-            $traits += performancetoolkit_vendor_trait_uses_recursive($trait);
+            $traits += pivotperformancetoolkit_vendor_trait_uses_recursive($trait);
         }
 
         return $traits;
     }
 }
 
-if (! function_exists('performancetoolkit_vendor_transform')) {
+if (! function_exists('pivotperformancetoolkit_vendor_transform')) {
     /**
      * Transform the given value if it is present.
      *
@@ -484,9 +484,9 @@ if (! function_exists('performancetoolkit_vendor_transform')) {
      * @param  TDefault|callable(TValue): TDefault  $default
      * @return ($value is empty ? TDefault : TReturn)
      */
-    function performancetoolkit_vendor_transform($value, callable $callback, $default = null)
+    function pivotperformancetoolkit_vendor_transform($value, callable $callback, $default = null)
     {
-        if (performancetoolkit_vendor_filled($value)) {
+        if (pivotperformancetoolkit_vendor_filled($value)) {
             return $callback($value);
         }
 
@@ -498,19 +498,19 @@ if (! function_exists('performancetoolkit_vendor_transform')) {
     }
 }
 
-if (! function_exists('performancetoolkit_vendor_windows_os')) {
+if (! function_exists('pivotperformancetoolkit_vendor_windows_os')) {
     /**
      * Determine whether the current environment is Windows based.
      *
      * @return bool
      */
-    function performancetoolkit_vendor_windows_os()
+    function pivotperformancetoolkit_vendor_windows_os()
     {
         return PHP_OS_FAMILY === 'Windows';
     }
 }
 
-if (! function_exists('performancetoolkit_vendor_with')) {
+if (! function_exists('pivotperformancetoolkit_vendor_with')) {
     /**
      * Return the given value, optionally passed through the given callback.
      *
@@ -521,7 +521,7 @@ if (! function_exists('performancetoolkit_vendor_with')) {
      * @param  (callable(TValue): (TReturn))|null  $callback
      * @return ($callback is null ? TValue : TReturn)
      */
-    function performancetoolkit_vendor_with($value, ?callable $callback = null)
+    function pivotperformancetoolkit_vendor_with($value, ?callable $callback = null)
     {
         return is_null($callback) ? $value : $callback($value);
     }

@@ -1,10 +1,10 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
 use ArrayIterator;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\ValidatedData;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\InteractsWithData;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\ValidatedData;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\InteractsWithData;
 use Symfony\Component\VarDumper\VarDumper;
 use Traversable;
 
@@ -93,7 +93,7 @@ class ValidatedInput implements ValidatedData
      */
     public function input($key = null, $default = null)
     {
-        return performancetoolkit_vendor_data_get(
+        return pivotperformancetoolkit_vendor_data_get(
             $this->all(), $key, $default
         );
     }

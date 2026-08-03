@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Carbon\Traits;
+namespace PivotPerformanceToolkit\Vendor\Carbon\Traits;
 
-use PerformanceToolkit\Vendor\Carbon\CarbonInterface;
-use PerformanceToolkit\Vendor\Carbon\CarbonTimeZone;
-use PerformanceToolkit\Vendor\Carbon\Factory;
-use PerformanceToolkit\Vendor\Carbon\FactoryImmutable;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonTimeZone;
+use PivotPerformanceToolkit\Vendor\Carbon\Factory;
+use PivotPerformanceToolkit\Vendor\Carbon\FactoryImmutable;
 use Closure;
 use DateTimeImmutable;
 use DateTimeInterface;

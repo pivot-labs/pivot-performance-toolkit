@@ -2,20 +2,24 @@
 /**
  * CDN integrations admin page.
  *
- * @package PerformanceToolkit
+ * @package PivotPerformanceToolkit
  */
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Admin;
+namespace PivotPerformanceToolkit\Admin;
 
-use PerformanceToolkit\Core\Settings;
-use PerformanceToolkit\Integrations\CloudflareIntegration;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+use PivotPerformanceToolkit\Core\Settings;
+use PivotPerformanceToolkit\Integrations\CloudflareIntegration;
 
 final class CdnIntegrationsPage extends BladeAdminPage {
 
-	private const TEST_ACTION  = 'performance_toolkit_cloudflare_test';
-	private const PURGE_ACTION = 'performance_toolkit_cloudflare_purge';
+	private const TEST_ACTION  = 'pivot_performance_toolkit_cloudflare_test';
+	private const PURGE_ACTION = 'pivot_performance_toolkit_cloudflare_purge';
 
 	private Settings $settings;
 
@@ -32,15 +36,15 @@ final class CdnIntegrationsPage extends BladeAdminPage {
 	}
 
 	public function slug(): string {
-		return 'performance-toolkit-cdn-integrations';
+		return 'pivot-performance-toolkit-cdn-integrations';
 	}
 
 	public function menuTitle(): string {
-		return __( 'CDN & Integrations', 'performance-toolkit' );
+		return __( 'CDN & Integrations', 'pivot-performance-toolkit' );
 	}
 
 	public function pageTitle(): string {
-		return __( 'Performance Toolkit CDN & Integrations', 'performance-toolkit' );
+		return __( 'Pivot Performance Toolkit CDN & Integrations', 'pivot-performance-toolkit' );
 	}
 
 	public function iconKey(): string {
@@ -58,22 +62,22 @@ final class CdnIntegrationsPage extends BladeAdminPage {
 		return array(
 			'options'          => $this->settings->all(),
 			'option_key'       => $this->settings->optionKey(),
-			'notice'           => isset( $_GET['ptk_cf_notice'] ) ? sanitize_key( wp_unslash( (string) $_GET['ptk_cf_notice'] ) ) : '',
-			'message'          => isset( $_GET['ptk_cf_message'] ) ? sanitize_text_field( wp_unslash( (string) $_GET['ptk_cf_message'] ) ) : '',
+			'notice'           => isset( $_GET['pivot_performance_toolkit_cf_notice'] ) ? sanitize_key( wp_unslash( (string) $_GET['pivot_performance_toolkit_cf_notice'] ) ) : '',
+			'message'          => isset( $_GET['pivot_performance_toolkit_cf_message'] ) ? sanitize_text_field( wp_unslash( (string) $_GET['pivot_performance_toolkit_cf_message'] ) ) : '',
 			'settings_updated' => isset( $_GET['settings-updated'] ) && (string) wp_unslash( $_GET['settings-updated'] ) === 'true',
 			'test_action'      => self::TEST_ACTION,
 			'purge_action'     => self::PURGE_ACTION,
-			'test_nonce'       => wp_create_nonce( 'ptk_cloudflare_test' ),
-			'purge_nonce'      => wp_create_nonce( 'ptk_cloudflare_purge' ),
+			'test_nonce'       => wp_create_nonce( 'pivot_performance_toolkit_cloudflare_test' ),
+			'purge_nonce'      => wp_create_nonce( 'pivot_performance_toolkit_cloudflare_purge' ),
 		);
 	}
 
 	public function handleTestConnection(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'You are not allowed to perform this action.', 'performance-toolkit' ) );
+			wp_die( esc_html__( 'You are not allowed to perform this action.', 'pivot-performance-toolkit' ) );
 		}
 
-		check_admin_referer( 'ptk_cloudflare_test' );
+		check_admin_referer( 'pivot_performance_toolkit_cloudflare_test' );
 
 		$result = $this->cloudflare->testConnection();
 
@@ -82,10 +86,10 @@ final class CdnIntegrationsPage extends BladeAdminPage {
 
 	public function handlePurgeCache(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'You are not allowed to perform this action.', 'performance-toolkit' ) );
+			wp_die( esc_html__( 'You are not allowed to perform this action.', 'pivot-performance-toolkit' ) );
 		}
 
-		check_admin_referer( 'ptk_cloudflare_purge' );
+		check_admin_referer( 'pivot_performance_toolkit_cloudflare_purge' );
 
 		$result = $this->cloudflare->purgeCache();
 
@@ -95,12 +99,12 @@ final class CdnIntegrationsPage extends BladeAdminPage {
 	public function handleAjaxTestConnection(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_send_json_error(
-				array( 'message' => __( 'You are not allowed to perform this action.', 'performance-toolkit' ) ),
+				array( 'message' => __( 'You are not allowed to perform this action.', 'pivot-performance-toolkit' ) ),
 				403
 			);
 		}
 
-		check_ajax_referer( 'ptk_cloudflare_test' );
+		check_ajax_referer( 'pivot_performance_toolkit_cloudflare_test' );
 
 		$result = $this->cloudflare->testConnection();
 
@@ -110,12 +114,12 @@ final class CdnIntegrationsPage extends BladeAdminPage {
 	public function handleAjaxPurgeCache(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_send_json_error(
-				array( 'message' => __( 'You are not allowed to perform this action.', 'performance-toolkit' ) ),
+				array( 'message' => __( 'You are not allowed to perform this action.', 'pivot-performance-toolkit' ) ),
 				403
 			);
 		}
 
-		check_ajax_referer( 'ptk_cloudflare_purge' );
+		check_ajax_referer( 'pivot_performance_toolkit_cloudflare_purge' );
 
 		$result = $this->cloudflare->purgeCache();
 
@@ -125,11 +129,11 @@ final class CdnIntegrationsPage extends BladeAdminPage {
 	private function redirectWithNotice( bool $success, string $message ): void {
 		$redirect_url = add_query_arg(
 			array(
-				'page'           => 'performance-toolkit',
+				'page'           => 'pivot-performance-toolkit',
 				'section'        => 'caching',
 				'tab'            => $this->slug(),
-				'ptk_cf_notice'  => $success ? 'success' : 'error',
-				'ptk_cf_message' => $message,
+				'pivot_performance_toolkit_cf_notice'  => $success ? 'success' : 'error',
+				'pivot_performance_toolkit_cf_message' => $message,
 			),
 			admin_url( 'admin.php' )
 		);

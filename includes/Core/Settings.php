@@ -2,16 +2,20 @@
 /**
  * Plugin settings manager.
  *
- * @package PerformanceToolkit
+ * @package PivotPerformanceToolkit
  */
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Core;
+namespace PivotPerformanceToolkit\Core;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 final class Settings {
 
-	private const OPTION_KEY = 'performance_toolkit_settings';
+	private const OPTION_KEY = 'pivot_performance_toolkit_settings';
 
 	/**
 	 * @return array<string, bool|int|string>
@@ -47,7 +51,7 @@ final class Settings {
 
 	public function register(): void {
 		register_setting(
-			'performance_toolkit',
+			'pivot_performance_toolkit',
 			self::OPTION_KEY,
 			array(
 				'type'              => 'array',

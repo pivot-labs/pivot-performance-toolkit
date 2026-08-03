@@ -2,27 +2,31 @@
 /**
  * Documentation admin page.
  *
- * @package PerformanceToolkit
+ * @package PivotPerformanceToolkit
  */
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Admin;
+namespace PivotPerformanceToolkit\Admin;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 final class DocumentationPage extends BladeAdminPage {
 
 	private const DOCS_URL = 'http://docs.wpperformancetoolkit.com';
 
 	public function slug(): string {
-		return 'performance-toolkit-documentation';
+		return 'pivot-performance-toolkit-documentation';
 	}
 
 	public function menuTitle(): string {
-		return __( 'Documentation', 'performance-toolkit' );
+		return __( 'Documentation', 'pivot-performance-toolkit' );
 	}
 
 	public function pageTitle(): string {
-		return __( 'Performance Toolkit Documentation', 'performance-toolkit' );
+		return __( 'Pivot Performance Toolkit Documentation', 'pivot-performance-toolkit' );
 	}
 
 	public function iconKey(): string {

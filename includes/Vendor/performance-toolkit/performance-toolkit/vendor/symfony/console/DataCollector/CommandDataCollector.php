@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\DataCollector;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\DataCollector;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Command\Command;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Debug\CliRequest;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\SignalRegistry\SignalMap;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Command\Command;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Debug\CliRequest;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\SignalRegistry\SignalMap;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;

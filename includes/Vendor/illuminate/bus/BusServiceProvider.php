@@ -1,14 +1,14 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Bus;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Bus;
 
 use Aws\DynamoDb\DynamoDbClient;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Bus\Dispatcher as DispatcherContract;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Bus\QueueingDispatcher as QueueingDispatcherContract;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Factory as QueueFactoryContract;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\DeferrableProvider;
-use PerformanceToolkit\Vendor\Illuminate\Support\Arr;
-use PerformanceToolkit\Vendor\Illuminate\Support\ServiceProvider;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Bus\Dispatcher as DispatcherContract;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Bus\QueueingDispatcher as QueueingDispatcherContract;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Factory as QueueFactoryContract;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\DeferrableProvider;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Arr;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\ServiceProvider;
 
 class BusServiceProvider extends ServiceProvider implements DeferrableProvider
 {

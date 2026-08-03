@@ -1,19 +1,19 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp;
 
-use PerformanceToolkit\Vendor\GuzzleHttp\Cookie\CookieJar;
-use PerformanceToolkit\Vendor\GuzzleHttp\Exception\GuzzleException;
-use PerformanceToolkit\Vendor\GuzzleHttp\Exception\InvalidArgumentException;
-use PerformanceToolkit\Vendor\GuzzleHttp\Promise as P;
-use PerformanceToolkit\Vendor\GuzzleHttp\Promise\PromiseInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\ResponseInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\UriInterface;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Cookie\CookieJar;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Exception\GuzzleException;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Exception\InvalidArgumentException;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Promise as P;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Promise\PromiseInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\ResponseInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\UriInterface;
 /**
  * @final
  */
-class Client implements ClientInterface, \PerformanceToolkit\Vendor\Psr\Http\Client\ClientInterface
+class Client implements ClientInterface, \PivotPerformanceToolkit\Vendor\Psr\Http\Client\ClientInterface
 {
     use ClientTrait;
     /**
@@ -60,7 +60,7 @@ class Client implements ClientInterface, \PerformanceToolkit\Vendor\Psr\Http\Cli
         }
         // Convert the base_uri to a UriInterface
         if (isset($config['base_uri'])) {
-            $config['base_uri'] = \PerformanceToolkit\Vendor\GuzzleHttp\Psr7\Utils::uriFor($config['base_uri']);
+            $config['base_uri'] = \PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7\Utils::uriFor($config['base_uri']);
         }
         $this->configureDefaults($config);
     }
@@ -138,7 +138,7 @@ class Client implements ClientInterface, \PerformanceToolkit\Vendor\Psr\Http\Cli
         $body = $options['body'] ?? null;
         $version = $options['version'] ?? '1.1';
         // Merge the URI into the base URI.
-        $uri = $this->buildUri(\PerformanceToolkit\Vendor\GuzzleHttp\Psr7\Utils::uriFor($uri), $options);
+        $uri = $this->buildUri(\PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7\Utils::uriFor($uri), $options);
         if (\is_array($body)) {
             throw $this->invalidBody();
         }
@@ -185,7 +185,7 @@ class Client implements ClientInterface, \PerformanceToolkit\Vendor\Psr\Http\Cli
     private function buildUri(UriInterface $uri, array $config): UriInterface
     {
         if (isset($config['base_uri'])) {
-            $uri = \PerformanceToolkit\Vendor\GuzzleHttp\Psr7\UriResolver::resolve(\PerformanceToolkit\Vendor\GuzzleHttp\Psr7\Utils::uriFor($config['base_uri']), $uri);
+            $uri = \PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7\UriResolver::resolve(\PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7\Utils::uriFor($config['base_uri']), $uri);
         }
         if (isset($config['idn_conversion']) && $config['idn_conversion'] !== false) {
             $idnOptions = $config['idn_conversion'] === true ? \IDNA_DEFAULT : $config['idn_conversion'];
@@ -303,7 +303,7 @@ class Client implements ClientInterface, \PerformanceToolkit\Vendor\Psr\Http\Cli
             $options['body'] = \http_build_query($options['form_params'], '', '&');
             unset($options['form_params']);
             // Ensure that we don't have the header in different case and set the new value.
-            $options['_conditional'] = \PerformanceToolkit\Vendor\GuzzleHttp\Psr7\Utils::caselessRemove(['Content-Type'], $options['_conditional']);
+            $options['_conditional'] = \PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7\Utils::caselessRemove(['Content-Type'], $options['_conditional']);
             $options['_conditional']['Content-Type'] = 'application/x-www-form-urlencoded';
         }
         if (isset($options['multipart'])) {
@@ -314,19 +314,19 @@ class Client implements ClientInterface, \PerformanceToolkit\Vendor\Psr\Http\Cli
             $options['body'] = Utils::jsonEncode($options['json']);
             unset($options['json']);
             // Ensure that we don't have the header in different case and set the new value.
-            $options['_conditional'] = \PerformanceToolkit\Vendor\GuzzleHttp\Psr7\Utils::caselessRemove(['Content-Type'], $options['_conditional']);
+            $options['_conditional'] = \PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7\Utils::caselessRemove(['Content-Type'], $options['_conditional']);
             $options['_conditional']['Content-Type'] = 'application/json';
         }
         if (!empty($options['decode_content']) && $options['decode_content'] !== true) {
             // Ensure that we don't have the header in different case and set the new value.
-            $options['_conditional'] = \PerformanceToolkit\Vendor\GuzzleHttp\Psr7\Utils::caselessRemove(['Accept-Encoding'], $options['_conditional']);
+            $options['_conditional'] = \PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7\Utils::caselessRemove(['Accept-Encoding'], $options['_conditional']);
             $modify['set_headers']['Accept-Encoding'] = $options['decode_content'];
         }
         if (isset($options['body'])) {
             if (\is_array($options['body'])) {
                 throw $this->invalidBody();
             }
-            $modify['body'] = \PerformanceToolkit\Vendor\GuzzleHttp\Psr7\Utils::streamFor($options['body']);
+            $modify['body'] = \PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7\Utils::streamFor($options['body']);
             unset($options['body']);
         }
         if (!empty($options['auth']) && \is_array($options['auth'])) {
@@ -335,7 +335,7 @@ class Client implements ClientInterface, \PerformanceToolkit\Vendor\Psr\Http\Cli
             switch ($type) {
                 case 'basic':
                     // Ensure that we don't have the header in different case and set the new value.
-                    $modify['set_headers'] = \PerformanceToolkit\Vendor\GuzzleHttp\Psr7\Utils::caselessRemove(['Authorization'], $modify['set_headers']);
+                    $modify['set_headers'] = \PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7\Utils::caselessRemove(['Authorization'], $modify['set_headers']);
                     $modify['set_headers']['Authorization'] = 'Basic ' . \base64_encode("{$value[0]}:{$value[1]}");
                     break;
                 case 'digest':
@@ -370,11 +370,11 @@ class Client implements ClientInterface, \PerformanceToolkit\Vendor\Psr\Http\Cli
         if (isset($options['version'])) {
             $modify['version'] = $options['version'];
         }
-        $request = \PerformanceToolkit\Vendor\GuzzleHttp\Psr7\Utils::modifyRequest($request, $modify);
-        if ($request->getBody() instanceof \PerformanceToolkit\Vendor\GuzzleHttp\Psr7\MultipartStream) {
+        $request = \PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7\Utils::modifyRequest($request, $modify);
+        if ($request->getBody() instanceof \PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7\MultipartStream) {
             // Use a multipart/form-data POST if a Content-Type is not set.
             // Ensure that we don't have the header in different case and set the new value.
-            $options['_conditional'] = \PerformanceToolkit\Vendor\GuzzleHttp\Psr7\Utils::caselessRemove(['Content-Type'], $options['_conditional']);
+            $options['_conditional'] = \PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7\Utils::caselessRemove(['Content-Type'], $options['_conditional']);
             $options['_conditional']['Content-Type'] = 'multipart/form-data; boundary=' . $request->getBody()->getBoundary();
         }
         // Merge in conditional headers if they are not present.
@@ -386,7 +386,7 @@ class Client implements ClientInterface, \PerformanceToolkit\Vendor\Psr\Http\Cli
                     $modify['set_headers'][$k] = $v;
                 }
             }
-            $request = \PerformanceToolkit\Vendor\GuzzleHttp\Psr7\Utils::modifyRequest($request, $modify);
+            $request = \PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7\Utils::modifyRequest($request, $modify);
             // Don't pass this internal value along to middleware/handlers.
             unset($options['_conditional']);
         }

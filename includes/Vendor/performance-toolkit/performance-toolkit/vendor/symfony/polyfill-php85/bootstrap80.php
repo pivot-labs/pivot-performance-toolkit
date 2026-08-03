@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use PerformanceToolkit\Vendor\Symfony\Polyfill\Php85 as p;
+use PivotPerformanceToolkit\Vendor\Symfony\Polyfill\Php85 as p;
 
 if (\PHP_VERSION_ID >= 80500) {
     return;

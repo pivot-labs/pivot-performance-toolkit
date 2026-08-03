@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\View\Concerns;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\View\Concerns;
 
 use InvalidArgumentException;
 

@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation\Formatter;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Formatter;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\InvalidArgumentException;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\LogicException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\InvalidArgumentException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\LogicException;
 
 /**
  * @author Guilherme Blanco <guilhermeblanco@hotmail.com>

@@ -1,12 +1,12 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp\Handler;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp\Handler;
 
-use PerformanceToolkit\Vendor\GuzzleHttp\Psr7\Response;
-use PerformanceToolkit\Vendor\GuzzleHttp\Utils;
-use PerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\ResponseInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\StreamInterface;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7\Response;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Utils;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\ResponseInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\StreamInterface;
 
 /**
  * Represents a cURL easy handle and the data it populates.

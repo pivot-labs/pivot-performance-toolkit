@@ -1,19 +1,19 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Filesystem;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Filesystem;
 
 use Closure;
-use PerformanceToolkit\Vendor\Illuminate\Container\Container;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Debug\ExceptionHandler;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem\Cloud as CloudFilesystemContract;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem\Filesystem as FilesystemContract;
+use PivotPerformanceToolkit\Vendor\Illuminate\Container\Container;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Debug\ExceptionHandler;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem\Cloud as CloudFilesystemContract;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem\Filesystem as FilesystemContract;
 use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
-use PerformanceToolkit\Vendor\Illuminate\Support\Arr;
-use PerformanceToolkit\Vendor\Illuminate\Support\Str;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Conditionable;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Arr;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Str;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Conditionable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
 use InvalidArgumentException;
 use League\Flysystem\FilesystemAdapter as FlysystemAdapter;
 use League\Flysystem\FilesystemOperator;
@@ -290,7 +290,7 @@ class FilesystemAdapter implements CloudFilesystemContract
         try {
             return $this->driver->read($path);
         } catch (UnableToReadFile $e) {
-            performancetoolkit_vendor_throw_if($this->throwsExceptions(), $e);
+            pivotperformancetoolkit_vendor_throw_if($this->throwsExceptions(), $e);
 
             $this->report($e);
         }
@@ -420,7 +420,7 @@ class FilesystemAdapter implements CloudFilesystemContract
                 ? $this->driver->writeStream($path, $contents, $options)
                 : $this->driver->write($path, $contents, $options);
         } catch (UnableToWriteFile|UnableToSetVisibility $e) {
-            performancetoolkit_vendor_throw_if($this->throwsExceptions(), $e);
+            pivotperformancetoolkit_vendor_throw_if($this->throwsExceptions(), $e);
 
             $this->report($e);
 
@@ -507,7 +507,7 @@ class FilesystemAdapter implements CloudFilesystemContract
         try {
             $this->driver->setVisibility($path, $this->parseVisibility($visibility));
         } catch (UnableToSetVisibility $e) {
-            performancetoolkit_vendor_throw_if($this->throwsExceptions(), $e);
+            pivotperformancetoolkit_vendor_throw_if($this->throwsExceptions(), $e);
 
             $this->report($e);
 
@@ -567,7 +567,7 @@ class FilesystemAdapter implements CloudFilesystemContract
             try {
                 $this->driver->delete($path);
             } catch (UnableToDeleteFile $e) {
-                performancetoolkit_vendor_throw_if($this->throwsExceptions(), $e);
+                pivotperformancetoolkit_vendor_throw_if($this->throwsExceptions(), $e);
 
                 $this->report($e);
 
@@ -590,7 +590,7 @@ class FilesystemAdapter implements CloudFilesystemContract
         try {
             $this->driver->copy($from, $to);
         } catch (UnableToCopyFile $e) {
-            performancetoolkit_vendor_throw_if($this->throwsExceptions(), $e);
+            pivotperformancetoolkit_vendor_throw_if($this->throwsExceptions(), $e);
 
             $this->report($e);
 
@@ -612,7 +612,7 @@ class FilesystemAdapter implements CloudFilesystemContract
         try {
             $this->driver->move($from, $to);
         } catch (UnableToMoveFile $e) {
-            performancetoolkit_vendor_throw_if($this->throwsExceptions(), $e);
+            pivotperformancetoolkit_vendor_throw_if($this->throwsExceptions(), $e);
 
             $this->report($e);
 
@@ -645,7 +645,7 @@ class FilesystemAdapter implements CloudFilesystemContract
         try {
             return $this->driver->checksum($path, $options);
         } catch (UnableToProvideChecksum $e) {
-            performancetoolkit_vendor_throw_if($this->throwsExceptions(), $e);
+            pivotperformancetoolkit_vendor_throw_if($this->throwsExceptions(), $e);
 
             $this->report($e);
 
@@ -664,7 +664,7 @@ class FilesystemAdapter implements CloudFilesystemContract
         try {
             return $this->driver->mimeType($path);
         } catch (UnableToRetrieveMetadata $e) {
-            performancetoolkit_vendor_throw_if($this->throwsExceptions(), $e);
+            pivotperformancetoolkit_vendor_throw_if($this->throwsExceptions(), $e);
 
             $this->report($e);
         }
@@ -691,7 +691,7 @@ class FilesystemAdapter implements CloudFilesystemContract
         try {
             return $this->driver->readStream($path);
         } catch (UnableToReadFile $e) {
-            performancetoolkit_vendor_throw_if($this->throwsExceptions(), $e);
+            pivotperformancetoolkit_vendor_throw_if($this->throwsExceptions(), $e);
 
             $this->report($e);
         }
@@ -705,7 +705,7 @@ class FilesystemAdapter implements CloudFilesystemContract
         try {
             $this->driver->writeStream($path, $resource, $options);
         } catch (UnableToWriteFile|UnableToSetVisibility $e) {
-            performancetoolkit_vendor_throw_if($this->throwsExceptions(), $e);
+            pivotperformancetoolkit_vendor_throw_if($this->throwsExceptions(), $e);
 
             $this->report($e);
 
@@ -939,7 +939,7 @@ class FilesystemAdapter implements CloudFilesystemContract
         try {
             $this->driver->createDirectory($path);
         } catch (UnableToCreateDirectory|UnableToSetVisibility $e) {
-            performancetoolkit_vendor_throw_if($this->throwsExceptions(), $e);
+            pivotperformancetoolkit_vendor_throw_if($this->throwsExceptions(), $e);
 
             $this->report($e);
 
@@ -960,7 +960,7 @@ class FilesystemAdapter implements CloudFilesystemContract
         try {
             $this->driver->deleteDirectory($directory);
         } catch (UnableToDeleteDirectory $e) {
-            performancetoolkit_vendor_throw_if($this->throwsExceptions(), $e);
+            pivotperformancetoolkit_vendor_throw_if($this->throwsExceptions(), $e);
 
             $this->report($e);
 

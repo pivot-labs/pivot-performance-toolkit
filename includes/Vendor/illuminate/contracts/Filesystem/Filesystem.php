@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem;
 
 interface Filesystem
 {

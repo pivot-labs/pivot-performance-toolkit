@@ -1,19 +1,19 @@
-<x-card :title="__('Cache', 'performance-toolkit')" id="ptk-cache">
+<x-card :title="__('Cache', 'pivot-performance-toolkit')" id="pivot-performance-toolkit-cache">
     @if ($settings_updated)
         <div class="notice notice-success is-dismissible">
-            <p>{{ __('Settings saved successfully.', 'performance-toolkit') }}</p>
+            <p>{{ __('Settings saved successfully.', 'pivot-performance-toolkit') }}</p>
         </div>
     @endif
 
     @if ($cache_cleared)
         <div class="notice notice-success is-dismissible">
-            <p>{{ __('Cache cleared successfully.', 'performance-toolkit') }}</p>
+            <p>{{ __('Cache cleared successfully.', 'pivot-performance-toolkit') }}</p>
         </div>
     @endif
 
-    <form id="ptk-cache-settings-form" method="post" action="{{ esc_url(admin_url('options.php')) }}">
+    <form id="pivot-performance-toolkit-cache-settings-form" method="post" action="{{ esc_url(admin_url('options.php')) }}">
         @php
-            settings_fields('performance_toolkit');
+            settings_fields('pivot_performance_toolkit');
 
             // Hidden fields for unchecked checkboxes (WordPress form standard)
             echo '<input type="hidden" name="' . esc_attr($option_key) . '[defer_scripts]" value="0" />';
@@ -33,7 +33,7 @@
             echo '<input type="hidden" name="' . esc_attr($option_key) . '[enable_page_cache]" value="0" />';
         @endphp
 
-        <div class="ptk-field">
+        <div class="pivot-performance-toolkit-field">
             <label>
                 <input
                     type="checkbox"
@@ -41,15 +41,15 @@
                     value="1"
                     {{ !empty($options['enable_page_cache']) ? 'checked' : '' }}
                 />
-                <span>{{ __('Enable page cache', 'performance-toolkit') }}</span>
+                <span>{{ __('Enable page cache', 'pivot-performance-toolkit') }}</span>
             </label>
-            <p>{{ __('Store and serve cache files for anonymous visitors.', 'performance-toolkit') }}</p>
+            <p>{{ __('Store and serve cache files for anonymous visitors.', 'pivot-performance-toolkit') }}</p>
         </div>
 
-        <div class="ptk-field">
-            <label for="ptk-cache-ttl">{{ __('Cache TTL (seconds)', 'performance-toolkit') }}</label>
+        <div class="pivot-performance-toolkit-field">
+            <label for="pivot-performance-toolkit-cache-ttl">{{ __('Cache TTL (seconds)', 'pivot-performance-toolkit') }}</label>
             <input
-                id="ptk-cache-ttl"
+                id="pivot-performance-toolkit-cache-ttl"
                 type="number"
                 min="60"
                 step="60"
@@ -59,10 +59,10 @@
             />
         </div>
 
-        <div class="ptk-field">
-            <label for="ptk-max-cache-size">{{ __('Max cache size (MB)', 'performance-toolkit') }}</label>
+        <div class="pivot-performance-toolkit-field">
+            <label for="pivot-performance-toolkit-max-cache-size">{{ __('Max cache size (MB)', 'pivot-performance-toolkit') }}</label>
             <input
-                id="ptk-max-cache-size"
+                id="pivot-performance-toolkit-max-cache-size"
                 type="number"
                 min="1"
                 step="1"
@@ -70,12 +70,12 @@
                 value="{{ esc_attr((string) $options['max_cache_size_mb']) }}"
                 class="small-text"
             />
-            <p>{{ __('When the cache folder exceeds this size the oldest files are pruned automatically.', 'performance-toolkit') }}</p>
+            <p>{{ __('When the cache folder exceeds this size the oldest files are pruned automatically.', 'pivot-performance-toolkit') }}</p>
 
-            <div class="ptk-cache-usage">
-                <div class="ptk-cache-usage-bar">
+            <div class="pivot-performance-toolkit-cache-usage">
+                <div class="pivot-performance-toolkit-cache-usage-bar">
                     <div
-                        class="ptk-cache-usage-fill {{ $usage_pct >= 90 ? 'is-critical' : ($usage_pct >= 70 ? 'is-warning' : '') }}"
+                        class="pivot-performance-toolkit-cache-usage-fill {{ $usage_pct >= 90 ? 'is-critical' : ($usage_pct >= 70 ? 'is-warning' : '') }}"
                         style="width: {{ esc_attr((string) $usage_pct) }}%"
                     ></div>
                 </div>
@@ -83,10 +83,10 @@
                     $cache_limit_mb_label = number_format_i18n((int) $options['max_cache_size_mb']);
                     $usage_pct_label = number_format_i18n((int) $usage_pct);
                 @endphp
-                <span class="ptk-cache-usage-label">
+                <span class="pivot-performance-toolkit-cache-usage-label">
                     {{ sprintf(
                         /* translators: 1: Used cache size in human-readable units, 2: Configured max cache size in MB, 3: Percentage of cache usage. */
-                        __('%1$s of %2$s MB used (%3$s%%)', 'performance-toolkit'),
+                        __('%1$s of %2$s MB used (%3$s%%)', 'pivot-performance-toolkit'),
                         $cache_size_formatted,
                         $cache_limit_mb_label,
                         $usage_pct_label
@@ -98,15 +98,15 @@
     </form>
 
     <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 10px;">
-        <button type="submit" form="ptk-cache-settings-form" class="button button-primary">
-            {{ __('Save changes', 'performance-toolkit') }}
+        <button type="submit" form="pivot-performance-toolkit-cache-settings-form" class="button button-primary">
+            {{ __('Save changes', 'pivot-performance-toolkit') }}
         </button>
 
         <form method="post" action="{{ esc_url(admin_url('admin-post.php')) }}">
             <input type="hidden" name="action" value="{{ esc_attr($clear_action) }}" />
             @php
-                wp_nonce_field('ptk_clear_cache');
-                submit_button(__('Clear cache', 'performance-toolkit'), 'secondary', 'submit', false);
+                wp_nonce_field('pivot_performance_toolkit_clear_cache');
+                submit_button(__('Clear cache', 'pivot-performance-toolkit'), 'secondary', 'submit', false);
             @endphp
         </form>
     </div>

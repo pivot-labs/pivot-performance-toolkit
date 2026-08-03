@@ -10,7 +10,7 @@
  */
 
 if (\PHP_VERSION_ID < 80400) {
-    enum PerformanceToolkit_Vendor_RoundingMode
+    enum PivotPerformanceToolkit_Vendor_RoundingMode
     {
         case HalfAwayFromZero;
         case HalfTowardsZero;

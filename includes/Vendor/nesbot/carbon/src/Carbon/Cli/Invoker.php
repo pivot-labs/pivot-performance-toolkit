@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Carbon\Cli;
+namespace PivotPerformanceToolkit\Vendor\Carbon\Cli;
 
 class Invoker
 {
-    public const CLI_CLASS_NAME = 'PerformanceToolkit\\Vendor\\Carbon\\Cli';
+    public const CLI_CLASS_NAME = 'PivotPerformanceToolkit\\Vendor\\Carbon\\Cli';
 
     protected function runWithCli(string $className, array $parameters): bool
     {

@@ -1,10 +1,10 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Traits;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits;
 
 use Closure;
-use PerformanceToolkit\Vendor\Illuminate\Support\Collection;
-use PerformanceToolkit\Vendor\Illuminate\Support\Reflector;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Reflector;
 use ReflectionFunction;
 use ReflectionIntersectionType;
 use ReflectionUnionType;

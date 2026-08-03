@@ -1,17 +1,17 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Bus;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Bus;
 
 use Closure;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Bus\QueueingDispatcher;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Queue;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Queue\ShouldQueue;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Bus\QueueingDispatcher;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Queue;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\PendingChain;
-use PerformanceToolkit\Vendor\Illuminate\Pipeline\Pipeline;
+use PivotPerformanceToolkit\Vendor\Illuminate\Pipeline\Pipeline;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\Jobs\SyncJob;
-use PerformanceToolkit\Vendor\Illuminate\Support\Collection;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection;
 use RuntimeException;
 
 class Dispatcher implements QueueingDispatcher
@@ -19,14 +19,14 @@ class Dispatcher implements QueueingDispatcher
     /**
      * The container implementation.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container
      */
     protected $container;
 
     /**
      * The pipeline instance for the bus.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Pipeline\Pipeline
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Pipeline\Pipeline
      */
     protected $pipeline;
 
@@ -54,7 +54,7 @@ class Dispatcher implements QueueingDispatcher
     /**
      * Create a new command dispatcher instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container  $container
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container  $container
      * @param  \Closure|null  $queueResolver
      * @return void
      */
@@ -107,7 +107,7 @@ class Dispatcher implements QueueingDispatcher
      */
     public function dispatchNow($command, $handler = null)
     {
-        $uses = performancetoolkit_vendor_class_uses_recursive($command);
+        $uses = pivotperformancetoolkit_vendor_class_uses_recursive($command);
 
         if (isset($uses[InteractsWithQueue::class], $uses[Queueable::class]) && ! $command->job) {
             $command->setJob(new SyncJob($this->container, json_encode([]), 'sync', 'sync'));
@@ -134,7 +134,7 @@ class Dispatcher implements QueueingDispatcher
      * Attempt to find the batch with the given ID.
      *
      * @param  string  $batchId
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\Batch|null
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\Batch|null
      */
     public function findBatch(string $batchId)
     {
@@ -144,8 +144,8 @@ class Dispatcher implements QueueingDispatcher
     /**
      * Create a new batch of queueable jobs.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Support\Collection|array|mixed  $jobs
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection|array|mixed  $jobs
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch
      */
     public function batch($jobs)
     {
@@ -155,7 +155,7 @@ class Dispatcher implements QueueingDispatcher
     /**
      * Create a new chain of queueable jobs.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Support\Collection|array  $jobs
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection|array  $jobs
      * @return \Illuminate\Foundation\Bus\PendingChain
      */
     public function chain($jobs)
@@ -231,7 +231,7 @@ class Dispatcher implements QueueingDispatcher
     /**
      * Push the command onto the given queue instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Queue  $queue
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Queue  $queue
      * @param  mixed  $command
      * @return mixed
      */

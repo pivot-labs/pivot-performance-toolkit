@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Vendor\Doctrine\Inflector\Rules;
+namespace PivotPerformanceToolkit\Vendor\Doctrine\Inflector\Rules;
 
-use PerformanceToolkit\Vendor\Doctrine\Inflector\WordInflector;
+use PivotPerformanceToolkit\Vendor\Doctrine\Inflector\WordInflector;
 
 class Transformations implements WordInflector
 {

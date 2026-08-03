@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Input;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\InvalidArgumentException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\InvalidArgumentException;
 
 /**
  * StringInput represents an input provided as a string.

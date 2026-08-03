@@ -1,7 +1,7 @@
 <?php
 
-use PerformanceToolkit\Vendor\Illuminate\Support\Arr;
-use PerformanceToolkit\Vendor\Illuminate\Support\Collection;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Arr;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection;
 
 if (! function_exists('collect')) {
     /**
@@ -10,8 +10,8 @@ if (! function_exists('collect')) {
      * @template TKey of array-key
      * @template TValue
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, TValue>|iterable<TKey, TValue>|null  $value
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Collection<TKey, TValue>
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, TValue>|iterable<TKey, TValue>|null  $value
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection<TKey, TValue>
      */
     function collect($value = []): Collection
     {

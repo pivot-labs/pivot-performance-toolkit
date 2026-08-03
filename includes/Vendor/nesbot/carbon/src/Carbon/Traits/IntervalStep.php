@@ -9,12 +9,12 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace PerformanceToolkit\Vendor\Carbon\Traits;
+namespace PivotPerformanceToolkit\Vendor\Carbon\Traits;
 
-use PerformanceToolkit\Vendor\Carbon\Callback;
-use PerformanceToolkit\Vendor\Carbon\Carbon;
-use PerformanceToolkit\Vendor\Carbon\CarbonImmutable;
-use PerformanceToolkit\Vendor\Carbon\CarbonInterface;
+use PivotPerformanceToolkit\Vendor\Carbon\Callback;
+use PivotPerformanceToolkit\Vendor\Carbon\Carbon;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface;
 use Closure;
 use DateTimeImmutable;
 use DateTimeInterface;

@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Contracts\Service;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Contracts\Service;
 
-use PerformanceToolkit\Vendor\Psr\Container\ContainerExceptionInterface;
-use PerformanceToolkit\Vendor\Psr\Container\NotFoundExceptionInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Container\ContainerExceptionInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Container\NotFoundExceptionInterface;
 
 // Help opcache.preload discover always-needed symbols
 class_exists(ContainerExceptionInterface::class);

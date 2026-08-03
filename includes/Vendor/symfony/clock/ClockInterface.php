@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Clock;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Clock;
 
-use PerformanceToolkit\Vendor\Psr\Clock\ClockInterface as PsrClockInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Clock\ClockInterface as PsrClockInterface;
 
 /**
  * @author Nicolas Grekas <p@tchwork.com>

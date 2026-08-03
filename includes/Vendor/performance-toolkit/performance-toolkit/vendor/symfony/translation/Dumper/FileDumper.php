@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation\Dumper;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Dumper;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\InvalidArgumentException;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\RuntimeException;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogue;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\InvalidArgumentException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\RuntimeException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogue;
 
 /**
  * FileDumper is an implementation of DumperInterface that dump a message catalogue to file(s).

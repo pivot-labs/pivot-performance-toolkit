@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Clock;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Clock;
 
 /**
  * A monotonic clock suitable for performance profiling.

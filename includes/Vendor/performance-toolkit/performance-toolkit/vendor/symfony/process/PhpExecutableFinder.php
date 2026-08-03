@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Process;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Process;
 
 /**
  * An executable finder specifically designed for the PHP executable.

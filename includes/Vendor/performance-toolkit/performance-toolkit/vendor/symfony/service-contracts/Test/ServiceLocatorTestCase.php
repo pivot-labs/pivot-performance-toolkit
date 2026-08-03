@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Contracts\Service\Test;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Contracts\Service\Test;
 
 use PHPUnit\Framework\TestCase;
-use PerformanceToolkit\Vendor\Psr\Container\ContainerExceptionInterface;
-use PerformanceToolkit\Vendor\Psr\Container\ContainerInterface;
-use PerformanceToolkit\Vendor\Psr\Container\NotFoundExceptionInterface;
-use PerformanceToolkit\Vendor\Symfony\Contracts\Service\ServiceLocatorTrait;
+use PivotPerformanceToolkit\Vendor\Psr\Container\ContainerExceptionInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Container\ContainerInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Container\NotFoundExceptionInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Contracts\Service\ServiceLocatorTrait;
 
 abstract class ServiceLocatorTestCase extends TestCase
 {

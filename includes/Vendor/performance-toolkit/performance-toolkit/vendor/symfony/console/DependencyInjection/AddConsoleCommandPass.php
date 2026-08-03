@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\DependencyInjection;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\DependencyInjection;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Attribute\AsCommand;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Command\Command;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Command\LazyCommand;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\CommandLoader\ContainerCommandLoader;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Attribute\AsCommand;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Command\Command;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Command\LazyCommand;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\CommandLoader\ContainerCommandLoader;
 use Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass;

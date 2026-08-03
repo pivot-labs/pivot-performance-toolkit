@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation\Test;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Test;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpClient\MockHttpClient;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Dumper\XliffFileDumper;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Loader\LoaderInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\TranslatorBagInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Dumper\XliffFileDumper;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Loader\LoaderInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\TranslatorBagInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /**

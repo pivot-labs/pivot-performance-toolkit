@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation\DependencyInjection;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\TranslatorBagInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\TranslatorBagInterface;
 
 /**
  * @author Christian Flothmann <christian.flothmann@sensiolabs.de>

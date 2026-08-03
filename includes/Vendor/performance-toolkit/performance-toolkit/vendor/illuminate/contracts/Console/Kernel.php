@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Console;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Console;
 
 interface Kernel
 {
@@ -14,8 +14,8 @@ interface Kernel
     /**
      * Handle an incoming console command.
      *
-     * @param  \PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface  $input
-     * @param  \PerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface|null  $output
+     * @param  \PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface  $input
+     * @param  \PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface|null  $output
      * @return int
      */
     public function handle($input, $output = null);
@@ -25,7 +25,7 @@ interface Kernel
      *
      * @param  string  $command
      * @param  array  $parameters
-     * @param  \PerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface|null  $outputBuffer
+     * @param  \PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface|null  $outputBuffer
      * @return int
      */
     public function call($command, array $parameters = [], $outputBuffer = null);
@@ -56,7 +56,7 @@ interface Kernel
     /**
      * Terminate the application.
      *
-     * @param  \PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface  $input
+     * @param  \PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface  $input
      * @param  int  $status
      * @return void
      */

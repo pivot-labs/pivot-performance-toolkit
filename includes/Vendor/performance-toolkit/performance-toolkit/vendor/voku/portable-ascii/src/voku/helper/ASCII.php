@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Vendor\voku\helper;
+namespace PivotPerformanceToolkit\Vendor\voku\helper;
 
 /**
  * ## 🇷🇺 Русским гражданам

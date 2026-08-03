@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Bus;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Bus;
 
 interface Dispatcher
 {

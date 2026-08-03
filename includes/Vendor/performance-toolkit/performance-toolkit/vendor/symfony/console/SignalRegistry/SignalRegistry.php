@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\SignalRegistry;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\SignalRegistry;
 
 final class SignalRegistry
 {

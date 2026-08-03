@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Debug;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Debug;
 
 use Throwable;
 
@@ -38,7 +38,7 @@ interface ExceptionHandler
     /**
      * Render an exception to the console.
      *
-     * @param  \PerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface  $output
+     * @param  \PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface  $output
      * @param  \Throwable  $e
      * @return void
      *

@@ -2,25 +2,29 @@
 /**
  * Card showcase admin page.
  *
- * @package PerformanceToolkit
+ * @package PivotPerformanceToolkit
  */
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Admin;
+namespace PivotPerformanceToolkit\Admin;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 final class CardShowcasePage extends BladeAdminPage {
 
 	public function slug(): string {
-		return 'performance-toolkit-card-showcase';
+		return 'pivot-performance-toolkit-card-showcase';
 	}
 
 	public function menuTitle(): string {
-		return __( 'Card Showcase', 'performance-toolkit' );
+		return __( 'Card Showcase', 'pivot-performance-toolkit' );
 	}
 
 	public function pageTitle(): string {
-		return __( 'Performance Toolkit Card Showcase', 'performance-toolkit' );
+		return __( 'Pivot Performance Toolkit Card Showcase', 'pivot-performance-toolkit' );
 	}
 
 	public function iconKey(): string {

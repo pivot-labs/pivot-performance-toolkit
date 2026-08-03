@@ -1,10 +1,10 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\View;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\View;
 
 use ErrorException;
-use PerformanceToolkit\Vendor\Illuminate\Container\Container;
-use PerformanceToolkit\Vendor\Illuminate\Support\Reflector;
+use PivotPerformanceToolkit\Vendor\Illuminate\Container\Container;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Reflector;
 
 class ViewException extends ErrorException
 {

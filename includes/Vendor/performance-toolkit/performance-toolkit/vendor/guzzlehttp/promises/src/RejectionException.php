@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp\Promise;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp\Promise;
 
 /**
  * A special exception that is thrown when waiting on a rejected promise.

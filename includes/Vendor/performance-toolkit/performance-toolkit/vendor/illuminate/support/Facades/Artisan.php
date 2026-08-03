@@ -1,18 +1,18 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
 
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Console\Kernel as ConsoleKernelContract;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Console\Kernel as ConsoleKernelContract;
 
 /**
- * @method static int handle(\PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface $input, \PerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface|null $output = null)
- * @method static void terminate(\PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface $input, int $status)
- * @method static void whenCommandLifecycleIsLongerThan(\DateTimeInterface|\PerformanceToolkit\Vendor\Carbon\CarbonInterval|float|int $threshold, callable $handler)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Carbon|null commandStartedAt()
+ * @method static int handle(\PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface $input, \PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface|null $output = null)
+ * @method static void terminate(\PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface $input, int $status)
+ * @method static void whenCommandLifecycleIsLongerThan(\DateTimeInterface|\PivotPerformanceToolkit\Vendor\Carbon\CarbonInterval|float|int $threshold, callable $handler)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon|null commandStartedAt()
  * @method static \Illuminate\Console\Scheduling\Schedule resolveConsoleSchedule()
  * @method static \Illuminate\Foundation\Console\ClosureCommand command(string $signature, \Closure $callback)
- * @method static void registerCommand(\PerformanceToolkit\Vendor\Symfony\Component\Console\Command\Command $command)
- * @method static int call(\PerformanceToolkit\Vendor\Symfony\Component\Console\Command\Command|string $command, array $parameters = [], \PerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface|null $outputBuffer = null)
+ * @method static void registerCommand(\PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Command\Command $command)
+ * @method static int call(\PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Command\Command|string $command, array $parameters = [], \PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface|null $outputBuffer = null)
  * @method static \Illuminate\Foundation\Bus\PendingDispatch queue(string $command, array $parameters = [])
  * @method static array all()
  * @method static string output()

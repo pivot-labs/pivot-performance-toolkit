@@ -1,11 +1,11 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
-use PerformanceToolkit\Vendor\Carbon\CarbonInterval;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterval;
 use Closure;
 use DateInterval;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
 use PHPUnit\Framework\Assert as PHPUnit;
 use RuntimeException;
 
@@ -30,7 +30,7 @@ class Sleep
     /**
      * The total duration to sleep.
      *
-     * @var \PerformanceToolkit\Vendor\Carbon\CarbonInterval
+     * @var \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterval
      */
     public $duration;
 
@@ -58,7 +58,7 @@ class Sleep
     /**
      * The sequence of sleep durations encountered while faking.
      *
-     * @var array<int, \PerformanceToolkit\Vendor\Carbon\CarbonInterval>
+     * @var array<int, \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterval>
      */
     protected static $sequence = [];
 
@@ -371,7 +371,7 @@ class Sleep
             $this->pending = 0;
         }
 
-        return performancetoolkit_vendor_tap($this->pending, function () {
+        return pivotperformancetoolkit_vendor_tap($this->pending, function () {
             $this->pending = null;
         });
     }
@@ -505,7 +505,7 @@ class Sleep
      */
     public function when($condition)
     {
-        $this->shouldSleep = (bool) performancetoolkit_vendor_value($condition, $this);
+        $this->shouldSleep = (bool) pivotperformancetoolkit_vendor_value($condition, $this);
 
         return $this;
     }
@@ -518,7 +518,7 @@ class Sleep
      */
     public function unless($condition)
     {
-        return $this->when(! performancetoolkit_vendor_value($condition, $this));
+        return $this->when(! pivotperformancetoolkit_vendor_value($condition, $this));
     }
 
     /**

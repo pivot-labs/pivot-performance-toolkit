@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\CommandLoader;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\CommandLoader;
 
-use PerformanceToolkit\Vendor\Psr\Container\ContainerInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Command\Command;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\CommandNotFoundException;
+use PivotPerformanceToolkit\Vendor\Psr\Container\ContainerInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Command\Command;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\CommandNotFoundException;
 
 /**
  * Loads commands from a PSR-11 container.

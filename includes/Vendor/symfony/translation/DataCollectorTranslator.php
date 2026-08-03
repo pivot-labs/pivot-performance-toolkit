@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation;
 
 use Symfony\Component\HttpKernel\CacheWarmer\WarmableInterface;
 use Symfony\Contracts\Service\ResetInterface;
-use PerformanceToolkit\Vendor\Symfony\Contracts\Translation\LocaleAwareInterface;
-use PerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatorInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Contracts\Translation\LocaleAwareInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @author Abdellatif Ait boudad <a.aitboudad@gmail.com>

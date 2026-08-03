@@ -1,11 +1,11 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
 use ArrayIterator;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\ValidatedData;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Dumpable;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\InteractsWithData;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\ValidatedData;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Dumpable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\InteractsWithData;
 use Traversable;
 
 class ValidatedInput implements ValidatedData

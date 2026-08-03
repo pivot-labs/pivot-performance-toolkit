@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Contracts\Translation;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Contracts\Translation;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\InvalidArgumentException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\InvalidArgumentException;
 
 /**
  * A trait to help implement TranslatorInterface and LocaleAwareInterface.

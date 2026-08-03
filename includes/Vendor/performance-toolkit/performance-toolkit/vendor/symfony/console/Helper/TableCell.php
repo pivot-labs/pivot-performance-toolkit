@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Helper;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Helper;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\InvalidArgumentException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\InvalidArgumentException;
 
 /**
  * @author Abdellatif Ait boudad <a.aitboudad@gmail.com>

@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Encryption;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Encryption;
 
 interface StringEncrypter
 {
@@ -10,7 +10,7 @@ interface StringEncrypter
      * @param  string  $value
      * @return string
      *
-     * @throws \PerformanceToolkit\Vendor\Illuminate\Contracts\Encryption\EncryptException
+     * @throws \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Encryption\EncryptException
      */
     public function encryptString(#[\SensitiveParameter] $value);
 
@@ -20,7 +20,7 @@ interface StringEncrypter
      * @param  string  $payload
      * @return string
      *
-     * @throws \PerformanceToolkit\Vendor\Illuminate\Contracts\Encryption\DecryptException
+     * @throws \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Encryption\DecryptException
      */
     public function decryptString($payload);
 }

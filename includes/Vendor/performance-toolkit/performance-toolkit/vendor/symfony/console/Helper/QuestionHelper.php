@@ -9,23 +9,23 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Helper;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Helper;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Cursor;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\MissingInputException;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\RuntimeException;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Formatter\OutputFormatter;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Formatter\OutputFormatterStyle;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\StreamableInputInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Output\ConsoleSectionOutput;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Question\ChoiceQuestion;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Question\Question;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Terminal;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Cursor;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\MissingInputException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\RuntimeException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Formatter\OutputFormatter;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Formatter\OutputFormatterStyle;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\StreamableInputInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\ConsoleSectionOutput;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Question\ChoiceQuestion;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Question\Question;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Terminal;
 
-use function PerformanceToolkit\Vendor\Symfony\Component\String\s;
+use function PivotPerformanceToolkit\Vendor\Symfony\Component\String\s;
 
 /**
  * The QuestionHelper class provides helpers to interact with the user.

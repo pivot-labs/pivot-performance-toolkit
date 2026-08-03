@@ -1,11 +1,11 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Jsonable;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\MessageBag as MessageBagContract;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\MessageProvider;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Jsonable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\MessageBag as MessageBagContract;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\MessageProvider;
 use JsonSerializable;
 use Stringable;
 
@@ -96,7 +96,7 @@ class MessageBag implements Jsonable, JsonSerializable, MessageBagContract, Mess
     /**
      * Merge a new array of messages into the message bag.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\MessageProvider|array  $messages
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\MessageProvider|array  $messages
      * @return $this
      */
     public function merge($messages)
@@ -331,7 +331,7 @@ class MessageBag implements Jsonable, JsonSerializable, MessageBagContract, Mess
     /**
      * Get the messages for the instance.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\MessageBag
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\MessageBag
      */
     public function getMessageBag()
     {
@@ -352,7 +352,7 @@ class MessageBag implements Jsonable, JsonSerializable, MessageBagContract, Mess
      * Set the default message format.
      *
      * @param  string  $format
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\MessageBag
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\MessageBag
      */
     public function setFormat($format = ':message')
     {

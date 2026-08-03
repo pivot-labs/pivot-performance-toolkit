@@ -1,11 +1,11 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Pipeline;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Pipeline;
 
 use Closure;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Pipeline\Pipeline as PipelineContract;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Conditionable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Pipeline\Pipeline as PipelineContract;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Conditionable;
 use RuntimeException;
 use Throwable;
 
@@ -16,7 +16,7 @@ class Pipeline implements PipelineContract
     /**
      * The container implementation.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container|null
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container|null
      */
     protected $container;
 
@@ -51,7 +51,7 @@ class Pipeline implements PipelineContract
     /**
      * Create a new class instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container|null  $container
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container|null  $container
      * @return void
      */
     public function __construct(?Container $container = null)
@@ -249,7 +249,7 @@ class Pipeline implements PipelineContract
     /**
      * Get the container instance.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container
      *
      * @throws \RuntimeException
      */
@@ -265,7 +265,7 @@ class Pipeline implements PipelineContract
     /**
      * Set the container instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container  $container
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container  $container
      * @return $this
      */
     public function setContainer(Container $container)

@@ -1,11 +1,11 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Filesystem;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Filesystem;
 
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\CachesRoutes;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\CachesRoutes;
 use Illuminate\Http\Request;
-use PerformanceToolkit\Vendor\Illuminate\Support\Facades\Route;
-use PerformanceToolkit\Vendor\Illuminate\Support\ServiceProvider;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades\Route;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\ServiceProvider;
 
 class FilesystemServiceProvider extends ServiceProvider
 {

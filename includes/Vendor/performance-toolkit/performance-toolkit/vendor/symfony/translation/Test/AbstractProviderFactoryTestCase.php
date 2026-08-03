@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation\Test;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Test;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\UnsupportedSchemeException;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Provider\Dsn;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Provider\ProviderFactoryInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\UnsupportedSchemeException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Provider\Dsn;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Provider\ProviderFactoryInterface;
 
 abstract class AbstractProviderFactoryTestCase extends TestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
 
 use Illuminate\Http\Client\Factory;
 
@@ -9,8 +9,8 @@ use Illuminate\Http\Client\Factory;
  * @method static \Illuminate\Http\Client\Factory globalRequestMiddleware(callable $middleware)
  * @method static \Illuminate\Http\Client\Factory globalResponseMiddleware(callable $middleware)
  * @method static \Illuminate\Http\Client\Factory globalOptions(\Closure|array $options)
- * @method static \PerformanceToolkit\Vendor\GuzzleHttp\Promise\PromiseInterface response(array|string|null $body = null, int $status = 200, array $headers = [])
- * @method static \PerformanceToolkit\Vendor\GuzzleHttp\Psr7\Response psr7Response(array|string|null $body = null, int $status = 200, array<string, mixed> $headers = [])
+ * @method static \PivotPerformanceToolkit\Vendor\GuzzleHttp\Promise\PromiseInterface response(array|string|null $body = null, int $status = 200, array $headers = [])
+ * @method static \PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7\Response psr7Response(array|string|null $body = null, int $status = 200, array<string, mixed> $headers = [])
  * @method static \Illuminate\Http\Client\RequestException failedRequest(array|string|null $body = null, int $status = 200, array<string, mixed> $headers = [])
  * @method static \Closure failedConnection(string|null $message = null)
  * @method static \Illuminate\Http\Client\ResponseSequence sequence(array $responses = [])
@@ -24,9 +24,9 @@ use Illuminate\Http\Client\Factory;
  * @method static void assertNothingSent()
  * @method static void assertSentCount(int $count)
  * @method static void assertSequencesAreEmpty()
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Collection<int, array> recorded(\Closure|callable $callback = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection<int, array> recorded(\Closure|callable $callback = null)
  * @method static \Illuminate\Http\Client\PendingRequest createPendingRequest()
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher|null getDispatcher()
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher|null getDispatcher()
  * @method static array getGlobalMiddleware()
  * @method static void macro(string $name, object|callable $macro)
  * @method static void mixin(object $mixin, bool $replace = true)
@@ -34,7 +34,7 @@ use Illuminate\Http\Client\Factory;
  * @method static void flushMacros()
  * @method static mixed macroCall(string $method, array $parameters)
  * @method static \Illuminate\Http\Client\PendingRequest baseUrl(string $url)
- * @method static \Illuminate\Http\Client\PendingRequest withBody(\PerformanceToolkit\Vendor\Psr\Http\Message\StreamInterface|string $content, string $contentType = 'application/json')
+ * @method static \Illuminate\Http\Client\PendingRequest withBody(\PivotPerformanceToolkit\Vendor\Psr\Http\Message\StreamInterface|string $content, string $contentType = 'application/json')
  * @method static \Illuminate\Http\Client\PendingRequest asJson()
  * @method static \Illuminate\Http\Client\PendingRequest asForm()
  * @method static \Illuminate\Http\Client\PendingRequest attach(string|array $name, string|resource $contents = '', string|null $filename = null, array $headers = [])
@@ -73,31 +73,31 @@ use Illuminate\Http\Client\Factory;
  * @method static \Illuminate\Http\Client\PendingRequest throwUnless(callable|bool $condition)
  * @method static \Illuminate\Http\Client\PendingRequest dump()
  * @method static \Illuminate\Http\Client\PendingRequest dd()
- * @method static \Illuminate\Http\Client\Response|\PerformanceToolkit\Vendor\GuzzleHttp\Promise\PromiseInterface get(string $url, array|string|null $query = null)
- * @method static \Illuminate\Http\Client\Response|\PerformanceToolkit\Vendor\GuzzleHttp\Promise\PromiseInterface head(string $url, array|string|null $query = null)
- * @method static \Illuminate\Http\Client\Response|\PerformanceToolkit\Vendor\GuzzleHttp\Promise\PromiseInterface post(string $url, array|\JsonSerializable|\PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable $data = [])
- * @method static \Illuminate\Http\Client\Response|\PerformanceToolkit\Vendor\GuzzleHttp\Promise\PromiseInterface patch(string $url, array|\JsonSerializable|\PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable $data = [])
- * @method static \Illuminate\Http\Client\Response|\PerformanceToolkit\Vendor\GuzzleHttp\Promise\PromiseInterface put(string $url, array|\JsonSerializable|\PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable $data = [])
- * @method static \Illuminate\Http\Client\Response|\PerformanceToolkit\Vendor\GuzzleHttp\Promise\PromiseInterface delete(string $url, array|\JsonSerializable|\PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable $data = [])
+ * @method static \Illuminate\Http\Client\Response|\PivotPerformanceToolkit\Vendor\GuzzleHttp\Promise\PromiseInterface get(string $url, array|string|null $query = null)
+ * @method static \Illuminate\Http\Client\Response|\PivotPerformanceToolkit\Vendor\GuzzleHttp\Promise\PromiseInterface head(string $url, array|string|null $query = null)
+ * @method static \Illuminate\Http\Client\Response|\PivotPerformanceToolkit\Vendor\GuzzleHttp\Promise\PromiseInterface post(string $url, array|\JsonSerializable|\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable $data = [])
+ * @method static \Illuminate\Http\Client\Response|\PivotPerformanceToolkit\Vendor\GuzzleHttp\Promise\PromiseInterface patch(string $url, array|\JsonSerializable|\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable $data = [])
+ * @method static \Illuminate\Http\Client\Response|\PivotPerformanceToolkit\Vendor\GuzzleHttp\Promise\PromiseInterface put(string $url, array|\JsonSerializable|\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable $data = [])
+ * @method static \Illuminate\Http\Client\Response|\PivotPerformanceToolkit\Vendor\GuzzleHttp\Promise\PromiseInterface delete(string $url, array|\JsonSerializable|\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable $data = [])
  * @method static array<array-key, \Illuminate\Http\Client\Response|\Throwable> pool(callable $callback, int|null $concurrency = 0)
  * @method static \Illuminate\Http\Client\Batch batch(callable $callback)
  * @method static \Illuminate\Http\Client\Response|\Illuminate\Http\Client\Promises\LazyPromise send(string $method, string $url, array $options = [])
- * @method static \PerformanceToolkit\Vendor\GuzzleHttp\Client buildClient()
- * @method static \PerformanceToolkit\Vendor\GuzzleHttp\Client createClient(\PerformanceToolkit\Vendor\GuzzleHttp\HandlerStack $handlerStack)
- * @method static \PerformanceToolkit\Vendor\GuzzleHttp\HandlerStack buildHandlerStack()
- * @method static \PerformanceToolkit\Vendor\GuzzleHttp\HandlerStack pushHandlers(\PerformanceToolkit\Vendor\GuzzleHttp\HandlerStack $handlerStack)
+ * @method static \PivotPerformanceToolkit\Vendor\GuzzleHttp\Client buildClient()
+ * @method static \PivotPerformanceToolkit\Vendor\GuzzleHttp\Client createClient(\PivotPerformanceToolkit\Vendor\GuzzleHttp\HandlerStack $handlerStack)
+ * @method static \PivotPerformanceToolkit\Vendor\GuzzleHttp\HandlerStack buildHandlerStack()
+ * @method static \PivotPerformanceToolkit\Vendor\GuzzleHttp\HandlerStack pushHandlers(\PivotPerformanceToolkit\Vendor\GuzzleHttp\HandlerStack $handlerStack)
  * @method static \Closure buildBeforeSendingHandler()
  * @method static \Closure buildRecorderHandler()
  * @method static \Closure buildStubHandler()
- * @method static \PerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface runBeforeSendingCallbacks(\PerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface $request, array $options)
+ * @method static \PivotPerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface runBeforeSendingCallbacks(\PivotPerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface $request, array $options)
  * @method static array mergeOptions(array ...$options)
  * @method static \Illuminate\Http\Client\PendingRequest stub(callable $callback)
  * @method static bool isAllowedRequestUrl(string $url)
  * @method static \Illuminate\Http\Client\PendingRequest<bool> async(bool $async = true)
- * @method static \PerformanceToolkit\Vendor\GuzzleHttp\Promise\PromiseInterface|null getPromise()
+ * @method static \PivotPerformanceToolkit\Vendor\GuzzleHttp\Promise\PromiseInterface|null getPromise()
  * @method static \Illuminate\Http\Client\PendingRequest truncateExceptionsAt(int<int, mixed> $length)
  * @method static \Illuminate\Http\Client\PendingRequest dontTruncateExceptions()
- * @method static \Illuminate\Http\Client\PendingRequest setClient(\PerformanceToolkit\Vendor\GuzzleHttp\Client $client)
+ * @method static \Illuminate\Http\Client\PendingRequest setClient(\PivotPerformanceToolkit\Vendor\GuzzleHttp\Client $client)
  * @method static \Illuminate\Http\Client\PendingRequest setHandler(callable $handler)
  * @method static array getOptions()
  * @method static \Illuminate\Http\Client\PendingRequest|mixed when(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
@@ -162,7 +162,7 @@ class Http extends Facade
      * Stub the given URL using the given callback.
      *
      * @param  string  $url
-     * @param  \Illuminate\Http\Client\Response|\PerformanceToolkit\Vendor\GuzzleHttp\Promise\PromiseInterface|callable  $callback
+     * @param  \Illuminate\Http\Client\Response|\PivotPerformanceToolkit\Vendor\GuzzleHttp\Promise\PromiseInterface|callable  $callback
      * @return \Illuminate\Http\Client\Factory
      */
     public static function stubUrl($url, $callback)

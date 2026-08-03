@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support;
 
 use Countable;
 
@@ -25,7 +25,7 @@ interface MessageBag extends Arrayable, Countable
     /**
      * Merge a new array of messages into the bag.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\MessageProvider|array  $messages
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\MessageProvider|array  $messages
      * @return $this
      */
     public function merge($messages);

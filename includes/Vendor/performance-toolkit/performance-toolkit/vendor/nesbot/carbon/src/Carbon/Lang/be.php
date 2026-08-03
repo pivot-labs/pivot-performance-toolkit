@@ -9,8 +9,8 @@
  * file that was distributed with this source code.
  */
 
-use PerformanceToolkit\Vendor\Carbon\CarbonInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\PluralizationRules;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\PluralizationRules;
 
 // @codeCoverageIgnoreStart
 if (class_exists(PluralizationRules::class)) {

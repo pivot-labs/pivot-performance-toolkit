@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Hashing;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Hashing;
 
 interface Hasher
 {

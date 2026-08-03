@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation\Test;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Test;
 
 use PHPUnit\Framework\Attributes\DataProvider;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\IncompleteDsnException;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Provider\Dsn;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\IncompleteDsnException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Provider\Dsn;
 
 trait IncompleteDsnTestTrait
 {

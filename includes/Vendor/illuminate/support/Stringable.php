@@ -1,14 +1,14 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
 use ArrayAccess;
 use Closure;
-use PerformanceToolkit\Vendor\Illuminate\Support\Facades\Date;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Conditionable;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Dumpable;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Tappable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades\Date;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Conditionable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Dumpable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Tappable;
 use JsonSerializable;
 use Stringable as BaseStringable;
 
@@ -140,7 +140,7 @@ class Stringable implements JsonSerializable, ArrayAccess, BaseStringable
      */
     public function classBasename()
     {
-        return new static(performancetoolkit_vendor_class_basename($this->value));
+        return new static(pivotperformancetoolkit_vendor_class_basename($this->value));
     }
 
     /**
@@ -271,7 +271,7 @@ class Stringable implements JsonSerializable, ArrayAccess, BaseStringable
     /**
      * Determine if the string is an exact match with the given value.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Support\Stringable|string  $value
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Support\Stringable|string  $value
      * @return bool
      */
     public function exactly($value)
@@ -300,7 +300,7 @@ class Stringable implements JsonSerializable, ArrayAccess, BaseStringable
      *
      * @param  string  $delimiter
      * @param  int  $limit
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Collection<int, string>
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection<int, string>
      */
     public function explode($delimiter, $limit = PHP_INT_MAX)
     {
@@ -313,7 +313,7 @@ class Stringable implements JsonSerializable, ArrayAccess, BaseStringable
      * @param  string|int  $pattern
      * @param  int  $limit
      * @param  int  $flags
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Collection<int, string>
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection<int, string>
      */
     public function split($pattern, $limit = -1, $flags = 0)
     {
@@ -527,7 +527,7 @@ class Stringable implements JsonSerializable, ArrayAccess, BaseStringable
      * Get the string matching the given pattern.
      *
      * @param  string  $pattern
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Collection
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection
      */
     public function matchAll($pattern)
     {
@@ -797,7 +797,7 @@ class Stringable implements JsonSerializable, ArrayAccess, BaseStringable
      * Parse input from a string to a collection, according to a format.
      *
      * @param  string  $format
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Collection
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection
      */
     public function scan($format)
     {
@@ -1074,7 +1074,7 @@ class Stringable implements JsonSerializable, ArrayAccess, BaseStringable
     /**
      * Split a string by uppercase characters.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Collection<int, string>
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection<int, string>
      */
     public function ucsplit()
     {
@@ -1308,7 +1308,7 @@ class Stringable implements JsonSerializable, ArrayAccess, BaseStringable
     /**
      * Convert the string into a `HtmlString` instance.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\HtmlString
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\HtmlString
      */
     public function toHtmlString()
     {
@@ -1407,9 +1407,9 @@ class Stringable implements JsonSerializable, ArrayAccess, BaseStringable
      *
      * @param  string|null  $format
      * @param  string|null  $tz
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Carbon
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon
      *
-     * @throws \PerformanceToolkit\Vendor\Carbon\Exceptions\InvalidFormatException
+     * @throws \PivotPerformanceToolkit\Vendor\Carbon\Exceptions\InvalidFormatException
      */
     public function toDate($format = null, $tz = null)
     {

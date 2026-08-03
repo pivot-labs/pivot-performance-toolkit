@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Broadcasting;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Broadcasting;
 
 interface Factory
 {
@@ -8,7 +8,7 @@ interface Factory
      * Get a broadcaster implementation by name.
      *
      * @param  string|null  $name
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\Broadcasting\Broadcaster
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Broadcasting\Broadcaster
      */
     public function connection($name = null);
 }

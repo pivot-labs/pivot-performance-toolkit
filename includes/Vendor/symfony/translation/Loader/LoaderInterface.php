@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation\Loader;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Loader;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\InvalidResourceException;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\NotFoundResourceException;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogue;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\InvalidResourceException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\NotFoundResourceException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogue;
 
 /**
  * LoaderInterface is the interface implemented by all translation loaders.

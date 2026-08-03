@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation;
 
 use Symfony\Component\Routing\RequestContext;
-use PerformanceToolkit\Vendor\Symfony\Contracts\Translation\LocaleAwareInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Contracts\Translation\LocaleAwareInterface;
 
 /**
  * @author Kevin Bond <kevinbond@gmail.com>

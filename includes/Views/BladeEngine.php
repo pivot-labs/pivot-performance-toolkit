@@ -2,23 +2,27 @@
 /**
  * Blade templating engine wrapper.
  *
- * @package PerformanceToolkit
+ * @package PivotPerformanceToolkit
  */
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Views;
+namespace PivotPerformanceToolkit\Views;
 
-use PerformanceToolkit\Vendor\Illuminate\Container\Container;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\View\Factory as ViewFactoryContract;
-use PerformanceToolkit\Vendor\Illuminate\Events\Dispatcher;
-use PerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem;
-use PerformanceToolkit\Vendor\Illuminate\View\Factory;
-use PerformanceToolkit\Vendor\Illuminate\View\FileViewFinder;
-use PerformanceToolkit\Vendor\Illuminate\View\Engines\CompilerEngine;
-use PerformanceToolkit\Vendor\Illuminate\View\Engines\EngineResolver;
-use PerformanceToolkit\Vendor\Illuminate\View\Compilers\BladeCompiler;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+use PivotPerformanceToolkit\Vendor\Illuminate\Container\Container;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View\Factory as ViewFactoryContract;
+use PivotPerformanceToolkit\Vendor\Illuminate\Events\Dispatcher;
+use PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem;
+use PivotPerformanceToolkit\Vendor\Illuminate\View\Factory;
+use PivotPerformanceToolkit\Vendor\Illuminate\View\FileViewFinder;
+use PivotPerformanceToolkit\Vendor\Illuminate\View\Engines\CompilerEngine;
+use PivotPerformanceToolkit\Vendor\Illuminate\View\Engines\EngineResolver;
+use PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\BladeCompiler;
 
 /**
  * Blade templating engine for the plugin.
@@ -53,8 +57,8 @@ final class BladeEngine {
 		$filesystem = new Filesystem();
 
 		// Define paths for views and cache
-		$views_path = PERFORMANCE_TOOLKIT_PATH . 'includes/Views';
-		$cache_path = WP_CONTENT_DIR . '/cache/performance-toolkit-blade';
+		$views_path = PIVOT_PERFORMANCE_TOOLKIT_PATH . 'includes/Views';
+		$cache_path = WP_CONTENT_DIR . '/cache/pivot-performance-toolkit-blade';
 
 		// Ensure cache directory exists
 		if ( ! is_dir( $cache_path ) ) {
@@ -69,7 +73,7 @@ final class BladeEngine {
 
 		// Register the Blade compiler
 		$blade_compiler = new BladeCompiler( $filesystem, $cache_path );
-		$blade_compiler->setEchoFormat( 'performancetoolkit_vendor_e(%s)' );
+		$blade_compiler->setEchoFormat( 'pivotperformancetoolkit_vendor_e(%s)' );
 		$resolver->register(
 			'blade',
 			function () use ( $blade_compiler ) {
@@ -87,7 +91,7 @@ final class BladeEngine {
 			Application::class,
 			new class() {
 				public function getNamespace(): string {
-					return 'PerformanceToolkit\\';
+					return 'PivotPerformanceToolkit\\';
 				}
 			}
 		);

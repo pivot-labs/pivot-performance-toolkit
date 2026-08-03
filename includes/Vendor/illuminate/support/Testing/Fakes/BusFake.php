@@ -1,15 +1,15 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes;
 
 use Closure;
-use PerformanceToolkit\Vendor\Illuminate\Bus\BatchRepository;
-use PerformanceToolkit\Vendor\Illuminate\Bus\ChainedBatch;
-use PerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Bus\QueueingDispatcher;
-use PerformanceToolkit\Vendor\Illuminate\Support\Arr;
-use PerformanceToolkit\Vendor\Illuminate\Support\Collection;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\ReflectsClosures;
+use PivotPerformanceToolkit\Vendor\Illuminate\Bus\BatchRepository;
+use PivotPerformanceToolkit\Vendor\Illuminate\Bus\ChainedBatch;
+use PivotPerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Bus\QueueingDispatcher;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Arr;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\ReflectsClosures;
 use PHPUnit\Framework\Assert as PHPUnit;
 use RuntimeException;
 
@@ -20,7 +20,7 @@ class BusFake implements Fake, QueueingDispatcher
     /**
      * The original Bus dispatcher implementation.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Contracts\Bus\QueueingDispatcher
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Bus\QueueingDispatcher
      */
     public $dispatcher;
 
@@ -41,7 +41,7 @@ class BusFake implements Fake, QueueingDispatcher
     /**
      * The fake repository to track batched jobs.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Bus\BatchRepository
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Bus\BatchRepository
      */
     protected $batchRepository;
 
@@ -83,9 +83,9 @@ class BusFake implements Fake, QueueingDispatcher
     /**
      * Create a new bus fake instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Bus\QueueingDispatcher  $dispatcher
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Bus\QueueingDispatcher  $dispatcher
      * @param  array|string  $jobsToFake
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Bus\BatchRepository|null  $batchRepository
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Bus\BatchRepository|null  $batchRepository
      * @return void
      */
     public function __construct(QueueingDispatcher $dispatcher, $jobsToFake = [], ?BatchRepository $batchRepository = null)
@@ -379,7 +379,7 @@ class BusFake implements Fake, QueueingDispatcher
      */
     protected function resetChainPropertiesToDefaults($job)
     {
-        return performancetoolkit_vendor_tap(clone $job, function ($job) {
+        return pivotperformancetoolkit_vendor_tap(clone $job, function ($job) {
             $job->chainConnection = null;
             $job->chainQueue = null;
             $job->chainCatchCallbacks = null;
@@ -465,7 +465,7 @@ class BusFake implements Fake, QueueingDispatcher
      * Create a new assertion about a chained batch.
      *
      * @param  \Closure  $callback
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\ChainedBatchTruthTest
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\ChainedBatchTruthTest
      */
     public function chainedBatch(Closure $callback)
     {
@@ -530,7 +530,7 @@ class BusFake implements Fake, QueueingDispatcher
      *
      * @param  string  $command
      * @param  callable|null  $callback
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Collection
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection
      */
     public function dispatched($command, $callback = null)
     {
@@ -548,7 +548,7 @@ class BusFake implements Fake, QueueingDispatcher
      *
      * @param  string  $command
      * @param  callable|null  $callback
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Collection
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection
      */
     public function dispatchedSync(string $command, $callback = null)
     {
@@ -566,7 +566,7 @@ class BusFake implements Fake, QueueingDispatcher
      *
      * @param  string  $command
      * @param  callable|null  $callback
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Collection
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection
      */
     public function dispatchedAfterResponse(string $command, $callback = null)
     {
@@ -583,7 +583,7 @@ class BusFake implements Fake, QueueingDispatcher
      * Get all of the pending batches matching a truth-test callback.
      *
      * @param  callable  $callback
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Collection
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection
      */
     public function batched(callable $callback)
     {
@@ -709,7 +709,7 @@ class BusFake implements Fake, QueueingDispatcher
     /**
      * Create a new chain of queueable jobs.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Support\Collection|array  $jobs
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection|array  $jobs
      * @return \Illuminate\Foundation\Bus\PendingChain
      */
     public function chain($jobs)
@@ -724,7 +724,7 @@ class BusFake implements Fake, QueueingDispatcher
      * Attempt to find the batch with the given ID.
      *
      * @param  string  $batchId
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\Batch|null
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\Batch|null
      */
     public function findBatch(string $batchId)
     {
@@ -734,8 +734,8 @@ class BusFake implements Fake, QueueingDispatcher
     /**
      * Create a new batch of queueable jobs.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Support\Collection|array  $jobs
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection|array  $jobs
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch
      */
     public function batch($jobs)
     {
@@ -746,7 +746,7 @@ class BusFake implements Fake, QueueingDispatcher
      * Dispatch an empty job batch for testing.
      *
      * @param  string  $name
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\Batch
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\Batch
      */
     public function dispatchFakeBatch($name = '')
     {
@@ -756,8 +756,8 @@ class BusFake implements Fake, QueueingDispatcher
     /**
      * Record the fake pending batch dispatch.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch  $pendingBatch
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\Batch
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch  $pendingBatch
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\Batch
      */
     public function recordPendingBatch(PendingBatch $pendingBatch)
     {

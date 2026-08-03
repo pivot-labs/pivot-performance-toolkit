@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation\Loader;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Loader;
 
 use Symfony\Component\Config\Resource\FileResource;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\InvalidResourceException;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\NotFoundResourceException;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogue;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\InvalidResourceException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\NotFoundResourceException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogue;
 
 /**
  * @author Abdellatif Ait boudad <a.aitboudad@gmail.com>

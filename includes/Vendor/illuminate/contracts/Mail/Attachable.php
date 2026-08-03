@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Mail;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Mail;
 
 interface Attachable
 {
