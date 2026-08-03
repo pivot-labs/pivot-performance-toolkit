@@ -1,12 +1,12 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp\Exception;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp\Exception;
 
-use PerformanceToolkit\Vendor\GuzzleHttp\BodySummarizer;
-use PerformanceToolkit\Vendor\GuzzleHttp\BodySummarizerInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Client\RequestExceptionInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\ResponseInterface;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\BodySummarizer;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\BodySummarizerInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Client\RequestExceptionInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\ResponseInterface;
 
 /**
  * HTTP Request exception
@@ -89,7 +89,7 @@ class RequestException extends TransferException implements RequestExceptionInte
             $className = __CLASS__;
         }
 
-        $uri = \PerformanceToolkit\Vendor\GuzzleHttp\Psr7\Utils::redactUserInfo($request->getUri());
+        $uri = \PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7\Utils::redactUserInfo($request->getUri());
 
         // Client Error: `GET /` resulted in a `404 Not Found` response:
         // <html> ... (truncated)

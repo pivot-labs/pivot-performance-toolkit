@@ -1,16 +1,16 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\View\Compilers;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers;
 
-use PerformanceToolkit\Vendor\Illuminate\Container\Container;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\View\Factory;
-use PerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem;
-use PerformanceToolkit\Vendor\Illuminate\Support\Collection;
-use PerformanceToolkit\Vendor\Illuminate\Support\Str;
-use PerformanceToolkit\Vendor\Illuminate\View\AnonymousComponent;
-use PerformanceToolkit\Vendor\Illuminate\View\DynamicComponent;
-use PerformanceToolkit\Vendor\Illuminate\View\ViewFinderInterface;
+use PivotPerformanceToolkit\Vendor\Illuminate\Container\Container;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View\Factory;
+use PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Str;
+use PivotPerformanceToolkit\Vendor\Illuminate\View\AnonymousComponent;
+use PivotPerformanceToolkit\Vendor\Illuminate\View\DynamicComponent;
+use PivotPerformanceToolkit\Vendor\Illuminate\View\ViewFinderInterface;
 use InvalidArgumentException;
 use ReflectionClass;
 
@@ -23,7 +23,7 @@ class ComponentTagCompiler
     /**
      * The Blade compiler instance.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\View\Compilers\BladeCompiler
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\BladeCompiler
      */
     protected $blade;
 
@@ -53,7 +53,7 @@ class ComponentTagCompiler
      *
      * @param  array  $aliases
      * @param  array  $namespaces
-     * @param  \PerformanceToolkit\Vendor\Illuminate\View\Compilers\BladeCompiler|null  $blade
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\BladeCompiler|null  $blade
      * @return void
      */
     public function __construct(array $aliases = [], array $namespaces = [], ?BladeCompiler $blade = null)
@@ -246,7 +246,7 @@ class ComponentTagCompiler
         // can be accessed within the component and we can render out the view.
         if (! class_exists($class)) {
             $view = Str::startsWith($component, 'mail::')
-                ? "\$__env->getContainer()->make(PerformanceToolkit\\Vendor\\Illuminate\\View\\Factory::class)->make('{$component}')"
+                ? "\$__env->getContainer()->make(PivotPerformanceToolkit\\Vendor\\Illuminate\\View\\Factory::class)->make('{$component}')"
                 : "'$class'";
 
             $parameters = [
@@ -260,7 +260,7 @@ class ComponentTagCompiler
         }
 
         return "##BEGIN-COMPONENT-CLASS##@component('{$class}', '{$component}', [".$this->attributesToString($parameters, $escapeBound = false).'])
-<?php if (isset($attributes) && $attributes instanceof PerformanceToolkit\Vendor\Illuminate\View\ComponentAttributeBag): ?>
+<?php if (isset($attributes) && $attributes instanceof PivotPerformanceToolkit\Vendor\Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\\'.$class.'::ignoredParameterNames()); ?>
 <?php endif; ?>
 <?php $component->withAttributes(['.$this->attributesToString($attributes->all(), $escapeAttributes = $class !== DynamicComponent::class).']); ?>';
@@ -321,7 +321,7 @@ class ComponentTagCompiler
     /**
      * Attempt to find an anonymous component using the registered anonymous component paths.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\View\Factory  $viewFactory
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View\Factory  $viewFactory
      * @param  string  $component
      * @return string|null
      */
@@ -357,7 +357,7 @@ class ComponentTagCompiler
     /**
      * Attempt to find an anonymous component using the registered anonymous component namespaces.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\View\Factory  $viewFactory
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View\Factory  $viewFactory
      * @param  string  $component
      * @return string|null
      */
@@ -691,7 +691,7 @@ class ComponentTagCompiler
                 if ($match[1] === 'class') {
                     $match[2] = str_replace('"', "'", $match[2]);
 
-                    return ":class=\"\PerformanceToolkit\Vendor\Illuminate\Support\Arr::toCssClasses{$match[2]}\"";
+                    return ":class=\"\PivotPerformanceToolkit\Vendor\Illuminate\Support\Arr::toCssClasses{$match[2]}\"";
                 }
 
                 return $match[0];
@@ -712,7 +712,7 @@ class ComponentTagCompiler
                 if ($match[1] === 'style') {
                     $match[2] = str_replace('"', "'", $match[2]);
 
-                    return ":style=\"\PerformanceToolkit\Vendor\Illuminate\Support\Arr::toCssStyles{$match[2]}\"";
+                    return ":style=\"\PivotPerformanceToolkit\Vendor\Illuminate\Support\Arr::toCssStyles{$match[2]}\"";
                 }
 
                 return $match[0];
@@ -789,7 +789,7 @@ class ComponentTagCompiler
         return (new Collection($attributes))
             ->map(function (string $value, string $attribute) use ($escapeBound) {
                 return $escapeBound && isset($this->boundAttributes[$attribute]) && $value !== 'true' && ! is_numeric($value)
-                            ? "'{$attribute}' => \PerformanceToolkit\Vendor\Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute({$value})"
+                            ? "'{$attribute}' => \PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute({$value})"
                             : "'{$attribute}' => {$value}";
             })
             ->implode(',');

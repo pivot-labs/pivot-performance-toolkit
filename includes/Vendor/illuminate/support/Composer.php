@@ -1,9 +1,9 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
 use Closure;
-use PerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem;
+use PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem;
 use RuntimeException;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Process\Process;
@@ -13,7 +13,7 @@ class Composer
     /**
      * The filesystem instance.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem
      */
     protected $files;
 
@@ -27,7 +27,7 @@ class Composer
     /**
      * Create a new Composer manager instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem  $files
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem  $files
      * @param  string|null  $workingPath
      * @return void
      */

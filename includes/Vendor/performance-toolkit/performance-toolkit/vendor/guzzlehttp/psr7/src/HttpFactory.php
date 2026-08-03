@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp\Psr7;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7;
 
-use PerformanceToolkit\Vendor\Psr\Http\Message\RequestFactoryInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\ResponseFactoryInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\ResponseInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\ServerRequestFactoryInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\ServerRequestInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\StreamFactoryInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\StreamInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\UploadedFileFactoryInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\UploadedFileInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\UriFactoryInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\UriInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\RequestFactoryInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\ResponseFactoryInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\ResponseInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\ServerRequestFactoryInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\ServerRequestInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\StreamFactoryInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\StreamInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\UploadedFileFactoryInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\UploadedFileInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\UriFactoryInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\UriInterface;
 
 /**
  * Implements all of the PSR-17 interfaces.

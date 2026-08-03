@@ -2,7 +2,7 @@
 /**
  * Plugin uninstall cleanup routines.
  *
- * @package PerformanceToolkit
+ * @package PivotPerformanceToolkit
  */
 
 declare(strict_types=1);
@@ -11,20 +11,29 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
 
-$policy = get_option( 'performance_toolkit_remove_data_on_uninstall', '0' );
+// Fall back to the pre-rebrand option name in case the plugin was never reactivated
+// (and its options never migrated) between the rebrand and this uninstall.
+$policy = get_option( 'pivot_performance_toolkit_remove_data_on_uninstall', null );
+
+if ( null === $policy ) {
+	$policy = get_option( 'performance_toolkit_remove_data_on_uninstall', '0' );
+}
 
 if ( (string) '1' !== $policy ) {
 	return;
 }
 
-$plugin_option_key = 'performance_toolkit_settings';
-$cache_dir         = WP_CONTENT_DIR . '/cache/performance-toolkit';
-$dropin_path       = WP_CONTENT_DIR . '/advanced-cache.php';
-$wp_config_path    = ABSPATH . 'wp-config.php';
+$cache_dir      = WP_CONTENT_DIR . '/cache/pivot-performance-toolkit';
+$dropin_path    = WP_CONTENT_DIR . '/advanced-cache.php';
+$wp_config_path = ABSPATH . 'wp-config.php';
 
-// Remove plugin options.
-delete_option( $plugin_option_key );
+// Remove plugin options (both current and pre-rebrand key names).
+delete_option( 'pivot_performance_toolkit_settings' );
+delete_option( 'performance_toolkit_settings' );
+delete_option( 'pivot_performance_toolkit_remove_data_on_uninstall' );
 delete_option( 'performance_toolkit_remove_data_on_uninstall' );
+delete_option( 'pivot_performance_toolkit_last_performance_result' );
+delete_option( 'ptk_last_performance_result' );
 
 // Remove cache directory recursively.
 if ( is_dir( $cache_dir ) ) {
@@ -49,7 +58,7 @@ if ( is_dir( $cache_dir ) ) {
 if ( is_file( $dropin_path ) ) {
 	$dropin_contents = (string) file_get_contents( $dropin_path );
 
-	if ( '' !== $dropin_contents && str_contains( $dropin_contents, 'Performance Toolkit' ) ) {
+	if ( '' !== $dropin_contents && str_contains( $dropin_contents, 'Pivot Performance Toolkit' ) ) {
 		@unlink( $dropin_path );
 	}
 }
@@ -60,7 +69,7 @@ if ( is_file( $wp_config_path ) && is_writable( $wp_config_path ) ) {
 
 	if ( is_string( $config_contents ) && '' !== $config_contents ) {
 		$new_contents = preg_replace(
-			'/^define\s*\(\s*[\'\"]WP_CACHE[\'\"].*\/\/ Added by Performance Toolkit\r?\n/m',
+			'/^define\s*\(\s*[\'\"]WP_CACHE[\'\"].*\/\/ Added by Pivot Performance Toolkit\r?\n/m',
 			'',
 			$config_contents
 		);

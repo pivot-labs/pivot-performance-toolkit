@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Http;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Http;
 
 interface Kernel
 {
@@ -31,7 +31,7 @@ interface Kernel
     /**
      * Get the Laravel application instance.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application
      */
     public function getApplication();
 }

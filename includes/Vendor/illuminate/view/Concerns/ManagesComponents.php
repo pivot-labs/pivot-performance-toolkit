@@ -1,11 +1,11 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\View\Concerns;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\View\Concerns;
 
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\View\View;
-use PerformanceToolkit\Vendor\Illuminate\Support\Arr;
-use PerformanceToolkit\Vendor\Illuminate\View\ComponentSlot;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View\View;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Arr;
+use PivotPerformanceToolkit\Vendor\Illuminate\View\ComponentSlot;
 
 trait ManagesComponents
 {
@@ -47,7 +47,7 @@ trait ManagesComponents
     /**
      * Start a component rendering process.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\View\View|\PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable|\Closure|string  $view
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View\View|\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable|\Closure|string  $view
      * @param  array  $data
      * @return void
      */
@@ -93,7 +93,7 @@ trait ManagesComponents
         );
 
         try {
-            $view = performancetoolkit_vendor_value($view, $data);
+            $view = pivotperformancetoolkit_vendor_value($view, $data);
 
             if ($view instanceof View) {
                 return $view->with($data)->render();
@@ -144,7 +144,7 @@ trait ManagesComponents
         $currentComponent = count($this->componentStack);
 
         if ($currentComponent === 0) {
-            return performancetoolkit_vendor_value($default);
+            return pivotperformancetoolkit_vendor_value($default);
         }
 
         for ($i = $currentComponent - 1; $i >= 0; $i--) {
@@ -155,7 +155,7 @@ trait ManagesComponents
             }
         }
 
-        return performancetoolkit_vendor_value($default);
+        return pivotperformancetoolkit_vendor_value($default);
     }
 
     /**
@@ -184,7 +184,7 @@ trait ManagesComponents
      */
     public function endSlot()
     {
-        performancetoolkit_vendor_last($this->componentStack);
+        pivotperformancetoolkit_vendor_last($this->componentStack);
 
         $currentSlot = array_pop(
             $this->slotStack[$this->currentComponent()]

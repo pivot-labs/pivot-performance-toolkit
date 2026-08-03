@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes;
 
 use Closure;
 
@@ -9,14 +9,14 @@ class ChainedBatchTruthTest
     /**
      * The underlying truth test.
      *
-     * @var \Closure(\PerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch): bool
+     * @var \Closure(\PivotPerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch): bool
      */
     protected $callback;
 
     /**
      * Create a new truth test instance.
      *
-     * @param  \Closure(\PerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch): bool  $callback
+     * @param  \Closure(\PivotPerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch): bool  $callback
      */
     public function __construct(Closure $callback)
     {
@@ -26,7 +26,7 @@ class ChainedBatchTruthTest
     /**
      * Invoke the truth test with the given pending batch.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch  $pendingBatch
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch  $pendingBatch
      * @return bool
      */
     public function __invoke($pendingBatch)

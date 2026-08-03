@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Polyfill\Php84;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Polyfill\Php84;
 
 /**
  * @author Ayesh Karunaratne <ayesh@aye.sh>
@@ -232,7 +232,7 @@ final class Php84
             throw new \ValueError('bcceil(): Argument #1 ($num) is not well-formed');
         }
 
-        return self::bcround($num, 0, \PerformanceToolkit_Vendor_RoundingMode::PositiveInfinity);
+        return self::bcround($num, 0, \PivotPerformanceToolkit_Vendor_RoundingMode::PositiveInfinity);
     }
 
     public static function bcdivmod(string $num1, string $num2, ?int $scale = null): ?array
@@ -251,13 +251,13 @@ final class Php84
             throw new \ValueError('bcfloor(): Argument #1 ($num) is not well-formed');
         }
 
-        return self::bcround($num, 0, \PerformanceToolkit_Vendor_RoundingMode::NegativeInfinity);
+        return self::bcround($num, 0, \PivotPerformanceToolkit_Vendor_RoundingMode::NegativeInfinity);
     }
 
     /**
-     * @param \PerformanceToolkit_Vendor_RoundingMode|\RoundingMode::* $mode
+     * @param \PivotPerformanceToolkit_Vendor_RoundingMode|\RoundingMode::* $mode
      */
-    public static function bcround(string $num, int $precision = 0, $mode = \PerformanceToolkit_Vendor_RoundingMode::HalfAwayFromZero): string
+    public static function bcround(string $num, int $precision = 0, $mode = \PivotPerformanceToolkit_Vendor_RoundingMode::HalfAwayFromZero): string
     {
         if (!is_numeric($num)) {
             throw new \ValueError('bcround(): Argument #1 ($num) is not well-formed');
@@ -338,30 +338,30 @@ final class Php84
         $shouldIncrease = false;
 
         switch ($mode) {
-            case \PerformanceToolkit_Vendor_RoundingMode::TowardsZero:
+            case \PivotPerformanceToolkit_Vendor_RoundingMode::TowardsZero:
                 break;
 
-            case \PerformanceToolkit_Vendor_RoundingMode::AwayFromZero:
+            case \PivotPerformanceToolkit_Vendor_RoundingMode::AwayFromZero:
                 $shouldIncrease = true;
                 break;
 
-            case \PerformanceToolkit_Vendor_RoundingMode::PositiveInfinity:
+            case \PivotPerformanceToolkit_Vendor_RoundingMode::PositiveInfinity:
                 $shouldIncrease = $sign > 0;
                 break;
 
-            case \PerformanceToolkit_Vendor_RoundingMode::NegativeInfinity:
+            case \PivotPerformanceToolkit_Vendor_RoundingMode::NegativeInfinity:
                 $shouldIncrease = $sign < 0;
                 break;
 
-            case \PerformanceToolkit_Vendor_RoundingMode::HalfAwayFromZero:
+            case \PivotPerformanceToolkit_Vendor_RoundingMode::HalfAwayFromZero:
                 $shouldIncrease = $isGreaterThanHalf || $isExactlyHalf;
                 break;
 
-            case \PerformanceToolkit_Vendor_RoundingMode::HalfTowardsZero:
+            case \PivotPerformanceToolkit_Vendor_RoundingMode::HalfTowardsZero:
                 $shouldIncrease = $isGreaterThanHalf;
                 break;
 
-            case \PerformanceToolkit_Vendor_RoundingMode::HalfEven:
+            case \PivotPerformanceToolkit_Vendor_RoundingMode::HalfEven:
                 if ($isGreaterThanHalf) {
                     $shouldIncrease = true;
                 } elseif ($isExactlyHalf && 1 === self::lastDigit($intPart) % 2) {
@@ -369,7 +369,7 @@ final class Php84
                 }
                 break;
 
-            case \PerformanceToolkit_Vendor_RoundingMode::HalfOdd:
+            case \PivotPerformanceToolkit_Vendor_RoundingMode::HalfOdd:
                 if ($isGreaterThanHalf) {
                     $shouldIncrease = true;
                 } elseif ($isExactlyHalf && 0 === self::lastDigit($intPart) % 2) {

@@ -2,24 +2,28 @@
 /**
  * Admin page shell renderer.
  *
- * @package PerformanceToolkit
+ * @package PivotPerformanceToolkit
  */
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Admin;
+namespace PivotPerformanceToolkit\Admin;
 
-use PerformanceToolkit\Views\BladeEngine;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+use PivotPerformanceToolkit\Views\BladeEngine;
 
 final class AdminShell {
 
 	private const PAGE_BY_SECTION = array(
-		'overview'     => 'performance-toolkit',
-		'caching'      => 'performance-toolkit-cache',
-		'optimization' => 'performance-toolkit-file-optimization',
-		'database'     => 'performance-toolkit-database',
-		'settings'     => 'performance-toolkit-settings',
-		'system'       => 'performance-toolkit-system-status',
+		'overview'     => 'pivot-performance-toolkit',
+		'caching'      => 'pivot-performance-toolkit-cache',
+		'optimization' => 'pivot-performance-toolkit-file-optimization',
+		'database'     => 'pivot-performance-toolkit-database',
+		'settings'     => 'pivot-performance-toolkit-settings',
+		'system'       => 'pivot-performance-toolkit-system-status',
 	);
 
 	private const SECTION_LABELS = array(
@@ -41,11 +45,11 @@ final class AdminShell {
 	);
 
 	private const PAGE_HEADINGS = array(
-		'performance-toolkit-card-showcase' => 'Card Showcase',
+		'pivot-performance-toolkit-card-showcase' => 'Card Showcase',
 	);
 
 	private const PAGE_DESCRIPTIONS = array(
-		'performance-toolkit-card-showcase' => 'Preview reusable admin card layouts for settings, actions, and workflow-based interfaces.',
+		'pivot-performance-toolkit-card-showcase' => 'Preview reusable admin card layouts for settings, actions, and workflow-based interfaces.',
 	);
 
 	/**
@@ -65,7 +69,7 @@ final class AdminShell {
 		if ( '' !== $tab_override && isset( $pages[ $tab_override ] ) ) {
 			$current_page_slug = $tab_override;
 		} else {
-			$current_page_slug = self::PAGE_BY_SECTION[ $current_section ] ?? 'performance-toolkit';
+			$current_page_slug = self::PAGE_BY_SECTION[ $current_section ] ?? 'pivot-performance-toolkit';
 		}
 
 		$current_page = $pages[ $current_page_slug ] ?? null;
@@ -75,17 +79,17 @@ final class AdminShell {
 		}
 
 		$page_layout = 'two-col';
-		if ( 'performance-toolkit' === $current_page_slug ) {
+		if ( 'pivot-performance-toolkit' === $current_page_slug ) {
 			$page_layout = 'overview';
-		} elseif ( in_array( $current_page_slug, array( 'performance-toolkit-system-import-export', 'performance-toolkit-system-maintenance' ), true ) ) {
+		} elseif ( in_array( $current_page_slug, array( 'pivot-performance-toolkit-system-import-export', 'pivot-performance-toolkit-system-maintenance' ), true ) ) {
 			$page_layout = 'tools';
-		} elseif ( 'performance-toolkit-card-showcase' === $current_page_slug ) {
+		} elseif ( 'pivot-performance-toolkit-card-showcase' === $current_page_slug ) {
 			$page_layout = 'overview';
 		}
 
 		$shell_data = array(
-			'icon_url'         => PERFORMANCE_TOOLKIT_URL . 'src/img/performance-toolkit-logo.png',
-			'plugin_version'   => defined( 'PERFORMANCE_TOOLKIT_VERSION' ) ? PERFORMANCE_TOOLKIT_VERSION : '',
+			'icon_url'         => PIVOT_PERFORMANCE_TOOLKIT_URL . 'src/img/pivot-performance-toolkit-logo.png',
+			'plugin_version'   => defined( 'PIVOT_PERFORMANCE_TOOLKIT_VERSION' ) ? PIVOT_PERFORMANCE_TOOLKIT_VERSION : '',
 			'help_url'         => 'https://docs.wpperformancetoolkit.com/',
 			'primary_nav'      => self::buildPrimaryNav( $current_section ),
 			'secondary_nav'    => self::buildSecondaryNav( $current_section, $current_page_slug ),
@@ -116,38 +120,38 @@ final class AdminShell {
 		$items = array(
 			array(
 				'key'   => 'overview',
-				'label' => __( 'Overview', 'performance-toolkit' ),
+				'label' => __( 'Overview', 'pivot-performance-toolkit' ),
 				'icon'  => 'layout-dashboard',
 			),
 			array(
 				'key'   => 'caching',
-				'label' => __( 'Caching', 'performance-toolkit' ),
+				'label' => __( 'Caching', 'pivot-performance-toolkit' ),
 				'icon'  => 'rocket',
 			),
 			array(
 				'key'   => 'optimization',
-				'label' => __( 'Optimization', 'performance-toolkit' ),
+				'label' => __( 'Optimization', 'pivot-performance-toolkit' ),
 				'icon'  => 'sliders-horizontal',
 			),
 			array(
 				'key'   => 'database',
-				'label' => __( 'Database', 'performance-toolkit' ),
+				'label' => __( 'Database', 'pivot-performance-toolkit' ),
 				'icon'  => 'database',
 			),
 			array(
 				'key'   => 'system',
-				'label' => __( 'System', 'performance-toolkit' ),
+				'label' => __( 'System', 'pivot-performance-toolkit' ),
 				'icon'  => 'wrench',
 			),
 			array(
 				'key'   => 'settings',
-				'label' => __( 'Settings', 'performance-toolkit' ),
+				'label' => __( 'Settings', 'pivot-performance-toolkit' ),
 				'icon'  => 'dashicons-admin-settings',
 			),
 		);
 
 		foreach ( $items as &$item ) {
-			$item['url']    = add_query_arg( 'section', $item['key'], admin_url( 'admin.php?page=performance-toolkit' ) );
+			$item['url']    = add_query_arg( 'section', $item['key'], admin_url( 'admin.php?page=pivot-performance-toolkit' ) );
 			$item['active'] = $item['key'] === $current_section;
 		}
 		unset( $item );
@@ -164,20 +168,20 @@ final class AdminShell {
 				'caching',
 				array(
 					array(
-						'slug'  => 'performance-toolkit-cache',
-						'label' => __( 'Page Cache', 'performance-toolkit' ),
+						'slug'  => 'pivot-performance-toolkit-cache',
+						'label' => __( 'Page Cache', 'pivot-performance-toolkit' ),
 					),
 					array(
-						'slug'  => 'performance-toolkit-browser-cache',
-						'label' => __( 'Browser Cache', 'performance-toolkit' ),
+						'slug'  => 'pivot-performance-toolkit-browser-cache',
+						'label' => __( 'Browser Cache', 'pivot-performance-toolkit' ),
 					),
 					array(
-						'slug'  => 'performance-toolkit-cdn-integrations',
-						'label' => __( 'CDN', 'performance-toolkit' ),
+						'slug'  => 'pivot-performance-toolkit-cdn-integrations',
+						'label' => __( 'CDN', 'pivot-performance-toolkit' ),
 					),
 					array(
-						'slug'  => 'performance-toolkit-advanced-rules',
-						'label' => __( 'Rules', 'performance-toolkit' ),
+						'slug'  => 'pivot-performance-toolkit-advanced-rules',
+						'label' => __( 'Rules', 'pivot-performance-toolkit' ),
 					),
 				),
 				$current_page_slug
@@ -189,20 +193,20 @@ final class AdminShell {
 				'optimization',
 				array(
 					array(
-						'slug'  => 'performance-toolkit-file-optimization',
-						'label' => __( 'Files', 'performance-toolkit' ),
+						'slug'  => 'pivot-performance-toolkit-file-optimization',
+						'label' => __( 'Files', 'pivot-performance-toolkit' ),
 					),
 					array(
-						'slug'  => 'performance-toolkit-media-optimization',
-						'label' => __( 'Media', 'performance-toolkit' ),
+						'slug'  => 'pivot-performance-toolkit-media-optimization',
+						'label' => __( 'Media', 'pivot-performance-toolkit' ),
 					),
 					array(
-						'slug'  => 'performance-toolkit-performance',
-						'label' => __( 'Performance', 'performance-toolkit' ),
+						'slug'  => 'pivot-performance-toolkit-performance',
+						'label' => __( 'Performance', 'pivot-performance-toolkit' ),
 					),
 					array(
-						'slug'  => 'performance-toolkit-assets',
-						'label' => __( 'Assets', 'performance-toolkit' ),
+						'slug'  => 'pivot-performance-toolkit-assets',
+						'label' => __( 'Assets', 'pivot-performance-toolkit' ),
 					),
 				),
 				$current_page_slug
@@ -214,12 +218,12 @@ final class AdminShell {
 				'database',
 				array(
 					array(
-						'slug'  => 'performance-toolkit-database',
-						'label' => __( 'Overview', 'performance-toolkit' ),
+						'slug'  => 'pivot-performance-toolkit-database',
+						'label' => __( 'Overview', 'pivot-performance-toolkit' ),
 					),
 					array(
-						'slug'  => 'performance-toolkit-database-table',
-						'label' => __( 'Tables', 'performance-toolkit' ),
+						'slug'  => 'pivot-performance-toolkit-database-table',
+						'label' => __( 'Tables', 'pivot-performance-toolkit' ),
 					),
 				),
 				$current_page_slug
@@ -231,16 +235,16 @@ final class AdminShell {
 				'system',
 				array(
 					array(
-						'slug'  => 'performance-toolkit-system-status',
-						'label' => __( 'Status', 'performance-toolkit' ),
+						'slug'  => 'pivot-performance-toolkit-system-status',
+						'label' => __( 'Status', 'pivot-performance-toolkit' ),
 					),
 					array(
-						'slug'  => 'performance-toolkit-system-import-export',
-						'label' => __( 'Import/Export', 'performance-toolkit' ),
+						'slug'  => 'pivot-performance-toolkit-system-import-export',
+						'label' => __( 'Import/Export', 'pivot-performance-toolkit' ),
 					),
 					array(
-						'slug'  => 'performance-toolkit-system-maintenance',
-						'label' => __( 'Maintenance', 'performance-toolkit' ),
+						'slug'  => 'pivot-performance-toolkit-system-maintenance',
+						'label' => __( 'Maintenance', 'pivot-performance-toolkit' ),
 					),
 				),
 				$current_page_slug
@@ -259,7 +263,7 @@ final class AdminShell {
 	 * @return array<int, array<string, mixed>>
 	 */
 	private static function withSecondaryState( string $section, array $items, string $current_page_slug ): array {
-		$base_url = add_query_arg( 'section', $section, admin_url( 'admin.php?page=performance-toolkit' ) );
+		$base_url = add_query_arg( 'section', $section, admin_url( 'admin.php?page=pivot-performance-toolkit' ) );
 
 		foreach ( $items as &$item ) {
 			$item['url']    = add_query_arg( 'tab', $item['slug'], $base_url );
@@ -271,94 +275,94 @@ final class AdminShell {
 	}
 
 	private static function resolvePageHeading( string $current_page_slug, string $current_section ): string {
-		if ( 'performance-toolkit-card-showcase' === $current_page_slug ) {
-			return __( 'Card Showcase', 'performance-toolkit' );
+		if ( 'pivot-performance-toolkit-card-showcase' === $current_page_slug ) {
+			return __( 'Card Showcase', 'pivot-performance-toolkit' );
 		}
 
-		if ( 'performance-toolkit-system-status' === $current_page_slug ) {
-			return __( 'System Status', 'performance-toolkit' );
+		if ( 'pivot-performance-toolkit-system-status' === $current_page_slug ) {
+			return __( 'System Status', 'pivot-performance-toolkit' );
 		}
 
-		if ( 'performance-toolkit-system-import-export' === $current_page_slug ) {
-			return __( 'Import/Export', 'performance-toolkit' );
+		if ( 'pivot-performance-toolkit-system-import-export' === $current_page_slug ) {
+			return __( 'Import/Export', 'pivot-performance-toolkit' );
 		}
 
-		if ( 'performance-toolkit-system-maintenance' === $current_page_slug ) {
-			return __( 'Maintenance', 'performance-toolkit' );
+		if ( 'pivot-performance-toolkit-system-maintenance' === $current_page_slug ) {
+			return __( 'Maintenance', 'pivot-performance-toolkit' );
 		}
 
-		if ( 'performance-toolkit-performance' === $current_page_slug ) {
-			return __( 'Performance', 'performance-toolkit' );
+		if ( 'pivot-performance-toolkit-performance' === $current_page_slug ) {
+			return __( 'Performance', 'pivot-performance-toolkit' );
 		}
 
-		if ( 'performance-toolkit-assets' === $current_page_slug ) {
-			return __( 'Assets', 'performance-toolkit' );
+		if ( 'pivot-performance-toolkit-assets' === $current_page_slug ) {
+			return __( 'Assets', 'pivot-performance-toolkit' );
 		}
 
-		if ( 'performance-toolkit-settings' === $current_page_slug ) {
-			return __( 'Settings', 'performance-toolkit' );
+		if ( 'pivot-performance-toolkit-settings' === $current_page_slug ) {
+			return __( 'Settings', 'pivot-performance-toolkit' );
 		}
 
 		switch ( $current_section ) {
 			case 'caching':
-				return __( 'Caching', 'performance-toolkit' );
+				return __( 'Caching', 'pivot-performance-toolkit' );
 			case 'optimization':
-				return __( 'Optimization', 'performance-toolkit' );
+				return __( 'Optimization', 'pivot-performance-toolkit' );
 			case 'database':
-				return __( 'Database', 'performance-toolkit' );
+				return __( 'Database', 'pivot-performance-toolkit' );
 			case 'settings':
-				return __( 'Settings', 'performance-toolkit' );
+				return __( 'Settings', 'pivot-performance-toolkit' );
 			case 'system':
-				return __( 'System', 'performance-toolkit' );
+				return __( 'System', 'pivot-performance-toolkit' );
 			case 'overview':
 			default:
-				return __( 'Overview', 'performance-toolkit' );
+				return __( 'Overview', 'pivot-performance-toolkit' );
 		}
 	}
 
 	private static function resolvePageDescription( string $current_page_slug, string $current_section ): string {
-		if ( 'performance-toolkit-card-showcase' === $current_page_slug ) {
-			return __( 'Preview reusable admin card layouts for settings, actions, and workflow-based interfaces.', 'performance-toolkit' );
+		if ( 'pivot-performance-toolkit-card-showcase' === $current_page_slug ) {
+			return __( 'Preview reusable admin card layouts for settings, actions, and workflow-based interfaces.', 'pivot-performance-toolkit' );
 		}
 
-		if ( 'performance-toolkit-system-status' === $current_page_slug ) {
-			return __( 'Inspect runtime, server, and filesystem health signals for troubleshooting.', 'performance-toolkit' );
+		if ( 'pivot-performance-toolkit-system-status' === $current_page_slug ) {
+			return __( 'Inspect runtime, server, and filesystem health signals for troubleshooting.', 'pivot-performance-toolkit' );
 		}
 
-		if ( 'performance-toolkit-system-import-export' === $current_page_slug ) {
-			return __( 'Export and import configuration packages for migrations, backups, and standardized deployments.', 'performance-toolkit' );
+		if ( 'pivot-performance-toolkit-system-import-export' === $current_page_slug ) {
+			return __( 'Export and import configuration packages for migrations, backups, and standardized deployments.', 'pivot-performance-toolkit' );
 		}
 
-		if ( 'performance-toolkit-system-maintenance' === $current_page_slug ) {
-			return __( 'Run maintenance operations such as clearing generated assets, setting uninstall policy, and resetting defaults.', 'performance-toolkit' );
+		if ( 'pivot-performance-toolkit-system-maintenance' === $current_page_slug ) {
+			return __( 'Run maintenance operations such as clearing generated assets, setting uninstall policy, and resetting defaults.', 'pivot-performance-toolkit' );
 		}
 
-		if ( 'performance-toolkit-performance' === $current_page_slug ) {
-			return __( 'Run website statistics tests and review performance metrics for selected pages and posts.', 'performance-toolkit' );
+		if ( 'pivot-performance-toolkit-performance' === $current_page_slug ) {
+			return __( 'Run website statistics tests and review performance metrics for selected pages and posts.', 'pivot-performance-toolkit' );
 		}
 
-		if ( 'performance-toolkit-assets' === $current_page_slug ) {
-			return __( 'Configure CSS and JavaScript delivery rules, exclusions, and optimization behavior.', 'performance-toolkit' );
+		if ( 'pivot-performance-toolkit-assets' === $current_page_slug ) {
+			return __( 'Configure CSS and JavaScript delivery rules, exclusions, and optimization behavior.', 'pivot-performance-toolkit' );
 		}
 
-		if ( 'performance-toolkit-settings' === $current_page_slug ) {
-			return __( 'Manage global plugin settings and defaults.', 'performance-toolkit' );
+		if ( 'pivot-performance-toolkit-settings' === $current_page_slug ) {
+			return __( 'Manage global plugin settings and defaults.', 'pivot-performance-toolkit' );
 		}
 
 		switch ( $current_section ) {
 			case 'caching':
-				return __( 'Configure page and browser caching behavior for faster page delivery.', 'performance-toolkit' );
+				return __( 'Configure page and browser caching behavior for faster page delivery.', 'pivot-performance-toolkit' );
 			case 'optimization':
-				return __( 'Tune file and media optimization settings to reduce payload size.', 'performance-toolkit' );
+				return __( 'Tune file and media optimization settings to reduce payload size.', 'pivot-performance-toolkit' );
 			case 'database':
-				return __( 'Review and clean database overhead to keep queries fast.', 'performance-toolkit' );
+				return __( 'Review and clean database overhead to keep queries fast.', 'pivot-performance-toolkit' );
 			case 'settings':
-				return __( 'Manage global plugin settings and defaults.', 'performance-toolkit' );
+				return __( 'Manage global plugin settings and defaults.', 'pivot-performance-toolkit' );
 			case 'system':
-				return __( 'Export, import, and maintenance utilities for advanced site operations.', 'performance-toolkit' );
+				return __( 'Export, import, and maintenance utilities for advanced site operations.', 'pivot-performance-toolkit' );
 			case 'overview':
 			default:
-				return __( 'View performance highlights and quick status details for your site.', 'performance-toolkit' );
+				return __( 'View performance highlights and quick status details for your site.', 'pivot-performance-toolkit' );
 		}
 	}
 }

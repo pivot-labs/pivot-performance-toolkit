@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Finder;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Finder;
 
 /**
  * Extends \SplFileInfo to support relative paths.

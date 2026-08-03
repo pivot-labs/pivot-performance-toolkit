@@ -2,12 +2,16 @@
 /**
  * Profile-based scoring thresholds.
  *
- * @package PerformanceToolkit
+ * @package PivotPerformanceToolkit
  */
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Utils;
+namespace PivotPerformanceToolkit\Utils;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 final class PerformanceProfileBands {
 

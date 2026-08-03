@@ -1,10 +1,10 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Container\Attributes;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Container\Attributes;
 
 use Attribute;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Container\ContextualAttribute;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\ContextualAttribute;
 
 #[Attribute(Attribute::TARGET_PARAMETER)]
 class Log implements ContextualAttribute
@@ -20,7 +20,7 @@ class Log implements ContextualAttribute
      * Resolve the log channel.
      *
      * @param  self  $attribute
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container  $container
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container  $container
      * @return \Psr\Log\LoggerInterface
      */
     public static function resolve(self $attribute, Container $container)

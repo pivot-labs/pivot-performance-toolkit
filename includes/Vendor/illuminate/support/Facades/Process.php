@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
 
 use Closure;
 use Illuminate\Process\Factory;
@@ -16,7 +16,7 @@ use Illuminate\Process\Factory;
  * @method static \Illuminate\Process\PendingProcess quietly()
  * @method static \Illuminate\Process\PendingProcess tty(bool $tty = true)
  * @method static \Illuminate\Process\PendingProcess options(array $options)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Process\ProcessResult run(array|string|null $command = null, callable|null $output = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Process\ProcessResult run(array|string|null $command = null, callable|null $output = null)
  * @method static \Illuminate\Process\InvokedProcess start(array|string|null $command = null, callable|null $output = null)
  * @method static bool supportsTty()
  * @method static \Illuminate\Process\PendingProcess withFakeHandlers(array $fakeHandlers)
@@ -26,8 +26,8 @@ use Illuminate\Process\Factory;
  * @method static \Illuminate\Process\FakeProcessDescription describe()
  * @method static \Illuminate\Process\FakeProcessSequence sequence(array $processes = [])
  * @method static bool isRecording()
- * @method static \Illuminate\Process\Factory recordIfRecording(\Illuminate\Process\PendingProcess $process, \PerformanceToolkit\Vendor\Illuminate\Contracts\Process\ProcessResult $result)
- * @method static \Illuminate\Process\Factory record(\Illuminate\Process\PendingProcess $process, \PerformanceToolkit\Vendor\Illuminate\Contracts\Process\ProcessResult $result)
+ * @method static \Illuminate\Process\Factory recordIfRecording(\Illuminate\Process\PendingProcess $process, \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Process\ProcessResult $result)
+ * @method static \Illuminate\Process\Factory record(\Illuminate\Process\PendingProcess $process, \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Process\ProcessResult $result)
  * @method static \Illuminate\Process\Factory preventStrayProcesses(bool $prevent = true)
  * @method static bool preventingStrayProcesses()
  * @method static \Illuminate\Process\Factory assertRan(\Closure|string $callback)
@@ -36,7 +36,7 @@ use Illuminate\Process\Factory;
  * @method static \Illuminate\Process\Factory assertDidntRun(\Closure|string $callback)
  * @method static \Illuminate\Process\Factory assertNothingRan()
  * @method static \Illuminate\Process\Pool pool(callable $callback)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Process\ProcessResult pipe(callable|array $callback, callable|null $output = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Process\ProcessResult pipe(callable|array $callback, callable|null $output = null)
  * @method static \Illuminate\Process\ProcessPoolResults concurrently(callable $callback, callable|null $output = null)
  * @method static \Illuminate\Process\PendingProcess newPendingProcess()
  * @method static void macro(string $name, object|callable $macro)
@@ -68,7 +68,7 @@ class Process extends Facade
      */
     public static function fake(Closure|array|null $callback = null)
     {
-        return performancetoolkit_vendor_tap(static::getFacadeRoot(), function ($fake) use ($callback) {
+        return pivotperformancetoolkit_vendor_tap(static::getFacadeRoot(), function ($fake) use ($callback) {
             static::swap($fake->fake($callback));
         });
     }

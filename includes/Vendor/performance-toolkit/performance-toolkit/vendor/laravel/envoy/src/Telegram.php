@@ -1,8 +1,8 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Laravel\Envoy;
+namespace PivotPerformanceToolkit\Vendor\Laravel\Envoy;
 
-use PerformanceToolkit\Vendor\GuzzleHttp\Client;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Client;
 
 class Telegram
 {
@@ -67,7 +67,7 @@ class Telegram
      * @param  string  $chat
      * @param  string  $message
      * @param  array  $options
-     * @return \PerformanceToolkit\Vendor\Laravel\Envoy\Telegram
+     * @return \PivotPerformanceToolkit\Vendor\Laravel\Envoy\Telegram
      */
     public static function make($token, $chat, $message = null, $options = [])
     {

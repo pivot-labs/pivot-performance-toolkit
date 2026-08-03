@@ -1,9 +1,9 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp;
 
-use PerformanceToolkit\Vendor\GuzzleHttp\Promise\PromiseInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Promise\PromiseInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
 /**
  * Prepares requests that contain a body, adding the Content-Length,
  * Content-Type, and Expect headers.
@@ -34,7 +34,7 @@ class PrepareBodyMiddleware
         // Add a default content-type if possible.
         if (!$request->hasHeader('Content-Type')) {
             if ($uri = $request->getBody()->getMetadata('uri')) {
-                if (is_string($uri) && $type = \PerformanceToolkit\Vendor\GuzzleHttp\Psr7\MimeType::fromFilename($uri)) {
+                if (is_string($uri) && $type = \PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7\MimeType::fromFilename($uri)) {
                     $modify['set_headers']['Content-Type'] = $type;
                 }
             }
@@ -50,7 +50,7 @@ class PrepareBodyMiddleware
         }
         // Add the expect header if needed.
         $this->addExpectHeader($request, $options, $modify);
-        return $fn(\PerformanceToolkit\Vendor\GuzzleHttp\Psr7\Utils::modifyRequest($request, $modify), $options);
+        return $fn(\PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7\Utils::modifyRequest($request, $modify), $options);
     }
     /**
      * Add expect header

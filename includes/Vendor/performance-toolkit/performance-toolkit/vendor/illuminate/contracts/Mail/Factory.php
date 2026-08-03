@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Mail;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Mail;
 
 interface Factory
 {
@@ -8,7 +8,7 @@ interface Factory
      * Get a mailer instance by name.
      *
      * @param  \UnitEnum|string|null  $name
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailer
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailer
      */
     public function mailer($name = null);
 }

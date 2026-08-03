@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Bus;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Bus;
 
 interface Dispatcher
 {
@@ -44,7 +44,7 @@ interface Dispatcher
     /**
      * Create a new chain of queueable jobs.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Support\Collection|array|null  $jobs
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection|array|null  $jobs
      * @return mixed
      */
     public function chain($jobs = null);

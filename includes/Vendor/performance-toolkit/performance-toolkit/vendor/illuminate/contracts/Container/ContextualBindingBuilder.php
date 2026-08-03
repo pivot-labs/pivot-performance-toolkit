@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Container;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container;
 
 interface ContextualBindingBuilder
 {

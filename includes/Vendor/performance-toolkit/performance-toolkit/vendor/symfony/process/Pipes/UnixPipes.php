@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Process\Pipes;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Process\Pipes;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Process\Process;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Process\Process;
 
 /**
  * UnixPipes implementation uses unix pipes as handles.

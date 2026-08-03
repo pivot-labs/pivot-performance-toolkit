@@ -1,10 +1,10 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Laravel\Envoy\Console;
+namespace PivotPerformanceToolkit\Vendor\Laravel\Envoy\Console;
 
-use PerformanceToolkit\Vendor\Laravel\Envoy\Compiler;
-use PerformanceToolkit\Vendor\Laravel\Envoy\TaskContainer;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Command\Command as SymfonyCommand;
+use PivotPerformanceToolkit\Vendor\Laravel\Envoy\Compiler;
+use PivotPerformanceToolkit\Vendor\Laravel\Envoy\TaskContainer;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Command\Command as SymfonyCommand;
 
 class TasksCommand extends SymfonyCommand
 {
@@ -42,7 +42,7 @@ class TasksCommand extends SymfonyCommand
     /**
      * List the tasks from the container.
      *
-     * @param  \PerformanceToolkit\Vendor\Laravel\Envoy\TaskContainer  $container
+     * @param  \PivotPerformanceToolkit\Vendor\Laravel\Envoy\TaskContainer  $container
      * @return void
      */
     protected function listTasks($container)
@@ -57,7 +57,7 @@ class TasksCommand extends SymfonyCommand
     /**
      * List the macros from the container.
      *
-     * @param  \PerformanceToolkit\Vendor\Laravel\Envoy\TaskContainer  $container
+     * @param  \PivotPerformanceToolkit\Vendor\Laravel\Envoy\TaskContainer  $container
      * @return void
      */
     protected function listMacros($container)
@@ -72,7 +72,7 @@ class TasksCommand extends SymfonyCommand
     /**
      * Load the task container instance with the Envoy file.
      *
-     * @return \PerformanceToolkit\Vendor\Laravel\Envoy\TaskContainer
+     * @return \PivotPerformanceToolkit\Vendor\Laravel\Envoy\TaskContainer
      */
     protected function loadTaskContainer()
     {

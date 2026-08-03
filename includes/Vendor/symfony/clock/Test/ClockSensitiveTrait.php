@@ -9,16 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Clock\Test;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Clock\Test;
 
 use PHPUnit\Framework\Attributes\After;
 use PHPUnit\Framework\Attributes\Before;
 use PHPUnit\Framework\Attributes\BeforeClass;
-use PerformanceToolkit\Vendor\Symfony\Component\Clock\Clock;
-use PerformanceToolkit\Vendor\Symfony\Component\Clock\ClockInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Clock\MockClock;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Clock\Clock;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Clock\ClockInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Clock\MockClock;
 
-use function PerformanceToolkit\Vendor\Symfony\Component\Clock\now;
+use function PivotPerformanceToolkit\Vendor\Symfony\Component\Clock\now;
 
 /**
  * Helps with mocking the time in your test cases.

@@ -1,12 +1,12 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\View;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\View;
 
 use Closure;
-use PerformanceToolkit\Vendor\Illuminate\Container\Container;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\View\View as ViewContract;
-use PerformanceToolkit\Vendor\Illuminate\Support\Collection;
+use PivotPerformanceToolkit\Vendor\Illuminate\Container\Container;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View\View as ViewContract;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection;
 use ReflectionClass;
 use ReflectionMethod;
 use ReflectionProperty;
@@ -30,14 +30,14 @@ abstract class Component
     /**
      * The component attributes.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\View\ComponentAttributeBag
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\View\ComponentAttributeBag
      */
     public $attributes;
 
     /**
      * The view factory instance, if any.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Contracts\View\Factory|null
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View\Factory|null
      */
     protected static $factory;
 
@@ -86,7 +86,7 @@ abstract class Component
     /**
      * Get the view / view contents that represent the component.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\View\View|\PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable|\Closure|string
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View\View|\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable|\Closure|string
      */
     abstract public function render();
 
@@ -136,7 +136,7 @@ abstract class Component
     /**
      * Resolve the Blade view or view file that should be used when rendering the component.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\View\View|\PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable|\Closure|string
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View\View|\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable|\Closure|string
      */
     public function resolveView()
     {
@@ -188,7 +188,7 @@ abstract class Component
     /**
      * Create a Blade view with the raw component string content.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\View\Factory  $factory
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View\Factory  $factory
      * @param  string  $contents
      * @return string
      */
@@ -296,7 +296,7 @@ abstract class Component
      * Create an invokable, toStringable variable for the given component method.
      *
      * @param  string  $method
-     * @return \PerformanceToolkit\Vendor\Illuminate\View\InvokableComponentVariable
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\View\InvokableComponentVariable
      */
     protected function createInvokableVariable(string $method)
     {
@@ -372,7 +372,7 @@ abstract class Component
      * Get a new attribute bag instance.
      *
      * @param  array  $attributes
-     * @return \PerformanceToolkit\Vendor\Illuminate\View\ComponentAttributeBag
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\View\ComponentAttributeBag
      */
     protected function newAttributeBag(array $attributes = [])
     {
@@ -393,9 +393,9 @@ abstract class Component
      * Get the evaluated view contents for the given view.
      *
      * @param  string|null  $view
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable|array  $data
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable|array  $data
      * @param  array  $mergeData
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\View\View
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View\View
      */
     public function view($view, $data = [], $mergeData = [])
     {
@@ -405,7 +405,7 @@ abstract class Component
     /**
      * Get the view factory instance.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\View\Factory
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View\Factory
      */
     protected function factory()
     {

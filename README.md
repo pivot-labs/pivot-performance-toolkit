@@ -1,10 +1,10 @@
-# Performance Toolkit
+# Pivot Performance Toolkit
 
 A modular WordPress plugin focused on practical, safe-by-default performance optimizations.
 
 ## Current MVP Features
 
-- Dedicated top-level admin menu (`Performance Toolkit`), positioned under `Settings`
+- Dedicated top-level admin menu (`Pivot Performance Toolkit`), positioned under `Settings`
 - Disk-based page cache for anonymous GET requests
 - Script defer optimization (with safe handle exclusions)
 - Lazy-loading for post content images missing a `loading` attribute
@@ -26,7 +26,7 @@ A modular WordPress plugin focused on practical, safe-by-default performance opt
 
 ## Structure
 
-- `performance-toolkit.php` - plugin bootstrap and lifecycle hooks
+- `pivot-performance-toolkit.php` - plugin bootstrap and lifecycle hooks
 - `includes/Core` - plugin bootstrap, settings, lifecycle
 - `includes/Admin` - menu router, shared shell, and dedicated admin page classes
 - `includes/Cache` - page cache module
@@ -37,7 +37,7 @@ A modular WordPress plugin focused on practical, safe-by-default performance opt
 ## Local Development
 
 ```bash
-cd /Users/jeffshaikh/Herd/wp-performance-toolkit/wp-content/plugins/performance-toolkit
+cd /Users/jeffshaikh/Herd/wp-pivot-performance-toolkit/wp-content/plugins/pivot-performance-toolkit
 composer install
 composer dump-autoload
 composer lint

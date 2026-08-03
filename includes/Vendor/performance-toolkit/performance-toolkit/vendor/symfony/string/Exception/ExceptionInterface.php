@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\String\Exception;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\String\Exception;
 
 interface ExceptionInterface extends \Throwable
 {

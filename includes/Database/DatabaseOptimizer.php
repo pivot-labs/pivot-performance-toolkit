@@ -2,12 +2,16 @@
 /**
  * Database optimization operations.
  *
- * @package PerformanceToolkit
+ * @package PivotPerformanceToolkit
  */
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Database;
+namespace PivotPerformanceToolkit\Database;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 final class DatabaseOptimizer {
 

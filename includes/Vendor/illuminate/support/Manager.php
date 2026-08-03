@@ -1,9 +1,9 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
 use Closure;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container;
 use InvalidArgumentException;
 
 abstract class Manager
@@ -11,14 +11,14 @@ abstract class Manager
     /**
      * The container instance.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container
      */
     protected $container;
 
     /**
      * The configuration repository instance.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Contracts\Config\Repository
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Config\Repository
      */
     protected $config;
 
@@ -39,7 +39,7 @@ abstract class Manager
     /**
      * Create a new manager instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container  $container
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container  $container
      * @return void
      */
     public function __construct(Container $container)
@@ -147,7 +147,7 @@ abstract class Manager
     /**
      * Get the container instance used by the manager.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container
      */
     public function getContainer()
     {
@@ -157,7 +157,7 @@ abstract class Manager
     /**
      * Set the container instance used by the manager.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container  $container
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container  $container
      * @return $this
      */
     public function setContainer(Container $container)

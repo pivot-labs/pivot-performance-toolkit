@@ -64,7 +64,7 @@
     }
 
     function setMetric(container, key, value) {
-        var target = bySelector(container, '[data-ptk-metric="' + key + '"]');
+        var target = bySelector(container, '[data-pivot-performance-toolkit-metric="' + key + '"]');
 
         if (!target) {
             return;
@@ -74,7 +74,7 @@
     }
 
     function setCacheHitMetricTone(container, value) {
-        var target = bySelector(container, '[data-ptk-metric="page_cache_hit"]');
+        var target = bySelector(container, '[data-pivot-performance-toolkit-metric="page_cache_hit"]');
         var n = Number(value);
 
         if (!target) {
@@ -92,7 +92,7 @@
     }
 
     function setCacheHitMessage(container, value) {
-        var target = bySelector(container, '[data-ptk-cache-message]');
+        var target = bySelector(container, '[data-pivot-performance-toolkit-cache-message]');
         var n = Number(value);
 
         if (!target) {
@@ -113,7 +113,7 @@
     }
 
     function setCacheStatusCardTone(container, value) {
-        var target = bySelector(container, '#ptk-page-cache-status');
+        var target = bySelector(container, '#pivot-performance-toolkit-page-cache-status');
         var n = Number(value);
 
         if (!target) {
@@ -174,7 +174,7 @@
     }
 
     function setScoreDonut(container, score) {
-        var target = bySelector(container, '[data-ptk-score-donut]');
+        var target = bySelector(container, '[data-pivot-performance-toolkit-score-donut]');
         var normalized = Math.max(0, Math.min(100, Math.round(Number(score) || 0)));
         var band = scoreBand(normalized);
 
@@ -370,7 +370,7 @@
     }
 
     function setMetricStatus(container, key, value) {
-        var target = bySelector(container, '[data-ptk-metric-status="' + key + '"]');
+        var target = bySelector(container, '[data-pivot-performance-toolkit-metric-status="' + key + '"]');
 
         if (!target) {
             return;
@@ -766,11 +766,11 @@
     }
 
     function clearProbeCookie() {
-        document.cookie = 'ptk_perf_probe=; path=/; SameSite=Lax; max-age=0; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+        document.cookie = 'pivot_performance_toolkit_perf_probe=; path=/; SameSite=Lax; max-age=0; expires=Thu, 01 Jan 1970 00:00:00 GMT';
     }
 
     function ensureProbeFrame() {
-        var id = 'ptk-performance-probe-frame';
+        var id = 'pivot-performance-toolkit-performance-probe-frame';
         var frame = document.getElementById(id);
 
         if (!frame) {
@@ -795,7 +795,7 @@
         var features = 'width=1280,height=800,left=99999,top=0';
 
         try {
-            return window.open(url, token || 'ptk-performance-probe', features);
+            return window.open(url, token || 'pivot-performance-toolkit-performance-probe', features);
         } catch (e) {
             return null;
         }
@@ -804,14 +804,14 @@
     function buildProbeUrl(baseUrl) {
         try {
             var parsed = new URL(baseUrl, window.location.origin);
-            parsed.searchParams.delete('ptk_perf_probe');
-            parsed.searchParams.delete('ptk_perf_token');
+            parsed.searchParams.delete('pivot_performance_toolkit_perf_probe');
+            parsed.searchParams.delete('pivot_performance_toolkit_perf_token');
             parsed.hash = '';
             return parsed.toString();
         } catch (e) {
             return String(baseUrl)
-                .replace(/([?&])ptk_perf_probe=[^&]*&?/g, '$1')
-                .replace(/([?&])ptk_perf_token=[^&]*&?/g, '$1')
+                .replace(/([?&])pivot_performance_toolkit_perf_probe=[^&]*&?/g, '$1')
+                .replace(/([?&])pivot_performance_toolkit_perf_token=[^&]*&?/g, '$1')
                 .replace(/#.*$/, '')
                 .replace(/[?&]$/, '');
         }
@@ -819,7 +819,7 @@
 
     function init() {
         var cfg = (typeof window.ptkPerfTest === 'object' && window.ptkPerfTest) ? window.ptkPerfTest : null;
-        var card = document.querySelector('[data-ptk-performance-test]');
+        var card = document.querySelector('[data-pivot-performance-toolkit-performance-test]');
 
         TEST_I18N = (cfg && cfg.i18n && typeof cfg.i18n === 'object') ? cfg.i18n : {};
 
@@ -827,9 +827,9 @@
             return;
         }
 
-        var runButton = bySelector(card, '[data-ptk-run-test]');
-        var statusEl = bySelector(card, '[data-ptk-status]');
-        var urlInput = bySelector(card, '#ptk-test-url');
+        var runButton = bySelector(card, '[data-pivot-performance-toolkit-run-test]');
+        var statusEl = bySelector(card, '[data-pivot-performance-toolkit-status]');
+        var urlInput = bySelector(card, '#pivot-performance-toolkit-test-url');
 
         if (!runButton || !statusEl || !urlInput) {
             return;
@@ -862,7 +862,7 @@
 
                     // Set the probe cookie so the cache drop-in serves cached HTML to this request
                     // and injects the metrics-collection script into it.
-                    document.cookie = 'ptk_perf_probe=' + encodeURIComponent(token) + '; path=/; SameSite=Lax; max-age=120';
+                    document.cookie = 'pivot_performance_toolkit_perf_probe=' + encodeURIComponent(token) + '; path=/; SameSite=Lax; max-age=120';
 
                     var probeUrl = buildProbeUrl(startPayload.testUrl);
                     var probeWindow = openProbeWindow(probeUrl, token);

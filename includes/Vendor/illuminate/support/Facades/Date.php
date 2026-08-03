@@ -1,8 +1,8 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
 
-use PerformanceToolkit\Vendor\Illuminate\Support\DateFactory;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\DateFactory;
 
 /**
  * @see https://carbon.nesbot.com/docs/
@@ -13,20 +13,20 @@ use PerformanceToolkit\Vendor\Illuminate\Support\DateFactory;
  * @method static void useCallable(callable $callable)
  * @method static void useClass(string $dateClass)
  * @method static void useFactory(object $factory)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Carbon create($year = 0, $month = 1, $day = 1, $hour = 0, $minute = 0, $second = 0, $tz = null)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Carbon createFromDate($year = null, $month = null, $day = null, $tz = null)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Carbon|false createFromFormat($format, $time, $tz = null)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Carbon createFromTime($hour = 0, $minute = 0, $second = 0, $tz = null)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Carbon createFromTimeString($time, $tz = null)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Carbon createFromTimestamp($timestamp, $tz = null)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Carbon createFromTimestampMs($timestamp, $tz = null)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Carbon createFromTimestampUTC($timestamp)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Carbon createMidnightDate($year = null, $month = null, $day = null, $tz = null)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Carbon|false createSafe($year = null, $month = null, $day = null, $hour = null, $minute = null, $second = null, $tz = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon create($year = 0, $month = 1, $day = 1, $hour = 0, $minute = 0, $second = 0, $tz = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon createFromDate($year = null, $month = null, $day = null, $tz = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon|false createFromFormat($format, $time, $tz = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon createFromTime($hour = 0, $minute = 0, $second = 0, $tz = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon createFromTimeString($time, $tz = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon createFromTimestamp($timestamp, $tz = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon createFromTimestampMs($timestamp, $tz = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon createFromTimestampUTC($timestamp)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon createMidnightDate($year = null, $month = null, $day = null, $tz = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon|false createSafe($year = null, $month = null, $day = null, $hour = null, $minute = null, $second = null, $tz = null)
  * @method static void disableHumanDiffOption($humanDiffOption)
  * @method static void enableHumanDiffOption($humanDiffOption)
  * @method static mixed executeWithLocale($locale, $func)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Carbon fromSerialized($value)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon fromSerialized($value)
  * @method static array getAvailableLocales()
  * @method static array getDays()
  * @method static int getHumanDiffOptions()
@@ -34,8 +34,8 @@ use PerformanceToolkit\Vendor\Illuminate\Support\DateFactory;
  * @method static array getLastErrors()
  * @method static string getLocale()
  * @method static int getMidDayAt()
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Carbon|null getTestNow()
- * @method static \PerformanceToolkit\Vendor\Symfony\Component\Translation\TranslatorInterface getTranslator()
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon|null getTestNow()
+ * @method static \PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\TranslatorInterface getTranslator()
  * @method static int getWeekEndsAt()
  * @method static int getWeekStartsAt()
  * @method static array getWeekendDays()
@@ -43,7 +43,7 @@ use PerformanceToolkit\Vendor\Illuminate\Support\DateFactory;
  * @method static bool hasMacro($name)
  * @method static bool hasRelativeKeywords($time)
  * @method static bool hasTestNow()
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Carbon instance($date)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon instance($date)
  * @method static bool isImmutable()
  * @method static bool isModifiableUnit($unit)
  * @method static bool isMutable()
@@ -54,12 +54,12 @@ use PerformanceToolkit\Vendor\Illuminate\Support\DateFactory;
  * @method static bool localeHasPeriodSyntax($locale)
  * @method static bool localeHasShortUnits($locale)
  * @method static void macro($name, $macro)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Carbon|null make($var)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Carbon maxValue()
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Carbon minValue()
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon|null make($var)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon maxValue()
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon minValue()
  * @method static void mixin($mixin)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Carbon now($tz = null)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Carbon parse($time = null, $tz = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon now($tz = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon parse($time = null, $tz = null)
  * @method static string pluralUnit(string $unit)
  * @method static void resetMonthsOverflow()
  * @method static void resetToStringFormat()
@@ -70,7 +70,7 @@ use PerformanceToolkit\Vendor\Illuminate\Support\DateFactory;
  * @method static void setMidDayAt($hour)
  * @method static void setTestNow($testNow = null)
  * @method static void setToStringFormat($format)
- * @method static void setTranslator(\PerformanceToolkit\Vendor\Symfony\Component\Translation\TranslatorInterface $translator)
+ * @method static void setTranslator(\PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\TranslatorInterface $translator)
  * @method static void setUtf8($utf8)
  * @method static void setWeekEndsAt($day)
  * @method static void setWeekStartsAt($day)
@@ -78,14 +78,14 @@ use PerformanceToolkit\Vendor\Illuminate\Support\DateFactory;
  * @method static bool shouldOverflowMonths()
  * @method static bool shouldOverflowYears()
  * @method static string singularUnit(string $unit)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Carbon today($tz = null)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Carbon tomorrow($tz = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon today($tz = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon tomorrow($tz = null)
  * @method static void useMonthsOverflow($monthsOverflow = true)
  * @method static void useStrictMode($strictModeEnabled = true)
  * @method static void useYearsOverflow($yearsOverflow = true)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Carbon yesterday($tz = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon yesterday($tz = null)
  *
- * @see \PerformanceToolkit\Vendor\Illuminate\Support\DateFactory
+ * @see \PivotPerformanceToolkit\Vendor\Illuminate\Support\DateFactory
  */
 class Date extends Facade
 {

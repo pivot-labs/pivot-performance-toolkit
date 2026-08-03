@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation\Exception;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Exception;
 
 /**
  * Base InvalidArgumentException for the Translation component.

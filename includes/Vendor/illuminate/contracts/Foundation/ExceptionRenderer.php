@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Foundation;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Foundation;
 
 interface ExceptionRenderer
 {

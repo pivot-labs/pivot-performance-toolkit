@@ -1,13 +1,13 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes;
 
 use Closure;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Debug\ExceptionHandler;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Foundation\Testing\Concerns\WithoutExceptionHandlingHandler;
-use PerformanceToolkit\Vendor\Illuminate\Support\Collection;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\ForwardsCalls;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\ReflectsClosures;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\ForwardsCalls;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\ReflectsClosures;
 use Illuminate\Testing\Assert;
 use PHPUnit\Framework\Assert as PHPUnit;
 use PHPUnit\Framework\ExpectationFailedException;
@@ -37,7 +37,7 @@ class ExceptionHandlerFake implements ExceptionHandler, Fake
     /**
      * Create a new exception handler fake.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Debug\ExceptionHandler  $handler
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Debug\ExceptionHandler  $handler
      * @param  list<class-string<\Throwable>>  $exceptions
      * @return void
      */
@@ -51,7 +51,7 @@ class ExceptionHandlerFake implements ExceptionHandler, Fake
     /**
      * Get the underlying handler implementation.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\Debug\ExceptionHandler
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Debug\ExceptionHandler
      */
     public function handler()
     {
@@ -252,7 +252,7 @@ class ExceptionHandlerFake implements ExceptionHandler, Fake
     /**
      * Set the "original" handler that should be used by the fake.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Debug\ExceptionHandler  $handler
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Debug\ExceptionHandler  $handler
      * @return $this
      */
     public function setHandler(ExceptionHandler $handler)

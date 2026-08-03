@@ -1,9 +1,9 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp\Cookie;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp\Cookie;
 
-use PerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\ResponseInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\ResponseInterface;
 
 /**
  * Stores HTTP cookies.

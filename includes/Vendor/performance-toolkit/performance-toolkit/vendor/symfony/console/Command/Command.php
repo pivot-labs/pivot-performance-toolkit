@@ -9,23 +9,23 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Command;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Command;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Application;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Attribute\AsCommand;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Completion\CompletionInput;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Completion\CompletionSuggestions;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Completion\Suggestion;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\ExceptionInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\InvalidArgumentException;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\LogicException;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Helper\HelperInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Helper\HelperSet;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputArgument;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputDefinition;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputOption;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Application;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Attribute\AsCommand;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Completion\CompletionInput;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Completion\CompletionSuggestions;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Completion\Suggestion;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\ExceptionInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\InvalidArgumentException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\LogicException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Helper\HelperInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Helper\HelperSet;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputArgument;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputDefinition;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputOption;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Base class for all commands.

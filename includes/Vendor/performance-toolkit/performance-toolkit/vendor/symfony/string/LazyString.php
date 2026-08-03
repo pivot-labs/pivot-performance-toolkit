@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\String;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\String;
 
 /**
  * A string whose value is computed lazily by a callback.

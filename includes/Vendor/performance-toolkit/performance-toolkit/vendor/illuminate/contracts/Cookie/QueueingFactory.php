@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Cookie;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Cookie;
 
 interface QueueingFactory extends Factory
 {

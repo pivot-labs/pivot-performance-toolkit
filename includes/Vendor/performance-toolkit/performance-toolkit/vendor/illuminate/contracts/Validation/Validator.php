@@ -1,8 +1,8 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Validation;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Validation;
 
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\MessageProvider;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\MessageProvider;
 
 interface Validator extends MessageProvider
 {
@@ -59,7 +59,7 @@ interface Validator extends MessageProvider
     /**
      * Get all of the validation error messages.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\MessageBag
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\MessageBag
      */
     public function errors();
 }

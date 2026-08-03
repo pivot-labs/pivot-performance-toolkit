@@ -2,12 +2,16 @@
 /**
  * Module contract interface.
  *
- * @package PerformanceToolkit
+ * @package PivotPerformanceToolkit
  */
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Contracts;
+namespace PivotPerformanceToolkit\Contracts;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 interface ModuleInterface {
 

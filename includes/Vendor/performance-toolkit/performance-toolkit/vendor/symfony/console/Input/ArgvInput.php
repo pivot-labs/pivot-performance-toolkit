@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Input;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\RuntimeException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\RuntimeException;
 
 /**
  * ArgvInput represents an input coming from the CLI arguments.

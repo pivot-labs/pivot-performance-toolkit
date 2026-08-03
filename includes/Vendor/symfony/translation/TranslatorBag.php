@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Catalogue\AbstractOperation;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Catalogue\TargetOperation;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Catalogue\AbstractOperation;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Catalogue\TargetOperation;
 
 final class TranslatorBag implements TranslatorBagInterface
 {

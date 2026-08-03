@@ -1,8 +1,8 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp;
 
-use PerformanceToolkit\Vendor\Psr\Http\Message\MessageInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\MessageInterface;
 final class BodySummarizer implements BodySummarizerInterface
 {
     /**
@@ -18,6 +18,6 @@ final class BodySummarizer implements BodySummarizerInterface
      */
     public function summarize(MessageInterface $message): ?string
     {
-        return $this->truncateAt === null ? \PerformanceToolkit\Vendor\GuzzleHttp\Psr7\Message::bodySummary($message) : \PerformanceToolkit\Vendor\GuzzleHttp\Psr7\Message::bodySummary($message, $this->truncateAt);
+        return $this->truncateAt === null ? \PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7\Message::bodySummary($message) : \PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7\Message::bodySummary($message, $this->truncateAt);
     }
 }

@@ -9,26 +9,26 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace PerformanceToolkit\Vendor\Carbon\Traits;
+namespace PivotPerformanceToolkit\Vendor\Carbon\Traits;
 
 use BadMethodCallException;
-use PerformanceToolkit\Vendor\Carbon\Carbon;
-use PerformanceToolkit\Vendor\Carbon\CarbonInterface;
-use PerformanceToolkit\Vendor\Carbon\CarbonPeriod;
-use PerformanceToolkit\Vendor\Carbon\CarbonTimeZone;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\BadComparisonUnitException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\ImmutableException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\InvalidTimeZoneException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\UnitException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\UnknownGetterException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\UnknownMethodException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\UnknownSetterException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\UnknownUnitException;
-use PerformanceToolkit\Vendor\Carbon\FactoryImmutable;
-use PerformanceToolkit\Vendor\Carbon\Month;
-use PerformanceToolkit\Vendor\Carbon\Translator;
-use PerformanceToolkit\Vendor\Carbon\Unit;
-use PerformanceToolkit\Vendor\Carbon\WeekDay;
+use PivotPerformanceToolkit\Vendor\Carbon\Carbon;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonPeriod;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonTimeZone;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\BadComparisonUnitException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\ImmutableException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\InvalidTimeZoneException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\UnitException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\UnknownGetterException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\UnknownMethodException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\UnknownSetterException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\UnknownUnitException;
+use PivotPerformanceToolkit\Vendor\Carbon\FactoryImmutable;
+use PivotPerformanceToolkit\Vendor\Carbon\Month;
+use PivotPerformanceToolkit\Vendor\Carbon\Translator;
+use PivotPerformanceToolkit\Vendor\Carbon\Unit;
+use PivotPerformanceToolkit\Vendor\Carbon\WeekDay;
 use Closure;
 use DateInterval;
 use DatePeriod;
@@ -39,7 +39,7 @@ use DateTimeZone;
 use Generator;
 use InvalidArgumentException;
 use ReflectionException;
-use PerformanceToolkit\Vendor\Symfony\Component\Clock\NativeClock;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Clock\NativeClock;
 use Throwable;
 /**
  * A simple API extension for DateTime.
@@ -1026,7 +1026,7 @@ trait Date
      * Return the Carbon instance passed through, a now instance in the same timezone
      * if null given or parse the input if string given.
      *
-     * @param \Carbon|\PerformanceToolkit\Vendor\Carbon\CarbonPeriod|\PerformanceToolkit\Vendor\Carbon\CarbonInterval|\DateInterval|\DatePeriod|DateTimeInterface|string|null $date
+     * @param \Carbon|\PivotPerformanceToolkit\Vendor\Carbon\CarbonPeriod|\PivotPerformanceToolkit\Vendor\Carbon\CarbonInterval|\DateInterval|\DatePeriod|DateTimeInterface|string|null $date
      *
      * @return static
      */

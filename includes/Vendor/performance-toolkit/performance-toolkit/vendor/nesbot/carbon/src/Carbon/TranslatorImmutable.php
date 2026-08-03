@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Carbon;
+namespace PivotPerformanceToolkit\Vendor\Carbon;
 
-use PerformanceToolkit\Vendor\Carbon\Exceptions\ImmutableException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\ImmutableException;
 use Symfony\Component\Config\ConfigCacheFactoryInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Formatter\MessageFormatterInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Formatter\MessageFormatterInterface;
 
 class TranslatorImmutable extends Translator
 {

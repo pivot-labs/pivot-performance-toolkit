@@ -9,16 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Helper;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Helper;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Descriptor\DescriptorInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Descriptor\JsonDescriptor;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Descriptor\MarkdownDescriptor;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Descriptor\ReStructuredTextDescriptor;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Descriptor\TextDescriptor;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Descriptor\XmlDescriptor;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\InvalidArgumentException;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Descriptor\DescriptorInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Descriptor\JsonDescriptor;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Descriptor\MarkdownDescriptor;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Descriptor\ReStructuredTextDescriptor;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Descriptor\TextDescriptor;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Descriptor\XmlDescriptor;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\InvalidArgumentException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * This class adds helper method to describe objects in various formats.

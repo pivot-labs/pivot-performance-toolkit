@@ -1,4 +1,4 @@
-<div class="ptk-col ptk-col--main">
+<div class="pivot-performance-toolkit-col pivot-performance-toolkit-col--main">
     @if ($tools_notice !== '' && $tools_message !== '')
         <div class="notice {{ $tools_notice === 'success' ? 'notice-success' : 'notice-error' }} is-dismissible">
             <p>{{ $tools_message }}</p>

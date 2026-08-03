@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Pdo;
+namespace PivotPerformanceToolkit\Vendor\Pdo;
 
 use PDO;
 
@@ -43,7 +43,7 @@ if (\PHP_VERSION_ID < 80400 && \extension_loaded('pdo_mysql')) {
                 parent::__construct($dsn, $username, $password, $options);
 
                 if ('mysql' !== $driver = $this->getAttribute(\PDO::ATTR_DRIVER_NAME)) {
-                    throw new \PDOException(\sprintf('PerformanceToolkit\Vendor\Pdo\Mysql::__construct() cannot be used for connecting to the "%s" driver', $driver));
+                    throw new \PDOException(\sprintf('PivotPerformanceToolkit\Vendor\Pdo\Mysql::__construct() cannot be used for connecting to the "%s" driver', $driver));
                 }
             }
 
@@ -52,7 +52,7 @@ if (\PHP_VERSION_ID < 80400 && \extension_loaded('pdo_mysql')) {
                 try {
                     return new self($dsn, $username, $password, $options);
                 } catch (\PDOException $e) {
-                    throw preg_match('/^Pdo\\\\Mysql::__construct\(\) cannot be used for connecting to the "([a-z]+)" driver/', $e->getMessage(), $matches) ? new \PDOException(\sprintf('PerformanceToolkit\Vendor\Pdo\Mysql::connect() cannot be used for connecting to the "%s" driver', $matches[1])) : $e;
+                    throw preg_match('/^Pdo\\\\Mysql::__construct\(\) cannot be used for connecting to the "([a-z]+)" driver/', $e->getMessage(), $matches) ? new \PDOException(\sprintf('PivotPerformanceToolkit\Vendor\Pdo\Mysql::connect() cannot be used for connecting to the "%s" driver', $matches[1])) : $e;
                 }
             }
         }
@@ -84,7 +84,7 @@ if (\PHP_VERSION_ID < 80400 && \extension_loaded('pdo_mysql')) {
                 parent::__construct($dsn, $username, $password, $options);
 
                 if ('mysql' !== $driver = $this->getAttribute(\PDO::ATTR_DRIVER_NAME)) {
-                    throw new \PDOException(\sprintf('PerformanceToolkit\Vendor\Pdo\Mysql::__construct() cannot be used for connecting to the "%s" driver', $driver));
+                    throw new \PDOException(\sprintf('PivotPerformanceToolkit\Vendor\Pdo\Mysql::__construct() cannot be used for connecting to the "%s" driver', $driver));
                 }
             }
 
@@ -93,7 +93,7 @@ if (\PHP_VERSION_ID < 80400 && \extension_loaded('pdo_mysql')) {
                 try {
                     return new self($dsn, $username, $password, $options);
                 } catch (\PDOException $e) {
-                    throw preg_match('/^Pdo\\\\Mysql::__construct\(\) cannot be used for connecting to the "([a-z]+)" driver/', $e->getMessage(), $matches) ? new \PDOException(\sprintf('PerformanceToolkit\Vendor\Pdo\Mysql::connect() cannot be used for connecting to the "%s" driver', $matches[1])) : $e;
+                    throw preg_match('/^Pdo\\\\Mysql::__construct\(\) cannot be used for connecting to the "([a-z]+)" driver/', $e->getMessage(), $matches) ? new \PDOException(\sprintf('PivotPerformanceToolkit\Vendor\Pdo\Mysql::connect() cannot be used for connecting to the "%s" driver', $matches[1])) : $e;
                 }
             }
         }

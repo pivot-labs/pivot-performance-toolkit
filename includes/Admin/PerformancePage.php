@@ -2,25 +2,29 @@
 /**
  * Optimization performance test admin page.
  *
- * @package PerformanceToolkit
+ * @package PivotPerformanceToolkit
  */
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Admin;
+namespace PivotPerformanceToolkit\Admin;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 final class PerformancePage extends BladeAdminPage {
 
 	public function slug(): string {
-		return 'performance-toolkit-performance';
+		return 'pivot-performance-toolkit-performance';
 	}
 
 	public function menuTitle(): string {
-		return __( 'Performance', 'performance-toolkit' );
+		return __( 'Performance', 'pivot-performance-toolkit' );
 	}
 
 	public function pageTitle(): string {
-		return __( 'Performance Toolkit Performance', 'performance-toolkit' );
+		return __( 'Pivot Performance Toolkit Performance', 'pivot-performance-toolkit' );
 	}
 
 	public function iconKey(): string {
@@ -35,7 +39,7 @@ final class PerformancePage extends BladeAdminPage {
 	 * @return array<string, mixed>
 	 */
 	protected function buildViewData(): array {
-		$last_result = get_option( 'ptk_last_performance_result', array() );
+		$last_result = get_option( 'pivot_performance_toolkit_last_performance_result', array() );
 		$last_score  = PerformanceTest::calculateOverallScoreFromResult( is_array( $last_result ) ? $last_result : array() );
 
 		return array(
@@ -91,7 +95,7 @@ final class PerformancePage extends BladeAdminPage {
 
 				$label = is_string( $title ) && '' !== trim( $title ) ? $title : sprintf(
 					/* translators: %d: post ID. */
-					__( 'Untitled #%d', 'performance-toolkit' ),
+					__( 'Untitled #%d', 'pivot-performance-toolkit' ),
 					(int) $post_id
 				);
 

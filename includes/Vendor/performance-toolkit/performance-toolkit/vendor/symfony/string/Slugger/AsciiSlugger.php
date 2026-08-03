@@ -9,15 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\String\Slugger;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\String\Slugger;
 
 use Symfony\Component\Emoji\EmojiTransliterator;
-use PerformanceToolkit\Vendor\Symfony\Component\String\AbstractUnicodeString;
-use PerformanceToolkit\Vendor\Symfony\Component\String\UnicodeString;
-use PerformanceToolkit\Vendor\Symfony\Contracts\Translation\LocaleAwareInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\String\AbstractUnicodeString;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\String\UnicodeString;
+use PivotPerformanceToolkit\Vendor\Symfony\Contracts\Translation\LocaleAwareInterface;
 
 if (!interface_exists(LocaleAwareInterface::class)) {
-    throw new \LogicException('You cannot use the "PerformanceToolkit\Vendor\Symfony\Component\String\Slugger\AsciiSlugger" as the "symfony/translation-contracts" package is not installed. Try running "composer require symfony/translation-contracts".');
+    throw new \LogicException('You cannot use the "PivotPerformanceToolkit\Vendor\Symfony\Component\String\Slugger\AsciiSlugger" as the "symfony/translation-contracts" package is not installed. Try running "composer require symfony/translation-contracts".');
 }
 
 /**

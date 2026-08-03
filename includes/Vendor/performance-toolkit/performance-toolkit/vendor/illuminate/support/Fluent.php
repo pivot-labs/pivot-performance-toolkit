@@ -1,14 +1,14 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
 use ArrayAccess;
 use ArrayIterator;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Jsonable;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Conditionable;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\InteractsWithData;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Jsonable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Conditionable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\InteractsWithData;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
 use IteratorAggregate;
 use JsonSerializable;
 use Traversable;
@@ -17,7 +17,7 @@ use Traversable;
  * @template TKey of array-key
  * @template TValue
  *
- * @implements \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, TValue>
+ * @implements \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, TValue>
  * @implements \ArrayAccess<TKey, TValue>
  */
 class Fluent implements Arrayable, ArrayAccess, IteratorAggregate, Jsonable, JsonSerializable

@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Auth;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Auth;
 
 interface Factory
 {
@@ -8,7 +8,7 @@ interface Factory
      * Get a guard instance by name.
      *
      * @param  string|null  $name
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\Auth\Guard|\PerformanceToolkit\Vendor\Illuminate\Contracts\Auth\StatefulGuard
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Auth\Guard|\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Auth\StatefulGuard
      */
     public function guard($name = null);
 

@@ -1,16 +1,16 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes;
 
 use Closure;
-use PerformanceToolkit\Vendor\Illuminate\Container\Container;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
-use PerformanceToolkit\Vendor\Illuminate\Support\Arr;
-use PerformanceToolkit\Vendor\Illuminate\Support\Collection;
-use PerformanceToolkit\Vendor\Illuminate\Support\Str;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\ForwardsCalls;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\ReflectsClosures;
+use PivotPerformanceToolkit\Vendor\Illuminate\Container\Container;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Arr;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Str;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\ForwardsCalls;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\ReflectsClosures;
 use PHPUnit\Framework\Assert as PHPUnit;
 use ReflectionFunction;
 
@@ -21,7 +21,7 @@ class EventFake implements Dispatcher, Fake
     /**
      * The original event dispatcher.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher
      */
     public $dispatcher;
 
@@ -49,7 +49,7 @@ class EventFake implements Dispatcher, Fake
     /**
      * Create a new event fake instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher  $dispatcher
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher  $dispatcher
      * @param  array|string  $eventsToFake
      */
     public function __construct(Dispatcher $dispatcher, $eventsToFake = [])
@@ -227,7 +227,7 @@ class EventFake implements Dispatcher, Fake
      *
      * @param  string  $event
      * @param  callable|null  $callback
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Collection
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection
      */
     public function dispatched($event, $callback = null)
     {

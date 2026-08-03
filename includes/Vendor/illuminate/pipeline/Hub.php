@@ -1,17 +1,17 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Pipeline;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Pipeline;
 
 use Closure;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Pipeline\Hub as HubContract;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Pipeline\Hub as HubContract;
 
 class Hub implements HubContract
 {
     /**
      * The container implementation.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container|null
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container|null
      */
     protected $container;
 
@@ -25,7 +25,7 @@ class Hub implements HubContract
     /**
      * Create a new Hub instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container|null  $container
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container|null  $container
      * @return void
      */
     public function __construct(?Container $container = null)
@@ -75,7 +75,7 @@ class Hub implements HubContract
     /**
      * Get the container instance used by the hub.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container
      */
     public function getContainer()
     {
@@ -85,7 +85,7 @@ class Hub implements HubContract
     /**
      * Set the container instance used by the hub.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container  $container
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container  $container
      * @return $this
      */
     public function setContainer(Container $container)

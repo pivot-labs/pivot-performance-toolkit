@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Descriptor;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Descriptor;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Application;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Command\Command;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\CommandNotFoundException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Application;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Command\Command;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\CommandNotFoundException;
 
 /**
  * @author Jean-François Simon <jeanfrancois.simon@sensiolabs.com>

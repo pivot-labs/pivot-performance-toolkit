@@ -1,22 +1,22 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
-use PerformanceToolkit\Vendor\Carbon\CarbonInterface;
-use PerformanceToolkit\Vendor\Carbon\CarbonInterval;
-use PerformanceToolkit\Vendor\Illuminate\Support\Defer\DeferredCallback;
-use PerformanceToolkit\Vendor\Illuminate\Support\Defer\DeferredCallbackCollection;
-use PerformanceToolkit\Vendor\Illuminate\Support\Facades\Date;
-use PerformanceToolkit\Vendor\Symfony\Component\Process\PhpExecutableFinder;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterval;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Defer\DeferredCallback;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Defer\DeferredCallbackCollection;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades\Date;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Process\PhpExecutableFinder;
 
-if (! function_exists('PerformanceToolkit\Vendor\Illuminate\Support\defer')) {
+if (! function_exists('PivotPerformanceToolkit\Vendor\Illuminate\Support\defer')) {
     /**
      * Defer execution of the given callback.
      *
      * @param  callable|null  $callback
      * @param  string|null  $name
      * @param  bool  $always
-     * @return ($callback is null ? \PerformanceToolkit\Vendor\Illuminate\Support\Defer\DeferredCallbackCollection : \PerformanceToolkit\Vendor\Illuminate\Support\Defer\DeferredCallback)
+     * @return ($callback is null ? \PivotPerformanceToolkit\Vendor\Illuminate\Support\Defer\DeferredCallbackCollection : \PivotPerformanceToolkit\Vendor\Illuminate\Support\Defer\DeferredCallback)
      */
     function defer(?callable $callback = null, ?string $name = null, bool $always = false): DeferredCallback|DeferredCallbackCollection
     {
@@ -31,7 +31,7 @@ if (! function_exists('PerformanceToolkit\Vendor\Illuminate\Support\defer')) {
     }
 }
 
-if (! function_exists('PerformanceToolkit\Vendor\Illuminate\Support\php_binary')) {
+if (! function_exists('PivotPerformanceToolkit\Vendor\Illuminate\Support\php_binary')) {
     /**
      * Determine the PHP Binary.
      */
@@ -41,7 +41,7 @@ if (! function_exists('PerformanceToolkit\Vendor\Illuminate\Support\php_binary')
     }
 }
 
-if (! function_exists('PerformanceToolkit\Vendor\Illuminate\Support\artisan_binary')) {
+if (! function_exists('PivotPerformanceToolkit\Vendor\Illuminate\Support\artisan_binary')) {
     /**
      * Determine the proper Artisan executable.
      */
@@ -53,12 +53,12 @@ if (! function_exists('PerformanceToolkit\Vendor\Illuminate\Support\artisan_bina
 
 // Time functions...
 
-if (! function_exists('PerformanceToolkit\Vendor\Illuminate\Support\now')) {
+if (! function_exists('PivotPerformanceToolkit\Vendor\Illuminate\Support\now')) {
     /**
      * Create a new Carbon instance for the current time.
      *
      * @param  \DateTimeZone|\UnitEnum|string|null  $tz
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Carbon
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon
      */
     function now($tz = null): CarbonInterface
     {
@@ -66,7 +66,7 @@ if (! function_exists('PerformanceToolkit\Vendor\Illuminate\Support\now')) {
     }
 }
 
-if (! function_exists('PerformanceToolkit\Vendor\Illuminate\Support\microseconds')) {
+if (! function_exists('PivotPerformanceToolkit\Vendor\Illuminate\Support\microseconds')) {
     /**
      * Get the current date / time plus the given number of microseconds.
      */
@@ -76,7 +76,7 @@ if (! function_exists('PerformanceToolkit\Vendor\Illuminate\Support\microseconds
     }
 }
 
-if (! function_exists('PerformanceToolkit\Vendor\Illuminate\Support\milliseconds')) {
+if (! function_exists('PivotPerformanceToolkit\Vendor\Illuminate\Support\milliseconds')) {
     /**
      * Get the current date / time plus the given number of milliseconds.
      */
@@ -86,7 +86,7 @@ if (! function_exists('PerformanceToolkit\Vendor\Illuminate\Support\milliseconds
     }
 }
 
-if (! function_exists('PerformanceToolkit\Vendor\Illuminate\Support\seconds')) {
+if (! function_exists('PivotPerformanceToolkit\Vendor\Illuminate\Support\seconds')) {
     /**
      * Get the current date / time plus the given number of seconds.
      */
@@ -96,7 +96,7 @@ if (! function_exists('PerformanceToolkit\Vendor\Illuminate\Support\seconds')) {
     }
 }
 
-if (! function_exists('PerformanceToolkit\Vendor\Illuminate\Support\minutes')) {
+if (! function_exists('PivotPerformanceToolkit\Vendor\Illuminate\Support\minutes')) {
     /**
      * Get the current date / time plus the given number of minutes.
      */
@@ -106,7 +106,7 @@ if (! function_exists('PerformanceToolkit\Vendor\Illuminate\Support\minutes')) {
     }
 }
 
-if (! function_exists('PerformanceToolkit\Vendor\Illuminate\Support\hours')) {
+if (! function_exists('PivotPerformanceToolkit\Vendor\Illuminate\Support\hours')) {
     /**
      * Get the current date / time plus the given number of hours.
      */
@@ -116,7 +116,7 @@ if (! function_exists('PerformanceToolkit\Vendor\Illuminate\Support\hours')) {
     }
 }
 
-if (! function_exists('PerformanceToolkit\Vendor\Illuminate\Support\days')) {
+if (! function_exists('PivotPerformanceToolkit\Vendor\Illuminate\Support\days')) {
     /**
      * Get the current date / time plus the given number of days.
      */
@@ -126,7 +126,7 @@ if (! function_exists('PerformanceToolkit\Vendor\Illuminate\Support\days')) {
     }
 }
 
-if (! function_exists('PerformanceToolkit\Vendor\Illuminate\Support\weeks')) {
+if (! function_exists('PivotPerformanceToolkit\Vendor\Illuminate\Support\weeks')) {
     /**
      * Get the current date / time plus the given number of weeks.
      */
@@ -136,7 +136,7 @@ if (! function_exists('PerformanceToolkit\Vendor\Illuminate\Support\weeks')) {
     }
 }
 
-if (! function_exists('PerformanceToolkit\Vendor\Illuminate\Support\months')) {
+if (! function_exists('PivotPerformanceToolkit\Vendor\Illuminate\Support\months')) {
     /**
      * Get the current date / time plus the given number of months.
      */
@@ -146,7 +146,7 @@ if (! function_exists('PerformanceToolkit\Vendor\Illuminate\Support\months')) {
     }
 }
 
-if (! function_exists('PerformanceToolkit\Vendor\Illuminate\Support\years')) {
+if (! function_exists('PivotPerformanceToolkit\Vendor\Illuminate\Support\years')) {
     /**
      * Get the current date / time plus the given number of years.
      */

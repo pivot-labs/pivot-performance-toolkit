@@ -1,13 +1,13 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
 use ArgumentCountError;
 use ArrayAccess;
 use Closure;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Jsonable;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Jsonable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
 use InvalidArgumentException;
 use JsonSerializable;
 use Random\Randomizer;
@@ -1062,8 +1062,8 @@ class Arr
      * @param  array  $array
      * @param  (callable(mixed, array-key): array)|null  $callback
      *
-     * @throws \PerformanceToolkit\Vendor\Illuminate\Support\ItemNotFoundException
-     * @throws \PerformanceToolkit\Vendor\Illuminate\Support\MultipleItemsFoundException
+     * @throws \PivotPerformanceToolkit\Vendor\Illuminate\Support\ItemNotFoundException
+     * @throws \PivotPerformanceToolkit\Vendor\Illuminate\Support\MultipleItemsFoundException
      */
     public static function sole($array, ?callable $callback = null)
     {

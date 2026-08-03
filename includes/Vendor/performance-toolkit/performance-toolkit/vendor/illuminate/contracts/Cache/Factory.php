@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Cache;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Cache;
 
 interface Factory
 {
@@ -8,7 +8,7 @@ interface Factory
      * Get a cache store instance by name.
      *
      * @param  \UnitEnum|string|null  $name
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\Cache\Repository
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Cache\Repository
      */
     public function store($name = null);
 }

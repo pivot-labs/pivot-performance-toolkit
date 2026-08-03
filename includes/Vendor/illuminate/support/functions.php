@@ -1,19 +1,19 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
-use PerformanceToolkit\Vendor\Illuminate\Support\Defer\DeferredCallback;
-use PerformanceToolkit\Vendor\Illuminate\Support\Defer\DeferredCallbackCollection;
-use PerformanceToolkit\Vendor\Illuminate\Support\Process\PhpExecutableFinder;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Defer\DeferredCallback;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Defer\DeferredCallbackCollection;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Process\PhpExecutableFinder;
 
-if (! function_exists('PerformanceToolkit\Vendor\Illuminate\Support\defer')) {
+if (! function_exists('PivotPerformanceToolkit\Vendor\Illuminate\Support\defer')) {
     /**
      * Defer execution of the given callback.
      *
      * @param  callable|null  $callback
      * @param  string|null  $name
      * @param  bool  $always
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Defer\DeferredCallback
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Defer\DeferredCallback
      */
     function defer(?callable $callback = null, ?string $name = null, bool $always = false)
     {
@@ -21,14 +21,14 @@ if (! function_exists('PerformanceToolkit\Vendor\Illuminate\Support\defer')) {
             return app(DeferredCallbackCollection::class);
         }
 
-        return performancetoolkit_vendor_tap(
+        return pivotperformancetoolkit_vendor_tap(
             new DeferredCallback($callback, $name, $always),
             fn ($deferred) => app(DeferredCallbackCollection::class)[] = $deferred
         );
     }
 }
 
-if (! function_exists('PerformanceToolkit\Vendor\Illuminate\Support\php_binary')) {
+if (! function_exists('PivotPerformanceToolkit\Vendor\Illuminate\Support\php_binary')) {
     /**
      * Determine the PHP Binary.
      *
@@ -40,7 +40,7 @@ if (! function_exists('PerformanceToolkit\Vendor\Illuminate\Support\php_binary')
     }
 }
 
-if (! function_exists('PerformanceToolkit\Vendor\Illuminate\Support\artisan_binary')) {
+if (! function_exists('PivotPerformanceToolkit\Vendor\Illuminate\Support\artisan_binary')) {
     /**
      * Determine the proper Artisan executable.
      *

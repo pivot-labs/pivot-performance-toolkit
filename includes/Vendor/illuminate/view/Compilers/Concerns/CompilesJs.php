@@ -1,8 +1,8 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns;
 
-use PerformanceToolkit\Vendor\Illuminate\Support\Js;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Js;
 
 trait CompilesJs
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Events;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Events;
 
-use PerformanceToolkit\Vendor\Illuminate\Bus\Queueable;
-use PerformanceToolkit\Vendor\Illuminate\Container\Container;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Job;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Queue\ShouldQueue;
+use PivotPerformanceToolkit\Vendor\Illuminate\Bus\Queueable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Container\Container;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Job;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
 class CallQueuedListener implements ShouldQueue
@@ -100,7 +100,7 @@ class CallQueuedListener implements ShouldQueue
     /**
      * Handle the queued job.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Container\Container  $container
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Container\Container  $container
      * @return void
      */
     public function handle(Container $container)
@@ -117,13 +117,13 @@ class CallQueuedListener implements ShouldQueue
     /**
      * Set the job instance of the given class if necessary.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Job  $job
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Job  $job
      * @param  object  $instance
      * @return object
      */
     protected function setJobInstanceIfNecessary(Job $job, $instance)
     {
-        if (in_array(InteractsWithQueue::class, performancetoolkit_vendor_class_uses_recursive($instance))) {
+        if (in_array(InteractsWithQueue::class, pivotperformancetoolkit_vendor_class_uses_recursive($instance))) {
             $instance->setJob($job);
         }
 

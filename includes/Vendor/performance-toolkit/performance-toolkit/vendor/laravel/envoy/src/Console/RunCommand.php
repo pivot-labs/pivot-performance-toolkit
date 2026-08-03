@@ -1,17 +1,17 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Laravel\Envoy\Console;
+namespace PivotPerformanceToolkit\Vendor\Laravel\Envoy\Console;
 
-use PerformanceToolkit\Vendor\Illuminate\Support\Str;
-use PerformanceToolkit\Vendor\Laravel\Envoy\Compiler;
-use PerformanceToolkit\Vendor\Laravel\Envoy\ParallelSSH;
-use PerformanceToolkit\Vendor\Laravel\Envoy\SSH;
-use PerformanceToolkit\Vendor\Laravel\Envoy\Task;
-use PerformanceToolkit\Vendor\Laravel\Envoy\TaskContainer;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Command\Command as SymfonyCommand;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputArgument;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputOption;
-use PerformanceToolkit\Vendor\Symfony\Component\Process\Process;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Str;
+use PivotPerformanceToolkit\Vendor\Laravel\Envoy\Compiler;
+use PivotPerformanceToolkit\Vendor\Laravel\Envoy\ParallelSSH;
+use PivotPerformanceToolkit\Vendor\Laravel\Envoy\SSH;
+use PivotPerformanceToolkit\Vendor\Laravel\Envoy\Task;
+use PivotPerformanceToolkit\Vendor\Laravel\Envoy\TaskContainer;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Command\Command as SymfonyCommand;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputArgument;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputOption;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Process\Process;
 
 class RunCommand extends SymfonyCommand
 {
@@ -100,7 +100,7 @@ class RunCommand extends SymfonyCommand
     /**
      * Get the tasks from the container based on user input.
      *
-     * @param  \PerformanceToolkit\Vendor\Laravel\Envoy\TaskContainer  $container
+     * @param  \PivotPerformanceToolkit\Vendor\Laravel\Envoy\TaskContainer  $container
      * @return array
      */
     protected function getTasks($container)
@@ -112,7 +112,7 @@ class RunCommand extends SymfonyCommand
      * Build a list of tasks starting from a task or macro name.
      *
      * @param  array  $tasks
-     * @param  \PerformanceToolkit\Vendor\Laravel\Envoy\TaskContainer  $container
+     * @param  \PivotPerformanceToolkit\Vendor\Laravel\Envoy\TaskContainer  $container
      * @param  string  $task
      * @return array
      */
@@ -132,7 +132,7 @@ class RunCommand extends SymfonyCommand
     /**
      * Run the given task out of the container.
      *
-     * @param  \PerformanceToolkit\Vendor\Laravel\Envoy\TaskContainer  $container
+     * @param  \PivotPerformanceToolkit\Vendor\Laravel\Envoy\TaskContainer  $container
      * @param  string  $task
      * @return null|int|void
      */
@@ -166,7 +166,7 @@ class RunCommand extends SymfonyCommand
     /**
      * Run the given task and return the exit code.
      *
-     * @param  \PerformanceToolkit\Vendor\Laravel\Envoy\Task  $task
+     * @param  \PivotPerformanceToolkit\Vendor\Laravel\Envoy\Task  $task
      * @return int
      */
     protected function runTaskOverSSH(Task $task)
@@ -186,7 +186,7 @@ class RunCommand extends SymfonyCommand
     /**
      * Run the given task and return the exit code.
      *
-     * @param  \PerformanceToolkit\Vendor\Laravel\Envoy\Task  $task
+     * @param  \PivotPerformanceToolkit\Vendor\Laravel\Envoy\Task  $task
      * @return int
      */
     protected function passToRemoteProcessor(Task $task)
@@ -226,7 +226,7 @@ class RunCommand extends SymfonyCommand
     /**
      * Load the task container instance with the Envoy file.
      *
-     * @return \PerformanceToolkit\Vendor\Laravel\Envoy\TaskContainer
+     * @return \PivotPerformanceToolkit\Vendor\Laravel\Envoy\TaskContainer
      */
     protected function loadTaskContainer()
     {
@@ -317,8 +317,8 @@ class RunCommand extends SymfonyCommand
     /**
      * Get the SSH processor for the task.
      *
-     * @param  \PerformanceToolkit\Vendor\Laravel\Envoy\Task  $task
-     * @return \PerformanceToolkit\Vendor\Laravel\Envoy\RemoteProcessor
+     * @param  \PivotPerformanceToolkit\Vendor\Laravel\Envoy\Task  $task
+     * @return \PivotPerformanceToolkit\Vendor\Laravel\Envoy\RemoteProcessor
      */
     protected function getRemoteProcessor(Task $task)
     {

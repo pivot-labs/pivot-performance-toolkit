@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Process;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Process;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Process\Exception\LogicException;
-use PerformanceToolkit\Vendor\Symfony\Component\Process\Exception\RuntimeException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Process\Exception\LogicException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Process\Exception\RuntimeException;
 
 /**
  * PhpSubprocess runs a PHP command as a subprocess while keeping the original php.ini settings.

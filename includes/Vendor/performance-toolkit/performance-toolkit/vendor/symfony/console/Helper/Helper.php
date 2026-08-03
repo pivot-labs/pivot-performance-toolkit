@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Helper;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Helper;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Formatter\OutputFormatterInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\String\UnicodeString;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\String\UnicodeString;
 
 /**
  * Helper is the base class for all helper classes.

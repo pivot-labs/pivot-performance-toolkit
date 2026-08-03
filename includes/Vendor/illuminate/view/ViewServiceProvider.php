@@ -1,14 +1,14 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\View;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\View;
 
-use PerformanceToolkit\Vendor\Illuminate\Container\Container;
-use PerformanceToolkit\Vendor\Illuminate\Support\ServiceProvider;
-use PerformanceToolkit\Vendor\Illuminate\View\Compilers\BladeCompiler;
-use PerformanceToolkit\Vendor\Illuminate\View\Engines\CompilerEngine;
-use PerformanceToolkit\Vendor\Illuminate\View\Engines\EngineResolver;
-use PerformanceToolkit\Vendor\Illuminate\View\Engines\FileEngine;
-use PerformanceToolkit\Vendor\Illuminate\View\Engines\PhpEngine;
+use PivotPerformanceToolkit\Vendor\Illuminate\Container\Container;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\ServiceProvider;
+use PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\BladeCompiler;
+use PivotPerformanceToolkit\Vendor\Illuminate\View\Engines\CompilerEngine;
+use PivotPerformanceToolkit\Vendor\Illuminate\View\Engines\EngineResolver;
+use PivotPerformanceToolkit\Vendor\Illuminate\View\Engines\FileEngine;
+use PivotPerformanceToolkit\Vendor\Illuminate\View\Engines\PhpEngine;
 
 class ViewServiceProvider extends ServiceProvider
 {
@@ -64,10 +64,10 @@ class ViewServiceProvider extends ServiceProvider
     /**
      * Create a new Factory Instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\View\Engines\EngineResolver  $resolver
-     * @param  \PerformanceToolkit\Vendor\Illuminate\View\ViewFinderInterface  $finder
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher  $events
-     * @return \PerformanceToolkit\Vendor\Illuminate\View\Factory
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\View\Engines\EngineResolver  $resolver
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\View\ViewFinderInterface  $finder
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher  $events
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\View\Factory
      */
     protected function createFactory($resolver, $finder, $events)
     {
@@ -94,7 +94,7 @@ class ViewServiceProvider extends ServiceProvider
     public function registerBladeCompiler()
     {
         $this->app->singleton('blade.compiler', function ($app) {
-            return performancetoolkit_vendor_tap(new BladeCompiler(
+            return pivotperformancetoolkit_vendor_tap(new BladeCompiler(
                 $app['files'],
                 $app['config']['view.compiled'],
                 $app['config']->get('view.relative_hash', false) ? $app->basePath() : '',
@@ -130,7 +130,7 @@ class ViewServiceProvider extends ServiceProvider
     /**
      * Register the file engine implementation.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\View\Engines\EngineResolver  $resolver
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\View\Engines\EngineResolver  $resolver
      * @return void
      */
     public function registerFileEngine($resolver)
@@ -143,7 +143,7 @@ class ViewServiceProvider extends ServiceProvider
     /**
      * Register the PHP engine implementation.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\View\Engines\EngineResolver  $resolver
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\View\Engines\EngineResolver  $resolver
      * @return void
      */
     public function registerPhpEngine($resolver)
@@ -156,7 +156,7 @@ class ViewServiceProvider extends ServiceProvider
     /**
      * Register the Blade engine implementation.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\View\Engines\EngineResolver  $resolver
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\View\Engines\EngineResolver  $resolver
      * @return void
      */
     public function registerBladeEngine($resolver)

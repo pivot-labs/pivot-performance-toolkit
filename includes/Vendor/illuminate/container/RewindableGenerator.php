@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Container;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Container;
 
 use Countable;
 use IteratorAggregate;

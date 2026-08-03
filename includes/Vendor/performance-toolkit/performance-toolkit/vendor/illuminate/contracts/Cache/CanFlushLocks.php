@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Cache;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Cache;
 
 interface CanFlushLocks
 {

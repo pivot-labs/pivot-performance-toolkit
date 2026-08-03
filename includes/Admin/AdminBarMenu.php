@@ -2,26 +2,30 @@
 /**
  * Admin bar menu.
  *
- * @package PerformanceToolkit
+ * @package PivotPerformanceToolkit
  */
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Admin;
+namespace PivotPerformanceToolkit\Admin;
 
-use PerformanceToolkit\Contracts\ModuleInterface;
-use PerformanceToolkit\Views\BladeEngine;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+use PivotPerformanceToolkit\Contracts\ModuleInterface;
+use PivotPerformanceToolkit\Views\BladeEngine;
 use WP_Admin_Bar;
 
 final class AdminBarMenu implements ModuleInterface {
 
-	private const PURGE_ACTION = 'performance_toolkit_purge_all_cache';
+	private const PURGE_ACTION = 'pivot_performance_toolkit_purge_all_cache';
 
-	private const PURGE_PAGE_ACTION = 'performance_toolkit_purge_page_cache';
+	private const PURGE_PAGE_ACTION = 'pivot_performance_toolkit_purge_page_cache';
 
-	private const PAGE_CACHE_DIR = WP_CONTENT_DIR . '/cache/performance-toolkit';
+	private const PAGE_CACHE_DIR = WP_CONTENT_DIR . '/cache/pivot-performance-toolkit';
 
-	private const MINIFIED_CACHE_DIR = WP_CONTENT_DIR . '/cache/performance-toolkit/minified-assets';
+	private const MINIFIED_CACHE_DIR = WP_CONTENT_DIR . '/cache/pivot-performance-toolkit/minified-assets';
 
 	public function register(): void {
 		add_action( 'admin_bar_menu', array( $this, 'registerMenu' ), 100 );
@@ -35,34 +39,34 @@ final class AdminBarMenu implements ModuleInterface {
 			return;
 		}
 
-		$settings_url = admin_url( 'admin.php?page=performance-toolkit' );
+		$settings_url = admin_url( 'admin.php?page=pivot-performance-toolkit' );
 		$purge_url    = wp_nonce_url(
 			admin_url( 'admin-post.php?action=' . self::PURGE_ACTION ),
-			'ptk_adminbar_purge_all_cache'
+			'pivot_performance_toolkit_adminbar_purge_all_cache'
 		);
 
 		$admin_bar->add_node(
 			array(
-				'id'    => 'performance-toolkit',
-				'title' => __( 'Performance', 'performance-toolkit' ),
+				'id'    => 'pivot-performance-toolkit',
+				'title' => __( 'Performance', 'pivot-performance-toolkit' ),
 				'href'  => $settings_url,
 			)
 		);
 
 		$admin_bar->add_node(
 			array(
-				'id'     => 'performance-toolkit-settings',
-				'parent' => 'performance-toolkit',
-				'title'  => __( 'Settings', 'performance-toolkit' ),
+				'id'     => 'pivot-performance-toolkit-settings',
+				'parent' => 'pivot-performance-toolkit',
+				'title'  => __( 'Settings', 'pivot-performance-toolkit' ),
 				'href'   => $settings_url,
 			)
 		);
 
 		$admin_bar->add_node(
 			array(
-				'id'     => 'performance-toolkit-purge-all-cache',
-				'parent' => 'performance-toolkit',
-				'title'  => __( 'Purge all cache', 'performance-toolkit' ),
+				'id'     => 'pivot-performance-toolkit-purge-all-cache',
+				'parent' => 'pivot-performance-toolkit',
+				'title'  => __( 'Purge all cache', 'pivot-performance-toolkit' ),
 				'href'   => $purge_url,
 			)
 		);
@@ -71,12 +75,12 @@ final class AdminBarMenu implements ModuleInterface {
 
 		$admin_bar->add_node(
 			array(
-				'id'     => 'performance-toolkit-page-cache-status',
-				'parent' => 'performance-toolkit',
+				'id'     => 'pivot-performance-toolkit-page-cache-status',
+				'parent' => 'pivot-performance-toolkit',
 				'title'  => sprintf(
 					/* translators: %s: cache status label */
-					__( 'Page cache: %s', 'performance-toolkit' ),
-					'<span class="ptk-cache-status ' . esc_attr( $status['class'] ) . '">' . esc_html( $status['label'] ) . '</span>'
+					__( 'Page cache: %s', 'pivot-performance-toolkit' ),
+					'<span class="pivot-performance-toolkit-cache-status ' . esc_attr( $status['class'] ) . '">' . esc_html( $status['label'] ) . '</span>'
 				),
 				'href'   => false,
 				'meta'   => array(
@@ -92,23 +96,23 @@ final class AdminBarMenu implements ModuleInterface {
 				add_query_arg(
 					array(
 						'action'     => self::PURGE_PAGE_ACTION,
-						'ptk_target' => rawurlencode( $status['url'] ),
+						'pivot_performance_toolkit_target' => rawurlencode( $status['url'] ),
 					),
 					admin_url( 'admin-post.php' )
 				),
-				'ptk_adminbar_purge_page_cache'
+				'pivot_performance_toolkit_adminbar_purge_page_cache'
 			);
 		}
 
 		$admin_bar->add_node(
 			array(
-				'id'     => 'performance-toolkit-purge-page-cache',
-				'parent' => 'performance-toolkit',
-				'title'  => __( 'Purge this page', 'performance-toolkit' ),
+				'id'     => 'pivot-performance-toolkit-purge-page-cache',
+				'parent' => 'pivot-performance-toolkit',
+				'title'  => __( 'Purge this page', 'pivot-performance-toolkit' ),
 				'href'   => $status['cacheable'] ? $purge_page_url : '#',
 				'meta'   => array(
-					'class' => $status['cacheable'] ? '' : 'ptk-disabled',
-					'title' => $status['cacheable'] ? __( 'Purge cache for this page', 'performance-toolkit' ) : __( 'Not on a cacheable page', 'performance-toolkit' ),
+					'class' => $status['cacheable'] ? '' : 'pivot-performance-toolkit-disabled',
+					'title' => $status['cacheable'] ? __( 'Purge cache for this page', 'pivot-performance-toolkit' ) : __( 'Not on a cacheable page', 'pivot-performance-toolkit' ),
 				),
 			)
 		);
@@ -155,8 +159,8 @@ final class AdminBarMenu implements ModuleInterface {
 		// Indicator should reflect file state even for logged-in/admin-bar visits.
 		if ( is_admin() || ! isset( $_SERVER['REQUEST_METHOD'] ) || strtoupper( (string) $_SERVER['REQUEST_METHOD'] ) !== 'GET' ) {
 			return array(
-				'label'     => __( 'Unavailable', 'performance-toolkit' ),
-				'class'     => 'ptk-cache-status-bypass',
+				'label'     => __( 'Unavailable', 'pivot-performance-toolkit' ),
+				'class'     => 'pivot-performance-toolkit-cache-status-bypass',
 				'cacheable' => $this->isCurrentPageCacheable(),
 				'url'       => null,
 			);
@@ -166,8 +170,8 @@ final class AdminBarMenu implements ModuleInterface {
 
 		if ( ! is_string( $url ) || '' === $url ) {
 			return array(
-				'label'     => __( 'Not cacheable', 'performance-toolkit' ),
-				'class'     => 'ptk-cache-status-bypass',
+				'label'     => __( 'Not cacheable', 'pivot-performance-toolkit' ),
+				'class'     => 'pivot-performance-toolkit-cache-status-bypass',
 				'cacheable' => false,
 				'url'       => null,
 			);
@@ -177,8 +181,8 @@ final class AdminBarMenu implements ModuleInterface {
 
 		if ( ! is_string( $cache_file ) || '' === $cache_file ) {
 			return array(
-				'label'     => __( 'Unavailable', 'performance-toolkit' ),
-				'class'     => 'ptk-cache-status-bypass',
+				'label'     => __( 'Unavailable', 'pivot-performance-toolkit' ),
+				'class'     => 'pivot-performance-toolkit-cache-status-bypass',
 				'cacheable' => $this->isCurrentPageCacheable(),
 				'url'       => $url,
 			);
@@ -186,8 +190,8 @@ final class AdminBarMenu implements ModuleInterface {
 
 		if ( ! is_file( $cache_file ) ) {
 			return array(
-				'label'     => __( 'File missing', 'performance-toolkit' ),
-				'class'     => 'ptk-cache-status-miss',
+				'label'     => __( 'File missing', 'pivot-performance-toolkit' ),
+				'class'     => 'pivot-performance-toolkit-cache-status-miss',
 				'cacheable' => $this->isCurrentPageCacheable(),
 				'url'       => $url,
 			);
@@ -198,16 +202,16 @@ final class AdminBarMenu implements ModuleInterface {
 
 		if ( $filetime <= 0 || ( $filetime + $ttl ) < time() ) {
 			return array(
-				'label'     => __( 'File stale', 'performance-toolkit' ),
-				'class'     => 'ptk-cache-status-miss',
+				'label'     => __( 'File stale', 'pivot-performance-toolkit' ),
+				'class'     => 'pivot-performance-toolkit-cache-status-miss',
 				'cacheable' => $this->isCurrentPageCacheable(),
 				'url'       => $url,
 			);
 		}
 
 		return array(
-			'label'     => __( 'File present', 'performance-toolkit' ),
-			'class'     => 'ptk-cache-status-hit',
+			'label'     => __( 'File present', 'pivot-performance-toolkit' ),
+			'class'     => 'pivot-performance-toolkit-cache-status-hit',
 			'cacheable' => $this->isCurrentPageCacheable(),
 			'url'       => $url,
 		);
@@ -271,10 +275,10 @@ final class AdminBarMenu implements ModuleInterface {
 
 	public function handlePurgeAllCache(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'You are not allowed to perform this action.', 'performance-toolkit' ) );
+			wp_die( esc_html__( 'You are not allowed to perform this action.', 'pivot-performance-toolkit' ) );
 		}
 
-		check_admin_referer( 'ptk_adminbar_purge_all_cache' );
+		check_admin_referer( 'pivot_performance_toolkit_adminbar_purge_all_cache' );
 
 		foreach ( glob( self::PAGE_CACHE_DIR . '/*.html' ) ?: array() as $file_path ) {
 			@unlink( $file_path );
@@ -291,21 +295,21 @@ final class AdminBarMenu implements ModuleInterface {
 		$redirect = wp_get_referer();
 
 		if ( ! is_string( $redirect ) || '' === $redirect ) {
-			$redirect = admin_url( 'admin.php?page=performance-toolkit' );
+			$redirect = admin_url( 'admin.php?page=pivot-performance-toolkit' );
 		}
 
-		wp_safe_redirect( add_query_arg( 'ptk_cache_purged', '1', $redirect ) );
+		wp_safe_redirect( add_query_arg( 'pivot_performance_toolkit_cache_purged', '1', $redirect ) );
 		exit;
 	}
 
 	public function handlePurgePageCache(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'You are not allowed to perform this action.', 'performance-toolkit' ) );
+			wp_die( esc_html__( 'You are not allowed to perform this action.', 'pivot-performance-toolkit' ) );
 		}
 
-		check_admin_referer( 'ptk_adminbar_purge_page_cache' );
+		check_admin_referer( 'pivot_performance_toolkit_adminbar_purge_page_cache' );
 
-		$target_raw = isset( $_GET['ptk_target'] ) ? sanitize_text_field( (string) wp_unslash( $_GET['ptk_target'] ) ) : '';
+		$target_raw = isset( $_GET['pivot_performance_toolkit_target'] ) ? sanitize_text_field( (string) wp_unslash( $_GET['pivot_performance_toolkit_target'] ) ) : '';
 		$target_url = '' !== $target_raw ? rawurldecode( $target_raw ) : '';
 
 		if ( '' === $target_url ) {
@@ -325,7 +329,7 @@ final class AdminBarMenu implements ModuleInterface {
 			$redirect = home_url();
 		}
 
-		wp_safe_redirect( add_query_arg( 'ptk_page_cache_purged', '1', $redirect ) );
+		wp_safe_redirect( add_query_arg( 'pivot_performance_toolkit_page_cache_purged', '1', $redirect ) );
 		exit;
 	}
 
@@ -337,8 +341,8 @@ final class AdminBarMenu implements ModuleInterface {
 		echo BladeEngine::view(
 			'admin.admin-bar-notice',
 			array(
-				'cache_purged'      => isset( $_GET['ptk_cache_purged'] ) && (string) '1' === wp_unslash( $_GET['ptk_cache_purged'] ),
-				'page_cache_purged' => isset( $_GET['ptk_page_cache_purged'] ) && (string) '1' === wp_unslash( $_GET['ptk_page_cache_purged'] ),
+				'cache_purged'      => isset( $_GET['pivot_performance_toolkit_cache_purged'] ) && (string) '1' === wp_unslash( $_GET['pivot_performance_toolkit_cache_purged'] ),
+				'page_cache_purged' => isset( $_GET['pivot_performance_toolkit_page_cache_purged'] ) && (string) '1' === wp_unslash( $_GET['pivot_performance_toolkit_page_cache_purged'] ),
 			)
 		);
 	}

@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Process\Messenger;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Process\Messenger;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Process\Process;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Process\Process;
 
 /**
  * @author Kevin Bond <kevinbond@gmail.com>

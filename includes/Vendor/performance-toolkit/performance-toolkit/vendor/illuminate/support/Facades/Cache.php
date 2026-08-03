@@ -1,23 +1,23 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
 
 use Mockery;
 
 /**
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Cache\Repository store(\UnitEnum|string|null $name = null)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Cache\Repository driver(\UnitEnum|string|null $driver = null)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Cache\Repository memo(\UnitEnum|string|null $driver = null)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Cache\Repository resolve(string $name)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Cache\Repository store(\UnitEnum|string|null $name = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Cache\Repository driver(\UnitEnum|string|null $driver = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Cache\Repository memo(\UnitEnum|string|null $driver = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Cache\Repository resolve(string $name)
  * @method static \Illuminate\Cache\Repository build(array $config)
- * @method static \Illuminate\Cache\Repository repository(\PerformanceToolkit\Vendor\Illuminate\Contracts\Cache\Store $store, array $config = [])
+ * @method static \Illuminate\Cache\Repository repository(\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Cache\Store $store, array $config = [])
  * @method static void refreshEventDispatcher()
  * @method static string getDefaultDriver()
  * @method static void setDefaultDriver(\UnitEnum|string $name)
  * @method static \Illuminate\Cache\CacheManager forgetDriver(array|\UnitEnum|string|null $name = null)
  * @method static void purge(\UnitEnum|string|null $name = null)
  * @method static \Illuminate\Cache\CacheManager extend(string $driver, \Closure $callback)
- * @method static \Illuminate\Cache\CacheManager setApplication(\PerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application $app)
+ * @method static \Illuminate\Cache\CacheManager setApplication(\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application $app)
  * @method static void handleUnserializableClassUsing(callable|null $callback)
  * @method static bool has(\UnitEnum|array|string $key)
  * @method static bool missing(\UnitEnum|string $key)
@@ -56,10 +56,10 @@ use Mockery;
  * @method static bool supportsFlushingLocks()
  * @method static int|null getDefaultCacheTime()
  * @method static \Illuminate\Cache\Repository setDefaultCacheTime(int|null $seconds)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Cache\Store getStore()
- * @method static \Illuminate\Cache\Repository setStore(\PerformanceToolkit\Vendor\Illuminate\Contracts\Cache\Store $store)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher|null getEventDispatcher()
- * @method static void setEventDispatcher(\PerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher $events)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Cache\Store getStore()
+ * @method static \Illuminate\Cache\Repository setStore(\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Cache\Store $store)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher|null getEventDispatcher()
+ * @method static void setEventDispatcher(\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher $events)
  * @method static void macro(string $name, object|callable $macro)
  * @method static void mixin(object $mixin, bool $replace = true)
  * @method static bool hasMacro(string $name)
@@ -67,8 +67,8 @@ use Mockery;
  * @method static mixed macroCall(string $method, array $parameters)
  * @method static bool flush()
  * @method static string getPrefix()
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Cache\Lock lock(string $name, int $seconds = 0, string|null $owner = null)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Cache\Lock restoreLock(string $name, string $owner)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Cache\Lock lock(string $name, int $seconds = 0, string|null $owner = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Cache\Lock restoreLock(string $name, string $owner)
  *
  * @see \Illuminate\Cache\CacheManager
  * @see \Illuminate\Cache\Repository

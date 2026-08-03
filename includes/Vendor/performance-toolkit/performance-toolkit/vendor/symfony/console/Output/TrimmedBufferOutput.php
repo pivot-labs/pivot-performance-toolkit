@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Output;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\InvalidArgumentException;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\InvalidArgumentException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Formatter\OutputFormatterInterface;
 
 /**
  * A BufferedOutput that keeps only the last N chars.

@@ -1,4 +1,4 @@
-WP Performance Toolkit includes third-party libraries:
+Pivot Performance Toolkit includes third-party libraries:
 
 Tailwind CSS
 Copyright Tailwind Labs, Inc.

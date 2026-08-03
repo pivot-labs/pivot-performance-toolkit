@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\String\Slugger;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\String\Slugger;
 
-use PerformanceToolkit\Vendor\Symfony\Component\String\AbstractUnicodeString;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\String\AbstractUnicodeString;
 
 /**
  * Creates a URL-friendly slug from a given string.

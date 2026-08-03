@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation\Reader;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Reader;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Finder\Finder;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Loader\LoaderInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogue;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Finder\Finder;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Loader\LoaderInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogue;
 
 /**
  * TranslationReader reads translation messages from translation files.

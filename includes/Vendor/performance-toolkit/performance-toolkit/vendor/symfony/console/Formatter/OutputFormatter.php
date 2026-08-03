@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Formatter;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Formatter;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\InvalidArgumentException;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Helper\Helper;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\InvalidArgumentException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Helper\Helper;
 
-use function PerformanceToolkit\Vendor\Symfony\Component\String\b;
+use function PivotPerformanceToolkit\Vendor\Symfony\Component\String\b;
 
 /**
  * Formatter class for console output.

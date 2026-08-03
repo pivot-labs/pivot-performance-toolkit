@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Logger;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Logger;
 
 use Psr\Log\AbstractLogger;
 use Psr\Log\InvalidArgumentException;
 use Psr\Log\LogLevel;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * PSR-3 compliant console logger.

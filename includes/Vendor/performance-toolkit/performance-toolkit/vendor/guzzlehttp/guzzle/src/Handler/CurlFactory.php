@@ -1,17 +1,17 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp\Handler;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp\Handler;
 
-use PerformanceToolkit\Vendor\GuzzleHttp\Exception\ConnectException;
-use PerformanceToolkit\Vendor\GuzzleHttp\Exception\RequestException;
-use PerformanceToolkit\Vendor\GuzzleHttp\Promise as P;
-use PerformanceToolkit\Vendor\GuzzleHttp\Promise\FulfilledPromise;
-use PerformanceToolkit\Vendor\GuzzleHttp\Promise\PromiseInterface;
-use PerformanceToolkit\Vendor\GuzzleHttp\Psr7\LazyOpenStream;
-use PerformanceToolkit\Vendor\GuzzleHttp\TransferStats;
-use PerformanceToolkit\Vendor\GuzzleHttp\Utils;
-use PerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\UriInterface;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Exception\ConnectException;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Exception\RequestException;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Promise as P;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Promise\FulfilledPromise;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Promise\PromiseInterface;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7\LazyOpenStream;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\TransferStats;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Utils;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\UriInterface;
 
 /**
  * Creates curl resources from a request
@@ -266,7 +266,7 @@ class CurlFactory implements CurlFactoryInterface
         );
 
         if ('' !== $sanitizedError) {
-            $redactedUriString = \PerformanceToolkit\Vendor\GuzzleHttp\Psr7\Utils::redactUserInfo($uri)->__toString();
+            $redactedUriString = \PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7\Utils::redactUserInfo($uri)->__toString();
             if ($redactedUriString !== '' && false === \strpos($sanitizedError, $redactedUriString)) {
                 $message .= \sprintf(' for %s', $redactedUriString);
             }
@@ -293,7 +293,7 @@ class CurlFactory implements CurlFactoryInterface
             return $error;
         }
 
-        $redactedUriString = \PerformanceToolkit\Vendor\GuzzleHttp\Psr7\Utils::redactUserInfo($baseUri)->__toString();
+        $redactedUriString = \PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7\Utils::redactUserInfo($baseUri)->__toString();
 
         return str_replace($baseUriString, $redactedUriString, $error);
     }
@@ -486,11 +486,11 @@ class CurlFactory implements CurlFactoryInterface
 
         if (!isset($options['sink'])) {
             // Use a default temp stream if no sink was set.
-            $options['sink'] = \PerformanceToolkit\Vendor\GuzzleHttp\Psr7\Utils::tryFopen('php://temp', 'w+');
+            $options['sink'] = \PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7\Utils::tryFopen('php://temp', 'w+');
         }
         $sink = $options['sink'];
         if (!\is_string($sink)) {
-            $sink = \PerformanceToolkit\Vendor\GuzzleHttp\Psr7\Utils::streamFor($sink);
+            $sink = \PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7\Utils::streamFor($sink);
         } elseif (!\is_dir(\dirname($sink))) {
             // Ensure that the directory exists before failing in curl.
             throw new \RuntimeException(\sprintf('Directory %s does not exist for sink value of %s', \dirname($sink), $sink));

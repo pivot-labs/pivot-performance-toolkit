@@ -1,16 +1,16 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
 
 use Closure;
 use Illuminate\Database\Eloquent\Model;
-use PerformanceToolkit\Vendor\Illuminate\Support\Arr;
-use PerformanceToolkit\Vendor\Illuminate\Support\Collection;
-use PerformanceToolkit\Vendor\Illuminate\Support\Js;
-use PerformanceToolkit\Vendor\Illuminate\Support\Number;
-use PerformanceToolkit\Vendor\Illuminate\Support\Str;
-use PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\Fake;
-use PerformanceToolkit\Vendor\Illuminate\Support\Uri;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Arr;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Js;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Number;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Str;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\Fake;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Uri;
 use Mockery;
 use Mockery\LegacyMockInterface;
 use RuntimeException;
@@ -20,7 +20,7 @@ abstract class Facade
     /**
      * The application instance being facaded.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application|null
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application|null
      */
     protected static $app;
 
@@ -67,7 +67,7 @@ abstract class Facade
         if (! static::isMock()) {
             $class = static::getMockableClass();
 
-            return performancetoolkit_vendor_tap($class ? Mockery::spy($class) : Mockery::spy(), function ($spy) {
+            return pivotperformancetoolkit_vendor_tap($class ? Mockery::spy($class) : Mockery::spy(), function ($spy) {
                 static::swap($spy);
             });
         }
@@ -128,7 +128,7 @@ abstract class Facade
      */
     protected static function createFreshMockInstance()
     {
-        return performancetoolkit_vendor_tap(static::createMock(), function ($mock) {
+        return pivotperformancetoolkit_vendor_tap(static::createMock(), function ($mock) {
             static::swap($mock);
 
             $mock->shouldAllowMockingProtectedMethods();
@@ -267,7 +267,7 @@ abstract class Facade
     /**
      * Get the application default aliases.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Collection
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection
      */
     public static function defaultAliases()
     {
@@ -323,7 +323,7 @@ abstract class Facade
     /**
      * Get the application instance behind the facade.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application|null
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application|null
      */
     public static function getFacadeApplication()
     {
@@ -333,7 +333,7 @@ abstract class Facade
     /**
      * Set the application instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application|null  $app
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application|null  $app
      * @return void
      */
     public static function setFacadeApplication($app)

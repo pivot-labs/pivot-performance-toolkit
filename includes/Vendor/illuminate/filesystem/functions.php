@@ -1,8 +1,8 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Filesystem;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Filesystem;
 
-if (! function_exists('PerformanceToolkit\Vendor\Illuminate\Filesystem\join_paths')) {
+if (! function_exists('PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\join_paths')) {
     /**
      * Join the given paths together.
      *

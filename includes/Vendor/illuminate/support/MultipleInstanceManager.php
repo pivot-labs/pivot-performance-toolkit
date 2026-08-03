@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
 use Closure;
 use InvalidArgumentException;
@@ -11,14 +11,14 @@ abstract class MultipleInstanceManager
     /**
      * The application instance.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application
      */
     protected $app;
 
     /**
      * The configuration repository instance.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Contracts\Config\Repository
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Config\Repository
      */
     protected $config;
 
@@ -46,7 +46,7 @@ abstract class MultipleInstanceManager
     /**
      * Create a new manager instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application  $app
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application  $app
      * @return void
      */
     public function __construct($app)
@@ -204,7 +204,7 @@ abstract class MultipleInstanceManager
     /**
      * Set the application instance used by the manager.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application  $app
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application  $app
      * @return $this
      */
     public function setApplication($app)

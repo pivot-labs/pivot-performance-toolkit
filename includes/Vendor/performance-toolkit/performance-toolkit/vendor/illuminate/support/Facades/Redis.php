@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
 
 /**
  * @method static \Illuminate\Redis\Connections\Connection connection(\UnitEnum|string|null $name = null)
@@ -23,8 +23,8 @@ namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
  * @method static bool isCluster()
  * @method static string|null getName()
  * @method static \Illuminate\Redis\Connections\Connection setName(string $name)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher|null getEventDispatcher()
- * @method static void setEventDispatcher(\PerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher $events)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher|null getEventDispatcher()
+ * @method static void setEventDispatcher(\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher $events)
  * @method static void unsetEventDispatcher()
  * @method static bool hasHashTag(string $key)
  * @method static void macro(string $name, object|callable $macro)

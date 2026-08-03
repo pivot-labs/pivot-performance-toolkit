@@ -1,19 +1,19 @@
 <?php
 
-use PerformanceToolkit\Vendor\Carbon\CarbonInterval;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\DeferringDisplayableValue;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterval;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\DeferringDisplayableValue;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
-use PerformanceToolkit\Vendor\Illuminate\Support\Arr;
-use PerformanceToolkit\Vendor\Illuminate\Support\Env;
-use PerformanceToolkit\Vendor\Illuminate\Support\Fluent;
-use PerformanceToolkit\Vendor\Illuminate\Support\HigherOrderTapProxy;
-use PerformanceToolkit\Vendor\Illuminate\Support\Once;
-use PerformanceToolkit\Vendor\Illuminate\Support\Onceable;
-use PerformanceToolkit\Vendor\Illuminate\Support\Optional;
-use PerformanceToolkit\Vendor\Illuminate\Support\Sleep;
-use PerformanceToolkit\Vendor\Illuminate\Support\Str;
-use PerformanceToolkit\Vendor\Illuminate\Support\Stringable as SupportStringable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Arr;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Env;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Fluent;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\HigherOrderTapProxy;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Once;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Onceable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Optional;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Sleep;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Str;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Stringable as SupportStringable;
 if (!function_exists('append_config')) {
     /**
      * Assign high numeric IDs to a config item to force appending.
@@ -100,7 +100,7 @@ if (!function_exists('e')) {
     /**
      * Encode HTML special characters in a string.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\DeferringDisplayableValue|\PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable|\BackedEnum|string|int|float|null  $value
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\DeferringDisplayableValue|\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable|\BackedEnum|string|int|float|null  $value
      * @param  bool  $doubleEncode
      */
     function e($value, $doubleEncode = true): string
@@ -228,7 +228,7 @@ if (!function_exists('optional')) {
      *
      * @param  TValue  $value
      * @param  (callable(TValue): TReturn)|null  $callback
-     * @return ($callback is null ? \PerformanceToolkit\Vendor\Illuminate\Support\Optional : ($value is null ? null : TReturn))
+     * @return ($callback is null ? \PivotPerformanceToolkit\Vendor\Illuminate\Support\Optional : ($value is null ? null : TReturn))
      */
     function optional($value = null, ?callable $callback = null)
     {
@@ -299,7 +299,7 @@ if (!function_exists('str')) {
      * Get a new stringable object from the given string.
      *
      * @param  string|null  $string
-     * @return ($string is null ? object : \PerformanceToolkit\Vendor\Illuminate\Support\Stringable)
+     * @return ($string is null ? object : \PivotPerformanceToolkit\Vendor\Illuminate\Support\Stringable)
      */
     function str($string = null)
     {
@@ -327,7 +327,7 @@ if (!function_exists('tap')) {
      *
      * @param  TValue  $value
      * @param  (callable(TValue): mixed)|null  $callback
-     * @return ($callback is null ? \PerformanceToolkit\Vendor\Illuminate\Support\HigherOrderTapProxy : TValue)
+     * @return ($callback is null ? \PivotPerformanceToolkit\Vendor\Illuminate\Support\HigherOrderTapProxy : TValue)
      */
     function tap($value, $callback = null)
     {

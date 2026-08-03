@@ -9,8 +9,8 @@
     :checked="$checked"
     :action="$action"
     :nonce="$nonce"
-    :label="__('Minify HTML output', 'performance-toolkit')"
-    :description="__('Removes non-essential whitespace and safe HTML comments from frontend output.', 'performance-toolkit')"
+    :label="__('Minify HTML output', 'pivot-performance-toolkit')"
+    :description="__('Removes non-essential whitespace and safe HTML comments from frontend output.', 'pivot-performance-toolkit')"
 >
     <x-slot name="icon">
         <x-icons.html

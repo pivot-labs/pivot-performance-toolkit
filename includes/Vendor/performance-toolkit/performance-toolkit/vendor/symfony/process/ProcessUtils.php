@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Process;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Process;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Process\Exception\InvalidArgumentException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Process\Exception\InvalidArgumentException;
 
 /**
  * ProcessUtils is a bunch of utility methods.

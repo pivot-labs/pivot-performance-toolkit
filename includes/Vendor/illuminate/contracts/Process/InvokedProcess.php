@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Process;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Process;
 
 interface InvokedProcess
 {

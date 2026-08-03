@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
 
 /**
  * @method static bool hasForLocale(string $key, string|null $locale = null)
@@ -17,7 +17,7 @@ namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
  * @method static void determineLocalesUsing(callable $callback)
  * @method static \Illuminate\Translation\MessageSelector getSelector()
  * @method static void setSelector(\Illuminate\Translation\MessageSelector $selector)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Translation\Loader getLoader()
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Translation\Loader getLoader()
  * @method static string locale()
  * @method static string getLocale()
  * @method static void setLocale(string $locale)

@@ -1,19 +1,19 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
 use ArrayAccess;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Jsonable;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\InteractsWithData;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Jsonable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\InteractsWithData;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
 use JsonSerializable;
 
 /**
  * @template TKey of array-key
  * @template TValue
  *
- * @implements \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, TValue>
+ * @implements \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, TValue>
  * @implements \ArrayAccess<TKey, TValue>
  */
 class Fluent implements Arrayable, ArrayAccess, Jsonable, JsonSerializable
@@ -51,7 +51,7 @@ class Fluent implements Arrayable, ArrayAccess, Jsonable, JsonSerializable
      */
     public function get($key, $default = null)
     {
-        return performancetoolkit_vendor_data_get($this->attributes, $key, $default);
+        return pivotperformancetoolkit_vendor_data_get($this->attributes, $key, $default);
     }
 
     /**
@@ -63,7 +63,7 @@ class Fluent implements Arrayable, ArrayAccess, Jsonable, JsonSerializable
      */
     public function set($key, $value)
     {
-        performancetoolkit_vendor_data_set($this->attributes, $key, $value);
+        pivotperformancetoolkit_vendor_data_set($this->attributes, $key, $value);
 
         return $this;
     }
@@ -96,7 +96,7 @@ class Fluent implements Arrayable, ArrayAccess, Jsonable, JsonSerializable
             return $this->attributes[$key];
         }
 
-        return performancetoolkit_vendor_value($default);
+        return pivotperformancetoolkit_vendor_value($default);
     }
 
     /**

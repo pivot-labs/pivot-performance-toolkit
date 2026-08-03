@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation;
 
-use PerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatableInterface;
-use PerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatorInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatableInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @author Nate Wiebe <nate@northern.co>
@@ -31,7 +31,7 @@ class TranslatableMessage implements TranslatableInterface
      */
     public function __toString(): string
     {
-        performancetoolkit_vendor_trigger_deprecation('symfony/translation', '7.4', 'Method "%s()" is deprecated.', __METHOD__);
+        pivotperformancetoolkit_vendor_trigger_deprecation('symfony/translation', '7.4', 'Method "%s()" is deprecated.', __METHOD__);
 
         return $this->getMessage();
     }

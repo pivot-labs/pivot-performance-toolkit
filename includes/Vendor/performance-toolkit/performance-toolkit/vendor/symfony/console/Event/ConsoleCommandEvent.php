@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Event;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Event;
 
 /**
  * Allows to do things before the command is executed, like skipping the command or executing code before the command is

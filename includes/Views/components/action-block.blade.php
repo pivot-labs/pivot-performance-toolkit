@@ -35,11 +35,11 @@
     );
 
     $variant = $palette[$color] ?? $palette['blue'];
-    $icon_svg = \PerformanceToolkit\Admin\LucideIcons::render((string) $icon);
+    $icon_svg = \PivotPerformanceToolkit\Admin\LucideIcons::render((string) $icon);
     $icon_svg = str_replace('<svg ', '<svg class="h-5 w-5" ', $icon_svg);
 @endphp
 
-<div class="ptk-action-block flex min-h-44 gap-4 rounded-xl border border-slate-200 bg-white p-5">
+<div class="pivot-performance-toolkit-action-block flex min-h-44 gap-4 rounded-xl border border-slate-200 bg-white p-5">
     <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg {{ $variant['icon_bg'] }} {{ $variant['icon_text'] }}">
         {!! $icon_svg !!}
     </div>

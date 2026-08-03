@@ -2,16 +2,20 @@
 /**
  * Filesystem utility checks.
  *
- * @package PerformanceToolkit
+ * @package PivotPerformanceToolkit
  */
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Utils;
+namespace PivotPerformanceToolkit\Utils;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 final class FilesystemCheck {
 
-	private const FILESYSTEM_STATUS_TRANSIENT = 'performance_toolkit_fs_status';
+	private const FILESYSTEM_STATUS_TRANSIENT = 'pivot_performance_toolkit_fs_status';
 	private const FILESYSTEM_STATUS_TTL       = 3600; // 1 hour
 
 	/**
@@ -20,7 +24,7 @@ final class FilesystemCheck {
 	 * @return array{writable: bool, dirs: array<string, bool>, errors: string[]}
 	 */
 	public static function checkCacheDirectories(): array {
-		$cache_base = WP_CONTENT_DIR . '/cache/performance-toolkit';
+		$cache_base = WP_CONTENT_DIR . '/cache/pivot-performance-toolkit';
 
 		$dirs = array(
 			'base'            => $cache_base,
@@ -41,7 +45,7 @@ final class FilesystemCheck {
 				$results['writable'] = false;
 				$results['errors'][] = sprintf(
 					/* translators: %s: directory path */
-					esc_html__( 'Cache directory not writable: %s', 'performance-toolkit' ),
+					esc_html__( 'Cache directory not writable: %s', 'pivot-performance-toolkit' ),
 					$dir_path
 				);
 			}
@@ -112,7 +116,7 @@ final class FilesystemCheck {
 			return false;
 		}
 
-		$test_file = $dir_path . '/.ptk-write-test-' . uniqid();
+		$test_file = $dir_path . '/.pivot-performance-toolkit-write-test-' . uniqid();
 
 			$result = file_put_contents( $test_file, 'test' );
 

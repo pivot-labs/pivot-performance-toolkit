@@ -9,27 +9,27 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace PerformanceToolkit\Vendor\Carbon;
+namespace PivotPerformanceToolkit\Vendor\Carbon;
 
-use PerformanceToolkit\Vendor\Carbon\Constants\UnitValue;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\BadFluentConstructorException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\BadFluentSetterException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\InvalidCastException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\InvalidFormatException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\InvalidIntervalException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\OutOfRangeException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\ParseErrorException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\UnitNotConfiguredException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\UnknownGetterException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\UnknownSetterException;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\UnknownUnitException;
-use PerformanceToolkit\Vendor\Carbon\Traits\IntervalRounding;
-use PerformanceToolkit\Vendor\Carbon\Traits\IntervalStep;
-use PerformanceToolkit\Vendor\Carbon\Traits\LocalFactory;
-use PerformanceToolkit\Vendor\Carbon\Traits\MagicParameter;
-use PerformanceToolkit\Vendor\Carbon\Traits\Mixin;
-use PerformanceToolkit\Vendor\Carbon\Traits\Options;
-use PerformanceToolkit\Vendor\Carbon\Traits\ToStringFormat;
+use PivotPerformanceToolkit\Vendor\Carbon\Constants\UnitValue;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\BadFluentConstructorException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\BadFluentSetterException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\InvalidCastException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\InvalidFormatException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\InvalidIntervalException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\OutOfRangeException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\ParseErrorException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\UnitNotConfiguredException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\UnknownGetterException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\UnknownSetterException;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\UnknownUnitException;
+use PivotPerformanceToolkit\Vendor\Carbon\Traits\IntervalRounding;
+use PivotPerformanceToolkit\Vendor\Carbon\Traits\IntervalStep;
+use PivotPerformanceToolkit\Vendor\Carbon\Traits\LocalFactory;
+use PivotPerformanceToolkit\Vendor\Carbon\Traits\MagicParameter;
+use PivotPerformanceToolkit\Vendor\Carbon\Traits\Mixin;
+use PivotPerformanceToolkit\Vendor\Carbon\Traits\Options;
+use PivotPerformanceToolkit\Vendor\Carbon\Traits\ToStringFormat;
 use Closure;
 use DateInterval;
 use DateTime;
@@ -40,7 +40,7 @@ use InvalidArgumentException;
 use ReflectionException;
 use ReturnTypeWillChange;
 use RuntimeException;
-use PerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatorInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatorInterface;
 use Throwable;
 /**
  * A simple API extension for DateInterval.
@@ -564,7 +564,7 @@ class CarbonInterval extends DateInterval implements CarbonConverterInterface, U
      * @param string      $format   Format of the $interval input string
      * @param string|null $interval Input string to convert into an interval
      *
-     * @throws \PerformanceToolkit\Vendor\Carbon\Exceptions\ParseErrorException when the $interval cannot be parsed as an interval.
+     * @throws \PivotPerformanceToolkit\Vendor\Carbon\Exceptions\ParseErrorException when the $interval cannot be parsed as an interval.
      *
      * @return static
      */
@@ -881,8 +881,8 @@ class CarbonInterval extends DateInterval implements CarbonConverterInterface, U
     /**
      * Create an interval from the difference between 2 dates.
      *
-     * @param \PerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|mixed $start
-     * @param \PerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|mixed $end
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|mixed $start
+     * @param \PivotPerformanceToolkit\Vendor\Carbon\Carbon|\DateTimeInterface|mixed $end
      *
      * @return static
      */

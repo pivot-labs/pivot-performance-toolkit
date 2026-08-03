@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Pdo;
+namespace PivotPerformanceToolkit\Vendor\Pdo;
 
 if (\PHP_VERSION_ID < 80400 && \extension_loaded('pdo_firebird')) {
     class Firebird extends \PDO
@@ -23,7 +23,7 @@ if (\PHP_VERSION_ID < 80400 && \extension_loaded('pdo_firebird')) {
             parent::__construct($dsn, $username, $password, $options);
 
             if ('firebird' !== $driver = $this->getAttribute(\PDO::ATTR_DRIVER_NAME)) {
-                throw new \PDOException(\sprintf('PerformanceToolkit\Vendor\Pdo\Firebird::__construct() cannot be used for connecting to the "%s" driver', $driver));
+                throw new \PDOException(\sprintf('PivotPerformanceToolkit\Vendor\Pdo\Firebird::__construct() cannot be used for connecting to the "%s" driver', $driver));
             }
         }
 
@@ -32,7 +32,7 @@ if (\PHP_VERSION_ID < 80400 && \extension_loaded('pdo_firebird')) {
             try {
                 return new self($dsn, $username, $password, $options);
             } catch (\PDOException $e) {
-                throw preg_match('/^Pdo\\\\Firebird::__construct\(\) cannot be used for connecting to the "([a-z]+)" driver/', $e->getMessage(), $matches) ? new \PDOException(\sprintf('PerformanceToolkit\Vendor\Pdo\Firebird::connect() cannot be used for connecting to the "%s" driver', $matches[1])) : $e;
+                throw preg_match('/^Pdo\\\\Firebird::__construct\(\) cannot be used for connecting to the "([a-z]+)" driver/', $e->getMessage(), $matches) ? new \PDOException(\sprintf('PivotPerformanceToolkit\Vendor\Pdo\Firebird::connect() cannot be used for connecting to the "%s" driver', $matches[1])) : $e;
             }
         }
     }

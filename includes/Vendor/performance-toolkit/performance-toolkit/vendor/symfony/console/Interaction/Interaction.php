@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Interaction;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Interaction;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Attribute\InteractiveAttributeInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Attribute\MapInput;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Attribute\InteractiveAttributeInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Attribute\MapInput;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * @internal

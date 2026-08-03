@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Database\Query;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Database\Query;
 
 interface ConditionExpression extends Expression
 {

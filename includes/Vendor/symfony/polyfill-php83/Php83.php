@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Polyfill\Php83;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Polyfill\Php83;
 
 /**
  * @author Ion Bazan <ion.bazan@gmail.com>

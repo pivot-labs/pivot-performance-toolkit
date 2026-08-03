@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Database\Events;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Database\Events;
 
 interface MigrationEvent
 {

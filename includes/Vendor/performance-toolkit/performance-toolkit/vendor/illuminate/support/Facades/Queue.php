@@ -1,9 +1,9 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
 
 use Illuminate\Queue\Worker;
-use PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\QueueFake;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\QueueFake;
 
 /**
  * @method static void before(mixed $callback)
@@ -15,7 +15,7 @@ use PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\QueueFake;
  * @method static void stopping(mixed $callback)
  * @method static void route(array|string $class, string|null $queue = null, string|null $connection = null)
  * @method static bool connected(\UnitEnum|string|null $name = null)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Queue connection(\UnitEnum|string|null $name = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Queue connection(\UnitEnum|string|null $name = null)
  * @method static void pause(string $connection, string $queue)
  * @method static void pauseFor(string $connection, string $queue, \DateTimeInterface|\DateInterval|int $ttl)
  * @method static void resume(string $connection, string $queue)
@@ -26,8 +26,8 @@ use PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\QueueFake;
  * @method static string getDefaultDriver()
  * @method static void setDefaultDriver(string $name)
  * @method static string getName(string|null $connection = null)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application getApplication()
- * @method static \Illuminate\Queue\QueueManager setApplication(\PerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application $app)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application getApplication()
+ * @method static \Illuminate\Queue\QueueManager setApplication(\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application $app)
  * @method static string|null resolveConnectionFromQueueRoute(object $queueable)
  * @method static string|null resolveQueueFromQueueRoute(object $queueable)
  * @method static int size(string|null $queue = null)
@@ -41,18 +41,18 @@ use PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\QueueFake;
  * @method static mixed later(\DateTimeInterface|\DateInterval|int $delay, string|object $job, mixed $data = '', string|null $queue = null)
  * @method static mixed laterOn(string $queue, \DateTimeInterface|\DateInterval|int $delay, string|object $job, mixed $data = '')
  * @method static mixed bulk(array $jobs, mixed $data = '', string|null $queue = null)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Job|null pop(string|null $queue = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Job|null pop(string|null $queue = null)
  * @method static string getConnectionName()
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Queue setConnectionName(string $name)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Queue setConnectionName(string $name)
  * @method static mixed getJobTries(mixed $job)
  * @method static mixed getJobBackoff(mixed $job)
  * @method static mixed getJobExpiration(mixed $job)
  * @method static void createPayloadUsing(callable|null $callback)
  * @method static array getConfig()
  * @method static \Illuminate\Queue\Queue setConfig(array $config)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Container\Container getContainer()
- * @method static void setContainer(\PerformanceToolkit\Vendor\Illuminate\Container\Container $container)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\QueueFake except(array|string $jobsToBeQueued)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Container\Container getContainer()
+ * @method static void setContainer(\PivotPerformanceToolkit\Vendor\Illuminate\Container\Container $container)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\QueueFake except(array|string $jobsToBeQueued)
  * @method static void assertPushed(string|\Closure $job, callable|int|null $callback = null)
  * @method static void assertPushedTimes(string $job, int $times = 1)
  * @method static void assertPushedOn(string $queue, string|\Closure $job, callable|null $callback = null)
@@ -63,22 +63,22 @@ use PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\QueueFake;
  * @method static void assertNotPushed(string|\Closure $job, callable|null $callback = null)
  * @method static void assertCount(int $expectedCount)
  * @method static void assertNothingPushed()
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Collection pushed(string $job, callable|null $callback = null)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Collection<int, mixed> pushedRaw(null|\Closure $callback = null)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Collection<int, \PerformanceToolkit\Vendor\Illuminate\Events\CallQueuedListener> listenersPushed(string $listenerClass, \Closure|null $callback = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection pushed(string $job, callable|null $callback = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection<int, mixed> pushedRaw(null|\Closure $callback = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection<int, \PivotPerformanceToolkit\Vendor\Illuminate\Events\CallQueuedListener> listenersPushed(string $listenerClass, \Closure|null $callback = null)
  * @method static bool hasPushed(string $job)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Collection<int, \Illuminate\Queue\Jobs\InspectedJob> pendingJobs(string|null $queue = null)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Collection delayedJobs(string|null $queue = null)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Collection reservedJobs(string|null $queue = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection<int, \Illuminate\Queue\Jobs\InspectedJob> pendingJobs(string|null $queue = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection delayedJobs(string|null $queue = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection reservedJobs(string|null $queue = null)
  * @method static bool shouldFakeJob(object $job)
  * @method static array pushedJobs()
  * @method static array<mixed> rawPushes()
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\QueueFake serializeAndRestore(bool $serializeAndRestore = true)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\QueueFake serializeAndRestore(bool $serializeAndRestore = true)
  * @method static void releaseUniqueJobLocks()
  *
  * @see \Illuminate\Queue\QueueManager
  * @see \Illuminate\Queue\Queue
- * @see \PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\QueueFake
+ * @see \PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\QueueFake
  */
 class Queue extends Facade
 {
@@ -98,7 +98,7 @@ class Queue extends Facade
      * Replace the bound instance with a fake.
      *
      * @param  array|string  $jobsToFake
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\QueueFake
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\QueueFake
      */
     public static function fake($jobsToFake = [])
     {
@@ -115,7 +115,7 @@ class Queue extends Facade
      * Replace the bound instance with a fake that fakes all jobs except the given jobs.
      *
      * @param  string[]|string  $jobsToAllow
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\QueueFake
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\QueueFake
      */
     public static function fakeExcept($jobsToAllow)
     {

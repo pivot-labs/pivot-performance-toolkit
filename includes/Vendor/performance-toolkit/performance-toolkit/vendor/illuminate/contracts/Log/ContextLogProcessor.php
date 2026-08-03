@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Log;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Log;
 
 use Monolog\Processor\ProcessorInterface;
 

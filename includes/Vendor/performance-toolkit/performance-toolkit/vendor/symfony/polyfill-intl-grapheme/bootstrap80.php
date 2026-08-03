@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use PerformanceToolkit\Vendor\Symfony\Polyfill\Intl\Grapheme as p;
+use PivotPerformanceToolkit\Vendor\Symfony\Polyfill\Intl\Grapheme as p;
 
 if (!function_exists('grapheme_str_split')) {
     function grapheme_str_split(string $string, int $length = 1): array|false { return p\Grapheme::grapheme_str_split($string, $length); }

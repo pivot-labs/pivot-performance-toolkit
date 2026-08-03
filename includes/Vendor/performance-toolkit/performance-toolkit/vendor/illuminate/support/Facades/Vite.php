@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
 
 /**
  * @method static array preloadedAssets()
@@ -21,7 +21,7 @@ namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
  * @method static \Illuminate\Foundation\Vite useWaterfallPrefetching(int|null $concurrency = null)
  * @method static \Illuminate\Foundation\Vite useAggressivePrefetching()
  * @method static \Illuminate\Foundation\Vite usePrefetchStrategy(string|null $strategy, array $config = [])
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\HtmlString|void reactRefresh()
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\HtmlString|void reactRefresh()
  * @method static string asset(string $asset, string|null $buildDirectory = null)
  * @method static string content(string $asset, string|null $buildDirectory = null)
  * @method static string|null manifestHash(string|null $buildDirectory = null)

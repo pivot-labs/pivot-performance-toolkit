@@ -1,7 +1,7 @@
-<div class="ptk-col ptk-col--main">
-    @if ($settings_updated && !isset($_GET['ptk_notice']))
+<div class="pivot-performance-toolkit-col pivot-performance-toolkit-col--main">
+    @if ($settings_updated && !isset($_GET['pivot_performance_toolkit_notice']))
         <div class="notice notice-success is-dismissible">
-            <p>{{ __('Settings saved successfully.', 'performance-toolkit') }}</p>
+            <p>{{ __('Settings saved successfully.', 'pivot-performance-toolkit') }}</p>
         </div>
     @endif
 
@@ -11,7 +11,7 @@
 </div>
 
 
-<div class="ptk-col ptk-col--sidebar">
+<div class="pivot-performance-toolkit-col pivot-performance-toolkit-col--sidebar">
 
 @include('cards.optimization.file.info.about')
 

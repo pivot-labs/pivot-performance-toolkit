@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
 
 /**
  * @method static \Psr\Log\LoggerInterface build(array $config)
@@ -25,13 +25,13 @@ namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
  * @method static void info(string|\Stringable $message, array $context = [])
  * @method static void debug(string|\Stringable $message, array $context = [])
  * @method static void log(mixed $level, string|\Stringable $message, array $context = [])
- * @method static \Illuminate\Log\LogManager setApplication(\PerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application $app)
- * @method static void write(string $level, \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable|\PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Jsonable|\PerformanceToolkit\Vendor\Illuminate\Support\Stringable|array|string $message, array $context = [])
+ * @method static \Illuminate\Log\LogManager setApplication(\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application $app)
+ * @method static void write(string $level, \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable|\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Jsonable|\PivotPerformanceToolkit\Vendor\Illuminate\Support\Stringable|array|string $message, array $context = [])
  * @method static \Illuminate\Log\Logger withContext(array $context = [])
  * @method static void listen(\Closure $callback)
  * @method static \Psr\Log\LoggerInterface getLogger()
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher getEventDispatcher()
- * @method static void setEventDispatcher(\PerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher $dispatcher)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher getEventDispatcher()
+ * @method static void setEventDispatcher(\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher $dispatcher)
  * @method static \Illuminate\Log\Logger|mixed when(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
  * @method static \Illuminate\Log\Logger|mixed unless(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
  *

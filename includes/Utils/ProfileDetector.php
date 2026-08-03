@@ -2,12 +2,16 @@
 /**
  * Website profile recommendation detector.
  *
- * @package PerformanceToolkit
+ * @package PivotPerformanceToolkit
  */
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Utils;
+namespace PivotPerformanceToolkit\Utils;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 final class ProfileDetector {
 
@@ -22,7 +26,7 @@ final class ProfileDetector {
 		if ( array() !== $signals ) {
 			return array(
 				'profile' => 'page-builder-heavy',
-				'label'   => __( 'Page Builder Heavy', 'performance-toolkit' ),
+				'label'   => __( 'Page Builder Heavy', 'pivot-performance-toolkit' ),
 				'signals' => $signals,
 			);
 		}
@@ -32,7 +36,7 @@ final class ProfileDetector {
 		if ( array() !== $signals ) {
 			return array(
 				'profile' => 'membership-lms',
-				'label'   => __( 'Membership / LMS', 'performance-toolkit' ),
+				'label'   => __( 'Membership / LMS', 'pivot-performance-toolkit' ),
 				'signals' => $signals,
 			);
 		}
@@ -42,14 +46,14 @@ final class ProfileDetector {
 		if ( array() !== $signals ) {
 			return array(
 				'profile' => 'woocommerce',
-				'label'   => __( 'WooCommerce', 'performance-toolkit' ),
+				'label'   => __( 'WooCommerce', 'pivot-performance-toolkit' ),
 				'signals' => $signals,
 			);
 		}
 
 		return array(
 			'profile' => 'standard',
-			'label'   => __( 'Standard', 'performance-toolkit' ),
+			'label'   => __( 'Standard', 'pivot-performance-toolkit' ),
 			'signals' => array(),
 		);
 	}

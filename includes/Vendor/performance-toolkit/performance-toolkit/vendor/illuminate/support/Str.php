@@ -1,9 +1,9 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
 use Closure;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
 use League\CommonMark\Environment\Environment;
 use League\CommonMark\Extension\GithubFlavoredMarkdownExtension;
 use League\CommonMark\Extension\InlinesOnly\InlinesOnlyExtension;
@@ -18,7 +18,7 @@ use Ramsey\Uuid\UuidFactory;
 use Symfony\Component\Uid\Ulid;
 use Throwable;
 use Traversable;
-use PerformanceToolkit\Vendor\voku\helper\ASCII;
+use PivotPerformanceToolkit\Vendor\voku\helper\ASCII;
 
 class Str
 {
@@ -77,7 +77,7 @@ class Str
      * Get a new stringable object from the given string.
      *
      * @param  string  $string
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Stringable
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Stringable
      */
     public static function of($string)
     {
@@ -915,7 +915,7 @@ class Str
      *
      * @param  string  $pattern
      * @param  string  $subject
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Collection
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection
      */
     public static function matchAll($pattern, $subject)
     {

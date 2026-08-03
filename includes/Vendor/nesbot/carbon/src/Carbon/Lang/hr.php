@@ -28,7 +28,7 @@
  * - Vanja Retkovac (vr00)
  */
 
-use PerformanceToolkit\Vendor\Carbon\CarbonInterface;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface;
 
 return [
     'year' => ':count godinu|:count godine|:count godina',

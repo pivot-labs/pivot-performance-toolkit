@@ -2,16 +2,20 @@
 /**
  * System status admin page.
  *
- * @package PerformanceToolkit
+ * @package PivotPerformanceToolkit
  */
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Admin;
+namespace PivotPerformanceToolkit\Admin;
 
-use PerformanceToolkit\Core\Settings;
-use PerformanceToolkit\Media\ImageOptimizerDetector;
-use PerformanceToolkit\Utils\FilesystemCheck;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+use PivotPerformanceToolkit\Core\Settings;
+use PivotPerformanceToolkit\Media\ImageOptimizerDetector;
+use PivotPerformanceToolkit\Utils\FilesystemCheck;
 
 final class SystemStatusPage extends BladeAdminPage {
 
@@ -25,15 +29,15 @@ final class SystemStatusPage extends BladeAdminPage {
 	}
 
 	public function slug(): string {
-		return 'performance-toolkit-system-status';
+		return 'pivot-performance-toolkit-system-status';
 	}
 
 	public function menuTitle(): string {
-		return __( 'System Status', 'performance-toolkit' );
+		return __( 'System Status', 'pivot-performance-toolkit' );
 	}
 
 	public function pageTitle(): string {
-		return __( 'Performance Toolkit System Status', 'performance-toolkit' );
+		return __( 'Pivot Performance Toolkit System Status', 'pivot-performance-toolkit' );
 	}
 
 	public function iconKey(): string {
@@ -66,8 +70,8 @@ final class SystemStatusPage extends BladeAdminPage {
 
 		// Format filesystem status
 		$fs_status_label = $fs_status['writable']
-			? __( 'Writable', 'performance-toolkit' )
-			: __( 'Read-only / Not writable', 'performance-toolkit' );
+			? __( 'Writable', 'pivot-performance-toolkit' )
+			: __( 'Read-only / Not writable', 'pivot-performance-toolkit' );
 
 		$fs_status_color = $fs_status['writable'] ? '#28a745' : '#dc3545';
 		$fs_status_value = sprintf(
@@ -81,45 +85,45 @@ final class SystemStatusPage extends BladeAdminPage {
 
 		$rows = array(
 			array(
-				'label' => __( 'PHP Version', 'performance-toolkit' ),
+				'label' => __( 'PHP Version', 'pivot-performance-toolkit' ),
 				'value' => PHP_VERSION,
 			),
 			array(
-				'label' => __( 'WordPress Version', 'performance-toolkit' ),
+				'label' => __( 'WordPress Version', 'pivot-performance-toolkit' ),
 				'value' => get_bloginfo( 'version' ),
 			),
 			array(
-				'label' => __( 'MySQL Version', 'performance-toolkit' ),
+				'label' => __( 'MySQL Version', 'pivot-performance-toolkit' ),
 				'value' => $wpdb->db_version(),
 			),
 			array(
-				'label' => __( 'Plugin Version', 'performance-toolkit' ),
-				'value' => defined( 'PERFORMANCE_TOOLKIT_VERSION' ) ? PERFORMANCE_TOOLKIT_VERSION : __( 'Unknown', 'performance-toolkit' ),
+				'label' => __( 'Plugin Version', 'pivot-performance-toolkit' ),
+				'value' => defined( 'PIVOT_PERFORMANCE_TOOLKIT_VERSION' ) ? PIVOT_PERFORMANCE_TOOLKIT_VERSION : __( 'Unknown', 'pivot-performance-toolkit' ),
 			),
 			array(
-				'label' => __( 'Server Software', 'performance-toolkit' ),
+				'label' => __( 'Server Software', 'pivot-performance-toolkit' ),
 				'value' => $server_software['name'] . ' ' . $server_software['version'],
 			),
 			array(
-				'label' => __( 'MySQL Size', 'performance-toolkit' ),
+				'label' => __( 'MySQL Size', 'pivot-performance-toolkit' ),
 				'value' => self::formatBytes( $mysql_size ),
 			),
 			array(
-				'label' => __( 'Page Cache', 'performance-toolkit' ),
-				'value' => $cache_on ? __( 'On', 'performance-toolkit' ) : __( 'Off', 'performance-toolkit' ),
+				'label' => __( 'Page Cache', 'pivot-performance-toolkit' ),
+				'value' => $cache_on ? __( 'On', 'pivot-performance-toolkit' ) : __( 'Off', 'pivot-performance-toolkit' ),
 			),
 			array(
-				'label' => __( 'Object Cache Enabled', 'performance-toolkit' ),
-				'value' => $object_cache_enabled ? __( 'Yes', 'performance-toolkit' ) : __( 'No', 'performance-toolkit' ),
+				'label' => __( 'Object Cache Enabled', 'pivot-performance-toolkit' ),
+				'value' => $object_cache_enabled ? __( 'Yes', 'pivot-performance-toolkit' ) : __( 'No', 'pivot-performance-toolkit' ),
 			),
 			array(
-				'label'   => __( 'Cache Directory Status', 'performance-toolkit' ),
+				'label'   => __( 'Cache Directory Status', 'pivot-performance-toolkit' ),
 				'value'   => $fs_status_value,
 				'is_html' => true,
 			),
 			array(
-				'label' => __( 'Image Optimizer Plugins', 'performance-toolkit' ),
-				'value' => array() === $active_optimizers ? __( 'None detected', 'performance-toolkit' ) : implode( ', ', $active_optimizers ),
+				'label' => __( 'Image Optimizer Plugins', 'pivot-performance-toolkit' ),
+				'value' => array() === $active_optimizers ? __( 'None detected', 'pivot-performance-toolkit' ) : implode( ', ', $active_optimizers ),
 			),
 		);
 
@@ -230,43 +234,43 @@ final class SystemStatusPage extends BladeAdminPage {
 		// PHP Memory Limit
 		$memory_limit = ini_get( 'memory_limit' );
 		$config[]     = array(
-			'label' => __( 'PHP Memory Limit', 'performance-toolkit' ),
-			'value' => $memory_limit ? $memory_limit : __( 'Unlimited', 'performance-toolkit' ),
+			'label' => __( 'PHP Memory Limit', 'pivot-performance-toolkit' ),
+			'value' => $memory_limit ? $memory_limit : __( 'Unlimited', 'pivot-performance-toolkit' ),
 		);
 
 		// PHP Max Execution Time
 		$max_execution_time = ini_get( 'max_execution_time' );
 		$config[]           = array(
-			'label' => __( 'PHP Max Execution Time', 'performance-toolkit' ),
-			'value' => $max_execution_time ? $max_execution_time . 's' : __( 'Unlimited', 'performance-toolkit' ),
+			'label' => __( 'PHP Max Execution Time', 'pivot-performance-toolkit' ),
+			'value' => $max_execution_time ? $max_execution_time . 's' : __( 'Unlimited', 'pivot-performance-toolkit' ),
 		);
 
 		// PHP Upload Max File Size
 		$upload_max_filesize = ini_get( 'upload_max_filesize' );
 		$config[]            = array(
-			'label' => __( 'PHP Upload Max File Size', 'performance-toolkit' ),
-			'value' => $upload_max_filesize ? $upload_max_filesize : __( 'Unknown', 'performance-toolkit' ),
+			'label' => __( 'PHP Upload Max File Size', 'pivot-performance-toolkit' ),
+			'value' => $upload_max_filesize ? $upload_max_filesize : __( 'Unknown', 'pivot-performance-toolkit' ),
 		);
 
 		// PHP Post Max Size
 		$post_max_size = ini_get( 'post_max_size' );
 		$config[]      = array(
-			'label' => __( 'PHP Post Max Size', 'performance-toolkit' ),
-			'value' => $post_max_size ? $post_max_size : __( 'Unknown', 'performance-toolkit' ),
+			'label' => __( 'PHP Post Max Size', 'pivot-performance-toolkit' ),
+			'value' => $post_max_size ? $post_max_size : __( 'Unknown', 'pivot-performance-toolkit' ),
 		);
 
 		// GZip compression
 		$gzip_enabled = extension_loaded( 'zlib' ) && ini_get( 'zlib.output_compression' );
 		$config[]     = array(
-			'label' => __( 'GZip Compression', 'performance-toolkit' ),
-			'value' => $gzip_enabled ? __( 'Enabled', 'performance-toolkit' ) : __( 'Disabled', 'performance-toolkit' ),
+			'label' => __( 'GZip Compression', 'pivot-performance-toolkit' ),
+			'value' => $gzip_enabled ? __( 'Enabled', 'pivot-performance-toolkit' ) : __( 'Disabled', 'pivot-performance-toolkit' ),
 		);
 
 		// OPcache
 		$opcache_enabled = extension_loaded( 'Zend OPcache' ) && ini_get( 'opcache.enable' );
 		$config[]        = array(
-			'label' => __( 'PHP OPcache', 'performance-toolkit' ),
-			'value' => $opcache_enabled ? __( 'Enabled', 'performance-toolkit' ) : __( 'Disabled', 'performance-toolkit' ),
+			'label' => __( 'PHP OPcache', 'pivot-performance-toolkit' ),
+			'value' => $opcache_enabled ? __( 'Enabled', 'pivot-performance-toolkit' ) : __( 'Disabled', 'pivot-performance-toolkit' ),
 		);
 
 		return $config;
@@ -284,50 +288,50 @@ final class SystemStatusPage extends BladeAdminPage {
 			// Check for mod_rewrite
 			$mod_rewrite = function_exists( 'apache_get_modules' ) && in_array( 'mod_rewrite', apache_get_modules(), true );
 			$config[]    = array(
-				'label' => __( 'Apache mod_rewrite', 'performance-toolkit' ),
-				'value' => $mod_rewrite ? __( 'Enabled', 'performance-toolkit' ) : __( 'Disabled', 'performance-toolkit' ),
+				'label' => __( 'Apache mod_rewrite', 'pivot-performance-toolkit' ),
+				'value' => $mod_rewrite ? __( 'Enabled', 'pivot-performance-toolkit' ) : __( 'Disabled', 'pivot-performance-toolkit' ),
 			);
 
 			// Check for mod_expires
 			$mod_expires = function_exists( 'apache_get_modules' ) && in_array( 'mod_expires', apache_get_modules(), true );
 			$config[]    = array(
-				'label' => __( 'Apache mod_expires', 'performance-toolkit' ),
-				'value' => $mod_expires ? __( 'Enabled', 'performance-toolkit' ) : __( 'Disabled', 'performance-toolkit' ),
+				'label' => __( 'Apache mod_expires', 'pivot-performance-toolkit' ),
+				'value' => $mod_expires ? __( 'Enabled', 'pivot-performance-toolkit' ) : __( 'Disabled', 'pivot-performance-toolkit' ),
 			);
 
 			// Check for mod_deflate
 			$mod_deflate = function_exists( 'apache_get_modules' ) && in_array( 'mod_deflate', apache_get_modules(), true );
 			$config[]    = array(
-				'label' => __( 'Apache mod_deflate', 'performance-toolkit' ),
-				'value' => $mod_deflate ? __( 'Enabled', 'performance-toolkit' ) : __( 'Disabled', 'performance-toolkit' ),
+				'label' => __( 'Apache mod_deflate', 'pivot-performance-toolkit' ),
+				'value' => $mod_deflate ? __( 'Enabled', 'pivot-performance-toolkit' ) : __( 'Disabled', 'pivot-performance-toolkit' ),
 			);
 
 			// Check for mod_headers
 			$mod_headers = function_exists( 'apache_get_modules' ) && in_array( 'mod_headers', apache_get_modules(), true );
 			$config[]    = array(
-				'label' => __( 'Apache mod_headers', 'performance-toolkit' ),
-				'value' => $mod_headers ? __( 'Enabled', 'performance-toolkit' ) : __( 'Disabled', 'performance-toolkit' ),
+				'label' => __( 'Apache mod_headers', 'pivot-performance-toolkit' ),
+				'value' => $mod_headers ? __( 'Enabled', 'pivot-performance-toolkit' ) : __( 'Disabled', 'pivot-performance-toolkit' ),
 			);
 		} elseif ( 'Nginx' === $server_software['name'] ) {
 			$config[] = array(
-				'label' => __( 'Nginx Configuration', 'performance-toolkit' ),
-				'value' => __( 'Please review your server configuration', 'performance-toolkit' ),
+				'label' => __( 'Nginx Configuration', 'pivot-performance-toolkit' ),
+				'value' => __( 'Please review your server configuration', 'pivot-performance-toolkit' ),
 			);
 		}
 
 		// HTTPS status
 		$https    = ( isset( $_SERVER['HTTPS'] ) && 'off' !== $_SERVER['HTTPS'] ) || ( isset( $_SERVER['SERVER_PORT'] ) && 443 === (int) $_SERVER['SERVER_PORT'] );
 		$config[] = array(
-			'label' => __( 'HTTPS Enabled', 'performance-toolkit' ),
-			'value' => $https ? __( 'Yes', 'performance-toolkit' ) : __( 'No', 'performance-toolkit' ),
+			'label' => __( 'HTTPS Enabled', 'pivot-performance-toolkit' ),
+			'value' => $https ? __( 'Yes', 'pivot-performance-toolkit' ) : __( 'No', 'pivot-performance-toolkit' ),
 		);
 
 		// File upload capability
 		$uploads_dir      = wp_upload_dir();
 		$uploads_writable = is_writable( $uploads_dir['basedir'] );
 		$config[]         = array(
-			'label' => __( 'Uploads Directory Writable', 'performance-toolkit' ),
-			'value' => $uploads_writable ? __( 'Yes', 'performance-toolkit' ) : __( 'No', 'performance-toolkit' ),
+			'label' => __( 'Uploads Directory Writable', 'pivot-performance-toolkit' ),
+			'value' => $uploads_writable ? __( 'Yes', 'pivot-performance-toolkit' ) : __( 'No', 'pivot-performance-toolkit' ),
 		);
 
 		return $config;

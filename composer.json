@@ -1,5 +1,5 @@
 {
-    "name": "jeffshaikh/performance-toolkit",
+    "name": "jeffshaikh/pivot-performance-toolkit",
     "description": "WordPress performance optimization toolkit",
     "type": "wordpress-plugin",
     "license": "GPL-2.0-or-later",
@@ -27,7 +27,7 @@
     },
     "autoload": {
         "psr-4": {
-            "PerformanceToolkit\\": "includes/"
+            "PivotPerformanceToolkit\\": "includes/"
         }
     },
     "authors": [
@@ -51,8 +51,8 @@
     "extra": {
         "strauss": {
             "target_directory": "includes/Vendor",
-            "namespace_prefix": "PerformanceToolkit\\Vendor\\",
-            "classmap_prefix": "PerformanceToolkit_Vendor_",
+            "namespace_prefix": "PivotPerformanceToolkit\\Vendor\\",
+            "classmap_prefix": "PivotPerformanceToolkit_Vendor_",
             "constant_prefix": "PTK_VENDOR_",
             "packages": [
                 "illuminate/view"

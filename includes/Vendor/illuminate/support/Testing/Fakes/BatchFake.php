@@ -1,12 +1,12 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes;
 
-use PerformanceToolkit\Vendor\Carbon\CarbonImmutable;
-use PerformanceToolkit\Vendor\Illuminate\Bus\Batch;
-use PerformanceToolkit\Vendor\Illuminate\Bus\UpdatedBatchJobCounts;
-use PerformanceToolkit\Vendor\Illuminate\Support\Carbon;
-use PerformanceToolkit\Vendor\Illuminate\Support\Collection;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Bus\Batch;
+use PivotPerformanceToolkit\Vendor\Illuminate\Bus\UpdatedBatchJobCounts;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection;
 
 class BatchFake extends Batch
 {
@@ -34,9 +34,9 @@ class BatchFake extends Batch
      * @param  int  $failedJobs
      * @param  array  $failedJobIds
      * @param  array  $options
-     * @param  \PerformanceToolkit\Vendor\Carbon\CarbonImmutable  $createdAt
-     * @param  \PerformanceToolkit\Vendor\Carbon\CarbonImmutable|null  $cancelledAt
-     * @param  \PerformanceToolkit\Vendor\Carbon\CarbonImmutable|null  $finishedAt
+     * @param  \PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable  $createdAt
+     * @param  \PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable|null  $cancelledAt
+     * @param  \PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable|null  $finishedAt
      * @return void
      */
     public function __construct(
@@ -76,7 +76,7 @@ class BatchFake extends Batch
     /**
      * Add additional jobs to the batch.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Support\Enumerable|object|array  $jobs
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Support\Enumerable|object|array  $jobs
      * @return self
      */
     public function add($jobs)
@@ -107,7 +107,7 @@ class BatchFake extends Batch
      * Decrement the pending jobs for the batch.
      *
      * @param  string  $jobId
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\UpdatedBatchJobCounts
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\UpdatedBatchJobCounts
      */
     public function decrementPendingJobs(string $jobId)
     {
@@ -130,7 +130,7 @@ class BatchFake extends Batch
      * Increment the failed jobs for the batch.
      *
      * @param  string  $jobId
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\UpdatedBatchJobCounts
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\UpdatedBatchJobCounts
      */
     public function incrementFailedJobs(string $jobId)
     {

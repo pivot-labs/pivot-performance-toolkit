@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
 
 /**
  * @method static bool has(string $key)
@@ -38,7 +38,7 @@ namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
  * @method static void mixin(object $mixin, bool $replace = true)
  * @method static bool hasMacro(string $name)
  * @method static void flushMacros()
- * @method static \Illuminate\Database\Eloquent\Model restoreModel(\PerformanceToolkit\Vendor\Illuminate\Contracts\Database\ModelIdentifier $value)
+ * @method static \Illuminate\Database\Eloquent\Model restoreModel(\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Database\ModelIdentifier $value)
  *
  * @see \Illuminate\Log\Context\Repository
  */

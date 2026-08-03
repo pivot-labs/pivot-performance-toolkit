@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation\Formatter;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Formatter;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\IdentityTranslator;
-use PerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatorInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\IdentityTranslator;
+use PivotPerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatorInterface;
 
 // Help opcache.preload discover always-needed symbols
 class_exists(IntlFormatter::class);

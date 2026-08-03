@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns;
 
 trait CompilesRawPhp
 {

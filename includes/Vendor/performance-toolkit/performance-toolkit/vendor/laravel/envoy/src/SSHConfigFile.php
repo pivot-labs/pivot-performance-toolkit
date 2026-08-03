@@ -1,8 +1,8 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Laravel\Envoy;
+namespace PivotPerformanceToolkit\Vendor\Laravel\Envoy;
 
-use PerformanceToolkit\Vendor\Illuminate\Support\Str;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Str;
 
 class SSHConfigFile
 {
@@ -28,7 +28,7 @@ class SSHConfigFile
      * Parse the given configuration file.
      *
      * @param  string  $file
-     * @return \PerformanceToolkit\Vendor\Laravel\Envoy\SSHConfigFile
+     * @return \PivotPerformanceToolkit\Vendor\Laravel\Envoy\SSHConfigFile
      */
     public static function parse($file)
     {
@@ -39,7 +39,7 @@ class SSHConfigFile
      * Parse the given configuration string.
      *
      * @param  string  $string
-     * @return \PerformanceToolkit\Vendor\Laravel\Envoy\SSHConfigFile
+     * @return \PivotPerformanceToolkit\Vendor\Laravel\Envoy\SSHConfigFile
      */
     public static function parseString($string)
     {

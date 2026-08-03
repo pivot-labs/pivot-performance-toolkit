@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp\Exception;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp\Exception;
 
 class TransferException extends \RuntimeException implements GuzzleException
 {

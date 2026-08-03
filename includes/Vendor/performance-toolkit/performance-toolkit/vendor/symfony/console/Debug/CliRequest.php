@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Debug;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Debug;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Command\TraceableCommand;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Command\TraceableCommand;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 

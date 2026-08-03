@@ -41,7 +41,7 @@
 
 @if (!$ptkScoreDonutStylesPrinted)
     <style>
-        .ptk-score-donut {
+        .pivot-performance-toolkit-score-donut {
             --score: 0;
             --size: 180px;
             --stroke: 12;
@@ -54,19 +54,19 @@
             height: var(--size);
         }
 
-        .ptk-score-donut svg {
+        .pivot-performance-toolkit-score-donut svg {
             width: 100%;
             height: 100%;
             transform: rotate(-90deg);
         }
 
-        .ptk-score-donut .track {
+        .pivot-performance-toolkit-score-donut .track {
             fill: none;
             stroke: #d1d5db;
             stroke-width: var(--stroke);
         }
 
-        .ptk-score-donut .progress {
+        .pivot-performance-toolkit-score-donut .progress {
             fill: none;
             stroke: var(--donut-color);
             stroke-width: var(--stroke);
@@ -76,7 +76,7 @@
             filter: drop-shadow(0 0 8px var(--donut-glow));
         }
 
-        .ptk-score-donut .label {
+        .pivot-performance-toolkit-score-donut .label {
             position: absolute;
             inset: 0;
             display: flex;
@@ -86,14 +86,14 @@
             text-align: center;
         }
 
-        .ptk-score-donut .label strong {
+        .pivot-performance-toolkit-score-donut .label strong {
             font-size: 48px;
             font-weight: 800;
             line-height: 1;
             color: var(--donut-color);
         }
 
-        .ptk-score-donut .label span {
+        .pivot-performance-toolkit-score-donut .label span {
             margin-top: 8px;
             font-size: 14px;
             color: var(--donut-color);
@@ -106,7 +106,7 @@
 @endif
 
 <div
-    {{ $attributes->merge(array('class' => 'ptk-score-donut')) }}
+    {{ $attributes->merge(array('class' => 'pivot-performance-toolkit-score-donut')) }}
     style="--score:{{ $normalizedScore }}; --size:{{ $sizePx }}px; --donut-color:{{ $band['color'] }}; --donut-glow:{{ $band['glow'] }};"
 >
     <svg viewBox="0 0 120 120" aria-hidden="true">

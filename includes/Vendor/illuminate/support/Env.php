@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
 use Dotenv\Repository\Adapter\PutenvAdapter;
 use Dotenv\Repository\RepositoryBuilder;
@@ -74,7 +74,7 @@ class Env
      */
     public static function get($key, $default = null)
     {
-        return self::getOption($key)->getOrCall(fn () => performancetoolkit_vendor_value($default));
+        return self::getOption($key)->getOrCall(fn () => pivotperformancetoolkit_vendor_value($default));
     }
 
     /**

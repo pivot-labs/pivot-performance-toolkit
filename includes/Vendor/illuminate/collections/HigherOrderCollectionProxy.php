@@ -1,13 +1,13 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
 /**
  * @template TKey of array-key
  *
  * @template-covariant TValue
  *
- * @mixin \PerformanceToolkit\Vendor\Illuminate\Support\Enumerable<TKey, TValue>
+ * @mixin \PivotPerformanceToolkit\Vendor\Illuminate\Support\Enumerable<TKey, TValue>
  * @mixin TValue
  */
 class HigherOrderCollectionProxy
@@ -15,7 +15,7 @@ class HigherOrderCollectionProxy
     /**
      * The collection being operated on.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Support\Enumerable<TKey, TValue>
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Support\Enumerable<TKey, TValue>
      */
     protected $collection;
 
@@ -29,7 +29,7 @@ class HigherOrderCollectionProxy
     /**
      * Create a new proxy instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Support\Enumerable<TKey, TValue>  $collection
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Support\Enumerable<TKey, TValue>  $collection
      * @param  string  $method
      * @return void
      */

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp\Psr7;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7;
 
 use InvalidArgumentException;
-use PerformanceToolkit\Vendor\Psr\Http\Message\ServerRequestInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\StreamInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\UploadedFileInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\UriInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\ServerRequestInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\StreamInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\UploadedFileInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\UriInterface;
 
 /**
  * Server-side HTTP request

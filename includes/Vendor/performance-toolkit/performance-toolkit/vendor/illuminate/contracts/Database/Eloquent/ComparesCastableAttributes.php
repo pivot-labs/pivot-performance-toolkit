@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Database\Eloquent;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Database\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
 

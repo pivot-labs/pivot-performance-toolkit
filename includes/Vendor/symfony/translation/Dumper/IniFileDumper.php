@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation\Dumper;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Dumper;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogue;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogue;
 
 /**
  * IniFileDumper generates an ini formatted string representation of a message catalogue.

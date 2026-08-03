@@ -1,8 +1,8 @@
-<div class="ptk-col ptk-col--main">
+<div class="pivot-performance-toolkit-col pivot-performance-toolkit-col--main">
     @include('cards.caching.rules.exclusions')
 </div>
 
-<div class="ptk-col ptk-col--sidebar">
+<div class="pivot-performance-toolkit-col pivot-performance-toolkit-col--sidebar">
     @include('cards.caching.rules.info.about-exclusions')
     @include('cards.caching.rules.info.bestpractices-exclusions')
     @include('cards.caching.rules.info.need-help')

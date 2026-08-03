@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Output\AnsiColorMode;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\AnsiColorMode;
 
 class Terminal
 {

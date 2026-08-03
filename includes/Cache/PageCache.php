@@ -2,16 +2,20 @@
 /**
  * Frontend full-page cache handler.
  *
- * @package PerformanceToolkit
+ * @package PivotPerformanceToolkit
  */
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Cache;
+namespace PivotPerformanceToolkit\Cache;
 
-use PerformanceToolkit\Contracts\ModuleInterface;
-use PerformanceToolkit\Core\Settings;
-use PerformanceToolkit\Utils\FilesystemCheck;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+use PivotPerformanceToolkit\Contracts\ModuleInterface;
+use PivotPerformanceToolkit\Core\Settings;
+use PivotPerformanceToolkit\Utils\FilesystemCheck;
 
 final class PageCache implements ModuleInterface {
 
@@ -21,7 +25,7 @@ final class PageCache implements ModuleInterface {
 
 	public function __construct( Settings $settings ) {
 		$this->settings  = $settings;
-		$this->cache_dir = WP_CONTENT_DIR . '/cache/performance-toolkit';
+		$this->cache_dir = WP_CONTENT_DIR . '/cache/pivot-performance-toolkit';
 	}
 
 	public function register(): void {
@@ -218,7 +222,7 @@ final class PageCache implements ModuleInterface {
 			return false;
 		}
 
-		$token = isset( $_COOKIE['ptk_perf_probe'] ) ? trim( (string) $_COOKIE['ptk_perf_probe'] ) : '';
+		$token = isset( $_COOKIE['pivot_performance_toolkit_perf_probe'] ) ? trim( (string) $_COOKIE['pivot_performance_toolkit_perf_probe'] ) : '';
 
 		return strlen( $token ) >= 20;
 	}

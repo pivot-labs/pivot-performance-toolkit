@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
 
 use Illuminate\Console\Scheduling\Schedule as ConsoleSchedule;
 
@@ -12,7 +12,7 @@ use Illuminate\Console\Scheduling\Schedule as ConsoleSchedule;
  * @method static void group(\Closure $events)
  * @method static string compileArrayInput(string|int $key, array $value)
  * @method static bool serverShouldRun(\Illuminate\Console\Scheduling\Event $event, \DateTimeInterface $time)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Collection dueEvents(\PerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application $app)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection dueEvents(\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application $app)
  * @method static \Illuminate\Console\Scheduling\Event[] events()
  * @method static \Illuminate\Console\Scheduling\Schedule useCache(string $store)
  * @method static void macro(string $name, object|callable $macro)

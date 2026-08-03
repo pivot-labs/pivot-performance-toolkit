@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Carbon\Traits;
+namespace PivotPerformanceToolkit\Vendor\Carbon\Traits;
 
-use PerformanceToolkit\Vendor\Carbon\CarbonInterval;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\InvalidIntervalException;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterval;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\InvalidIntervalException;
 use DateInterval;
 
 /**

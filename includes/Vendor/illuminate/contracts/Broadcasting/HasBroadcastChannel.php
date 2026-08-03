@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Broadcasting;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Broadcasting;
 
 interface HasBroadcastChannel
 {

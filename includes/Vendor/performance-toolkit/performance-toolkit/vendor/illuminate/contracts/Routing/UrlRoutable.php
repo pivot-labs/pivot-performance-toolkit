@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Routing;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Routing;
 
 interface UrlRoutable
 {

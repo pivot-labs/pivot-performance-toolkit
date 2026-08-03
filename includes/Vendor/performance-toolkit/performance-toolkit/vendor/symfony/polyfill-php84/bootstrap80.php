@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use PerformanceToolkit\Vendor\Symfony\Polyfill\Php84 as p;
+use PivotPerformanceToolkit\Vendor\Symfony\Polyfill\Php84 as p;
 
 if (extension_loaded('mbstring')) {
     if (!function_exists('mb_ucfirst')) {
@@ -44,7 +44,7 @@ if (extension_loaded('bcmath')) {
         function bcfloor(string $num): string { return p\Php84::bcfloor($num); }
     }
     if (!function_exists('bcround')) {
-        function bcround(string $num, int $precision = 0, $mode = PerformanceToolkit_Vendor_RoundingMode::HalfAwayFromZero): string { return p\Php84::bcround($num, $precision, $mode); }
+        function bcround(string $num, int $precision = 0, $mode = PivotPerformanceToolkit_Vendor_RoundingMode::HalfAwayFromZero): string { return p\Php84::bcround($num, $precision, $mode); }
     }
 }
 

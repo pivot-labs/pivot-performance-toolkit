@@ -1,9 +1,9 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp\Exception;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp\Exception;
 
-use PerformanceToolkit\Vendor\Psr\Http\Client\NetworkExceptionInterface;
-use PerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Client\NetworkExceptionInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
 
 /**
  * Exception thrown when a connection cannot be established.

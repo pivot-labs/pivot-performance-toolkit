@@ -1,8 +1,8 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Filesystem;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Filesystem;
 
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem\LockTimeoutException;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem\LockTimeoutException;
 
 class LockableFile
 {
@@ -127,7 +127,7 @@ class LockableFile
      * @param  bool  $block
      * @return $this
      *
-     * @throws \PerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem\LockTimeoutException
+     * @throws \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem\LockTimeoutException
      */
     public function getSharedLock($block = false)
     {
@@ -146,7 +146,7 @@ class LockableFile
      * @param  bool  $block
      * @return $this
      *
-     * @throws \PerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem\LockTimeoutException
+     * @throws \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem\LockTimeoutException
      */
     public function getExclusiveLock($block = false)
     {

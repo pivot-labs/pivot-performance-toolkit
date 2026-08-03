@@ -1,11 +1,11 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Laravel\Envoy\Console;
+namespace PivotPerformanceToolkit\Vendor\Laravel\Envoy\Console;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Question\ConfirmationQuestion;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Question\Question;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Question\ConfirmationQuestion;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Question\Question;
 
 trait Command
 {
@@ -26,8 +26,8 @@ trait Command
     /**
      * Execute the command.
      *
-     * @param  \PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface  $input
-     * @param  \PerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface  $output
+     * @param  \PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface  $input
+     * @param  \PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface  $output
      * @return int
      */
     public function execute(InputInterface $input, OutputInterface $output): int

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Contracts\Service\Test;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Contracts\Service\Test;
 
 class_alias(ServiceLocatorTestCase::class, ServiceLocatorTest::class);
 

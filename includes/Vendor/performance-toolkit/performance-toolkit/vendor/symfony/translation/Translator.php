@@ -9,21 +9,21 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation;
 
 use Symfony\Component\Config\ConfigCacheFactory;
 use Symfony\Component\Config\ConfigCacheFactoryInterface;
 use Symfony\Component\Config\ConfigCacheInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\InvalidArgumentException;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\NotFoundResourceException;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\RuntimeException;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Formatter\IntlFormatterInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Formatter\MessageFormatter;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Formatter\MessageFormatterInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Loader\LoaderInterface;
-use PerformanceToolkit\Vendor\Symfony\Contracts\Translation\LocaleAwareInterface;
-use PerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatableInterface;
-use PerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatorInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\InvalidArgumentException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\NotFoundResourceException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\RuntimeException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Formatter\IntlFormatterInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Formatter\MessageFormatter;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Formatter\MessageFormatterInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Loader\LoaderInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Contracts\Translation\LocaleAwareInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatableInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatorInterface;
 
 // Help opcache.preload discover always-needed symbols
 class_exists(MessageCatalogue::class);
@@ -309,7 +309,7 @@ class Translator implements TranslatorInterface, TranslatorBagInterface, LocaleA
         $content = \sprintf(<<<EOF
             <?php
 
-            use PerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogue;
+            use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogue;
 
             \$catalogue = new MessageCatalogue('%s', %s);
 

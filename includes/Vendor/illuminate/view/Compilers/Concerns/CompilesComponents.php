@@ -1,11 +1,11 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns;
 
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\CanBeEscapedWhenCastToString;
-use PerformanceToolkit\Vendor\Illuminate\Support\Str;
-use PerformanceToolkit\Vendor\Illuminate\View\AnonymousComponent;
-use PerformanceToolkit\Vendor\Illuminate\View\ComponentAttributeBag;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\CanBeEscapedWhenCastToString;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Str;
+use PivotPerformanceToolkit\Vendor\Illuminate\View\AnonymousComponent;
+use PivotPerformanceToolkit\Vendor\Illuminate\View\ComponentAttributeBag;
 
 trait CompilesComponents
 {
@@ -68,7 +68,7 @@ trait CompilesComponents
         return implode("\n", [
             '<?php if (isset($component)) { $__componentOriginal'.$hash.' = $component; } ?>',
             '<?php if (isset($attributes)) { $__attributesOriginal'.$hash.' = $attributes; } ?>',
-            '<?php $component = '.$component.'::resolve('.($data ?: '[]').' + (isset($attributes) && $attributes instanceof PerformanceToolkit\Vendor\Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>',
+            '<?php $component = '.$component.'::resolve('.($data ?: '[]').' + (isset($attributes) && $attributes instanceof PivotPerformanceToolkit\Vendor\Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>',
             '<?php $component->withName('.$alias.'); ?>',
             '<?php if ($component->shouldRender()): ?>',
             '<?php $__env->startComponent($component->resolveView(), $component->data()); ?>',
@@ -157,10 +157,10 @@ trait CompilesComponents
      */
     protected function compileProps($expression)
     {
-        return "<?php \$attributes ??= new \\PerformanceToolkit\\Vendor\\Illuminate\\View\\ComponentAttributeBag;
+        return "<?php \$attributes ??= new \\PivotPerformanceToolkit\\Vendor\\Illuminate\\View\\ComponentAttributeBag;
 
 \$__newAttributes = [];
-\$__propNames = \PerformanceToolkit\Vendor\Illuminate\View\ComponentAttributeBag::extractPropNames({$expression});
+\$__propNames = \PivotPerformanceToolkit\Vendor\Illuminate\View\ComponentAttributeBag::extractPropNames({$expression});
 
 foreach (\$attributes->all() as \$__key => \$__value) {
     if (in_array(\$__key, \$__propNames)) {
@@ -170,7 +170,7 @@ foreach (\$attributes->all() as \$__key => \$__value) {
     }
 }
 
-\$attributes = new \PerformanceToolkit\Vendor\Illuminate\View\ComponentAttributeBag(\$__newAttributes);
+\$attributes = new \PivotPerformanceToolkit\Vendor\Illuminate\View\ComponentAttributeBag(\$__newAttributes);
 
 unset(\$__propNames);
 unset(\$__newAttributes);
@@ -216,7 +216,7 @@ unset(\$__defined_vars); ?>";
 
         return is_string($value) ||
                (is_object($value) && ! $value instanceof ComponentAttributeBag && method_exists($value, '__toString'))
-                        ? performancetoolkit_vendor_e($value)
+                        ? pivotperformancetoolkit_vendor_e($value)
                         : $value;
     }
 }

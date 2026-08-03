@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Contracts\Translation;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Contracts\Translation;
 
 /**
  * @author Nicolas Grekas <p@tchwork.com>

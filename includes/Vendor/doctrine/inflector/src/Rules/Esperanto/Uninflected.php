@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Esperanto;
+namespace PivotPerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Esperanto;
 
-use PerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Pattern;
+use PivotPerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Pattern;
 
 final class Uninflected
 {

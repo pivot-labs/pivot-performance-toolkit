@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Finder\Iterator;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Finder\Iterator;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Finder\SplFileInfo;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Finder\SplFileInfo;
 
 /**
  * FilecontentFilterIterator filters files by their contents using patterns (regexps or strings).

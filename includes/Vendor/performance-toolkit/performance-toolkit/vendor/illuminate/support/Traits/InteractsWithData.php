@@ -1,17 +1,17 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Traits;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits;
 
-use PerformanceToolkit\Vendor\Carbon\CarbonInterval;
-use PerformanceToolkit\Vendor\Carbon\Unit;
-use PerformanceToolkit\Vendor\Illuminate\Support\Arr;
-use PerformanceToolkit\Vendor\Illuminate\Support\Collection;
-use PerformanceToolkit\Vendor\Illuminate\Support\Facades\Date;
-use PerformanceToolkit\Vendor\Illuminate\Support\Number;
-use PerformanceToolkit\Vendor\Illuminate\Support\Str;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterval;
+use PivotPerformanceToolkit\Vendor\Carbon\Unit;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Arr;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades\Date;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Number;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Str;
 use stdClass;
 
-use function PerformanceToolkit\Vendor\Illuminate\Support\enum_value;
+use function PivotPerformanceToolkit\Vendor\Illuminate\Support\enum_value;
 
 trait InteractsWithData
 {
@@ -230,7 +230,7 @@ trait InteractsWithData
      *
      * @param  string  $key
      * @param  mixed  $default
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Stringable
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Stringable
      */
     public function str($key, $default = null)
     {
@@ -242,7 +242,7 @@ trait InteractsWithData
      *
      * @param  string  $key
      * @param  mixed  $default
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Stringable
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Stringable
      */
     public function string($key, $default = null)
     {
@@ -307,9 +307,9 @@ trait InteractsWithData
      * @param  string  $key
      * @param  string|null  $format
      * @param  \UnitEnum|string|null  $tz
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Carbon|null
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon|null
      *
-     * @throws \PerformanceToolkit\Vendor\Carbon\Exceptions\InvalidFormatException
+     * @throws \PivotPerformanceToolkit\Vendor\Carbon\Exceptions\InvalidFormatException
      */
     public function date($key, $format = null, $tz = null)
     {
@@ -330,8 +330,8 @@ trait InteractsWithData
      * Retrieve data from the instance as a CarbonInterval instance.
      *
      * @param  string  $key
-     * @param  \PerformanceToolkit\Vendor\Carbon\Unit|string|null  $unit
-     * @return \PerformanceToolkit\Vendor\Carbon\CarbonInterval|null
+     * @param  \PivotPerformanceToolkit\Vendor\Carbon\Unit|string|null  $unit
+     * @return \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterval|null
      */
     public function interval($key, $unit = null)
     {
@@ -417,7 +417,7 @@ trait InteractsWithData
      * Retrieve data from the instance as a collection.
      *
      * @param  array|string|null  $key
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Collection
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection
      */
     public function collect($key = null)
     {

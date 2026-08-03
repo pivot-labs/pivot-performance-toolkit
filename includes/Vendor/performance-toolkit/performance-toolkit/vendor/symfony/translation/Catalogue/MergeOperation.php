@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation\Catalogue;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Catalogue;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogueInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogueInterface;
 
 /**
  * Merge operation between two catalogues as follows:

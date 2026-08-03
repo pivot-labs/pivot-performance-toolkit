@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Translation;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Translation;
 
 interface Translator
 {

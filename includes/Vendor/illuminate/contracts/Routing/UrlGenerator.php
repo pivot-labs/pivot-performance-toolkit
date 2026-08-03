@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Routing;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Routing;
 
 /**
  * @method string query(string $path, array $query = [], mixed $extra = [], bool|null $secure = null)

@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Auth\Access;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Auth\Access;
 
 interface Gate
 {
@@ -136,7 +136,7 @@ interface Gate
     /**
      * Get a guard instance for the given user.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Auth\Authenticatable|mixed  $user
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Auth\Authenticatable|mixed  $user
      * @return static
      */
     public function forUser($user);

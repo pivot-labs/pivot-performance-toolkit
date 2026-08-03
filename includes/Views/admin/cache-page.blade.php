@@ -1,4 +1,4 @@
-<div class="ptk-col ptk-col--main">
+<div class="pivot-performance-toolkit-col pivot-performance-toolkit-col--main">
 	@include('cards.caching.page.cache')
 	@include('cards.caching.page.object-cache', array(
 		'object_cache'                     => $object_cache,
@@ -11,7 +11,7 @@
 	))
 </div>
 
-<div class="ptk-col ptk-col--sidebar">
+<div class="pivot-performance-toolkit-col pivot-performance-toolkit-col--sidebar">
     @include('cards.caching.page.info.about')
     @include('cards.caching.page.quick-actions', array(
         'clear_action' => $clear_action,

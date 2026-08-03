@@ -1,14 +1,14 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\View\Engines;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\View\Engines;
 
 use Illuminate\Database\RecordNotFoundException;
 use Illuminate\Database\RecordsNotFoundException;
-use PerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem;
+use PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use PerformanceToolkit\Vendor\Illuminate\Support\Str;
-use PerformanceToolkit\Vendor\Illuminate\View\Compilers\CompilerInterface;
-use PerformanceToolkit\Vendor\Illuminate\View\ViewException;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Str;
+use PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\CompilerInterface;
+use PivotPerformanceToolkit\Vendor\Illuminate\View\ViewException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
 
@@ -17,7 +17,7 @@ class CompilerEngine extends PhpEngine
     /**
      * The Blade compiler instance.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\View\Compilers\CompilerInterface
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\CompilerInterface
      */
     protected $compiler;
 
@@ -38,8 +38,8 @@ class CompilerEngine extends PhpEngine
     /**
      * Create a new compiler engine instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\View\Compilers\CompilerInterface  $compiler
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem|null  $files
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\CompilerInterface  $compiler
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem|null  $files
      * @return void
      */
     public function __construct(CompilerInterface $compiler, ?Filesystem $files = null)
@@ -125,13 +125,13 @@ class CompilerEngine extends PhpEngine
      */
     protected function getMessage(Throwable $e)
     {
-        return $e->getMessage().' (View: '.realpath(performancetoolkit_vendor_last($this->lastCompiled)).')';
+        return $e->getMessage().' (View: '.realpath(pivotperformancetoolkit_vendor_last($this->lastCompiled)).')';
     }
 
     /**
      * Get the compiler implementation.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\View\Compilers\CompilerInterface
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\CompilerInterface
      */
     public function getCompiler()
     {

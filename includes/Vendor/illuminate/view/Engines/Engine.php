@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\View\Engines;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\View\Engines;
 
 abstract class Engine
 {

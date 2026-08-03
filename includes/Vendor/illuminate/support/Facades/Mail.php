@@ -1,11 +1,11 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
 
-use PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\MailFake;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\MailFake;
 
 /**
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailer mailer(string|null $name = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailer mailer(string|null $name = null)
  * @method static \Illuminate\Mail\Mailer driver(string|null $driver = null)
  * @method static \Illuminate\Mail\Mailer build(array $config)
  * @method static \Symfony\Component\Mailer\Transport\TransportInterface createSymfonyTransport(array $config)
@@ -13,8 +13,8 @@ use PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\MailFake;
  * @method static void setDefaultDriver(string $name)
  * @method static void purge(string|null $name = null)
  * @method static \Illuminate\Mail\MailManager extend(string $driver, \Closure $callback)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application getApplication()
- * @method static \Illuminate\Mail\MailManager setApplication(\PerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application $app)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application getApplication()
+ * @method static \Illuminate\Mail\MailManager setApplication(\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application $app)
  * @method static \Illuminate\Mail\MailManager forgetMailers()
  * @method static void alwaysFrom(string $address, string|null $name = null)
  * @method static void alwaysReplyTo(string $address, string|null $name = null)
@@ -27,17 +27,17 @@ use PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\MailFake;
  * @method static \Illuminate\Mail\SentMessage|null raw(string $text, mixed $callback)
  * @method static \Illuminate\Mail\SentMessage|null plain(string $view, array $data, mixed $callback)
  * @method static string render(string|array $view, array $data = [])
- * @method static \Illuminate\Mail\SentMessage|null send(\PerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailable|string|array $view, array $data = [], \Closure|string|null $callback = null)
- * @method static \Illuminate\Mail\SentMessage|null sendNow(\PerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailable|string|array $mailable, array $data = [], \Closure|string|null $callback = null)
- * @method static mixed queue(\PerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailable|string|array $view, \BackedEnum|string|null $queue = null)
- * @method static mixed onQueue(\BackedEnum|string|null $queue, \PerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailable $view)
- * @method static mixed queueOn(string $queue, \PerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailable $view)
- * @method static mixed later(\DateTimeInterface|\DateInterval|int $delay, \PerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailable $view, string|null $queue = null)
- * @method static mixed laterOn(string $queue, \DateTimeInterface|\DateInterval|int $delay, \PerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailable $view)
+ * @method static \Illuminate\Mail\SentMessage|null send(\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailable|string|array $view, array $data = [], \Closure|string|null $callback = null)
+ * @method static \Illuminate\Mail\SentMessage|null sendNow(\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailable|string|array $mailable, array $data = [], \Closure|string|null $callback = null)
+ * @method static mixed queue(\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailable|string|array $view, \BackedEnum|string|null $queue = null)
+ * @method static mixed onQueue(\BackedEnum|string|null $queue, \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailable $view)
+ * @method static mixed queueOn(string $queue, \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailable $view)
+ * @method static mixed later(\DateTimeInterface|\DateInterval|int $delay, \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailable $view, string|null $queue = null)
+ * @method static mixed laterOn(string $queue, \DateTimeInterface|\DateInterval|int $delay, \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailable $view)
  * @method static \Symfony\Component\Mailer\Transport\TransportInterface getSymfonyTransport()
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\View\Factory getViewFactory()
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View\Factory getViewFactory()
  * @method static void setSymfonyTransport(\Symfony\Component\Mailer\Transport\TransportInterface $transport)
- * @method static \Illuminate\Mail\Mailer setQueue(\PerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Factory $queue)
+ * @method static \Illuminate\Mail\Mailer setQueue(\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Factory $queue)
  * @method static void macro(string $name, object|callable $macro)
  * @method static void mixin(object $mixin, bool $replace = true)
  * @method static bool hasMacro(string $name)
@@ -53,20 +53,20 @@ use PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\MailFake;
  * @method static void assertSentCount(int $count)
  * @method static void assertQueuedCount(int $count)
  * @method static void assertOutgoingCount(int $count)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Collection sent(string|\Closure $mailable, callable|null $callback = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection sent(string|\Closure $mailable, callable|null $callback = null)
  * @method static bool hasSent(string $mailable)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Collection queued(string|\Closure $mailable, callable|null $callback = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection queued(string|\Closure $mailable, callable|null $callback = null)
  * @method static bool hasQueued(string $mailable)
  *
  * @see \Illuminate\Mail\MailManager
- * @see \PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\MailFake
+ * @see \PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\MailFake
  */
 class Mail extends Facade
 {
     /**
      * Replace the bound instance with a fake.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\MailFake
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\MailFake
      */
     public static function fake()
     {
@@ -74,7 +74,7 @@ class Mail extends Facade
                 ? static::getFacadeRoot()->manager
                 : static::getFacadeRoot();
 
-        return performancetoolkit_vendor_tap(new MailFake($actualMailManager), function ($fake) {
+        return pivotperformancetoolkit_vendor_tap(new MailFake($actualMailManager), function ($fake) {
             static::swap($fake);
         });
     }

@@ -2,15 +2,19 @@
 /**
  * Media optimization admin page.
  *
- * @package PerformanceToolkit
+ * @package PivotPerformanceToolkit
  */
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Admin;
+namespace PivotPerformanceToolkit\Admin;
 
-use PerformanceToolkit\Core\Settings;
-use PerformanceToolkit\Media\ImageOptimizerDetector;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+use PivotPerformanceToolkit\Core\Settings;
+use PivotPerformanceToolkit\Media\ImageOptimizerDetector;
 
 final class MediaOptimizationPage extends BladeAdminPage {
 
@@ -24,15 +28,15 @@ final class MediaOptimizationPage extends BladeAdminPage {
 	}
 
 	public function slug(): string {
-		return 'performance-toolkit-media-optimization';
+		return 'pivot-performance-toolkit-media-optimization';
 	}
 
 	public function menuTitle(): string {
-		return __( 'Media Optimization', 'performance-toolkit' );
+		return __( 'Media Optimization', 'pivot-performance-toolkit' );
 	}
 
 	public function pageTitle(): string {
-		return __( 'Performance Toolkit Media Optimization', 'performance-toolkit' );
+		return __( 'Pivot Performance Toolkit Media Optimization', 'pivot-performance-toolkit' );
 	}
 
 	public function iconKey(): string {
@@ -58,7 +62,7 @@ final class MediaOptimizationPage extends BladeAdminPage {
 			'lazyload_providers'   => $lazyload_providers,
 			'external_lazyload_on' => array() !== $lazyload_providers,
 			'optimizer_status'     => array() === $active_optimizers
-				? __( 'None detected', 'performance-toolkit' )
+				? __( 'None detected', 'pivot-performance-toolkit' )
 				: implode( ', ', $active_optimizers ),
 		);
 	}

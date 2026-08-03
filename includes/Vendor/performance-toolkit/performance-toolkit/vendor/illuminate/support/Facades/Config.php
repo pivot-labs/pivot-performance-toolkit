@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
 
 /**
  * @method static bool has(string $key)
@@ -11,7 +11,7 @@ namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
  * @method static float float(string $key, \Closure|float|null $default = null)
  * @method static bool boolean(string $key, \Closure|bool|null $default = null)
  * @method static array<array-key, mixed> array(string $key, \Closure|array<array-key, mixed>|null $default = null)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Collection<array-key, mixed> collection(string $key, \Closure|array<array-key, mixed>|null $default = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection<array-key, mixed> collection(string $key, \Closure|array<array-key, mixed>|null $default = null)
  * @method static void set(array|string $key, mixed $value = null)
  * @method static void prepend(string $key, mixed $value)
  * @method static void push(string $key, mixed $value)

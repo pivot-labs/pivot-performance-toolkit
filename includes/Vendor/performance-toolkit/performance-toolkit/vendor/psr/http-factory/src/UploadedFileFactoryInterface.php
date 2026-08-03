@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Psr\Http\Message;
+namespace PivotPerformanceToolkit\Vendor\Psr\Http\Message;
 
 interface UploadedFileFactoryInterface
 {

@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Helper;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Helper;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Formatter\OutputFormatter;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Formatter\OutputFormatter;
 
 /**
  * The Formatter class provides helpers to format messages.

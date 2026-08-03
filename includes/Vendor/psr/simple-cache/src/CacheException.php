@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Psr\SimpleCache;
+namespace PivotPerformanceToolkit\Vendor\Psr\SimpleCache;
 
 /**
  * Interface used for all types of exceptions thrown by the implementing library.

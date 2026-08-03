@@ -2,20 +2,20 @@
 /**
  * Script and stylesheet optimization handler.
  *
- * @package PerformanceToolkit
+ * @package PivotPerformanceToolkit
  */
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Optimization;
+namespace PivotPerformanceToolkit\Optimization;
 
-use PerformanceToolkit\Contracts\ModuleInterface;
-use PerformanceToolkit\Core\Settings;
-use PerformanceToolkit\Utils\FilesystemCheck;
+use PivotPerformanceToolkit\Contracts\ModuleInterface;
+use PivotPerformanceToolkit\Core\Settings;
+use PivotPerformanceToolkit\Utils\FilesystemCheck;
 
 final class Assets implements ModuleInterface {
 
-	private const MINIFIED_ASSETS_SUBDIR = 'cache/performance-toolkit/minified-assets';
+	private const MINIFIED_ASSETS_SUBDIR = 'cache/pivot-performance-toolkit/minified-assets';
 
 	private const EXCLUDED_HANDLES = array(
 		'jquery',

@@ -1,8 +1,8 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns;
 
-use PerformanceToolkit\Vendor\Illuminate\Contracts\View\ViewCompilationException;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View\ViewCompilationException;
 
 trait CompilesLoops
 {
@@ -19,7 +19,7 @@ trait CompilesLoops
      * @param  string|null  $expression
      * @return string
      *
-     * @throws \PerformanceToolkit\Vendor\Illuminate\Contracts\View\ViewCompilationException
+     * @throws \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View\ViewCompilationException
      */
     protected function compileForelse($expression)
     {
@@ -96,7 +96,7 @@ trait CompilesLoops
      * @param  string|null  $expression
      * @return string
      *
-     * @throws \PerformanceToolkit\Vendor\Illuminate\Contracts\View\ViewCompilationException
+     * @throws \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View\ViewCompilationException
      */
     protected function compileForeach($expression)
     {

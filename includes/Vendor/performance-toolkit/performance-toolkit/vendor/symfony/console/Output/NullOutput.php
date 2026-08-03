@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Output;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Formatter\NullOutputFormatter;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Formatter\NullOutputFormatter;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Formatter\OutputFormatterInterface;
 
 /**
  * NullOutput suppresses all output.

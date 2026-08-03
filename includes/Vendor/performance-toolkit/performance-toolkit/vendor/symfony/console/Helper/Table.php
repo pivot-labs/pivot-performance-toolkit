@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Helper;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Helper;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\InvalidArgumentException;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\RuntimeException;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Formatter\OutputFormatter;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Formatter\WrappableOutputFormatterInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Output\ConsoleSectionOutput;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\InvalidArgumentException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\RuntimeException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Formatter\OutputFormatter;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Formatter\WrappableOutputFormatterInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\ConsoleSectionOutput;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Provides helpers to display a table.

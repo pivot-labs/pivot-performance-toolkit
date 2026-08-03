@@ -1,11 +1,11 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Bus;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Bus;
 
-use PerformanceToolkit\Vendor\Carbon\CarbonImmutable;
-use PerformanceToolkit\Vendor\Illuminate\Container\Container;
-use PerformanceToolkit\Vendor\Illuminate\Support\Str;
-use PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\BatchFake;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Container\Container;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Str;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\BatchFake;
 
 trait Batchable
 {
@@ -19,14 +19,14 @@ trait Batchable
     /**
      * The fake batch, if applicable.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\BatchFake
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\BatchFake
      */
     private $fakeBatch;
 
     /**
      * Get the batch instance for the job, if applicable.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\Batch|null
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\Batch|null
      */
     public function batch()
     {
@@ -74,10 +74,10 @@ trait Batchable
      * @param  int  $failedJobs
      * @param  array  $failedJobIds
      * @param  array  $options
-     * @param  \PerformanceToolkit\Vendor\Carbon\CarbonImmutable|null  $createdAt
-     * @param  \PerformanceToolkit\Vendor\Carbon\CarbonImmutable|null  $cancelledAt
-     * @param  \PerformanceToolkit\Vendor\Carbon\CarbonImmutable|null  $finishedAt
-     * @return array{0: $this, 1: \PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\BatchFake}
+     * @param  \PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable|null  $createdAt
+     * @param  \PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable|null  $cancelledAt
+     * @param  \PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable|null  $finishedAt
+     * @return array{0: $this, 1: \PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\BatchFake}
      */
     public function withFakeBatch(string $id = '',
                                   string $name = '',

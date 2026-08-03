@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Vendor\Illuminate\Container\Attributes;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Container\Attributes;
 
 use Attribute;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Container\ContextualAttribute;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\ContextualAttribute;
 
 #[Attribute(Attribute::TARGET_PARAMETER)]
 final class Tag implements ContextualAttribute
@@ -20,7 +20,7 @@ final class Tag implements ContextualAttribute
      * Resolve the tag.
      *
      * @param  self  $attribute
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container  $container
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container  $container
      * @return mixed
      */
     public static function resolve(self $attribute, Container $container)

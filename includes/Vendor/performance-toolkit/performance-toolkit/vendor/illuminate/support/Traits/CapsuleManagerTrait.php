@@ -1,9 +1,9 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Traits;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits;
 
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container;
-use PerformanceToolkit\Vendor\Illuminate\Support\Fluent;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Fluent;
 
 trait CapsuleManagerTrait
 {
@@ -17,14 +17,14 @@ trait CapsuleManagerTrait
     /**
      * The container instance.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container
      */
     protected $container;
 
     /**
      * Setup the IoC container instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container  $container
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container  $container
      * @return void
      */
     protected function setupContainer(Container $container)
@@ -49,7 +49,7 @@ trait CapsuleManagerTrait
     /**
      * Get the IoC container instance.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container
      */
     public function getContainer()
     {
@@ -59,7 +59,7 @@ trait CapsuleManagerTrait
     /**
      * Set the IoC container instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container  $container
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container  $container
      * @return void
      */
     public function setContainer(Container $container)

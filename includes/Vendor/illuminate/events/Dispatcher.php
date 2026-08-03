@@ -1,24 +1,24 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Events;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Events;
 
 use Closure;
 use Exception;
-use PerformanceToolkit\Vendor\Illuminate\Container\Container;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Broadcasting\Factory as BroadcastFactory;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container as ContainerContract;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Events\ShouldHandleEventsAfterCommit;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Queue\ShouldBeEncrypted;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Queue\ShouldQueue;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Queue\ShouldQueueAfterCommit;
-use PerformanceToolkit\Vendor\Illuminate\Support\Arr;
-use PerformanceToolkit\Vendor\Illuminate\Support\Collection;
-use PerformanceToolkit\Vendor\Illuminate\Support\Str;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\ReflectsClosures;
+use PivotPerformanceToolkit\Vendor\Illuminate\Container\Container;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Broadcasting\Factory as BroadcastFactory;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container as ContainerContract;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Events\ShouldHandleEventsAfterCommit;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue\ShouldBeEncrypted;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue\ShouldQueue;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue\ShouldQueueAfterCommit;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Arr;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Str;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\ReflectsClosures;
 use ReflectionClass;
 
 class Dispatcher implements DispatcherContract
@@ -28,7 +28,7 @@ class Dispatcher implements DispatcherContract
     /**
      * The IoC container instance.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container
      */
     protected $container;
 
@@ -70,7 +70,7 @@ class Dispatcher implements DispatcherContract
     /**
      * Create a new event dispatcher instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container|null  $container
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container|null  $container
      * @return void
      */
     public function __construct(?ContainerContract $container = null)
@@ -81,8 +81,8 @@ class Dispatcher implements DispatcherContract
     /**
      * Register an event listener with the dispatcher.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Events\QueuedClosure|callable|array|class-string|string  $events
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Events\QueuedClosure|callable|array|class-string|null  $listener
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Events\QueuedClosure|callable|array|class-string|string  $events
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Events\QueuedClosure|callable|array|class-string|null  $listener
      * @return void
      */
     public function listen($events, $listener = null)
@@ -350,7 +350,7 @@ class Dispatcher implements DispatcherContract
     /**
      * Broadcast the given event class.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Broadcasting\ShouldBroadcast  $event
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Broadcasting\ShouldBroadcast  $event
      * @return void
      */
     protected function broadcastEvent($event)
@@ -656,12 +656,12 @@ class Dispatcher implements DispatcherContract
      * Propagate listener options to the job.
      *
      * @param  mixed  $listener
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Events\CallQueuedListener  $job
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Events\CallQueuedListener  $job
      * @return mixed
      */
     protected function propagateListenerOptions($listener, $job)
     {
-        return performancetoolkit_vendor_tap($job, function ($job) use ($listener) {
+        return pivotperformancetoolkit_vendor_tap($job, function ($job) use ($listener) {
             $data = array_values($job->data);
 
             if ($listener instanceof ShouldQueueAfterCommit) {
@@ -723,7 +723,7 @@ class Dispatcher implements DispatcherContract
     /**
      * Get the queue implementation from the resolver.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Queue
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Queue
      */
     protected function resolveQueue()
     {

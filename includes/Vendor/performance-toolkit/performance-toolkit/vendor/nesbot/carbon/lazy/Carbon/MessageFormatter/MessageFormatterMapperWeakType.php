@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Carbon\MessageFormatter;
+namespace PivotPerformanceToolkit\Vendor\Carbon\MessageFormatter;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Formatter\ChoiceMessageFormatterInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Formatter\MessageFormatterInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Formatter\ChoiceMessageFormatterInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Formatter\MessageFormatterInterface;
 
 if (!class_exists(LazyMessageFormatter::class, false)) {
     abstract class LazyMessageFormatter implements MessageFormatterInterface, ChoiceMessageFormatterInterface

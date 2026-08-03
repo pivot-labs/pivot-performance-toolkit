@@ -1,14 +1,14 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes;
 
 use BadMethodCallException;
 use Closure;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Queue;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Queue;
 use Illuminate\Queue\CallQueuedClosure;
 use Illuminate\Queue\QueueManager;
-use PerformanceToolkit\Vendor\Illuminate\Support\Collection;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\ReflectsClosures;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\ReflectsClosures;
 use PHPUnit\Framework\Assert as PHPUnit;
 
 /**
@@ -21,21 +21,21 @@ class QueueFake extends QueueManager implements Fake, Queue
     /**
      * The original queue manager.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Queue
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Queue
      */
     public $queue;
 
     /**
      * The job types that should be intercepted instead of pushed to the queue.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Support\Collection
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection
      */
     protected $jobsToFake;
 
     /**
      * The job types that should be pushed to the queue and not intercepted.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Support\Collection
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection
      */
     protected $jobsToBeQueued;
 
@@ -63,7 +63,7 @@ class QueueFake extends QueueManager implements Fake, Queue
     /**
      * Create a new fake queue instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application  $app
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application  $app
      * @param  array  $jobsToFake
      * @param  \Illuminate\Queue\QueueManager|null  $queue
      * @return void
@@ -321,7 +321,7 @@ class QueueFake extends QueueManager implements Fake, Queue
      *
      * @param  string  $job
      * @param  callable|null  $callback
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Collection
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection
      */
     public function pushed($job, $callback = null)
     {
@@ -340,7 +340,7 @@ class QueueFake extends QueueManager implements Fake, Queue
      * Get all of the raw pushes matching a truth-test callback.
      *
      * @param  null|\Closure(string, ?string, array): bool  $callback
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Collection<int, RawPushType>
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection<int, RawPushType>
      */
     public function pushedRaw($callback = null)
     {
@@ -364,7 +364,7 @@ class QueueFake extends QueueManager implements Fake, Queue
      * Resolve a queue connection instance.
      *
      * @param  mixed  $value
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Queue
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Queue
      */
     public function connection($value = null)
     {
@@ -511,7 +511,7 @@ class QueueFake extends QueueManager implements Fake, Queue
      * Pop the next job off of the queue.
      *
      * @param  string|null  $queue
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Job|null
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Job|null
      */
     public function pop($queue = null)
     {

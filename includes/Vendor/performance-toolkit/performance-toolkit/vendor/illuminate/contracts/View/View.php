@@ -1,8 +1,8 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\View;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View;
 
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Renderable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Renderable;
 
 interface View extends Renderable
 {

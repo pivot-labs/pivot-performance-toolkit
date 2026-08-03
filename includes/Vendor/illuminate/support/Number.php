@@ -1,8 +1,8 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
 use NumberFormatter;
 use RuntimeException;
 
@@ -311,7 +311,7 @@ class Number
 
         static::useLocale($locale);
 
-        return performancetoolkit_vendor_tap($callback(), fn () => static::useLocale($previousLocale));
+        return pivotperformancetoolkit_vendor_tap($callback(), fn () => static::useLocale($previousLocale));
     }
 
     /**
@@ -327,7 +327,7 @@ class Number
 
         static::useCurrency($currency);
 
-        return performancetoolkit_vendor_tap($callback(), fn () => static::useCurrency($previousCurrency));
+        return pivotperformancetoolkit_vendor_tap($callback(), fn () => static::useCurrency($previousCurrency));
     }
 
     /**

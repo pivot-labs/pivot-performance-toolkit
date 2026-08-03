@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Spanish;
+namespace PivotPerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Spanish;
 
-use PerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Pattern;
-use PerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Substitution;
-use PerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Transformation;
-use PerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Word;
+use PivotPerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Pattern;
+use PivotPerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Substitution;
+use PivotPerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Transformation;
+use PivotPerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Word;
 
 class Inflectible
 {

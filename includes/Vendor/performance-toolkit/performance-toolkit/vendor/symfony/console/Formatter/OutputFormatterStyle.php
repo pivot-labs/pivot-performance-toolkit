@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Formatter;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Formatter;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Color;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Color;
 
 /**
  * Formatter style class for defining styles.

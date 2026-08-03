@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Validation;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Validation;
 
 interface Factory
 {
@@ -11,7 +11,7 @@ interface Factory
      * @param  array  $rules
      * @param  array  $messages
      * @param  array  $attributes
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\Validation\Validator
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Validation\Validator
      */
     public function make(array $data, array $rules, array $messages = [], array $attributes = []);
 

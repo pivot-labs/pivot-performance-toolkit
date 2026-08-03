@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Process\Pipes;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Process\Pipes;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Process\Exception\RuntimeException;
-use PerformanceToolkit\Vendor\Symfony\Component\Process\Process;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Process\Exception\RuntimeException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Process\Process;
 
 /**
  * WindowsPipes implementation uses temporary files as handles.

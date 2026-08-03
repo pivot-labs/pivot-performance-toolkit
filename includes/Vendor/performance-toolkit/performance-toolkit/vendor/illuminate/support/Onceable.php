@@ -1,9 +1,9 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
 use Closure;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\HasOnceHash;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\HasOnceHash;
 use Laravel\SerializableClosure\Support\ReflectionClosure;
 
 class Onceable

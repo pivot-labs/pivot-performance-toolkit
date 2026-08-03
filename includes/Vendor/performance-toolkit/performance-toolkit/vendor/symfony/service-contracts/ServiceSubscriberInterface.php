@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Contracts\Service;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Contracts\Service;
 
-use PerformanceToolkit\Vendor\Symfony\Contracts\Service\Attribute\SubscribedService;
+use PivotPerformanceToolkit\Vendor\Symfony\Contracts\Service\Attribute\SubscribedService;
 
 /**
  * A ServiceSubscriber exposes its dependencies via the static {@link getSubscribedServices} method.

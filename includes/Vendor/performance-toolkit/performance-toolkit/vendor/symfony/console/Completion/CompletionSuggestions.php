@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Completion;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Completion;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputOption;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputOption;
 
 /**
  * Stores all completion suggestions for the current input.

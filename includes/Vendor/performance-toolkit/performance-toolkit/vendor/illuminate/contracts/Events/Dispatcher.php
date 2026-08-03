@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Events;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Events;
 
 interface Dispatcher
 {

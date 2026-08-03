@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Carbon\Traits;
+namespace PivotPerformanceToolkit\Vendor\Carbon\Traits;
 
-use PerformanceToolkit\Vendor\Carbon\Carbon;
-use PerformanceToolkit\Vendor\Carbon\CarbonImmutable;
+use PivotPerformanceToolkit\Vendor\Carbon\Carbon;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable;
 
 /**
  * Trait Mutability.
@@ -44,7 +44,7 @@ trait Mutability
     /**
      * Return a mutable copy of the instance.
      */
-    public function toMutable(): PerformanceToolkit\Vendor\Carbon
+    public function toMutable(): PivotPerformanceToolkit\Vendor\Carbon
     {
         return $this->cast(Carbon::class);
     }

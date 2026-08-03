@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Contracts\Service;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Contracts\Service;
 
-use PerformanceToolkit\Vendor\Psr\Container\ContainerInterface;
-use PerformanceToolkit\Vendor\Symfony\Contracts\Service\Attribute\Required;
-use PerformanceToolkit\Vendor\Symfony\Contracts\Service\Attribute\SubscribedService;
+use PivotPerformanceToolkit\Vendor\Psr\Container\ContainerInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Contracts\Service\Attribute\Required;
+use PivotPerformanceToolkit\Vendor\Symfony\Contracts\Service\Attribute\SubscribedService;
 
 trigger_deprecation('symfony/contracts', 'v3.5', '"%s" is deprecated, use "ServiceMethodsSubscriberTrait" instead.', ServiceSubscriberTrait::class);
 

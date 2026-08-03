@@ -1,13 +1,13 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Notifications;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Notifications;
 
 interface Dispatcher
 {
     /**
      * Send the given notification to the given notifiable entities.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Support\Collection|mixed  $notifiables
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection|mixed  $notifiables
      * @param  mixed  $notification
      * @return void
      */
@@ -16,7 +16,7 @@ interface Dispatcher
     /**
      * Send the given notification immediately.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Support\Collection|mixed  $notifiables
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection|mixed  $notifiables
      * @param  mixed  $notification
      * @param  array|null  $channels
      * @return void

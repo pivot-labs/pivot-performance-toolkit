@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Formatter;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Formatter;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\InvalidArgumentException;
-use PerformanceToolkit\Vendor\Symfony\Contracts\Service\ResetInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\InvalidArgumentException;
+use PivotPerformanceToolkit\Vendor\Symfony\Contracts\Service\ResetInterface;
 
 /**
  * @author Jean-François Simon <contact@jfsimon.fr>

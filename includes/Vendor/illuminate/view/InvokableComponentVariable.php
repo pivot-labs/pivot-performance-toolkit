@@ -1,11 +1,11 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\View;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\View;
 
 use ArrayIterator;
 use Closure;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\DeferringDisplayableValue;
-use PerformanceToolkit\Vendor\Illuminate\Support\Enumerable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\DeferringDisplayableValue;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Enumerable;
 use IteratorAggregate;
 use Stringable;
 use Traversable;
@@ -33,7 +33,7 @@ class InvokableComponentVariable implements DeferringDisplayableValue, IteratorA
     /**
      * Resolve the displayable value that the class is deferring.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable|string
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable|string
      */
     public function resolveDisplayableValue()
     {

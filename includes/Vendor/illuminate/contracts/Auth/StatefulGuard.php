@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Auth;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Auth;
 
 interface StatefulGuard extends Guard
 {
@@ -24,7 +24,7 @@ interface StatefulGuard extends Guard
     /**
      * Log a user into the application.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Auth\Authenticatable  $user
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Auth\Authenticatable  $user
      * @param  bool  $remember
      * @return void
      */
@@ -35,7 +35,7 @@ interface StatefulGuard extends Guard
      *
      * @param  mixed  $id
      * @param  bool  $remember
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\Auth\Authenticatable|false
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Auth\Authenticatable|false
      */
     public function loginUsingId($id, $remember = false);
 
@@ -43,7 +43,7 @@ interface StatefulGuard extends Guard
      * Log the given user ID into the application without sessions or cookies.
      *
      * @param  mixed  $id
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\Auth\Authenticatable|false
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Auth\Authenticatable|false
      */
     public function onceUsingId($id);
 

@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Messenger;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Messenger;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Application;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Command\Command;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\RunCommandFailedException;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\StringInput;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Output\BufferedOutput;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Application;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Command\Command;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\RunCommandFailedException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\StringInput;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Messenger\Exception\RecoverableExceptionInterface;
 use Symfony\Component\Messenger\Exception\UnrecoverableExceptionInterface;
 

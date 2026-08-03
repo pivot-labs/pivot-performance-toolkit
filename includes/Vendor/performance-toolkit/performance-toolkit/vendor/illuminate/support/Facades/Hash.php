@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
 
 /**
  * @method static \Illuminate\Hashing\BcryptHasher createBcryptDriver()
@@ -15,8 +15,8 @@ namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
  * @method static mixed driver(\UnitEnum|string|null $driver = null)
  * @method static \Illuminate\Hashing\HashManager extend(string $driver, \Closure $callback)
  * @method static array<string, mixed> getDrivers()
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container getContainer()
- * @method static \Illuminate\Hashing\HashManager setContainer(\PerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container $container)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container getContainer()
+ * @method static \Illuminate\Hashing\HashManager setContainer(\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container $container)
  * @method static \Illuminate\Hashing\HashManager forgetDrivers()
  *
  * @see \Illuminate\Hashing\HashManager

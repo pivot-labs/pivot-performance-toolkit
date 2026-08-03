@@ -1,12 +1,12 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Events;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Events;
 
 use Closure;
-use PerformanceToolkit\Vendor\Illuminate\Support\Collection;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection;
 use Laravel\SerializableClosure\SerializableClosure;
 
-use function PerformanceToolkit\Vendor\Illuminate\Support\enum_value;
+use function PivotPerformanceToolkit\Vendor\Illuminate\Support\enum_value;
 
 class QueuedClosure
 {

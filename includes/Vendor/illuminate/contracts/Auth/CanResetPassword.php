@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Auth;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Auth;
 
 interface CanResetPassword
 {

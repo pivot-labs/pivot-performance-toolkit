@@ -1,21 +1,21 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes;
 
-use PerformanceToolkit\Vendor\Carbon\Carbon;
-use PerformanceToolkit\Vendor\Carbon\CarbonImmutable;
+use PivotPerformanceToolkit\Vendor\Carbon\Carbon;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable;
 use Closure;
-use PerformanceToolkit\Vendor\Illuminate\Bus\BatchRepository;
-use PerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch;
-use PerformanceToolkit\Vendor\Illuminate\Bus\UpdatedBatchJobCounts;
-use PerformanceToolkit\Vendor\Illuminate\Support\Str;
+use PivotPerformanceToolkit\Vendor\Illuminate\Bus\BatchRepository;
+use PivotPerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch;
+use PivotPerformanceToolkit\Vendor\Illuminate\Bus\UpdatedBatchJobCounts;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Str;
 
 class BatchRepositoryFake implements BatchRepository
 {
     /**
      * The batches stored in the repository.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Bus\Batch[]
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Bus\Batch[]
      */
     protected $batches = [];
 
@@ -24,7 +24,7 @@ class BatchRepositoryFake implements BatchRepository
      *
      * @param  int  $limit
      * @param  mixed  $before
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\Batch[]
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\Batch[]
      */
     public function get($limit, $before)
     {
@@ -35,7 +35,7 @@ class BatchRepositoryFake implements BatchRepository
      * Retrieve information about an existing batch.
      *
      * @param  string  $batchId
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\Batch|null
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\Batch|null
      */
     public function find(string $batchId)
     {
@@ -45,8 +45,8 @@ class BatchRepositoryFake implements BatchRepository
     /**
      * Store a new pending batch.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch  $batch
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\Batch
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch  $batch
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\Batch
      */
     public function store(PendingBatch $batch)
     {
@@ -85,7 +85,7 @@ class BatchRepositoryFake implements BatchRepository
      *
      * @param  string  $batchId
      * @param  string  $jobId
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\UpdatedBatchJobCounts
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\UpdatedBatchJobCounts
      */
     public function decrementPendingJobs(string $batchId, string $jobId)
     {
@@ -97,7 +97,7 @@ class BatchRepositoryFake implements BatchRepository
      *
      * @param  string  $batchId
      * @param  string  $jobId
-     * @return \PerformanceToolkit\Vendor\Illuminate\Bus\UpdatedBatchJobCounts
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\UpdatedBatchJobCounts
      */
     public function incrementFailedJobs(string $batchId, string $jobId)
     {

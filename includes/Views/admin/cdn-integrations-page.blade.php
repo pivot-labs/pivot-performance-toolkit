@@ -1,8 +1,8 @@
-<div class="ptk-col ptk-col--main">
+<div class="pivot-performance-toolkit-col pivot-performance-toolkit-col--main">
     @include('cards.caching.cdn.integrations')
     @include('cards.caching.cdn.actions')
 </div>
-<div class="ptk-col ptk-col--sidebar">
+<div class="pivot-performance-toolkit-col pivot-performance-toolkit-col--sidebar">
     @include('cards.caching.cdn.info.about-cdn')
     @include('cards.caching.cdn.info.auto-purge')
 </div>

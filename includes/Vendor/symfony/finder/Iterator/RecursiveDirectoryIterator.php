@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Finder\Iterator;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Finder\Iterator;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Finder\Exception\AccessDeniedException;
-use PerformanceToolkit\Vendor\Symfony\Component\Finder\SplFileInfo;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Finder\Exception\AccessDeniedException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Finder\SplFileInfo;
 
 /**
  * Extends the \RecursiveDirectoryIterator to support relative paths.

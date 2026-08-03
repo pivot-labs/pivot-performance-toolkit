@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Laravel\Envoy;
+namespace PivotPerformanceToolkit\Vendor\Laravel\Envoy;
 
 use Closure;
 
@@ -11,7 +11,7 @@ class SSH extends RemoteProcessor
     /**
      * Run the given task over SSH.
      *
-     * @param  \PerformanceToolkit\Vendor\Laravel\Envoy\Task  $task
+     * @param  \PivotPerformanceToolkit\Vendor\Laravel\Envoy\Task  $task
      * @param  \Closure|null  $callback
      * @return int
      */

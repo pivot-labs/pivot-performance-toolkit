@@ -1,17 +1,17 @@
-<div class="ptk-col ptk-col--main">
+<div class="pivot-performance-toolkit-col pivot-performance-toolkit-col--main">
     @if ($cleaned_task)
         <div class="notice notice-success is-dismissible">
             <p>
                 @if ($cleaned_task === 'optimize')
                     {{ sprintf(
                         /* translators: %d: Number of database tables optimized. */
-                        __('%d database table(s) optimized successfully.', 'performance-toolkit'),
+                        __('%d database table(s) optimized successfully.', 'pivot-performance-toolkit'),
                         $cleaned_count
                     ) }}
                 @else
                     {{ sprintf(
                         /* translators: 1: Cleanup task label, 2: Number of items removed. */
-                        __('%1$s: %2$d item(s) removed successfully.', 'performance-toolkit'),
+                        __('%1$s: %2$d item(s) removed successfully.', 'pivot-performance-toolkit'),
                         $task_labels[$cleaned_task] ?? $cleaned_task,
                         $cleaned_count
                     ) }}
@@ -39,7 +39,7 @@
 
 </div>
 
-<div class="ptk-col ptk-col--sidebar">
+<div class="pivot-performance-toolkit-col pivot-performance-toolkit-col--sidebar">
     @include('cards.database.cleanup', array(
         'cleanup_items' => $cleanup_items,
         'cleanup_action' => $cleanup_action,

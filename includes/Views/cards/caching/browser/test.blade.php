@@ -1,80 +1,80 @@
-<x-card :title="__('Browser Cache Test', 'performance-toolkit')" id="ptk-browser-cache-test">
+<x-card :title="__('Browser Cache Test', 'pivot-performance-toolkit')" id="pivot-performance-toolkit-browser-cache-test">
     <p>
-        {{ __('Browser caching stores static assets locally to improve repeat visitor performance and reduce server load.', 'performance-toolkit') }}
+        {{ __('Browser caching stores static assets locally to improve repeat visitor performance and reduce server load.', 'pivot-performance-toolkit') }}
     </p>
     <p>
-        {{ __('Test your current browser cache headers and compression configuration.', 'performance-toolkit') }}
+        {{ __('Test your current browser cache headers and compression configuration.', 'pivot-performance-toolkit') }}
     </p>
 
     <div style="margin: 16px 0;">
-        <button type="button" class="button button-primary" id="ptk-run-cache-test">
-            {{ __('Run Cache Test', 'performance-toolkit') }}
+        <button type="button" class="button button-primary" id="pivot-performance-toolkit-run-cache-test">
+            {{ __('Run Cache Test', 'pivot-performance-toolkit') }}
         </button>
-        <span id="ptk-test-status" style="display: none; margin-left: 12px;">
+        <span id="pivot-performance-toolkit-test-status" style="display: none; margin-left: 12px;">
             <span class="spinner" style="float: none; margin: 0;"></span>
-            {{ __('Testing...', 'performance-toolkit') }}
+            {{ __('Testing...', 'pivot-performance-toolkit') }}
         </span>
     </div>
 
-    <div id="ptk-test-results" style="display: none; margin-top: 16px;">
-        <table class="ptk-table-list" style="width: 100%; margin-top: 12px;">
+    <div id="pivot-performance-toolkit-test-results" style="display: none; margin-top: 16px;">
+        <table class="pivot-performance-toolkit-table-list" style="width: 100%; margin-top: 12px;">
             <thead>
                 <tr>
-                    <th>{{ __('Asset', 'performance-toolkit') }}</th>
-                    <th>{{ __('Cache-Control', 'performance-toolkit') }}</th>
-                    <th>{{ __('Compression', 'performance-toolkit') }}</th>
-                    <th>{{ __('Status', 'performance-toolkit') }}</th>
+                    <th>{{ __('Asset', 'pivot-performance-toolkit') }}</th>
+                    <th>{{ __('Cache-Control', 'pivot-performance-toolkit') }}</th>
+                    <th>{{ __('Compression', 'pivot-performance-toolkit') }}</th>
+                    <th>{{ __('Status', 'pivot-performance-toolkit') }}</th>
                 </tr>
             </thead>
-            <tbody id="ptk-test-results-body"></tbody>
+            <tbody id="pivot-performance-toolkit-test-results-body"></tbody>
         </table>
 
-        <div id="ptk-test-summary" style="margin-top: 16px; padding: 12px; background-color: #f0f6fc; border-left: 4px solid #0969da; line-height: 1.6;">
-            <p id="ptk-test-summary-text"></p>
+        <div id="pivot-performance-toolkit-test-summary" style="margin-top: 16px; padding: 12px; background-color: #f0f6fc; border-left: 4px solid #0969da; line-height: 1.6;">
+            <p id="pivot-performance-toolkit-test-summary-text"></p>
         </div>
     </div>
 
-    <div id="ptk-test-errors" style="display: none; margin-top: 16px; padding: 12px; background-color: #fff5f5; border-left: 4px solid #d63638;">
-        <strong>{{ __('Test Error:', 'performance-toolkit') }}</strong>
-        <p id="ptk-test-error-text" style="margin: 8px 0 0;"></p>
+    <div id="pivot-performance-toolkit-test-errors" style="display: none; margin-top: 16px; padding: 12px; background-color: #fff5f5; border-left: 4px solid #d63638;">
+        <strong>{{ __('Test Error:', 'pivot-performance-toolkit') }}</strong>
+        <p id="pivot-performance-toolkit-test-error-text" style="margin: 8px 0 0;"></p>
     </div>
 </x-card>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     const homeUrl = @json($home_url);
-    const noAssetsLabel = @json(__('No testable assets found. Make sure your WordPress site is publicly accessible.', 'performance-toolkit'));
-    const resultsLabel = @json(__('Results:', 'performance-toolkit'));
-    const assetsHaveHeadersLabel = @json(__('assets have cache headers', 'performance-toolkit'));
-    const assetsCompressedLabel = @json(__('assets are compressed', 'performance-toolkit'));
-    const configGoodLabel = @json(__('Browser cache configuration looks good!', 'performance-toolkit'));
-    const applyConfigLabel = @json(__('Not all assets have cache headers. Apply the configuration below.', 'performance-toolkit'));
-    const cacheNotSetLabel = @json(__('Not set', 'performance-toolkit'));
-    const cacheNoneLabel = @json(__('None', 'performance-toolkit'));
-    const cacheUnknownLabel = @json(__('Unknown', 'performance-toolkit'));
-    const cacheYesLabel = @json(__('Yes', 'performance-toolkit'));
-    const cacheErrorPrefixLabel = @json(__('Error:', 'performance-toolkit'));
-    const cacheNaLabel = @json(__('N/A', 'performance-toolkit'));
-    const cacheGoodLabel = @json(__('GOOD', 'performance-toolkit'));
-    const cacheCheckLabel = @json(__('CHECK', 'performance-toolkit'));
-    const cacheCompressionOkLabel = @json(__('OK', 'performance-toolkit'));
-    const cacheNotUsedLabel = @json(__('NOT USED', 'performance-toolkit'));
-    const cssLabel = @json(__('CSS', 'performance-toolkit'));
-    const jsLabel = @json(__('JavaScript', 'performance-toolkit'));
-    const imageLabel = @json(__('Image', 'performance-toolkit'));
-    const errorLabel = @json(__('Error', 'performance-toolkit'));
+    const noAssetsLabel = @json(__('No testable assets found. Make sure your WordPress site is publicly accessible.', 'pivot-performance-toolkit'));
+    const resultsLabel = @json(__('Results:', 'pivot-performance-toolkit'));
+    const assetsHaveHeadersLabel = @json(__('assets have cache headers', 'pivot-performance-toolkit'));
+    const assetsCompressedLabel = @json(__('assets are compressed', 'pivot-performance-toolkit'));
+    const configGoodLabel = @json(__('Browser cache configuration looks good!', 'pivot-performance-toolkit'));
+    const applyConfigLabel = @json(__('Not all assets have cache headers. Apply the configuration below.', 'pivot-performance-toolkit'));
+    const cacheNotSetLabel = @json(__('Not set', 'pivot-performance-toolkit'));
+    const cacheNoneLabel = @json(__('None', 'pivot-performance-toolkit'));
+    const cacheUnknownLabel = @json(__('Unknown', 'pivot-performance-toolkit'));
+    const cacheYesLabel = @json(__('Yes', 'pivot-performance-toolkit'));
+    const cacheErrorPrefixLabel = @json(__('Error:', 'pivot-performance-toolkit'));
+    const cacheNaLabel = @json(__('N/A', 'pivot-performance-toolkit'));
+    const cacheGoodLabel = @json(__('GOOD', 'pivot-performance-toolkit'));
+    const cacheCheckLabel = @json(__('CHECK', 'pivot-performance-toolkit'));
+    const cacheCompressionOkLabel = @json(__('OK', 'pivot-performance-toolkit'));
+    const cacheNotUsedLabel = @json(__('NOT USED', 'pivot-performance-toolkit'));
+    const cssLabel = @json(__('CSS', 'pivot-performance-toolkit'));
+    const jsLabel = @json(__('JavaScript', 'pivot-performance-toolkit'));
+    const imageLabel = @json(__('Image', 'pivot-performance-toolkit'));
+    const errorLabel = @json(__('Error', 'pivot-performance-toolkit'));
 
-    const testButton = document.getElementById('ptk-run-cache-test');
+    const testButton = document.getElementById('pivot-performance-toolkit-run-cache-test');
     if (testButton) {
         testButton.addEventListener('click', runCacheTest);
     }
 
     async function runCacheTest() {
-        const status = document.getElementById('ptk-test-status');
-        const results = document.getElementById('ptk-test-results');
-        const errors = document.getElementById('ptk-test-errors');
-        const resultsBody = document.getElementById('ptk-test-results-body');
-        const summaryText = document.getElementById('ptk-test-summary-text');
+        const status = document.getElementById('pivot-performance-toolkit-test-status');
+        const results = document.getElementById('pivot-performance-toolkit-test-results');
+        const errors = document.getElementById('pivot-performance-toolkit-test-errors');
+        const resultsBody = document.getElementById('pivot-performance-toolkit-test-results-body');
+        const summaryText = document.getElementById('pivot-performance-toolkit-test-summary-text');
 
         status.style.display = 'inline';
         results.style.display = 'none';
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
         } catch (error) {
             status.style.display = 'none';
             errors.style.display = 'block';
-            document.getElementById('ptk-test-error-text').textContent = error.message;
+            document.getElementById('pivot-performance-toolkit-test-error-text').textContent = error.message;
         }
     }
 

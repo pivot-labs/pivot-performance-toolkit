@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Messenger;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Messenger;
 
 /**
  * @author Kevin Bond <kevinbond@gmail.com>

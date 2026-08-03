@@ -1,15 +1,15 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Bus;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Bus;
 
 use Closure;
 use Illuminate\Queue\CallQueuedClosure;
-use PerformanceToolkit\Vendor\Illuminate\Support\Arr;
-use PerformanceToolkit\Vendor\Illuminate\Support\Collection;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Arr;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection;
 use PHPUnit\Framework\Assert as PHPUnit;
 use RuntimeException;
 
-use function PerformanceToolkit\Vendor\Illuminate\Support\enum_value;
+use function PivotPerformanceToolkit\Vendor\Illuminate\Support\enum_value;
 
 trait Queueable
 {
@@ -274,7 +274,7 @@ trait Queueable
     public function dispatchNextJobInChain()
     {
         if (! empty($this->chained)) {
-            dispatch(performancetoolkit_vendor_tap(unserialize(array_shift($this->chained)), function ($next) {
+            dispatch(pivotperformancetoolkit_vendor_tap(unserialize(array_shift($this->chained)), function ($next) {
                 $next->chained = $this->chained;
 
                 $next->onConnection($next->connection ?: $this->chainConnection);

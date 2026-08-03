@@ -1,14 +1,14 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
 use Closure;
 use Illuminate\Console\Application as Artisan;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\CachesConfiguration;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\CachesRoutes;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\DeferrableProvider;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\CachesConfiguration;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\CachesRoutes;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Database\Eloquent\Factory as ModelFactory;
-use PerformanceToolkit\Vendor\Illuminate\View\Compilers\BladeCompiler;
+use PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\BladeCompiler;
 
 /**
  * @property array<string, string> $bindings All of the container bindings that should be registered.
@@ -19,7 +19,7 @@ abstract class ServiceProvider
     /**
      * The application instance.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application
      */
     protected $app;
 
@@ -75,7 +75,7 @@ abstract class ServiceProvider
     /**
      * Create a new service provider instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application  $app
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application  $app
      * @return void
      */
     public function __construct($app)
@@ -492,7 +492,7 @@ abstract class ServiceProvider
             ->trim();
 
         if (empty($key)) {
-            $key = performancetoolkit_vendor_class_basename(get_class($this));
+            $key = pivotperformancetoolkit_vendor_class_basename(get_class($this));
         }
 
         if ($optimize) {
@@ -537,7 +537,7 @@ abstract class ServiceProvider
     /**
      * Get the default providers for a Laravel application.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\DefaultProviders
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\DefaultProviders
      */
     public static function defaultProviders()
     {

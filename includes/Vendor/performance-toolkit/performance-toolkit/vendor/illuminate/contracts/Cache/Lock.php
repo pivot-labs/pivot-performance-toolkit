@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Cache;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Cache;
 
 interface Lock
 {
@@ -19,7 +19,7 @@ interface Lock
      * @param  callable|null  $callback
      * @return mixed
      *
-     * @throws \PerformanceToolkit\Vendor\Illuminate\Contracts\Cache\LockTimeoutException
+     * @throws \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Cache\LockTimeoutException
      */
     public function block($seconds, $callback = null);
 

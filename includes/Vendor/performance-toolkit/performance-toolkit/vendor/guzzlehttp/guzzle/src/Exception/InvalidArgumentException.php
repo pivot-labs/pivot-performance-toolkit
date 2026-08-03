@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp\Exception;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp\Exception;
 
 final class InvalidArgumentException extends \InvalidArgumentException implements GuzzleException
 {

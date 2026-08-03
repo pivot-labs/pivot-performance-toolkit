@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Session\Middleware;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Session\Middleware;
 
 interface AuthenticatesSessions
 {

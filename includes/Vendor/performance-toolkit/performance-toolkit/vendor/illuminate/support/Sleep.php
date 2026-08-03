@@ -1,11 +1,11 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
-use PerformanceToolkit\Vendor\Carbon\CarbonInterval;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterval;
 use Closure;
 use DateInterval;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
 use PHPUnit\Framework\Assert as PHPUnit;
 use RuntimeException;
 
@@ -30,7 +30,7 @@ class Sleep
     /**
      * The total duration to sleep.
      *
-     * @var \PerformanceToolkit\Vendor\Carbon\CarbonInterval
+     * @var \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterval
      */
     public $duration;
 
@@ -58,7 +58,7 @@ class Sleep
     /**
      * The sequence of sleep durations encountered while faking.
      *
-     * @var array<int, \PerformanceToolkit\Vendor\Carbon\CarbonInterval>
+     * @var array<int, \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterval>
      */
     protected static $sequence = [];
 

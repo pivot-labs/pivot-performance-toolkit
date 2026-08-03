@@ -11,20 +11,20 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Carbon\Laravel;
+namespace PivotPerformanceToolkit\Vendor\Carbon\Laravel;
 
-use PerformanceToolkit\Vendor\Carbon\Carbon;
-use PerformanceToolkit\Vendor\Carbon\CarbonImmutable;
-use PerformanceToolkit\Vendor\Carbon\CarbonInterval;
-use PerformanceToolkit\Vendor\Carbon\CarbonPeriod;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
-use PerformanceToolkit\Vendor\Illuminate\Events\Dispatcher;
-use PerformanceToolkit\Vendor\Illuminate\Events\EventDispatcher;
-use PerformanceToolkit\Vendor\Illuminate\Support\Carbon as IlluminateCarbon;
-use PerformanceToolkit\Vendor\Illuminate\Support\Facades\Date;
+use PivotPerformanceToolkit\Vendor\Carbon\Carbon;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterval;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonPeriod;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
+use PivotPerformanceToolkit\Vendor\Illuminate\Events\Dispatcher;
+use PivotPerformanceToolkit\Vendor\Illuminate\Events\EventDispatcher;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon as IlluminateCarbon;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades\Date;
 use Throwable;
 
-class ServiceProvider extends \PerformanceToolkit\Vendor\Illuminate\Support\ServiceProvider
+class ServiceProvider extends \PivotPerformanceToolkit\Vendor\Illuminate\Support\ServiceProvider
 {
     /** @var callable|null */
     protected $appGetter = null;

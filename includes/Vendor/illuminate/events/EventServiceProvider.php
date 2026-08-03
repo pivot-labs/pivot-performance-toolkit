@@ -1,9 +1,9 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Events;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Events;
 
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Factory as QueueFactoryContract;
-use PerformanceToolkit\Vendor\Illuminate\Support\ServiceProvider;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Factory as QueueFactoryContract;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
 {

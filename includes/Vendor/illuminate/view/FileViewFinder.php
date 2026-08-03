@@ -1,8 +1,8 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\View;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\View;
 
-use PerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem;
+use PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem;
 use InvalidArgumentException;
 
 class FileViewFinder implements ViewFinderInterface
@@ -10,7 +10,7 @@ class FileViewFinder implements ViewFinderInterface
     /**
      * The filesystem instance.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem
      */
     protected $files;
 
@@ -45,7 +45,7 @@ class FileViewFinder implements ViewFinderInterface
     /**
      * Create a new file view loader instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem  $files
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem  $files
      * @param  array  $paths
      * @param  array|null  $extensions
      * @return void
@@ -270,7 +270,7 @@ class FileViewFinder implements ViewFinderInterface
     /**
      * Get the filesystem instance.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem
      */
     public function getFilesystem()
     {

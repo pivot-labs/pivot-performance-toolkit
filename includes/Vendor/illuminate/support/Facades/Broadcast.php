@@ -1,8 +1,8 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
 
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Broadcasting\Factory as BroadcastingFactoryContract;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Broadcasting\Factory as BroadcastingFactoryContract;
 
 /**
  * @method static void routes(array|null $attributes = null)
@@ -22,16 +22,16 @@ use PerformanceToolkit\Vendor\Illuminate\Contracts\Broadcasting\Factory as Broad
  * @method static void setDefaultDriver(string $name)
  * @method static void purge(string|null $name = null)
  * @method static \Illuminate\Broadcasting\BroadcastManager extend(string $driver, \Closure $callback)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application getApplication()
- * @method static \Illuminate\Broadcasting\BroadcastManager setApplication(\PerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application $app)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application getApplication()
+ * @method static \Illuminate\Broadcasting\BroadcastManager setApplication(\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application $app)
  * @method static \Illuminate\Broadcasting\BroadcastManager forgetDrivers()
  * @method static mixed auth(\Illuminate\Http\Request $request)
  * @method static mixed validAuthenticationResponse(\Illuminate\Http\Request $request, mixed $result)
  * @method static void broadcast(array $channels, string $event, array $payload = [])
  * @method static array|null resolveAuthenticatedUser(\Illuminate\Http\Request $request)
  * @method static void resolveAuthenticatedUserUsing(\Closure $callback)
- * @method static \Illuminate\Broadcasting\Broadcasters\Broadcaster channel(\PerformanceToolkit\Vendor\Illuminate\Contracts\Broadcasting\HasBroadcastChannel|string $channel, callable|string $callback, array $options = [])
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Collection getChannels()
+ * @method static \Illuminate\Broadcasting\Broadcasters\Broadcaster channel(\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Broadcasting\HasBroadcastChannel|string $channel, callable|string $callback, array $options = [])
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection getChannels()
  *
  * @see \Illuminate\Broadcasting\BroadcastManager
  * @see \Illuminate\Broadcasting\Broadcasters\Broadcaster

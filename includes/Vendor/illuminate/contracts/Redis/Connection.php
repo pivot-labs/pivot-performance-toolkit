@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Redis;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Redis;
 
 use Closure;
 

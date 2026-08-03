@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Process\Messenger;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Process\Messenger;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Process\Exception\ProcessFailedException;
-use PerformanceToolkit\Vendor\Symfony\Component\Process\Exception\RunProcessFailedException;
-use PerformanceToolkit\Vendor\Symfony\Component\Process\Process;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Process\Exception\ProcessFailedException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Process\Exception\RunProcessFailedException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Process\Process;
 
 /**
  * @author Kevin Bond <kevinbond@gmail.com>

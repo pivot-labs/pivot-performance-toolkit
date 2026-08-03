@@ -1,8 +1,8 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Psr\Http\Client;
+namespace PivotPerformanceToolkit\Vendor\Psr\Http\Client;
 
-use PerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface;
 
 /**
  * Thrown when the request cannot be completed because of network issues.

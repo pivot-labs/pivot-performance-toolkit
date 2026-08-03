@@ -1,9 +1,9 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\InteractsWithData;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\InteractsWithData;
 use League\Uri\QueryString;
 use Stringable;
 
@@ -59,7 +59,7 @@ class UriQueryString implements Arrayable, Stringable
      */
     public function get(?string $key = null, mixed $default = null): mixed
     {
-        return performancetoolkit_vendor_data_get($this->toArray(), $key, $default);
+        return pivotperformancetoolkit_vendor_data_get($this->toArray(), $key, $default);
     }
 
     /**

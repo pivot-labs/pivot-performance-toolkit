@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Process\Pipes;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Process\Pipes;
 
 /**
  * PipesInterface manages descriptors and pipes for the use of proc_open.

@@ -1,16 +1,16 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\View;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\View;
 
 use ArrayAccess;
 use ArrayIterator;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable;
-use PerformanceToolkit\Vendor\Illuminate\Support\Arr;
-use PerformanceToolkit\Vendor\Illuminate\Support\Collection;
-use PerformanceToolkit\Vendor\Illuminate\Support\HtmlString;
-use PerformanceToolkit\Vendor\Illuminate\Support\Str;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Conditionable;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Arr;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\HtmlString;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Str;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Conditionable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
 use IteratorAggregate;
 use JsonSerializable;
 use Stringable;
@@ -56,7 +56,7 @@ class ComponentAttributeBag implements ArrayAccess, IteratorAggregate, JsonSeria
      */
     public function first($default = null)
     {
-        return $this->getIterator()->current() ?? performancetoolkit_vendor_value($default);
+        return $this->getIterator()->current() ?? pivotperformancetoolkit_vendor_value($default);
     }
 
     /**
@@ -68,7 +68,7 @@ class ComponentAttributeBag implements ArrayAccess, IteratorAggregate, JsonSeria
      */
     public function get($key, $default = null)
     {
-        return $this->attributes[$key] ?? performancetoolkit_vendor_value($default);
+        return $this->attributes[$key] ?? pivotperformancetoolkit_vendor_value($default);
     }
 
     /**
@@ -269,7 +269,7 @@ class ComponentAttributeBag implements ArrayAccess, IteratorAggregate, JsonSeria
     {
         $attributeDefaults = array_map(function ($value) use ($escape) {
             return $this->shouldEscapeAttributeValue($escape, $value)
-                        ? performancetoolkit_vendor_e($value)
+                        ? pivotperformancetoolkit_vendor_e($value)
                         : $value;
         }, $attributeDefaults);
 
@@ -318,7 +318,7 @@ class ComponentAttributeBag implements ArrayAccess, IteratorAggregate, JsonSeria
      * Create a new appendable attribute value.
      *
      * @param  mixed  $value
-     * @return \PerformanceToolkit\Vendor\Illuminate\View\AppendableAttributeValue
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\View\AppendableAttributeValue
      */
     public function prepends($value)
     {
@@ -336,7 +336,7 @@ class ComponentAttributeBag implements ArrayAccess, IteratorAggregate, JsonSeria
     protected function resolveAppendableAttributeDefault($attributeDefaults, $key, $escape)
     {
         if ($this->shouldEscapeAttributeValue($escape, $value = $attributeDefaults[$key]->value)) {
-            $value = performancetoolkit_vendor_e($value);
+            $value = pivotperformancetoolkit_vendor_e($value);
         }
 
         return $value;
@@ -426,7 +426,7 @@ class ComponentAttributeBag implements ArrayAccess, IteratorAggregate, JsonSeria
      * Merge additional attributes / values into the attribute bag.
      *
      * @param  array  $attributeDefaults
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\HtmlString
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\HtmlString
      */
     public function __invoke(array $attributeDefaults = [])
     {

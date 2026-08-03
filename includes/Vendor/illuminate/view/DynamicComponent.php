@@ -1,11 +1,11 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\View;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\View;
 
-use PerformanceToolkit\Vendor\Illuminate\Container\Container;
-use PerformanceToolkit\Vendor\Illuminate\Support\Collection;
-use PerformanceToolkit\Vendor\Illuminate\Support\Str;
-use PerformanceToolkit\Vendor\Illuminate\View\Compilers\ComponentTagCompiler;
+use PivotPerformanceToolkit\Vendor\Illuminate\Container\Container;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Str;
+use PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\ComponentTagCompiler;
 
 class DynamicComponent extends Component
 {
@@ -19,7 +19,7 @@ class DynamicComponent extends Component
     /**
      * The component tag compiler instance.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\View\Compilers\BladeTagCompiler
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\BladeTagCompiler
      */
     protected static $compiler;
 
@@ -44,12 +44,12 @@ class DynamicComponent extends Component
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\View\View|string
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View\View|string
      */
     public function render()
     {
         $template = <<<'EOF'
-<?php extract((new \PerformanceToolkit\Vendor\Illuminate\Support\Collection($attributes->getAttributes()))->mapWithKeys(function ($value, $key) { return [PerformanceToolkit\Vendor\Illuminate\Support\Str::camel(str_replace([':', '.'], ' ', $key)) => $value]; })->all(), EXTR_SKIP); ?>
+<?php extract((new \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection($attributes->getAttributes()))->mapWithKeys(function ($value, $key) { return [PivotPerformanceToolkit\Vendor\Illuminate\Support\Str::camel(str_replace([':', '.'], ' ', $key)) => $value]; })->all(), EXTR_SKIP); ?>
 {{ props }}
 <x-{{ component }} {{ bindings }} {{ attributes }}>
 {{ slots }}
@@ -157,7 +157,7 @@ EOF;
     /**
      * Get an instance of the Blade tag compiler.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\View\Compilers\ComponentTagCompiler
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\ComponentTagCompiler
      */
     protected function compiler()
     {

@@ -1,28 +1,28 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
-use PerformanceToolkit\Vendor\Carbon\Factory;
+use PivotPerformanceToolkit\Vendor\Carbon\Factory;
 use InvalidArgumentException;
 
 /**
  * @see https://carbon.nesbot.com/docs/
  * @see https://github.com/briannesbitt/Carbon/blob/master/src/Carbon/Factory.php
  *
- * @method \PerformanceToolkit\Vendor\Illuminate\Support\Carbon create($year = 0, $month = 1, $day = 1, $hour = 0, $minute = 0, $second = 0, $tz = null)
- * @method \PerformanceToolkit\Vendor\Illuminate\Support\Carbon createFromDate($year = null, $month = null, $day = null, $tz = null)
- * @method \PerformanceToolkit\Vendor\Illuminate\Support\Carbon|false createFromFormat($format, $time, $tz = null)
- * @method \PerformanceToolkit\Vendor\Illuminate\Support\Carbon createFromTime($hour = 0, $minute = 0, $second = 0, $tz = null)
- * @method \PerformanceToolkit\Vendor\Illuminate\Support\Carbon createFromTimeString($time, $tz = null)
- * @method \PerformanceToolkit\Vendor\Illuminate\Support\Carbon createFromTimestamp($timestamp, $tz = null)
- * @method \PerformanceToolkit\Vendor\Illuminate\Support\Carbon createFromTimestampMs($timestamp, $tz = null)
- * @method \PerformanceToolkit\Vendor\Illuminate\Support\Carbon createFromTimestampUTC($timestamp)
- * @method \PerformanceToolkit\Vendor\Illuminate\Support\Carbon createMidnightDate($year = null, $month = null, $day = null, $tz = null)
- * @method \PerformanceToolkit\Vendor\Illuminate\Support\Carbon|false createSafe($year = null, $month = null, $day = null, $hour = null, $minute = null, $second = null, $tz = null)
+ * @method \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon create($year = 0, $month = 1, $day = 1, $hour = 0, $minute = 0, $second = 0, $tz = null)
+ * @method \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon createFromDate($year = null, $month = null, $day = null, $tz = null)
+ * @method \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon|false createFromFormat($format, $time, $tz = null)
+ * @method \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon createFromTime($hour = 0, $minute = 0, $second = 0, $tz = null)
+ * @method \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon createFromTimeString($time, $tz = null)
+ * @method \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon createFromTimestamp($timestamp, $tz = null)
+ * @method \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon createFromTimestampMs($timestamp, $tz = null)
+ * @method \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon createFromTimestampUTC($timestamp)
+ * @method \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon createMidnightDate($year = null, $month = null, $day = null, $tz = null)
+ * @method \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon|false createSafe($year = null, $month = null, $day = null, $hour = null, $minute = null, $second = null, $tz = null)
  * @method void disableHumanDiffOption($humanDiffOption)
  * @method void enableHumanDiffOption($humanDiffOption)
  * @method mixed executeWithLocale($locale, $func)
- * @method \PerformanceToolkit\Vendor\Illuminate\Support\Carbon fromSerialized($value)
+ * @method \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon fromSerialized($value)
  * @method array getAvailableLocales()
  * @method array getDays()
  * @method int getHumanDiffOptions()
@@ -30,8 +30,8 @@ use InvalidArgumentException;
  * @method array getLastErrors()
  * @method string getLocale()
  * @method int getMidDayAt()
- * @method \PerformanceToolkit\Vendor\Illuminate\Support\Carbon|null getTestNow()
- * @method \PerformanceToolkit\Vendor\Symfony\Component\Translation\TranslatorInterface getTranslator()
+ * @method \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon|null getTestNow()
+ * @method \PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\TranslatorInterface getTranslator()
  * @method int getWeekEndsAt()
  * @method int getWeekStartsAt()
  * @method array getWeekendDays()
@@ -39,7 +39,7 @@ use InvalidArgumentException;
  * @method bool hasMacro($name)
  * @method bool hasRelativeKeywords($time)
  * @method bool hasTestNow()
- * @method \PerformanceToolkit\Vendor\Illuminate\Support\Carbon instance($date)
+ * @method \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon instance($date)
  * @method bool isImmutable()
  * @method bool isModifiableUnit($unit)
  * @method bool isMutable()
@@ -50,12 +50,12 @@ use InvalidArgumentException;
  * @method bool localeHasPeriodSyntax($locale)
  * @method bool localeHasShortUnits($locale)
  * @method void macro($name, $macro)
- * @method \PerformanceToolkit\Vendor\Illuminate\Support\Carbon|null make($var)
- * @method \PerformanceToolkit\Vendor\Illuminate\Support\Carbon maxValue()
- * @method \PerformanceToolkit\Vendor\Illuminate\Support\Carbon minValue()
+ * @method \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon|null make($var)
+ * @method \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon maxValue()
+ * @method \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon minValue()
  * @method void mixin($mixin)
- * @method \PerformanceToolkit\Vendor\Illuminate\Support\Carbon now($tz = null)
- * @method \PerformanceToolkit\Vendor\Illuminate\Support\Carbon parse($time = null, $tz = null)
+ * @method \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon now($tz = null)
+ * @method \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon parse($time = null, $tz = null)
  * @method string pluralUnit(string $unit)
  * @method void resetMonthsOverflow()
  * @method void resetToStringFormat()
@@ -66,7 +66,7 @@ use InvalidArgumentException;
  * @method void setMidDayAt($hour)
  * @method void setTestNow($testNow = null)
  * @method void setToStringFormat($format)
- * @method void setTranslator(\PerformanceToolkit\Vendor\Symfony\Component\Translation\TranslatorInterface $translator)
+ * @method void setTranslator(\PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\TranslatorInterface $translator)
  * @method void setUtf8($utf8)
  * @method void setWeekEndsAt($day)
  * @method void setWeekStartsAt($day)
@@ -74,12 +74,12 @@ use InvalidArgumentException;
  * @method bool shouldOverflowMonths()
  * @method bool shouldOverflowYears()
  * @method string singularUnit(string $unit)
- * @method \PerformanceToolkit\Vendor\Illuminate\Support\Carbon today($tz = null)
- * @method \PerformanceToolkit\Vendor\Illuminate\Support\Carbon tomorrow($tz = null)
+ * @method \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon today($tz = null)
+ * @method \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon tomorrow($tz = null)
  * @method void useMonthsOverflow($monthsOverflow = true)
  * @method void useStrictMode($strictModeEnabled = true)
  * @method void useYearsOverflow($yearsOverflow = true)
- * @method \PerformanceToolkit\Vendor\Illuminate\Support\Carbon yesterday($tz = null)
+ * @method \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon yesterday($tz = null)
  */
 class DateFactory
 {

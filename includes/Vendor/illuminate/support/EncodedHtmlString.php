@@ -1,17 +1,17 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
 use BackedEnum;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\DeferringDisplayableValue;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\DeferringDisplayableValue;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable;
 
 class EncodedHtmlString extends HtmlString
 {
     /**
      * The HTML string.
      *
-     * @var \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\DeferringDisplayableValue|\PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable|\BackedEnum|string|int|float|null
+     * @var \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\DeferringDisplayableValue|\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable|\BackedEnum|string|int|float|null
      */
     protected $html;
 
@@ -25,7 +25,7 @@ class EncodedHtmlString extends HtmlString
     /**
      * Create a new encoded HTML string instance.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\DeferringDisplayableValue|\PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable|\BackedEnum|string|int|float|null  $html
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\DeferringDisplayableValue|\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable|\BackedEnum|string|int|float|null  $html
      * @param  bool  $doubleEncode
      * @return void
      */

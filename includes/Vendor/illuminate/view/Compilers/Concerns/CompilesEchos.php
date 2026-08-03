@@ -1,9 +1,9 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns;
 
 use Closure;
-use PerformanceToolkit\Vendor\Illuminate\Support\Stringable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Stringable;
 
 trait CompilesEchos
 {

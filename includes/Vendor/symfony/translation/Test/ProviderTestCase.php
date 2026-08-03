@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation\Test;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Test;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -17,12 +17,12 @@ use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Symfony\Component\HttpClient\MockHttpClient;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Dumper\XliffFileDumper;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Loader\ArrayLoader;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Loader\LoaderInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\Provider\ProviderInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\TranslatorBag;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\TranslatorBagInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Dumper\XliffFileDumper;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Loader\ArrayLoader;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Loader\LoaderInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Provider\ProviderInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\TranslatorBag;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\TranslatorBagInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /**

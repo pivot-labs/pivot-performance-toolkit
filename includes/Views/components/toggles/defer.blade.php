@@ -9,8 +9,8 @@
     :checked="$checked"
     :action="$action"
     :nonce="$nonce"
-    :label="__('Defer frontend scripts', 'performance-toolkit')"
-    :description="__('Adds defer to non-critical scripts where possible.', 'performance-toolkit')"
+    :label="__('Defer frontend scripts', 'pivot-performance-toolkit')"
+    :description="__('Adds defer to non-critical scripts where possible.', 'pivot-performance-toolkit')"
 >
     <x-slot name="icon">
         <x-icons.js

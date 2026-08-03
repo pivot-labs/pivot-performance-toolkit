@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Session;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Session;
 
 interface Session
 {

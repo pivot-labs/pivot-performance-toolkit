@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Clock;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Clock;
 
 /**
  * A clock that always returns the same date, suitable for testing time-sensitive logic.

@@ -1,12 +1,12 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
 use ArrayAccess;
 use ArrayIterator;
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Support\CanBeEscapedWhenCastToString;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\EnumeratesValues;
-use PerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\CanBeEscapedWhenCastToString;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\EnumeratesValues;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
 use InvalidArgumentException;
 use stdClass;
 use Traversable;
@@ -17,12 +17,12 @@ use Traversable;
  * @template-covariant TValue
  *
  * @implements \ArrayAccess<TKey, TValue>
- * @implements \PerformanceToolkit\Vendor\Illuminate\Support\Enumerable<TKey, TValue>
+ * @implements \PivotPerformanceToolkit\Vendor\Illuminate\Support\Enumerable<TKey, TValue>
  */
 class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerable
 {
     /**
-     * @use \PerformanceToolkit\Vendor\Illuminate\Support\Traits\EnumeratesValues<TKey, TValue>
+     * @use \PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\EnumeratesValues<TKey, TValue>
      */
     use EnumeratesValues, Macroable;
 
@@ -36,7 +36,7 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
     /**
      * Create a new collection.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, TValue>|iterable<TKey, TValue>|null  $items
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, TValue>|iterable<TKey, TValue>|null  $items
      * @return void
      */
     public function __construct($items = [])
@@ -69,7 +69,7 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
     /**
      * Get a lazy collection for the items in this collection.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\LazyCollection<TKey, TValue>
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\LazyCollection<TKey, TValue>
      */
     public function lazy()
     {
@@ -200,7 +200,7 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
     public function containsStrict($key, $value = null)
     {
         if (func_num_args() === 2) {
-            return $this->contains(fn ($item) => performancetoolkit_vendor_data_get($item, $key) === $value);
+            return $this->contains(fn ($item) => pivotperformancetoolkit_vendor_data_get($item, $key) === $value);
         }
 
         if ($this->useAsCallable($key)) {
@@ -229,7 +229,7 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
      * @template TCrossJoinKey
      * @template TCrossJoinValue
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TCrossJoinKey, TCrossJoinValue>|iterable<TCrossJoinKey, TCrossJoinValue>  ...$lists
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TCrossJoinKey, TCrossJoinValue>|iterable<TCrossJoinKey, TCrossJoinValue>  ...$lists
      * @return static<int, array<int, TValue|TCrossJoinValue>>
      */
     public function crossJoin(...$lists)
@@ -242,7 +242,7 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
     /**
      * Get the items in the collection that are not present in the given items.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<array-key, TValue>|iterable<array-key, TValue>  $items
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<array-key, TValue>|iterable<array-key, TValue>  $items
      * @return static
      */
     public function diff($items)
@@ -253,7 +253,7 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
     /**
      * Get the items in the collection that are not present in the given items, using the callback.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<array-key, TValue>|iterable<array-key, TValue>  $items
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<array-key, TValue>|iterable<array-key, TValue>  $items
      * @param  callable(TValue, TValue): int  $callback
      * @return static
      */
@@ -265,7 +265,7 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
     /**
      * Get the items in the collection whose keys and values are not present in the given items.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, TValue>|iterable<TKey, TValue>  $items
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, TValue>|iterable<TKey, TValue>  $items
      * @return static
      */
     public function diffAssoc($items)
@@ -276,7 +276,7 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
     /**
      * Get the items in the collection whose keys and values are not present in the given items, using the callback.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, TValue>|iterable<TKey, TValue>  $items
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, TValue>|iterable<TKey, TValue>  $items
      * @param  callable(TKey, TKey): int  $callback
      * @return static
      */
@@ -288,7 +288,7 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
     /**
      * Get the items in the collection whose keys are not present in the given items.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, mixed>|iterable<TKey, mixed>  $items
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, mixed>|iterable<TKey, mixed>  $items
      * @return static
      */
     public function diffKeys($items)
@@ -299,7 +299,7 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
     /**
      * Get the items in the collection whose keys are not present in the given items, using the callback.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, mixed>|iterable<TKey, mixed>  $items
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, mixed>|iterable<TKey, mixed>  $items
      * @param  callable(TKey, TKey): int  $callback
      * @return static
      */
@@ -369,7 +369,7 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
     /**
      * Get all items except for those with the specified keys.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Support\Enumerable<array-key, TKey>|array<array-key, TKey>|string  $keys
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Support\Enumerable<array-key, TKey>|array<array-key, TKey>|string  $keys
      * @return static
      */
     public function except($keys)
@@ -468,7 +468,7 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
             return $this->items[$key];
         }
 
-        return performancetoolkit_vendor_value($default);
+        return pivotperformancetoolkit_vendor_value($default);
     }
 
     /**
@@ -486,7 +486,7 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
             return $this->items[$key];
         }
 
-        $this->offsetSet($key, $value = performancetoolkit_vendor_value($value));
+        $this->offsetSet($key, $value = pivotperformancetoolkit_vendor_value($value));
 
         return $value;
     }
@@ -638,7 +638,7 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
     /**
      * Intersect the collection with the given items.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, TValue>|iterable<TKey, TValue>  $items
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, TValue>|iterable<TKey, TValue>  $items
      * @return static
      */
     public function intersect($items)
@@ -649,7 +649,7 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
     /**
      * Intersect the collection with the given items, using the callback.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<array-key, TValue>|iterable<array-key, TValue>  $items
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<array-key, TValue>|iterable<array-key, TValue>  $items
      * @param  callable(TValue, TValue): int  $callback
      * @return static
      */
@@ -661,7 +661,7 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
     /**
      * Intersect the collection with the given items with additional index check.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, TValue>|iterable<TKey, TValue>  $items
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, TValue>|iterable<TKey, TValue>  $items
      * @return static
      */
     public function intersectAssoc($items)
@@ -672,7 +672,7 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
     /**
      * Intersect the collection with the given items with additional index check, using the callback.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<array-key, TValue>|iterable<array-key, TValue>  $items
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<array-key, TValue>|iterable<array-key, TValue>  $items
      * @param  callable(TValue, TValue): int  $callback
      * @return static
      */
@@ -684,7 +684,7 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
     /**
      * Intersect the collection with the given items by key.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, mixed>|iterable<TKey, mixed>  $items
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, mixed>|iterable<TKey, mixed>  $items
      * @return static
      */
     public function intersectByKeys($items)
@@ -850,7 +850,7 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
     /**
      * Merge the collection with the given items.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, TValue>|iterable<TKey, TValue>  $items
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, TValue>|iterable<TKey, TValue>  $items
      * @return static
      */
     public function merge($items)
@@ -863,7 +863,7 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
      *
      * @template TMergeRecursiveValue
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, TMergeRecursiveValue>|iterable<TKey, TMergeRecursiveValue>  $items
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, TMergeRecursiveValue>|iterable<TKey, TMergeRecursiveValue>  $items
      * @return static<TKey, TValue|TMergeRecursiveValue>
      */
     public function mergeRecursive($items)
@@ -893,7 +893,7 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
      *
      * @template TCombineValue
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<array-key, TCombineValue>|iterable<array-key, TCombineValue>  $values
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<array-key, TCombineValue>|iterable<array-key, TCombineValue>  $values
      * @return static<TValue, TCombineValue>
      */
     public function combine($values)
@@ -904,7 +904,7 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
     /**
      * Union the collection with the given items.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, TValue>|iterable<TKey, TValue>  $items
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, TValue>|iterable<TKey, TValue>  $items
      * @return static
      */
     public function union($items)
@@ -939,7 +939,7 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
     /**
      * Get the items with the specified keys.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Support\Enumerable<array-key, TKey>|array<array-key, TKey>|string|null  $keys
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Support\Enumerable<array-key, TKey>|array<array-key, TKey>|string|null  $keys
      * @return static
      */
     public function only($keys)
@@ -960,7 +960,7 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
     /**
      * Select specific values from the items within the collection.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Support\Enumerable<array-key, TKey>|array<array-key, TKey>|string|null  $keys
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Support\Enumerable<array-key, TKey>|array<array-key, TKey>|string|null  $keys
      * @return static
      */
     public function select($keys)
@@ -1124,7 +1124,7 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
     /**
      * Replace the collection items with the given items.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, TValue>|iterable<TKey, TValue>  $items
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, TValue>|iterable<TKey, TValue>  $items
      * @return static
      */
     public function replace($items)
@@ -1135,7 +1135,7 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
     /**
      * Recursively replace the collection items with the given items.
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, TValue>|iterable<TKey, TValue>  $items
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, TValue>|iterable<TKey, TValue>  $items
      * @return static
      */
     public function replaceRecursive($items)
@@ -1385,8 +1385,8 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
      * @param  mixed  $value
      * @return TValue
      *
-     * @throws \PerformanceToolkit\Vendor\Illuminate\Support\ItemNotFoundException
-     * @throws \PerformanceToolkit\Vendor\Illuminate\Support\MultipleItemsFoundException
+     * @throws \PivotPerformanceToolkit\Vendor\Illuminate\Support\ItemNotFoundException
+     * @throws \PivotPerformanceToolkit\Vendor\Illuminate\Support\MultipleItemsFoundException
      */
     public function sole($key = null, $operator = null, $value = null)
     {
@@ -1417,7 +1417,7 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
      * @param  mixed  $value
      * @return TValue
      *
-     * @throws \PerformanceToolkit\Vendor\Illuminate\Support\ItemNotFoundException
+     * @throws \PivotPerformanceToolkit\Vendor\Illuminate\Support\ItemNotFoundException
      */
     public function firstOrFail($key = null, $operator = null, $value = null)
     {
@@ -1563,7 +1563,7 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
                 if (! is_string($prop) && is_callable($prop)) {
                     $result = $prop($a, $b);
                 } else {
-                    $values = [performancetoolkit_vendor_data_get($a, $prop), performancetoolkit_vendor_data_get($b, $prop)];
+                    $values = [pivotperformancetoolkit_vendor_data_get($a, $prop), pivotperformancetoolkit_vendor_data_get($b, $prop)];
 
                     if (! $ascending) {
                         $values = array_reverse($values);
@@ -1792,7 +1792,7 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
      *
      * @template TZipValue
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<array-key, TZipValue>|iterable<array-key, TZipValue>  ...$items
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<array-key, TZipValue>|iterable<array-key, TZipValue>  ...$items
      * @return static<int, static<int, TValue|TZipValue>>
      */
     public function zip($items)
@@ -1865,7 +1865,7 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
     /**
      * Get a base Support collection instance from this collection.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Collection<TKey, TValue>
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection<TKey, TValue>
      */
     public function toBase()
     {

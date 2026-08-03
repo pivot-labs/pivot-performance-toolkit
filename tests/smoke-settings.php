@@ -2,9 +2,13 @@
 
 declare(strict_types=1);
 
+if (! defined('ABSPATH')) {
+    define('ABSPATH', __DIR__ . '/');
+}
+
 require_once __DIR__ . '/../includes/Core/Settings.php';
 
-use PerformanceToolkit\Core\Settings;
+use PivotPerformanceToolkit\Core\Settings;
 
 $settings = new Settings();
 $input = array(

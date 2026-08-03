@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Psr\Clock;
+namespace PivotPerformanceToolkit\Vendor\Psr\Clock;
 
 use DateTimeImmutable;
 

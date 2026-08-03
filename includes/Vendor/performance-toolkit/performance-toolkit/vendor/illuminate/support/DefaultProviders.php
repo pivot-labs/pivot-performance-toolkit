@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
 
 class DefaultProviders
 {
@@ -21,27 +21,27 @@ class DefaultProviders
         $this->providers = $providers ?: [
             \Illuminate\Auth\AuthServiceProvider::class,
             \Illuminate\Broadcasting\BroadcastServiceProvider::class,
-            \PerformanceToolkit\Vendor\Illuminate\Bus\BusServiceProvider::class,
+            \PivotPerformanceToolkit\Vendor\Illuminate\Bus\BusServiceProvider::class,
             \Illuminate\Cache\CacheServiceProvider::class,
             \Illuminate\Foundation\Providers\ConsoleSupportServiceProvider::class,
             \Illuminate\Concurrency\ConcurrencyServiceProvider::class,
             \Illuminate\Cookie\CookieServiceProvider::class,
             \Illuminate\Database\DatabaseServiceProvider::class,
             \Illuminate\Encryption\EncryptionServiceProvider::class,
-            \PerformanceToolkit\Vendor\Illuminate\Filesystem\FilesystemServiceProvider::class,
+            \PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\FilesystemServiceProvider::class,
             \Illuminate\Foundation\Providers\FoundationServiceProvider::class,
             \Illuminate\Hashing\HashServiceProvider::class,
             \Illuminate\Mail\MailServiceProvider::class,
             \Illuminate\Notifications\NotificationServiceProvider::class,
             \Illuminate\Pagination\PaginationServiceProvider::class,
             \Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
-            \PerformanceToolkit\Vendor\Illuminate\Pipeline\PipelineServiceProvider::class,
+            \PivotPerformanceToolkit\Vendor\Illuminate\Pipeline\PipelineServiceProvider::class,
             \Illuminate\Queue\QueueServiceProvider::class,
             \Illuminate\Redis\RedisServiceProvider::class,
             \Illuminate\Session\SessionServiceProvider::class,
             \Illuminate\Translation\TranslationServiceProvider::class,
             \Illuminate\Validation\ValidationServiceProvider::class,
-            \PerformanceToolkit\Vendor\Illuminate\View\ViewServiceProvider::class,
+            \PivotPerformanceToolkit\Vendor\Illuminate\View\ViewServiceProvider::class,
         ];
     }
 

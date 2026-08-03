@@ -1,11 +1,11 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Traits;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits;
 
-use PerformanceToolkit\Vendor\Illuminate\Support\Arr;
-use PerformanceToolkit\Vendor\Illuminate\Support\Collection;
-use PerformanceToolkit\Vendor\Illuminate\Support\Facades\Date;
-use PerformanceToolkit\Vendor\Illuminate\Support\Str;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Arr;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades\Date;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Str;
 use stdClass;
 
 trait InteractsWithData
@@ -85,7 +85,7 @@ trait InteractsWithData
     public function whenHas($key, callable $callback, ?callable $default = null)
     {
         if ($this->has($key)) {
-            return $callback(performancetoolkit_vendor_data_get($this->all(), $key)) ?: $this;
+            return $callback(pivotperformancetoolkit_vendor_data_get($this->all(), $key)) ?: $this;
         }
 
         if ($default) {
@@ -163,7 +163,7 @@ trait InteractsWithData
     public function whenFilled($key, callable $callback, ?callable $default = null)
     {
         if ($this->filled($key)) {
-            return $callback(performancetoolkit_vendor_data_get($this->all(), $key)) ?: $this;
+            return $callback(pivotperformancetoolkit_vendor_data_get($this->all(), $key)) ?: $this;
         }
 
         if ($default) {
@@ -197,7 +197,7 @@ trait InteractsWithData
     public function whenMissing($key, callable $callback, ?callable $default = null)
     {
         if ($this->missing($key)) {
-            return $callback(performancetoolkit_vendor_data_get($this->all(), $key)) ?: $this;
+            return $callback(pivotperformancetoolkit_vendor_data_get($this->all(), $key)) ?: $this;
         }
 
         if ($default) {
@@ -225,7 +225,7 @@ trait InteractsWithData
      *
      * @param  string  $key
      * @param  mixed  $default
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Stringable
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Stringable
      */
     public function str($key, $default = null)
     {
@@ -237,7 +237,7 @@ trait InteractsWithData
      *
      * @param  string  $key
      * @param  mixed  $default
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Stringable
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Stringable
      */
     public function string($key, $default = null)
     {
@@ -288,9 +288,9 @@ trait InteractsWithData
      * @param  string  $key
      * @param  string|null  $format
      * @param  string|null  $tz
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Carbon|null
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon|null
      *
-     * @throws \PerformanceToolkit\Vendor\Carbon\Exceptions\InvalidFormatException
+     * @throws \PivotPerformanceToolkit\Vendor\Carbon\Exceptions\InvalidFormatException
      */
     public function date($key, $format = null, $tz = null)
     {
@@ -369,7 +369,7 @@ trait InteractsWithData
      * Retrieve data from the instance as a collection.
      *
      * @param  array|string|null  $key
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Collection
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection
      */
     public function collect($key = null)
     {
@@ -391,7 +391,7 @@ trait InteractsWithData
         $placeholder = new stdClass;
 
         foreach (is_array($keys) ? $keys : func_get_args() as $key) {
-            $value = performancetoolkit_vendor_data_get($data, $key, $placeholder);
+            $value = pivotperformancetoolkit_vendor_data_get($data, $key, $placeholder);
 
             if ($value !== $placeholder) {
                 Arr::set($results, $key, $value);

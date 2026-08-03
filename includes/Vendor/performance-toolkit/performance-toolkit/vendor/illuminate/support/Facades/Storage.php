@@ -1,33 +1,33 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
 
-use PerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem;
+use PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem;
 
-use function PerformanceToolkit\Vendor\Illuminate\Support\enum_value;
+use function PivotPerformanceToolkit\Vendor\Illuminate\Support\enum_value;
 
 /**
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem\Filesystem drive(\UnitEnum|string|null $name = null)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem\Filesystem disk(\UnitEnum|string|null $name = null)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem\Cloud cloud()
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem\Filesystem build(string|array $config)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem\Filesystem createLocalDriver(array $config, string $name = 'local')
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem\Filesystem createFtpDriver(array $config)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem\Filesystem createSftpDriver(array $config)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem\Cloud createS3Driver(array $config)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem\Filesystem createScopedDriver(array $config)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Filesystem\FilesystemManager set(string $name, mixed $disk)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem\Filesystem drive(\UnitEnum|string|null $name = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem\Filesystem disk(\UnitEnum|string|null $name = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem\Cloud cloud()
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem\Filesystem build(string|array $config)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem\Filesystem createLocalDriver(array $config, string $name = 'local')
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem\Filesystem createFtpDriver(array $config)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem\Filesystem createSftpDriver(array $config)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem\Cloud createS3Driver(array $config)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem\Filesystem createScopedDriver(array $config)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\FilesystemManager set(string $name, mixed $disk)
  * @method static string getDefaultDriver()
  * @method static string getDefaultCloudDriver()
- * @method static \PerformanceToolkit\Vendor\Illuminate\Filesystem\FilesystemManager forgetDisk(array|string $disk)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\FilesystemManager forgetDisk(array|string $disk)
  * @method static void purge(string|null $name = null)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Filesystem\FilesystemManager extend(string $driver, \Closure $callback)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Filesystem\FilesystemManager setApplication(\PerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application $app)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\FilesystemManager extend(string $driver, \Closure $callback)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\FilesystemManager setApplication(\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Foundation\Application $app)
  * @method static string path(string $path)
  * @method static bool exists(string $path)
  * @method static string|null get(string $path)
  * @method static resource|null readStream(string $path)
- * @method static bool put(string $path, \PerformanceToolkit\Vendor\Psr\Http\Message\StreamInterface|\Illuminate\Http\File|\Illuminate\Http\UploadedFile|string|resource $contents, mixed $options = [])
+ * @method static bool put(string $path, \PivotPerformanceToolkit\Vendor\Psr\Http\Message\StreamInterface|\Illuminate\Http\File|\Illuminate\Http\UploadedFile|string|resource $contents, mixed $options = [])
  * @method static string|false putFile(\Illuminate\Http\File|\Illuminate\Http\UploadedFile|string $path, \Illuminate\Http\File|\Illuminate\Http\UploadedFile|string|array|null $file = null, mixed $options = [])
  * @method static string|false putFileAs(\Illuminate\Http\File|\Illuminate\Http\UploadedFile|string $path, \Illuminate\Http\File|\Illuminate\Http\UploadedFile|string|array|null $file, string|array|null $name = null, mixed $options = [])
  * @method static bool writeStream(string $path, resource $resource, array $options = [])
@@ -46,10 +46,10 @@ use function PerformanceToolkit\Vendor\Illuminate\Support\enum_value;
  * @method static array<string> allDirectories(string|null $directory = null)
  * @method static bool makeDirectory(string $path)
  * @method static bool deleteDirectory(string $directory)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Filesystem\FilesystemAdapter assertExists(string|array $path, string|null $content = null)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Filesystem\FilesystemAdapter assertCount(string $path, int $count, bool $recursive = false)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Filesystem\FilesystemAdapter assertMissing(string|array $path)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Filesystem\FilesystemAdapter assertDirectoryEmpty(string $path)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\FilesystemAdapter assertExists(string|array $path, string|null $content = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\FilesystemAdapter assertCount(string $path, int $count, bool $recursive = false)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\FilesystemAdapter assertMissing(string|array $path)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\FilesystemAdapter assertDirectoryEmpty(string $path)
  * @method static bool missing(string $path)
  * @method static bool fileExists(string $path)
  * @method static bool fileMissing(string $path)
@@ -72,8 +72,8 @@ use function PerformanceToolkit\Vendor\Illuminate\Support\enum_value;
  * @method static void serveUsing(\Closure $callback)
  * @method static void buildTemporaryUrlsUsing(\Closure $callback)
  * @method static void buildTemporaryUploadUrlsUsing(\Closure $callback)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Filesystem\FilesystemAdapter|mixed when(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Filesystem\FilesystemAdapter|mixed unless(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\FilesystemAdapter|mixed when(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\FilesystemAdapter|mixed unless(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
  * @method static void macro(string $name, object|callable $macro)
  * @method static void mixin(object $mixin, bool $replace = true)
  * @method static bool hasMacro(string $name)
@@ -87,7 +87,7 @@ use function PerformanceToolkit\Vendor\Illuminate\Support\enum_value;
  * @method static void write(string $location, string $contents, array $config = [])
  * @method static void createDirectory(string $location, array $config = [])
  *
- * @see \PerformanceToolkit\Vendor\Illuminate\Filesystem\FilesystemManager
+ * @see \PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\FilesystemManager
  */
 class Storage extends Facade
 {
@@ -96,7 +96,7 @@ class Storage extends Facade
      *
      * @param  \UnitEnum|string|null  $disk
      * @param  array  $config
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem\Filesystem
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem\Filesystem
      */
     public static function fake($disk = null, array $config = [])
     {
@@ -128,7 +128,7 @@ class Storage extends Facade
      *
      * @param  \UnitEnum|string|null  $disk
      * @param  array  $config
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem\Filesystem
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem\Filesystem
      */
     public static function persistentFake($disk = null, array $config = [])
     {

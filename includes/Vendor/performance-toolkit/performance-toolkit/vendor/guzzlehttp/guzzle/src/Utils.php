@@ -1,13 +1,13 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp;
 
-use PerformanceToolkit\Vendor\GuzzleHttp\Exception\InvalidArgumentException;
-use PerformanceToolkit\Vendor\GuzzleHttp\Handler\CurlHandler;
-use PerformanceToolkit\Vendor\GuzzleHttp\Handler\CurlMultiHandler;
-use PerformanceToolkit\Vendor\GuzzleHttp\Handler\Proxy;
-use PerformanceToolkit\Vendor\GuzzleHttp\Handler\StreamHandler;
-use PerformanceToolkit\Vendor\Psr\Http\Message\UriInterface;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Exception\InvalidArgumentException;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Handler\CurlHandler;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Handler\CurlMultiHandler;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Handler\Proxy;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Handler\StreamHandler;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\UriInterface;
 final class Utils
 {
     /**
@@ -64,14 +64,14 @@ final class Utils
         if (\defined('STDOUT')) {
             return \STDOUT;
         }
-        return \PerformanceToolkit\Vendor\GuzzleHttp\Psr7\Utils::tryFopen('php://output', 'w');
+        return \PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7\Utils::tryFopen('php://output', 'w');
     }
     /**
      * Chooses and creates a default handler to use based on the environment.
      *
      * The returned handler is not wrapped by any default middlewares.
      *
-     * @return callable(\PerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface, array): Promise\PromiseInterface Returns the best handler for the given system.
+     * @return callable(\PivotPerformanceToolkit\Vendor\Psr\Http\Message\RequestInterface, array): Promise\PromiseInterface Returns the best handler for the given system.
      *
      * @throws \RuntimeException if no viable Handler is available.
      */

@@ -1,25 +1,25 @@
 <?php
 
-use PerformanceToolkit\Vendor\Illuminate\Support\Arr;
-use PerformanceToolkit\Vendor\Illuminate\Support\Collection;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Arr;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection;
 
-if (! function_exists('performancetoolkit_vendor_collect')) {
+if (! function_exists('pivotperformancetoolkit_vendor_collect')) {
     /**
      * Create a collection from the given value.
      *
      * @template TKey of array-key
      * @template TValue
      *
-     * @param  \PerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, TValue>|iterable<TKey, TValue>|null  $value
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Collection<TKey, TValue>
+     * @param  \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable<TKey, TValue>|iterable<TKey, TValue>|null  $value
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection<TKey, TValue>
      */
-    function performancetoolkit_vendor_collect($value = [])
+    function pivotperformancetoolkit_vendor_collect($value = [])
     {
         return new Collection($value);
     }
 }
 
-if (! function_exists('performancetoolkit_vendor_data_fill')) {
+if (! function_exists('pivotperformancetoolkit_vendor_data_fill')) {
     /**
      * Fill in data where it's missing.
      *
@@ -28,13 +28,13 @@ if (! function_exists('performancetoolkit_vendor_data_fill')) {
      * @param  mixed  $value
      * @return mixed
      */
-    function performancetoolkit_vendor_data_fill(&$target, $key, $value)
+    function pivotperformancetoolkit_vendor_data_fill(&$target, $key, $value)
     {
-        return performancetoolkit_vendor_data_set($target, $key, $value, false);
+        return pivotperformancetoolkit_vendor_data_set($target, $key, $value, false);
     }
 }
 
-if (! function_exists('performancetoolkit_vendor_data_get')) {
+if (! function_exists('pivotperformancetoolkit_vendor_data_get')) {
     /**
      * Get an item from an array or object using "dot" notation.
      *
@@ -43,7 +43,7 @@ if (! function_exists('performancetoolkit_vendor_data_get')) {
      * @param  mixed  $default
      * @return mixed
      */
-    function performancetoolkit_vendor_data_get($target, $key, $default = null)
+    function pivotperformancetoolkit_vendor_data_get($target, $key, $default = null)
     {
         if (is_null($key)) {
             return $target;
@@ -62,13 +62,13 @@ if (! function_exists('performancetoolkit_vendor_data_get')) {
                 if ($target instanceof Collection) {
                     $target = $target->all();
                 } elseif (! is_iterable($target)) {
-                    return performancetoolkit_vendor_value($default);
+                    return pivotperformancetoolkit_vendor_value($default);
                 }
 
                 $result = [];
 
                 foreach ($target as $item) {
-                    $result[] = performancetoolkit_vendor_data_get($item, $key);
+                    $result[] = pivotperformancetoolkit_vendor_data_get($item, $key);
                 }
 
                 return in_array('*', $key) ? Arr::collapse($result) : $result;
@@ -88,7 +88,7 @@ if (! function_exists('performancetoolkit_vendor_data_get')) {
             } elseif (is_object($target) && isset($target->{$segment})) {
                 $target = $target->{$segment};
             } else {
-                return performancetoolkit_vendor_value($default);
+                return pivotperformancetoolkit_vendor_value($default);
             }
         }
 
@@ -96,7 +96,7 @@ if (! function_exists('performancetoolkit_vendor_data_get')) {
     }
 }
 
-if (! function_exists('performancetoolkit_vendor_data_set')) {
+if (! function_exists('pivotperformancetoolkit_vendor_data_set')) {
     /**
      * Set an item on an array or object using dot notation.
      *
@@ -106,7 +106,7 @@ if (! function_exists('performancetoolkit_vendor_data_set')) {
      * @param  bool  $overwrite
      * @return mixed
      */
-    function performancetoolkit_vendor_data_set(&$target, $key, $value, $overwrite = true)
+    function pivotperformancetoolkit_vendor_data_set(&$target, $key, $value, $overwrite = true)
     {
         $segments = is_array($key) ? $key : explode('.', $key);
 
@@ -117,7 +117,7 @@ if (! function_exists('performancetoolkit_vendor_data_set')) {
 
             if ($segments) {
                 foreach ($target as &$inner) {
-                    performancetoolkit_vendor_data_set($inner, $segments, $value, $overwrite);
+                    pivotperformancetoolkit_vendor_data_set($inner, $segments, $value, $overwrite);
                 }
             } elseif ($overwrite) {
                 foreach ($target as &$inner) {
@@ -130,7 +130,7 @@ if (! function_exists('performancetoolkit_vendor_data_set')) {
                     $target[$segment] = [];
                 }
 
-                performancetoolkit_vendor_data_set($target[$segment], $segments, $value, $overwrite);
+                pivotperformancetoolkit_vendor_data_set($target[$segment], $segments, $value, $overwrite);
             } elseif ($overwrite || ! Arr::exists($target, $segment)) {
                 $target[$segment] = $value;
             }
@@ -140,7 +140,7 @@ if (! function_exists('performancetoolkit_vendor_data_set')) {
                     $target->{$segment} = [];
                 }
 
-                performancetoolkit_vendor_data_set($target->{$segment}, $segments, $value, $overwrite);
+                pivotperformancetoolkit_vendor_data_set($target->{$segment}, $segments, $value, $overwrite);
             } elseif ($overwrite || ! isset($target->{$segment})) {
                 $target->{$segment} = $value;
             }
@@ -148,7 +148,7 @@ if (! function_exists('performancetoolkit_vendor_data_set')) {
             $target = [];
 
             if ($segments) {
-                performancetoolkit_vendor_data_set($target[$segment], $segments, $value, $overwrite);
+                pivotperformancetoolkit_vendor_data_set($target[$segment], $segments, $value, $overwrite);
             } elseif ($overwrite) {
                 $target[$segment] = $value;
             }
@@ -158,7 +158,7 @@ if (! function_exists('performancetoolkit_vendor_data_set')) {
     }
 }
 
-if (! function_exists('performancetoolkit_vendor_data_forget')) {
+if (! function_exists('pivotperformancetoolkit_vendor_data_forget')) {
     /**
      * Remove / unset an item from an array or object using "dot" notation.
      *
@@ -166,25 +166,25 @@ if (! function_exists('performancetoolkit_vendor_data_forget')) {
      * @param  string|array|int|null  $key
      * @return mixed
      */
-    function performancetoolkit_vendor_data_forget(&$target, $key)
+    function pivotperformancetoolkit_vendor_data_forget(&$target, $key)
     {
         $segments = is_array($key) ? $key : explode('.', $key);
 
         if (($segment = array_shift($segments)) === '*' && Arr::accessible($target)) {
             if ($segments) {
                 foreach ($target as &$inner) {
-                    performancetoolkit_vendor_data_forget($inner, $segments);
+                    pivotperformancetoolkit_vendor_data_forget($inner, $segments);
                 }
             }
         } elseif (Arr::accessible($target)) {
             if ($segments && Arr::exists($target, $segment)) {
-                performancetoolkit_vendor_data_forget($target[$segment], $segments);
+                pivotperformancetoolkit_vendor_data_forget($target[$segment], $segments);
             } else {
                 Arr::forget($target, $segment);
             }
         } elseif (is_object($target)) {
             if ($segments && isset($target->{$segment})) {
-                performancetoolkit_vendor_data_forget($target->{$segment}, $segments);
+                pivotperformancetoolkit_vendor_data_forget($target->{$segment}, $segments);
             } elseif (isset($target->{$segment})) {
                 unset($target->{$segment});
             }
@@ -194,33 +194,33 @@ if (! function_exists('performancetoolkit_vendor_data_forget')) {
     }
 }
 
-if (! function_exists('performancetoolkit_vendor_head')) {
+if (! function_exists('pivotperformancetoolkit_vendor_head')) {
     /**
      * Get the first element of an array. Useful for method chaining.
      *
      * @param  array  $array
      * @return mixed
      */
-    function performancetoolkit_vendor_head($array)
+    function pivotperformancetoolkit_vendor_head($array)
     {
         return reset($array);
     }
 }
 
-if (! function_exists('performancetoolkit_vendor_last')) {
+if (! function_exists('pivotperformancetoolkit_vendor_last')) {
     /**
      * Get the last element from an array.
      *
      * @param  array  $array
      * @return mixed
      */
-    function performancetoolkit_vendor_last($array)
+    function pivotperformancetoolkit_vendor_last($array)
     {
         return end($array);
     }
 }
 
-if (! function_exists('performancetoolkit_vendor_value')) {
+if (! function_exists('pivotperformancetoolkit_vendor_value')) {
     /**
      * Return the default value of the given value.
      *
@@ -231,13 +231,13 @@ if (! function_exists('performancetoolkit_vendor_value')) {
      * @param  TArgs  ...$args
      * @return TValue
      */
-    function performancetoolkit_vendor_value($value, ...$args)
+    function pivotperformancetoolkit_vendor_value($value, ...$args)
     {
         return $value instanceof Closure ? $value(...$args) : $value;
     }
 }
 
-if (! function_exists('performancetoolkit_vendor_when')) {
+if (! function_exists('pivotperformancetoolkit_vendor_when')) {
     /**
      * Return a value if the given condition is true.
      *
@@ -246,12 +246,12 @@ if (! function_exists('performancetoolkit_vendor_when')) {
      * @param  \Closure|mixed  $default
      * @return mixed
      */
-    function performancetoolkit_vendor_when($condition, $value, $default = null)
+    function pivotperformancetoolkit_vendor_when($condition, $value, $default = null)
     {
         if ($condition) {
-            return performancetoolkit_vendor_value($value, $condition);
+            return pivotperformancetoolkit_vendor_value($value, $condition);
         }
 
-        return performancetoolkit_vendor_value($default, $condition);
+        return pivotperformancetoolkit_vendor_value($default, $condition);
     }
 }

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Vendor\Doctrine\Inflector;
+namespace PivotPerformanceToolkit\Vendor\Doctrine\Inflector;
 
-use PerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Ruleset;
+use PivotPerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Ruleset;
 
 use function array_merge;
 

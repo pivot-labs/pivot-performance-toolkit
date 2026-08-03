@@ -1,10 +1,10 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
 
-use PerformanceToolkit\Vendor\Illuminate\Contracts\Debug\ExceptionHandler;
-use PerformanceToolkit\Vendor\Illuminate\Support\Arr;
-use PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\ExceptionHandlerFake;
+use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Debug\ExceptionHandler;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Arr;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\ExceptionHandlerFake;
 
 /**
  * @method static void register()
@@ -24,18 +24,18 @@ use PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\ExceptionHandlerF
  * @method static \Illuminate\Foundation\Exceptions\Handler respondUsing(callable $callback)
  * @method static \Illuminate\Foundation\Exceptions\Handler shouldRenderJsonWhen(callable $callback)
  * @method static \Illuminate\Foundation\Exceptions\Handler dontReportDuplicates()
- * @method static \PerformanceToolkit\Vendor\Illuminate\Contracts\Debug\ExceptionHandler handler()
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Debug\ExceptionHandler handler()
  * @method static void assertReported(\Closure|string $exception)
  * @method static void assertReportedCount(int $count)
  * @method static void assertNotReported(\Closure|string $exception)
  * @method static void assertNothingReported()
  * @method static void renderForConsole(\Symfony\Component\Console\Output\OutputInterface $output, \Throwable $e)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\ExceptionHandlerFake throwOnReport()
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\ExceptionHandlerFake throwFirstReported()
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\ExceptionHandlerFake setHandler(\PerformanceToolkit\Vendor\Illuminate\Contracts\Debug\ExceptionHandler $handler)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\ExceptionHandlerFake throwOnReport()
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\ExceptionHandlerFake throwFirstReported()
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\ExceptionHandlerFake setHandler(\PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Debug\ExceptionHandler $handler)
  *
  * @see \Illuminate\Foundation\Exceptions\Handler
- * @see \PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\ExceptionHandlerFake
+ * @see \PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\ExceptionHandlerFake
  */
 class Exceptions extends Facade
 {
@@ -43,7 +43,7 @@ class Exceptions extends Facade
      * Replace the bound instance with a fake.
      *
      * @param  array<int, class-string<\Throwable>>|class-string<\Throwable>  $exceptions
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\ExceptionHandlerFake
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\ExceptionHandlerFake
      */
     public static function fake(array|string $exceptions = [])
     {
@@ -51,7 +51,7 @@ class Exceptions extends Facade
             ? static::getFacadeRoot()->handler()
             : static::getFacadeRoot();
 
-        return performancetoolkit_vendor_tap(new ExceptionHandlerFake($exceptionHandler, Arr::wrap($exceptions)), function ($fake) {
+        return pivotperformancetoolkit_vendor_tap(new ExceptionHandlerFake($exceptionHandler, Arr::wrap($exceptions)), function ($fake) {
             static::swap($fake);
         });
     }

@@ -1,12 +1,12 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Support\Facades;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
 
 use Illuminate\Database\Eloquent\Model;
-use PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\EventFake;
+use PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\EventFake;
 
 /**
- * @method static void listen(\PerformanceToolkit\Vendor\Illuminate\Events\QueuedClosure|callable|array|string $events, \PerformanceToolkit\Vendor\Illuminate\Events\QueuedClosure|callable|array|string|null $listener = null)
+ * @method static void listen(\PivotPerformanceToolkit\Vendor\Illuminate\Events\QueuedClosure|callable|array|string $events, \PivotPerformanceToolkit\Vendor\Illuminate\Events\QueuedClosure|callable|array|string|null $listener = null)
  * @method static bool hasListeners(string $eventName)
  * @method static bool hasWildcardListeners(string $eventName)
  * @method static void push(string $event, object|array $payload = [])
@@ -19,25 +19,25 @@ use PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\EventFake;
  * @method static \Closure createClassListener(string $listener, bool $wildcard = false)
  * @method static void forget(string $event)
  * @method static void forgetPushed()
- * @method static \PerformanceToolkit\Vendor\Illuminate\Events\Dispatcher setQueueResolver(callable $resolver)
- * @method static \PerformanceToolkit\Vendor\Illuminate\Events\Dispatcher setTransactionManagerResolver(callable $resolver)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Events\Dispatcher setQueueResolver(callable $resolver)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Events\Dispatcher setTransactionManagerResolver(callable $resolver)
  * @method static array getRawListeners()
  * @method static void macro(string $name, object|callable $macro)
  * @method static void mixin(object $mixin, bool $replace = true)
  * @method static bool hasMacro(string $name)
  * @method static void flushMacros()
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\EventFake except(array|string $eventsToDispatch)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\EventFake except(array|string $eventsToDispatch)
  * @method static void assertListening(string $expectedEvent, string|array $expectedListener)
  * @method static void assertDispatched(string|\Closure $event, callable|int|null $callback = null)
  * @method static void assertDispatchedTimes(string $event, int $times = 1)
  * @method static void assertNotDispatched(string|\Closure $event, callable|null $callback = null)
  * @method static void assertNothingDispatched()
- * @method static \PerformanceToolkit\Vendor\Illuminate\Support\Collection dispatched(string $event, callable|null $callback = null)
+ * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection dispatched(string $event, callable|null $callback = null)
  * @method static bool hasDispatched(string $event)
  * @method static array dispatchedEvents()
  *
- * @see \PerformanceToolkit\Vendor\Illuminate\Events\Dispatcher
- * @see \PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\EventFake
+ * @see \PivotPerformanceToolkit\Vendor\Illuminate\Events\Dispatcher
+ * @see \PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\EventFake
  */
 class Event extends Facade
 {
@@ -45,7 +45,7 @@ class Event extends Facade
      * Replace the bound instance with a fake.
      *
      * @param  array|string  $eventsToFake
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\EventFake
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\EventFake
      */
     public static function fake($eventsToFake = [])
     {
@@ -53,7 +53,7 @@ class Event extends Facade
                 ? static::getFacadeRoot()->dispatcher
                 : static::getFacadeRoot();
 
-        return performancetoolkit_vendor_tap(new EventFake($actualDispatcher, $eventsToFake), function ($fake) {
+        return pivotperformancetoolkit_vendor_tap(new EventFake($actualDispatcher, $eventsToFake), function ($fake) {
             static::swap($fake);
 
             Model::setEventDispatcher($fake);
@@ -65,7 +65,7 @@ class Event extends Facade
      * Replace the bound instance with a fake that fakes all events except the given events.
      *
      * @param  string[]|string  $eventsToAllow
-     * @return \PerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\EventFake
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\EventFake
      */
     public static function fakeExcept($eventsToAllow)
     {
@@ -89,7 +89,7 @@ class Event extends Facade
 
         static::fake($eventsToFake);
 
-        return performancetoolkit_vendor_tap($callable(), function () use ($originalDispatcher) {
+        return pivotperformancetoolkit_vendor_tap($callable(), function () use ($originalDispatcher) {
             static::swap($originalDispatcher);
 
             Model::setEventDispatcher($originalDispatcher);
@@ -110,7 +110,7 @@ class Event extends Facade
 
         static::fakeExcept($eventsToAllow);
 
-        return performancetoolkit_vendor_tap($callable(), function () use ($originalDispatcher) {
+        return pivotperformancetoolkit_vendor_tap($callable(), function () use ($originalDispatcher) {
             static::swap($originalDispatcher);
 
             Model::setEventDispatcher($originalDispatcher);

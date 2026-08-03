@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\CommandLoader;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\CommandLoader;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Command\Command;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\CommandNotFoundException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Command\Command;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\CommandNotFoundException;
 
 /**
  * @author Robin Chalas <robin.chalas@gmail.com>

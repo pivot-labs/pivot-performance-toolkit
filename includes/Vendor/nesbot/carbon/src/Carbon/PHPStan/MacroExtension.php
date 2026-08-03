@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Carbon\PHPStan;
+namespace PivotPerformanceToolkit\Vendor\Carbon\PHPStan;
 
-use PerformanceToolkit\Vendor\Carbon\CarbonInterface;
-use PerformanceToolkit\Vendor\Carbon\FactoryImmutable;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface;
+use PivotPerformanceToolkit\Vendor\Carbon\FactoryImmutable;
 use Closure;
 use InvalidArgumentException;
 use PHPStan\Reflection\ClassReflection;

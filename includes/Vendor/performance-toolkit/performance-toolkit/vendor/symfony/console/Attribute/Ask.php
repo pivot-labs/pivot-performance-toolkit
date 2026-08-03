@@ -9,15 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Attribute;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Attribute;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Attribute\Reflection\ReflectionMember;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\InvalidArgumentException;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Exception\LogicException;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Question\ConfirmationQuestion;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Question\Question;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Style\SymfonyStyle;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Attribute\Reflection\ReflectionMember;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\InvalidArgumentException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception\LogicException;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Input\InputInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Question\ConfirmationQuestion;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Question\Question;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Style\SymfonyStyle;
 
 #[\Attribute(\Attribute::TARGET_PARAMETER | \Attribute::TARGET_PROPERTY)]
 class Ask implements InteractiveAttributeInterface

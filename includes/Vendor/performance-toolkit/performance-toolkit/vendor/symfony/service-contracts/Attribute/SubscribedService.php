@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Contracts\Service\Attribute;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Contracts\Service\Attribute;
 
-use PerformanceToolkit\Vendor\Symfony\Contracts\Service\ServiceMethodsSubscriberTrait;
-use PerformanceToolkit\Vendor\Symfony\Contracts\Service\ServiceSubscriberInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Contracts\Service\ServiceMethodsSubscriberTrait;
+use PivotPerformanceToolkit\Vendor\Symfony\Contracts\Service\ServiceSubscriberInterface;
 
 /**
  * For use as the return value for {@see ServiceSubscriberInterface}.

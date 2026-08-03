@@ -1,8 +1,8 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp;
 
-use PerformanceToolkit\Vendor\Psr\Http\Message\MessageInterface;
+use PivotPerformanceToolkit\Vendor\Psr\Http\Message\MessageInterface;
 
 interface BodySummarizerInterface
 {

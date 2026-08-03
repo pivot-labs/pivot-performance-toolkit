@@ -2,14 +2,18 @@
 /**
  * Blade-based admin page base class.
  *
- * @package PerformanceToolkit
+ * @package PivotPerformanceToolkit
  */
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Admin;
+namespace PivotPerformanceToolkit\Admin;
 
-use PerformanceToolkit\Views\BladeEngine;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+use PivotPerformanceToolkit\Views\BladeEngine;
 
 abstract class BladeAdminPage implements AdminPageInterface, AdminPageViewInterface {
 

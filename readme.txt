@@ -1,8 +1,8 @@
-=== WP Performance Toolkit ===
+=== Pivot Performance Toolkit ===
 Contributors: jeffshaikh
-Tags: performance, cache, page cache, minify, lazy load, cloudflare
+Tags: performance, cache, minify, lazy load, cloudflare
 Requires at least: 6.5
-Tested up to: 6.5
+Tested up to: 7.2
 Requires PHP: 8.2
 Stable tag: 1.0.0
 License: GPLv2 or later
@@ -11,7 +11,7 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 A practical, safe-by-default WordPress performance plugin with page caching, minification, lazy loading, and Cloudflare integration.
 
 == Description ==
-Performance Toolkit helps speed up WordPress sites with focused optimizations that are easy to configure and safe to roll out.
+Pivot Performance Toolkit helps speed up WordPress sites with focused optimizations that are easy to configure and safe to roll out.
 
 Core features in this version include:
 
@@ -53,9 +53,9 @@ http://docs.wpperformancetoolkit.com/
 
 == Installation ==
 
-1. Upload the `performance-toolkit` folder to the `/wp-content/plugins/` directory, or install it through the WordPress plugin screen.
+1. Upload the `pivot-performance-toolkit` folder to the `/wp-content/plugins/` directory, or install it through the WordPress plugin screen.
 2. Activate the plugin through the "Plugins" screen in WordPress.
-3. Go to **Performance Toolkit** in the WordPress admin menu.
+3. Go to **Pivot Performance Toolkit** in the WordPress admin menu.
 4. Start with the **Cache** tab, then enable additional optimizations as needed.
 
 == Frequently Asked Questions ==
@@ -82,11 +82,25 @@ No. Secret keys are redacted unless you explicitly check the "include secret API
 
 = Where are minified external asset files stored? =
 
-In `wp-content/cache/performance-toolkit/minified-assets`.
+In `wp-content/cache/pivot-performance-toolkit/minified-assets`.
 
 = What happens if I enable a feature and it breaks the website? =
 
 We recommend enabling one feature at a time to validate the performance impact. If you encounter an issue, there is a the ability to disable the feature and clear the cache. Additionally there is a "Reset to Defaults" button in the Tools tab that will disable all features and clear caches if needed.
+
+== Source Code ==
+
+The stylesheet shipped in this plugin (`dist/admin.css`) is a compiled/minified build produced from human-readable source via Tailwind CSS and Vite. The source files (`src/css/admin.css`, `tailwind.config.js`, `vite.config.js`, `package.json`) are excluded from the distributed plugin package to keep it lean, but are published in full in the public GitHub repository:
+
+https://github.com/pivot-labs/pivot-performance-toolkit
+
+To build `dist/admin.css` (and `dist/admin-js.js`) from source:
+
+1. Clone the repository above and check out the tag matching the plugin version you're building.
+2. Install Node dependencies: `npm install`
+3. Run the build: `npm run build`
+
+This regenerates the `dist/` directory from the source files in `src/css/` and `src/js/` using the Vite config in `vite.config.js`.
 
 == Screenshots ==
 

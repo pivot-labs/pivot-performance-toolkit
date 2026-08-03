@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Pagination;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Pagination;
 
 /**
  * @template TKey of array-key

@@ -11,7 +11,7 @@
 
 if (\PHP_VERSION_ID < 80500) {
     #[Attribute(Attribute::TARGET_METHOD | Attribute::TARGET_FUNCTION)]
-    final class PerformanceToolkit_Vendor_NoDiscard
+    final class PivotPerformanceToolkit_Vendor_NoDiscard
     {
         public ?string $message;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Cache;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Cache;
 
 use Closure;
-use PerformanceToolkit\Vendor\Psr\SimpleCache\CacheInterface;
+use PivotPerformanceToolkit\Vendor\Psr\SimpleCache\CacheInterface;
 
 interface Repository extends CacheInterface
 {
@@ -119,7 +119,7 @@ interface Repository extends CacheInterface
     /**
      * Get the cache store implementation.
      *
-     * @return \PerformanceToolkit\Vendor\Illuminate\Contracts\Cache\Store
+     * @return \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Cache\Store
      */
     public function getStore();
 }

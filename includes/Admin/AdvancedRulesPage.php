@@ -2,14 +2,18 @@
 /**
  * Advanced rules admin page.
  *
- * @package PerformanceToolkit
+ * @package PivotPerformanceToolkit
  */
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Admin;
+namespace PivotPerformanceToolkit\Admin;
 
-use PerformanceToolkit\Core\Settings;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+use PivotPerformanceToolkit\Core\Settings;
 
 final class AdvancedRulesPage extends BladeAdminPage {
 
@@ -20,15 +24,15 @@ final class AdvancedRulesPage extends BladeAdminPage {
 	}
 
 	public function slug(): string {
-		return 'performance-toolkit-advanced-rules';
+		return 'pivot-performance-toolkit-advanced-rules';
 	}
 
 	public function menuTitle(): string {
-		return __( 'Advanced Rules', 'performance-toolkit' );
+		return __( 'Advanced Rules', 'pivot-performance-toolkit' );
 	}
 
 	public function pageTitle(): string {
-		return __( 'Performance Toolkit Advanced Rules', 'performance-toolkit' );
+		return __( 'Pivot Performance Toolkit Advanced Rules', 'pivot-performance-toolkit' );
 	}
 
 	public function iconKey(): string {

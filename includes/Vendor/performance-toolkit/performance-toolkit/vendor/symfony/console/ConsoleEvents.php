@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Event\ConsoleCommandEvent;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Event\ConsoleErrorEvent;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Event\ConsoleSignalEvent;
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Event\ConsoleTerminateEvent;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Event\ConsoleCommandEvent;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Event\ConsoleErrorEvent;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Event\ConsoleSignalEvent;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Event\ConsoleTerminateEvent;
 
 /**
  * Contains all events dispatched by an Application.
@@ -28,7 +28,7 @@ final class ConsoleEvents
      * executed by the console. It also allows you to modify the command, input and output
      * before they are handed to the command.
      *
-     * @Event("PerformanceToolkit\Vendor\Symfony\Component\Console\Event\ConsoleCommandEvent")
+     * @Event("PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Event\ConsoleCommandEvent")
      */
     public const COMMAND = 'console.command';
 
@@ -36,7 +36,7 @@ final class ConsoleEvents
      * The SIGNAL event allows you to perform some actions
      * after the command execution was interrupted.
      *
-     * @Event("PerformanceToolkit\Vendor\Symfony\Component\Console\Event\ConsoleSignalEvent")
+     * @Event("PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Event\ConsoleSignalEvent")
      */
     public const SIGNAL = 'console.signal';
 
@@ -44,7 +44,7 @@ final class ConsoleEvents
      * The TERMINATE event allows you to attach listeners after a command is
      * executed by the console.
      *
-     * @Event("PerformanceToolkit\Vendor\Symfony\Component\Console\Event\ConsoleTerminateEvent")
+     * @Event("PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Event\ConsoleTerminateEvent")
      */
     public const TERMINATE = 'console.terminate';
 
@@ -54,7 +54,7 @@ final class ConsoleEvents
      * This event allows you to deal with the exception/error or
      * to modify the thrown exception.
      *
-     * @Event("PerformanceToolkit\Vendor\Symfony\Component\Console\Event\ConsoleErrorEvent")
+     * @Event("PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Event\ConsoleErrorEvent")
      */
     public const ERROR = 'console.error';
 

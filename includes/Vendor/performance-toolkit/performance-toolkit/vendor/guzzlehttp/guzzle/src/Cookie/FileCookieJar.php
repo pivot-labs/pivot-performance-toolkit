@@ -1,8 +1,8 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp\Cookie;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp\Cookie;
 
-use PerformanceToolkit\Vendor\GuzzleHttp\Utils;
+use PivotPerformanceToolkit\Vendor\GuzzleHttp\Utils;
 
 /**
  * Persists non-session cookies using a JSON formatted file

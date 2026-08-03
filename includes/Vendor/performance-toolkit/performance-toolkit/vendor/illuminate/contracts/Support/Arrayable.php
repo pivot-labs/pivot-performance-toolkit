@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\Illuminate\Contracts\Support;
+namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support;
 
 /**
  * @template TKey of array-key

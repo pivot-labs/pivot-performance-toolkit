@@ -9,8 +9,8 @@
     :checked="$checked"
     :action="$action"
     :nonce="$nonce"
-    :label="__('Minify JavaScript files', 'performance-toolkit')"
-    :description="__('Creates cached minified copies of local enqueued JavaScript files and rewrites their URLs.', 'performance-toolkit')"
+    :label="__('Minify JavaScript files', 'pivot-performance-toolkit')"
+    :description="__('Creates cached minified copies of local enqueued JavaScript files and rewrites their URLs.', 'pivot-performance-toolkit')"
 >
     <x-slot name="icon">
         <x-icons.js

@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation\DataCollector;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\DataCollector;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 use Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\DataCollectorTranslator;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\DataCollectorTranslator;
 use Symfony\Component\VarDumper\Cloner\Data;
 
 /**

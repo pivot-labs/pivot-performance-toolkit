@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Finder\Iterator;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Finder\Iterator;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Finder\Comparator\NumberComparator;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Finder\Comparator\NumberComparator;
 
 /**
  * SizeRangeFilterIterator filters out files that are not in the given size range.

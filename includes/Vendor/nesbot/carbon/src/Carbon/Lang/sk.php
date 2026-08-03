@@ -35,7 +35,7 @@
  * - Peter Kundis
  */
 
-use PerformanceToolkit\Vendor\Carbon\CarbonInterface;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface;
 
 $fromNow = function ($time) {
     return 'o '.strtr($time, [

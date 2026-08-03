@@ -11,17 +11,17 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Carbon\Traits;
+namespace PivotPerformanceToolkit\Vendor\Carbon\Traits;
 
 use BackedEnum;
 use BadMethodCallException;
-use PerformanceToolkit\Vendor\Carbon\CarbonConverterInterface;
-use PerformanceToolkit\Vendor\Carbon\CarbonInterface;
-use PerformanceToolkit\Vendor\Carbon\Exceptions\BadComparisonUnitException;
-use PerformanceToolkit\Vendor\Carbon\FactoryImmutable;
-use PerformanceToolkit\Vendor\Carbon\Month;
-use PerformanceToolkit\Vendor\Carbon\Unit;
-use PerformanceToolkit\Vendor\Carbon\WeekDay;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonConverterInterface;
+use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface;
+use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\BadComparisonUnitException;
+use PivotPerformanceToolkit\Vendor\Carbon\FactoryImmutable;
+use PivotPerformanceToolkit\Vendor\Carbon\Month;
+use PivotPerformanceToolkit\Vendor\Carbon\Unit;
+use PivotPerformanceToolkit\Vendor\Carbon\WeekDay;
 use Closure;
 use DateInterval;
 use DateTimeInterface;

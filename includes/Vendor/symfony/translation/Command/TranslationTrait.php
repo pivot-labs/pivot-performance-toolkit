@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Translation\Command;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Command;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogue;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogueInterface;
-use PerformanceToolkit\Vendor\Symfony\Component\Translation\TranslatorBag;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogue;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogueInterface;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\TranslatorBag;
 
 /**
  * @internal

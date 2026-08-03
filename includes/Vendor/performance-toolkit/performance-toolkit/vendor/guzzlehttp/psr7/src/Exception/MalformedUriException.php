@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp\Psr7\Exception;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp\Psr7\Exception;
 
 use InvalidArgumentException;
 

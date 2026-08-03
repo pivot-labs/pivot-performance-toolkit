@@ -1,6 +1,6 @@
 @props(['label' => '', 'name' => '', 'description' => '', 'checked' => false])
 
-<div class="ptk-field">
+<div class="pivot-performance-toolkit-field">
     <label>
         <input
             type="checkbox"

@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace PerformanceToolkit\Vendor\Symfony\Component\Console\Exception;
+namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Exception;
 
-use PerformanceToolkit\Vendor\Symfony\Component\Console\Messenger\RunCommandContext;
+use PivotPerformanceToolkit\Vendor\Symfony\Component\Console\Messenger\RunCommandContext;
 
 /**
  * @author Kevin Bond <kevinbond@gmail.com>

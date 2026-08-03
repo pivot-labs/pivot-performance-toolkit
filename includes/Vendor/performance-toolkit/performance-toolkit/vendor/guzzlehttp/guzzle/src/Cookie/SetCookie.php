@@ -1,6 +1,6 @@
 <?php
 
-namespace PerformanceToolkit\Vendor\GuzzleHttp\Cookie;
+namespace PivotPerformanceToolkit\Vendor\GuzzleHttp\Cookie;
 
 /**
  * Set-Cookie object
