@@ -6,6 +6,15 @@
     <arg name="extensions" value="php"/>
     <arg value="sp"/>
 
+    <!--
+        Plugin header declares "Requires PHP: 8.2" as a floor with no stated
+        ceiling, so check against 8.2 and up (open-ended) rather than a fixed
+        version — this catches code that would break on any PHP >= 8.2, not
+        just exactly 8.2.
+    -->
+    <config name="testVersion" value="8.2-"/>
+    <rule ref="PHPCompatibilityWP"/>
+
     <file>pivot-performance-toolkit.php</file>
     <file>includes</file>
     <file>uninstall.php</file>
