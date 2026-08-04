@@ -53,6 +53,17 @@ final class PageCache implements ModuleInterface {
 			return;
 		}
 
+		// Probe requests (from the performance test) must never write to the shared
+		// page cache. The wp_footer metrics-collection script it renders is specific
+		// to this one test run; if captured into the cache file, that script would
+		// re-execute on every future serve of the file and race against (and often
+		// overwrite) the correct cache-hit result injected fresh by the advanced-cache
+		// drop-in. Real anonymous visits are unaffected and still populate the cache.
+		if ( $this->isProbeRequest() ) {
+			$this->sendDebugHeaders( 'MISS', 'probe_no_write' );
+			return;
+		}
+
 		if ( ! file_exists( $this->cache_dir ) ) {
 			wp_mkdir_p( $this->cache_dir );
 		}
