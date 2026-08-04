@@ -10,6 +10,7 @@
 		<header class="pivot-performance-toolkit-header">
 			<div class="pivot-performance-toolkit-page-title">
 				<img src="{{ esc_url($iconUrl) }}" alt="{{ __('Pivot Performance Toolkit', 'pivot-performance-toolkit') }}" class="pivot-performance-toolkit-page-title-icon" />
+				<span class="pivot-performance-toolkit-plugin-title">{{ __('Pivot Performance Toolkit', 'pivot-performance-toolkit') }}</span>
 				@if (is_string($version) && $version !== '')
 					<span class="pivot-performance-toolkit-status-pill bg-gray-100">v {{ $version }}</span>
 				@endif

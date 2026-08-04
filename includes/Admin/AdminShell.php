@@ -88,7 +88,7 @@ final class AdminShell {
 		}
 
 		$shell_data = array(
-			'icon_url'         => PIVOT_PERFORMANCE_TOOLKIT_URL . 'src/img/pivot-performance-toolkit-logo.png',
+			'icon_url'         => PIVOT_PERFORMANCE_TOOLKIT_URL . 'src/img/ptk-header-logo-tile.svg',
 			'plugin_version'   => defined( 'PIVOT_PERFORMANCE_TOOLKIT_VERSION' ) ? PIVOT_PERFORMANCE_TOOLKIT_VERSION : '',
 			'help_url'         => 'https://docs.pivotlabs.dev/performance-toolkit',
 			'primary_nav'      => self::buildPrimaryNav( $current_section ),
