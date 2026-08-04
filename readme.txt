@@ -48,7 +48,7 @@ Homepage:
 https://www.wpperformancetoolkit.com/
 
 Documentation:
-http://docs.wpperformancetoolkit.com/
+https://docs.pivotlabs.dev/performance-toolkit
 
 
 == Installation ==

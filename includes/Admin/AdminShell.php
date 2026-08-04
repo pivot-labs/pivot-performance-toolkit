@@ -90,7 +90,7 @@ final class AdminShell {
 		$shell_data = array(
 			'icon_url'         => PIVOT_PERFORMANCE_TOOLKIT_URL . 'src/img/pivot-performance-toolkit-logo.png',
 			'plugin_version'   => defined( 'PIVOT_PERFORMANCE_TOOLKIT_VERSION' ) ? PIVOT_PERFORMANCE_TOOLKIT_VERSION : '',
-			'help_url'         => 'https://docs.wpperformancetoolkit.com/',
+			'help_url'         => 'https://docs.pivotlabs.dev/performance-toolkit',
 			'primary_nav'      => self::buildPrimaryNav( $current_section ),
 			'secondary_nav'    => self::buildSecondaryNav( $current_section, $current_page_slug ),
 			'page_heading'     => self::resolvePageHeading( $current_page_slug, $current_section ),

@@ -8,7 +8,7 @@
 
 	<ul style="margin: 12px 0 0; padding-left: 0; list-style: none; display: grid; gap: 8px;">
 		<li>
-			<a href="https://docs.wppivot-performance-toolkit.com" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 6px; text-decoration: none;">
+			<a href="https://docs.pivotlabs.dev/performance-toolkit" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 6px; text-decoration: none;">
 				<span>{{ __('View Documentation', 'pivot-performance-toolkit') }}</span>
 				{!! $external_link_icon !!}
 			</a>
