@@ -109,7 +109,7 @@ This regenerates the `dist/` directory from the source files in `src/css/` and `
 3. File optimization settings for defer and minification.
 4. Cloudflare integration with test and purge actions.
 5. Database cleanup tools.
-6. Tools tab with minified asset clear and import/export utilities.
+6. Cache exclusion rules for URLs that should never be cached.
 
 == Changelog ==
 
