@@ -22,7 +22,7 @@ final class CachePage extends BladeAdminPage {
 	private const CLEAR_MINIFIED_ACTION            = 'pivot_performance_toolkit_clear_minified_cache';
 	private const AJAX_CLEAR_ACTION                = 'pivot_performance_toolkit_ajax_clear_cache';
 	private const AJAX_CLEAR_MINIFIED_ACTION       = 'pivot_performance_toolkit_ajax_clear_minified_cache';
-	private const AJAX_REFRESH_USAGE_ACTION        = 'pivot_performance_toolkit_ajax_refresh_cache_usage';
+	private const AJAX_PRELOAD_CACHE_ACTION        = 'pivot_performance_toolkit_ajax_preload_cache';
 	private const AJAX_ENABLE_OBJECT_CACHE_ACTION  = 'pivot_performance_toolkit_ajax_enable_object_cache';
 	private const AJAX_DISABLE_OBJECT_CACHE_ACTION = 'pivot_performance_toolkit_ajax_disable_object_cache';
 	private const AJAX_FLUSH_OBJECT_CACHE_ACTION   = 'pivot_performance_toolkit_ajax_flush_object_cache';
@@ -37,7 +37,7 @@ final class CachePage extends BladeAdminPage {
 		add_action( 'admin_post_' . self::CLEAR_MINIFIED_ACTION, array( $this, 'handleClearMinifiedCache' ) );
 		add_action( 'wp_ajax_' . self::AJAX_CLEAR_ACTION, array( $this, 'handleClearCacheAjax' ) );
 		add_action( 'wp_ajax_' . self::AJAX_CLEAR_MINIFIED_ACTION, array( $this, 'handleClearMinifiedCacheAjax' ) );
-		add_action( 'wp_ajax_' . self::AJAX_REFRESH_USAGE_ACTION, array( $this, 'handleRefreshCacheUsageAjax' ) );
+		add_action( 'wp_ajax_' . self::AJAX_PRELOAD_CACHE_ACTION, array( $this, 'handlePreloadCacheAjax' ) );
 		add_action( 'wp_ajax_' . self::AJAX_ENABLE_OBJECT_CACHE_ACTION, array( $this, 'handleEnableObjectCacheAjax' ) );
 		add_action( 'wp_ajax_' . self::AJAX_DISABLE_OBJECT_CACHE_ACTION, array( $this, 'handleDisableObjectCacheAjax' ) );
 		add_action( 'wp_ajax_' . self::AJAX_FLUSH_OBJECT_CACHE_ACTION, array( $this, 'handleFlushObjectCacheAjax' ) );
@@ -92,13 +92,13 @@ final class CachePage extends BladeAdminPage {
 			'clear_minified_action'            => self::CLEAR_MINIFIED_ACTION,
 			'ajax_clear_action'                => self::AJAX_CLEAR_ACTION,
 			'ajax_clear_minified_action'       => self::AJAX_CLEAR_MINIFIED_ACTION,
-			'ajax_refresh_usage_action'        => self::AJAX_REFRESH_USAGE_ACTION,
+			'ajax_preload_action'              => self::AJAX_PRELOAD_CACHE_ACTION,
 			'ajax_clear_nonce'                 => wp_create_nonce( 'pivot_performance_toolkit_clear_cache_ajax' ),
 			'ajax_clear_minified_nonce'        => wp_create_nonce( 'pivot_performance_toolkit_clear_minified_cache_ajax' ),
-			'ajax_refresh_usage_nonce'         => wp_create_nonce( 'pivot_performance_toolkit_refresh_cache_usage_ajax' ),
+			'ajax_preload_nonce'               => wp_create_nonce( 'pivot_performance_toolkit_preload_cache_ajax' ),
 			'cache_cleared_message'            => __( 'Cache cleared successfully.', 'pivot-performance-toolkit' ),
 			'minified_cache_cleared_message'   => __( 'Minified CSS/JS cache cleared successfully.', 'pivot-performance-toolkit' ),
-			'preload_not_implemented_message'  => __( 'Preload started. This can take a moment.', 'pivot-performance-toolkit' ),
+			'preload_cache_message'            => __( 'Preload started. This can take a moment.', 'pivot-performance-toolkit' ),
 			'object_cache'                     => $this->getObjectCacheStatus(),
 			'ajax_enable_object_cache_action'  => self::AJAX_ENABLE_OBJECT_CACHE_ACTION,
 			'ajax_disable_object_cache_action' => self::AJAX_DISABLE_OBJECT_CACHE_ACTION,
@@ -204,12 +204,12 @@ final class CachePage extends BladeAdminPage {
 		);
 	}
 
-	public function handleRefreshCacheUsageAjax(): void {
+	public function handlePreloadCacheAjax(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_send_json_error( array( 'message' => __( 'Unauthorized', 'pivot-performance-toolkit' ) ), 403 );
 		}
 
-		check_ajax_referer( 'pivot_performance_toolkit_refresh_cache_usage_ajax' );
+		check_ajax_referer( 'pivot_performance_toolkit_preload_cache_ajax' );
 
 		if ( ! $this->settings->getBool( 'enable_page_cache' ) ) {
 			wp_send_json_error(

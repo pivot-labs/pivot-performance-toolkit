@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 final class DocumentationPage extends BladeAdminPage {
 
-	private const DOCS_URL = 'http://docs.wpperformancetoolkit.com';
+	private const DOCS_URL = 'https://docs.pivotlabs.dev/performance-toolkit';
 
 	public function slug(): string {
 		return 'pivot-performance-toolkit-documentation';

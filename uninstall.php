@@ -64,18 +64,26 @@ if ( is_file( $dropin_path ) ) {
 }
 
 // Remove WP_CACHE define only if this plugin originally added the marker comment.
-if ( is_file( $wp_config_path ) && is_writable( $wp_config_path ) ) {
-	$config_contents = file_get_contents( $wp_config_path );
+if ( is_file( $wp_config_path ) ) {
+	require_once ABSPATH . 'wp-admin/includes/file.php';
 
-	if ( is_string( $config_contents ) && '' !== $config_contents ) {
-		$new_contents = preg_replace(
-			'/^define\s*\(\s*[\'\"]WP_CACHE[\'\"].*\/\/ Added by Pivot Performance Toolkit\r?\n/m',
-			'',
-			$config_contents
-		);
+	if ( WP_Filesystem() ) {
+		global $wp_filesystem;
 
-		if ( is_string( $new_contents ) && $new_contents !== $config_contents ) {
-			file_put_contents( $wp_config_path, $new_contents, LOCK_EX );
+		if ( $wp_filesystem instanceof WP_Filesystem_Base && $wp_filesystem->is_writable( $wp_config_path ) ) {
+			$config_contents = $wp_filesystem->get_contents( $wp_config_path );
+
+			if ( is_string( $config_contents ) && '' !== $config_contents ) {
+				$new_contents = preg_replace(
+					'/^define\s*\(\s*[\'\"]WP_CACHE[\'\"].*\/\/ Added by Pivot Performance Toolkit\r?\n/m',
+					'',
+					$config_contents
+				);
+
+				if ( is_string( $new_contents ) && $new_contents !== $config_contents ) {
+					$wp_filesystem->put_contents( $wp_config_path, $new_contents, FS_CHMOD_FILE );
+				}
+			}
 		}
 	}
 }

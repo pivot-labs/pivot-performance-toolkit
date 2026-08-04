@@ -32,9 +32,9 @@
 			href="#"
 			class="pivot-performance-toolkit-action-btn"
 			role="button"
-			data-ajax-action="{{ esc_attr((string) ($ajax_refresh_usage_action ?? 'pivot_performance_toolkit_ajax_refresh_cache_usage')) }}"
-			data-ajax-nonce="{{ esc_attr((string) ($ajax_refresh_usage_nonce ?? '')) }}"
-			data-success-message="{{ esc_attr((string) ($preload_not_implemented_message ?? __('Preload cache is not implemented yet.', 'pivot-performance-toolkit'))) }}"
+			data-ajax-action="{{ esc_attr((string) ($ajax_preload_action ?? 'pivot_performance_toolkit_ajax_preload_cache')) }}"
+			data-ajax-nonce="{{ esc_attr((string) ($ajax_preload_nonce ?? '')) }}"
+			data-success-message="{{ esc_attr((string) ($preload_cache_message ?? __('Preload started. This can take a moment.', 'pivot-performance-toolkit'))) }}"
 		>
 			<span class="pivot-performance-toolkit-action-text">
 				<span class="pivot-performance-toolkit-action-title">{{ __('Preload Cache', 'pivot-performance-toolkit') }}</span>
