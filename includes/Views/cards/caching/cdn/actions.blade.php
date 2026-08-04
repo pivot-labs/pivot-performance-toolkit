@@ -27,7 +27,7 @@
 
     <div class="pivot-performance-toolkit-card-notices" aria-live="polite"></div>
 
-    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-2">
         <x-action-block
             icon="shield-check"
             color="blue"
