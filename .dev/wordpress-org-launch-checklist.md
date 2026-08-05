@@ -52,7 +52,7 @@ This is the code path reviewers read line-by-line for caching plugins.
 - [ ] Submit zip at wordpress.org/plugins/developers/add/
 - [ ] Expect initial response ~10 days, full approval typically 2–3 weeks (queue is ~4,800 plugins as of June 2026)
 - [ ] On approval: commit to SVN (trunk + assets/ folder for banners/screenshots), tag 1.0.0
-- [ ] Use review wait time to: finish wpperformancetoolkit.com one-pager with email capture, plan Pro infrastructure
+- [ ] Use review wait time to: finish pivotlabs.dev one-pager with email capture, plan Pro infrastructure
 
 ## Slug note
 Plugin folder is `pivot-performance-toolkit` but the brand is "Pivot Performance Toolkit." The wordpress.org slug is assigned at submission from your requested name and is permanent — decide before submitting whether you want `pivot-performance-toolkit` or `wp-pivot-performance-toolkit`. ("WP" prefix is allowed; "WordPress" is not.)

@@ -22,7 +22,7 @@ msgstr ""
 
 #. Plugin URI of the plugin
 #: pivot-performance-toolkit.php
-msgid "https://www.wpperformancetoolkit.com"
+msgid "https://www.pivotlabs.dev"
 msgstr ""
 
 #. Description of the plugin

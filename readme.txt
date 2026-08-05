@@ -45,7 +45,7 @@ Core features in this version include:
 * System status page with environment and database size details.
 
 Homepage:
-https://www.wpperformancetoolkit.com/
+https://www.pivotlabs.dev/
 
 Documentation:
 https://docs.pivotlabs.dev/performance-toolkit
