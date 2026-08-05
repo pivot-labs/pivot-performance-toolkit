@@ -70,7 +70,7 @@ final class Plugin {
 			return;
 		}
 
-		$this->booted             = true;
+		$this->booted = true;
 
 		Lifecycle::maybeMigrateLegacyOptionKeys();
 

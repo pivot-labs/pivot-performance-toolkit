@@ -129,9 +129,9 @@ final class CdnIntegrationsPage extends BladeAdminPage {
 	private function redirectWithNotice( bool $success, string $message ): void {
 		$redirect_url = add_query_arg(
 			array(
-				'page'           => 'pivot-performance-toolkit',
-				'section'        => 'caching',
-				'tab'            => $this->slug(),
+				'page'                                 => 'pivot-performance-toolkit',
+				'section'                              => 'caching',
+				'tab'                                  => $this->slug(),
 				'pivot_performance_toolkit_cf_notice'  => $success ? 'success' : 'error',
 				'pivot_performance_toolkit_cf_message' => $message,
 			),

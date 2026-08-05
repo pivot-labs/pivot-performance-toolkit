@@ -95,7 +95,7 @@ final class AdminBarMenu implements ModuleInterface {
 			$purge_page_url = wp_nonce_url(
 				add_query_arg(
 					array(
-						'action'     => self::PURGE_PAGE_ACTION,
+						'action'                           => self::PURGE_PAGE_ACTION,
 						'pivot_performance_toolkit_target' => rawurlencode( $status['url'] ),
 					),
 					admin_url( 'admin-post.php' )

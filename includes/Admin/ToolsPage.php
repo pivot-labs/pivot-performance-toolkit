@@ -154,7 +154,7 @@ final class ToolsPage extends BladeAdminPage {
 
 		$redirect_url = add_query_arg(
 			array(
-				'page'                 => self::SLUG_MAINTENANCE,
+				'page' => self::SLUG_MAINTENANCE,
 				'pivot_performance_toolkit_minified_cleared' => '1',
 				'pivot_performance_toolkit_minified_removed' => (string) $removed,
 			),
@@ -343,7 +343,7 @@ final class ToolsPage extends BladeAdminPage {
 	private function redirectWithNotice( bool $success, string $message, string $page_slug ): void {
 		$redirect_url = add_query_arg(
 			array(
-				'page'              => $page_slug,
+				'page'                                    => $page_slug,
 				'pivot_performance_toolkit_tools_notice'  => $success ? 'success' : 'error',
 				'pivot_performance_toolkit_tools_message' => $message,
 			),

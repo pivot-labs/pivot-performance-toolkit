@@ -24,9 +24,9 @@ final class Lifecycle {
 	 * @var array<string, string>
 	 */
 	private const LEGACY_OPTION_KEYS = array(
-		'performance_toolkit_settings'                  => 'pivot_performance_toolkit_settings',
-		'performance_toolkit_remove_data_on_uninstall'   => 'pivot_performance_toolkit_remove_data_on_uninstall',
-		'ptk_last_performance_result'                    => 'pivot_performance_toolkit_last_performance_result',
+		'performance_toolkit_settings'                 => 'pivot_performance_toolkit_settings',
+		'performance_toolkit_remove_data_on_uninstall' => 'pivot_performance_toolkit_remove_data_on_uninstall',
+		'ptk_last_performance_result'                  => 'pivot_performance_toolkit_last_performance_result',
 	);
 
 	/**
