@@ -15,15 +15,21 @@ Pivot Performance Toolkit helps speed up WordPress sites with focused optimizati
 
 Core features in this version include:
 
-* Disk-based page caching for anonymous GET requests.
-* Cache TTL and max cache size controls.
-* URL exclusion rules for pages that should never be cached.
+* Real-time performance scoring, runnable on demand from the dashboard: page load time, Largest Contentful Paint, Time to First Byte, First Contentful Paint, resource count, and JS/CSS/image payload size, with a live cache-hit indicator.
+* Disk-based page caching for anonymous GET requests, with cache preload/warming.
+* Cache TTL and max cache size controls, with automatic pruning of oldest files.
+* URL exclusion rules for pages that should never be cached, including WooCommerce-aware default exclusions (cart, checkout, my account).
 * One-click cache clear action.
+* File-based object cache to persist WordPress object cache entries to disk between requests.
+* Browser cache header controls, with ready-to-use Apache (.htaccess) and Nginx configuration snippets.
 * HTML minification.
 * Inline CSS and inline JavaScript minification.
-* External CSS and JavaScript minification for local assets.
+* External CSS and JavaScript minification for local assets, with cached minified copies.
 * Script defer support (with safe built-in exclusions).
-* Native image lazy-loading support.
+* HTTP/1.1 file combination for CSS/JS, with automatic HTTP protocol detection so the plugin can recommend against combining files on HTTP/2+ connections.
+* Minification and combination exclusion rules by handle, filename, path, or wildcard pattern.
+* Native lazy-loading for content images, with automatic detection of other active image-optimization plugins to avoid conflicts.
+* Asset detector: scan any page or post to see its loaded CSS and JavaScript files.
 * Cloudflare integration:
   * Provider selection
   * API token + Zone ID settings
