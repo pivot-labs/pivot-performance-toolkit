@@ -361,7 +361,19 @@
                 var phEl    = trigger.querySelector('.pivot-performance-toolkit-icon-select__logo-placeholder');
                 var labelEl = trigger.querySelector('.pivot-performance-toolkit-icon-select__label');
 
+                var safeLogo = '';
                 if (logo !== '') {
+                    try {
+                        var parsedLogo = new URL(logo, window.location.origin);
+                        if (parsedLogo.protocol === 'http:' || parsedLogo.protocol === 'https:') {
+                            safeLogo = parsedLogo.href;
+                        }
+                    } catch (e) {
+                        safeLogo = '';
+                    }
+                }
+
+                if (safeLogo !== '') {
                     if (!imgEl) {
                         imgEl = document.createElement('img');
                         imgEl.className = 'pivot-performance-toolkit-icon-select__logo';
@@ -371,7 +383,7 @@
                             phEl.parentNode.replaceChild(imgEl, phEl);
                         }
                     }
-                    imgEl.src = logo;
+                    imgEl.src = safeLogo;
                 } else {
                     if (imgEl) {
                         var newPh = document.createElement('span');
