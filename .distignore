@@ -8,13 +8,18 @@ vendor/phpcompatibility/
 vendor/phpcsstandards/
 vendor/wp-cli/
 vendor/dealerdirect/
+vendor/inmarelibero/
 vendor/bin/
+
+# Build tooling binaries — not needed at runtime.
+bin/
 
 # VCS and local metadata.
 .git/
 .github/
 .gitignore
 .gitmodules
+.distignore
 .DS_Store
 .idea/
 
