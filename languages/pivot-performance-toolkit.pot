@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-08-05T17:55:04+00:00\n"
+"POT-Creation-Date: 2026-08-05T18:18:39+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: pivot-performance-toolkit\n"
@@ -383,8 +383,18 @@ msgstr ""
 msgid "First error: %s"
 msgstr ""
 
+#. translators: 1: HTTP status code, 2: fallback URL that was requested
+#: includes/Admin/CachePage.php:442
+msgid "HTTP fallback returned %1$d for %2$s"
+msgstr ""
+
+#. translators: 1: HTTP status code, 2: URL that was requested
+#: includes/Admin/CachePage.php:465
+msgid "HTTP %1$d for %2$s"
+msgstr ""
+
 #. translators: 1: Used cache size in human-readable units, 2: Configured max cache size in MB, 3: Percentage of cache usage.
-#: includes/Admin/CachePage.php:548
+#: includes/Admin/CachePage.php:550
 msgid "%1$s of %2$d MB used (%3$d%%)"
 msgstr ""
 

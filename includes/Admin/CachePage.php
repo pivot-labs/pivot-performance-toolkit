@@ -438,7 +438,8 @@ final class CachePage extends BladeAdminPage {
 
 					return array(
 						'ok'    => false,
-						'error' => sprintf( 'HTTP fallback returned %d for %s', $fallback_code, $fallback_url ),
+						/* translators: 1: HTTP status code, 2: fallback URL that was requested */
+						'error' => sprintf( __( 'HTTP fallback returned %1$d for %2$s', 'pivot-performance-toolkit' ), $fallback_code, $fallback_url ),
 					);
 				}
 			}
@@ -460,7 +461,8 @@ final class CachePage extends BladeAdminPage {
 
 		return array(
 			'ok'    => false,
-			'error' => sprintf( 'HTTP %d for %s', $status_code, $url ),
+			/* translators: 1: HTTP status code, 2: URL that was requested */
+			'error' => sprintf( __( 'HTTP %1$d for %2$s', 'pivot-performance-toolkit' ), $status_code, $url ),
 		);
 	}
 
