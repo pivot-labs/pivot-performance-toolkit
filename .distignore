@@ -63,3 +63,17 @@ wp-cache/
 # so it's unused dead weight — and it ships a handful of "@variant" filenames
 # (e.g. be_BY@latin.php) that WordPress.org's plugin checker rejects.
 includes/Vendor/nesbot/carbon/src/Carbon/Lang/
+
+# Dead weight bundled inside third-party dependencies: test doubles/helpers
+# meant for consumers' own PHPUnit suites (never loaded by this plugin), and
+# dev-tooling integration classes (PHPStan, a standalone CLI, a Laravel
+# service provider) that are unreachable outside those specific contexts.
+Test/
+Testing/
+includes/Vendor/nesbot/carbon/src/Carbon/PHPStan/
+includes/Vendor/nesbot/carbon/src/Carbon/Cli/
+includes/Vendor/nesbot/carbon/src/Carbon/Laravel/
+includes/Vendor/nesbot/carbon/extension.neon
+
+# Changelogs from bundled dependencies (READMEs are already covered above).
+CHANGELOG.md
