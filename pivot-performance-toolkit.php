@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Pivot Performance Toolkit
- * Plugin URI: https://www.wpperformancetoolkit.com
+ * Plugin URI: https://www.pivotlabs.dev/
  * Description: Performance optimization toolkit for WordPress.
  * Version: 1.0.0
  * Requires at least: 6.5
