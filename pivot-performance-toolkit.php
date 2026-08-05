@@ -6,8 +6,8 @@
  * Version: 1.0.0
  * Requires at least: 6.5
  * Requires PHP: 8.2
- * Author: Digital Canvas
- * Author URI: https://www.digitalcanvas.com
+ * Author: Pivot Labs
+ * Author URI: https://www.pivotlabs.dev
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: pivot-performance-toolkit
