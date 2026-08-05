@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <x-card :title="__('HTTP/1.1 File Combination', 'pivot-performance-toolkit')" id="pivot-performance-toolkit-file-optimization-http11">
     <form method="post" action="{{ esc_url(admin_url('options.php')) }}">
         @php

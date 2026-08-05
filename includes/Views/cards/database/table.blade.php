@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <x-card :title="__('Table breakdown', 'pivot-performance-toolkit')">
     @php
         $show_overhead = (bool) ($show_overhead ?? false);

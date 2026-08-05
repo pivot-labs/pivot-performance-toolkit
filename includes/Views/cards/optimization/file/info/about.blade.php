@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <x-info-card :title="__('About File Optimization', 'pivot-performance-toolkit')">
     @php
         $benefits = array(

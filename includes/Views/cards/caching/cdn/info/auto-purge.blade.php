@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <x-info-card :title="__('How Auto-Purge Works', 'pivot-performance-toolkit')" id="pivot-performance-toolkit-cdn-about">
     <p>
         {{ __('When enabled, the CDN cache will be automatically cleared whenever the following content is updated:', 'pivot-performance-toolkit') }}

@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <x-admin-layout
     :icon-url="$icon_url"
     :version="$plugin_version"

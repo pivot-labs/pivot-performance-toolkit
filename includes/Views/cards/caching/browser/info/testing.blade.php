@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <x-info-card :title="__('Testing Your Configuration', 'pivot-performance-toolkit')" id="pivot-performance-toolkit-browser-cache">
     @php
         $testing_items = array(

@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <x-card :title="__('Cache', 'pivot-performance-toolkit')" id="pivot-performance-toolkit-cache">
     @if ($settings_updated)
         <div class="notice notice-success is-dismissible">

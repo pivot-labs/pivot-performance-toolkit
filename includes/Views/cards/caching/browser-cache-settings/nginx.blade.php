@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 
 <div role="tabpanel" aria-labelledby="pivot-performance-toolkit-tab-nginx" id="pivot-performance-toolkit-panel-nginx">
     <h3>{{ __('Nginx Configuration', 'pivot-performance-toolkit') }}</h3>

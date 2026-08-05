@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <div class="notice notice-error is-dismissible">
 	<p>
 		<strong>{{ esc_html__( 'Pivot Performance Toolkit – Drop-in Installation Failed', 'pivot-performance-toolkit' ) }}</strong>

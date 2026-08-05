@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 @props([
     'icon' => 'circle-check',
     'color' => 'blue',

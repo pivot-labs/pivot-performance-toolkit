@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <x-info-card :title="__('Why optimize your database?', 'pivot-performance-toolkit')">
     @php
         $benefits = array(

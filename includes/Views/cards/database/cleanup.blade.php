@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <x-card :title="__('Cleanup', 'pivot-performance-toolkit')">
     <p style="margin:0 0 16px;color:#646970">{{ __('Remove unnecessary data to keep your database lean and fast.', 'pivot-performance-toolkit') }}</p>
 

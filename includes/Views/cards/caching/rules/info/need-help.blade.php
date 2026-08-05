@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <x-info-card :title="__('Need Help', 'pivot-performance-toolkit')">
 	@php
 		$external_link_icon = \PivotPerformanceToolkit\Admin\LucideIcons::render('external-link');

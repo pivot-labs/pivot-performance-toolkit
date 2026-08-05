@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <x-card :title="__('Optimization Overview', 'pivot-performance-toolkit')" id="pivot-performance-toolkit-dashboard">
 	@if (empty($fs_status['writable']))
 		<div style="margin-bottom: 16px; padding: 12px; background-color: #fff3cd; border-left: 4px solid #ffc107;">

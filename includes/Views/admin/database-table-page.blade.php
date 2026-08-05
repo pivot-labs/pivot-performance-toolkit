@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <div class="pivot-performance-toolkit-col pivot-performance-toolkit-col--main">
     @include('cards.database.table', array(
         'table_stats' => $table_stats,

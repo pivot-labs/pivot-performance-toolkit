@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <div class="space-y-8">
     <x-card-standard
         :title="__('Reset Performance Profile', 'pivot-performance-toolkit')"

@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <div class="pivot-performance-toolkit-col pivot-performance-toolkit-col--main">
 	@include('cards.caching.page.cache')
 	@include('cards.caching.page.object-cache', array(

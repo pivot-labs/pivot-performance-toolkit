@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <x-card :title="__('Minification Exclusions', 'pivot-performance-toolkit')" id="pivot-performance-toolkit-file-optimization-exclusions">
 
     @php

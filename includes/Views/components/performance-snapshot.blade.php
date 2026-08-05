@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 @props([
 	'options' => array(),
 	'last_score' => 0,

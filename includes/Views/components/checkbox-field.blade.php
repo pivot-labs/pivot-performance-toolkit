@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 @props(['label' => '', 'name' => '', 'description' => '', 'checked' => false])
 
 <div class="pivot-performance-toolkit-field">

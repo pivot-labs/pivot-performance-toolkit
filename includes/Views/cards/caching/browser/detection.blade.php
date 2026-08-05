@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <x-card :title="__('Server Detection', 'pivot-performance-toolkit')" id="pivot-performance-toolkit-browser-cache-detection">
     @php
         $server_label = __('Apache', 'pivot-performance-toolkit');

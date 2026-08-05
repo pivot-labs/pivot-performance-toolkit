@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <div class="pivot-performance-toolkit-col pivot-performance-toolkit-col--main">
     @if ($settings_notice !== '' && $settings_message !== '')
         <div class="notice {{ $settings_notice === 'success' ? 'notice-success' : 'notice-error' }} is-dismissible">

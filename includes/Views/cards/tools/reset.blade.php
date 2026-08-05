@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <x-card-standard
         :title="__('Reset to Safe Defaults', 'pivot-performance-toolkit')"
         :description="__('Restore the plugin to a safe baseline when you want to roll back aggressive optimization changes or start a fresh round of testing.', 'pivot-performance-toolkit')"

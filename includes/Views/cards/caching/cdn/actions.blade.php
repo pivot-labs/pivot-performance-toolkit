@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <x-card :title="__('CDN Actions', 'pivot-performance-toolkit')" id="pivot-performance-toolkit-cdn-actions">
     @php
         ob_start();

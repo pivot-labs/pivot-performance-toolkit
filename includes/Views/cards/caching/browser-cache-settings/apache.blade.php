@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <div role="tabpanel" aria-labelledby="pivot-performance-toolkit-tab-htaccess" id="pivot-performance-toolkit-panel-htaccess">
     <h3>{{ __('Apache .htaccess Configuration', 'pivot-performance-toolkit') }}</h3>
     <p>{{ __('Add this to your .htaccess file in the WordPress root directory. Most shared hosting uses Apache.', 'pivot-performance-toolkit') }}</p>

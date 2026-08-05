@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <x-info-card :title="__('Best Practices for Exclusions', 'pivot-performance-toolkit')">
 	<x-list :items="[
 		__('Exclude cart, checkout, and account pages', 'pivot-performance-toolkit'),

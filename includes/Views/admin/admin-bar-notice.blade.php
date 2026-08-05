@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 @if ($cache_purged)
     <div class="notice notice-success is-dismissible">
         <p>{{ __('Pivot Performance Toolkit cache was purged.', 'pivot-performance-toolkit') }}</p>

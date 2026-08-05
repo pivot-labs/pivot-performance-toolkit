@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 @include('cards.overview.optimization-overview')
 
 @include('cards.overview.performance-test', array(

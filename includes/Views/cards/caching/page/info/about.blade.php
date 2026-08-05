@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <x-info-card :title="__('About Page Cache', 'pivot-performance-toolkit')" class="pivot-performance-toolkit-object-cache-card">
     @php
         $benefits = array(

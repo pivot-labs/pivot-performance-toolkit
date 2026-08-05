@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <x-card :title="__('Database overview', 'pivot-performance-toolkit')">
     <div class="pivot-performance-toolkit-db-stats">
         <div class="pivot-performance-toolkit-stat">

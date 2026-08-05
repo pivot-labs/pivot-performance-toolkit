@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <x-card-standard
     :title="__('Website Profile', 'pivot-performance-toolkit')"
     :description="__('Choose the profile that best matches your site so upcoming presets and recommendations can align with your use case.', 'pivot-performance-toolkit')"

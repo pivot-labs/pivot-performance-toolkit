@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 {{-- Minified CSS/JS cache --}}
 <x-card-split
         :title="__('Minified CSS/JS Cache', 'pivot-performance-toolkit')"

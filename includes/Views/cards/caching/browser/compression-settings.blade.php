@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <x-card :title="__('Browser Cache & Compression Settings', 'pivot-performance-toolkit')" id="pivot-performance-toolkit-browser-cache">
 
     @php

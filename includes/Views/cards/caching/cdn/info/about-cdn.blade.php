@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <x-info-card :title="__('About CDN', 'pivot-performance-toolkit')" id="pivot-performance-toolkit-cdn-about">
     <p>
         {{ __('A CDN delivers your website\'s static files (CSS, JS, images, etc.) from global servers closer to your visitors for faster load times.', 'pivot-performance-toolkit') }}

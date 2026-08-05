@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <x-card :title="__('System Status', 'pivot-performance-toolkit')" id="pivot-performance-toolkit-system-status">
 
     @if (!$fs_writable)

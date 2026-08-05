@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <x-card :title="__('Object Cache', 'pivot-performance-toolkit')" class="pivot-performance-toolkit-object-cache-card" id="pivot-performance-toolkit-object-cache-card">
 
 	<?php

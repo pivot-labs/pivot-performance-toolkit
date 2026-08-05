@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <x-card-standard
     :title="__('Uninstall Cleanup Policy', 'pivot-performance-toolkit')"
     :description="__('Choose whether plugin settings and cache data should be removed when the plugin is deleted from WordPress.', 'pivot-performance-toolkit')"

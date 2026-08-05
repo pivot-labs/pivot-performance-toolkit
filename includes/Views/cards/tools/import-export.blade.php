@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 
 <x-card-sectioned-split
         :title="__('Export / Import Configuration', 'pivot-performance-toolkit')"

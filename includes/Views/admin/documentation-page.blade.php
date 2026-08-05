@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <x-card :title="__('Documentation', 'pivot-performance-toolkit')" id="pivot-performance-toolkit-documentation">
     <p>{{ __('Full guides, setup instructions, and troubleshooting are available in the external documentation site.', 'pivot-performance-toolkit') }}</p>
     <p>

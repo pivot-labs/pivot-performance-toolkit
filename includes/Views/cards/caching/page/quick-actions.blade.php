@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <x-card :title="__('Quick Actions', 'pivot-performance-toolkit')" id="pivot-performance-toolkit-cache-quick-actions">
 	<div class="pivot-performance-toolkit-action-list">
 		<button

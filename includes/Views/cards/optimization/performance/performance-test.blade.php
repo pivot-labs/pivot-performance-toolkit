@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <x-performance-snapshot
     :options="$options"
     :last_score="(int) ($last_score ?? 0)"

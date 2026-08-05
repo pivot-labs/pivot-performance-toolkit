@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <x-card :title="__('Browser Cache Test', 'pivot-performance-toolkit')" id="pivot-performance-toolkit-browser-cache-test">
     <p>
         {{ __('Browser caching stores static assets locally to improve repeat visitor performance and reduce server load.', 'pivot-performance-toolkit') }}

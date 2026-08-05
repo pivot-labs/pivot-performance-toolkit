@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <div class="pivot-performance-toolkit-col pivot-performance-toolkit-col--main col-span-full">
 	@if ($settings_updated && !isset($_GET['pivot_performance_toolkit_notice']))
 		<div class="notice notice-success is-dismissible">

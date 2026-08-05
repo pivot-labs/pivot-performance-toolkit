@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <x-info-card :title="__('Cache-Busting Strategy', 'pivot-performance-toolkit')">
 	<p>
 		{{ __('With 1-year browser cache on versioned assets (like style.css?v=123), you need a way to invalidate old versions when you update. WordPress theme/plugin versioning handles this automatically through query strings.', 'pivot-performance-toolkit') }}

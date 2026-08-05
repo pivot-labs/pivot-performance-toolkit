@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <x-card :title="__('Media Optimization', 'pivot-performance-toolkit')" id="pivot-performance-toolkit-media-optimization">
     @if ($settings_updated)
         <div class="notice notice-success is-dismissible">

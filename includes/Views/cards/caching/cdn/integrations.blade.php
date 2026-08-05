@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <x-card :title="__('CDN & Integrations', 'pivot-performance-toolkit')" id="pivot-performance-toolkit-cdn-integrations">
     @if ($settings_updated)
         <div class="notice notice-success is-dismissible">
