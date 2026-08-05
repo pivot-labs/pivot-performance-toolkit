@@ -12,6 +12,7 @@ vendor/bin/
 
 # VCS and local metadata.
 .git/
+.github/
 .gitignore
 .gitmodules
 .DS_Store
