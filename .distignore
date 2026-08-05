@@ -51,3 +51,9 @@ README.md
 
 # Local cache/artifacts.
 wp-cache/
+
+# WordPress.org disallows hidden files anywhere in a submitted package.
+# Bundled third-party dependencies (e.g. includes/Vendor/**) ship their own
+# dotfiles (.editorconfig, .phpstorm.meta.php, .deepsource.toml, etc.); this
+# catches those and any other hidden file, not just the specific names above.
+.*
