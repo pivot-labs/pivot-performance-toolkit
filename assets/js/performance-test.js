@@ -41,6 +41,10 @@
         return root ? root.querySelector(selector) : null;
     }
 
+    function byAllSelector(root, selector) {
+        return root ? root.querySelectorAll(selector) : [];
+    }
+
     function setStatus(el, text, isError) {
         if (!el) {
             return;
@@ -64,31 +68,27 @@
     }
 
     function setMetric(container, key, value) {
-        var target = bySelector(container, '[data-pivot-performance-toolkit-metric="' + key + '"]');
+        var targets = byAllSelector(container, '[data-pivot-performance-toolkit-metric="' + key + '"]');
 
-        if (!target) {
-            return;
-        }
-
-        target.textContent = value;
+        targets.forEach(function (target) {
+            target.textContent = value;
+        });
     }
 
     function setCacheHitMetricTone(container, value) {
-        var target = bySelector(container, '[data-pivot-performance-toolkit-metric="page_cache_hit"]');
+        var targets = byAllSelector(container, '[data-pivot-performance-toolkit-metric="page_cache_hit"]');
         var n = Number(value);
 
-        if (!target) {
-            return;
-        }
+        targets.forEach(function (target) {
+            target.classList.remove('text-emerald-600', 'text-red-600', 'text-gray-500');
 
-        target.classList.remove('text-emerald-600', 'text-red-600', 'text-gray-500');
+            if (!Number.isFinite(n)) {
+                target.classList.add('text-gray-500');
+                return;
+            }
 
-        if (!Number.isFinite(n)) {
-            target.classList.add('text-gray-500');
-            return;
-        }
-
-        target.classList.add(n > 0 ? 'text-emerald-600' : 'text-red-600');
+            target.classList.add(n > 0 ? 'text-emerald-600' : 'text-red-600');
+        });
     }
 
     function setCacheHitMessage(container, value) {
@@ -370,18 +370,16 @@
     }
 
     function setMetricStatus(container, key, value) {
-        var target = bySelector(container, '[data-pivot-performance-toolkit-metric-status="' + key + '"]');
+        var targets = byAllSelector(container, '[data-pivot-performance-toolkit-metric-status="' + key + '"]');
 
-        if (!target) {
-            return;
-        }
+        targets.forEach(function (target) {
+            if (key === 'page_cache_hit') {
+                target.replaceChildren(renderCacheStatusIcon(value));
+                return;
+            }
 
-        if (key === 'page_cache_hit') {
-            target.replaceChildren(renderCacheStatusIcon(value));
-            return;
-        }
-
-        target.replaceChildren(renderStatusPill(value));
+            target.replaceChildren(renderStatusPill(value));
+        });
     }
 
     function getScoreWeights(cfg) {
@@ -736,6 +734,11 @@
         });
     }
 
+    function withQueryParam(url, key, value) {
+        var separator = url.indexOf('?') === -1 ? '?' : '&';
+        return url + separator + encodeURIComponent(key) + '=' + encodeURIComponent(value);
+    }
+
     function request(url, method, body, nonce) {
         var options = {
             method: method,
@@ -880,7 +883,7 @@
                     var timeoutMs = Number(cfg.timeoutMs || 45000);
 
                     var timer = window.setInterval(function () {
-                        request(cfg.restRoot + 'result?token=' + encodeURIComponent(token), 'GET', null, cfg.nonce)
+                        request(withQueryParam(cfg.restRoot + 'result', 'token', token), 'GET', null, cfg.nonce)
                             .then(function (resultPayload) {
                                 if (resultPayload && resultPayload.status === 'complete') {
                                     window.clearInterval(timer);

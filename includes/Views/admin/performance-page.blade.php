@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     @include('cards.optimization.performance.performance-test', array(
         'options' => $options,
         'last_score' => $last_score,
+        'has_result' => $has_result,
     ))
 </div>
 

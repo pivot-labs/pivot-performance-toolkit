@@ -50,13 +50,15 @@ final class DashboardPage extends BladeAdminPage {
 	 */
 	protected function buildViewData(): array {
 		$last_result = get_option( 'pivot_performance_toolkit_last_performance_result', array() );
-		$last_score  = PerformanceTest::calculateOverallScoreFromResult( is_array( $last_result ) ? $last_result : array() );
+		$last_result = is_array( $last_result ) ? $last_result : array();
+		$last_score  = PerformanceTest::calculateOverallScoreFromResult( $last_result );
 
 		return array(
 			'options'                  => $this->settings->all(),
 			'fs_status'                => FilesystemCheck::getCachedStatus(),
 			'performance_test_options' => PerformanceTest::getTestableContentOptions(),
 			'last_score'               => $last_score,
+			'has_result'               => PerformanceTest::hasStoredResult( $last_result ),
 		);
 	}
 }

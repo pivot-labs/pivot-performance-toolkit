@@ -54,13 +54,15 @@ final class PerformanceTest implements ModuleInterface {
 
 	public function renderPerformanceTestCard(): void {
 		$last_result = get_option( self::LAST_RESULT_OPTION, array() );
-		$last_score  = self::calculateOverallScoreFromResult( is_array( $last_result ) ? $last_result : array() );
+		$last_result = is_array( $last_result ) ? $last_result : array();
+		$last_score  = self::calculateOverallScoreFromResult( $last_result );
 
 		echo BladeEngine::view(
 			'cards.optimization.performance.performance-test',
 			array(
 				'options'    => self::getTestableContentOptions(),
 				'last_score' => $last_score,
+				'has_result' => self::hasStoredResult( $last_result ),
 			)
 		);
 	}
@@ -74,7 +76,7 @@ final class PerformanceTest implements ModuleInterface {
 
 		wp_enqueue_script(
 			'pivot-performance-toolkit-performance-test',
-			PIVOT_PERFORMANCE_TOOLKIT_URL . 'src/js/performance-test.js',
+			PIVOT_PERFORMANCE_TOOLKIT_URL . 'assets/js/performance-test.js',
 			array(),
 			PIVOT_PERFORMANCE_TOOLKIT_VERSION,
 			true
@@ -416,6 +418,13 @@ final class PerformanceTest implements ModuleInterface {
 		}
 
 		return (string) remove_query_arg( array( 'pivot_performance_toolkit_perf_probe', 'pivot_performance_toolkit_perf_token' ), $sanitized );
+	}
+
+	/**
+	 * @param array<string,mixed> $result
+	 */
+	public static function hasStoredResult( array $result ): bool {
+		return isset( $result['metrics'] ) && is_array( $result['metrics'] ) && array() !== $result['metrics'];
 	}
 
 	/**

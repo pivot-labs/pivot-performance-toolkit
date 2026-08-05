@@ -6,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 @props([
 	'options' => array(),
 	'last_score' => 0,
+	'has_result' => false,
 	'show_table' => true,
 	'show_open_full_test' => false,
 ])
@@ -44,7 +45,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<div class="rounded-lg border border-gray-200 bg-white p-3">
 				<div class="grid items-center gap-3 lg:grid-cols-[225px_minmax(0,1fr)]">
 					<div class="flex justify-center">
-					<x-score-donut :score="(int) $last_score" size="225" data-pivot-performance-toolkit-score-donut />
+					<x-score-donut :score="(int) $last_score" :has_score="(bool) $has_result" size="225" data-pivot-performance-toolkit-score-donut />
 					</div>
 					<div class="flex flex-col gap-4">
 						<div>
