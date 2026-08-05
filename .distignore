@@ -57,3 +57,9 @@ wp-cache/
 # dotfiles (.editorconfig, .phpstorm.meta.php, .deepsource.toml, etc.); this
 # catches those and any other hidden file, not just the specific names above.
 .*
+
+# Carbon's full locale/translation data set (800+ files, ~3.4MB). This plugin
+# never calls Carbon's localization APIs (no setLocale/diffForHumans usage),
+# so it's unused dead weight — and it ships a handful of "@variant" filenames
+# (e.g. be_BY@latin.php) that WordPress.org's plugin checker rejects.
+includes/Vendor/nesbot/carbon/src/Carbon/Lang/
