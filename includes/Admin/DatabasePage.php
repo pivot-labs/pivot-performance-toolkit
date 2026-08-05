@@ -208,9 +208,9 @@ final class DatabasePage extends BladeAdminPage {
 		wp_safe_redirect(
 			add_query_arg(
 				array(
-					'page'        => 'pivot-performance-toolkit',
-					'section'     => 'database',
-					'tab'         => 'pivot-performance-toolkit-database',
+					'page'                              => 'pivot-performance-toolkit',
+					'section'                           => 'database',
+					'tab'                               => 'pivot-performance-toolkit-database',
 					'pivot_performance_toolkit_cleaned' => $task,
 					'pivot_performance_toolkit_count'   => $count,
 				),
