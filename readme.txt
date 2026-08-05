@@ -119,7 +119,7 @@ This regenerates the `dist/` directory from the source files in `src/css/` and `
 
 == Upgrade Notice ==
 
-= 0.1.0 =
+= 1.0.0 =
 
 Initial release.
 
