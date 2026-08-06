@@ -10,6 +10,10 @@
  */
 
 namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Catalogue\AbstractOperation;
 use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Catalogue\TargetOperation;

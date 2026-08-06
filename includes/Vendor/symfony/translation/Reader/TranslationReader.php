@@ -10,6 +10,10 @@
  */
 
 namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Reader;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use PivotPerformanceToolkit\Vendor\Symfony\Component\Finder\Finder;
 use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Loader\LoaderInterface;

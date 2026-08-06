@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Mail\Mailable;
 use Illuminate\Mail\PendingMail;

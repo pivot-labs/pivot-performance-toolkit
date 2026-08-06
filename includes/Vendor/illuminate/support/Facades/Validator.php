@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 /**
  * @method static \Illuminate\Validation\Validator make(array $data, array $rules, array $messages = [], array $attributes = [])

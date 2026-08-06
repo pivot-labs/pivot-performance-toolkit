@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 if (! function_exists('PivotPerformanceToolkit\Vendor\Illuminate\Support\enum_value')) {
     /**

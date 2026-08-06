@@ -12,6 +12,10 @@ declare(strict_types=1);
  */
 
 namespace PivotPerformanceToolkit\Vendor\Carbon\Exceptions;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 interface BadMethodCallException extends Exception
 {

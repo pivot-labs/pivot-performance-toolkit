@@ -47,8 +47,10 @@ final class DatabaseTablePage extends BladeAdminPage {
 	 * @return array<string, mixed>
 	 */
 	protected function buildViewData(): array {
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- read-only table-sort query args, not a state-changing action; both are sanitized via sanitize_key() and validated against a hardcoded whitelist below.
 		$sort_by  = isset( $_GET['sort'] ) ? sanitize_key( (string) wp_unslash( $_GET['sort'] ) ) : 'size';
 		$sort_dir = isset( $_GET['sort_dir'] ) ? sanitize_key( (string) wp_unslash( $_GET['sort_dir'] ) ) : 'desc';
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended
 
 		if ( ! in_array( $sort_by, array( 'name', 'engine', 'rows', 'size' ), true ) ) {
 			$sort_by = 'size';

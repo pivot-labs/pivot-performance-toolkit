@@ -12,6 +12,10 @@ declare(strict_types=1);
  */
 
 namespace PivotPerformanceToolkit\Vendor\Carbon\Traits;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\InvalidFormatException;
 use PivotPerformanceToolkit\Vendor\Carbon\FactoryImmutable;

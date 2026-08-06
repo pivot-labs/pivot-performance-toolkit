@@ -46,6 +46,7 @@ final class FilesystemNotices implements ModuleInterface {
 
 		delete_transient( self::DROPIN_INSTALL_NOTICE_TRANSIENT );
 
+		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped -- BladeEngine::view() returns HTML already escaped by Blade's {{ }} at render time; re-escaping here would break the markup.
 		echo BladeEngine::view(
 			'admin.dropin-install-notice',
 			array(
@@ -54,6 +55,7 @@ final class FilesystemNotices implements ModuleInterface {
 				'dest'   => $dest,
 			)
 		);
+		// phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 	public function displayDeactivateCleanupNotice(): void {
@@ -86,6 +88,7 @@ final class FilesystemNotices implements ModuleInterface {
 
 		delete_transient( self::DEACTIVATE_CLEANUP_NOTICE_TRANSIENT );
 
+		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped -- BladeEngine::view() returns HTML already escaped by Blade's {{ }} at render time; re-escaping here would break the markup.
 		echo BladeEngine::view(
 			'admin.deactivate-cleanup-notice',
 			array(
@@ -94,6 +97,7 @@ final class FilesystemNotices implements ModuleInterface {
 				'config_file' => $config_file,
 			)
 		);
+		// phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 	public function displayWpConfigNotice(): void {
@@ -115,12 +119,14 @@ final class FilesystemNotices implements ModuleInterface {
 
 		delete_transient( self::WP_CONFIG_NOTICE_TRANSIENT );
 
+		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped -- BladeEngine::view() returns HTML already escaped by Blade's {{ }} at render time; re-escaping here would break the markup.
 		echo BladeEngine::view(
 			'admin.wp-config-notice',
 			array(
 				'message' => $message,
 			)
 		);
+		// phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 	public function displayFilesystemNotice(): void {
@@ -158,7 +164,15 @@ final class FilesystemNotices implements ModuleInterface {
 				printf(
 					/* translators: %s: link to system status page */
 					wp_kses_post( __( 'For more details, visit the <a href="%s">System Status page</a>.', 'pivot-performance-toolkit' ) ),
-					esc_url( add_query_arg( 'page', 'pivot-performance-toolkit-system-status', admin_url( 'admin.php' ) ) )
+					esc_url(
+						add_query_arg(
+							array(
+								'page'    => 'pivot-performance-toolkit',
+								'section' => 'system',
+							),
+							admin_url( 'admin.php' )
+						)
+					)
 				);
 				?>
 			</p>

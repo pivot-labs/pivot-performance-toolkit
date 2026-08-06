@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use PivotPerformanceToolkit\Vendor\Illuminate\Support\Arr;
 use PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection;
 

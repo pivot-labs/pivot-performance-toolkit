@@ -10,6 +10,10 @@
  */
 
 namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Clock;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 /**
  * A clock that relies the system time.

@@ -51,12 +51,6 @@ function pivot_performance_toolkit_has_pro(): bool {
 add_action(
 	'plugins_loaded',
 	static function (): void {
-		load_plugin_textdomain(
-			'pivot-performance-toolkit',
-			false,
-			dirname( plugin_basename( __FILE__ ) ) . '/languages/'
-		);
-
 		if ( is_multisite() ) {
 			$render_multisite_notice = static function (): void {
 				if ( ! current_user_can( 'manage_options' ) ) {

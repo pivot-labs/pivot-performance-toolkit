@@ -10,6 +10,10 @@
  */
 
 namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Loader;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 /**
  * IniFileLoader loads translations from an ini file.

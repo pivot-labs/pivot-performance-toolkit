@@ -1,6 +1,10 @@
 <?php
 
 declare(strict_types=1);
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 /**
  * This file is part of the Carbon package.

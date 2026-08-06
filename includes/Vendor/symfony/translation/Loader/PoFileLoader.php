@@ -10,6 +10,10 @@
  */
 
 namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Loader;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 /**
  * @copyright Copyright (c) 2010, Union of RAD https://github.com/UnionOfRAD/lithium

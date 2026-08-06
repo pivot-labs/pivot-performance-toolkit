@@ -3,6 +3,10 @@
 declare(strict_types=1);
 
 namespace PivotPerformanceToolkit\Vendor\Psr\Container;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 /**
  * Describes the interface of a container that exposes methods to read its entries.

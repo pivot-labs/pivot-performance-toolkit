@@ -10,6 +10,10 @@
  */
 
 namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Finder\Iterator;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use PivotPerformanceToolkit\Vendor\Symfony\Component\Finder\Comparator\NumberComparator;
 

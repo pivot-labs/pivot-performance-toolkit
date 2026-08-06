@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Routing;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 /**
  * @method string query(string $path, array $query = [], mixed $extra = [], bool|null $secure = null)

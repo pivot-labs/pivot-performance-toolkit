@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Redis;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 interface Connector
 {

@@ -97,6 +97,7 @@ if ( ! is_file( $ptk_file ) ) {
 
 // Expire stale files.
 if ( ( (int) filemtime( $ptk_file ) + $ptk_ttl ) < time() ) {
+	// phpcs:ignore WordPress.WP.AlternativeFunctions.unlink_unlink -- this drop-in is included before wp-includes/functions.php loads (see wp-settings.php), so wp_delete_file() is not yet defined at this point in the request.
 	@unlink( $ptk_file );
 	return;
 }
@@ -139,5 +140,6 @@ if ( $ptk_is_probe ) {
 	}
 }
 
+// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_readfile -- this drop-in is included before wp-includes/functions.php loads (see wp-settings.php), so WP_Filesystem is not yet available; readfile() also streams the cached page directly rather than buffering it in memory, which matters for large pages.
 readfile( $ptk_file );
 exit;

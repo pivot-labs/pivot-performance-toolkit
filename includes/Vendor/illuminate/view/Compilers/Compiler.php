@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use ErrorException;
 use PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\Filesystem;

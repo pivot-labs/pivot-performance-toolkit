@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\View;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use Closure;
 use PivotPerformanceToolkit\Vendor\Illuminate\Container\Container;

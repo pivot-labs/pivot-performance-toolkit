@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use BackedEnum;
 use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\DeferringDisplayableValue;

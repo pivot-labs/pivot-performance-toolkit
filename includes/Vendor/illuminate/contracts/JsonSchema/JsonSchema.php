@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\JsonSchema;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use Closure;
 

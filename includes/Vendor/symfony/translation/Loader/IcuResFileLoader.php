@@ -10,6 +10,10 @@
  */
 
 namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Loader;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use Symfony\Component\Config\Resource\DirectoryResource;
 use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Exception\InvalidResourceException;

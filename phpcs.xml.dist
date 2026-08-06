@@ -68,5 +68,18 @@
     <rule ref="Universal.Operators.DisallowShortTernary">
         <severity>0</severity>
     </rule>
+
+    <!--
+        WordPress-Core doesn't pull in the EscapeOutput sniff (it lives in
+        WordPress-Extra), but WordPress.org's Plugin Check does enforce it —
+        so we opt in explicitly to catch what PCP catches, rather than only
+        finding out after a submission scan.
+
+        `echo BladeEngine::view(...)` call sites are individually suppressed
+        inline (phpcs:ignore) rather than via customAutoEscapedFunctions:
+        that property only recognizes bare function_name() calls, not
+        Class::method() static calls, so it can't whitelist this pattern.
+    -->
+    <rule ref="WordPress.Security.EscapeOutput" />
 </ruleset>
 

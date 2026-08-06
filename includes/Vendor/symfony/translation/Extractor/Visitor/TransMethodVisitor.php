@@ -10,6 +10,10 @@
  */
 
 namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Extractor\Visitor;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use PhpParser\Node;
 use PhpParser\NodeVisitor;

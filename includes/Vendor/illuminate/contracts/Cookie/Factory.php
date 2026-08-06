@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Cookie;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 interface Factory
 {

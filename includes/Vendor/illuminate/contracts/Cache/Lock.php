@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Cache;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 interface Lock
 {

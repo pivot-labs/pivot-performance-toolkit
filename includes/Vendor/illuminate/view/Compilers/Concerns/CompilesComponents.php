@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\CanBeEscapedWhenCastToString;
 use PivotPerformanceToolkit\Vendor\Illuminate\Support\Str;

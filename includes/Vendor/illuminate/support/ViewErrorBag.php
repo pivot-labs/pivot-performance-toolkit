@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use Countable;
 use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\MessageBag as MessageBagContract;

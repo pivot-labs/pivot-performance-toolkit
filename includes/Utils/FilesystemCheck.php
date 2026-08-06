@@ -68,6 +68,7 @@ final class FilesystemCheck {
 			}
 		}
 
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_is_writable -- pre-flight check backing this plugin's own direct-PHP cache writes (not WP_Filesystem); initializing WP_Filesystem here could trigger its credentials prompt on what's meant to be a silent status check.
 		return is_writable( $dir_path );
 	}
 
@@ -112,6 +113,7 @@ final class FilesystemCheck {
 	 * @return bool True if write test succeeds
 	 */
 	public static function testWrite( string $dir_path ): bool {
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_is_writable -- pre-flight check for the direct-PHP file_put_contents() write test below (not WP_Filesystem); initializing WP_Filesystem here could trigger its credentials prompt on what's meant to be a silent status check.
 		if ( ! is_dir( $dir_path ) || ! is_writable( $dir_path ) ) {
 			return false;
 		}
@@ -121,7 +123,7 @@ final class FilesystemCheck {
 			$result = file_put_contents( $test_file, 'test' );
 
 		if ( false !== $result ) {
-			@unlink( $test_file );
+			wp_delete_file( $test_file );
 			return true;
 		}
 

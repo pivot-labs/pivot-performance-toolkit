@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Database\Eloquent;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 interface Castable
 {

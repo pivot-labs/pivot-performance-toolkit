@@ -10,6 +10,10 @@
  */
 
 namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Exception;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Bridge;
 use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Provider\Dsn;

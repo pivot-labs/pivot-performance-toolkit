@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Bus;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use Aws\DynamoDb\DynamoDbClient;
 use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Bus\Dispatcher as DispatcherContract;

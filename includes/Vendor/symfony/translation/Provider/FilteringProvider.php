@@ -10,6 +10,10 @@
  */
 
 namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Provider;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\TranslatorBag;
 use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\TranslatorBagInterface;

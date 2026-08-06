@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Process;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use Symfony\Component\Process\ExecutableFinder;
 use Symfony\Component\Process\PhpExecutableFinder as SymfonyPhpExecutableFinder;

@@ -3,6 +3,10 @@
 declare(strict_types=1);
 
 namespace PivotPerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Italian;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use PivotPerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Patterns;
 use PivotPerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Ruleset;

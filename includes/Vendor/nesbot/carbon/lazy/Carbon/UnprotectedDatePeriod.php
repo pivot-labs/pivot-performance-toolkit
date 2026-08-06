@@ -10,6 +10,10 @@
  */
 
 namespace PivotPerformanceToolkit\Vendor\Carbon;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use DatePeriod;
 

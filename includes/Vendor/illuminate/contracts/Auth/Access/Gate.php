@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Auth\Access;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 interface Gate
 {

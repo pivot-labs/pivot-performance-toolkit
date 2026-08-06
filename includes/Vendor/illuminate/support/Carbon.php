@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use PivotPerformanceToolkit\Vendor\Carbon\Carbon as BaseCarbon;
 use PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable as BaseCarbonImmutable;

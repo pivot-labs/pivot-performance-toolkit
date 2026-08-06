@@ -69,7 +69,8 @@ final class CachePage extends BladeAdminPage {
 	 * @return array<string, mixed>
 	 */
 	protected function buildViewData(): array {
-		$options          = $this->settings->all();
+		$options = $this->settings->all();
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only "was this just saved" display flag from WordPress core's own settings-updated redirect param, not a state-changing action.
 		$settings_updated = isset( $_GET['settings-updated'] ) && (string) wp_unslash( $_GET['settings-updated'] ) === 'true';
 		$cache_cleared    = (bool) get_transient( 'pivot_performance_toolkit_cache_cleared' );
 
@@ -137,7 +138,7 @@ final class CachePage extends BladeAdminPage {
 
 	public function handleClearCache(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( __( 'Unauthorized', 'pivot-performance-toolkit' ) );
+			wp_die( esc_html__( 'Unauthorized', 'pivot-performance-toolkit' ) );
 		}
 
 		check_admin_referer( 'pivot_performance_toolkit_clear_cache' );
@@ -155,7 +156,7 @@ final class CachePage extends BladeAdminPage {
 
 	public function handleClearMinifiedCache(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( __( 'Unauthorized', 'pivot-performance-toolkit' ) );
+			wp_die( esc_html__( 'Unauthorized', 'pivot-performance-toolkit' ) );
 		}
 
 		check_admin_referer( 'pivot_performance_toolkit_clear_minified_cache' );
@@ -488,7 +489,7 @@ final class CachePage extends BladeAdminPage {
 		$cache_dir = WP_CONTENT_DIR . '/cache/pivot-performance-toolkit';
 
 		foreach ( glob( $cache_dir . '/*.html' ) ?: array() as $file_path ) {
-			@unlink( $file_path );
+			wp_delete_file( $file_path );
 		}
 	}
 
@@ -507,11 +508,11 @@ final class CachePage extends BladeAdminPage {
 		$cache_dir = WP_CONTENT_DIR . '/cache/pivot-performance-toolkit/minified-assets';
 
 		foreach ( glob( $cache_dir . '/*.min.css' ) ?: array() as $file_path ) {
-			@unlink( $file_path );
+			wp_delete_file( $file_path );
 		}
 
 		foreach ( glob( $cache_dir . '/*.min.js' ) ?: array() as $file_path ) {
-			@unlink( $file_path );
+			wp_delete_file( $file_path );
 		}
 	}
 

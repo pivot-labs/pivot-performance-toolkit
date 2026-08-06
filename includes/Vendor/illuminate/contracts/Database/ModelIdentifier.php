@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Database;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 class ModelIdentifier
 {

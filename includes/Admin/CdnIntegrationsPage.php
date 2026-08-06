@@ -62,9 +62,11 @@ final class CdnIntegrationsPage extends BladeAdminPage {
 		return array(
 			'options'          => $this->settings->all(),
 			'option_key'       => $this->settings->optionKey(),
+			// phpcs:disable WordPress.Security.NonceVerification.Recommended -- these are read-only display values from this page's own post-redirect notice / WordPress core's settings-updated param, not a state-changing action.
 			'notice'           => isset( $_GET['pivot_performance_toolkit_cf_notice'] ) ? sanitize_key( wp_unslash( (string) $_GET['pivot_performance_toolkit_cf_notice'] ) ) : '',
 			'message'          => isset( $_GET['pivot_performance_toolkit_cf_message'] ) ? sanitize_text_field( wp_unslash( (string) $_GET['pivot_performance_toolkit_cf_message'] ) ) : '',
 			'settings_updated' => isset( $_GET['settings-updated'] ) && (string) wp_unslash( $_GET['settings-updated'] ) === 'true',
+			// phpcs:enable WordPress.Security.NonceVerification.Recommended
 			'test_action'      => self::TEST_ACTION,
 			'purge_action'     => self::PURGE_ACTION,
 			'test_nonce'       => wp_create_nonce( 'pivot_performance_toolkit_cloudflare_test' ),

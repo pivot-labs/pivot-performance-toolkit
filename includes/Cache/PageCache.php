@@ -104,7 +104,7 @@ final class PageCache implements ModuleInterface {
 		}
 
 		foreach ( glob( $this->cache_dir . '/*.html' ) ?: array() as $file_path ) {
-			@unlink( $file_path );
+			wp_delete_file( $file_path );
 		}
 	}
 

@@ -308,6 +308,7 @@ final class Assets implements ModuleInterface {
 				return null;
 			}
 
+			// phpcs:ignore PluginCheck.CodeAnalysis.WriteFile.PluginDirectoryWrite -- $target_path resolves under WP_CONTENT_DIR . '/cache/pivot-performance-toolkit/...', a sibling of wp-content/plugins/, not inside the plugin's own folder; it's untouched by plugin upgrades/reinstalls.
 			$written = file_put_contents( $target_path, $minified, LOCK_EX );
 
 			if ( false === $written ) {
@@ -349,6 +350,7 @@ final class Assets implements ModuleInterface {
 				return null;
 			}
 
+			// phpcs:ignore PluginCheck.CodeAnalysis.WriteFile.PluginDirectoryWrite -- $target_path resolves under WP_CONTENT_DIR . '/cache/pivot-performance-toolkit/...', a sibling of wp-content/plugins/, not inside the plugin's own folder; it's untouched by plugin upgrades/reinstalls.
 			$written = file_put_contents( $target_path, $minified, LOCK_EX );
 
 			if ( false === $written ) {

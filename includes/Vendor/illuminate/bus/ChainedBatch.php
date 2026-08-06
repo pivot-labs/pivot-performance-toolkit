@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Bus;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use PivotPerformanceToolkit\Vendor\Illuminate\Container\Container;
 use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Bus\Dispatcher;

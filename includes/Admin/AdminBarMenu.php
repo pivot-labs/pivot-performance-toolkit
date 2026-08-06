@@ -281,15 +281,15 @@ final class AdminBarMenu implements ModuleInterface {
 		check_admin_referer( 'pivot_performance_toolkit_adminbar_purge_all_cache' );
 
 		foreach ( glob( self::PAGE_CACHE_DIR . '/*.html' ) ?: array() as $file_path ) {
-			@unlink( $file_path );
+			wp_delete_file( $file_path );
 		}
 
 		foreach ( glob( self::MINIFIED_CACHE_DIR . '/*.min.css' ) ?: array() as $file_path ) {
-			@unlink( $file_path );
+			wp_delete_file( $file_path );
 		}
 
 		foreach ( glob( self::MINIFIED_CACHE_DIR . '/*.min.js' ) ?: array() as $file_path ) {
-			@unlink( $file_path );
+			wp_delete_file( $file_path );
 		}
 
 		$redirect = wp_get_referer();
@@ -319,7 +319,7 @@ final class AdminBarMenu implements ModuleInterface {
 		if ( '' !== $target_url ) {
 			$cache_file = $this->cacheFilePathFromUrl( $target_url );
 			if ( is_string( $cache_file ) && is_file( $cache_file ) ) {
-				@unlink( $cache_file );
+				wp_delete_file( $cache_file );
 			}
 		}
 
@@ -338,6 +338,7 @@ final class AdminBarMenu implements ModuleInterface {
 			return;
 		}
 
+		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped, WordPress.Security.NonceVerification.Recommended -- BladeEngine::view() returns HTML already escaped by Blade's {{ }} at render time; re-escaping here would break the markup. The $_GET values below are read-only post-redirect display flags (booleans, never echoed raw), not a state-changing action.
 		echo BladeEngine::view(
 			'admin.admin-bar-notice',
 			array(
@@ -345,5 +346,6 @@ final class AdminBarMenu implements ModuleInterface {
 				'page_cache_purged' => isset( $_GET['pivot_performance_toolkit_page_cache_purged'] ) && (string) '1' === wp_unslash( $_GET['pivot_performance_toolkit_page_cache_purged'] ),
 			)
 		);
+		// phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped, WordPress.Security.NonceVerification.Recommended
 	}
 }

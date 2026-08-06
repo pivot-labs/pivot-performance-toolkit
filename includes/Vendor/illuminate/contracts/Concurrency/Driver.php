@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Concurrency;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use Closure;
 use PivotPerformanceToolkit\Vendor\Illuminate\Support\Defer\DeferredCallback;

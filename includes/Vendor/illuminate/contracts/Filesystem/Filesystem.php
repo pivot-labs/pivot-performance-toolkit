@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Filesystem;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 interface Filesystem
 {

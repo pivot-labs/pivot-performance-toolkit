@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use PivotPerformanceToolkit\Vendor\Illuminate\Bus\BatchRepository;
 use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Bus\Dispatcher as BusDispatcherContract;

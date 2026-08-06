@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Filesystem;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use Illuminate\Http\Request;
 use PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades\Storage;

@@ -10,6 +10,10 @@
  */
 
 namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use Symfony\Component\HttpKernel\CacheWarmer\WarmableInterface;
 use Symfony\Contracts\Service\ResetInterface;

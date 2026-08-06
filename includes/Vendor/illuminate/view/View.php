@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\View;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use ArrayAccess;
 use BadMethodCallException;

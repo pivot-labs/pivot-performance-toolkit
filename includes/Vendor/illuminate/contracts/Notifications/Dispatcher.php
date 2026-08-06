@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Notifications;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 interface Dispatcher
 {

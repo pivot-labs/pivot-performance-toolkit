@@ -38,8 +38,10 @@ package-lock.json
 tailwind.config.js
 vite.config.js
 
-# Composer manifests are not required when shipping vendor.
-composer.json
+# composer.json documents what's declared/bundled in includes/Vendor and is
+# required by WordPress.org's Plugin Check (missing_composer_json_file) when
+# a plugin ships Composer-managed dependencies. composer.lock stays excluded —
+# it's a large generated file already tracked in the public GitHub repo.
 composer.lock
 
 # Project docs not used by WordPress runtime.

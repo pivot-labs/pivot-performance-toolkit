@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Filesystem;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use Aws\S3\S3Client;
 use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Conditionable;

@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use BackedEnum;
 use CachingIterator;

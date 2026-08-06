@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Bus;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 interface QueueingDispatcher extends Dispatcher
 {

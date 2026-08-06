@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Filesystem;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 if (! function_exists('PivotPerformanceToolkit\Vendor\Illuminate\Filesystem\join_paths')) {
     /**

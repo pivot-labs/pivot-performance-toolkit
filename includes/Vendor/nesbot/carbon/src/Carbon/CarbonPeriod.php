@@ -10,6 +10,10 @@ declare (strict_types=1);
  * file that was distributed with this source code.
  */
 namespace PivotPerformanceToolkit\Vendor\Carbon;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use PivotPerformanceToolkit\Vendor\Carbon\Constants\UnitValue;
 use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\EndLessPeriodException;

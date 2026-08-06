@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Support;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use ArrayIterator;
 use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\ValidatedData;

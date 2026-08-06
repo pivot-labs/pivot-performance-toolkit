@@ -3,6 +3,10 @@
 declare(strict_types=1);
 
 namespace PivotPerformanceToolkit\Vendor\Doctrine\Inflector\Rules;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 final class Substitution
 {

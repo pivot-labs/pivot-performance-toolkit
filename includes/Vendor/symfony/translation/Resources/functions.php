@@ -10,6 +10,10 @@
  */
 
 namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 if (!\function_exists(t::class)) {
     /**

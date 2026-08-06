@@ -12,6 +12,10 @@ declare(strict_types=1);
  */
 
 namespace PivotPerformanceToolkit\Vendor\Carbon\PHPStan;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterface;
 use PivotPerformanceToolkit\Vendor\Carbon\FactoryImmutable;

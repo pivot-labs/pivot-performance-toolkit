@@ -3,6 +3,10 @@
 declare(strict_types=1);
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Container\Attributes;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use Attribute;
 use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Container\Container;

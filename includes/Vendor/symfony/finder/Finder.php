@@ -9,6 +9,10 @@
  * file that was distributed with this source code.
  */
 namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Finder;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use PivotPerformanceToolkit\Vendor\Symfony\Component\Finder\Comparator\DateComparator;
 use PivotPerformanceToolkit\Vendor\Symfony\Component\Finder\Comparator\NumberComparator;

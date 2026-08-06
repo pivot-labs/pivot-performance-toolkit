@@ -10,6 +10,10 @@
  */
 
 namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Formatter;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\IdentityTranslator;
 use PivotPerformanceToolkit\Vendor\Symfony\Contracts\Translation\TranslatorInterface;

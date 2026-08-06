@@ -3,6 +3,10 @@
 declare(strict_types=1);
 
 namespace PivotPerformanceToolkit\Vendor\Carbon\Doctrine;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 

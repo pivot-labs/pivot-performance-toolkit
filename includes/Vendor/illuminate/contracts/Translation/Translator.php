@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Translation;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 interface Translator
 {

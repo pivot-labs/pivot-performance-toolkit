@@ -10,6 +10,10 @@
  */
 
 namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Clock;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 if (!\function_exists(now::class)) {
     /**

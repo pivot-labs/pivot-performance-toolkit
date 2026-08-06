@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Psr\Container;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use Throwable;
 

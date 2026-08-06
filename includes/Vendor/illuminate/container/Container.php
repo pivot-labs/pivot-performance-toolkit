@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Container;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use ArrayAccess;
 use Closure;

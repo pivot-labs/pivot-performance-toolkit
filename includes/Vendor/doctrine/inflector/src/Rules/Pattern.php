@@ -3,6 +3,10 @@
 declare(strict_types=1);
 
 namespace PivotPerformanceToolkit\Vendor\Doctrine\Inflector\Rules;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use function preg_match;
 

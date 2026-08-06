@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Foundation;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 interface CachesConfiguration
 {

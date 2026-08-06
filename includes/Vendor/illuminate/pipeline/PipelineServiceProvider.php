@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Pipeline;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Pipeline\Hub as PipelineHubContract;
 use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\DeferrableProvider;

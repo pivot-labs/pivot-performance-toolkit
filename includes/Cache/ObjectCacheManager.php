@@ -69,6 +69,7 @@ final class ObjectCacheManager {
 	 */
 	public function canInstall(): bool {
 		return ! $this->hasForeignDropin()
+			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_is_writable -- pre-flight check for a direct-PHP copy() elsewhere in this class (not WP_Filesystem), so drop-in install works silently on activation without a credentials prompt.
 			&& is_writable( WP_CONTENT_DIR )
 			&& file_exists( $this->dropin_source );
 	}
@@ -125,6 +126,7 @@ final class ObjectCacheManager {
 			);
 		}
 
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_is_writable -- pre-flight check for a direct-PHP copy() below (not WP_Filesystem), so drop-in install works silently on activation without a credentials prompt.
 		if ( ! is_writable( WP_CONTENT_DIR ) ) {
 			return array(
 				'ok'      => false,
@@ -160,7 +162,7 @@ final class ObjectCacheManager {
 			);
 		}
 
-		if ( ! unlink( $this->dropin_dest ) ) {
+		if ( ! wp_delete_file( $this->dropin_dest ) ) {
 			return array(
 				'ok'      => false,
 				'message' => __( 'Could not remove object-cache.php. Please check file permissions.', 'pivot-performance-toolkit' ),
@@ -222,7 +224,7 @@ final class ObjectCacheManager {
 		$count = 0;
 		foreach ( glob( $this->cache_dir . '/*', GLOB_ONLYDIR ) ?: array() as $group_dir ) {
 			foreach ( glob( $group_dir . '/*.php' ) ?: array() as $file ) {
-				if ( @unlink( $file ) ) {
+				if ( wp_delete_file( $file ) ) {
 					++$count;
 				}
 			}

@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Psr\SimpleCache;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 interface CacheInterface
 {

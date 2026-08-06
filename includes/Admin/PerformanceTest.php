@@ -57,6 +57,7 @@ final class PerformanceTest implements ModuleInterface {
 		$last_result = is_array( $last_result ) ? $last_result : array();
 		$last_score  = self::calculateOverallScoreFromResult( $last_result );
 
+		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped -- BladeEngine::view() returns HTML already escaped by Blade's {{ }} at render time; re-escaping here would break the markup.
 		echo BladeEngine::view(
 			'cards.optimization.performance.performance-test',
 			array(
@@ -65,6 +66,7 @@ final class PerformanceTest implements ModuleInterface {
 				'has_result' => self::hasStoredResult( $last_result ),
 			)
 		);
+		// phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 	public function enqueueAdminAssets( string $hook_suffix ): void {
@@ -252,7 +254,7 @@ final class PerformanceTest implements ModuleInterface {
 
 		echo "\n<script>\n";
 		echo '(function(){';
-		echo 'var collectUrl=' . $safe_url . ';';
+		echo 'var collectUrl=' . $safe_url . ';'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $safe_url is wp_json_encode() of an esc_url_raw() value, the correct way to safely embed a PHP string as a JS literal inside a <script> block.
 		echo 'function getToken(){var token="";try{token=String(window.name||"").trim();}catch(e){}if(token&&token.length>=20){return token;}try{var m=document.cookie.match(/(?:^|;\\s*)pivot_performance_toolkit_perf_probe=([^;]+)/);if(m){token=String(m[1]||"").trim();if(token.length>=20){return token;}}}catch(e){}return "";}';
 		echo 'var fcp=0;';
 		echo 'var lcp=0;';

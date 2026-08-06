@@ -3,6 +3,10 @@
 declare(strict_types=1);
 
 namespace PivotPerformanceToolkit\Vendor\Doctrine\Inflector;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 interface WordInflector
 {

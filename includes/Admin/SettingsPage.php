@@ -61,10 +61,12 @@ final class SettingsPage extends BladeAdminPage {
 	 * @return array<string, mixed>
 	 */
 	protected function buildViewData(): array {
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- these are read-only display values from this page's own post-redirect notice (already produced by a nonce-verified admin-post handler), not a new state-changing action.
 		$tools_notice     = isset( $_GET[ self::TOOLS_NOTICE_QUERY_KEY ] ) ? sanitize_key( (string) wp_unslash( $_GET[ self::TOOLS_NOTICE_QUERY_KEY ] ) ) : '';
 		$tools_message    = isset( $_GET[ self::TOOLS_MESSAGE_QUERY_KEY ] ) ? sanitize_text_field( (string) wp_unslash( $_GET[ self::TOOLS_MESSAGE_QUERY_KEY ] ) ) : '';
 		$settings_notice  = isset( $_GET[ self::SETTINGS_NOTICE_QUERY_KEY ] ) ? sanitize_key( (string) wp_unslash( $_GET[ self::SETTINGS_NOTICE_QUERY_KEY ] ) ) : '';
 		$settings_message = isset( $_GET[ self::SETTINGS_MESSAGE_QUERY_KEY ] ) ? sanitize_text_field( (string) wp_unslash( $_GET[ self::SETTINGS_MESSAGE_QUERY_KEY ] ) ) : '';
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended
 		$current_settings = $this->settings->all();
 		$recommendation   = ProfileDetector::detectRecommendation();
 

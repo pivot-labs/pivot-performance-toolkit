@@ -56,6 +56,7 @@ final class AdminShell {
 	 * @param AdminPageInterface[] $pages
 	 */
 	public static function render( array $pages ): void {
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- these are read-only navigation query args (which section/tab to display), not a state-changing action; both are sanitized via sanitize_key().
 		// Determine current section from query parameter, default to 'overview'
 		$current_section = isset( $_GET['section'] )
 			? sanitize_key( (string) wp_unslash( $_GET['section'] ) )
@@ -65,6 +66,7 @@ final class AdminShell {
 		$tab_override = isset( $_GET['tab'] )
 			? sanitize_key( (string) wp_unslash( $_GET['tab'] ) )
 			: '';
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended
 
 		if ( '' !== $tab_override && isset( $pages[ $tab_override ] ) ) {
 			$current_page_slug = $tab_override;
@@ -110,6 +112,7 @@ final class AdminShell {
 			$shell_data['content'] = (string) ob_get_clean();
 		}
 
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- BladeEngine::view() returns HTML already escaped by Blade's {{ }} at render time; re-escaping here would break the markup.
 		echo BladeEngine::view( 'admin.shell', $shell_data );
 	}
 

@@ -10,6 +10,10 @@
  */
 
 namespace PivotPerformanceToolkit\Vendor\Carbon;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 if (!class_exists(LazyTranslator::class, false)) {
     class LazyTranslator extends AbstractTranslator

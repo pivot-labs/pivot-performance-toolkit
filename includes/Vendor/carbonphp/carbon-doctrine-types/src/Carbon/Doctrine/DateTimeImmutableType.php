@@ -2,6 +2,10 @@
 
 declare (strict_types=1);
 namespace PivotPerformanceToolkit\Vendor\Carbon\Doctrine;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable;
 use DateTimeImmutable;

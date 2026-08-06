@@ -12,6 +12,10 @@ declare(strict_types=1);
  */
 
 namespace PivotPerformanceToolkit\Vendor\Carbon\Constants;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 interface TranslationOptions
 {

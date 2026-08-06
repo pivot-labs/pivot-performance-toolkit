@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Psr\Clock;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use DateTimeImmutable;
 

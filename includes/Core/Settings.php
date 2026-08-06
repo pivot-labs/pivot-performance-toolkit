@@ -125,7 +125,7 @@ final class Settings {
 			return sanitize_text_field( $value );
 		}
 
-		return trim( strip_tags( $value ) );
+		return trim( wp_strip_all_tags( $value ) );
 	}
 
 	private function sanitizeTextarea( string $value ): string {
@@ -133,7 +133,7 @@ final class Settings {
 			return sanitize_textarea_field( $value );
 		}
 
-		return trim( str_replace( "\r", '', strip_tags( $value ) ) );
+		return trim( str_replace( "\r", '', wp_strip_all_tags( $value ) ) );
 	}
 
 	private function sanitizeKey( string $value ): string {

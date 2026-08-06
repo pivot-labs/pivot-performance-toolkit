@@ -57,6 +57,7 @@ final class SystemStatusPage extends BladeAdminPage {
 	protected function buildViewData(): array {
 		global $wpdb;
 
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- live database-size status display; caching would show stale figures right after the admin runs a cleanup/optimize action.
 		$wpdb_row = $wpdb->get_row(
 			'SELECT SUM(data_length + index_length) AS db_size
              FROM information_schema.TABLES
@@ -327,7 +328,8 @@ final class SystemStatusPage extends BladeAdminPage {
 		);
 
 		// File upload capability
-		$uploads_dir      = wp_upload_dir();
+		$uploads_dir = wp_upload_dir();
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_is_writable -- read-only status display; initializing WP_Filesystem here could trigger its credentials prompt on a page meant to be a silent status check.
 		$uploads_writable = is_writable( $uploads_dir['basedir'] );
 		$config[]         = array(
 			'label' => __( 'Uploads Directory Writable', 'pivot-performance-toolkit' ),

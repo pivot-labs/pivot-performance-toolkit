@@ -40,6 +40,7 @@ if ( ! class_exists( 'WP_Object_Cache' ) ) {
 			$this->cache_dir = WP_CONTENT_DIR . '/cache/pivot-performance-toolkit/object-cache';
 
 			if ( ! is_dir( $this->cache_dir ) ) {
+				// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_mkdir -- this object-cache drop-in runs on every request type (frontend, AJAX, REST, cron), not just admin; WP_Filesystem lives in wp-admin/includes/file.php (not loaded here) and its init can itself prompt for credentials, which would be unsafe to trigger from a hot cache path.
 				@mkdir( $this->cache_dir, 0755, true );
 			}
 		}
@@ -147,12 +148,13 @@ if ( ! class_exists( 'WP_Object_Cache' ) ) {
 				return true;
 			}
 
-			return (bool) @unlink( $file );
+			return (bool) wp_delete_file( $file );
 		}
 
 		public function flush(): bool {
 			$this->cache = array();
 			$this->delete_dir( $this->cache_dir );
+			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_mkdir -- this object-cache drop-in runs on every request type (frontend, AJAX, REST, cron), not just admin; WP_Filesystem lives in wp-admin/includes/file.php (not loaded here) and its init can itself prompt for credentials, which would be unsafe to trigger from a hot cache path.
 			@mkdir( $this->cache_dir, 0755, true );
 			return true;
 		}
@@ -260,6 +262,7 @@ if ( ! class_exists( 'WP_Object_Cache' ) ) {
 		private function write_file( string $group, string $cache_key, $data, int $expire ): bool {
 			$group_dir = $this->cache_dir . '/' . $group;
 			if ( ! is_dir( $group_dir ) ) {
+				// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_mkdir -- this object-cache drop-in runs on every request type (frontend, AJAX, REST, cron), not just admin; WP_Filesystem lives in wp-admin/includes/file.php (not loaded here) and its init can itself prompt for credentials, which would be unsafe to trigger from a hot cache path.
 				@mkdir( $group_dir, 0755, true );
 			}
 
@@ -290,7 +293,7 @@ if ( ! class_exists( 'WP_Object_Cache' ) ) {
 
 			$expires_at = (int) ( $payload['e'] ?? 0 );
 			if ( $expires_at > 0 && $expires_at < time() ) {
-				@unlink( $file );
+				wp_delete_file( $file );
 				return false;
 			}
 
@@ -307,10 +310,11 @@ if ( ! class_exists( 'WP_Object_Cache' ) ) {
 				if ( is_dir( $item ) ) {
 					$this->delete_dir( $item );
 				} else {
-					@unlink( $item );
+					wp_delete_file( $item );
 				}
 			}
 
+			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_rmdir -- this object-cache drop-in runs on every request type (frontend, AJAX, REST, cron), not just admin; WP_Filesystem lives in wp-admin/includes/file.php (not loaded here) and its init can itself prompt for credentials, which would be unsafe to trigger from a hot cache path.
 			@rmdir( $dir );
 		}
 	}

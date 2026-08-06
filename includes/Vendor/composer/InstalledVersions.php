@@ -11,6 +11,10 @@
  */
 
 namespace PivotPerformanceToolkit\Vendor\Composer;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use PivotPerformanceToolkit\Vendor\Composer\Autoload\ClassLoader;
 use PivotPerformanceToolkit\Vendor\Composer\Semver\VersionParser;

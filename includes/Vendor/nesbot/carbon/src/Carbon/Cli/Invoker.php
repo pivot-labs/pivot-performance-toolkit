@@ -12,6 +12,10 @@ declare(strict_types=1);
  */
 
 namespace PivotPerformanceToolkit\Vendor\Carbon\Cli;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 class Invoker
 {

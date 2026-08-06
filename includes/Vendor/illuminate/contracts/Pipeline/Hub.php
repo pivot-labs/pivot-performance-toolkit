@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Pipeline;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 interface Hub
 {

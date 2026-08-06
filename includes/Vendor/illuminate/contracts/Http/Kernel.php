@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Http;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 interface Kernel
 {

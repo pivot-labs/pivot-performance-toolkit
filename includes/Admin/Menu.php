@@ -123,6 +123,7 @@ final class Menu {
 	public function printMenuIconStyles(): void {
 		$icon_url = esc_url( PIVOT_PERFORMANCE_TOOLKIT_URL . 'src/img/ptk-menu-icon-white.svg' );
 
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $icon_url was already run through esc_url() above; the sniff can't trace the variable assignment.
 		echo '<style id="pivot-performance-toolkit-menu-icon">#adminmenu .toplevel_page_pivot-performance-toolkit .wp-menu-image img{display:none}#adminmenu .toplevel_page_pivot-performance-toolkit .wp-menu-image{color:inherit}#adminmenu .toplevel_page_pivot-performance-toolkit .wp-menu-image:before{content:"";display:block;width:26px;height:26px;margin:-2px auto 0;transform:translateY(-1px);background-color:currentColor;-webkit-mask-image:url("' . $icon_url . '");mask-image:url("' . $icon_url . '");-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:26px 26px;mask-size:26px 26px}#adminmenu .toplevel_page_pivot-performance-toolkit.wp-has-current-submenu .wp-menu-image:before,#adminmenu .toplevel_page_pivot-performance-toolkit.current .wp-menu-image:before{transform:translateY(2px)}</style>';
 	}
 

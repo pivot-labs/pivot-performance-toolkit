@@ -12,6 +12,10 @@ declare(strict_types=1);
  */
 
 namespace PivotPerformanceToolkit\Vendor\Carbon\MessageFormatter;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use ReflectionMethod;
 use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Formatter\MessageFormatter;

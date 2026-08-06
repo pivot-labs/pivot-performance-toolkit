@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 /**
  * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\View\View file(string $path, \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable|array $data = [], array $mergeData = [])

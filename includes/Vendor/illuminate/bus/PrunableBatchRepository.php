@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Bus;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use DateTimeInterface;
 

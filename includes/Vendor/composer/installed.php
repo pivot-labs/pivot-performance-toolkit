@@ -1,4 +1,8 @@
-<?php return array (
+<?php 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+return array (
   'root' => 
   array (
     'name' => 'jeffshaikh/pivot-performance-toolkit',

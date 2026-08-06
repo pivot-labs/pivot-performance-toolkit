@@ -9,6 +9,10 @@
  * file that was distributed with this source code.
  */
 namespace PivotPerformanceToolkit\Vendor\Carbon;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use DatePeriod;
 if (!class_exists(DatePeriodBase::class, false)) {

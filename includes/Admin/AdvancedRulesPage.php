@@ -52,6 +52,7 @@ final class AdvancedRulesPage extends BladeAdminPage {
 		return array(
 			'options'          => $options,
 			'option_key'       => $this->settings->optionKey(),
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only "was this just saved" display flag from WordPress core's own settings-updated redirect param, not a state-changing action.
 			'settings_updated' => isset( $_GET['settings-updated'] ) && (string) wp_unslash( $_GET['settings-updated'] ) === 'true',
 			'woo_defaults'     => array(
 				'/cart',

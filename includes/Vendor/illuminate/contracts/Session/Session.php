@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Session;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 interface Session
 {

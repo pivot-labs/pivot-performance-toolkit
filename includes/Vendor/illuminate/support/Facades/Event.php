@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use Illuminate\Database\Eloquent\Model;
 use PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\EventFake;

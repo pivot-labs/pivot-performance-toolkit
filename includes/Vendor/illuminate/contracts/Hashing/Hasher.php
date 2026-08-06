@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Hashing;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 interface Hasher
 {

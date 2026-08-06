@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\DeferringDisplayableValue;
 use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;

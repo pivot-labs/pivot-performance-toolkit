@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Bus;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable;
 use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Factory as QueueFactory;

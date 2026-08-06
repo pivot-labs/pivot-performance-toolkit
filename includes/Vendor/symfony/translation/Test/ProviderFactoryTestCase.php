@@ -10,6 +10,10 @@
  */
 
 namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Test;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Log\LoggerInterface;

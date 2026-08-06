@@ -3,6 +3,10 @@
 declare(strict_types=1);
 
 namespace PivotPerformanceToolkit\Vendor\Doctrine\Inflector\Rules\NorwegianBokmal;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use PivotPerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Pattern;
 use PivotPerformanceToolkit\Vendor\Doctrine\Inflector\Rules\Substitution;

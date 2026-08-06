@@ -12,6 +12,10 @@ declare(strict_types=1);
  */
 
 namespace PivotPerformanceToolkit\Vendor\Carbon;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\InvalidCastException;
 use PivotPerformanceToolkit\Vendor\Carbon\Exceptions\InvalidTimeZoneException;

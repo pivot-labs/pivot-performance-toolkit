@@ -10,6 +10,10 @@
  */
 
 namespace PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\Command;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogue;
 use PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\MessageCatalogueInterface;

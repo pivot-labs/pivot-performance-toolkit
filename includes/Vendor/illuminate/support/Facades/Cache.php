@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\Support\Facades;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 /**
  * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Cache\Repository store(string|null $name = null)

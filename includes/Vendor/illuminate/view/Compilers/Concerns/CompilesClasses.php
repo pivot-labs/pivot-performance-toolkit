@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\Concerns;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 trait CompilesClasses
 {

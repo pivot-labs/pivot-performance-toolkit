@@ -105,11 +105,13 @@ final class ToolsPage extends BladeAdminPage {
 	 * @return array<string, mixed>
 	 */
 	protected function buildViewData(): array {
-		$stats         = $this->getMinifiedAssetStats();
+		$stats = $this->getMinifiedAssetStats();
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- these are read-only display values from this page's own post-redirect notice (already produced by a nonce-verified admin-post handler), not a new state-changing action.
 		$cleared       = isset( $_GET['pivot_performance_toolkit_minified_cleared'] ) && (string) '1' === $_GET['pivot_performance_toolkit_minified_cleared'];
 		$removed_files = isset( $_GET['pivot_performance_toolkit_minified_removed'] ) ? max( 0, (int) $_GET['pivot_performance_toolkit_minified_removed'] ) : 0;
 		$tools_notice  = isset( $_GET['pivot_performance_toolkit_tools_notice'] ) ? sanitize_key( (string) wp_unslash( $_GET['pivot_performance_toolkit_tools_notice'] ) ) : '';
 		$tools_message = isset( $_GET['pivot_performance_toolkit_tools_message'] ) ? sanitize_text_field( (string) wp_unslash( $_GET['pivot_performance_toolkit_tools_message'] ) ) : '';
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended
 		$last_exported = $this->settings->getString( 'last_settings_exported_at_gmt' );
 
 		return array(
@@ -141,22 +143,24 @@ final class ToolsPage extends BladeAdminPage {
 		$removed = 0;
 
 		foreach ( glob( self::MINIFIED_ASSETS_DIR . '/*.min.css' ) ?: array() as $file_path ) {
-			if ( @unlink( $file_path ) ) {
+			if ( wp_delete_file( $file_path ) ) {
 				++$removed;
 			}
 		}
 
 		foreach ( glob( self::MINIFIED_ASSETS_DIR . '/*.min.js' ) ?: array() as $file_path ) {
-			if ( @unlink( $file_path ) ) {
+			if ( wp_delete_file( $file_path ) ) {
 				++$removed;
 			}
 		}
 
 		$redirect_url = add_query_arg(
-			array(
-				'page' => self::SLUG_MAINTENANCE,
-				'pivot_performance_toolkit_minified_cleared' => '1',
-				'pivot_performance_toolkit_minified_removed' => (string) $removed,
+			array_merge(
+				self::sectionQueryArgsForSlug( self::SLUG_MAINTENANCE ),
+				array(
+					'pivot_performance_toolkit_minified_cleared' => '1',
+					'pivot_performance_toolkit_minified_removed' => (string) $removed,
+				)
 			),
 			admin_url( 'admin.php' )
 		);
@@ -208,6 +212,7 @@ final class ToolsPage extends BladeAdminPage {
 		header( 'Content-Type: application/json; charset=utf-8' );
 		header( 'Content-Disposition: attachment; filename="' . $filename . '"' );
 
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- this is a raw JSON file download (Content-Disposition: attachment), not HTML output; esc_html() would corrupt the exported JSON.
 		echo $json;
 		exit;
 	}
@@ -342,16 +347,40 @@ final class ToolsPage extends BladeAdminPage {
 
 	private function redirectWithNotice( bool $success, string $message, string $page_slug ): void {
 		$redirect_url = add_query_arg(
-			array(
-				'page'                                    => $page_slug,
-				'pivot_performance_toolkit_tools_notice'  => $success ? 'success' : 'error',
-				'pivot_performance_toolkit_tools_message' => $message,
+			array_merge(
+				self::sectionQueryArgsForSlug( $page_slug ),
+				array(
+					'pivot_performance_toolkit_tools_notice'  => $success ? 'success' : 'error',
+					'pivot_performance_toolkit_tools_message' => $message,
+				)
 			),
 			admin_url( 'admin.php' )
 		);
 
 		wp_safe_redirect( $redirect_url );
 		exit;
+	}
+
+	/**
+	 * Only the root "pivot-performance-toolkit" page is registered with WordPress;
+	 * every other page slug is routed internally via ?section=&tab=. Translate an
+	 * internal page slug into the query args that actually reach it.
+	 *
+	 * @return array<string, string>
+	 */
+	private static function sectionQueryArgsForSlug( string $page_slug ): array {
+		if ( self::SLUG_SETTINGS === $page_slug ) {
+			return array(
+				'page'    => 'pivot-performance-toolkit',
+				'section' => 'settings',
+			);
+		}
+
+		return array(
+			'page'    => 'pivot-performance-toolkit',
+			'section' => 'system',
+			'tab'     => $page_slug,
+		);
 	}
 
 	private function isSupportedSchemaVersion( int $schema_version ): bool {

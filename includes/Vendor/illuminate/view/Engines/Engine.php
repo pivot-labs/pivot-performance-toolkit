@@ -1,6 +1,10 @@
 <?php
 
 namespace PivotPerformanceToolkit\Vendor\Illuminate\View\Engines;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 abstract class Engine
 {
