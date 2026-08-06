@@ -158,7 +158,8 @@ final class SystemStatusPage extends BladeAdminPage {
 	 * Get server software name and version
 	 */
 	private static function getServerSoftware(): array {
-		$server_software = $_SERVER['SERVER_SOFTWARE'] ?? '';
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- only used with stripos()/preg_match() below; the returned 'name' is always a hardcoded literal and 'version' is regex-constrained to [0-9.]+, so raw content never reaches the caller.
+		$server_software = isset( $_SERVER['SERVER_SOFTWARE'] ) ? (string) wp_unslash( $_SERVER['SERVER_SOFTWARE'] ) : '';
 		$name            = 'Unknown';
 		$version         = 'N/A';
 

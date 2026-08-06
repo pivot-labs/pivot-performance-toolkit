@@ -57,7 +57,7 @@ final class MediaOptimizationPage extends BladeAdminPage {
 		return array(
 			'options'              => $this->settings->all(),
 			'option_key'           => $this->settings->optionKey(),
-			// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only "was this just saved" display flag from WordPress core's own settings-updated redirect param, not a state-changing action.
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- read-only "was this just saved" display flag from WordPress core's own settings-updated redirect param; used only in a strict === comparison against a hardcoded literal, never stored or output raw.
 			'settings_updated'     => isset( $_GET['settings-updated'] ) && (string) 'true' === wp_unslash( $_GET['settings-updated'] ),
 			'active_optimizers'    => $active_optimizers,
 			'lazyload_providers'   => $lazyload_providers,

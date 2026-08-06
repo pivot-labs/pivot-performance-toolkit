@@ -241,9 +241,11 @@ final class DatabaseOptimizer {
 		$order_by  = $sortable_columns[ $sort_by ] ?? 'tbl_size';
 		$direction = 'asc' === strtolower( $sort_dir ) ? 'ASC' : 'DESC';
 
-		// $order_by is restricted to a hardcoded whitelist; $direction is a ternary
-		// returning only 'ASC' or 'DESC'. ORDER BY identifiers cannot use prepare().
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- live per-table size/row-count status display; caching would show stale figures right after the admin runs a cleanup/optimize action.
+		// $order_by is restricted to a hardcoded whitelist ($sortable_columns above);
+		// $direction is a ternary returning only 'ASC' or 'DESC'. Neither can ever
+		// contain attacker-controlled content, regardless of what $sort_by/$sort_dir
+		// are — ORDER BY identifiers cannot use $wpdb->prepare() placeholders anyway.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- live per-table size/row-count status display; caching would show stale figures right after the admin runs a cleanup/optimize action. $order_by is whitelist-derived, see comment above.
 		$rows = $wpdb->get_results(
 			"SELECT
                 table_name                 AS tbl_name,

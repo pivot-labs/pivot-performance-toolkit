@@ -63,22 +63,25 @@ final class HttpProtocolDetector {
 	 * @return array{version:string,source:string}
 	 */
 	private static function detectFromServerGlobals(): array {
-		if ( ! empty( $_SERVER['HTTP3'] ) && 'off' !== strtolower( (string) $_SERVER['HTTP3'] ) ) {
+		// phpcs:disable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- these are only used in !empty()/strict comparisons; the returned 'version'/'source' values below are always hardcoded literals, never the raw $_SERVER content.
+		if ( ! empty( $_SERVER['HTTP3'] ) && 'off' !== strtolower( (string) wp_unslash( $_SERVER['HTTP3'] ) ) ) {
 			return array(
 				'version' => '3',
 				'source'  => 'server-http3',
 			);
 		}
 
-		if ( ! empty( $_SERVER['HTTP2'] ) && 'off' !== strtolower( (string) $_SERVER['HTTP2'] ) ) {
+		if ( ! empty( $_SERVER['HTTP2'] ) && 'off' !== strtolower( (string) wp_unslash( $_SERVER['HTTP2'] ) ) ) {
 			return array(
 				'version' => '2',
 				'source'  => 'server-http2',
 			);
 		}
+		// phpcs:enable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 		foreach ( array( 'SERVER_PROTOCOL', 'REQUEST_PROTOCOL' ) as $key ) {
-			$raw = isset( $_SERVER[ $key ] ) ? (string) $_SERVER[ $key ] : '';
+			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- only used with preg_match() below; the returned version is regex-constrained to [0-9.]+, so raw content never reaches the caller.
+			$raw = isset( $_SERVER[ $key ] ) ? (string) wp_unslash( $_SERVER[ $key ] ) : '';
 			if ( '' === $raw ) {
 				continue;
 			}

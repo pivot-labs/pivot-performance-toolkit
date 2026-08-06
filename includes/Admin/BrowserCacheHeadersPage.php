@@ -47,7 +47,8 @@ final class BrowserCacheHeadersPage extends BladeAdminPage {
 	 * @return array<string, string>
 	 */
 	protected function buildViewData(): array {
-		$server_software = isset( $_SERVER['SERVER_SOFTWARE'] ) ? (string) $_SERVER['SERVER_SOFTWARE'] : '';
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- SERVER_SOFTWARE is set by the web server, not user input; it's only ever displayed via Blade's {{ }}, which HTML-escapes it at render time.
+		$server_software = isset( $_SERVER['SERVER_SOFTWARE'] ) ? (string) wp_unslash( $_SERVER['SERVER_SOFTWARE'] ) : '';
 
 		return array(
 			'htaccess_snippet' => $this->generateHtaccessSnippet(),

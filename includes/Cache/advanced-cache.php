@@ -15,6 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Only handle anonymous GET requests.
+// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- used only in a strict === comparison against a hardcoded literal, never stored or output. wp_unslash() lives in wp-includes/formatting.php, which this drop-in is included before (see wp-settings.php), so it's not yet defined here.
 if ( ! isset( $_SERVER['REQUEST_METHOD'] ) || 'GET' !== strtoupper( $_SERVER['REQUEST_METHOD'] ) ) {
 	return;
 }
@@ -26,6 +27,7 @@ if ( ( defined( 'WP_CLI' ) && WP_CLI ) || ( defined( 'DOING_CRON' ) && DOING_CRO
 
 // Detect performance-test probe cookie.
 // When set, we bypass the logged-in check so the probe can measure the real cached page.
+// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- only the length is checked below; the token's content is never stored, output, or otherwise used. wp_unslash() isn't yet defined this early in the bootstrap (see the REQUEST_METHOD check above).
 $ptk_probe_token = isset( $_COOKIE['pivot_performance_toolkit_perf_probe'] ) ? trim( (string) $_COOKIE['pivot_performance_toolkit_perf_probe'] ) : '';
 $ptk_is_probe    = ( strlen( $ptk_probe_token ) >= 20 );
 
@@ -85,11 +87,13 @@ if ( ! $ptk_is_probe && array() !== $ptk_bypass_cookies && isset( $_COOKIE ) && 
 
 $ptk_ttl       = isset( $ptk_config['ttl'] ) ? (int) $ptk_config['ttl'] : 3600;
 $ptk_cache_dir = WP_CONTENT_DIR . '/cache/pivot-performance-toolkit';
-$ptk_scheme    = ( ! empty( $_SERVER['HTTPS'] ) && strtolower( (string) $_SERVER['HTTPS'] ) !== 'off' ) ? 'https' : 'http';
-$ptk_host      = isset( $_SERVER['HTTP_HOST'] ) ? (string) $_SERVER['HTTP_HOST'] : 'localhost';
-$ptk_uri       = isset( $_SERVER['REQUEST_URI'] ) ? (string) $_SERVER['REQUEST_URI'] : '/';
-$ptk_key       = md5( $ptk_scheme . '://' . $ptk_host . $ptk_uri );
-$ptk_file      = $ptk_cache_dir . '/' . $ptk_key . '.html';
+// phpcs:disable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- these are only ever MD5-hashed below to build the cache file name; raw content is never stored, echoed, or used directly as a filesystem path. wp_unslash() isn't yet defined this early in the bootstrap.
+$ptk_scheme = ( ! empty( $_SERVER['HTTPS'] ) && strtolower( (string) $_SERVER['HTTPS'] ) !== 'off' ) ? 'https' : 'http';
+$ptk_host   = isset( $_SERVER['HTTP_HOST'] ) ? (string) $_SERVER['HTTP_HOST'] : 'localhost';
+$ptk_uri    = isset( $_SERVER['REQUEST_URI'] ) ? (string) $_SERVER['REQUEST_URI'] : '/';
+// phpcs:enable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+$ptk_key  = md5( $ptk_scheme . '://' . $ptk_host . $ptk_uri );
+$ptk_file = $ptk_cache_dir . '/' . $ptk_key . '.html';
 
 if ( ! is_file( $ptk_file ) ) {
 	return;

@@ -145,7 +145,8 @@ final class AdminBarMenu implements ModuleInterface {
 		}
 
 		// Only GET requests.
-		if ( ! isset( $_SERVER['REQUEST_METHOD'] ) || strtoupper( (string) $_SERVER['REQUEST_METHOD'] ) !== 'GET' ) {
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- used only in a strict === comparison against a hardcoded literal, never stored or output.
+		if ( ! isset( $_SERVER['REQUEST_METHOD'] ) || strtoupper( (string) wp_unslash( $_SERVER['REQUEST_METHOD'] ) ) !== 'GET' ) {
 			return false;
 		}
 
@@ -157,7 +158,8 @@ final class AdminBarMenu implements ModuleInterface {
 	 */
 	private function getCurrentPageCacheStatus(): array {
 		// Indicator should reflect file state even for logged-in/admin-bar visits.
-		if ( is_admin() || ! isset( $_SERVER['REQUEST_METHOD'] ) || strtoupper( (string) $_SERVER['REQUEST_METHOD'] ) !== 'GET' ) {
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- used only in a strict === comparison against a hardcoded literal, never stored or output.
+		if ( is_admin() || ! isset( $_SERVER['REQUEST_METHOD'] ) || strtoupper( (string) wp_unslash( $_SERVER['REQUEST_METHOD'] ) ) !== 'GET' ) {
 			return array(
 				'label'     => __( 'Unavailable', 'pivot-performance-toolkit' ),
 				'class'     => 'pivot-performance-toolkit-cache-status-bypass',
@@ -218,9 +220,11 @@ final class AdminBarMenu implements ModuleInterface {
 	}
 
 	private function currentRequestUrl(): ?string {
-		$scheme      = ( ! empty( $_SERVER['HTTPS'] ) && strtolower( (string) $_SERVER['HTTPS'] ) !== 'off' ) ? 'https' : 'http';
-		$host        = isset( $_SERVER['HTTP_HOST'] ) ? (string) $_SERVER['HTTP_HOST'] : 'localhost';
-		$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? (string) $_SERVER['REQUEST_URI'] : '/';
+		// phpcs:disable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- this URL is only ever MD5-hashed to build a cache file path (see cacheFilePathFromUrl()) or rawurlencode()'d into a query arg; raw content is never stored, echoed, or used in a filesystem/query context directly.
+		$scheme      = ( ! empty( $_SERVER['HTTPS'] ) && strtolower( (string) wp_unslash( $_SERVER['HTTPS'] ) ) !== 'off' ) ? 'https' : 'http';
+		$host        = isset( $_SERVER['HTTP_HOST'] ) ? (string) wp_unslash( $_SERVER['HTTP_HOST'] ) : 'localhost';
+		$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? (string) wp_unslash( $_SERVER['REQUEST_URI'] ) : '/';
+		// phpcs:enable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 		if ( '' === $host ) {
 			return null;
@@ -338,7 +342,7 @@ final class AdminBarMenu implements ModuleInterface {
 			return;
 		}
 
-		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped, WordPress.Security.NonceVerification.Recommended -- BladeEngine::view() returns HTML already escaped by Blade's {{ }} at render time; re-escaping here would break the markup. The $_GET values below are read-only post-redirect display flags (booleans, never echoed raw), not a state-changing action.
+		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped, WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- BladeEngine::view() returns HTML already escaped by Blade's {{ }} at render time; re-escaping here would break the markup. The $_GET values below are read-only post-redirect display flags reduced to booleans via strict '1' === comparison, never echoed raw, not a state-changing action.
 		echo BladeEngine::view(
 			'admin.admin-bar-notice',
 			array(
@@ -346,6 +350,6 @@ final class AdminBarMenu implements ModuleInterface {
 				'page_cache_purged' => isset( $_GET['pivot_performance_toolkit_page_cache_purged'] ) && (string) '1' === wp_unslash( $_GET['pivot_performance_toolkit_page_cache_purged'] ),
 			)
 		);
-		// phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped, WordPress.Security.NonceVerification.Recommended
+		// phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped, WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 	}
 }

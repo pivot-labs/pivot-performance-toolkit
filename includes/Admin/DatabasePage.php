@@ -65,10 +65,10 @@ final class DatabasePage extends BladeAdminPage {
 
 		$stats       = $this->optimizer->getDatabaseStats();
 		$table_stats = $this->optimizer->getTableStats( $sort_by, $sort_dir );
-		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- these are read-only display values from this page's own post-redirect notice (already produced by a nonce-verified admin-post handler), not a new state-changing action.
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- these are read-only display values from this page's own post-redirect notice (already produced by a nonce-verified admin-post handler); sanitized via sanitize_key()/(int) cast, never stored or output raw.
 		$cleaned_task  = isset( $_GET['pivot_performance_toolkit_cleaned'] ) ? sanitize_key( (string) wp_unslash( $_GET['pivot_performance_toolkit_cleaned'] ) ) : '';
 		$cleaned_count = isset( $_GET['pivot_performance_toolkit_count'] ) ? (int) wp_unslash( $_GET['pivot_performance_toolkit_count'] ) : 0;
-		// phpcs:enable WordPress.Security.NonceVerification.Recommended
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		$show_overhead = false;
 		$has_innodb    = false;
 		$has_myisam    = false;

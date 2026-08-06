@@ -70,7 +70,7 @@ final class CachePage extends BladeAdminPage {
 	 */
 	protected function buildViewData(): array {
 		$options = $this->settings->all();
-		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only "was this just saved" display flag from WordPress core's own settings-updated redirect param, not a state-changing action.
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- read-only "was this just saved" display flag from WordPress core's own settings-updated redirect param; used only in a strict === comparison against a hardcoded literal, never stored or output raw.
 		$settings_updated = isset( $_GET['settings-updated'] ) && (string) wp_unslash( $_GET['settings-updated'] ) === 'true';
 		$cache_cleared    = (bool) get_transient( 'pivot_performance_toolkit_cache_cleared' );
 

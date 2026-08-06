@@ -224,11 +224,13 @@ final class ToolsPage extends BladeAdminPage {
 
 		check_admin_referer( 'pivot_performance_toolkit_import_settings' );
 
+		// phpcs:disable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- $_FILES is a structural array (error/size/tmp_name/name), not free-text input; ['error'] is cast to int and compared below, and the uploaded file's actual contents are JSON-decoded and validated further down before use.
 		if ( ! isset( $_FILES['pivot_performance_toolkit_settings_import_file'] ) || ! is_array( $_FILES['pivot_performance_toolkit_settings_import_file'] ) ) {
 			$this->redirectWithNotice( false, __( 'No import file was uploaded.', 'pivot-performance-toolkit' ), self::SLUG_IMPORT_EXPORT );
 		}
 
 		$file = $_FILES['pivot_performance_toolkit_settings_import_file'];
+		// phpcs:enable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 		if ( (int) ( $file['error'] ?? UPLOAD_ERR_NO_FILE ) !== UPLOAD_ERR_OK ) {
 			$this->redirectWithNotice( false, __( 'Upload failed. Please try again with a valid JSON file.', 'pivot-performance-toolkit' ), self::SLUG_IMPORT_EXPORT );

@@ -272,6 +272,7 @@ if ( ! class_exists( 'WP_Object_Cache' ) ) {
 				'd' => $data,
 			);
 
+			// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_export -- not debug output: this is the object-cache's storage format, a PHP-file cache (`<?php return array(...);`) included directly for fast, opcache-friendly reads.
 			$raw = '<?php return ' . var_export( $payload, true ) . ';';
 
 			return false !== @file_put_contents( $this->file_path( $group, $cache_key ), $raw, LOCK_EX );

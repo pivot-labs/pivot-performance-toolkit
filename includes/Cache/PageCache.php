@@ -130,6 +130,7 @@ final class PageCache implements ModuleInterface {
 			'collect_url'    => rest_url( 'ptk/v1/performance-tests/collect' ),
 		);
 
+		// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_export -- not debug output: this generates a PHP-file cache (`<?php return array(...);`) that advanced-cache.php includes directly for fast, opcache-friendly config reads without bootstrapping WordPress.
 		$content = "<?php\nreturn " . var_export( $config, true ) . ";\n";
 
 		$result = file_put_contents( $this->cache_dir . '/config.php', $content, LOCK_EX );
@@ -162,7 +163,8 @@ final class PageCache implements ModuleInterface {
 			return '404';
 		}
 
-		if ( ! isset( $_SERVER['REQUEST_METHOD'] ) || strtoupper( (string) $_SERVER['REQUEST_METHOD'] ) !== 'GET' ) {
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- used only in a strict === comparison against a hardcoded literal, never stored or output.
+		if ( ! isset( $_SERVER['REQUEST_METHOD'] ) || strtoupper( (string) wp_unslash( $_SERVER['REQUEST_METHOD'] ) ) !== 'GET' ) {
 			return 'method';
 		}
 
@@ -170,7 +172,8 @@ final class PageCache implements ModuleInterface {
 			return 'cookie_bypass';
 		}
 
-		$request_uri  = isset( $_SERVER['REQUEST_URI'] ) ? (string) $_SERVER['REQUEST_URI'] : '/';
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- only used for strtok()/fnmatch() pattern matching against admin-configured exclusion rules below; never stored, output, or used in a filesystem/query context.
+		$request_uri  = isset( $_SERVER['REQUEST_URI'] ) ? (string) wp_unslash( $_SERVER['REQUEST_URI'] ) : '/';
 		$request_path = strtok( $request_uri, '?' ) ?: '/';  // strip query string for matching
 
 		foreach ( $this->settings->getLines( 'cache_excluded_urls' ) as $pattern ) {
@@ -233,7 +236,8 @@ final class PageCache implements ModuleInterface {
 			return false;
 		}
 
-		$token = isset( $_COOKIE['pivot_performance_toolkit_perf_probe'] ) ? trim( (string) $_COOKIE['pivot_performance_toolkit_perf_probe'] ) : '';
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- only the length is checked below; the token's content is never stored, output, or otherwise used.
+		$token = isset( $_COOKIE['pivot_performance_toolkit_perf_probe'] ) ? trim( (string) wp_unslash( $_COOKIE['pivot_performance_toolkit_perf_probe'] ) ) : '';
 
 		return strlen( $token ) >= 20;
 	}
@@ -253,10 +257,12 @@ final class PageCache implements ModuleInterface {
 	}
 
 	private function cacheFilePath(): string {
-		$scheme      = ( ! empty( $_SERVER['HTTPS'] ) && strtolower( (string) $_SERVER['HTTPS'] ) !== 'off' ) ? 'https' : 'http';
-		$host        = isset( $_SERVER['HTTP_HOST'] ) ? (string) $_SERVER['HTTP_HOST'] : 'localhost';
-		$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? (string) $_SERVER['REQUEST_URI'] : '/';
-		$cache_key   = md5( $scheme . '://' . $host . $request_uri );
+		// phpcs:disable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- these are only ever MD5-hashed below to build the cache file name; raw content is never stored, echoed, or used directly as a filesystem path.
+		$scheme      = ( ! empty( $_SERVER['HTTPS'] ) && strtolower( (string) wp_unslash( $_SERVER['HTTPS'] ) ) !== 'off' ) ? 'https' : 'http';
+		$host        = isset( $_SERVER['HTTP_HOST'] ) ? (string) wp_unslash( $_SERVER['HTTP_HOST'] ) : 'localhost';
+		$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? (string) wp_unslash( $_SERVER['REQUEST_URI'] ) : '/';
+		// phpcs:enable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$cache_key = md5( $scheme . '://' . $host . $request_uri );
 
 		return $this->cache_dir . '/' . $cache_key . '.html';
 	}
