@@ -3,10 +3,12 @@
     "description": "WordPress performance optimization toolkit",
     "type": "wordpress-plugin",
     "license": "GPL-2.0-or-later",
-    "version": "1.0.1",
+    "version": "1.1.0-dev-20260807.1",
     "scripts": {
         "lint": "find includes -name '*.php' -print0 | xargs -0 -n1 php -l",
         "test:smoke": "php tests/smoke-settings.php",
+        "set-version": "bin/set-version.sh",
+        "build:zip": "bin/build-zip.sh",
         "strauss": [
             "sh -c 'test -f ./bin/strauss.phar || curl -o bin/strauss.phar -L -C - https://github.com/BrianHenryIE/strauss/releases/latest/download/strauss.phar'",
             "@php bin/strauss.phar",
