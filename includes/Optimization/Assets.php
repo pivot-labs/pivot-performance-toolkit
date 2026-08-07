@@ -50,7 +50,30 @@ final class Assets implements ModuleInterface {
 			return $tag;
 		}
 
+		if ( $this->hasInlineCompanionScript( $handle ) ) {
+			return $tag;
+		}
+
 		return str_replace( '<script ', '<script defer ', $tag );
+	}
+
+	/**
+	 * Whether a script has inline code attached via wp_add_inline_script()
+	 * (before or after). The `defer` attribute has no effect on inline
+	 * scripts — they always run synchronously at their position in the
+	 * document — so deferring only the external half of such a pair breaks
+	 * execution order: the inline companion (e.g. wp-i18n's setLocaleData()
+	 * call) would run before the deferred external script that defines the
+	 * globals it depends on has executed.
+	 */
+	private function hasInlineCompanionScript( string $handle ): bool {
+		if ( ! function_exists( 'wp_scripts' ) ) {
+			return false;
+		}
+
+		$scripts = wp_scripts();
+
+		return (bool) $scripts->get_data( $handle, 'after' ) || (bool) $scripts->get_data( $handle, 'before' );
 	}
 
 	public function minifyScriptTag( string $tag, string $handle, string $src ): string {
