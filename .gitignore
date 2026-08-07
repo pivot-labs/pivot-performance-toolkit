@@ -5,3 +5,4 @@
 .idea
 /bin/strauss.phar
 /includes/Vendor/performance-toolkit
+/dist-builds

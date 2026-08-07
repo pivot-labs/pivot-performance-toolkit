@@ -53,6 +53,7 @@ README.md
 
 # Local cache/artifacts.
 wp-cache/
+dist-builds/
 
 # WordPress.org disallows hidden files anywhere in a submitted package.
 # Bundled third-party dependencies (e.g. includes/Vendor/**) ship their own
