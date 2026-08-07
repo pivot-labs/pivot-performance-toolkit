@@ -15,6 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use PivotPerformanceToolkit\Core\Settings;
 use PivotPerformanceToolkit\Integrations\CloudflareIntegration;
+use PivotPerformanceToolkit\Media\ImageOptimizerDetector;
 
 final class CdnIntegrationsPage extends BladeAdminPage {
 
@@ -25,9 +26,12 @@ final class CdnIntegrationsPage extends BladeAdminPage {
 
 	private CloudflareIntegration $cloudflare;
 
-	public function __construct( Settings $settings, CloudflareIntegration $cloudflare ) {
-		$this->settings   = $settings;
-		$this->cloudflare = $cloudflare;
+	private ImageOptimizerDetector $optimizer_detector;
+
+	public function __construct( Settings $settings, CloudflareIntegration $cloudflare, ImageOptimizerDetector $optimizer_detector ) {
+		$this->settings           = $settings;
+		$this->cloudflare         = $cloudflare;
+		$this->optimizer_detector = $optimizer_detector;
 
 		add_action( 'admin_post_' . self::TEST_ACTION, array( $this, 'handleTestConnection' ) );
 		add_action( 'admin_post_' . self::PURGE_ACTION, array( $this, 'handlePurgeCache' ) );
@@ -60,17 +64,19 @@ final class CdnIntegrationsPage extends BladeAdminPage {
 	 */
 	protected function buildViewData(): array {
 		return array(
-			'options'          => $this->settings->all(),
-			'option_key'       => $this->settings->optionKey(),
+			'options'                 => $this->settings->all(),
+			'option_key'              => $this->settings->optionKey(),
 			// phpcs:disable WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- these are read-only display values from this page's own post-redirect notice / WordPress core's settings-updated param; used only in strict comparisons/sanitize_key(), never stored or output raw.
-			'notice'           => isset( $_GET['pivot_performance_toolkit_cf_notice'] ) ? sanitize_key( wp_unslash( (string) $_GET['pivot_performance_toolkit_cf_notice'] ) ) : '',
-			'message'          => isset( $_GET['pivot_performance_toolkit_cf_message'] ) ? sanitize_text_field( wp_unslash( (string) $_GET['pivot_performance_toolkit_cf_message'] ) ) : '',
-			'settings_updated' => isset( $_GET['settings-updated'] ) && (string) wp_unslash( $_GET['settings-updated'] ) === 'true',
+			'notice'                  => isset( $_GET['pivot_performance_toolkit_cf_notice'] ) ? sanitize_key( wp_unslash( (string) $_GET['pivot_performance_toolkit_cf_notice'] ) ) : '',
+			'message'                 => isset( $_GET['pivot_performance_toolkit_cf_message'] ) ? sanitize_text_field( wp_unslash( (string) $_GET['pivot_performance_toolkit_cf_message'] ) ) : '',
+			'settings_updated'        => isset( $_GET['settings-updated'] ) && (string) wp_unslash( $_GET['settings-updated'] ) === 'true',
 			// phpcs:enable WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-			'test_action'      => self::TEST_ACTION,
-			'purge_action'     => self::PURGE_ACTION,
-			'test_nonce'       => wp_create_nonce( 'pivot_performance_toolkit_cloudflare_test' ),
-			'purge_nonce'      => wp_create_nonce( 'pivot_performance_toolkit_cloudflare_purge' ),
+			'test_action'             => self::TEST_ACTION,
+			'purge_action'            => self::PURGE_ACTION,
+			'test_nonce'              => wp_create_nonce( 'pivot_performance_toolkit_cloudflare_test' ),
+			'purge_nonce'             => wp_create_nonce( 'pivot_performance_toolkit_cloudflare_purge' ),
+			'show_imagify_cdn_notice' => $this->cloudflare->isConfigured()
+				&& in_array( 'Imagify', $this->optimizer_detector->activeOptimizers(), true ),
 		);
 	}
 

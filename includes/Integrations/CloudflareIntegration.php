@@ -102,15 +102,19 @@ final class CloudflareIntegration implements ModuleInterface {
 	}
 
 	private function shouldAutoPurge(): bool {
-		if ( 'cloudflare' !== $this->settings->getString( 'cdn_provider' ) ) {
+		if ( ! $this->isConfigured() ) {
 			return false;
 		}
 
-		if ( ! $this->settings->getBool( 'cloudflare_auto_purge' ) ) {
-			return false;
-		}
+		return $this->settings->getBool( 'cloudflare_auto_purge' );
+	}
 
-		return $this->hasCredentials();
+	/**
+	 * Whether Cloudflare is selected as the CDN provider and has usable credentials.
+	 */
+	public function isConfigured(): bool {
+		return 'cloudflare' === $this->settings->getString( 'cdn_provider' )
+			&& $this->hasCredentials();
 	}
 
 	private function hasCredentials(): bool {

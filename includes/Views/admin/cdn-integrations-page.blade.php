@@ -10,4 +10,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="pivot-performance-toolkit-col pivot-performance-toolkit-col--sidebar">
     @include('cards.caching.cdn.info.about-cdn')
     @include('cards.caching.cdn.info.auto-purge')
+    @include('cards.caching.cdn.info.imagify-notice')
 </div>

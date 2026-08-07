@@ -606,6 +606,10 @@
         @apply mt-2.5 p-3 border border-yellow-300 bg-yellow-50 rounded text-yellow-900 flex gap-2 items-start;
     }
 
+    .pivot-performance-toolkit-warning-box {
+        @apply mt-2.5 p-3 border border-yellow-300 bg-yellow-50 rounded text-yellow-900 flex gap-2 items-start;
+    }
+
     .pivot-performance-toolkit-http11-note {
         @apply mt-2.5;
     }

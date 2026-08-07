@@ -28,7 +28,11 @@ final class LazyLoad implements ModuleInterface {
 	}
 
 	public function register(): void {
-		add_filter( 'the_content', array( $this, 'addLazyLoadingToImages' ), 20 );
+		// Run late (priority PHP_INT_MAX) so this always operates on the final HTML
+		// after any image-optimization plugin (Imagify, ShortPixel, EWWW, etc.) has
+		// already rewritten <img>/<picture> markup — avoids a hook-order race where
+		// a loading="lazy" attribute added here gets dropped by a later rewrite.
+		add_filter( 'the_content', array( $this, 'addLazyLoadingToImages' ), PHP_INT_MAX );
 	}
 
 	public function addLazyLoadingToImages( string $content ): string {

@@ -94,6 +94,10 @@ In `wp-content/cache/pivot-performance-toolkit/minified-assets`.
 
 We recommend enabling one feature at a time to validate the performance impact. If you encounter an issue, there is a the ability to disable the feature and clear the cache. Additionally there is a "Reset to Defaults" button in the Tools tab that will disable all features and clear caches if needed.
 
+= I'm using Imagify and Cloudflare together and my images aren't showing as WebP =
+
+Imagify's default WebP delivery method (server rewrite rules) is not reliable behind a CDN, including Cloudflare — this is a known limitation of that delivery method, not a Pivot Performance Toolkit issue. In Imagify's settings, switch WebP delivery to the "&lt;picture&gt; tag" method, which works correctly with Cloudflare. The CDN & Integrations page will show a reminder about this when both Cloudflare and Imagify are detected active.
+
 == Source Code ==
 
 The stylesheet shipped in this plugin (`dist/admin.css`) is a compiled/minified build produced from human-readable source via Tailwind CSS and Vite. The source files (`src/css/admin.css`, `tailwind.config.js`, `vite.config.js`, `package.json`) are excluded from the distributed plugin package to keep it lean, but are published in full in the public GitHub repository:

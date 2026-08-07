@@ -96,7 +96,7 @@ final class Plugin {
 					new DatabaseTablePage( $database_optimizer ),
 					new SettingsPage( $this->settings ),
 					new BrowserCacheHeadersPage( $this->settings ),
-					new CdnIntegrationsPage( $this->settings, $cloudflare ),
+					new CdnIntegrationsPage( $this->settings, $cloudflare, $image_optimizer_detector ),
 					new AdvancedRulesPage( $this->settings ),
 					new ToolsPage( $this->settings, ToolsPage::MODE_IMPORT_EXPORT ),
 					new ToolsPage( $this->settings, ToolsPage::MODE_MAINTENANCE ),
