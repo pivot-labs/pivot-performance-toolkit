@@ -18,7 +18,7 @@ final class DatabaseOptimizer {
 	public function countRevisions(): int {
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- this feeds a live "how much cruft is there right now" cleanup dashboard; caching would show stale counts immediately after the admin runs a delete action.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- this feeds a live "how much cruft is there right now" cleanup dashboard; caching would show stale counts immediately after the admin runs a delete action.
 		return (int) $wpdb->get_var(
 			"SELECT COUNT(*) FROM {$wpdb->posts} WHERE post_type = 'revision'"
 		);
@@ -27,7 +27,7 @@ final class DatabaseOptimizer {
 	public function countAutoDrafts(): int {
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- this feeds a live "how much cruft is there right now" cleanup dashboard; caching would show stale counts immediately after the admin runs a delete action.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- this feeds a live "how much cruft is there right now" cleanup dashboard; caching would show stale counts immediately after the admin runs a delete action.
 		return (int) $wpdb->get_var(
 			"SELECT COUNT(*) FROM {$wpdb->posts} WHERE post_status = 'auto-draft'"
 		);
@@ -36,7 +36,7 @@ final class DatabaseOptimizer {
 	public function countTrashedPosts(): int {
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- this feeds a live "how much cruft is there right now" cleanup dashboard; caching would show stale counts immediately after the admin runs a delete action.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- this feeds a live "how much cruft is there right now" cleanup dashboard; caching would show stale counts immediately after the admin runs a delete action.
 		return (int) $wpdb->get_var(
 			"SELECT COUNT(*) FROM {$wpdb->posts} WHERE post_status = 'trash'"
 		);
@@ -45,7 +45,7 @@ final class DatabaseOptimizer {
 	public function countSpamComments(): int {
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- this feeds a live "how much cruft is there right now" cleanup dashboard; caching would show stale counts immediately after the admin runs a delete action.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- this feeds a live "how much cruft is there right now" cleanup dashboard; caching would show stale counts immediately after the admin runs a delete action.
 		return (int) $wpdb->get_var(
 			"SELECT COUNT(*) FROM {$wpdb->comments} WHERE comment_approved = 'spam'"
 		);
@@ -54,7 +54,7 @@ final class DatabaseOptimizer {
 	public function countTrashedComments(): int {
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- this feeds a live "how much cruft is there right now" cleanup dashboard; caching would show stale counts immediately after the admin runs a delete action.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- this feeds a live "how much cruft is there right now" cleanup dashboard; caching would show stale counts immediately after the admin runs a delete action.
 		return (int) $wpdb->get_var(
 			"SELECT COUNT(*) FROM {$wpdb->comments} WHERE comment_approved = 'trash'"
 		);
@@ -63,7 +63,7 @@ final class DatabaseOptimizer {
 	public function countExpiredTransients(): int {
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- this feeds a live "how much cruft is there right now" cleanup dashboard; caching would show stale counts immediately after the admin runs a delete action.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- this feeds a live "how much cruft is there right now" cleanup dashboard; caching would show stale counts immediately after the admin runs a delete action.
 		return (int) $wpdb->get_var(
 			$wpdb->prepare(
 				"SELECT COUNT(*) FROM {$wpdb->options}
@@ -80,7 +80,7 @@ final class DatabaseOptimizer {
 	public function deleteRevisions(): int {
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- one-off lookup immediately consumed by the delete loop below, not a repeated read worth caching.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- one-off lookup immediately consumed by the delete loop below, not a repeated read worth caching.
 		$ids = $wpdb->get_col(
 			"SELECT ID FROM {$wpdb->posts} WHERE post_type = 'revision'"
 		) ?: array();
@@ -97,7 +97,7 @@ final class DatabaseOptimizer {
 	public function deleteAutoDrafts(): int {
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- a DELETE mutation; there is nothing here to cache.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- a DELETE mutation; there is nothing here to cache.
 		$affected = $wpdb->query(
 			"DELETE FROM {$wpdb->posts} WHERE post_status = 'auto-draft'"
 		);
@@ -108,7 +108,7 @@ final class DatabaseOptimizer {
 	public function deleteTrashedPosts(): int {
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- one-off lookup immediately consumed by the delete loop below, not a repeated read worth caching.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- one-off lookup immediately consumed by the delete loop below, not a repeated read worth caching.
 		$ids = $wpdb->get_col(
 			"SELECT ID FROM {$wpdb->posts} WHERE post_status = 'trash'"
 		) ?: array();
@@ -126,7 +126,7 @@ final class DatabaseOptimizer {
 	public function deleteSpamComments(): int {
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- one-off lookup immediately consumed by the delete loop below, not a repeated read worth caching.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- one-off lookup immediately consumed by the delete loop below, not a repeated read worth caching.
 		$ids = $wpdb->get_col(
 			"SELECT comment_ID FROM {$wpdb->comments} WHERE comment_approved = 'spam'"
 		) ?: array();
@@ -144,7 +144,7 @@ final class DatabaseOptimizer {
 	public function deleteTrashedComments(): int {
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- one-off lookup immediately consumed by the delete loop below, not a repeated read worth caching.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- one-off lookup immediately consumed by the delete loop below, not a repeated read worth caching.
 		$ids = $wpdb->get_col(
 			"SELECT comment_ID FROM {$wpdb->comments} WHERE comment_approved = 'trash'"
 		) ?: array();
@@ -162,7 +162,7 @@ final class DatabaseOptimizer {
 	public function deleteExpiredTransients(): int {
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- one-off lookup immediately consumed by the delete loop below, not a repeated read worth caching.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- one-off lookup immediately consumed by the delete loop below, not a repeated read worth caching.
 		$keys = $wpdb->get_col(
 			$wpdb->prepare(
 				"SELECT REPLACE(option_name, '_transient_timeout_', '')
@@ -189,12 +189,12 @@ final class DatabaseOptimizer {
 	public function optimizeTables(): int {
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- one-off admin-triggered maintenance action, not a repeated read worth caching.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- one-off admin-triggered maintenance action, not a repeated read worth caching.
 		$tables = $wpdb->get_col( 'SHOW TABLES' ) ?: array();
 		$count  = 0;
 
 		foreach ( $tables as $table ) {
-            // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.NoCaching -- OPTIMIZE TABLE is a maintenance mutation; there is nothing here to cache.
+            // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- OPTIMIZE TABLE is a maintenance mutation; there is nothing here to cache.
 			$wpdb->query( 'OPTIMIZE TABLE `' . esc_sql( $table ) . '`' );
 			++$count;
 		}
@@ -210,7 +210,7 @@ final class DatabaseOptimizer {
 	public function getDatabaseStats(): array {
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- live database-size status display; caching would show stale figures right after the admin runs a cleanup/optimize action.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- live database-size status display; caching would show stale figures right after the admin runs a cleanup/optimize action.
 		$row = $wpdb->get_row(
 			"SELECT
                 SUM(data_length + index_length)                    AS db_size,
@@ -245,7 +245,7 @@ final class DatabaseOptimizer {
 		// $direction is a ternary returning only 'ASC' or 'DESC'. Neither can ever
 		// contain attacker-controlled content, regardless of what $sort_by/$sort_dir
 		// are — ORDER BY identifiers cannot use $wpdb->prepare() placeholders anyway.
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- live per-table size/row-count status display; caching would show stale figures right after the admin runs a cleanup/optimize action. $order_by is whitelist-derived, see comment above.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery, PluginCheck.Security.DirectDB.UnescapedDBParameter -- live per-table size/row-count status display; caching would show stale figures right after the admin runs a cleanup/optimize action. $order_by is whitelist-derived, see comment above.
 		$rows = $wpdb->get_results(
 			"SELECT
                 table_name                 AS tbl_name,

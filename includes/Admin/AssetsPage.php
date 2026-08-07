@@ -307,7 +307,7 @@ final class AssetsPage extends BladeAdminPage {
 					'orderby'        => 'title',
 					'order'          => 'ASC',
 					'fields'         => 'ids',
-					'exclude'        => $exclude,
+					'exclude'        => $exclude, // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- $exclude holds at most one ID (the front page, only for the 'pages' bucket), never an unbounded/user-controlled list, so the resulting NOT IN clause carries no VIP-scale performance concern.
 				)
 			);
 

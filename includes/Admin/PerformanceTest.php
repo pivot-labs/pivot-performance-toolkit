@@ -265,7 +265,7 @@ final class PerformanceTest implements ModuleInterface {
 		echo 'function getCssMetrics(){var links=document.querySelectorAll("link[rel=\"stylesheet\"]")||[];var count=links.length;var totalSize=0;var resources=performance.getEntriesByType("resource")||[];resources.forEach(function(r){if(r.name&&(r.name.endsWith(".css")||r.initiatorType==="link")){var size=r.transferSize||r.encodedBodySize||0;totalSize+=size;}});return{total_css_count:count,total_css_size_bytes:totalSize};}';
 		echo 'function getImageMetrics(){var images=document.querySelectorAll("img")||[];var count=images.length;var totalSize=0;var resources=performance.getEntriesByType("resource")||[];resources.forEach(function(r){var name=String(r&&r.name?r.name:"").toLowerCase();var type=String(r&&r.initiatorType?r.initiatorType:"").toLowerCase();if(type==="img"||/\.(avif|bmp|gif|heic|heif|ico|jpe?g|png|svg|webp|tif|tiff)(\?|#|$)/i.test(name)){var size=r.transferSize||r.encodedBodySize||0;totalSize+=size;}});return{total_image_count:count,total_image_size_bytes:totalSize};}';
 		echo 'function collect(){var nav=(performance.getEntriesByType("navigation")[0]||null);if(!fcp){fcp=getFcpMetric();}if(!lcp){var lcpEntries=performance.getEntriesByType("largest-contentful-paint")||[];if(lcpEntries.length){lcp=lcpEntries[lcpEntries.length-1].startTime||0;}}var jsMetrics=getJsMetrics();var cssMetrics=getCssMetrics();var imageMetrics=getImageMetrics();var resources=performance.getEntriesByType("resource")||[];var metrics={ttfb_ms:num(nav&&nav.responseStart?nav.responseStart:0),fcp_ms:num(fcp),lcp_ms:num(lcp),dom_content_loaded_ms:num(nav&&nav.domContentLoadedEventEnd?nav.domContentLoadedEventEnd:0),load_event_ms:num(nav&&nav.loadEventEnd?nav.loadEventEnd:0),total_resource_count:resources.length,total_js_count:jsMetrics.total_js_count,total_js_size_bytes:jsMetrics.total_js_size_bytes,total_css_count:cssMetrics.total_css_count,total_css_size_bytes:cssMetrics.total_css_size_bytes,total_image_count:imageMetrics.total_image_count,total_image_size_bytes:imageMetrics.total_image_size_bytes};return metrics;}';
-		echo 'function getCacheHit(){return fetch(window.location.href,{method:"GET",credentials:"same-origin",cache:"no-store"}).then(function(response){var cacheStatus=String(response.headers.get("x-performance-toolkit-cache")||"").toUpperCase();return cacheStatus==="HIT"?1:0;}).catch(function(){return 0;});}';
+		echo 'function getCacheHit(){return fetch(window.location.href,{method:"GET",credentials:"same-origin",cache:"no-store"}).then(function(response){var cacheStatus=String(response.headers.get("x-pivot-cache")||"").toUpperCase();return cacheStatus==="HIT"?1:0;}).catch(function(){return 0;});}';
 		// The token is (re-)read here, at send-time, rather than once at parse-time:
 		// if this cached page also carries a freshly-injected probe script (from the
 		// advanced-cache drop-in, for a genuine cache HIT), that script deletes the
@@ -307,7 +307,7 @@ final class PerformanceTest implements ModuleInterface {
 					'orderby'        => 'title',
 					'order'          => 'ASC',
 					'fields'         => 'ids',
-					'exclude'        => $exclude,
+					'exclude'        => $exclude, // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- $exclude holds at most one ID (the front page, only for the 'pages' bucket), never an unbounded/user-controlled list, so the resulting NOT IN clause carries no VIP-scale performance concern.
 				)
 			);
 

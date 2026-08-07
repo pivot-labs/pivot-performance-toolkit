@@ -2,6 +2,8 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Illuminate's Blade PhpEngine::evaluatePath() includes compiled templates from inside a closure (`extract($data); include $path;`), so every local declared here is function-scoped at render time, never a true PHP global, despite this file's syntax looking top-level.
 ?>
 <x-card :title="__('Object Cache', 'pivot-performance-toolkit')" class="pivot-performance-toolkit-object-cache-card" id="pivot-performance-toolkit-object-cache-card">
 

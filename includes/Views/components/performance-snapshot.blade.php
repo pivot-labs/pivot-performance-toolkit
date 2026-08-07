@@ -2,6 +2,8 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Illuminate's Blade PhpEngine::evaluatePath() includes compiled templates from inside a closure (`extract($data); include $path;`), so every local declared here, including this loop's `$item`, is function-scoped at render time, never a true PHP global, despite this file's syntax looking top-level.
 ?>
 @props([
 	'options' => array(),

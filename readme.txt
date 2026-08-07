@@ -4,7 +4,7 @@ Tags: performance, cache, minify, lazy load, cloudflare
 Requires at least: 6.5
 Tested up to: 7.0
 Requires PHP: 8.2
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -119,11 +119,19 @@ This regenerates the `dist/` directory from the source files in `src/css/` and `
 
 == Changelog ==
 
+= 1.0.1 =
+
+* Fix: page caching could silently never serve cached pages on some installs. The cache would fill up normally, but the drop-in responsible for serving a fast cache hit had no configuration to read until the Cache settings page was saved once — so every request kept regenerating the cache instead of serving it. New installs are unaffected on activation, and existing installs self-correct automatically on the next page load.
+
 = 1.0.0 =
 
 * Initial public release.
 
 == Upgrade Notice ==
+
+= 1.0.1 =
+
+Fixes a bug where page caching would keep regenerating cache files instead of serving them. Recommended update.
 
 = 1.0.0 =
 

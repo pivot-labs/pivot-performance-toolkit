@@ -29,6 +29,14 @@ final class PageCache implements ModuleInterface {
 	}
 
 	public function register(): void {
+		// Self-heal installs activated before Lifecycle::activate() started writing
+		// this file (or where it was otherwise deleted): without it, advanced-cache.php
+		// has nothing to read and silently never serves a HIT, even though this class
+		// writes cache files fine via live settings. Cheap to check on every request.
+		if ( ! is_file( $this->cache_dir . '/config.php' ) ) {
+			$this->writeConfigFile();
+		}
+
 		// Cache writing – fires after headers are sent but before output is flushed.
 		add_action( 'template_redirect', array( $this, 'startBuffering' ), 1 );
 
@@ -247,12 +255,10 @@ final class PageCache implements ModuleInterface {
 			return;
 		}
 
-		// Keep both names for compatibility while introducing short PTK header.
-		header( 'X-PTK-Cache: ' . $status );
-		header( 'X-Performance-Toolkit-Cache: ' . $status );
+		header( 'X-Pivot-Cache: ' . $status );
 
 		if ( null !== $reason && '' !== $reason ) {
-			header( 'X-PTK-Cache-Reason: ' . $reason );
+			header( 'X-Pivot-Cache-Reason: ' . $reason );
 		}
 	}
 

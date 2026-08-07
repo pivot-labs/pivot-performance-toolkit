@@ -57,7 +57,7 @@ final class SystemStatusPage extends BladeAdminPage {
 	protected function buildViewData(): array {
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- live database-size status display; caching would show stale figures right after the admin runs a cleanup/optimize action.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- live database-size status display; caching would show stale figures right after the admin runs a cleanup/optimize action.
 		$wpdb_row = $wpdb->get_row(
 			'SELECT SUM(data_length + index_length) AS db_size
              FROM information_schema.TABLES

@@ -15,6 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 // phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
 // phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_file_get_contents
 // phpcs:disable WordPress.PHP.NoSilencedErrors.Discouraged
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound -- wp_cache_get(), wp_cache_set(), etc. are WordPress core's own Object Cache API function names; WP core and every other plugin call them by this exact literal name, so they cannot be prefixed without breaking the entire object cache system.
 
 if ( ! class_exists( 'WP_Object_Cache' ) ) {
 	/**

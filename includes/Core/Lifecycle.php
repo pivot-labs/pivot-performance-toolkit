@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace PivotPerformanceToolkit\Core;
 
+use PivotPerformanceToolkit\Cache\PageCache;
 use PivotPerformanceToolkit\Utils\FilesystemCheck;
 
 final class Lifecycle {
@@ -78,6 +79,13 @@ final class Lifecycle {
 		// Add WP_CACHE define to wp-config.php only when the drop-in is available.
 		if ( true === $dropin_installed ) {
 			self::enableWpCache();
+
+			// Without this, advanced-cache.php has no config.php to read until the
+			// admin visits the Cache settings page and saves once — until then it
+			// silently bails out of serving HITs on every request, even though
+			// PageCache is writing cache files fine (it reads live settings, not
+			// this flat file). Write it now so caching works immediately.
+			( new PageCache( new Settings() ) )->writeConfigFile();
 		} else {
 			// Remove the plugin-managed define to avoid claiming cache support when the drop-in is missing.
 			self::disableWpCache();

@@ -14,136 +14,142 @@ if ( ! defined( 'ABSPATH' ) ) {
 	return;
 }
 
-// Only handle anonymous GET requests.
-// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- used only in a strict === comparison against a hardcoded literal, never stored or output. wp_unslash() lives in wp-includes/formatting.php, which this drop-in is included before (see wp-settings.php), so it's not yet defined here.
-if ( ! isset( $_SERVER['REQUEST_METHOD'] ) || 'GET' !== strtoupper( $_SERVER['REQUEST_METHOD'] ) ) {
-	return;
-}
+// Wrapped in a closure so every local below is function-scoped rather than a
+// true PHP global (this file is `include`d at the top level of wp-settings.php,
+// so without this wrapper each `$ptk_*` variable would leak into the global
+// variable table for the rest of the request).
+( function () {
 
-// Skip CLI and cron.
-if ( ( defined( 'WP_CLI' ) && WP_CLI ) || ( defined( 'DOING_CRON' ) && DOING_CRON ) ) {
-	return;
-}
-
-// Detect performance-test probe cookie.
-// When set, we bypass the logged-in check so the probe can measure the real cached page.
-// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- only the length is checked below; the token's content is never stored, output, or otherwise used. wp_unslash() isn't yet defined this early in the bootstrap (see the REQUEST_METHOD check above).
-$ptk_probe_token = isset( $_COOKIE['pivot_performance_toolkit_perf_probe'] ) ? trim( (string) $_COOKIE['pivot_performance_toolkit_perf_probe'] ) : '';
-$ptk_is_probe    = ( strlen( $ptk_probe_token ) >= 20 );
-
-// Skip logged-in users by checking WP auth cookies (skip for probe requests).
-if ( ! $ptk_is_probe ) {
-	foreach ( array_keys( $_COOKIE ) as $ptk_cookie ) {
-		if ( 0 === strncmp( $ptk_cookie, 'wordpress_logged_in_', 20 ) ) {
-			return;
-		}
+	// Only handle anonymous GET requests.
+	// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- used only in a strict === comparison against a hardcoded literal, never stored or output. wp_unslash() lives in wp-includes/formatting.php, which this drop-in is included before (see wp-settings.php), so it's not yet defined here.
+	if ( ! isset( $_SERVER['REQUEST_METHOD'] ) || 'GET' !== strtoupper( $_SERVER['REQUEST_METHOD'] ) ) {
+		return;
 	}
-}
 
-// Read plugin config (written by PageCache on settings save / activation).
-$ptk_config_file = WP_CONTENT_DIR . '/cache/pivot-performance-toolkit/config.php';
+	// Skip CLI and cron.
+	if ( ( defined( 'WP_CLI' ) && WP_CLI ) || ( defined( 'DOING_CRON' ) && DOING_CRON ) ) {
+		return;
+	}
 
-if ( ! is_file( $ptk_config_file ) ) {
-	return;
-}
+	// Detect performance-test probe cookie.
+	// When set, we bypass the logged-in check so the probe can measure the real cached page.
+	// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- only the length is checked below; the token's content is never stored, output, or otherwise used. wp_unslash() isn't yet defined this early in the bootstrap (see the REQUEST_METHOD check above).
+	$ptk_probe_token = isset( $_COOKIE['pivot_performance_toolkit_perf_probe'] ) ? trim( (string) $_COOKIE['pivot_performance_toolkit_perf_probe'] ) : '';
+	$ptk_is_probe    = ( strlen( $ptk_probe_token ) >= 20 );
 
-$ptk_config = include $ptk_config_file;
-
-if ( empty( $ptk_config['enabled'] ) ) {
-	return;
-}
-
-$ptk_bypass_cookies = isset( $ptk_config['bypass_cookies'] ) && is_array( $ptk_config['bypass_cookies'] )
-	? $ptk_config['bypass_cookies']
-	: array();
-
-if ( ! $ptk_is_probe && array() !== $ptk_bypass_cookies && isset( $_COOKIE ) && is_array( $_COOKIE ) ) {
-	foreach ( array_keys( $_COOKIE ) as $ptk_cookie_name ) {
-		if ( ! is_string( $ptk_cookie_name ) || '' === $ptk_cookie_name ) {
-			continue;
-		}
-
-		foreach ( $ptk_bypass_cookies as $ptk_rule ) {
-			$ptk_rule = trim( (string) $ptk_rule );
-
-			if ( '' === $ptk_rule ) {
-				continue;
-			}
-
-			if ( false !== strpos( $ptk_rule, '*' ) ) {
-				if ( fnmatch( $ptk_rule, $ptk_cookie_name ) ) {
-					return;
-				}
-
-				continue;
-			}
-
-			if ( 0 === strcasecmp( $ptk_rule, $ptk_cookie_name ) ) {
+	// Skip logged-in users by checking WP auth cookies (skip for probe requests).
+	if ( ! $ptk_is_probe ) {
+		foreach ( array_keys( $_COOKIE ) as $ptk_cookie ) {
+			if ( 0 === strncmp( $ptk_cookie, 'wordpress_logged_in_', 20 ) ) {
 				return;
 			}
 		}
 	}
-}
 
-$ptk_ttl       = isset( $ptk_config['ttl'] ) ? (int) $ptk_config['ttl'] : 3600;
-$ptk_cache_dir = WP_CONTENT_DIR . '/cache/pivot-performance-toolkit';
-// phpcs:disable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- these are only ever MD5-hashed below to build the cache file name; raw content is never stored, echoed, or used directly as a filesystem path. wp_unslash() isn't yet defined this early in the bootstrap.
-$ptk_scheme = ( ! empty( $_SERVER['HTTPS'] ) && strtolower( (string) $_SERVER['HTTPS'] ) !== 'off' ) ? 'https' : 'http';
-$ptk_host   = isset( $_SERVER['HTTP_HOST'] ) ? (string) $_SERVER['HTTP_HOST'] : 'localhost';
-$ptk_uri    = isset( $_SERVER['REQUEST_URI'] ) ? (string) $_SERVER['REQUEST_URI'] : '/';
-// phpcs:enable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-$ptk_key  = md5( $ptk_scheme . '://' . $ptk_host . $ptk_uri );
-$ptk_file = $ptk_cache_dir . '/' . $ptk_key . '.html';
+	// Read plugin config (written by PageCache on settings save / activation).
+	$ptk_config_file = WP_CONTENT_DIR . '/cache/pivot-performance-toolkit/config.php';
 
-if ( ! is_file( $ptk_file ) ) {
-	return;
-}
-
-// Expire stale files.
-if ( ( (int) filemtime( $ptk_file ) + $ptk_ttl ) < time() ) {
-	// phpcs:ignore WordPress.WP.AlternativeFunctions.unlink_unlink -- this drop-in is included before wp-includes/functions.php loads (see wp-settings.php), so wp_delete_file() is not yet defined at this point in the request.
-	@unlink( $ptk_file );
-	return;
-}
-
-header( 'X-PTK-Cache: HIT' );
-header( 'X-Performance-Toolkit-Cache: HIT' );
-
-// For probe requests: inject the metrics-collection script into the cached HTML
-// before </body> so the probe can report back its timing data.
-if ( $ptk_is_probe ) {
-	$ptk_collect_url = isset( $ptk_config['collect_url'] ) ? (string) $ptk_config['collect_url'] : '';
-	$ptk_html        = (string) file_get_contents( $ptk_file );
-
-	if ( '' !== $ptk_collect_url && '' !== $ptk_html ) {
-		$ptk_safe_token = json_encode( $ptk_probe_token );
-		$ptk_safe_url   = json_encode( $ptk_collect_url );
-
-		$ptk_script  = "\n<script>\n(function(){\nvar token=" . $ptk_safe_token . ';var collectUrl=' . $ptk_safe_url . ';';
-		$ptk_script .= "document.cookie='pivot_performance_toolkit_perf_probe=;path=/;SameSite=Lax;max-age=0;expires=Thu, 01 Jan 1970 00:00:00 GMT';";
-		$ptk_script .= "try{window.name='';}catch(e){}";
-		$ptk_script .= 'var sentKey="pivot_performance_toolkit_perf_sent_"+token;';
-		$ptk_script .= 'try{if(window.sessionStorage&&window.sessionStorage.getItem(sentKey)==="1"){return;}}catch(e){}';
-		$ptk_script .= 'var fcp=0;var lcp=0;';
-		$ptk_script .= 'if("PerformanceObserver" in window){try{var paintObs=new PerformanceObserver(function(list){list.getEntries().forEach(function(e){if(e.name==="first-contentful-paint"){fcp=fcp||e.startTime||0;}});});paintObs.observe({type:"paint",buffered:true});var lcpObs=new PerformanceObserver(function(list){var e=list.getEntries();if(e.length){lcp=e[e.length-1].startTime||lcp;}});lcpObs.observe({type:"largest-contentful-paint",buffered:true});}catch(e){}}';
-		$ptk_script .= 'function num(v){var n=Number(v);return Number.isFinite(n)?Math.round(n*100)/100:0;}';
-		$ptk_script .= 'function getFcp(){var p=performance.getEntriesByType("paint")||[];var e=p.find(function(x){return x.name==="first-contentful-paint";});return num(e&&e.startTime?e.startTime:fcp);}';
-		$ptk_script .= 'function getJs(){var s=document.querySelectorAll("script[src]")||[];var c=s.length,t=0;(performance.getEntriesByType("resource")||[]).forEach(function(r){if(r.name&&(r.name.endsWith(".js")||r.initiatorType==="script")){t+=r.transferSize||r.encodedBodySize||0;}});return{total_js_count:c,total_js_size_bytes:t};}';
-		$ptk_script .= 'function getCss(){var s=document.querySelectorAll("link[rel=\"stylesheet\"]")||[];var c=s.length,t=0;(performance.getEntriesByType("resource")||[]).forEach(function(r){if(r.name&&(r.name.endsWith(".css")||r.initiatorType==="link")){t+=r.transferSize||r.encodedBodySize||0;}});return{total_css_count:c,total_css_size_bytes:t};}';
-		$ptk_script .= 'function getImg(){var imgs=document.querySelectorAll("img")||[];var c=imgs.length,t=0;(performance.getEntriesByType("resource")||[]).forEach(function(r){var n=String(r&&r.name?r.name:"").toLowerCase(),tp=String(r&&r.initiatorType?r.initiatorType:"").toLowerCase();if(tp==="img"||/\\.(avif|bmp|gif|heic|heif|ico|jpe?g|png|svg|webp|tif|tiff)(\\?|#|$)/i.test(n)){t+=r.transferSize||r.encodedBodySize||0;}});return{total_image_count:c,total_image_size_bytes:t};}';
-		$ptk_script .= 'function collect(){var nav=performance.getEntriesByType("navigation")[0]||null;if(!fcp){fcp=getFcp();}if(!lcp){var le=performance.getEntriesByType("largest-contentful-paint")||[];if(le.length){lcp=le[le.length-1].startTime||0;}}var js=getJs(),css=getCss(),img=getImg(),res=performance.getEntriesByType("resource")||[];return{ttfb_ms:num(nav&&nav.responseStart?nav.responseStart:0),fcp_ms:num(fcp),lcp_ms:num(lcp),dom_content_loaded_ms:num(nav&&nav.domContentLoadedEventEnd?nav.domContentLoadedEventEnd:0),load_event_ms:num(nav&&nav.loadEventEnd?nav.loadEventEnd:0),total_resource_count:res.length,total_js_count:js.total_js_count,total_js_size_bytes:js.total_js_size_bytes,total_css_count:css.total_css_count,total_css_size_bytes:css.total_css_size_bytes,total_image_count:img.total_image_count,total_image_size_bytes:img.total_image_size_bytes,page_cache_hit:1};}';
-		$ptk_script .= 'function send(){var p={token:token,pageUrl:window.location.href,metrics:collect()};fetch(collectUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(p),keepalive:true,credentials:"omit"}).then(function(){try{if(window.sessionStorage){window.sessionStorage.setItem(sentKey,"1");}}catch(e){}}).catch(function(){});}';
-		$ptk_script .= 'window.addEventListener("load",function(){window.setTimeout(send,300);});';
-		$ptk_script .= "})();\n</script>\n";
-
-		$ptk_replaced = preg_replace( '/<\/body\s*>/i', $ptk_script . '</body>', $ptk_html, 1 );
-		$ptk_html     = ( null !== $ptk_replaced ) ? $ptk_replaced : $ptk_html . $ptk_script;
-
-		echo $ptk_html; // phpcs:ignore WordPress.Security.EscapeOutput
-		exit;
+	if ( ! is_file( $ptk_config_file ) ) {
+		return;
 	}
-}
 
-// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_readfile -- this drop-in is included before wp-includes/functions.php loads (see wp-settings.php), so WP_Filesystem is not yet available; readfile() also streams the cached page directly rather than buffering it in memory, which matters for large pages.
-readfile( $ptk_file );
-exit;
+	$ptk_config = include $ptk_config_file;
+
+	if ( empty( $ptk_config['enabled'] ) ) {
+		return;
+	}
+
+	$ptk_bypass_cookies = isset( $ptk_config['bypass_cookies'] ) && is_array( $ptk_config['bypass_cookies'] )
+		? $ptk_config['bypass_cookies']
+		: array();
+
+	if ( ! $ptk_is_probe && array() !== $ptk_bypass_cookies && isset( $_COOKIE ) && is_array( $_COOKIE ) ) {
+		foreach ( array_keys( $_COOKIE ) as $ptk_cookie_name ) {
+			if ( ! is_string( $ptk_cookie_name ) || '' === $ptk_cookie_name ) {
+				continue;
+			}
+
+			foreach ( $ptk_bypass_cookies as $ptk_rule ) {
+				$ptk_rule = trim( (string) $ptk_rule );
+
+				if ( '' === $ptk_rule ) {
+					continue;
+				}
+
+				if ( false !== strpos( $ptk_rule, '*' ) ) {
+					if ( fnmatch( $ptk_rule, $ptk_cookie_name ) ) {
+						return;
+					}
+
+					continue;
+				}
+
+				if ( 0 === strcasecmp( $ptk_rule, $ptk_cookie_name ) ) {
+					return;
+				}
+			}
+		}
+	}
+
+	$ptk_ttl       = isset( $ptk_config['ttl'] ) ? (int) $ptk_config['ttl'] : 3600;
+	$ptk_cache_dir = WP_CONTENT_DIR . '/cache/pivot-performance-toolkit';
+	// phpcs:disable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- these are only ever MD5-hashed below to build the cache file name; raw content is never stored, echoed, or used directly as a filesystem path. wp_unslash() isn't yet defined this early in the bootstrap.
+	$ptk_scheme = ( ! empty( $_SERVER['HTTPS'] ) && strtolower( (string) $_SERVER['HTTPS'] ) !== 'off' ) ? 'https' : 'http';
+	$ptk_host   = isset( $_SERVER['HTTP_HOST'] ) ? (string) $_SERVER['HTTP_HOST'] : 'localhost';
+	$ptk_uri    = isset( $_SERVER['REQUEST_URI'] ) ? (string) $_SERVER['REQUEST_URI'] : '/';
+	// phpcs:enable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+	$ptk_key  = md5( $ptk_scheme . '://' . $ptk_host . $ptk_uri );
+	$ptk_file = $ptk_cache_dir . '/' . $ptk_key . '.html';
+
+	if ( ! is_file( $ptk_file ) ) {
+		return;
+	}
+
+	// Expire stale files.
+	if ( ( (int) filemtime( $ptk_file ) + $ptk_ttl ) < time() ) {
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.unlink_unlink -- this drop-in is included before wp-includes/functions.php loads (see wp-settings.php), so wp_delete_file() is not yet defined at this point in the request.
+		@unlink( $ptk_file );
+		return;
+	}
+
+	header( 'X-Pivot-Cache: HIT' );
+
+	// For probe requests: inject the metrics-collection script into the cached HTML
+	// before </body> so the probe can report back its timing data.
+	if ( $ptk_is_probe ) {
+		$ptk_collect_url = isset( $ptk_config['collect_url'] ) ? (string) $ptk_config['collect_url'] : '';
+		$ptk_html        = (string) file_get_contents( $ptk_file );
+
+		if ( '' !== $ptk_collect_url && '' !== $ptk_html ) {
+			$ptk_safe_token = json_encode( $ptk_probe_token );
+			$ptk_safe_url   = json_encode( $ptk_collect_url );
+
+			$ptk_script  = "\n<script>\n(function(){\nvar token=" . $ptk_safe_token . ';var collectUrl=' . $ptk_safe_url . ';';
+			$ptk_script .= "document.cookie='pivot_performance_toolkit_perf_probe=;path=/;SameSite=Lax;max-age=0;expires=Thu, 01 Jan 1970 00:00:00 GMT';";
+			$ptk_script .= "try{window.name='';}catch(e){}";
+			$ptk_script .= 'var sentKey="pivot_performance_toolkit_perf_sent_"+token;';
+			$ptk_script .= 'try{if(window.sessionStorage&&window.sessionStorage.getItem(sentKey)==="1"){return;}}catch(e){}';
+			$ptk_script .= 'var fcp=0;var lcp=0;';
+			$ptk_script .= 'if("PerformanceObserver" in window){try{var paintObs=new PerformanceObserver(function(list){list.getEntries().forEach(function(e){if(e.name==="first-contentful-paint"){fcp=fcp||e.startTime||0;}});});paintObs.observe({type:"paint",buffered:true});var lcpObs=new PerformanceObserver(function(list){var e=list.getEntries();if(e.length){lcp=e[e.length-1].startTime||lcp;}});lcpObs.observe({type:"largest-contentful-paint",buffered:true});}catch(e){}}';
+			$ptk_script .= 'function num(v){var n=Number(v);return Number.isFinite(n)?Math.round(n*100)/100:0;}';
+			$ptk_script .= 'function getFcp(){var p=performance.getEntriesByType("paint")||[];var e=p.find(function(x){return x.name==="first-contentful-paint";});return num(e&&e.startTime?e.startTime:fcp);}';
+			$ptk_script .= 'function getJs(){var s=document.querySelectorAll("script[src]")||[];var c=s.length,t=0;(performance.getEntriesByType("resource")||[]).forEach(function(r){if(r.name&&(r.name.endsWith(".js")||r.initiatorType==="script")){t+=r.transferSize||r.encodedBodySize||0;}});return{total_js_count:c,total_js_size_bytes:t};}';
+			$ptk_script .= 'function getCss(){var s=document.querySelectorAll("link[rel=\"stylesheet\"]")||[];var c=s.length,t=0;(performance.getEntriesByType("resource")||[]).forEach(function(r){if(r.name&&(r.name.endsWith(".css")||r.initiatorType==="link")){t+=r.transferSize||r.encodedBodySize||0;}});return{total_css_count:c,total_css_size_bytes:t};}';
+			$ptk_script .= 'function getImg(){var imgs=document.querySelectorAll("img")||[];var c=imgs.length,t=0;(performance.getEntriesByType("resource")||[]).forEach(function(r){var n=String(r&&r.name?r.name:"").toLowerCase(),tp=String(r&&r.initiatorType?r.initiatorType:"").toLowerCase();if(tp==="img"||/\\.(avif|bmp|gif|heic|heif|ico|jpe?g|png|svg|webp|tif|tiff)(\\?|#|$)/i.test(n)){t+=r.transferSize||r.encodedBodySize||0;}});return{total_image_count:c,total_image_size_bytes:t};}';
+			$ptk_script .= 'function collect(){var nav=performance.getEntriesByType("navigation")[0]||null;if(!fcp){fcp=getFcp();}if(!lcp){var le=performance.getEntriesByType("largest-contentful-paint")||[];if(le.length){lcp=le[le.length-1].startTime||0;}}var js=getJs(),css=getCss(),img=getImg(),res=performance.getEntriesByType("resource")||[];return{ttfb_ms:num(nav&&nav.responseStart?nav.responseStart:0),fcp_ms:num(fcp),lcp_ms:num(lcp),dom_content_loaded_ms:num(nav&&nav.domContentLoadedEventEnd?nav.domContentLoadedEventEnd:0),load_event_ms:num(nav&&nav.loadEventEnd?nav.loadEventEnd:0),total_resource_count:res.length,total_js_count:js.total_js_count,total_js_size_bytes:js.total_js_size_bytes,total_css_count:css.total_css_count,total_css_size_bytes:css.total_css_size_bytes,total_image_count:img.total_image_count,total_image_size_bytes:img.total_image_size_bytes,page_cache_hit:1};}';
+			$ptk_script .= 'function send(){var p={token:token,pageUrl:window.location.href,metrics:collect()};fetch(collectUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(p),keepalive:true,credentials:"omit"}).then(function(){try{if(window.sessionStorage){window.sessionStorage.setItem(sentKey,"1");}}catch(e){}}).catch(function(){});}';
+			$ptk_script .= 'window.addEventListener("load",function(){window.setTimeout(send,300);});';
+			$ptk_script .= "})();\n</script>\n";
+
+			$ptk_replaced = preg_replace( '/<\/body\s*>/i', $ptk_script . '</body>', $ptk_html, 1 );
+			$ptk_html     = ( null !== $ptk_replaced ) ? $ptk_replaced : $ptk_html . $ptk_script;
+
+			echo $ptk_html; // phpcs:ignore WordPress.Security.EscapeOutput
+			exit;
+		}
+	}
+
+	// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_readfile -- this drop-in is included before wp-includes/functions.php loads (see wp-settings.php), so WP_Filesystem is not yet available; readfile() also streams the cached page directly rather than buffering it in memory, which matters for large pages.
+	readfile( $ptk_file );
+	exit;
+} )();

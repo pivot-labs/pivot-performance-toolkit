@@ -3,7 +3,7 @@
  * Plugin Name: Pivot Performance Toolkit
  * Plugin URI: https://www.pivotlabs.dev/
  * Description: Performance optimization toolkit for WordPress.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Requires at least: 6.5
  * Requires PHP: 8.2
  * Author: Pivot Labs
@@ -20,22 +20,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'PIVOT_PERFORMANCE_TOOLKIT_VERSION', '1.0.0' );
+define( 'PIVOT_PERFORMANCE_TOOLKIT_VERSION', '1.0.1' );
 define( 'PIVOT_PERFORMANCE_TOOLKIT_PLUGIN_FILE', __FILE__ );
 define( 'PIVOT_PERFORMANCE_TOOLKIT_PATH', plugin_dir_path( __FILE__ ) );
 define( 'PIVOT_PERFORMANCE_TOOLKIT_URL', plugin_dir_url( __FILE__ ) );
 
-$autoload_file = PIVOT_PERFORMANCE_TOOLKIT_PATH . 'vendor/autoload.php';
+$pivot_performance_toolkit_autoload_file = PIVOT_PERFORMANCE_TOOLKIT_PATH . 'vendor/autoload.php';
 
-if ( file_exists( $autoload_file ) ) {
-	require_once $autoload_file;
+if ( file_exists( $pivot_performance_toolkit_autoload_file ) ) {
+	require_once $pivot_performance_toolkit_autoload_file;
 }
 
 // Strauss-scoped vendor dependencies (prevents class conflicts with other plugins).
-$scoped_autoload = PIVOT_PERFORMANCE_TOOLKIT_PATH . 'includes/Vendor/autoload.php';
+$pivot_performance_toolkit_scoped_autoload = PIVOT_PERFORMANCE_TOOLKIT_PATH . 'includes/Vendor/autoload.php';
 
-if ( file_exists( $scoped_autoload ) ) {
-	require_once $scoped_autoload;
+if ( file_exists( $pivot_performance_toolkit_scoped_autoload ) ) {
+	require_once $pivot_performance_toolkit_scoped_autoload;
 }
 
 register_activation_hook( __FILE__, array( '\\PivotPerformanceToolkit\\Core\\Lifecycle', 'activate' ) );
