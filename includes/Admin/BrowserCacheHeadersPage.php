@@ -56,7 +56,7 @@ final class BrowserCacheHeadersPage extends BladeAdminPage {
 	 * @return array<string, mixed>
 	 */
 	protected function buildViewData(): array {
-		// phpcs:disable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- SERVER_SOFTWARE is set by the web server, not user input; it's only ever displayed via Blade's {{ }}, which HTML-escapes it at render time. The notice/message query args are read-only display values from this page's own post-redirect notice, used only in strict comparisons/output via wp_kses, never stored.
+		// phpcs:disable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.NonceVerification.Recommended -- SERVER_SOFTWARE is set by the web server, not user input; it's only ever displayed via Blade's {{ }}, which HTML-escapes it at render time. The notice/message query args are read-only display values from this page's own post-redirect notice (set by handleApply()/handleRemove() below, both of which already verify the nonce via check_admin_referer() before redirecting here) — sanitized and used only for display, never to trigger a state change.
 		$server_software = isset( $_SERVER['SERVER_SOFTWARE'] ) ? (string) wp_unslash( $_SERVER['SERVER_SOFTWARE'] ) : '';
 
 		return array(
@@ -73,7 +73,7 @@ final class BrowserCacheHeadersPage extends BladeAdminPage {
 			'notice'           => isset( $_GET['pivot_performance_toolkit_htaccess_notice'] ) ? sanitize_key( wp_unslash( (string) $_GET['pivot_performance_toolkit_htaccess_notice'] ) ) : '',
 			'message'          => isset( $_GET['pivot_performance_toolkit_htaccess_message'] ) ? sanitize_text_field( wp_unslash( (string) $_GET['pivot_performance_toolkit_htaccess_message'] ) ) : '',
 		);
-		// phpcs:enable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		// phpcs:enable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.NonceVerification.Recommended
 	}
 
 	public function handleApply(): void {
