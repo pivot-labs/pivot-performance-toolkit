@@ -44,6 +44,8 @@ final class Settings {
 			'combine_js_exclusions'          => '',
 			'minify_js'                      => false,
 			'defer_scripts'                  => true,
+			'delay_js_execution'             => false,
+			'delay_js_exclusions'            => '',
 			'lazy_load_images'               => true,
 			'last_settings_exported_at_gmt'  => '',
 		);
@@ -102,6 +104,8 @@ final class Settings {
 			'combine_js_exclusions'          => $this->sanitizeTextarea( (string) ( $raw['combine_js_exclusions'] ?? $base['combine_js_exclusions'] ) ),
 			'minify_js'                      => array_key_exists( 'minify_js', $raw ) ? ! empty( $raw['minify_js'] ) : (bool) $base['minify_js'],
 			'defer_scripts'                  => array_key_exists( 'defer_scripts', $raw ) ? ! empty( $raw['defer_scripts'] ) : (bool) $base['defer_scripts'],
+			'delay_js_execution'             => array_key_exists( 'delay_js_execution', $raw ) ? ! empty( $raw['delay_js_execution'] ) : (bool) $base['delay_js_execution'],
+			'delay_js_exclusions'            => $this->sanitizeTextarea( (string) ( $raw['delay_js_exclusions'] ?? $base['delay_js_exclusions'] ) ),
 			'lazy_load_images'               => array_key_exists( 'lazy_load_images', $raw ) ? ! empty( $raw['lazy_load_images'] ) : (bool) $base['lazy_load_images'],
 			'last_settings_exported_at_gmt'  => $this->sanitizeText( (string) ( $raw['last_settings_exported_at_gmt'] ?? $base['last_settings_exported_at_gmt'] ) ),
 		);

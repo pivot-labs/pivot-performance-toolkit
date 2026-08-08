@@ -10,6 +10,11 @@ if ( ! defined( 'ABSPATH' ) ) {
             :action="$ajax_save_quick_toggle_action"
             :nonce="$ajax_save_quick_toggle_nonce"
         />
+        <x-toggles.delay-js
+            :checked="!empty($options['delay_js_execution'])"
+            :action="$ajax_save_quick_toggle_action"
+            :nonce="$ajax_save_quick_toggle_nonce"
+        />
         <x-toggles.minify-html
             :checked="!empty($options['minify_html'])"
             :action="$ajax_save_quick_toggle_action"

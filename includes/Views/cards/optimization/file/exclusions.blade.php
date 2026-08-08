@@ -3,11 +3,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-<x-card :title="__('Minification Exclusions', 'pivot-performance-toolkit')" id="pivot-performance-toolkit-file-optimization-exclusions">
+<x-card :title="__('Optimization Exclusions', 'pivot-performance-toolkit')" id="pivot-performance-toolkit-file-optimization-exclusions">
 
     @php
         $exclusionsOpen = !empty(trim((string) $options['minify_external_css_exclusions']))
-                       || !empty(trim((string) $options['minify_external_js_exclusions']));
+                       || !empty(trim((string) $options['minify_external_js_exclusions']))
+                       || !empty(trim((string) $options['delay_js_exclusions']));
     @endphp
 
     <style>
@@ -51,7 +52,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
      <div class="pivot-performance-toolkit-http11-warning">
          <strong>{{ __('Warning:', 'pivot-performance-toolkit') }}</strong>
-         <span>{{ __('Minification exclusions can break dependency order, plugin-specific assets, and conditional loading logic. Use only after testing key pages.', 'pivot-performance-toolkit') }}</span>
+         <span>{{ __('Minification and delay-execution exclusions can break dependency order, plugin-specific assets, and conditional loading logic. Use only after testing key pages — especially for scripts that must run before user interaction, such as consent banners or payment forms.', 'pivot-performance-toolkit') }}</span>
      </div>
 
     <button
@@ -107,6 +108,27 @@ if ( ! defined( 'ABSPATH' ) ) {
                 <p class="pivot-performance-toolkit-exclusions-hint">
                     {!! wp_kses(
                         __('<strong>One rule per line.</strong> You can exclude by script handle, file name, full path, or wildcard pattern. Examples: <code>jquery-core</code>, <code>app.js</code>, <code>/wp-content/themes/your-theme/js/*</code>.', 'pivot-performance-toolkit'),
+                        array('strong' => array(), 'code' => array())
+                    ) !!}
+                </p>
+            </div>
+
+            <div class="pivot-performance-toolkit-field">
+                <label for="pivot-performance-toolkit-delay-js-exclusions" style="display:block;font-weight:600;">
+                    {{ __('Delay JS execution exclusions', 'pivot-performance-toolkit') }}
+                </label>
+                <p>{{ __('Prevent specific scripts from having their execution delayed. Use for scripts that must run immediately (e.g. payment gateways, consent banners).', 'pivot-performance-toolkit') }}</p>
+                <textarea
+                    id="pivot-performance-toolkit-delay-js-exclusions"
+                    name="{{ $option_key }}[delay_js_exclusions]"
+                    class="pivot-performance-toolkit-exclusions-textarea"
+                    rows="6"
+                    placeholder="{{ esc_attr("stripe-js\nrecaptcha.js\n/wp-content/plugins/your-plugin/js/*") }}"
+                    spellcheck="false"
+                >{{ esc_textarea((string) $options['delay_js_exclusions']) }}</textarea>
+                <p class="pivot-performance-toolkit-exclusions-hint">
+                    {!! wp_kses(
+                        __('<strong>One rule per line.</strong> You can exclude by script id, file name, full path, or wildcard pattern. Examples: <code>stripe-js</code>, <code>recaptcha.js</code>, <code>/wp-content/plugins/your-plugin/js/*</code>.', 'pivot-performance-toolkit'),
                         array('strong' => array(), 'code' => array())
                     ) !!}
                 </p>
