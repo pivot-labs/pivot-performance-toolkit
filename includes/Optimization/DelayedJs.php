@@ -217,12 +217,10 @@ final class DelayedJs implements ModuleInterface {
 	}
 
 	private function runtimeScript( int $timeout ): string {
-		$placeholder_type = self::PLACEHOLDER_TYPE;
-
-		return <<<JS
-(function () {
+		return sprintf(
+			'(function () {
     var triggered = false;
-    var events = ['mousemove', 'scroll', 'keydown', 'touchstart', 'click'];
+    var events = [\'mousemove\', \'scroll\', \'keydown\', \'touchstart\', \'click\'];
 
     function restore() {
         if (triggered) return;
@@ -233,9 +231,9 @@ final class DelayedJs implements ModuleInterface {
         });
         clearTimeout(timer);
 
-        var delayed = document.querySelectorAll('script[type="{$placeholder_type}"]');
+        var delayed = document.querySelectorAll(\'script[type="%1$s"]\');
         delayed.forEach(function (oldScript) {
-            var newScript = document.createElement('script');
+            var newScript = document.createElement(\'script\');
             // Dynamically-inserted external scripts execute as soon as they
             // finish fetching (not in insertion order) unless async is
             // explicitly disabled — required to preserve relative order
@@ -243,8 +241,8 @@ final class DelayedJs implements ModuleInterface {
             newScript.async = false;
             for (var i = 0; i < oldScript.attributes.length; i++) {
                 var attr = oldScript.attributes[i];
-                if (attr.name === 'type') continue;
-                if (attr.name === 'data-pivot-delayed-src') {
+                if (attr.name === \'type\') continue;
+                if (attr.name === \'data-pivot-delayed-src\') {
                     newScript.src = attr.value;
                     continue;
                 }
@@ -257,11 +255,13 @@ final class DelayedJs implements ModuleInterface {
         });
     }
 
-    var timer = setTimeout(restore, {$timeout});
+    var timer = setTimeout(restore, %2$d);
     events.forEach(function (evt) {
         window.addEventListener(evt, restore, { passive: true, once: true });
     });
-})();
-JS;
+})();',
+			self::PLACEHOLDER_TYPE,
+			$timeout
+		);
 	}
 }
