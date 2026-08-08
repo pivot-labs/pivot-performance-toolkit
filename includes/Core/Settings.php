@@ -46,6 +46,8 @@ final class Settings {
 			'defer_scripts'                  => true,
 			'delay_js_execution'             => false,
 			'delay_js_exclusions'            => '',
+			'async_css_loading'              => false,
+			'async_css_exclusions'           => '',
 			'lazy_load_images'               => true,
 			'last_settings_exported_at_gmt'  => '',
 		);
@@ -106,6 +108,8 @@ final class Settings {
 			'defer_scripts'                  => array_key_exists( 'defer_scripts', $raw ) ? ! empty( $raw['defer_scripts'] ) : (bool) $base['defer_scripts'],
 			'delay_js_execution'             => array_key_exists( 'delay_js_execution', $raw ) ? ! empty( $raw['delay_js_execution'] ) : (bool) $base['delay_js_execution'],
 			'delay_js_exclusions'            => $this->sanitizeTextarea( (string) ( $raw['delay_js_exclusions'] ?? $base['delay_js_exclusions'] ) ),
+			'async_css_loading'              => array_key_exists( 'async_css_loading', $raw ) ? ! empty( $raw['async_css_loading'] ) : (bool) $base['async_css_loading'],
+			'async_css_exclusions'           => $this->sanitizeTextarea( (string) ( $raw['async_css_exclusions'] ?? $base['async_css_exclusions'] ) ),
 			'lazy_load_images'               => array_key_exists( 'lazy_load_images', $raw ) ? ! empty( $raw['lazy_load_images'] ) : (bool) $base['lazy_load_images'],
 			'last_settings_exported_at_gmt'  => $this->sanitizeText( (string) ( $raw['last_settings_exported_at_gmt'] ?? $base['last_settings_exported_at_gmt'] ) ),
 		);

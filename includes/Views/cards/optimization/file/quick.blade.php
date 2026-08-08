@@ -25,6 +25,11 @@ if ( ! defined( 'ABSPATH' ) ) {
             :action="$ajax_save_quick_toggle_action"
             :nonce="$ajax_save_quick_toggle_nonce"
         />
+        <x-toggles.async-css
+            :checked="!empty($options['async_css_loading'])"
+            :action="$ajax_save_quick_toggle_action"
+            :nonce="$ajax_save_quick_toggle_nonce"
+        />
         <x-toggles.minify-external-css
             :checked="!empty($options['minify_external_css'])"
             :action="$ajax_save_quick_toggle_action"

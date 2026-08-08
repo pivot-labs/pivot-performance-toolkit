@@ -75,7 +75,7 @@ final class FileOptimizationPage extends BladeAdminPage {
 
 		$setting_key = isset( $_POST['setting_key'] ) ? sanitize_key( wp_unslash( (string) $_POST['setting_key'] ) ) : '';
 
-		$allowed_setting_keys = array( 'defer_scripts', 'delay_js_execution', 'minify_html', 'minify_css', 'minify_external_css', 'minify_external_js', 'minify_js' );
+		$allowed_setting_keys = array( 'defer_scripts', 'delay_js_execution', 'async_css_loading', 'minify_html', 'minify_css', 'minify_external_css', 'minify_external_js', 'minify_js' );
 
 		if ( ! in_array( $setting_key, $allowed_setting_keys, true ) ) {
 			wp_send_json_error( array( 'message' => __( 'Invalid setting.', 'pivot-performance-toolkit' ) ), 400 );

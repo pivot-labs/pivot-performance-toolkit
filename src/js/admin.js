@@ -314,6 +314,104 @@
         });
     }
 
+    function bindHtaccessToggle() {
+        var i18n = (typeof window.ptkAdmin === 'object' && window.ptkAdmin) ? window.ptkAdmin : {};
+        var requestFailedMessage = i18n.requestFailed || '';
+
+        document.querySelectorAll('[data-htaccess-toggle]').forEach(function (container) {
+            var button = container.querySelector('[data-htaccess-submit]');
+            var title = container.querySelector('[data-htaccess-title]');
+            var description = container.querySelector('[data-htaccess-description]');
+            var noticeContainer = container.closest('#pivot-performance-toolkit-panel-htaccess')
+                ? container.closest('#pivot-performance-toolkit-panel-htaccess').querySelector('.pivot-performance-toolkit-card-notices')
+                : null;
+
+            if (!button || !title || !description) {
+                return;
+            }
+
+            button.addEventListener('click', function () {
+                var applied = container.getAttribute('data-state') === 'applied';
+                var action = applied ? container.getAttribute('data-remove-action') : container.getAttribute('data-apply-action');
+                var nonce = applied ? container.getAttribute('data-remove-nonce') : container.getAttribute('data-apply-nonce');
+
+                if (!action) {
+                    return;
+                }
+
+                button.disabled = true;
+
+                var body = new URLSearchParams();
+                body.set('action', action);
+                body.set('_ajax_nonce', nonce || '');
+
+                fetch(getAjaxUrl(), {
+                    method: 'POST',
+                    credentials: 'same-origin',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                    },
+                    body: body.toString()
+                })
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (payload) {
+                        var message = requestFailedMessage;
+
+                        if (payload && payload.data && payload.data.message) {
+                            message = payload.data.message;
+                        }
+
+                        if (!payload || !payload.success) {
+                            showQuickActionNotice(noticeContainer, 'error', message);
+                            return;
+                        }
+
+                        var nowApplied = !!(payload.data && payload.data.applied);
+
+                        container.setAttribute('data-state', nowApplied ? 'applied' : 'not-applied');
+                        container.classList.toggle('border-green-200', nowApplied);
+                        container.classList.toggle('bg-green-50', nowApplied);
+                        container.classList.toggle('border-slate-200', !nowApplied);
+                        container.classList.toggle('bg-slate-50', !nowApplied);
+
+                        title.textContent = nowApplied
+                            ? container.getAttribute('data-label-applied')
+                            : container.getAttribute('data-label-not-applied');
+                        title.classList.toggle('text-green-800', nowApplied);
+                        title.classList.toggle('text-slate-900', !nowApplied);
+
+                        description.textContent = nowApplied
+                            ? container.getAttribute('data-description-applied')
+                            : container.getAttribute('data-description-not-applied');
+                        description.classList.toggle('text-green-700', nowApplied);
+                        description.classList.toggle('text-slate-500', !nowApplied);
+
+                        button.textContent = nowApplied
+                            ? container.getAttribute('data-button-label-remove')
+                            : container.getAttribute('data-button-label-apply');
+                        button.classList.toggle('border-slate-300', nowApplied);
+                        button.classList.toggle('bg-white', nowApplied);
+                        button.classList.toggle('text-slate-700', nowApplied);
+                        button.classList.toggle('hover:bg-slate-50', nowApplied);
+                        button.classList.toggle('border-blue-600', !nowApplied);
+                        button.classList.toggle('bg-blue-600', !nowApplied);
+                        button.classList.toggle('text-white', !nowApplied);
+                        button.classList.toggle('hover:bg-blue-700', !nowApplied);
+
+                        showQuickActionNotice(noticeContainer, 'success', message);
+                    })
+                    .catch(function () {
+                        showQuickActionNotice(noticeContainer, 'error', requestFailedMessage);
+                    })
+                    .finally(function () {
+                        button.disabled = false;
+                    });
+            });
+        });
+    }
+
     function bindIconSelects() {
         document.querySelectorAll('[data-icon-select]').forEach(function (container) {
             var input    = container.querySelector('input[type="hidden"]');
@@ -588,6 +686,7 @@
         bindAjaxAutosaveForms();
         bindSnippetCopyButtons();
         bindSnippetToggles();
+        bindHtaccessToggle();
         bindIconSelects();
         bindObjectCacheButtons();
 

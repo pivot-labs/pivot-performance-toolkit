@@ -40,6 +40,7 @@ use PivotPerformanceToolkit\Media\ImageOptimizerDetector;
 use PivotPerformanceToolkit\Media\LazyLoad;
 use PivotPerformanceToolkit\Integrations\CloudflareIntegration;
 use PivotPerformanceToolkit\Optimization\Assets;
+use PivotPerformanceToolkit\Optimization\AsyncCss;
 use PivotPerformanceToolkit\Optimization\DelayedJs;
 
 final class Plugin {
@@ -114,6 +115,7 @@ final class Plugin {
 			new PerformanceTest( $this->settings ),
 			new PageCache( $this->settings ),
 			new Assets( $this->settings ),
+			new AsyncCss( $this->settings ),
 			new DelayedJs( $this->settings ),
 			new LazyLoad( $this->settings, $image_optimizer_detector ),
 			$cloudflare,

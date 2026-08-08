@@ -8,7 +8,8 @@ if ( ! defined( 'ABSPATH' ) ) {
     @php
         $exclusionsOpen = !empty(trim((string) $options['minify_external_css_exclusions']))
                        || !empty(trim((string) $options['minify_external_js_exclusions']))
-                       || !empty(trim((string) $options['delay_js_exclusions']));
+                       || !empty(trim((string) $options['delay_js_exclusions']))
+                       || !empty(trim((string) $options['async_css_exclusions']));
     @endphp
 
     <style>
@@ -52,7 +53,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
      <div class="pivot-performance-toolkit-http11-warning">
          <strong>{{ __('Warning:', 'pivot-performance-toolkit') }}</strong>
-         <span>{{ __('Minification and delay-execution exclusions can break dependency order, plugin-specific assets, and conditional loading logic. Use only after testing key pages — especially for scripts that must run before user interaction, such as consent banners or payment forms.', 'pivot-performance-toolkit') }}</span>
+         <span>{{ __('Minification, async CSS, and delay-execution exclusions can break dependency order, plugin-specific assets, conditional loading logic, and above-the-fold styling. Use only after testing key pages — especially for scripts that must run before user interaction (consent banners, payment forms) or stylesheets needed for first paint.', 'pivot-performance-toolkit') }}</span>
      </div>
 
     <button
@@ -108,6 +109,27 @@ if ( ! defined( 'ABSPATH' ) ) {
                 <p class="pivot-performance-toolkit-exclusions-hint">
                     {!! wp_kses(
                         __('<strong>One rule per line.</strong> You can exclude by script handle, file name, full path, or wildcard pattern. Examples: <code>jquery-core</code>, <code>app.js</code>, <code>/wp-content/themes/your-theme/js/*</code>.', 'pivot-performance-toolkit'),
+                        array('strong' => array(), 'code' => array())
+                    ) !!}
+                </p>
+            </div>
+
+            <div class="pivot-performance-toolkit-field">
+                <label for="pivot-performance-toolkit-async-css-exclusions" style="display:block;font-weight:600;">
+                    {{ __('Async CSS loading exclusions', 'pivot-performance-toolkit') }}
+                </label>
+                <p>{{ __('Prevent specific stylesheets from being loaded asynchronously. Use for critical above-the-fold styles that must apply before first paint.', 'pivot-performance-toolkit') }}</p>
+                <textarea
+                    id="pivot-performance-toolkit-async-css-exclusions"
+                    name="{{ $option_key }}[async_css_exclusions]"
+                    class="pivot-performance-toolkit-exclusions-textarea"
+                    rows="6"
+                    placeholder="{{ esc_attr("astra-theme-css\nstyle.css\n/wp-content/themes/your-theme/css/*") }}"
+                    spellcheck="false"
+                >{{ esc_textarea((string) $options['async_css_exclusions']) }}</textarea>
+                <p class="pivot-performance-toolkit-exclusions-hint">
+                    {!! wp_kses(
+                        __('<strong>One rule per line.</strong> You can exclude by stylesheet id, file name, full path, or wildcard pattern. Examples: <code>astra-theme-css</code>, <code>style.css</code>, <code>/wp-content/themes/your-theme/css/*</code>.', 'pivot-performance-toolkit'),
                         array('strong' => array(), 'code' => array())
                     ) !!}
                 </p>
