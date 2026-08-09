@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use PivotPerformanceToolkit\Core\Settings;
-use PivotPerformanceToolkit\Utils\ProfileDetector;
+use PivotPerformanceToolkit\Utils\Recommendations;
 
 final class SettingsPage extends BladeAdminPage {
 
@@ -31,8 +31,11 @@ final class SettingsPage extends BladeAdminPage {
 
 	private Settings $settings;
 
-	public function __construct( Settings $settings ) {
-		$this->settings = $settings;
+	private Recommendations $recommendations;
+
+	public function __construct( Settings $settings, Recommendations $recommendations ) {
+		$this->settings        = $settings;
+		$this->recommendations = $recommendations;
 
 		add_action( 'wp_ajax_' . self::SET_WEBSITE_PROFILE_ACTION, array( $this, 'handleSetWebsiteProfile' ) );
 	}
@@ -68,7 +71,7 @@ final class SettingsPage extends BladeAdminPage {
 		$settings_message = isset( $_GET[ self::SETTINGS_MESSAGE_QUERY_KEY ] ) ? sanitize_text_field( (string) wp_unslash( $_GET[ self::SETTINGS_MESSAGE_QUERY_KEY ] ) ) : '';
 		// phpcs:enable WordPress.Security.NonceVerification.Recommended
 		$current_settings = $this->settings->all();
-		$recommendation   = ProfileDetector::detectRecommendation();
+		$recommendation   = $this->recommendations->collect( array( 'profile' ) )[0] ?? null;
 
 		return array(
 			'tools_notice'                   => $tools_notice,

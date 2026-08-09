@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-<x-card :title="__('Optimization Recommendation', 'pivot-performance-toolkit')">
+<x-card :title="__('Recommendations', 'pivot-performance-toolkit')" id="pivot-performance-toolkit-dashboard-recommendations">
     @php
         $severity_styles = array(
             'warning'   => array('border' => 'border-amber-300', 'bg' => 'bg-amber-50', 'text' => 'text-amber-700'),
@@ -13,17 +13,13 @@ if ( ! defined( 'ABSPATH' ) ) {
     @endphp
 
     @if (empty($recommendations))
-        <p>{{ __('Based on your server and setup, everything here is already configured optimally.', 'pivot-performance-toolkit') }}</p>
+        <p>{{ __('Nothing to recommend right now — your setup looks good.', 'pivot-performance-toolkit') }}</p>
     @else
-        <p>
-        {{ __('Based on your server and setup, we recommend the following:', 'pivot-performance-toolkit') }}
-        </p>
-
         @foreach ($recommendations as $index => $recommendation)
             @php
                 $style = $severity_styles[$recommendation['severity']] ?? $severity_styles['info'];
             @endphp
-            <div class="rounded-md border {{ $style['border'] }} p-2.5 {{ $style['bg'] }} {{ $index > 0 ? 'mt-5' : '' }}">
+            <div class="rounded-md border {{ $style['border'] }} p-2.5 {{ $style['bg'] }} {{ $index > 0 ? 'mt-3' : '' }}">
                 <div class="flex items-center justify-between gap-3">
                     <p class="font-bold {{ $style['text'] }}">{{ $recommendation['title'] }}</p>
                     @if (!empty($recommendation['action']))

@@ -15,13 +15,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use PivotPerformanceToolkit\Core\Settings;
 use PivotPerformanceToolkit\Utils\FilesystemCheck;
+use PivotPerformanceToolkit\Utils\Recommendations;
 
 final class DashboardPage extends BladeAdminPage {
 
 	private Settings $settings;
 
-	public function __construct( Settings $settings ) {
-		$this->settings = $settings;
+	private Recommendations $recommendations;
+
+	public function __construct( Settings $settings, Recommendations $recommendations ) {
+		$this->settings        = $settings;
+		$this->recommendations = $recommendations;
 	}
 
 	public function slug(): string {
@@ -59,6 +63,7 @@ final class DashboardPage extends BladeAdminPage {
 			'performance_test_options' => PerformanceTest::getTestableContentOptions(),
 			'last_score'               => $last_score,
 			'has_result'               => PerformanceTest::hasStoredResult( $last_result ),
+			'recommendations'          => $this->recommendations->collect(),
 		);
 	}
 }

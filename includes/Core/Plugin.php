@@ -43,6 +43,7 @@ use PivotPerformanceToolkit\Optimization\Assets;
 use PivotPerformanceToolkit\Optimization\AsyncCss;
 use PivotPerformanceToolkit\Optimization\Combine;
 use PivotPerformanceToolkit\Optimization\DelayedJs;
+use PivotPerformanceToolkit\Utils\Recommendations;
 
 final class Plugin {
 
@@ -82,6 +83,7 @@ final class Plugin {
 		$image_optimizer_detector = new ImageOptimizerDetector();
 		$database_optimizer       = new DatabaseOptimizer();
 		$object_cache_manager     = new ObjectCacheManager();
+		$recommendations          = new Recommendations( $this->settings, $object_cache_manager );
 
 		add_action( 'admin_init', array( $this->settings, 'register' ) );
 		add_action( 'admin_init', array( Lifecycle::class, 'maybeUpdateDropin' ) );
@@ -90,15 +92,15 @@ final class Plugin {
 		if ( is_admin() ) {
 			$menu = new Menu(
 				array(
-					new DashboardPage( $this->settings ),
+					new DashboardPage( $this->settings, $recommendations ),
 					new CachePage( $this->settings, $object_cache_manager ),
-					new FileOptimizationPage( $this->settings ),
+					new FileOptimizationPage( $this->settings, $recommendations ),
 					new AssetsPage( $this->settings ),
 					new MediaOptimizationPage( $this->settings, $image_optimizer_detector ),
 					new PerformancePage(),
 					new DatabasePage( $database_optimizer ),
 					new DatabaseTablePage( $database_optimizer ),
-					new SettingsPage( $this->settings ),
+					new SettingsPage( $this->settings, $recommendations ),
 					new BrowserCacheHeadersPage( $this->settings ),
 					new CdnIntegrationsPage( $this->settings, $cloudflare, $image_optimizer_detector ),
 					new AdvancedRulesPage( $this->settings ),

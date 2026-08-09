@@ -10,23 +10,13 @@ if ( ! defined( 'ABSPATH' ) ) {
     tone="blue"
 >
     @php
-        $recommendation = $website_profile_recommendation ?? array();
-        $recommended_label = is_array($recommendation) ? (string) ($recommendation['label'] ?? '') : '';
-        $signals = is_array($recommendation) && isset($recommendation['signals']) && is_array($recommendation['signals'])
-            ? $recommendation['signals']
-            : array();
+        $recommendation = $website_profile_recommendation ?? null;
     @endphp
 
-    @if ($recommended_label !== '')
+    @if ($recommendation !== null)
         <div class="rounded-xl border border-blue-100 bg-blue-50 px-4 py-3 text-sm leading-6 text-blue-900">
-            <p class="font-semibold">{{ __('Recommended profile', 'pivot-performance-toolkit') }}: {{ esc_html($recommended_label) }}</p>
-            @if (!empty($signals))
-                <p class="mt-1">{{ sprintf(
-                    /* translators: %s: comma separated detected plugin names */
-                    __('Detected signals: %s', 'pivot-performance-toolkit'),
-                    esc_html(implode(', ', $signals))
-                ) }}</p>
-            @endif
+            <p class="font-semibold">{{ $recommendation['title'] }}</p>
+            <p class="mt-1">{{ $recommendation['description'] }}</p>
             <p class="mt-1 text-xs text-blue-800">{{ __('This is a recommendation only and does not automatically change your selected profile.', 'pivot-performance-toolkit') }}</p>
         </div>
     @endif

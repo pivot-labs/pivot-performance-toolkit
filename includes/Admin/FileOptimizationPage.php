@@ -15,6 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use PivotPerformanceToolkit\Core\Settings;
 use PivotPerformanceToolkit\Utils\HttpProtocolDetector;
+use PivotPerformanceToolkit\Utils\Recommendations;
 
 final class FileOptimizationPage extends BladeAdminPage {
 
@@ -22,8 +23,11 @@ final class FileOptimizationPage extends BladeAdminPage {
 
 	private Settings $settings;
 
-	public function __construct( Settings $settings ) {
-		$this->settings = $settings;
+	private Recommendations $recommendations;
+
+	public function __construct( Settings $settings, Recommendations $recommendations ) {
+		$this->settings        = $settings;
+		$this->recommendations = $recommendations;
 		add_action( 'wp_ajax_' . self::AJAX_SAVE_QUICK_TOGGLE_ACTION, array( $this, 'handleSaveQuickToggleAjax' ) );
 	}
 
@@ -63,6 +67,7 @@ final class FileOptimizationPage extends BladeAdminPage {
 			'http_protocol_version'         => $http_protocol['version'],
 			'is_http11'                     => $http_protocol['is_http11'],
 			'http_protocol_source'          => $http_protocol['source'],
+			'recommendations'               => $this->recommendations->collect( array( 'optimization' ) ),
 		);
 	}
 

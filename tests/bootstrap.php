@@ -19,4 +19,8 @@ if ( ! defined( 'WP_CONTENT_DIR' ) ) {
 	define( 'WP_CONTENT_DIR', __DIR__ . '/tmp/wp-content' );
 }
 
+if ( ! defined( 'PIVOT_PERFORMANCE_TOOLKIT_PATH' ) ) {
+	define( 'PIVOT_PERFORMANCE_TOOLKIT_PATH', dirname( __DIR__ ) . '/' );
+}
+
 require_once dirname( __DIR__ ) . '/vendor/autoload.php';

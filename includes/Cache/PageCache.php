@@ -15,6 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use PivotPerformanceToolkit\Contracts\ModuleInterface;
 use PivotPerformanceToolkit\Core\Settings;
+use PivotPerformanceToolkit\Utils\CachePurgeEvents;
 use PivotPerformanceToolkit\Utils\FilesystemCheck;
 
 final class PageCache implements ModuleInterface {
@@ -40,9 +41,21 @@ final class PageCache implements ModuleInterface {
 		// Cache writing – fires after headers are sent but before output is flushed.
 		add_action( 'template_redirect', array( $this, 'startBuffering' ), 1 );
 
-		// Invalidate cache when content changes.
-		add_action( 'save_post', array( $this, 'purgeAll' ) );
-		add_action( 'deleted_post', array( $this, 'purgeAll' ) );
+		// Invalidate cache when content changes. Post hooks fire on every
+		// autosave/revision too, so they go through purgeAllForPostChange()
+		// (which skips those) rather than purgeAll() directly — otherwise
+		// the entire cache would be wiped roughly every 60 seconds while
+		// anyone has a post open in the editor. Generic hooks (menus,
+		// widgets, terms, comments, plugin/theme updates) can affect pages
+		// that have nothing to do with a specific post, so they go straight
+		// to a full purge.
+		foreach ( CachePurgeEvents::POST_HOOKS as $hook ) {
+			add_action( $hook, array( $this, 'purgeAllForPostChange' ) );
+		}
+
+		foreach ( CachePurgeEvents::GENERIC_HOOKS as $hook ) {
+			add_action( $hook, array( $this, 'purgeAll' ) );
+		}
 
 		// Refresh the flat config file whenever settings are saved.
 		add_action( 'update_option_' . $this->settings->optionKey(), array( $this, 'writeConfigFile' ) );
@@ -114,6 +127,19 @@ final class PageCache implements ModuleInterface {
 		foreach ( glob( $this->cache_dir . '/*.html' ) ?: array() as $file_path ) {
 			wp_delete_file( $file_path );
 		}
+	}
+
+	/**
+	 * Purges only for a real content change — skips autosaves/revisions,
+	 * which fire the same hooks this is bound to but don't represent a
+	 * change worth invalidating the whole cache for.
+	 */
+	public function purgeAllForPostChange( int $post_id ): void {
+		if ( ! CachePurgeEvents::isRealPostChange( $post_id ) ) {
+			return;
+		}
+
+		$this->purgeAll();
 	}
 
 	/**

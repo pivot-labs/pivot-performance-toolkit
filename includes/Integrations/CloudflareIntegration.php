@@ -15,6 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use PivotPerformanceToolkit\Contracts\ModuleInterface;
 use PivotPerformanceToolkit\Core\Settings;
+use PivotPerformanceToolkit\Utils\CachePurgeEvents;
 
 final class CloudflareIntegration implements ModuleInterface {
 
@@ -27,10 +28,18 @@ final class CloudflareIntegration implements ModuleInterface {
 	}
 
 	public function register(): void {
-		add_action( 'save_post', array( $this, 'handleContentChange' ) );
-		add_action( 'deleted_post', array( $this, 'handleContentChange' ) );
-		add_action( 'trashed_post', array( $this, 'handleContentChange' ) );
-		add_action( 'untrashed_post', array( $this, 'handleContentChange' ) );
+		// Shares its trigger list with PageCache (CachePurgeEvents) so the
+		// local page cache and the CDN cache can't drift out of sync on
+		// which events invalidate them — previously this purged on
+		// trashed_post/untrashed_post while PageCache did not, so trashing
+		// a post purged the CDN but left the local page cache stale.
+		foreach ( CachePurgeEvents::POST_HOOKS as $hook ) {
+			add_action( $hook, array( $this, 'handleContentChange' ) );
+		}
+
+		foreach ( CachePurgeEvents::GENERIC_HOOKS as $hook ) {
+			add_action( $hook, array( $this, 'handleGenericCacheInvalidation' ) );
+		}
 	}
 
 	/**
@@ -90,10 +99,23 @@ final class CloudflareIntegration implements ModuleInterface {
 	}
 
 	public function handleContentChange( int $post_id ): void {
-		if ( wp_is_post_revision( $post_id ) || wp_is_post_autosave( $post_id ) ) {
+		if ( ! CachePurgeEvents::isRealPostChange( $post_id ) ) {
 			return;
 		}
 
+		if ( ! $this->shouldAutoPurge() ) {
+			return;
+		}
+
+		$this->purgeCache();
+	}
+
+	/**
+	 * Purge trigger for events that don't concern a single post (menus,
+	 * widgets, terms, comments, plugin/theme updates) — no revision/autosave
+	 * concept applies to these, so no post-ID check is needed first.
+	 */
+	public function handleGenericCacheInvalidation(): void {
 		if ( ! $this->shouldAutoPurge() ) {
 			return;
 		}
