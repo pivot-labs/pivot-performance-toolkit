@@ -7,6 +7,8 @@
     "scripts": {
         "lint": "find includes -name '*.php' -print0 | xargs -0 -n1 php -l",
         "test:smoke": "php tests/smoke-settings.php",
+        "test:unit": "phpunit",
+        "test": ["@test:smoke", "@test:unit"],
         "set-version": "bin/set-version.sh",
         "build:zip": "bin/build-zip.sh",
         "strauss": [
@@ -34,6 +36,11 @@
             "PivotPerformanceToolkit\\": "includes/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "PivotPerformanceToolkit\\Tests\\Unit\\": "tests/Unit/"
+        }
+    },
     "authors": [
         {
             "name": "Jeff Shaikh",
@@ -45,7 +52,9 @@
         "wp-coding-standards/wpcs": "^3.3",
         "phpcompatibility/phpcompatibility-wp": "^2.1",
         "phpcsstandards/phpcsextra": "^1.5",
-        "wp-cli/dist-archive-command": "^3.1"
+        "wp-cli/dist-archive-command": "^3.1",
+        "phpunit/phpunit": "^11",
+        "brain/monkey": "^2.6"
     },
     "config": {
         "allow-plugins": {

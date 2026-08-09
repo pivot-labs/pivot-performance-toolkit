@@ -25,6 +25,7 @@ bin/
 
 # Build/test tooling (not needed at runtime).
 phpcs.xml.dist
+phpunit.xml.dist
 phpcs.log
 tests/
 docs/

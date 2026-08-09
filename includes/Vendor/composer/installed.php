@@ -6,8 +6,8 @@ return array (
   'root' => 
   array (
     'name' => 'jeffshaikh/pivot-performance-toolkit',
-    'pretty_version' => '1.1.0',
-    'version' => '1.1.0.0',
+    'pretty_version' => '1.1.1-dev',
+    'version' => '1.1.1.0-dev',
     'reference' => NULL,
     'type' => 'wordpress-plugin',
     'install_path' => __DIR__ . '/../',

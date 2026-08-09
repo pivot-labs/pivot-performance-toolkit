@@ -7,3 +7,6 @@
 /includes/Vendor/performance-toolkit
 /dist-builds
 /references
+/tests/tmp
+/.phpunit.cache
+/.phpunit.result.cache
