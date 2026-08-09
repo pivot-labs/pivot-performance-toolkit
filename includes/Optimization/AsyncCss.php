@@ -79,10 +79,16 @@ final class AsyncCss implements ModuleInterface {
 
 		$id_attr = '' !== $id ? ' id="' . esc_attr( $id ) . '"' : '';
 
-		$preload = '<link rel="preload" as="style" href="' . esc_url( $href ) . '"' . $id_attr
+		// A non-default media (e.g. a responsive/conditional stylesheet) must
+		// survive the swap below — once the onload handler sets rel="stylesheet",
+		// an absent media attribute defaults to "all", so dropping it here would
+		// make a scoped stylesheet apply globally.
+		$media_attr = ( '' !== $media && 0 !== strcasecmp( $media, 'all' ) ) ? ' media="' . esc_attr( $media ) . '"' : '';
+
+		$preload = '<link rel="preload" as="style" href="' . esc_url( $href ) . '"' . $id_attr . $media_attr
 			. ' onload="this.onload=null;this.rel=&#039;stylesheet&#039;">';
 
-		$noscript = '<noscript><link rel="stylesheet" href="' . esc_url( $href ) . '"' . $id_attr . '></noscript>';
+		$noscript = '<noscript><link rel="stylesheet" href="' . esc_url( $href ) . '"' . $id_attr . $media_attr . '></noscript>';
 
 		return $preload . $noscript;
 	}
