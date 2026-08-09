@@ -13,14 +13,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+use PivotPerformanceToolkit\Cache\HtaccessCacheHeaders;
 use PivotPerformanceToolkit\Core\Settings;
 
 final class BrowserCacheHeadersPage extends BladeAdminPage {
+
+	private const APPLY_ACTION  = 'pivot_performance_toolkit_htaccess_apply';
+	private const REMOVE_ACTION = 'pivot_performance_toolkit_htaccess_remove';
 
 	private Settings $settings;
 
 	public function __construct( Settings $settings ) {
 		$this->settings = $settings;
+
+		add_action( 'admin_post_' . self::APPLY_ACTION, array( $this, 'handleApply' ) );
+		add_action( 'admin_post_' . self::REMOVE_ACTION, array( $this, 'handleRemove' ) );
+		add_action( 'wp_ajax_' . self::APPLY_ACTION, array( $this, 'handleAjaxApply' ) );
+		add_action( 'wp_ajax_' . self::REMOVE_ACTION, array( $this, 'handleAjaxRemove' ) );
 	}
 
 	public function slug(): string {
@@ -44,89 +53,104 @@ final class BrowserCacheHeadersPage extends BladeAdminPage {
 	}
 
 	/**
-	 * @return array<string, string>
+	 * @return array<string, mixed>
 	 */
 	protected function buildViewData(): array {
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- SERVER_SOFTWARE is set by the web server, not user input; it's only ever displayed via Blade's {{ }}, which HTML-escapes it at render time.
+		// phpcs:disable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.NonceVerification.Recommended -- SERVER_SOFTWARE is set by the web server, not user input; it's only ever displayed via Blade's {{ }}, which HTML-escapes it at render time. The notice/message query args are read-only display values from this page's own post-redirect notice (set by handleApply()/handleRemove() below, both of which already verify the nonce via check_admin_referer() before redirecting here) — sanitized and used only for display, never to trigger a state change.
 		$server_software = isset( $_SERVER['SERVER_SOFTWARE'] ) ? (string) wp_unslash( $_SERVER['SERVER_SOFTWARE'] ) : '';
 
 		return array(
-			'htaccess_snippet' => $this->generateHtaccessSnippet(),
+			'htaccess_snippet' => HtaccessCacheHeaders::snippet(),
+			'htaccess_applied' => HtaccessCacheHeaders::isApplied(),
 			'nginx_snippet'    => $this->generateNginxSnippet(),
 			'server_software'  => $server_software,
 			'home_url'         => home_url(),
 			'option_key'       => $this->settings->optionKey(),
+			'apply_action'     => self::APPLY_ACTION,
+			'remove_action'    => self::REMOVE_ACTION,
+			'apply_nonce'      => wp_create_nonce( self::APPLY_ACTION ),
+			'remove_nonce'     => wp_create_nonce( self::REMOVE_ACTION ),
+			'notice'           => isset( $_GET['pivot_performance_toolkit_htaccess_notice'] ) ? sanitize_key( wp_unslash( (string) $_GET['pivot_performance_toolkit_htaccess_notice'] ) ) : '',
+			'message'          => isset( $_GET['pivot_performance_toolkit_htaccess_message'] ) ? sanitize_text_field( wp_unslash( (string) $_GET['pivot_performance_toolkit_htaccess_message'] ) ) : '',
 		);
+		// phpcs:enable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.NonceVerification.Recommended
 	}
 
-	private function generateHtaccessSnippet(): string {
-		return '# BEGIN Pivot Performance Toolkit - Browser Cache & Compression
-<IfModule mod_expires.c>
-    ExpiresActive On
+	public function handleApply(): void {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( esc_html__( 'You are not allowed to perform this action.', 'pivot-performance-toolkit' ) );
+		}
 
-    # Cache HTML for 1 hour
-    ExpiresByType text/html "access plus 1 hour"
+		check_admin_referer( self::APPLY_ACTION );
 
-    # Cache CSS/JS for 1 year (versioned assets like style.css?v=123)
-    ExpiresByType text/css "access plus 1 year"
-    ExpiresByType application/javascript "access plus 1 year"
-    ExpiresByType text/javascript "access plus 1 year"
+		$result = HtaccessCacheHeaders::apply();
 
-    # Cache images for 1 month
-    ExpiresByType image/jpeg "access plus 1 month"
-    ExpiresByType image/gif "access plus 1 month"
-    ExpiresByType image/png "access plus 1 month"
-    ExpiresByType image/svg+xml "access plus 1 month"
-    ExpiresByType image/webp "access plus 1 month"
+		$this->redirectWithNotice( $result['success'], $result['message'] );
+	}
 
-    # Cache fonts for 1 year
-    ExpiresByType font/ttf "access plus 1 year"
-    ExpiresByType font/otf "access plus 1 year"
-    ExpiresByType font/woff "access plus 1 year"
-    ExpiresByType font/woff2 "access plus 1 year"
-    ExpiresByType application/font-woff "access plus 1 year"
+	public function handleRemove(): void {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( esc_html__( 'You are not allowed to perform this action.', 'pivot-performance-toolkit' ) );
+		}
 
-    # Default expiration
-    ExpiresDefault "access plus 2 days"
-</IfModule>
+		check_admin_referer( self::REMOVE_ACTION );
 
-<IfModule mod_deflate.c>
-    # Gzip compression for text-based files
-    AddOutputFilterByType DEFLATE text/html
-    AddOutputFilterByType DEFLATE text/plain
-    AddOutputFilterByType DEFLATE text/xml
-    AddOutputFilterByType DEFLATE text/css
-    AddOutputFilterByType DEFLATE text/javascript
-    AddOutputFilterByType DEFLATE application/javascript
-    AddOutputFilterByType DEFLATE application/x-javascript
-    AddOutputFilterByType DEFLATE application/x-httpd-php
-    AddOutputFilterByType DEFLATE application/rss+xml
-    AddOutputFilterByType DEFLATE application/atom+xml
-    AddOutputFilterByType DEFLATE image/svg+xml
+		$result = HtaccessCacheHeaders::remove();
 
-    # Disable for broken browsers
-    BrowserMatch ^Mozilla/4 gzip-only-text/html
-    BrowserMatch ^Mozilla/4\.0[678] no-gzip
-    BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
-    Header append Vary User-Agent
-</IfModule>
+		$this->redirectWithNotice( $result['success'], $result['message'] );
+	}
 
-<IfModule mod_headers.c>
-    # Cache control headers for versioned assets
-    <FilesMatch "\.(jpg|jpeg|png|gif|ico|css|js|svg|woff|woff2|ttf|otf)$">
-        Header set Cache-Control "max-age=31536000, immutable"
-    </FilesMatch>
+	public function handleAjaxApply(): void {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array( 'message' => __( 'You are not allowed to perform this action.', 'pivot-performance-toolkit' ) ), 403 );
+		}
 
-    # Cache control for HTML (revalidate frequently)
-    <FilesMatch "\.html$">
-        Header set Cache-Control "max-age=3600, must-revalidate"
-    </FilesMatch>
+		check_ajax_referer( self::APPLY_ACTION );
 
-    # Security headers
-    Header set X-Content-Type-Options "nosniff"
-    Header set X-Frame-Options "SAMEORIGIN"
-</IfModule>
-# END Pivot Performance Toolkit - Browser Cache & Compression';
+		$result = HtaccessCacheHeaders::apply();
+
+		$this->sendAjaxResult( $result['success'], $result['message'] );
+	}
+
+	public function handleAjaxRemove(): void {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array( 'message' => __( 'You are not allowed to perform this action.', 'pivot-performance-toolkit' ) ), 403 );
+		}
+
+		check_ajax_referer( self::REMOVE_ACTION );
+
+		$result = HtaccessCacheHeaders::remove();
+
+		$this->sendAjaxResult( $result['success'], $result['message'] );
+	}
+
+	private function redirectWithNotice( bool $success, string $message ): void {
+		$redirect_url = add_query_arg(
+			array(
+				'page'    => 'pivot-performance-toolkit',
+				'section' => 'caching',
+				'tab'     => $this->slug(),
+				'pivot_performance_toolkit_htaccess_notice' => $success ? 'success' : 'error',
+				'pivot_performance_toolkit_htaccess_message' => $message,
+			),
+			admin_url( 'admin.php' )
+		);
+
+		wp_safe_redirect( $redirect_url );
+		exit;
+	}
+
+	private function sendAjaxResult( bool $success, string $message ): void {
+		if ( $success ) {
+			wp_send_json_success(
+				array(
+					'message' => $message,
+					'applied' => HtaccessCacheHeaders::isApplied(),
+				)
+			);
+		}
+
+		wp_send_json_error( array( 'message' => $message ) );
 	}
 
 	private function generateNginxSnippet(): string {

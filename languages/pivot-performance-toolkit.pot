@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Pivot Performance Toolkit 1.0.0\n"
+"Project-Id-Version: Pivot Performance Toolkit 1.1.0-dev-20260808.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/pivot-performance-toolkit\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-08-05T20:55:55+00:00\n"
+"POT-Creation-Date: 2026-08-09T04:02:30+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: pivot-performance-toolkit\n"
@@ -42,17 +42,17 @@ msgid "https://www.pivotlabs.dev"
 msgstr ""
 
 #: includes/Admin/AdminBarMenu.php:51
-#: includes/Admin/AdminShell.php:205
-#: includes/Admin/AdminShell.php:295
+#: includes/Admin/AdminShell.php:208
+#: includes/Admin/AdminShell.php:298
 #: includes/Admin/Menu.php:60
 #: includes/Admin/PerformancePage.php:23
 msgid "Performance"
 msgstr ""
 
 #: includes/Admin/AdminBarMenu.php:60
-#: includes/Admin/AdminShell.php:148
-#: includes/Admin/AdminShell.php:303
-#: includes/Admin/AdminShell.php:314
+#: includes/Admin/AdminShell.php:151
+#: includes/Admin/AdminShell.php:306
+#: includes/Admin/AdminShell.php:317
 #: includes/Admin/SettingsPage.php:45
 msgid "Settings"
 msgstr ""
@@ -78,184 +78,188 @@ msgstr ""
 msgid "Not on a cacheable page"
 msgstr ""
 
-#: includes/Admin/AdminBarMenu.php:162
-#: includes/Admin/AdminBarMenu.php:184
+#: includes/Admin/AdminBarMenu.php:164
+#: includes/Admin/AdminBarMenu.php:186
 msgid "Unavailable"
 msgstr ""
 
-#: includes/Admin/AdminBarMenu.php:173
+#: includes/Admin/AdminBarMenu.php:175
 msgid "Not cacheable"
 msgstr ""
 
-#: includes/Admin/AdminBarMenu.php:193
+#: includes/Admin/AdminBarMenu.php:195
 msgid "File missing"
 msgstr ""
 
-#: includes/Admin/AdminBarMenu.php:205
+#: includes/Admin/AdminBarMenu.php:207
 msgid "File stale"
 msgstr ""
 
-#: includes/Admin/AdminBarMenu.php:213
+#: includes/Admin/AdminBarMenu.php:215
 msgid "File present"
 msgstr ""
 
-#: includes/Admin/AdminBarMenu.php:278
-#: includes/Admin/AdminBarMenu.php:307
-#: includes/Admin/CdnIntegrationsPage.php:77
-#: includes/Admin/CdnIntegrationsPage.php:89
-#: includes/Admin/CdnIntegrationsPage.php:102
-#: includes/Admin/CdnIntegrationsPage.php:117
-#: includes/Admin/DatabasePage.php:173
-#: includes/Admin/SettingsPage.php:87
-#: includes/Admin/ToolsPage.php:136
-#: includes/Admin/ToolsPage.php:170
-#: includes/Admin/ToolsPage.php:217
-#: includes/Admin/ToolsPage.php:318
-#: includes/Admin/ToolsPage.php:332
+#: includes/Admin/AdminBarMenu.php:282
+#: includes/Admin/AdminBarMenu.php:311
+#: includes/Admin/BrowserCacheHeadersPage.php:81
+#: includes/Admin/BrowserCacheHeadersPage.php:93
+#: includes/Admin/BrowserCacheHeadersPage.php:105
+#: includes/Admin/BrowserCacheHeadersPage.php:117
+#: includes/Admin/CdnIntegrationsPage.php:85
+#: includes/Admin/CdnIntegrationsPage.php:97
+#: includes/Admin/CdnIntegrationsPage.php:110
+#: includes/Admin/CdnIntegrationsPage.php:125
+#: includes/Admin/DatabasePage.php:177
+#: includes/Admin/SettingsPage.php:89
+#: includes/Admin/ToolsPage.php:138
+#: includes/Admin/ToolsPage.php:174
+#: includes/Admin/ToolsPage.php:222
+#: includes/Admin/ToolsPage.php:325
+#: includes/Admin/ToolsPage.php:339
 msgid "You are not allowed to perform this action."
 msgstr ""
 
-#: includes/Admin/AdminShell.php:123
-#: includes/Admin/AdminShell.php:222
-#: includes/Admin/AdminShell.php:319
+#: includes/Admin/AdminShell.php:126
+#: includes/Admin/AdminShell.php:225
+#: includes/Admin/AdminShell.php:322
 msgid "Overview"
 msgstr ""
 
-#: includes/Admin/AdminShell.php:128
-#: includes/Admin/AdminShell.php:308
+#: includes/Admin/AdminShell.php:131
+#: includes/Admin/AdminShell.php:311
 msgid "Caching"
 msgstr ""
 
-#: includes/Admin/AdminShell.php:133
-#: includes/Admin/AdminShell.php:310
+#: includes/Admin/AdminShell.php:136
+#: includes/Admin/AdminShell.php:313
 msgid "Optimization"
 msgstr ""
 
-#: includes/Admin/AdminShell.php:138
-#: includes/Admin/AdminShell.php:312
+#: includes/Admin/AdminShell.php:141
+#: includes/Admin/AdminShell.php:315
 #: includes/Admin/DatabasePage.php:34
 msgid "Database"
 msgstr ""
 
-#: includes/Admin/AdminShell.php:143
-#: includes/Admin/AdminShell.php:316
+#: includes/Admin/AdminShell.php:146
+#: includes/Admin/AdminShell.php:319
 msgid "System"
 msgstr ""
 
-#: includes/Admin/AdminShell.php:172
-#: includes/Admin/SystemStatusPage.php:112
-#: includes/Views/components/performance-snapshot.blade.php:71
-#: includes/Views/components/performance-snapshot.blade.php:129
+#: includes/Admin/AdminShell.php:175
+#: includes/Admin/SystemStatusPage.php:113
+#: includes/Views/components/performance-snapshot.blade.php:73
+#: includes/Views/components/performance-snapshot.blade.php:131
 msgid "Page Cache"
 msgstr ""
 
-#: includes/Admin/AdminShell.php:176
-#: includes/Admin/BrowserCacheHeadersPage.php:31
+#: includes/Admin/AdminShell.php:179
+#: includes/Admin/BrowserCacheHeadersPage.php:40
 msgid "Browser Cache"
 msgstr ""
 
-#: includes/Admin/AdminShell.php:180
+#: includes/Admin/AdminShell.php:183
 msgid "CDN"
 msgstr ""
 
-#: includes/Admin/AdminShell.php:184
+#: includes/Admin/AdminShell.php:187
 msgid "Rules"
 msgstr ""
 
-#: includes/Admin/AdminShell.php:197
+#: includes/Admin/AdminShell.php:200
 msgid "Files"
 msgstr ""
 
-#: includes/Admin/AdminShell.php:201
+#: includes/Admin/AdminShell.php:204
 msgid "Media"
 msgstr ""
 
-#: includes/Admin/AdminShell.php:209
-#: includes/Admin/AdminShell.php:299
+#: includes/Admin/AdminShell.php:212
+#: includes/Admin/AdminShell.php:302
 #: includes/Admin/AssetsPage.php:33
 msgid "Assets"
 msgstr ""
 
-#: includes/Admin/AdminShell.php:226
+#: includes/Admin/AdminShell.php:229
 #: includes/Views/cards/database/overview.blade.php:19
 msgid "Tables"
 msgstr ""
 
-#: includes/Admin/AdminShell.php:239
-#: includes/Views/components/performance-snapshot.blade.php:113
+#: includes/Admin/AdminShell.php:242
+#: includes/Views/components/performance-snapshot.blade.php:115
 #: includes/Views/cards/caching/browser/test.blade.php:35
-#: includes/Views/cards/caching/page/object-cache.blade.php:28
+#: includes/Views/cards/caching/page/object-cache.blade.php:30
 msgid "Status"
 msgstr ""
 
-#: includes/Admin/AdminShell.php:243
-#: includes/Admin/AdminShell.php:287
+#: includes/Admin/AdminShell.php:246
+#: includes/Admin/AdminShell.php:290
 #: includes/Admin/ToolsPage.php:76
 msgid "Import/Export"
 msgstr ""
 
-#: includes/Admin/AdminShell.php:247
-#: includes/Admin/AdminShell.php:291
+#: includes/Admin/AdminShell.php:250
+#: includes/Admin/AdminShell.php:294
 #: includes/Admin/ToolsPage.php:79
 msgid "Maintenance"
 msgstr ""
 
-#: includes/Admin/AdminShell.php:279
+#: includes/Admin/AdminShell.php:282
 #: includes/Admin/CardShowcasePage.php:23
 msgid "Card Showcase"
 msgstr ""
 
-#: includes/Admin/AdminShell.php:283
+#: includes/Admin/AdminShell.php:286
 #: includes/Admin/SystemStatusPage.php:36
 msgid "System Status"
 msgstr ""
 
-#: includes/Admin/AdminShell.php:325
+#: includes/Admin/AdminShell.php:328
 msgid "Preview reusable admin card layouts for settings, actions, and workflow-based interfaces."
 msgstr ""
 
-#: includes/Admin/AdminShell.php:329
+#: includes/Admin/AdminShell.php:332
 msgid "Inspect runtime, server, and filesystem health signals for troubleshooting."
 msgstr ""
 
-#: includes/Admin/AdminShell.php:333
+#: includes/Admin/AdminShell.php:336
 msgid "Export and import configuration packages for migrations, backups, and standardized deployments."
 msgstr ""
 
-#: includes/Admin/AdminShell.php:337
+#: includes/Admin/AdminShell.php:340
 msgid "Run maintenance operations such as clearing generated assets, setting uninstall policy, and resetting defaults."
 msgstr ""
 
-#: includes/Admin/AdminShell.php:341
+#: includes/Admin/AdminShell.php:344
 msgid "Run website statistics tests and review performance metrics for selected pages and posts."
 msgstr ""
 
-#: includes/Admin/AdminShell.php:345
+#: includes/Admin/AdminShell.php:348
 msgid "Configure CSS and JavaScript delivery rules, exclusions, and optimization behavior."
 msgstr ""
 
-#: includes/Admin/AdminShell.php:349
-#: includes/Admin/AdminShell.php:360
+#: includes/Admin/AdminShell.php:352
+#: includes/Admin/AdminShell.php:363
 msgid "Manage global plugin settings and defaults."
 msgstr ""
 
-#: includes/Admin/AdminShell.php:354
+#: includes/Admin/AdminShell.php:357
 msgid "Configure page and browser caching behavior for faster page delivery."
 msgstr ""
 
-#: includes/Admin/AdminShell.php:356
+#: includes/Admin/AdminShell.php:359
 msgid "Tune file and media optimization settings to reduce payload size."
 msgstr ""
 
-#: includes/Admin/AdminShell.php:358
+#: includes/Admin/AdminShell.php:361
 msgid "Review and clean database overhead to keep queries fast."
 msgstr ""
 
-#: includes/Admin/AdminShell.php:362
+#: includes/Admin/AdminShell.php:365
 msgid "Export, import, and maintenance utilities for advanced site operations."
 msgstr ""
 
-#: includes/Admin/AdminShell.php:365
+#: includes/Admin/AdminShell.php:368
 msgid "View performance highlights and quick status details for your site."
 msgstr ""
 
@@ -271,53 +275,53 @@ msgstr ""
 msgid "Pivot Performance Toolkit Assets"
 msgstr ""
 
-#: includes/Admin/AssetsPage.php:57
+#: includes/Admin/AssetsPage.php:58
 msgid "Select a page or post, then run detection to list loaded assets."
 msgstr ""
 
-#: includes/Admin/AssetsPage.php:63
-#: includes/Admin/CachePage.php:140
-#: includes/Admin/CachePage.php:158
-#: includes/Admin/CachePage.php:175
-#: includes/Admin/CachePage.php:192
-#: includes/Admin/CachePage.php:209
-#: includes/Admin/CachePage.php:260
-#: includes/Admin/CachePage.php:276
-#: includes/Admin/CachePage.php:292
-#: includes/Admin/FileOptimizationPage.php:70
+#: includes/Admin/AssetsPage.php:64
+#: includes/Admin/CachePage.php:141
+#: includes/Admin/CachePage.php:159
+#: includes/Admin/CachePage.php:176
+#: includes/Admin/CachePage.php:193
+#: includes/Admin/CachePage.php:210
+#: includes/Admin/CachePage.php:261
+#: includes/Admin/CachePage.php:277
+#: includes/Admin/CachePage.php:293
+#: includes/Admin/FileOptimizationPage.php:71
 msgid "Unauthorized"
 msgstr ""
 
-#: includes/Admin/AssetsPage.php:71
+#: includes/Admin/AssetsPage.php:72
 msgid "Please select a valid URL."
 msgstr ""
 
-#: includes/Admin/AssetsPage.php:75
+#: includes/Admin/AssetsPage.php:76
 msgid "Only URLs from this site are allowed."
 msgstr ""
 
 #. translators: %d: HTTP status code.
-#: includes/Admin/AssetsPage.php:101
+#: includes/Admin/AssetsPage.php:102
 msgid "Page request failed with HTTP %d."
 msgstr ""
 
-#: includes/Admin/AssetsPage.php:110
+#: includes/Admin/AssetsPage.php:111
 msgid "No HTML was returned for this URL."
 msgstr ""
 
 #. translators: 1: total assets, 2: local assets, 3: external assets.
-#: includes/Admin/AssetsPage.php:123
+#: includes/Admin/AssetsPage.php:124
 msgid "Detected %1$d assets (%2$d local, %3$d external)."
 msgstr ""
 
 #. translators: %d: post ID.
-#: includes/Admin/AssetsPage.php:328
+#: includes/Admin/AssetsPage.php:329
 #: includes/Admin/PerformancePage.php:100
-#: includes/Admin/PerformanceTest.php:327
+#: includes/Admin/PerformanceTest.php:329
 msgid "Untitled #%d"
 msgstr ""
 
-#: includes/Admin/BrowserCacheHeadersPage.php:35
+#: includes/Admin/BrowserCacheHeadersPage.php:44
 msgid "Pivot Performance Toolkit – Browser Cache & Compression"
 msgstr ""
 
@@ -329,72 +333,72 @@ msgstr ""
 msgid "Pivot Performance Toolkit Cache"
 msgstr ""
 
-#: includes/Admin/CachePage.php:99
-#: includes/Admin/CachePage.php:184
+#: includes/Admin/CachePage.php:100
+#: includes/Admin/CachePage.php:185
 #: includes/Views/cards/caching/page/cache.blade.php:15
 #: includes/Views/cards/caching/page/quick-actions.blade.php:13
 msgid "Cache cleared successfully."
 msgstr ""
 
-#: includes/Admin/CachePage.php:100
-#: includes/Admin/CachePage.php:201
-#: includes/Views/cards/caching/page/quick-actions.blade.php:27
+#: includes/Admin/CachePage.php:101
+#: includes/Admin/CachePage.php:202
+#: includes/Views/cards/caching/page/quick-actions.blade.php:30
 msgid "Minified CSS/JS cache cleared successfully."
 msgstr ""
 
-#: includes/Admin/CachePage.php:101
-#: includes/Views/cards/caching/page/quick-actions.blade.php:42
+#: includes/Admin/CachePage.php:102
+#: includes/Views/cards/caching/page/quick-actions.blade.php:48
 msgid "Preload started. This can take a moment."
 msgstr ""
 
-#: includes/Admin/CachePage.php:129
+#: includes/Admin/CachePage.php:130
 msgid "Active"
 msgstr ""
 
-#: includes/Admin/CachePage.php:129
-#: includes/Views/cards/caching/page/object-cache.blade.php:14
+#: includes/Admin/CachePage.php:130
+#: includes/Views/cards/caching/page/object-cache.blade.php:16
 msgid "Inactive"
 msgstr ""
 
-#: includes/Admin/CachePage.php:131
+#: includes/Admin/CachePage.php:132
 msgid "Installed"
 msgstr ""
 
-#: includes/Admin/CachePage.php:131
-#: includes/Views/cards/caching/page/object-cache.blade.php:50
+#: includes/Admin/CachePage.php:132
+#: includes/Views/cards/caching/page/object-cache.blade.php:52
 msgid "Not installed"
 msgstr ""
 
-#: includes/Admin/CachePage.php:217
+#: includes/Admin/CachePage.php:218
 msgid "Enable page cache before running preload."
 msgstr ""
 
-#: includes/Admin/CachePage.php:229
+#: includes/Admin/CachePage.php:230
 msgid "No preloadable URLs found."
 msgstr ""
 
 #. translators: 1: Successful preload requests, 2: Total preload requests, 3: Failed preload requests.
-#: includes/Admin/CachePage.php:238
+#: includes/Admin/CachePage.php:239
 msgid "Preload complete: %1$d/%2$d URLs cached (%3$d failed)."
 msgstr ""
 
 #. translators: %s: first preload failure reason.
-#: includes/Admin/CachePage.php:246
+#: includes/Admin/CachePage.php:247
 msgid "First error: %s"
 msgstr ""
 
 #. translators: 1: HTTP status code, 2: fallback URL that was requested
-#: includes/Admin/CachePage.php:442
+#: includes/Admin/CachePage.php:443
 msgid "HTTP fallback returned %1$d for %2$s"
 msgstr ""
 
 #. translators: 1: HTTP status code, 2: URL that was requested
-#: includes/Admin/CachePage.php:465
+#: includes/Admin/CachePage.php:466
 msgid "HTTP %1$d for %2$s"
 msgstr ""
 
 #. translators: 1: Used cache size in human-readable units, 2: Configured max cache size in MB, 3: Percentage of cache usage.
-#: includes/Admin/CachePage.php:550
+#: includes/Admin/CachePage.php:551
 msgid "%1$s of %2$d MB used (%3$d%%)"
 msgstr ""
 
@@ -402,11 +406,11 @@ msgstr ""
 msgid "Pivot Performance Toolkit Card Showcase"
 msgstr ""
 
-#: includes/Admin/CdnIntegrationsPage.php:43
+#: includes/Admin/CdnIntegrationsPage.php:47
 msgid "CDN & Integrations"
 msgstr ""
 
-#: includes/Admin/CdnIntegrationsPage.php:47
+#: includes/Admin/CdnIntegrationsPage.php:51
 msgid "Pivot Performance Toolkit CDN & Integrations"
 msgstr ""
 
@@ -422,70 +426,70 @@ msgstr ""
 msgid "Pivot Performance Toolkit Database"
 msgstr ""
 
-#: includes/Admin/DatabasePage.php:85
-#: includes/Admin/SystemStatusPage.php:101
-#: includes/Admin/SystemStatusPage.php:252
-#: includes/Admin/SystemStatusPage.php:259
+#: includes/Admin/DatabasePage.php:89
+#: includes/Admin/SystemStatusPage.php:102
+#: includes/Admin/SystemStatusPage.php:254
+#: includes/Admin/SystemStatusPage.php:261
 #: includes/Views/cards/caching/browser/detection.blade.php:25
 #: includes/Views/cards/caching/browser/test.blade.php:63
 msgid "Unknown"
 msgstr ""
 
-#: includes/Admin/DatabasePage.php:97
-#: includes/Admin/DatabasePage.php:129
+#: includes/Admin/DatabasePage.php:101
+#: includes/Admin/DatabasePage.php:133
 msgid "Post revisions"
 msgstr ""
 
-#: includes/Admin/DatabasePage.php:98
+#: includes/Admin/DatabasePage.php:102
 msgid "Saved history snapshots of edited posts and pages."
 msgstr ""
 
-#: includes/Admin/DatabasePage.php:102
-#: includes/Admin/DatabasePage.php:130
+#: includes/Admin/DatabasePage.php:106
+#: includes/Admin/DatabasePage.php:134
 msgid "Auto-drafts"
 msgstr ""
 
-#: includes/Admin/DatabasePage.php:103
+#: includes/Admin/DatabasePage.php:107
 msgid "Unsaved draft posts created automatically by WordPress."
 msgstr ""
 
-#: includes/Admin/DatabasePage.php:107
-#: includes/Admin/DatabasePage.php:131
+#: includes/Admin/DatabasePage.php:111
+#: includes/Admin/DatabasePage.php:135
 msgid "Trashed posts"
 msgstr ""
 
-#: includes/Admin/DatabasePage.php:108
+#: includes/Admin/DatabasePage.php:112
 msgid "Posts and pages sitting in the trash."
 msgstr ""
 
-#: includes/Admin/DatabasePage.php:112
-#: includes/Admin/DatabasePage.php:132
+#: includes/Admin/DatabasePage.php:116
+#: includes/Admin/DatabasePage.php:136
 msgid "Spam comments"
 msgstr ""
 
-#: includes/Admin/DatabasePage.php:113
+#: includes/Admin/DatabasePage.php:117
 msgid "Comments marked as spam."
 msgstr ""
 
-#: includes/Admin/DatabasePage.php:117
-#: includes/Admin/DatabasePage.php:133
+#: includes/Admin/DatabasePage.php:121
+#: includes/Admin/DatabasePage.php:137
 msgid "Trashed comments"
 msgstr ""
 
-#: includes/Admin/DatabasePage.php:118
+#: includes/Admin/DatabasePage.php:122
 msgid "Comments moved to the trash."
 msgstr ""
 
-#: includes/Admin/DatabasePage.php:122
-#: includes/Admin/DatabasePage.php:134
+#: includes/Admin/DatabasePage.php:126
+#: includes/Admin/DatabasePage.php:138
 msgid "Expired transients"
 msgstr ""
 
-#: includes/Admin/DatabasePage.php:123
+#: includes/Admin/DatabasePage.php:127
 msgid "Cached data that has already passed its expiry time."
 msgstr ""
 
-#: includes/Admin/DatabasePage.php:135
+#: includes/Admin/DatabasePage.php:139
 msgid "Tables optimized"
 msgstr ""
 
@@ -513,28 +517,28 @@ msgstr ""
 msgid "Pivot Performance Toolkit File Optimization"
 msgstr ""
 
-#: includes/Admin/FileOptimizationPage.php:80
+#: includes/Admin/FileOptimizationPage.php:81
 msgid "Invalid setting."
 msgstr ""
 
-#: includes/Admin/FileOptimizationPage.php:90
+#: includes/Admin/FileOptimizationPage.php:94
 msgid "Quick optimization saved."
 msgstr ""
 
-#: includes/Admin/FilesystemNotices.php:146
+#: includes/Admin/FilesystemNotices.php:152
 msgid "Pivot Performance Toolkit – Filesystem Issue"
 msgstr ""
 
-#: includes/Admin/FilesystemNotices.php:149
+#: includes/Admin/FilesystemNotices.php:155
 msgid "The cache directory is not writable. Pivot Performance Toolkit will continue to work, but page caching and asset minification will be disabled until the issue is resolved."
 msgstr ""
 
 #. translators: %s: link to system status page
-#: includes/Admin/FilesystemNotices.php:160
+#: includes/Admin/FilesystemNotices.php:166
 msgid "For more details, visit the <a href=\"%s\">System Status page</a>."
 msgstr ""
 
-#: includes/Admin/FilesystemNotices.php:166
+#: includes/Admin/FilesystemNotices.php:180
 msgid "<strong>To fix:</strong> Ensure the <code>wp-content/cache/pivot-performance-toolkit</code> directory exists and is writable by the web server. Usually: <code>chmod 755 wp-content/cache/pivot-performance-toolkit</code> or contact your hosting provider."
 msgstr ""
 
@@ -546,8 +550,8 @@ msgstr ""
 msgid "Pivot Performance Toolkit Media Optimization"
 msgstr ""
 
-#: includes/Admin/MediaOptimizationPage.php:65
-#: includes/Admin/SystemStatusPage.php:126
+#: includes/Admin/MediaOptimizationPage.php:66
+#: includes/Admin/SystemStatusPage.php:127
 msgid "None detected"
 msgstr ""
 
@@ -560,7 +564,6 @@ msgid "Failed to copy. Please try again."
 msgstr ""
 
 #: includes/Admin/Menu.php:107
-#: includes/Views/cards/caching/browser-cache-settings/apache.blade.php:25
 #: includes/Views/cards/caching/browser-cache-settings/nginx.blade.php:26
 msgid "Expand Full Configuration"
 msgstr ""
@@ -570,7 +573,7 @@ msgid "Hide Full Configuration"
 msgstr ""
 
 #: includes/Admin/Menu.php:116
-#: includes/Admin/PerformanceTest.php:110
+#: includes/Admin/PerformanceTest.php:112
 msgid "Request failed."
 msgstr ""
 
@@ -588,102 +591,102 @@ msgstr ""
 msgid "Pivot Performance Toolkit Performance"
 msgstr ""
 
-#: includes/Admin/PerformanceTest.php:105
+#: includes/Admin/PerformanceTest.php:107
 msgid "Starting test..."
 msgstr ""
 
-#: includes/Admin/PerformanceTest.php:106
+#: includes/Admin/PerformanceTest.php:108
 msgid "Loading target URL and collecting metrics..."
 msgstr ""
 
-#: includes/Admin/PerformanceTest.php:107
+#: includes/Admin/PerformanceTest.php:109
 msgid "Test complete."
 msgstr ""
 
-#: includes/Admin/PerformanceTest.php:108
+#: includes/Admin/PerformanceTest.php:110
 msgid "Timed out waiting for test result."
 msgstr ""
 
-#: includes/Admin/PerformanceTest.php:109
+#: includes/Admin/PerformanceTest.php:111
 msgid "Could not run test."
 msgstr ""
 
-#: includes/Admin/PerformanceTest.php:111
+#: includes/Admin/PerformanceTest.php:113
 msgid "Your page is being served from cache."
 msgstr ""
 
-#: includes/Admin/PerformanceTest.php:112
+#: includes/Admin/PerformanceTest.php:114
 msgid "Your page is not being served from cache."
 msgstr ""
 
-#: includes/Admin/PerformanceTest.php:113
-#: includes/Admin/PerformanceTest.php:118
+#: includes/Admin/PerformanceTest.php:115
+#: includes/Admin/PerformanceTest.php:120
 msgid "Excellent"
 msgstr ""
 
-#: includes/Admin/PerformanceTest.php:114
-#: includes/Admin/PerformanceTest.php:120
+#: includes/Admin/PerformanceTest.php:116
+#: includes/Admin/PerformanceTest.php:122
 msgid "Good"
 msgstr ""
 
-#: includes/Admin/PerformanceTest.php:115
+#: includes/Admin/PerformanceTest.php:117
 msgid "Needs Improvement"
 msgstr ""
 
-#: includes/Admin/PerformanceTest.php:116
-#: includes/Admin/PerformanceTest.php:125
+#: includes/Admin/PerformanceTest.php:118
+#: includes/Admin/PerformanceTest.php:127
 msgid "Poor"
 msgstr ""
 
-#: includes/Admin/PerformanceTest.php:117
+#: includes/Admin/PerformanceTest.php:119
 msgid "Score"
 msgstr ""
 
-#: includes/Admin/PerformanceTest.php:119
-#: includes/Admin/PerformanceTest.php:129
+#: includes/Admin/PerformanceTest.php:121
+#: includes/Admin/PerformanceTest.php:131
 msgid "HIT"
 msgstr ""
 
-#: includes/Admin/PerformanceTest.php:121
+#: includes/Admin/PerformanceTest.php:123
 msgid "Okay"
 msgstr ""
 
-#: includes/Admin/PerformanceTest.php:122
+#: includes/Admin/PerformanceTest.php:124
 msgid "Needs improvement"
 msgstr ""
 
-#: includes/Admin/PerformanceTest.php:123
+#: includes/Admin/PerformanceTest.php:125
 msgid "Slow"
 msgstr ""
 
-#: includes/Admin/PerformanceTest.php:124
+#: includes/Admin/PerformanceTest.php:126
 msgid "Moderate"
 msgstr ""
 
-#: includes/Admin/PerformanceTest.php:126
-#: includes/Admin/PerformanceTest.php:130
+#: includes/Admin/PerformanceTest.php:128
+#: includes/Admin/PerformanceTest.php:132
 msgid "MISS"
 msgstr ""
 
-#: includes/Admin/PerformanceTest.php:127
+#: includes/Admin/PerformanceTest.php:129
 msgid "Heavy"
 msgstr ""
 
-#: includes/Admin/PerformanceTest.php:128
+#: includes/Admin/PerformanceTest.php:130
 msgid "High"
 msgstr ""
 
-#: includes/Admin/PerformanceTest.php:177
+#: includes/Admin/PerformanceTest.php:179
 msgid "Please provide a valid URL on this site."
 msgstr ""
 
-#: includes/Admin/PerformanceTest.php:202
-#: includes/Admin/PerformanceTest.php:230
+#: includes/Admin/PerformanceTest.php:204
+#: includes/Admin/PerformanceTest.php:232
 msgid "Missing test token."
 msgstr ""
 
-#: includes/Admin/PerformanceTest.php:208
-#: includes/Admin/PerformanceTest.php:236
+#: includes/Admin/PerformanceTest.php:210
+#: includes/Admin/PerformanceTest.php:238
 msgid "Test token is invalid or expired."
 msgstr ""
 
@@ -692,26 +695,26 @@ msgid "Pivot Performance Toolkit Settings"
 msgstr ""
 
 #. translators: %s: profile label e.g. "Standard"
-#: includes/Admin/SettingsPage.php:106
+#: includes/Admin/SettingsPage.php:108
 msgid "Website profile changed to %s."
 msgstr ""
 
-#: includes/Admin/SettingsPage.php:118
+#: includes/Admin/SettingsPage.php:120
 #: includes/Utils/ProfileDetector.php:56
 msgid "Standard"
 msgstr ""
 
-#: includes/Admin/SettingsPage.php:119
+#: includes/Admin/SettingsPage.php:121
 #: includes/Utils/ProfileDetector.php:49
 msgid "WooCommerce"
 msgstr ""
 
-#: includes/Admin/SettingsPage.php:120
+#: includes/Admin/SettingsPage.php:122
 #: includes/Utils/ProfileDetector.php:39
 msgid "Membership / LMS"
 msgstr ""
 
-#: includes/Admin/SettingsPage.php:121
+#: includes/Admin/SettingsPage.php:123
 #: includes/Utils/ProfileDetector.php:29
 msgid "Page Builder Heavy"
 msgstr ""
@@ -720,156 +723,156 @@ msgstr ""
 msgid "Pivot Performance Toolkit System Status"
 msgstr ""
 
-#: includes/Admin/SystemStatusPage.php:73
+#: includes/Admin/SystemStatusPage.php:74
 #: includes/Views/cards/overview/optimization-overview.blade.php:33
 msgid "Writable"
 msgstr ""
 
-#: includes/Admin/SystemStatusPage.php:74
+#: includes/Admin/SystemStatusPage.php:75
 msgid "Read-only / Not writable"
 msgstr ""
 
-#: includes/Admin/SystemStatusPage.php:88
+#: includes/Admin/SystemStatusPage.php:89
 msgid "PHP Version"
 msgstr ""
 
-#: includes/Admin/SystemStatusPage.php:92
+#: includes/Admin/SystemStatusPage.php:93
 msgid "WordPress Version"
 msgstr ""
 
-#: includes/Admin/SystemStatusPage.php:96
+#: includes/Admin/SystemStatusPage.php:97
 msgid "MySQL Version"
 msgstr ""
 
-#: includes/Admin/SystemStatusPage.php:100
+#: includes/Admin/SystemStatusPage.php:101
 msgid "Plugin Version"
 msgstr ""
 
-#: includes/Admin/SystemStatusPage.php:104
+#: includes/Admin/SystemStatusPage.php:105
 msgid "Server Software"
 msgstr ""
 
-#: includes/Admin/SystemStatusPage.php:108
+#: includes/Admin/SystemStatusPage.php:109
 msgid "MySQL Size"
 msgstr ""
 
-#: includes/Admin/SystemStatusPage.php:113
+#: includes/Admin/SystemStatusPage.php:114
 msgid "On"
 msgstr ""
 
-#: includes/Admin/SystemStatusPage.php:113
+#: includes/Admin/SystemStatusPage.php:114
 msgid "Off"
 msgstr ""
 
-#: includes/Admin/SystemStatusPage.php:116
+#: includes/Admin/SystemStatusPage.php:117
 msgid "Object Cache Enabled"
 msgstr ""
 
-#: includes/Admin/SystemStatusPage.php:117
-#: includes/Admin/SystemStatusPage.php:326
-#: includes/Admin/SystemStatusPage.php:334
+#: includes/Admin/SystemStatusPage.php:118
+#: includes/Admin/SystemStatusPage.php:328
+#: includes/Admin/SystemStatusPage.php:337
 #: includes/Views/cards/caching/browser/test.blade.php:64
 msgid "Yes"
 msgstr ""
 
-#: includes/Admin/SystemStatusPage.php:117
-#: includes/Admin/SystemStatusPage.php:326
-#: includes/Admin/SystemStatusPage.php:334
+#: includes/Admin/SystemStatusPage.php:118
+#: includes/Admin/SystemStatusPage.php:328
+#: includes/Admin/SystemStatusPage.php:337
 msgid "No"
 msgstr ""
 
-#: includes/Admin/SystemStatusPage.php:120
+#: includes/Admin/SystemStatusPage.php:121
 msgid "Cache Directory Status"
 msgstr ""
 
-#: includes/Admin/SystemStatusPage.php:125
+#: includes/Admin/SystemStatusPage.php:126
 msgid "Image Optimizer Plugins"
 msgstr ""
 
-#: includes/Admin/SystemStatusPage.php:237
+#: includes/Admin/SystemStatusPage.php:239
 msgid "PHP Memory Limit"
 msgstr ""
 
-#: includes/Admin/SystemStatusPage.php:238
-#: includes/Admin/SystemStatusPage.php:245
+#: includes/Admin/SystemStatusPage.php:240
+#: includes/Admin/SystemStatusPage.php:247
 msgid "Unlimited"
 msgstr ""
 
-#: includes/Admin/SystemStatusPage.php:244
+#: includes/Admin/SystemStatusPage.php:246
 msgid "PHP Max Execution Time"
 msgstr ""
 
-#: includes/Admin/SystemStatusPage.php:251
+#: includes/Admin/SystemStatusPage.php:253
 msgid "PHP Upload Max File Size"
 msgstr ""
 
-#: includes/Admin/SystemStatusPage.php:258
+#: includes/Admin/SystemStatusPage.php:260
 msgid "PHP Post Max Size"
 msgstr ""
 
-#: includes/Admin/SystemStatusPage.php:265
+#: includes/Admin/SystemStatusPage.php:267
 msgid "GZip Compression"
 msgstr ""
 
-#: includes/Admin/SystemStatusPage.php:266
-#: includes/Admin/SystemStatusPage.php:273
-#: includes/Admin/SystemStatusPage.php:292
-#: includes/Admin/SystemStatusPage.php:299
-#: includes/Admin/SystemStatusPage.php:306
-#: includes/Admin/SystemStatusPage.php:313
+#: includes/Admin/SystemStatusPage.php:268
+#: includes/Admin/SystemStatusPage.php:275
+#: includes/Admin/SystemStatusPage.php:294
+#: includes/Admin/SystemStatusPage.php:301
+#: includes/Admin/SystemStatusPage.php:308
+#: includes/Admin/SystemStatusPage.php:315
 #: includes/Views/cards/overview/optimization-overview.blade.php:20
 #: includes/Views/cards/overview/optimization-overview.blade.php:24
 #: includes/Views/cards/overview/optimization-overview.blade.php:28
 msgid "Enabled"
 msgstr ""
 
-#: includes/Admin/SystemStatusPage.php:266
-#: includes/Admin/SystemStatusPage.php:273
-#: includes/Admin/SystemStatusPage.php:292
-#: includes/Admin/SystemStatusPage.php:299
-#: includes/Admin/SystemStatusPage.php:306
-#: includes/Admin/SystemStatusPage.php:313
+#: includes/Admin/SystemStatusPage.php:268
+#: includes/Admin/SystemStatusPage.php:275
+#: includes/Admin/SystemStatusPage.php:294
+#: includes/Admin/SystemStatusPage.php:301
+#: includes/Admin/SystemStatusPage.php:308
+#: includes/Admin/SystemStatusPage.php:315
 #: includes/Views/cards/overview/optimization-overview.blade.php:20
 #: includes/Views/cards/overview/optimization-overview.blade.php:24
 #: includes/Views/cards/overview/optimization-overview.blade.php:28
 msgid "Disabled"
 msgstr ""
 
-#: includes/Admin/SystemStatusPage.php:272
+#: includes/Admin/SystemStatusPage.php:274
 msgid "PHP OPcache"
 msgstr ""
 
-#: includes/Admin/SystemStatusPage.php:291
+#: includes/Admin/SystemStatusPage.php:293
 msgid "Apache mod_rewrite"
 msgstr ""
 
-#: includes/Admin/SystemStatusPage.php:298
+#: includes/Admin/SystemStatusPage.php:300
 msgid "Apache mod_expires"
 msgstr ""
 
-#: includes/Admin/SystemStatusPage.php:305
+#: includes/Admin/SystemStatusPage.php:307
 msgid "Apache mod_deflate"
 msgstr ""
 
-#: includes/Admin/SystemStatusPage.php:312
+#: includes/Admin/SystemStatusPage.php:314
 msgid "Apache mod_headers"
 msgstr ""
 
-#: includes/Admin/SystemStatusPage.php:317
+#: includes/Admin/SystemStatusPage.php:319
 #: includes/Views/cards/caching/browser-cache-settings/nginx.blade.php:8
 #: includes/Views/cards/caching/browser/compression-settings.blade.php:14
 msgid "Nginx Configuration"
 msgstr ""
 
-#: includes/Admin/SystemStatusPage.php:318
+#: includes/Admin/SystemStatusPage.php:320
 msgid "Please review your server configuration"
 msgstr ""
 
-#: includes/Admin/SystemStatusPage.php:325
+#: includes/Admin/SystemStatusPage.php:327
 msgid "HTTPS Enabled"
 msgstr ""
 
-#: includes/Admin/SystemStatusPage.php:333
+#: includes/Admin/SystemStatusPage.php:336
 msgid "Uploads Directory Writable"
 msgstr ""
 
@@ -881,204 +884,241 @@ msgstr ""
 msgid "Pivot Performance Toolkit Maintenance"
 msgstr ""
 
-#: includes/Admin/ToolsPage.php:198
+#: includes/Admin/ToolsPage.php:202
 msgid "Could not generate export file."
 msgstr ""
 
-#: includes/Admin/ToolsPage.php:223
+#: includes/Admin/ToolsPage.php:229
 msgid "No import file was uploaded."
 msgstr ""
 
-#: includes/Admin/ToolsPage.php:229
+#: includes/Admin/ToolsPage.php:236
 msgid "Upload failed. Please try again with a valid JSON file."
 msgstr ""
 
-#: includes/Admin/ToolsPage.php:235
+#: includes/Admin/ToolsPage.php:242
 msgid "Invalid uploaded file."
 msgstr ""
 
-#: includes/Admin/ToolsPage.php:241
+#: includes/Admin/ToolsPage.php:248
 msgid "Import file is empty."
 msgstr ""
 
-#: includes/Admin/ToolsPage.php:247
+#: includes/Admin/ToolsPage.php:254
 msgid "Import file is not valid JSON."
 msgstr ""
 
-#: includes/Admin/ToolsPage.php:261
+#: includes/Admin/ToolsPage.php:268
 msgid "Import file is not a Pivot Performance Toolkit export."
 msgstr ""
 
 #. translators: %d: schema version
-#: includes/Admin/ToolsPage.php:271
+#: includes/Admin/ToolsPage.php:278
 msgid "Unsupported import schema version: %d."
 msgstr ""
 
-#: includes/Admin/ToolsPage.php:282
+#: includes/Admin/ToolsPage.php:289
 msgid "No settings payload found in import file."
 msgstr ""
 
-#: includes/Admin/ToolsPage.php:327
+#: includes/Admin/ToolsPage.php:334
 msgid "Uninstall cleanup policy saved."
 msgstr ""
 
-#: includes/Admin/ToolsPage.php:340
+#: includes/Admin/ToolsPage.php:347
 msgid "All settings have been reset to safe defaults."
 msgstr ""
 
 #. translators: %d: schema version
-#: includes/Admin/ToolsPage.php:367
+#: includes/Admin/ToolsPage.php:398
 msgid "Schema v%d accepted"
 msgstr ""
 
-#: includes/Admin/ToolsPage.php:370
+#: includes/Admin/ToolsPage.php:401
 msgid "Legacy import format accepted"
 msgstr ""
 
 #. translators: %d: number of recognized settings imported
-#: includes/Admin/ToolsPage.php:374
+#: includes/Admin/ToolsPage.php:405
 msgid "%d key imported"
 msgid_plural "%d keys imported"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of ignored settings keys
-#: includes/Admin/ToolsPage.php:380
+#: includes/Admin/ToolsPage.php:411
 msgid "%d key ignored"
 msgid_plural "%d keys ignored"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of preserved secret values
-#: includes/Admin/ToolsPage.php:387
+#: includes/Admin/ToolsPage.php:418
 msgid "%d secret preserved"
 msgid_plural "%d secrets preserved"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/Admin/ToolsPage.php:392
+#: includes/Admin/ToolsPage.php:423
 msgid "Settings imported successfully."
 msgstr ""
 
+#: includes/Cache/HtaccessCacheHeaders.php:120
+msgid "Pivot Performance Toolkit couldn't access the filesystem to update .htaccess — add the snippet manually, or fix file permissions."
+msgstr ""
+
+#: includes/Cache/HtaccessCacheHeaders.php:129
+msgid ".htaccess isn't writable — add the snippet manually, or fix file permissions."
+msgstr ""
+
+#: includes/Cache/HtaccessCacheHeaders.php:157
+msgid "Pivot Performance Toolkit couldn't write to .htaccess — add the snippet manually, or fix file permissions."
+msgstr ""
+
+#: includes/Cache/HtaccessCacheHeaders.php:163
+msgid "Browser cache headers applied to .htaccess."
+msgstr ""
+
+#: includes/Cache/HtaccessCacheHeaders.php:176
+#: includes/Cache/HtaccessCacheHeaders.php:202
+msgid "Nothing to remove."
+msgstr ""
+
+#: includes/Cache/HtaccessCacheHeaders.php:185
+msgid "Pivot Performance Toolkit couldn't access the filesystem to update .htaccess — remove the snippet manually, or fix file permissions."
+msgstr ""
+
+#: includes/Cache/HtaccessCacheHeaders.php:192
+msgid ".htaccess isn't writable — remove the snippet manually, or fix file permissions."
+msgstr ""
+
+#: includes/Cache/HtaccessCacheHeaders.php:211
+msgid "Pivot Performance Toolkit couldn't write to .htaccess — remove the snippet manually, or fix file permissions."
+msgstr ""
+
+#: includes/Cache/HtaccessCacheHeaders.php:217
+msgid "Browser cache headers removed from .htaccess."
+msgstr ""
+
 #. translators: %d: number of cache hits.
-#: includes/Cache/object-cache.php:237
+#: includes/Cache/object-cache.php:261
 msgid "Cache hits: %d"
 msgstr ""
 
 #. translators: %d: number of cache misses.
-#: includes/Cache/object-cache.php:239
+#: includes/Cache/object-cache.php:263
 msgid "Cache misses: %d"
 msgstr ""
 
-#: includes/Cache/ObjectCacheManager.php:81
+#: includes/Cache/ObjectCacheManager.php:82
 msgid "PTK File Cache"
 msgstr ""
 
-#: includes/Cache/ObjectCacheManager.php:98
+#: includes/Cache/ObjectCacheManager.php:99
 msgid "External (unknown)"
 msgstr ""
 
-#: includes/Cache/ObjectCacheManager.php:101
-#: includes/Views/cards/caching/page/object-cache.blade.php:15
+#: includes/Cache/ObjectCacheManager.php:102
+#: includes/Views/cards/caching/page/object-cache.blade.php:17
 #: includes/Views/cards/caching/browser/test.blade.php:62
 msgid "None"
 msgstr ""
 
-#: includes/Cache/ObjectCacheManager.php:117
+#: includes/Cache/ObjectCacheManager.php:118
 msgid "Another plugin already manages object-cache.php. Pivot Performance Toolkit did not overwrite it."
 msgstr ""
 
-#: includes/Cache/ObjectCacheManager.php:124
+#: includes/Cache/ObjectCacheManager.php:125
 msgid "The object-cache source file is missing from the plugin directory."
 msgstr ""
 
-#: includes/Cache/ObjectCacheManager.php:131
-#: includes/Core/Lifecycle.php:190
+#: includes/Cache/ObjectCacheManager.php:133
+#: includes/Core/Lifecycle.php:199
 msgid "The wp-content directory is not writable by PHP."
 msgstr ""
 
-#: includes/Cache/ObjectCacheManager.php:140
+#: includes/Cache/ObjectCacheManager.php:142
 msgid "PHP failed to copy object-cache.php into wp-content."
 msgstr ""
 
-#: includes/Cache/ObjectCacheManager.php:146
+#: includes/Cache/ObjectCacheManager.php:148
 msgid "File-based object cache enabled. Changes take effect on next page load."
 msgstr ""
 
-#: includes/Cache/ObjectCacheManager.php:159
+#: includes/Cache/ObjectCacheManager.php:161
 msgid "The installed object-cache.php was not placed by Pivot Performance Toolkit."
 msgstr ""
 
-#: includes/Cache/ObjectCacheManager.php:166
+#: includes/Cache/ObjectCacheManager.php:168
 msgid "Could not remove object-cache.php. Please check file permissions."
 msgstr ""
 
-#: includes/Cache/ObjectCacheManager.php:172
+#: includes/Cache/ObjectCacheManager.php:174
 msgid "File-based object cache disabled. Changes take effect on next page load."
 msgstr ""
 
-#: includes/Cache/ObjectCacheManager.php:218
+#: includes/Cache/ObjectCacheManager.php:220
 msgid "Object cache is empty."
 msgstr ""
 
 #. translators: %d: number of cache entries deleted.
-#: includes/Cache/ObjectCacheManager.php:239
+#: includes/Cache/ObjectCacheManager.php:241
 msgid "Object cache flushed. %d entries removed."
 msgstr ""
 
-#: includes/Core/Lifecycle.php:102
+#: includes/Core/Lifecycle.php:110
 msgid "Could not list cached HTML files for cleanup."
 msgstr ""
 
 #. translators: %s: absolute file path that could not be deleted during deactivation cleanup.
-#: includes/Core/Lifecycle.php:115
+#: includes/Core/Lifecycle.php:123
 msgid "Could not remove cached file: %s"
 msgstr ""
 
 #. translators: %s: absolute config file path that could not be deleted during deactivation cleanup.
-#: includes/Core/Lifecycle.php:128
+#: includes/Core/Lifecycle.php:136
 msgid "Could not remove cache config file: %s"
 msgstr ""
 
-#: includes/Core/Lifecycle.php:175
+#: includes/Core/Lifecycle.php:183
 msgid "Another plugin already manages wp-content/advanced-cache.php. Pivot Performance Toolkit did not overwrite it."
 msgstr ""
 
-#: includes/Core/Lifecycle.php:182
+#: includes/Core/Lifecycle.php:190
 msgid "The source drop-in file is missing from the plugin directory."
 msgstr ""
 
-#: includes/Core/Lifecycle.php:198
+#: includes/Core/Lifecycle.php:207
 msgid "PHP failed to copy advanced-cache.php into wp-content."
 msgstr ""
 
-#: includes/Core/Lifecycle.php:274
+#: includes/Core/Lifecycle.php:283
 msgid "Pivot Performance Toolkit couldn't enable page caching because WordPress couldn't access the filesystem — add `define('WP_CACHE', true);` to wp-config.php manually, or fix file permissions."
 msgstr ""
 
-#: includes/Core/Lifecycle.php:281
-#: includes/Core/Lifecycle.php:319
+#: includes/Core/Lifecycle.php:290
+#: includes/Core/Lifecycle.php:328
 msgid "Pivot Performance Toolkit couldn't enable page caching because wp-config.php isn't writable — add `define('WP_CACHE', true);` manually, or fix file permissions."
 msgstr ""
 
-#: includes/Core/Lifecycle.php:290
+#: includes/Core/Lifecycle.php:299
 msgid "Pivot Performance Toolkit couldn't enable page caching because wp-config.php could not be read — add `define('WP_CACHE', true);` manually."
 msgstr ""
 
-#: includes/Core/Lifecycle.php:310
+#: includes/Core/Lifecycle.php:319
 msgid "Pivot Performance Toolkit couldn't find where to add the WP_CACHE setting in wp-config.php — add `define('WP_CACHE', true);` manually."
 msgstr ""
 
-#: includes/Core/Lifecycle.php:334
+#: includes/Core/Lifecycle.php:343
 msgid "Pivot Performance Toolkit couldn't disable page caching because WordPress couldn't access the filesystem — remove `define('WP_CACHE', true);` from wp-config.php manually, or fix file permissions."
 msgstr ""
 
-#: includes/Core/Lifecycle.php:341
-#: includes/Core/Lifecycle.php:371
+#: includes/Core/Lifecycle.php:350
+#: includes/Core/Lifecycle.php:380
 msgid "Pivot Performance Toolkit couldn't disable page caching because wp-config.php isn't writable — remove `define('WP_CACHE', true);` manually, or fix file permissions."
 msgstr ""
 
-#: includes/Core/Lifecycle.php:350
+#: includes/Core/Lifecycle.php:359
 msgid "Pivot Performance Toolkit couldn't disable page caching because wp-config.php could not be read — remove `define('WP_CACHE', true);` manually."
 msgstr ""
 
@@ -1103,7 +1143,7 @@ msgstr ""
 msgid "Cloudflare cache purged."
 msgstr ""
 
-#: includes/Integrations/CloudflareIntegration.php:156
+#: includes/Integrations/CloudflareIntegration.php:160
 msgid "Unexpected response from Cloudflare API."
 msgstr ""
 
@@ -1130,7 +1170,7 @@ msgid "Fonts"
 msgstr ""
 
 #: includes/Views/admin/assets-page.blade.php:105
-#: includes/Views/components/performance-snapshot.blade.php:124
+#: includes/Views/components/performance-snapshot.blade.php:126
 #: includes/Views/admin/assets-page.blade.php:107
 msgid "Images"
 msgstr ""
@@ -1173,122 +1213,122 @@ msgstr ""
 msgid "Detection complete."
 msgstr ""
 
-#: includes/Views/cards/caching/page/object-cache.blade.php:77
-#: includes/Views/cards/caching/page/object-cache.blade.php:80
+#: includes/Views/cards/caching/page/object-cache.blade.php:79
+#: includes/Views/cards/caching/page/object-cache.blade.php:82
 msgid "Enable File Object Cache"
 msgstr ""
 
-#: includes/Views/cards/caching/page/object-cache.blade.php:88
-#: includes/Views/cards/caching/page/object-cache.blade.php:91
+#: includes/Views/cards/caching/page/object-cache.blade.php:90
+#: includes/Views/cards/caching/page/object-cache.blade.php:93
 msgid "Flush Object Cache"
 msgstr ""
 
-#: includes/Views/cards/caching/page/object-cache.blade.php:98
-#: includes/Views/cards/caching/page/object-cache.blade.php:101
+#: includes/Views/cards/caching/page/object-cache.blade.php:100
+#: includes/Views/cards/caching/page/object-cache.blade.php:103
 msgid "Disable File Object Cache"
 msgstr ""
 
-#: includes/Views/components/performance-snapshot.blade.php:19
+#: includes/Views/components/performance-snapshot.blade.php:21
 msgid "Performance Snapshot"
 msgstr ""
 
-#: includes/Views/components/performance-snapshot.blade.php:20
+#: includes/Views/components/performance-snapshot.blade.php:22
 #: includes/Views/admin/assets-page.blade.php:43
 msgid "Idle"
 msgstr ""
 
-#: includes/Views/components/performance-snapshot.blade.php:22
+#: includes/Views/components/performance-snapshot.blade.php:24
 msgid "Quick test from dashboard. Open Performance page for full report."
 msgstr ""
 
-#: includes/Views/components/performance-snapshot.blade.php:38
+#: includes/Views/components/performance-snapshot.blade.php:40
 msgid "Open Full Test"
 msgstr ""
 
-#: includes/Views/components/performance-snapshot.blade.php:54
+#: includes/Views/components/performance-snapshot.blade.php:56
 msgid "Measured URL"
 msgstr ""
 
-#: includes/Views/components/performance-snapshot.blade.php:61
+#: includes/Views/components/performance-snapshot.blade.php:63
 msgid "Measured At"
 msgstr ""
 
-#: includes/Views/components/performance-snapshot.blade.php:84
+#: includes/Views/components/performance-snapshot.blade.php:86
 msgid "Test Content"
 msgstr ""
 
-#: includes/Views/components/performance-snapshot.blade.php:86
+#: includes/Views/components/performance-snapshot.blade.php:88
 #: includes/Views/admin/assets-page.blade.php:22
 msgid "Homepage"
 msgstr ""
 
-#: includes/Views/components/performance-snapshot.blade.php:88
+#: includes/Views/components/performance-snapshot.blade.php:90
 #: includes/Views/admin/assets-page.blade.php:24
 msgid "Pages"
 msgstr ""
 
-#: includes/Views/components/performance-snapshot.blade.php:95
+#: includes/Views/components/performance-snapshot.blade.php:97
 #: includes/Views/admin/assets-page.blade.php:32
 msgid "Posts"
 msgstr ""
 
-#: includes/Views/components/performance-snapshot.blade.php:102
+#: includes/Views/components/performance-snapshot.blade.php:104
 msgid "Run Test"
 msgstr ""
 
-#: includes/Views/components/performance-snapshot.blade.php:111
+#: includes/Views/components/performance-snapshot.blade.php:113
 msgid "Metric"
 msgstr ""
 
-#: includes/Views/components/performance-snapshot.blade.php:112
+#: includes/Views/components/performance-snapshot.blade.php:114
 msgid "Value"
 msgstr ""
 
-#: includes/Views/components/performance-snapshot.blade.php:117
+#: includes/Views/components/performance-snapshot.blade.php:119
 msgid "Page Load Time"
 msgstr ""
 
-#: includes/Views/components/performance-snapshot.blade.php:118
+#: includes/Views/components/performance-snapshot.blade.php:120
 msgid "Largest Contentful Paint (LCP)"
 msgstr ""
 
-#: includes/Views/components/performance-snapshot.blade.php:119
+#: includes/Views/components/performance-snapshot.blade.php:121
 msgid "Time To First Byte (TTFB)"
 msgstr ""
 
-#: includes/Views/components/performance-snapshot.blade.php:120
+#: includes/Views/components/performance-snapshot.blade.php:122
 msgid "First Contentful Paint (FCP)"
 msgstr ""
 
-#: includes/Views/components/performance-snapshot.blade.php:121
+#: includes/Views/components/performance-snapshot.blade.php:123
 msgid "DOM Content Loaded"
 msgstr ""
 
-#: includes/Views/components/performance-snapshot.blade.php:122
+#: includes/Views/components/performance-snapshot.blade.php:124
 msgid "Resource Count"
 msgstr ""
 
-#: includes/Views/components/performance-snapshot.blade.php:123
+#: includes/Views/components/performance-snapshot.blade.php:125
 msgid "Total Image Size"
 msgstr ""
 
-#: includes/Views/components/performance-snapshot.blade.php:125
+#: includes/Views/components/performance-snapshot.blade.php:127
 msgid "Total JS Size"
 msgstr ""
 
-#: includes/Views/components/performance-snapshot.blade.php:126
+#: includes/Views/components/performance-snapshot.blade.php:128
 msgid "JS Scripts"
 msgstr ""
 
-#: includes/Views/components/performance-snapshot.blade.php:127
+#: includes/Views/components/performance-snapshot.blade.php:129
 msgid "Total CSS Size"
 msgstr ""
 
-#: includes/Views/components/performance-snapshot.blade.php:128
+#: includes/Views/components/performance-snapshot.blade.php:130
 msgid "CSS Stylesheets"
 msgstr ""
 
-#: pivot-performance-toolkit.php:68
+#: pivot-performance-toolkit.php:61
 msgid ""
 "Pivot Performance Toolkit Free does not support WordPress Multisite. \n"
 "\t\t\t\t\tThe free version uses a single-site cache architecture and cannot safely operate in a multisite network environment. \n"
@@ -1531,43 +1571,47 @@ msgstr ""
 msgid "Add this to your .htaccess file in the WordPress root directory. Most shared hosting uses Apache."
 msgstr ""
 
-#: includes/Views/cards/caching/browser-cache-settings/apache.blade.php:14
-#: includes/Views/cards/caching/browser-cache-settings/nginx.blade.php:15
-msgid "Copy-friendly snippet:"
+#: includes/Views/cards/caching/browser-cache-settings/apache.blade.php:24
+#: includes/Views/cards/caching/browser-cache-settings/apache.blade.php:33
+msgid "Applied to .htaccess"
 msgstr ""
 
-#: includes/Views/cards/caching/browser-cache-settings/apache.blade.php:16
-#: includes/Views/cards/caching/browser-cache-settings/nginx.blade.php:17
-msgid "Copy"
+#: includes/Views/cards/caching/browser-cache-settings/apache.blade.php:25
+#: includes/Views/cards/caching/browser-cache-settings/apache.blade.php:33
+msgid "Not yet applied"
 msgstr ""
 
-#: includes/Views/cards/caching/browser-cache-settings/apache.blade.php:32
-#: includes/Views/cards/caching/browser-cache-settings/nginx.blade.php:33
-msgid "How to apply:"
-msgstr ""
-
-#: includes/Views/cards/caching/browser-cache-settings/apache.blade.php:34
-msgid "Connect via FTP/SFTP to your server"
-msgstr ""
-
-#: includes/Views/cards/caching/browser-cache-settings/apache.blade.php:35
-msgid "Navigate to your WordPress root (where wp-content, wp-admin, wp-includes are)"
-msgstr ""
-
-#: includes/Views/cards/caching/browser-cache-settings/apache.blade.php:36
-msgid "Open .htaccess (may be hidden file)"
-msgstr ""
-
-#: includes/Views/cards/caching/browser-cache-settings/apache.blade.php:37
-msgid "Add the above snippet (or replace entire file if new)"
-msgstr ""
-
+#: includes/Views/cards/caching/browser-cache-settings/apache.blade.php:26
 #: includes/Views/cards/caching/browser-cache-settings/apache.blade.php:38
-msgid "Save and clear your site cache"
+msgid "Pivot Performance Toolkit is managing these cache headers directly in .htaccess."
+msgstr ""
+
+#: includes/Views/cards/caching/browser-cache-settings/apache.blade.php:27
+msgid "Apply automatically, or copy the snippet below and add it yourself."
+msgstr ""
+
+#: includes/Views/cards/caching/browser-cache-settings/apache.blade.php:28
+msgid "Apply Automatically"
+msgstr ""
+
+#: includes/Views/cards/caching/browser-cache-settings/apache.blade.php:29
+msgid "Remove"
 msgstr ""
 
 #: includes/Views/cards/caching/browser-cache-settings/nginx.blade.php:9
 msgid "Ask your hosting provider to add this to your Nginx server block configuration. Nginx is common on managed hosting and higher-tier plans."
+msgstr ""
+
+#: includes/Views/cards/caching/browser-cache-settings/nginx.blade.php:15
+msgid "Copy-friendly snippet:"
+msgstr ""
+
+#: includes/Views/cards/caching/browser-cache-settings/nginx.blade.php:17
+msgid "Copy"
+msgstr ""
+
+#: includes/Views/cards/caching/browser-cache-settings/nginx.blade.php:33
+msgid "How to apply:"
 msgstr ""
 
 #: includes/Views/cards/caching/browser-cache-settings/nginx.blade.php:35
@@ -1776,11 +1820,11 @@ msgstr ""
 msgid "Image"
 msgstr ""
 
-#: includes/Views/cards/caching/cdn/actions.blade.php:14
+#: includes/Views/cards/caching/cdn/actions.blade.php:15
 msgid "Test Connection"
 msgstr ""
 
-#: includes/Views/cards/caching/cdn/actions.blade.php:27
+#: includes/Views/cards/caching/cdn/actions.blade.php:31
 msgid "Purge Cache"
 msgstr ""
 
@@ -1809,8 +1853,16 @@ msgstr ""
 msgid "Theme or plugin file changes"
 msgstr ""
 
+#: includes/Views/cards/caching/cdn/info/imagify-notice.blade.php:9
+msgid "Heads up:"
+msgstr ""
+
+#: includes/Views/cards/caching/cdn/info/imagify-notice.blade.php:11
+msgid "Imagify was detected, and its default WebP delivery method (server rewrite rules) is known to break behind a CDN, including Cloudflare. In Imagify's settings, switch WebP delivery to the \"<picture> tag\" method to avoid this — it works reliably with Cloudflare."
+msgstr ""
+
 #: includes/Views/cards/caching/cdn/integrations.blade.php:29
-#: includes/Views/cards/caching/page/object-cache.blade.php:35
+#: includes/Views/cards/caching/page/object-cache.blade.php:37
 msgid "Provider"
 msgstr ""
 
@@ -1818,28 +1870,28 @@ msgstr ""
 msgid "API token"
 msgstr ""
 
-#: includes/Views/cards/caching/cdn/integrations.blade.php:54
-msgid "API token with Zone:Read and Purge Cache permissions."
+#: includes/Views/cards/caching/cdn/integrations.blade.php:55
+msgid "How to create an API token?"
 msgstr ""
 
-#: includes/Views/cards/caching/cdn/integrations.blade.php:59
+#: includes/Views/cards/caching/cdn/integrations.blade.php:61
 msgid "Zone ID"
 msgstr ""
 
-#: includes/Views/cards/caching/cdn/integrations.blade.php:68
-msgid "Find your Zone ID in the Cloudflare dashboard."
+#: includes/Views/cards/caching/cdn/integrations.blade.php:71
+msgid "Where to find the Zone ID?"
 msgstr ""
 
-#: includes/Views/cards/caching/cdn/integrations.blade.php:86
+#: includes/Views/cards/caching/cdn/integrations.blade.php:90
 msgid "Auto-purge on content update"
 msgstr ""
 
-#: includes/Views/cards/caching/cdn/integrations.blade.php:87
+#: includes/Views/cards/caching/cdn/integrations.blade.php:91
 msgid "Automatically purge CDN cache when posts, pages or media are updated."
 msgstr ""
 
-#: includes/Views/cards/caching/cdn/integrations.blade.php:94
-#: includes/Views/cards/caching/page/cache.blade.php:109
+#: includes/Views/cards/caching/cdn/integrations.blade.php:99
+#: includes/Views/cards/caching/page/cache.blade.php:111
 #: includes/Views/cards/caching/rules/exclusions.blade.php:86
 #: includes/Views/cards/optimization/media/media-optimization.blade.php:78
 msgid "Save changes"
@@ -1870,7 +1922,7 @@ msgstr ""
 msgid "%1$s of %2$s MB used (%3$s%%)"
 msgstr ""
 
-#: includes/Views/cards/caching/page/cache.blade.php:117
+#: includes/Views/cards/caching/page/cache.blade.php:126
 msgid "Clear cache"
 msgstr ""
 
@@ -1896,27 +1948,27 @@ msgstr ""
 msgid "Page caching stores a static version of your pages and serves it to visitors, reducing server load and improving response times."
 msgstr ""
 
-#: includes/Views/cards/caching/page/object-cache.blade.php:21
+#: includes/Views/cards/caching/page/object-cache.blade.php:23
 msgid "Persist WordPress object cache entries to disk between requests, reducing database load and speeding up repeated queries."
 msgstr ""
 
-#: includes/Views/cards/caching/page/object-cache.blade.php:40
+#: includes/Views/cards/caching/page/object-cache.blade.php:42
 msgid "Entries"
 msgstr ""
 
-#: includes/Views/cards/caching/page/object-cache.blade.php:44
+#: includes/Views/cards/caching/page/object-cache.blade.php:46
 msgid "Cache Size"
 msgstr ""
 
-#: includes/Views/cards/caching/page/object-cache.blade.php:49
+#: includes/Views/cards/caching/page/object-cache.blade.php:51
 msgid "Drop-in"
 msgstr ""
 
-#: includes/Views/cards/caching/page/object-cache.blade.php:62
+#: includes/Views/cards/caching/page/object-cache.blade.php:64
 msgid "External object cache detected."
 msgstr ""
 
-#: includes/Views/cards/caching/page/object-cache.blade.php:63
+#: includes/Views/cards/caching/page/object-cache.blade.php:65
 msgid "Another plugin is managing object-cache.php. Pivot Performance Toolkit will not overwrite it."
 msgstr ""
 
@@ -1928,19 +1980,19 @@ msgstr ""
 msgid "Clear all cached files (page, minified assets, etc.)"
 msgstr ""
 
-#: includes/Views/cards/caching/page/quick-actions.blade.php:30
+#: includes/Views/cards/caching/page/quick-actions.blade.php:33
 msgid "Clear Minified CSS/JS Cache"
 msgstr ""
 
-#: includes/Views/cards/caching/page/quick-actions.blade.php:31
+#: includes/Views/cards/caching/page/quick-actions.blade.php:34
 msgid "Remove all cached minified CSS and JavaScript files"
 msgstr ""
 
-#: includes/Views/cards/caching/page/quick-actions.blade.php:45
+#: includes/Views/cards/caching/page/quick-actions.blade.php:51
 msgid "Preload Cache"
 msgstr ""
 
-#: includes/Views/cards/caching/page/quick-actions.blade.php:46
+#: includes/Views/cards/caching/page/quick-actions.blade.php:52
 msgid "Generate cache files for your most visited pages."
 msgstr ""
 
@@ -2028,8 +2080,8 @@ msgstr ""
 msgid "Recommended: Optimize your database weekly."
 msgstr ""
 
-#: includes/Views/cards/database/info/why.blade.php:25
-#: includes/Views/cards/database/overview.blade.php:33
+#: includes/Views/cards/database/info/why.blade.php:26
+#: includes/Views/cards/database/overview.blade.php:34
 msgid "Optimize all tables"
 msgstr ""
 
@@ -2078,45 +2130,69 @@ msgstr ""
 msgid "No table statistics are available right now."
 msgstr ""
 
-#: includes/Views/cards/optimization/file/exclusions.blade.php:53
+#: includes/Views/cards/optimization/file/exclusions.blade.php:55
 #: includes/Views/cards/optimization/file/http11.blade.php:18
 #: includes/Views/cards/overview/optimization-overview.blade.php:10
 msgid "Warning:"
 msgstr ""
 
-#: includes/Views/cards/optimization/file/exclusions.blade.php:54
-msgid "Minification exclusions can break dependency order, plugin-specific assets, and conditional loading logic. Use only after testing key pages."
+#: includes/Views/cards/optimization/file/exclusions.blade.php:56
+msgid "Minification, async CSS, and delay-execution exclusions can break dependency order, plugin-specific assets, conditional loading logic, and above-the-fold styling. Use only after testing key pages — especially for scripts that must run before user interaction (consent banners, payment forms) or stylesheets needed for first paint."
 msgstr ""
 
-#: includes/Views/cards/optimization/file/exclusions.blade.php:63
+#: includes/Views/cards/optimization/file/exclusions.blade.php:65
 msgid "Exclusion Rules"
 msgstr ""
 
-#: includes/Views/cards/optimization/file/exclusions.blade.php:76
+#: includes/Views/cards/optimization/file/exclusions.blade.php:78
 msgid "External CSS exclusions"
 msgstr ""
 
-#: includes/Views/cards/optimization/file/exclusions.blade.php:79
+#: includes/Views/cards/optimization/file/exclusions.blade.php:81
 msgid "Prevent specific stylesheets from being minified by external CSS minification."
 msgstr ""
 
-#: includes/Views/cards/optimization/file/exclusions.blade.php:90
+#: includes/Views/cards/optimization/file/exclusions.blade.php:92
 msgid "<strong>One rule per line.</strong> You can exclude by stylesheet handle, file name, full path, or wildcard pattern. Examples: <code>woocommerce-layout</code>, <code>style.css</code>, <code>/wp-content/themes/your-theme/css/*</code>."
 msgstr ""
 
-#: includes/Views/cards/optimization/file/exclusions.blade.php:99
+#: includes/Views/cards/optimization/file/exclusions.blade.php:101
 msgid "External JavaScript exclusions"
 msgstr ""
 
-#: includes/Views/cards/optimization/file/exclusions.blade.php:102
+#: includes/Views/cards/optimization/file/exclusions.blade.php:104
 msgid "Prevent specific scripts from being minified by external JavaScript minification."
 msgstr ""
 
-#: includes/Views/cards/optimization/file/exclusions.blade.php:113
+#: includes/Views/cards/optimization/file/exclusions.blade.php:115
 msgid "<strong>One rule per line.</strong> You can exclude by script handle, file name, full path, or wildcard pattern. Examples: <code>jquery-core</code>, <code>app.js</code>, <code>/wp-content/themes/your-theme/js/*</code>."
 msgstr ""
 
-#: includes/Views/cards/optimization/file/exclusions.blade.php:121
+#: includes/Views/cards/optimization/file/exclusions.blade.php:124
+msgid "Async CSS loading exclusions"
+msgstr ""
+
+#: includes/Views/cards/optimization/file/exclusions.blade.php:127
+msgid "Prevent specific stylesheets from being loaded asynchronously. Use for critical above-the-fold styles that must apply before first paint."
+msgstr ""
+
+#: includes/Views/cards/optimization/file/exclusions.blade.php:138
+msgid "<strong>One rule per line.</strong> You can exclude by stylesheet id, file name, full path, or wildcard pattern. Examples: <code>astra-theme-css</code>, <code>style.css</code>, <code>/wp-content/themes/your-theme/css/*</code>."
+msgstr ""
+
+#: includes/Views/cards/optimization/file/exclusions.blade.php:147
+msgid "Delay JS execution exclusions"
+msgstr ""
+
+#: includes/Views/cards/optimization/file/exclusions.blade.php:150
+msgid "Prevent specific scripts from having their execution delayed. Use for scripts that must run immediately (e.g. payment gateways, consent banners)."
+msgstr ""
+
+#: includes/Views/cards/optimization/file/exclusions.blade.php:161
+msgid "<strong>One rule per line.</strong> You can exclude by script id, file name, full path, or wildcard pattern. Examples: <code>stripe-js</code>, <code>recaptcha.js</code>, <code>/wp-content/plugins/your-plugin/js/*</code>."
+msgstr ""
+
+#: includes/Views/cards/optimization/file/exclusions.blade.php:169
 msgid "Save exclusions"
 msgstr ""
 

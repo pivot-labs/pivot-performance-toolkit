@@ -7,7 +7,7 @@
 # truth — run bin/set-version.sh first if you want a different version),
 # rebuilds dist/admin.css + dist/admin-js.js from source, then builds the
 # zip from an ISOLATED copy of the working tree (including any uncommitted
-# and untracked changes) rather than the live checkout.
+# changes) rather than the live checkout.
 #
 # This isolation matters: the zip must ship a Composer autoloader generated
 # with `--no-dev` (no dev-only packages like wp-cli/dist-archive-command),

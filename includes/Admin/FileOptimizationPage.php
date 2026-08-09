@@ -75,22 +75,25 @@ final class FileOptimizationPage extends BladeAdminPage {
 
 		$setting_key = isset( $_POST['setting_key'] ) ? sanitize_key( wp_unslash( (string) $_POST['setting_key'] ) ) : '';
 
-		$allowed_setting_keys = array( 'defer_scripts', 'minify_html', 'minify_css', 'minify_external_css', 'minify_external_js', 'minify_js' );
+		$allowed_setting_keys = array( 'defer_scripts', 'delay_js_execution', 'async_css_loading', 'minify_html', 'minify_css', 'minify_external_css', 'minify_external_js', 'minify_js' );
 
 		if ( ! in_array( $setting_key, $allowed_setting_keys, true ) ) {
 			wp_send_json_error( array( 'message' => __( 'Invalid setting.', 'pivot-performance-toolkit' ) ), 400 );
 		}
 
-		$options                 = $this->settings->all();
-		$options[ $setting_key ] = ! empty( $_POST['setting_value'] );
+		$value = ! empty( $_POST['setting_value'] );
 
-		update_option( $this->settings->optionKey(), $options );
+		// Only submit the changed key — sanitize() merges everything else in
+		// from a freshly-read $base. Writing back a full snapshot here would
+		// race with any concurrent save (e.g. the CDN integrations form) and
+		// silently clobber it with stale values for every other field.
+		update_option( $this->settings->optionKey(), array( $setting_key => $value ) );
 
 		wp_send_json_success(
 			array(
 				'message' => __( 'Quick optimization saved.', 'pivot-performance-toolkit' ),
 				'setting' => $setting_key,
-				'value'   => (bool) $options[ $setting_key ],
+				'value'   => $value,
 			)
 		);
 	}

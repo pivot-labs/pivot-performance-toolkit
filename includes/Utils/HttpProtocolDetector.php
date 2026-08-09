@@ -63,7 +63,23 @@ final class HttpProtocolDetector {
 	 * @return array{version:string,source:string}
 	 */
 	private static function detectFromServerGlobals(): array {
-		// phpcs:disable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- these are only used in !empty()/strict comparisons; the returned 'version'/'source' values below are always hardcoded literals, never the raw $_SERVER content.
+		// phpcs:disable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- these are only used in !empty() presence checks; the returned 'version'/'source' values below are always hardcoded literals, never the raw $_SERVER content.
+		// Cloudflare (and similar reverse proxies) frequently connect to the
+		// origin over HTTP/1.1 even while serving HTTP/2 or HTTP/3 to every
+		// visitor — origin-side signals (SERVER_PROTOCOL, a loopback request)
+		// only see that origin-facing hop, never the actual visitor-facing
+		// protocol. CF-Ray/CF-Connecting-IP are set by Cloudflare on every
+		// proxied request regardless of plan, and Cloudflare has served
+		// HTTP/2 by default to all proxied zones for years, so their
+		// presence alone is a more reliable "at least HTTP/2" signal than
+		// anything origin-side can provide — check it first.
+		if ( ! empty( $_SERVER['HTTP_CF_RAY'] ) || ! empty( $_SERVER['HTTP_CF_CONNECTING_IP'] ) ) {
+			return array(
+				'version' => '2',
+				'source'  => 'cloudflare-proxy',
+			);
+		}
+
 		if ( ! empty( $_SERVER['HTTP3'] ) && 'off' !== strtolower( (string) wp_unslash( $_SERVER['HTTP3'] ) ) ) {
 			return array(
 				'version' => '3',

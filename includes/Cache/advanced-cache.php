@@ -31,6 +31,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 		return;
 	}
 
+	// Never serve a cached file for wp-admin or core auth/cron entry points.
+	// The write side (PageCache::bypassReason()) already excludes is_admin()
+	// and is_user_logged_in(), so a cache file for these paths shouldn't
+	// exist — but this drop-in runs before WordPress loads and can't call
+	// those functions, so it must not rely solely on that assumption. This
+	// check is explicit and independent of the logged-in-cookie heuristic
+	// below, so it still holds even if a cache file ever ended up here.
+	// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- only used for a strpos() prefix match below; never stored, output, or used as a filesystem path. wp_unslash() isn't yet defined this early in the bootstrap.
+	$ptk_request_uri  = isset( $_SERVER['REQUEST_URI'] ) ? (string) $_SERVER['REQUEST_URI'] : '/';
+	$ptk_request_path = strtok( $ptk_request_uri, '?' );
+	$ptk_request_path = false !== $ptk_request_path ? $ptk_request_path : $ptk_request_uri;
+
+	foreach ( array( '/wp-admin/', '/wp-login.php', '/wp-cron.php', '/xmlrpc.php' ) as $ptk_never_cache_path ) {
+		if ( 0 === strpos( $ptk_request_path, $ptk_never_cache_path ) ) {
+			return;
+		}
+	}
+
 	// Detect performance-test probe cookie.
 	// When set, we bypass the logged-in check so the probe can measure the real cached page.
 	// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- only the length is checked below; the token's content is never stored, output, or otherwise used. wp_unslash() isn't yet defined this early in the bootstrap (see the REQUEST_METHOD check above).

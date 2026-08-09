@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         </div>
     @endif
 
-    <form method="post" action="{{ esc_url(admin_url('options.php')) }}" class="pivot-performance-toolkit-form-aligned">
+    <form method="post" action="{{ esc_url(admin_url('options.php')) }}" class="pivot-performance-toolkit-form-aligned" data-disable-on-submit>
         @php
             settings_fields('pivot_performance_toolkit');
 
@@ -51,7 +51,9 @@ if ( ! defined( 'ABSPATH' ) ) {
                     name="{{ $option_key }}[cloudflare_api_token]"
                     value="{{ esc_attr((string) $options['cloudflare_api_token']) }}"
                 />
-                <p class="pivot-performance-toolkit-field-help">{{ __('API token with Zone:Read and Purge Cache permissions.', 'pivot-performance-toolkit') }}</p>
+                <p class="pivot-performance-toolkit-field-help">
+                    <a href="https://docs.pivotlabs.dev/performance-toolkit/cdn-cloudflare#step-2-create-api-token" target="_blank" rel="noopener noreferrer">{{ __('How to create an API token?', 'pivot-performance-toolkit') }}</a>
+                </p>
             </div>
         </div>
 
@@ -65,7 +67,9 @@ if ( ! defined( 'ABSPATH' ) ) {
                     name="{{ $option_key }}[cloudflare_zone_id]"
                     value="{{ esc_attr((string) $options['cloudflare_zone_id']) }}"
                 />
-                <p class="pivot-performance-toolkit-field-help">{{ __('Find your Zone ID in the Cloudflare dashboard.', 'pivot-performance-toolkit') }}</p>
+                <p class="pivot-performance-toolkit-field-help">
+                    <a href="https://docs.pivotlabs.dev/performance-toolkit/cdn-cloudflare#step-1-get-zone-id" target="_blank" rel="noopener noreferrer">{{ __('Where to find the Zone ID?', 'pivot-performance-toolkit') }}</a>
+                </p>
             </div>
         </div>
 
@@ -89,9 +93,12 @@ if ( ! defined( 'ABSPATH' ) ) {
             </div>
         </div>
 
-        @php
-            submit_button(__('Save changes', 'pivot-performance-toolkit'));
-        @endphp
+        <div class="pivot-performance-toolkit-form-row pivot-performance-toolkit-form-row--full" style="display: flex; align-items: center; gap: 8px;">
+            @php
+                submit_button(__('Save changes', 'pivot-performance-toolkit'), 'primary', 'submit', false);
+            @endphp
+            <span class="spinner" style="float: none; margin: 0;"></span>
+        </div>
     </form>
 </x-card>
 

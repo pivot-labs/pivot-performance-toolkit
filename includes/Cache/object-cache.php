@@ -44,6 +44,23 @@ if ( ! class_exists( 'WP_Object_Cache' ) ) {
 				// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_mkdir -- this object-cache drop-in runs on every request type (frontend, AJAX, REST, cron), not just admin; WP_Filesystem lives in wp-admin/includes/file.php (not loaded here) and its init can itself prompt for credentials, which would be unsafe to trigger from a hot cache path.
 				@mkdir( $this->cache_dir, 0755, true );
 			}
+
+			/*
+			 * WordPress caches every autoloaded option together as a single
+			 * "alloptions" blob and updates it with a read-modify-write:
+			 * load the current blob, patch in the one changed option,
+			 * write the whole blob back. That sequence isn't atomic across
+			 * processes here — any other concurrent request that updates a
+			 * *different* autoloaded option (most commonly WP-Cron's own
+			 * "cron" option, re-saved via the loopback request fired after
+			 * almost every page load) can read a stale blob and write it
+			 * back whole, silently reverting an option that was correctly
+			 * saved to the database moments earlier. Keeping "options"
+			 * non-persistent avoids the cross-process race entirely by
+			 * always rebuilding it fresh from the database (single source
+			 * of truth) each request, at the cost of one extra query.
+			 */
+			$this->non_persistent_groups[] = 'options';
 		}
 
 		/**
@@ -147,6 +164,10 @@ if ( ! class_exists( 'WP_Object_Cache' ) ) {
 			$file = $this->file_path( $group_key, $cache_key );
 			if ( ! file_exists( $file ) ) {
 				return true;
+			}
+
+			if ( function_exists( 'opcache_invalidate' ) ) {
+				opcache_invalidate( $file, true );
 			}
 
 			return (bool) wp_delete_file( $file );
@@ -274,9 +295,25 @@ if ( ! class_exists( 'WP_Object_Cache' ) ) {
 			);
 
 			// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_export -- not debug output: this is the object-cache's storage format, a PHP-file cache (`<?php return array(...);`) included directly for fast, opcache-friendly reads.
-			$raw = '<?php return ' . var_export( $payload, true ) . ';';
+			$raw  = '<?php return ' . var_export( $payload, true ) . ';';
+			$path = $this->file_path( $group, $cache_key );
 
-			return false !== @file_put_contents( $this->file_path( $group, $cache_key ), $raw, LOCK_EX );
+			$written = false !== @file_put_contents( $path, $raw, LOCK_EX );
+
+			/*
+			 * Every write overwrites this same file in place for its cache
+			 * key. Without forcing invalidation, opcache can keep serving a
+			 * previously-compiled version of this exact path for up to
+			 * opcache.revalidate_freq seconds (default 2s) — e.g. a
+			 * password change written here can still read back as the old
+			 * hash for a couple of seconds, causing intermittent login
+			 * failures right after a legitimate update.
+			 */
+			if ( $written && function_exists( 'opcache_invalidate' ) ) {
+				opcache_invalidate( $path, true );
+			}
+
+			return $written;
 		}
 
 		/**

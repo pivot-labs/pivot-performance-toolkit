@@ -105,6 +105,22 @@
         });
     }
 
+    function setQuickActionBusy(button, busy) {
+        // <button> supports .disabled natively; <a role="button"> does not,
+        // so aria-disabled + a guard in the click handler covers both.
+        if (button.tagName === 'BUTTON') {
+            button.disabled = busy;
+        }
+
+        button.setAttribute('aria-disabled', busy ? 'true' : 'false');
+        button.classList.toggle('pivot-performance-toolkit-action-btn--busy', busy);
+
+        var spinner = button.querySelector('.spinner');
+        if (spinner) {
+            spinner.classList.toggle('is-active', busy);
+        }
+    }
+
     function bindQuickActionButtons() {
         var i18n = (typeof window.ptkAdmin === 'object' && window.ptkAdmin) ? window.ptkAdmin : {};
         var requestFailedMessage = i18n.requestFailed || '';
@@ -113,6 +129,10 @@
         buttons.forEach(function (button) {
             button.addEventListener('click', function (event) {
                 event.preventDefault();
+
+                if (button.getAttribute('aria-disabled') === 'true') {
+                    return;
+                }
 
                 var action = button.getAttribute('data-ajax-action');
                 var nonce = button.getAttribute('data-ajax-nonce') || '';
@@ -123,7 +143,7 @@
                     return;
                 }
 
-                button.disabled = true;
+                setQuickActionBusy(button, true);
 
                 var body = new URLSearchParams();
                 body.set('action', action);
@@ -161,7 +181,7 @@
                         showQuickActionNotice(list, 'error', requestFailedMessage);
                     })
                     .finally(function () {
-                        button.disabled = false;
+                        setQuickActionBusy(button, false);
                     });
             });
         });
@@ -184,6 +204,7 @@
                 var container = targetSelector !== ''
                     ? document.querySelector(targetSelector)
                     : (form.closest('.pivot-performance-toolkit-action-block') || form);
+                var spinner = form.querySelector('.spinner');
                 var body = new URLSearchParams(new FormData(form));
 
                 if (submitButton) {
@@ -193,6 +214,10 @@
                 controls.forEach(function (control) {
                     control.disabled = true;
                 });
+
+                if (spinner) {
+                    spinner.classList.add('is-active');
+                }
 
                 fetch(getAjaxUrl(), {
                     method: 'POST',
@@ -210,6 +235,10 @@
 
                         if (payload && payload.data && payload.data.message) {
                             message = payload.data.message;
+                        }
+
+                        if (payload && payload.data && payload.data.usage) {
+                            updateCacheUsage(payload.data.usage);
                         }
 
                         if (payload && payload.success) {
@@ -241,6 +270,10 @@
 
                         if (submitButton) {
                             submitButton.disabled = false;
+                        }
+
+                        if (spinner) {
+                            spinner.classList.remove('is-active');
                         }
                     });
             });
@@ -310,6 +343,104 @@
 
                 var expanded = wrapper.classList.toggle('pivot-performance-toolkit-snippet--expanded');
                 btn.textContent = expanded ? collapseLabel : expandLabel;
+            });
+        });
+    }
+
+    function bindHtaccessToggle() {
+        var i18n = (typeof window.ptkAdmin === 'object' && window.ptkAdmin) ? window.ptkAdmin : {};
+        var requestFailedMessage = i18n.requestFailed || '';
+
+        document.querySelectorAll('[data-htaccess-toggle]').forEach(function (container) {
+            var button = container.querySelector('[data-htaccess-submit]');
+            var title = container.querySelector('[data-htaccess-title]');
+            var description = container.querySelector('[data-htaccess-description]');
+            var noticeContainer = container.closest('#pivot-performance-toolkit-panel-htaccess')
+                ? container.closest('#pivot-performance-toolkit-panel-htaccess').querySelector('.pivot-performance-toolkit-card-notices')
+                : null;
+
+            if (!button || !title || !description) {
+                return;
+            }
+
+            button.addEventListener('click', function () {
+                var applied = container.getAttribute('data-state') === 'applied';
+                var action = applied ? container.getAttribute('data-remove-action') : container.getAttribute('data-apply-action');
+                var nonce = applied ? container.getAttribute('data-remove-nonce') : container.getAttribute('data-apply-nonce');
+
+                if (!action) {
+                    return;
+                }
+
+                button.disabled = true;
+
+                var body = new URLSearchParams();
+                body.set('action', action);
+                body.set('_ajax_nonce', nonce || '');
+
+                fetch(getAjaxUrl(), {
+                    method: 'POST',
+                    credentials: 'same-origin',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                    },
+                    body: body.toString()
+                })
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (payload) {
+                        var message = requestFailedMessage;
+
+                        if (payload && payload.data && payload.data.message) {
+                            message = payload.data.message;
+                        }
+
+                        if (!payload || !payload.success) {
+                            showQuickActionNotice(noticeContainer, 'error', message);
+                            return;
+                        }
+
+                        var nowApplied = !!(payload.data && payload.data.applied);
+
+                        container.setAttribute('data-state', nowApplied ? 'applied' : 'not-applied');
+                        container.classList.toggle('border-green-200', nowApplied);
+                        container.classList.toggle('bg-green-50', nowApplied);
+                        container.classList.toggle('border-slate-200', !nowApplied);
+                        container.classList.toggle('bg-slate-50', !nowApplied);
+
+                        title.textContent = nowApplied
+                            ? container.getAttribute('data-label-applied')
+                            : container.getAttribute('data-label-not-applied');
+                        title.classList.toggle('text-green-800', nowApplied);
+                        title.classList.toggle('text-slate-900', !nowApplied);
+
+                        description.textContent = nowApplied
+                            ? container.getAttribute('data-description-applied')
+                            : container.getAttribute('data-description-not-applied');
+                        description.classList.toggle('text-green-700', nowApplied);
+                        description.classList.toggle('text-slate-500', !nowApplied);
+
+                        button.textContent = nowApplied
+                            ? container.getAttribute('data-button-label-remove')
+                            : container.getAttribute('data-button-label-apply');
+                        button.classList.toggle('border-slate-300', nowApplied);
+                        button.classList.toggle('bg-white', nowApplied);
+                        button.classList.toggle('text-slate-700', nowApplied);
+                        button.classList.toggle('hover:bg-slate-50', nowApplied);
+                        button.classList.toggle('border-blue-600', !nowApplied);
+                        button.classList.toggle('bg-blue-600', !nowApplied);
+                        button.classList.toggle('text-white', !nowApplied);
+                        button.classList.toggle('hover:bg-blue-700', !nowApplied);
+
+                        showQuickActionNotice(noticeContainer, 'success', message);
+                    })
+                    .catch(function () {
+                        showQuickActionNotice(noticeContainer, 'error', requestFailedMessage);
+                    })
+                    .finally(function () {
+                        button.disabled = false;
+                    });
             });
         });
     }
@@ -506,6 +637,37 @@
 
     // provider select legacy helper removed; icon-select component is used instead
 
+    function bindDisableOnSubmitForms() {
+        document.querySelectorAll('form[data-disable-on-submit]').forEach(function (form) {
+            var submitButton = form.querySelector('button[type="submit"], input[type="submit"]');
+            var spinner = form.querySelector('.spinner');
+
+            if (!submitButton) {
+                return;
+            }
+
+            form.addEventListener('submit', function () {
+                submitButton.disabled = true;
+
+                if (spinner) {
+                    spinner.classList.add('is-active');
+                }
+            });
+
+            // If the user navigates back to this page from the browser's
+            // back/forward cache, the DOM (including the disabled button
+            // and active spinner from the previous submit) can be restored
+            // exactly as it was left — reset it since no request is pending.
+            window.addEventListener('pageshow', function () {
+                submitButton.disabled = false;
+
+                if (spinner) {
+                    spinner.classList.remove('is-active');
+                }
+            });
+        });
+    }
+
     function onDomReady(fn) {
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', fn);
@@ -588,8 +750,10 @@
         bindAjaxAutosaveForms();
         bindSnippetCopyButtons();
         bindSnippetToggles();
+        bindHtaccessToggle();
         bindIconSelects();
         bindObjectCacheButtons();
+        bindDisableOnSubmitForms();
 
         if (toggle && shell) {
             toggle.addEventListener('click', function () {
