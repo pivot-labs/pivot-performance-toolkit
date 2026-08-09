@@ -150,6 +150,32 @@ final class ObjectCacheManager {
 	}
 
 	/**
+	 * Update the installed drop-in if it is ours but outdated (e.g. after a
+	 * plugin update). Unlike install(), this is silent and safe to call on
+	 * every admin request — a no-op once the installed copy matches the
+	 * source, and it never touches a drop-in placed by another plugin.
+	 *
+	 * The rewritten file only takes effect on the *next* request: this one
+	 * already bootstrapped WP_Object_Cache from the old file before any
+	 * plugin code (including this hook) got to run.
+	 */
+	public function maybeUpdateDropin(): void {
+		if ( ! $this->isOurDropin() ) {
+			return;
+		}
+
+		if ( ! file_exists( $this->dropin_source ) ) {
+			return;
+		}
+
+		if ( sha1_file( $this->dropin_source ) === sha1_file( $this->dropin_dest ) ) {
+			return;
+		}
+
+		copy( $this->dropin_source, $this->dropin_dest );
+	}
+
+	/**
 	 * Remove the drop-in if it is ours.
 	 *
 	 * @return array{ok: bool, message: string}

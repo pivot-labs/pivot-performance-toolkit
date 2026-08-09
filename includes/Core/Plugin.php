@@ -84,6 +84,7 @@ final class Plugin {
 
 		add_action( 'admin_init', array( $this->settings, 'register' ) );
 		add_action( 'admin_init', array( Lifecycle::class, 'maybeUpdateDropin' ) );
+		add_action( 'admin_init', array( $object_cache_manager, 'maybeUpdateDropin' ) );
 
 		if ( is_admin() ) {
 			$menu = new Menu(
