@@ -12,6 +12,7 @@ namespace PivotPerformanceToolkit\Optimization;
 use PivotPerformanceToolkit\Contracts\ModuleInterface;
 use PivotPerformanceToolkit\Core\Settings;
 use PivotPerformanceToolkit\Utils\FilesystemCheck;
+use PivotPerformanceToolkit\Utils\LocalAssetResolver;
 
 final class Assets implements ModuleInterface {
 
@@ -85,7 +86,7 @@ final class Assets implements ModuleInterface {
 			return $tag;
 		}
 
-		$source_path = $this->resolveLocalAssetPathFromUrl( $src, 'js' );
+		$source_path = LocalAssetResolver::resolve( $src, 'js' );
 
 		if ( null === $source_path || str_ends_with( $source_path, '.min.js' ) ) {
 			return $tag;
@@ -109,7 +110,7 @@ final class Assets implements ModuleInterface {
 			return $html;
 		}
 
-		$source_path = $this->resolveLocalAssetPathFromUrl( $href, 'css' );
+		$source_path = LocalAssetResolver::resolve( $href, 'css' );
 
 		if ( null === $source_path || str_ends_with( $source_path, '.min.css' ) ) {
 			return $html;
@@ -271,35 +272,6 @@ final class Assets implements ModuleInterface {
 		$regex = '/^' . str_replace( '\*', '.*', preg_quote( $pattern, '/' ) ) . '$/i';
 
 		return (bool) preg_match( $regex, $value );
-	}
-
-	private function resolveLocalAssetPathFromUrl( string $url, string $extension ): ?string {
-		$path = (string) ( wp_parse_url( $url, PHP_URL_PATH ) ?? '' );
-
-		if ( '' === $path || ! str_ends_with( strtolower( $path ), '.' . strtolower( $extension ) ) ) {
-			return null;
-		}
-
-		$url_host  = (string) ( wp_parse_url( $url, PHP_URL_HOST ) ?? '' );
-		$home_host = (string) ( wp_parse_url( home_url(), PHP_URL_HOST ) ?? '' );
-
-		if ( '' !== $url_host && 0 !== strcasecmp( $url_host, $home_host ) ) {
-			return null;
-		}
-
-		$absolute = ABSPATH . ltrim( $path, '/' );
-		$real     = realpath( $absolute );
-		$root     = realpath( ABSPATH );
-
-		if ( false === $real || false === $root || ! str_starts_with( $real, $root ) ) {
-			return null;
-		}
-
-		if ( ! is_file( $real ) || ! is_readable( $real ) ) {
-			return null;
-		}
-
-		return $real;
 	}
 
 	private function buildMinifiedCssUrl( string $source_path ): ?string {
