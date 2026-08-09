@@ -88,6 +88,7 @@ final class AsyncCss implements ModuleInterface {
 		$preload = '<link rel="preload" as="style" href="' . esc_url( $href ) . '"' . $id_attr . $media_attr
 			. ' onload="this.onload=null;this.rel=&#039;stylesheet&#039;">';
 
+		// phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet -- rewriting an already-enqueued <link> tag captured from buffered output, not registering a new stylesheet.
 		$noscript = '<noscript><link rel="stylesheet" href="' . esc_url( $href ) . '"' . $id_attr . $media_attr . '></noscript>';
 
 		return $preload . $noscript;

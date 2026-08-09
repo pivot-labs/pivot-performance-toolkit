@@ -133,7 +133,8 @@ final class Settings {
 			return sanitize_text_field( $value );
 		}
 
-		return trim( wp_strip_all_tags( $value ) );
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.strip_tags_strip_tags -- fallback for when this class is used without WordPress loaded (see tests/smoke-settings.php), where wp_strip_all_tags() is also undefined.
+		return trim( strip_tags( $value ) );
 	}
 
 	private function sanitizeTextarea( string $value ): string {
@@ -141,7 +142,8 @@ final class Settings {
 			return sanitize_textarea_field( $value );
 		}
 
-		return trim( str_replace( "\r", '', wp_strip_all_tags( $value ) ) );
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.strip_tags_strip_tags -- fallback for when this class is used without WordPress loaded (see tests/smoke-settings.php), where wp_strip_all_tags() is also undefined.
+		return trim( str_replace( "\r", '', strip_tags( $value ) ) );
 	}
 
 	private function sanitizeKey( string $value ): string {
