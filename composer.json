@@ -3,7 +3,7 @@
     "description": "WordPress performance optimization toolkit",
     "type": "wordpress-plugin",
     "license": "GPL-2.0-or-later",
-    "version": "1.1.0-dev+20260807.1",
+    "version": "1.1.0",
     "scripts": {
         "lint": "find includes -name '*.php' -print0 | xargs -0 -n1 php -l",
         "test:smoke": "php tests/smoke-settings.php",
