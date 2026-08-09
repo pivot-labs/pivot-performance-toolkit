@@ -16,7 +16,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<span class="pivot-performance-toolkit-action-title">{{ __('Purge All Caches', 'pivot-performance-toolkit') }}</span>
 				<span class="pivot-performance-toolkit-action-desc">{{ __('Clear all cached files (page, minified assets, etc.)', 'pivot-performance-toolkit') }}</span>
 			</span>
-			<span class="pivot-performance-toolkit-action-arrow" aria-hidden="true">&gt;</span>
+			<span class="pivot-performance-toolkit-action-indicator">
+				<span class="spinner" style="float: none; margin: 0;"></span>
+				<span class="pivot-performance-toolkit-action-arrow" aria-hidden="true">&gt;</span>
+			</span>
 		</button>
 
 		<button
@@ -30,7 +33,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<span class="pivot-performance-toolkit-action-title">{{ __('Clear Minified CSS/JS Cache', 'pivot-performance-toolkit') }}</span>
 				<span class="pivot-performance-toolkit-action-desc">{{ __('Remove all cached minified CSS and JavaScript files', 'pivot-performance-toolkit') }}</span>
 			</span>
-			<span class="pivot-performance-toolkit-action-arrow" aria-hidden="true">&gt;</span>
+			<span class="pivot-performance-toolkit-action-indicator">
+				<span class="spinner" style="float: none; margin: 0;"></span>
+				<span class="pivot-performance-toolkit-action-arrow" aria-hidden="true">&gt;</span>
+			</span>
 		</button>
 
 		<a
@@ -45,7 +51,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<span class="pivot-performance-toolkit-action-title">{{ __('Preload Cache', 'pivot-performance-toolkit') }}</span>
 				<span class="pivot-performance-toolkit-action-desc">{{ __('Generate cache files for your most visited pages.', 'pivot-performance-toolkit') }}</span>
 			</span>
-			<span class="pivot-performance-toolkit-action-arrow" aria-hidden="true">&gt;</span>
+			<span class="pivot-performance-toolkit-action-indicator">
+				<span class="spinner" style="float: none; margin: 0;"></span>
+				<span class="pivot-performance-toolkit-action-arrow" aria-hidden="true">&gt;</span>
+			</span>
 		</a>
 	</div>
 </x-card>

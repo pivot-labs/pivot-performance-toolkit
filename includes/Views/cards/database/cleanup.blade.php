@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                 <span class="pivot-performance-toolkit-cleanup-badge {{ $item['count'] > 0 ? 'has-items' : '' }}">
                     {{ number_format_i18n((int) $item['count']) }}
                 </span>
-                <form method="post" action="{{ esc_url(admin_url('admin-post.php')) }}">
+                <form method="post" action="{{ esc_url(admin_url('admin-post.php')) }}" class="inline-flex items-center gap-2" data-disable-on-submit>
                     <input type="hidden" name="action" value="{{ esc_attr($cleanup_action) }}" />
                     <input type="hidden" name="pivot_performance_toolkit_task" value="{{ esc_attr($task) }}" />
                     @php
@@ -29,6 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     >
                         {{ __('Clean', 'pivot-performance-toolkit') }}
                     </button>
+                    <span class="spinner" style="float: none; margin: 0;"></span>
                 </form>
             </div>
         @endforeach

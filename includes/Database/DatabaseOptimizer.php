@@ -176,7 +176,31 @@ final class DatabaseOptimizer {
 
 		$count = 0;
 		foreach ( $keys as $key ) {
-			if ( delete_transient( $key ) ) {
+			/*
+			 * delete_transient() is cache-aware: with an external/persistent
+			 * object cache active (as with this plugin's own object-cache.php
+			 * drop-in), it calls wp_cache_delete() instead of touching
+			 * wp_options at all. These rows are stale DB leftovers that were
+			 * never in the object cache to begin with, so that call finds
+			 * nothing to delete and reports success without removing
+			 * anything — the row (and the count this feeds) never changes.
+			 * Delete the option rows directly instead, same as every other
+			 * cleanup method in this file, and also clear any object-cache
+			 * copy so a stale cached value can't outlive its DB row.
+			 */
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- a DELETE mutation on stale DB rows the cache-aware delete_transient() can't reach; see comment above.
+			$deleted = $wpdb->query(
+				$wpdb->prepare(
+					"DELETE FROM {$wpdb->options} WHERE option_name IN (%s, %s)",
+					'_transient_' . $key,
+					'_transient_timeout_' . $key
+				)
+			);
+
+			wp_cache_delete( $key, 'transient' );
+			wp_cache_delete( $key, 'transient_timeout' );
+
+			if ( $deleted ) {
 				++$count;
 			}
 		}

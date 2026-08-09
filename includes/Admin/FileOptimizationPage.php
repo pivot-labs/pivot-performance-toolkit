@@ -81,16 +81,19 @@ final class FileOptimizationPage extends BladeAdminPage {
 			wp_send_json_error( array( 'message' => __( 'Invalid setting.', 'pivot-performance-toolkit' ) ), 400 );
 		}
 
-		$options                 = $this->settings->all();
-		$options[ $setting_key ] = ! empty( $_POST['setting_value'] );
+		$value = ! empty( $_POST['setting_value'] );
 
-		update_option( $this->settings->optionKey(), $options );
+		// Only submit the changed key — sanitize() merges everything else in
+		// from a freshly-read $base. Writing back a full snapshot here would
+		// race with any concurrent save (e.g. the CDN integrations form) and
+		// silently clobber it with stale values for every other field.
+		update_option( $this->settings->optionKey(), array( $setting_key => $value ) );
 
 		wp_send_json_success(
 			array(
 				'message' => __( 'Quick optimization saved.', 'pivot-performance-toolkit' ),
 				'setting' => $setting_key,
-				'value'   => (bool) $options[ $setting_key ],
+				'value'   => $value,
 			)
 		);
 	}

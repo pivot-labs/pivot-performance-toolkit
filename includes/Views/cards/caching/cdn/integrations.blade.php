@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         </div>
     @endif
 
-    <form method="post" action="{{ esc_url(admin_url('options.php')) }}" class="pivot-performance-toolkit-form-aligned">
+    <form method="post" action="{{ esc_url(admin_url('options.php')) }}" class="pivot-performance-toolkit-form-aligned" data-disable-on-submit>
         @php
             settings_fields('pivot_performance_toolkit');
 
@@ -89,9 +89,12 @@ if ( ! defined( 'ABSPATH' ) ) {
             </div>
         </div>
 
-        @php
-            submit_button(__('Save changes', 'pivot-performance-toolkit'));
-        @endphp
+        <div class="pivot-performance-toolkit-form-row pivot-performance-toolkit-form-row--full" style="display: flex; align-items: center; gap: 8px;">
+            @php
+                submit_button(__('Save changes', 'pivot-performance-toolkit'), 'primary', 'submit', false);
+            @endphp
+            <span class="spinner" style="float: none; margin: 0;"></span>
+        </div>
     </form>
 </x-card>
 

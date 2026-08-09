@@ -102,17 +102,26 @@ if ( ! defined( 'ABSPATH' ) ) {
 
     </form>
 
+    <div class="pivot-performance-toolkit-card-notices mt-3" aria-live="polite"></div>
+
     <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 10px;">
         <button type="submit" form="pivot-performance-toolkit-cache-settings-form" class="button button-primary">
             {{ __('Save changes', 'pivot-performance-toolkit') }}
         </button>
 
-        <form method="post" action="{{ esc_url(admin_url('admin-post.php')) }}">
-            <input type="hidden" name="action" value="{{ esc_attr($clear_action) }}" />
-            @php
-                wp_nonce_field('pivot_performance_toolkit_clear_cache');
-                submit_button(__('Clear cache', 'pivot-performance-toolkit'), 'secondary', 'submit', false);
-            @endphp
+        <form
+            method="post"
+            action="{{ esc_url(admin_url('admin-ajax.php')) }}"
+            class="m-0 flex items-center gap-2"
+            data-ajax-action-form
+            data-ajax-notice-target="#pivot-performance-toolkit-cache .pivot-performance-toolkit-card-notices"
+        >
+            <input type="hidden" name="action" value="{{ esc_attr((string) ($ajax_clear_action ?? '')) }}" />
+            <input type="hidden" name="_ajax_nonce" value="{{ esc_attr((string) ($ajax_clear_nonce ?? '')) }}" />
+            <span class="spinner" style="float: none; margin: 0;"></span>
+            <button type="submit" class="button button-secondary">
+                {{ __('Clear cache', 'pivot-performance-toolkit') }}
+            </button>
         </form>
     </div>
 </x-card>

@@ -550,6 +550,26 @@
         @apply text-gray-500 text-base leading-none flex-shrink-0;
     }
 
+    .pivot-performance-toolkit-action-indicator {
+        @apply flex items-center flex-shrink-0;
+    }
+
+    .pivot-performance-toolkit-action-indicator .spinner {
+        @apply hidden;
+    }
+
+    .pivot-performance-toolkit-action-btn--busy {
+        @apply opacity-60 cursor-default pointer-events-none;
+    }
+
+    .pivot-performance-toolkit-action-btn--busy .pivot-performance-toolkit-action-indicator .spinner {
+        @apply inline-block;
+    }
+
+    .pivot-performance-toolkit-action-btn--busy .pivot-performance-toolkit-action-arrow {
+        @apply hidden;
+    }
+
     .pivot-performance-toolkit-cache-usage-bar {
         @apply h-2 bg-gray-200 rounded overflow-hidden;
     }

@@ -105,6 +105,22 @@
         });
     }
 
+    function setQuickActionBusy(button, busy) {
+        // <button> supports .disabled natively; <a role="button"> does not,
+        // so aria-disabled + a guard in the click handler covers both.
+        if (button.tagName === 'BUTTON') {
+            button.disabled = busy;
+        }
+
+        button.setAttribute('aria-disabled', busy ? 'true' : 'false');
+        button.classList.toggle('pivot-performance-toolkit-action-btn--busy', busy);
+
+        var spinner = button.querySelector('.spinner');
+        if (spinner) {
+            spinner.classList.toggle('is-active', busy);
+        }
+    }
+
     function bindQuickActionButtons() {
         var i18n = (typeof window.ptkAdmin === 'object' && window.ptkAdmin) ? window.ptkAdmin : {};
         var requestFailedMessage = i18n.requestFailed || '';
@@ -113,6 +129,10 @@
         buttons.forEach(function (button) {
             button.addEventListener('click', function (event) {
                 event.preventDefault();
+
+                if (button.getAttribute('aria-disabled') === 'true') {
+                    return;
+                }
 
                 var action = button.getAttribute('data-ajax-action');
                 var nonce = button.getAttribute('data-ajax-nonce') || '';
@@ -123,7 +143,7 @@
                     return;
                 }
 
-                button.disabled = true;
+                setQuickActionBusy(button, true);
 
                 var body = new URLSearchParams();
                 body.set('action', action);
@@ -161,7 +181,7 @@
                         showQuickActionNotice(list, 'error', requestFailedMessage);
                     })
                     .finally(function () {
-                        button.disabled = false;
+                        setQuickActionBusy(button, false);
                     });
             });
         });
@@ -184,6 +204,7 @@
                 var container = targetSelector !== ''
                     ? document.querySelector(targetSelector)
                     : (form.closest('.pivot-performance-toolkit-action-block') || form);
+                var spinner = form.querySelector('.spinner');
                 var body = new URLSearchParams(new FormData(form));
 
                 if (submitButton) {
@@ -193,6 +214,10 @@
                 controls.forEach(function (control) {
                     control.disabled = true;
                 });
+
+                if (spinner) {
+                    spinner.classList.add('is-active');
+                }
 
                 fetch(getAjaxUrl(), {
                     method: 'POST',
@@ -210,6 +235,10 @@
 
                         if (payload && payload.data && payload.data.message) {
                             message = payload.data.message;
+                        }
+
+                        if (payload && payload.data && payload.data.usage) {
+                            updateCacheUsage(payload.data.usage);
                         }
 
                         if (payload && payload.success) {
@@ -241,6 +270,10 @@
 
                         if (submitButton) {
                             submitButton.disabled = false;
+                        }
+
+                        if (spinner) {
+                            spinner.classList.remove('is-active');
                         }
                     });
             });
@@ -604,6 +637,37 @@
 
     // provider select legacy helper removed; icon-select component is used instead
 
+    function bindDisableOnSubmitForms() {
+        document.querySelectorAll('form[data-disable-on-submit]').forEach(function (form) {
+            var submitButton = form.querySelector('button[type="submit"], input[type="submit"]');
+            var spinner = form.querySelector('.spinner');
+
+            if (!submitButton) {
+                return;
+            }
+
+            form.addEventListener('submit', function () {
+                submitButton.disabled = true;
+
+                if (spinner) {
+                    spinner.classList.add('is-active');
+                }
+            });
+
+            // If the user navigates back to this page from the browser's
+            // back/forward cache, the DOM (including the disabled button
+            // and active spinner from the previous submit) can be restored
+            // exactly as it was left — reset it since no request is pending.
+            window.addEventListener('pageshow', function () {
+                submitButton.disabled = false;
+
+                if (spinner) {
+                    spinner.classList.remove('is-active');
+                }
+            });
+        });
+    }
+
     function onDomReady(fn) {
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', fn);
@@ -689,6 +753,7 @@
         bindHtaccessToggle();
         bindIconSelects();
         bindObjectCacheButtons();
+        bindDisableOnSubmitForms();
 
         if (toggle && shell) {
             toggle.addEventListener('click', function () {
