@@ -3,7 +3,7 @@
  * Plugin Name: Pivot Performance Toolkit
  * Plugin URI: https://www.pivotlabs.dev/
  * Description: Performance optimization toolkit for WordPress.
- * Version: 1.1.0
+ * Version: 1.1.1-dev
  * Requires at least: 6.5
  * Requires PHP: 8.2
  * Author: Pivot Labs
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'PIVOT_PERFORMANCE_TOOLKIT_VERSION', '1.1.0' );
+define( 'PIVOT_PERFORMANCE_TOOLKIT_VERSION', '1.1.1-dev' );
 define( 'PIVOT_PERFORMANCE_TOOLKIT_PLUGIN_FILE', __FILE__ );
 define( 'PIVOT_PERFORMANCE_TOOLKIT_PATH', plugin_dir_path( __FILE__ ) );
 define( 'PIVOT_PERFORMANCE_TOOLKIT_URL', plugin_dir_url( __FILE__ ) );
