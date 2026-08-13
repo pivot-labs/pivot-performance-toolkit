@@ -12,45 +12,6 @@ if ( ! defined( 'ABSPATH' ) ) {
                        || !empty(trim((string) $options['async_css_exclusions']));
     @endphp
 
-    <style>
-        .pivot-performance-toolkit-exclusions-trigger {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 0;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 14px;
-            color: #1f2937;
-            width: 100%;
-            text-align: left;
-        }
-        .pivot-performance-toolkit-exclusions-trigger:hover { color: #374151; }
-        .pivot-performance-toolkit-exclusions-trigger::before {
-            content: "▼";
-            display: inline-block;
-            transition: transform 200ms ease;
-            font-size: 12px;
-            width: 16px;
-            text-align: center;
-        }
-        .pivot-performance-toolkit-exclusions-trigger[aria-expanded="false"]::before {
-            transform: rotate(-90deg);
-        }
-        .pivot-performance-toolkit-card-content {
-            max-height: 2000px;
-            overflow: hidden;
-            transition: max-height 250ms ease, opacity 250ms ease;
-            opacity: 1;
-        }
-        .pivot-performance-toolkit-card-content[aria-hidden="true"] {
-            max-height: 0;
-            opacity: 0;
-        }
-    </style>
-
      <div class="pivot-performance-toolkit-http11-warning">
          <strong>{{ __('Warning:', 'pivot-performance-toolkit') }}</strong>
          <span>{{ __('Minification, async CSS, and delay-execution exclusions can break dependency order, plugin-specific assets, conditional loading logic, and above-the-fold styling. Use only after testing key pages — especially for scripts that must run before user interaction (consent banners, payment forms) or stylesheets needed for first paint.', 'pivot-performance-toolkit') }}</span>
@@ -162,20 +123,6 @@ if ( ! defined( 'ABSPATH' ) ) {
         </form>
 
     </div>
-
-    <script>
-    (function () {
-        const trigger = document.querySelector('.pivot-performance-toolkit-exclusions-trigger');
-        const content = document.getElementById('pivot-performance-toolkit-exclusions-content');
-        if (!trigger || !content) return;
-
-        trigger.addEventListener('click', function () {
-            const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
-            trigger.setAttribute('aria-expanded', String(!isExpanded));
-            content.setAttribute('aria-hidden', String(isExpanded));
-        });
-    })();
-    </script>
 
 </x-card>
 

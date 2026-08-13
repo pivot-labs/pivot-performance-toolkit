@@ -347,6 +347,63 @@
         });
     }
 
+    /*
+     * Generic collapse/expand trigger — powers the file-optimization
+     * exclusions card and the HTTP/1.1 combine-settings card. Both markup
+     * shapes match: a button with aria-expanded + aria-controls pointing at
+     * the id of the content it toggles.
+     */
+    function bindCollapsibleTriggers() {
+        document.querySelectorAll('.pivot-performance-toolkit-collapse-trigger').forEach(function (trigger) {
+            var targetId = trigger.getAttribute('aria-controls');
+            var content = targetId ? document.getElementById(targetId) : null;
+
+            if (!content) {
+                return;
+            }
+
+            trigger.addEventListener('click', function (e) {
+                e.preventDefault();
+                var isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+                trigger.setAttribute('aria-expanded', String(!isExpanded));
+                content.setAttribute('aria-hidden', String(isExpanded));
+            });
+        });
+    }
+
+    /*
+     * HTTP/1.1 combine-settings card: auto-expand/collapse based on whether
+     * either combine checkbox is checked, independent of the manual
+     * click-to-toggle behavior bindCollapsibleTriggers() already provides.
+     */
+    function bindHttp11AutoExpand() {
+        var trigger = document.querySelector('.pivot-performance-toolkit-http11-trigger');
+        var content = document.getElementById('pivot-performance-toolkit-http11-content');
+        var combineCssCheckbox = document.querySelector('input[name$="[combine_css]"][type="checkbox"]');
+        var combineJsCheckbox = document.querySelector('input[name$="[combine_js]"][type="checkbox"]');
+
+        if (!trigger || !content) {
+            return;
+        }
+
+        function updateCollapsibleState() {
+            var anyChecked = (combineCssCheckbox && combineCssCheckbox.checked) ||
+                              (combineJsCheckbox && combineJsCheckbox.checked);
+
+            trigger.setAttribute('aria-expanded', anyChecked ? 'true' : 'false');
+            content.setAttribute('aria-hidden', anyChecked ? 'false' : 'true');
+        }
+
+        updateCollapsibleState();
+
+        if (combineCssCheckbox) {
+            combineCssCheckbox.addEventListener('change', updateCollapsibleState);
+        }
+        if (combineJsCheckbox) {
+            combineJsCheckbox.addEventListener('change', updateCollapsibleState);
+        }
+    }
+
     function bindHtaccessToggle() {
         var i18n = (typeof window.ptkAdmin === 'object' && window.ptkAdmin) ? window.ptkAdmin : {};
         var requestFailedMessage = i18n.requestFailed || '';
@@ -754,6 +811,8 @@
         bindIconSelects();
         bindObjectCacheButtons();
         bindDisableOnSubmitForms();
+        bindCollapsibleTriggers();
+        bindHttp11AutoExpand();
 
         if (toggle && shell) {
             toggle.addEventListener('click', function () {

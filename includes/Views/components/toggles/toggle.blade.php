@@ -12,12 +12,6 @@ if ( ! defined( 'ABSPATH' ) ) {
     'description' => '',
 ])
 
-<style>
-    .pivot-performance-toolkit-toggle-input:checked + .pivot-performance-toolkit-toggle-knob {
-        transform: translateX(1.25rem);
-    }
-</style>
-
 <li class="h-full">
     <form
         method="post"

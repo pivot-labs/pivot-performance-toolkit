@@ -15,23 +15,3 @@ if ( ! defined( 'ABSPATH' ) ) {
     </div>
 @endif
 
-<style>
-    #wpadminbar .pivot-performance-toolkit-disabled {
-        opacity: 0.5;
-        pointer-events: none;
-        cursor: not-allowed;
-    }
-    #wpadminbar .pivot-performance-toolkit-cache-status {
-        font-weight: 600;
-    }
-    #wpadminbar .pivot-performance-toolkit-cache-status-hit {
-        color: #7bd88f;
-    }
-    #wpadminbar .pivot-performance-toolkit-cache-status-miss {
-        color: #ffce6a;
-    }
-    #wpadminbar .pivot-performance-toolkit-cache-status-bypass {
-        color: #a7aaad;
-    }
-</style>
-

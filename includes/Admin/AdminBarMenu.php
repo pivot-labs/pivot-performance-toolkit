@@ -32,6 +32,30 @@ final class AdminBarMenu implements ModuleInterface {
 		add_action( 'admin_post_' . self::PURGE_ACTION, array( $this, 'handlePurgeAllCache' ) );
 		add_action( 'admin_post_' . self::PURGE_PAGE_ACTION, array( $this, 'handlePurgePageCache' ) );
 		add_action( 'admin_notices', array( $this, 'renderAdminNotice' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueueAdminBarStyles' ) );
+	}
+
+	/**
+	 * Styles the admin-bar cache-status indicator (registerMenu() below).
+	 * Same scope as the original inline <style> it replaces: every admin
+	 * page for a manage_options user, via a source-less style handle rather
+	 * than an echoed <style> tag.
+	 */
+	public function enqueueAdminBarStyles(): void {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		wp_register_style( 'pivot-performance-toolkit-admin-bar', false );
+		wp_enqueue_style( 'pivot-performance-toolkit-admin-bar' );
+		wp_add_inline_style(
+			'pivot-performance-toolkit-admin-bar',
+			'#wpadminbar .pivot-performance-toolkit-disabled{opacity:0.5;pointer-events:none;cursor:not-allowed}'
+			. '#wpadminbar .pivot-performance-toolkit-cache-status{font-weight:600}'
+			. '#wpadminbar .pivot-performance-toolkit-cache-status-hit{color:#7bd88f}'
+			. '#wpadminbar .pivot-performance-toolkit-cache-status-miss{color:#ffce6a}'
+			. '#wpadminbar .pivot-performance-toolkit-cache-status-bypass{color:#a7aaad}'
+		);
 	}
 
 	public function registerMenu( WP_Admin_Bar $admin_bar ): void {

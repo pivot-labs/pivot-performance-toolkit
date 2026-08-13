@@ -43,7 +43,6 @@ final class Menu {
 		add_action( 'admin_menu', array( $this, 'addMenuPage' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueueAssets' ) );
 		add_action( 'current_screen', array( $this, 'suppressThirdPartyNotices' ), 100 );
-		add_action( 'admin_head', array( $this, 'printMenuIconStyles' ) );
 	}
 
 	public function addMenuPage(): void {
@@ -79,6 +78,16 @@ final class Menu {
 	}
 
 	public function enqueueAssets( string $hook_suffix ): void {
+		// The menu icon appears in the global admin sidebar on every wp-admin
+		// screen, not just this plugin's own pages, so its styling can't wait
+		// for the page-specific bundle below — a dedicated, source-less style
+		// handle (registered with `false` as the src, a WordPress-supported
+		// pattern for inline-only styles) carries it instead of an inline
+		// <style> tag.
+		wp_register_style( 'pivot-performance-toolkit-menu-icon', false );
+		wp_enqueue_style( 'pivot-performance-toolkit-menu-icon' );
+		wp_add_inline_style( 'pivot-performance-toolkit-menu-icon', $this->menuIconCss() );
+
 		if ( ! in_array( $hook_suffix, $this->page_hooks, true ) ) {
 			return;
 		}
@@ -120,11 +129,10 @@ final class Menu {
 		);
 	}
 
-	public function printMenuIconStyles(): void {
+	private function menuIconCss(): string {
 		$icon_url = esc_url( PIVOT_PERFORMANCE_TOOLKIT_URL . 'src/img/ptk-menu-icon-white.svg' );
 
-		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $icon_url was already run through esc_url() above; the sniff can't trace the variable assignment.
-		echo '<style id="pivot-performance-toolkit-menu-icon">#adminmenu .toplevel_page_pivot-performance-toolkit .wp-menu-image img{display:none}#adminmenu .toplevel_page_pivot-performance-toolkit .wp-menu-image{color:inherit}#adminmenu .toplevel_page_pivot-performance-toolkit .wp-menu-image:before{content:"";display:block;width:26px;height:26px;margin:-2px auto 0;transform:translateY(-1px);background-color:currentColor;-webkit-mask-image:url("' . $icon_url . '");mask-image:url("' . $icon_url . '");-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:26px 26px;mask-size:26px 26px}#adminmenu .toplevel_page_pivot-performance-toolkit.wp-has-current-submenu .wp-menu-image:before,#adminmenu .toplevel_page_pivot-performance-toolkit.current .wp-menu-image:before{transform:translateY(2px)}</style>';
+		return '#adminmenu .toplevel_page_pivot-performance-toolkit .wp-menu-image img{display:none}#adminmenu .toplevel_page_pivot-performance-toolkit .wp-menu-image{color:inherit}#adminmenu .toplevel_page_pivot-performance-toolkit .wp-menu-image:before{content:"";display:block;width:26px;height:26px;margin:-2px auto 0;transform:translateY(-1px);background-color:currentColor;-webkit-mask-image:url("' . $icon_url . '");mask-image:url("' . $icon_url . '");-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:26px 26px;mask-size:26px 26px}#adminmenu .toplevel_page_pivot-performance-toolkit.wp-has-current-submenu .wp-menu-image:before,#adminmenu .toplevel_page_pivot-performance-toolkit.current .wp-menu-image:before{transform:translateY(2px)}';
 	}
 
 	/**
