@@ -9,7 +9,7 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	return;
+	exit;
 }
 
 // phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
