@@ -19,8 +19,12 @@ final class HtaccessCacheHeaders {
 	private const MARKER_END   = '# END Pivot Performance Toolkit - Browser Cache & Compression';
 
 	public static function snippet(): string {
-		return self::MARKER_START . "\n" . <<<'HTACCESS'
-<IfModule mod_expires.c>
+		// Plain single-quoted string, not HEREDOC/NOWDOC — WP.org's review
+		// disallows <<< syntax since it hides unescaped variables from
+		// automated scanners. This block has none to hide (purely static
+		// Apache config), but single-quoted concatenation keeps the same
+		// readability without tripping that check.
+		$body = '<IfModule mod_expires.c>
     ExpiresActive On
 
     # Cache HTML for 1 hour
@@ -84,9 +88,9 @@ final class HtaccessCacheHeaders {
     # Security headers
     Header set X-Content-Type-Options "nosniff"
     Header set X-Frame-Options "SAMEORIGIN"
-</IfModule>
-HTACCESS
-			. "\n" . self::MARKER_END;
+</IfModule>';
+
+		return self::MARKER_START . "\n" . $body . "\n" . self::MARKER_END;
 	}
 
 	private static function htaccessPath(): string {
