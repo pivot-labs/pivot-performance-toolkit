@@ -81,6 +81,7 @@ final class FileOptimizationPage extends BladeAdminPage {
 			wp_send_json_error( array( 'message' => __( 'Invalid setting.', 'pivot-performance-toolkit' ) ), 400 );
 		}
 
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- reduced to a boolean via !empty() only; the raw string content (which is what wp_unslash() would affect) is never read, stored, or output.
 		$value = ! empty( $_POST['setting_value'] );
 
 		// Only submit the changed key — sanitize() merges everything else in

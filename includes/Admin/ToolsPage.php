@@ -107,8 +107,8 @@ final class ToolsPage extends BladeAdminPage {
 	protected function buildViewData(): array {
 		$stats = $this->getMinifiedAssetStats();
 		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- these are read-only display values from this page's own post-redirect notice (already produced by a nonce-verified admin-post handler), not a new state-changing action.
-		$cleared       = isset( $_GET['pivot_performance_toolkit_minified_cleared'] ) && (string) '1' === $_GET['pivot_performance_toolkit_minified_cleared'];
-		$removed_files = isset( $_GET['pivot_performance_toolkit_minified_removed'] ) ? max( 0, (int) $_GET['pivot_performance_toolkit_minified_removed'] ) : 0;
+		$cleared       = isset( $_GET['pivot_performance_toolkit_minified_cleared'] ) && '1' === (string) wp_unslash( $_GET['pivot_performance_toolkit_minified_cleared'] );
+		$removed_files = isset( $_GET['pivot_performance_toolkit_minified_removed'] ) ? max( 0, (int) wp_unslash( $_GET['pivot_performance_toolkit_minified_removed'] ) ) : 0;
 		$tools_notice  = isset( $_GET['pivot_performance_toolkit_tools_notice'] ) ? sanitize_key( (string) wp_unslash( $_GET['pivot_performance_toolkit_tools_notice'] ) ) : '';
 		$tools_message = isset( $_GET['pivot_performance_toolkit_tools_message'] ) ? sanitize_text_field( (string) wp_unslash( $_GET['pivot_performance_toolkit_tools_message'] ) ) : '';
 		// phpcs:enable WordPress.Security.NonceVerification.Recommended
@@ -176,6 +176,7 @@ final class ToolsPage extends BladeAdminPage {
 
 		check_admin_referer( 'pivot_performance_toolkit_export_settings' );
 
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- reduced to a boolean via !empty() only; the raw string content (which is what wp_unslash() would affect) is never read, stored, or output.
 		$include_secrets = isset( $_POST['pivot_performance_toolkit_include_secrets'] ) && ! empty( $_POST['pivot_performance_toolkit_include_secrets'] );
 		$settings        = $this->settings->all();
 
@@ -327,6 +328,7 @@ final class ToolsPage extends BladeAdminPage {
 
 		check_admin_referer( 'pivot_performance_toolkit_set_uninstall_policy' );
 
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- reduced to a boolean via !empty() only; the raw string content (which is what wp_unslash() would affect) is never read, stored, or output.
 		$remove_data = isset( $_POST['pivot_performance_toolkit_remove_data_on_uninstall'] ) && ! empty( $_POST['pivot_performance_toolkit_remove_data_on_uninstall'] );
 
 		update_option( self::UNINSTALL_POLICY_OPTION, $remove_data ? '1' : '0' );

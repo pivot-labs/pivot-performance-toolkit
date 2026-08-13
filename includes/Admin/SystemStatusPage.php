@@ -322,7 +322,8 @@ final class SystemStatusPage extends BladeAdminPage {
 		}
 
 		// HTTPS status
-		$https    = ( isset( $_SERVER['HTTPS'] ) && 'off' !== $_SERVER['HTTPS'] ) || ( isset( $_SERVER['SERVER_PORT'] ) && 443 === (int) $_SERVER['SERVER_PORT'] );
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- used only in a strict !== comparison and an (int) cast for a strict === comparison; the resulting boolean only ever selects between two hardcoded translated strings below, never echoed raw.
+		$https    = ( isset( $_SERVER['HTTPS'] ) && 'off' !== wp_unslash( $_SERVER['HTTPS'] ) ) || ( isset( $_SERVER['SERVER_PORT'] ) && 443 === (int) wp_unslash( $_SERVER['SERVER_PORT'] ) );
 		$config[] = array(
 			'label' => __( 'HTTPS Enabled', 'pivot-performance-toolkit' ),
 			'value' => $https ? __( 'Yes', 'pivot-performance-toolkit' ) : __( 'No', 'pivot-performance-toolkit' ),
