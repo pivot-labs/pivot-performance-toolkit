@@ -11,7 +11,7 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	return;
+	exit;
 }
 
 // Wrapped in a closure so every local below is function-scoped rather than a
