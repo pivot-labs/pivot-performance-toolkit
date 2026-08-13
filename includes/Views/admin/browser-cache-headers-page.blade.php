@@ -4,9 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <div class="pivot-performance-toolkit-col pivot-performance-toolkit-col--main">
-    @include('cards.caching.browser.test', array(
-        'home_url' => $home_url,
-    ))
+    @include('cards.caching.browser.test')
 
     @include('cards.caching.browser.detection', array(
         'server_software' => $server_software,

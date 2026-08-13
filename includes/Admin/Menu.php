@@ -127,6 +127,74 @@ final class Menu {
 				'error'         => __( 'Error', 'pivot-performance-toolkit' ),
 			)
 		);
+
+		// All plugin sections render behind this single bundle (routed via
+		// ?section=, not separate admin_enqueue_scripts hook suffixes), so
+		// section-specific data is localized here too and the JS binds
+		// against it only when that section's markup is present on the page.
+		wp_localize_script(
+			'pivot-performance-toolkit-admin-js',
+			'ptkAdvancedRules',
+			array(
+				'wooDefaults' => array(
+					'/cart',
+					'/checkout',
+					'/my-account',
+					'/wc-api/*',
+					'/?wc-ajax=*',
+				),
+			)
+		);
+
+		wp_localize_script(
+			'pivot-performance-toolkit-admin-js',
+			'ptkBrowserCacheTest',
+			array(
+				'homeUrl' => home_url(),
+				'i18n'    => array(
+					'noAssets'          => __( 'No testable assets found. Make sure your WordPress site is publicly accessible.', 'pivot-performance-toolkit' ),
+					'results'           => __( 'Results:', 'pivot-performance-toolkit' ),
+					'assetsHaveHeaders' => __( 'assets have cache headers', 'pivot-performance-toolkit' ),
+					'assetsCompressed'  => __( 'assets are compressed', 'pivot-performance-toolkit' ),
+					'configGood'        => __( 'Browser cache configuration looks good!', 'pivot-performance-toolkit' ),
+					'applyConfig'       => __( 'Not all assets have cache headers. Apply the configuration below.', 'pivot-performance-toolkit' ),
+					'notSet'            => __( 'Not set', 'pivot-performance-toolkit' ),
+					'none'              => __( 'None', 'pivot-performance-toolkit' ),
+					'unknown'           => __( 'Unknown', 'pivot-performance-toolkit' ),
+					'yes'               => __( 'Yes', 'pivot-performance-toolkit' ),
+					'errorPrefix'       => __( 'Error:', 'pivot-performance-toolkit' ),
+					'na'                => __( 'N/A', 'pivot-performance-toolkit' ),
+					'good'              => __( 'GOOD', 'pivot-performance-toolkit' ),
+					'check'             => __( 'CHECK', 'pivot-performance-toolkit' ),
+					'compressionOk'     => __( 'OK', 'pivot-performance-toolkit' ),
+					'notUsed'           => __( 'NOT USED', 'pivot-performance-toolkit' ),
+					'css'               => __( 'CSS', 'pivot-performance-toolkit' ),
+					'js'                => __( 'JavaScript', 'pivot-performance-toolkit' ),
+					'image'             => __( 'Image', 'pivot-performance-toolkit' ),
+					'error'             => __( 'Error', 'pivot-performance-toolkit' ),
+				),
+			)
+		);
+
+		wp_localize_script(
+			'pivot-performance-toolkit-admin-js',
+			'ptkAssetsDetector',
+			array(
+				'i18n' => array(
+					'selectUrl'         => __( 'Please select a URL first.', 'pivot-performance-toolkit' ),
+					'detecting'         => __( 'Detecting assets...', 'pivot-performance-toolkit' ),
+					'detectionFailed'   => __( 'Detection failed.', 'pivot-performance-toolkit' ),
+					'noAssetsFound'     => __( 'Detection complete. No assets found.', 'pivot-performance-toolkit' ),
+					'detectionComplete' => __( 'Detection complete.', 'pivot-performance-toolkit' ),
+					'css'               => __( 'CSS', 'pivot-performance-toolkit' ),
+					'javascript'        => __( 'JavaScript', 'pivot-performance-toolkit' ),
+					'fonts'             => __( 'Fonts', 'pivot-performance-toolkit' ),
+					'images'            => __( 'Images', 'pivot-performance-toolkit' ),
+					'other'             => __( 'Other', 'pivot-performance-toolkit' ),
+					'detected'          => __( 'Detected:', 'pivot-performance-toolkit' ),
+				),
+			)
+		);
 	}
 
 	private function menuIconCss(): string {

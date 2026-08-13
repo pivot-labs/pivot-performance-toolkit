@@ -725,6 +725,442 @@
         });
     }
 
+    function bindWooExclusions() {
+        var addButton = document.getElementById('pivot-performance-toolkit-add-woo-exclusions');
+        var textarea = document.getElementById('pivot-performance-toolkit-excluded-urls');
+        var data = (typeof window.ptkAdvancedRules === 'object' && window.ptkAdvancedRules) ? window.ptkAdvancedRules : {};
+        var defaults = data.wooDefaults;
+
+        if (!addButton || !textarea || !Array.isArray(defaults)) {
+            return;
+        }
+
+        addButton.addEventListener('click', function () {
+            var existing = textarea.value
+                .split('\n')
+                .map(function (line) {
+                    return line.trim();
+                })
+                .filter(function (line) {
+                    return line !== '';
+                });
+
+            var normalized = new Set(existing.map(function (line) {
+                return line.toLowerCase();
+            }));
+
+            defaults.forEach(function (rule) {
+                if (typeof rule !== 'string') {
+                    return;
+                }
+
+                if (!normalized.has(rule.toLowerCase())) {
+                    existing.push(rule);
+                    normalized.add(rule.toLowerCase());
+                }
+            });
+
+            textarea.value = existing.join('\n');
+            textarea.focus();
+        });
+    }
+
+    function bindBrowserCacheTest() {
+        var testButton = document.getElementById('pivot-performance-toolkit-run-cache-test');
+
+        if (!testButton) {
+            return;
+        }
+
+        var data = (typeof window.ptkBrowserCacheTest === 'object' && window.ptkBrowserCacheTest) ? window.ptkBrowserCacheTest : {};
+        var homeUrl = data.homeUrl || '/';
+        var i18n = (typeof data.i18n === 'object' && data.i18n) ? data.i18n : {};
+
+        var noAssetsLabel = i18n.noAssets || '';
+        var resultsLabel = i18n.results || '';
+        var assetsHaveHeadersLabel = i18n.assetsHaveHeaders || '';
+        var assetsCompressedLabel = i18n.assetsCompressed || '';
+        var configGoodLabel = i18n.configGood || '';
+        var applyConfigLabel = i18n.applyConfig || '';
+        var cacheNotSetLabel = i18n.notSet || '';
+        var cacheNoneLabel = i18n.none || '';
+        var cacheUnknownLabel = i18n.unknown || '';
+        var cacheYesLabel = i18n.yes || '';
+        var cacheErrorPrefixLabel = i18n.errorPrefix || '';
+        var cacheNaLabel = i18n.na || '';
+        var cacheGoodLabel = i18n.good || '';
+        var cacheCheckLabel = i18n.check || '';
+        var cacheCompressionOkLabel = i18n.compressionOk || '';
+        var cacheNotUsedLabel = i18n.notUsed || '';
+        var cssLabel = i18n.css || '';
+        var jsLabel = i18n.js || '';
+        var imageLabel = i18n.image || '';
+        var errorLabel = i18n.error || '';
+
+        testButton.addEventListener('click', runCacheTest);
+
+        function escapeHtml(text) {
+            var map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+
+            return String(text).replace(/[&<>"']/g, function (m) {
+                return map[m];
+            });
+        }
+
+        function getTestAssets() {
+            return fetch(homeUrl)
+                .then(function (response) {
+                    return response.text();
+                })
+                .then(function (html) {
+                    var parser = new DOMParser();
+                    var doc = parser.parseFromString(html, 'text/html');
+                    var assets = [];
+
+                    doc.querySelectorAll('link[rel="stylesheet"]').forEach(function (link) {
+                        var href = link.getAttribute('href');
+                        if (href && !href.includes('//fonts.')) {
+                            assets.push({ url: href, type: cssLabel, contentType: 'text/css' });
+                        }
+                    });
+
+                    doc.querySelectorAll('script[src]').forEach(function (script) {
+                        var src = script.getAttribute('src');
+                        if (src && src.includes('.js') && !src.includes('//')) {
+                            assets.push({ url: src, type: jsLabel, contentType: 'application/javascript' });
+                        }
+                    });
+
+                    var img = doc.querySelector('img');
+                    if (img) {
+                        var src2 = img.getAttribute('src');
+                        if (src2 && !src2.includes('//')) {
+                            assets.push({ url: src2, type: imageLabel, contentType: 'image' });
+                        }
+                    }
+
+                    return assets.slice(0, 5);
+                })
+                .catch(function (e) {
+                    console.error('Error fetching home page:', e);
+                    return [];
+                });
+        }
+
+        function testAsset(asset) {
+            var controller = new AbortController();
+            var timeoutId = setTimeout(function () {
+                controller.abort();
+            }, 5000);
+
+            return fetch(asset.url, { signal: controller.signal })
+                .then(function (response) {
+                    clearTimeout(timeoutId);
+
+                    var cacheControl = response.headers.get('Cache-Control') || cacheNotSetLabel;
+                    var contentEncoding = response.headers.get('Content-Encoding') || cacheNoneLabel;
+                    var contentLength = response.headers.get('Content-Length') || cacheUnknownLabel;
+                    var etag = response.headers.get('ETag');
+
+                    return {
+                        url: asset.url.split('/').pop(),
+                        type: asset.type,
+                        cacheControl: cacheControl,
+                        encoding: contentEncoding,
+                        size: contentLength,
+                        etag: etag ? cacheYesLabel : cacheNoneLabel,
+                        status: response.status
+                    };
+                })
+                .catch(function (e) {
+                    clearTimeout(timeoutId);
+                    return {
+                        url: asset.url.split('/').pop(),
+                        type: asset.type,
+                        cacheControl: cacheErrorPrefixLabel + ' ' + e.message,
+                        encoding: cacheNaLabel,
+                        size: cacheNaLabel,
+                        etag: cacheNaLabel,
+                        status: errorLabel
+                    };
+                });
+        }
+
+        function addResultRow(tbody, result) {
+            var row = tbody.insertRow();
+            var cacheStatus = result.cacheControl !== cacheNotSetLabel && result.cacheControl !== errorLabel ? cacheGoodLabel : cacheCheckLabel;
+            var compressionStatus = result.encoding !== cacheNoneLabel && result.encoding !== cacheNaLabel ? cacheCompressionOkLabel + ' ' + result.encoding : cacheNotUsedLabel;
+
+            row.innerHTML =
+                '<td><strong>' + escapeHtml(result.type) + '</strong><br><small>' + escapeHtml(result.url) + '</small></td>' +
+                '<td><small>' + escapeHtml(result.cacheControl) + '</small></td>' +
+                '<td><small>' + escapeHtml(compressionStatus) + '</small></td>' +
+                '<td>' + cacheStatus + '</td>';
+        }
+
+        function generateSummary(results, summaryElement) {
+            if (results.length === 0) {
+                summaryElement.textContent = noAssetsLabel;
+                return;
+            }
+
+            var good = results.filter(function (r) {
+                return r.cacheControl !== cacheNotSetLabel && r.cacheControl !== errorLabel && !r.cacheControl.includes(cacheErrorPrefixLabel);
+            }).length;
+            var compressed = results.filter(function (r) {
+                return r.encoding !== cacheNoneLabel && r.encoding !== cacheNaLabel;
+            }).length;
+
+            var summary = '<strong>' + resultsLabel + ' ' + good + '/' + results.length + ' ' + assetsHaveHeadersLabel + '</strong><br>';
+            summary += compressed + '/' + results.length + ' ' + assetsCompressedLabel;
+
+            if (good === results.length && compressed >= Math.floor(results.length / 2)) {
+                summary += '<br><strong style="color: #28a745;">' + configGoodLabel + '</strong>';
+            } else if (good < results.length / 2) {
+                summary += '<br><strong style="color: #ffc107;">' + applyConfigLabel + '</strong>';
+            }
+
+            summaryElement.innerHTML = summary;
+        }
+
+        function runCacheTest() {
+            var status = document.getElementById('pivot-performance-toolkit-test-status');
+            var results = document.getElementById('pivot-performance-toolkit-test-results');
+            var errors = document.getElementById('pivot-performance-toolkit-test-errors');
+            var resultsBody = document.getElementById('pivot-performance-toolkit-test-results-body');
+            var summaryText = document.getElementById('pivot-performance-toolkit-test-summary-text');
+
+            status.style.display = 'inline';
+            results.style.display = 'none';
+            errors.style.display = 'none';
+            resultsBody.innerHTML = '';
+
+            getTestAssets()
+                .then(function (assets) {
+                    var testResults = [];
+
+                    return assets.reduce(function (chain, asset) {
+                        return chain.then(function () {
+                            return testAsset(asset).then(function (result) {
+                                testResults.push(result);
+                                addResultRow(resultsBody, result);
+                            }).catch(function (e) {
+                                console.error('Error testing asset:', asset, e);
+                            });
+                        });
+                    }, Promise.resolve()).then(function () {
+                        status.style.display = 'none';
+                        results.style.display = 'block';
+                        generateSummary(testResults, summaryText);
+                    });
+                })
+                .catch(function (error) {
+                    status.style.display = 'none';
+                    errors.style.display = 'block';
+                    document.getElementById('pivot-performance-toolkit-test-error-text').textContent = error.message;
+                });
+        }
+    }
+
+    function bindAssetsDetector() {
+        var root = document.querySelector('[data-pivot-performance-toolkit-assets-detector]');
+        if (!root) {
+            return;
+        }
+
+        var select    = root.querySelector('[data-pivot-performance-toolkit-assets-select]');
+        var runBtn    = root.querySelector('[data-pivot-performance-toolkit-assets-run]');
+        var status    = root.querySelector('[data-pivot-performance-toolkit-assets-status]');
+        var summary   = root.querySelector('[data-pivot-performance-toolkit-assets-summary]');
+        var table     = root.querySelector('[data-pivot-performance-toolkit-assets-table]');
+        var rowsWrap  = root.querySelector('[data-pivot-performance-toolkit-assets-rows]');
+        var filtersBar = root.querySelector('[data-pivot-performance-toolkit-assets-filters]');
+
+        if (!select || !runBtn || !status || !summary || !table || !rowsWrap) {
+            return;
+        }
+
+        var data = (typeof window.ptkAssetsDetector === 'object' && window.ptkAssetsDetector) ? window.ptkAssetsDetector : {};
+        var i18n = (typeof data.i18n === 'object' && data.i18n) ? data.i18n : {};
+
+        var activeFilter = 'all';
+        var typeCounts = { css: 0, javascript: 0, fonts: 0, images: 0, other: 0 };
+        var summaryLabels = {
+            css: i18n.css || '',
+            javascript: i18n.javascript || '',
+            fonts: i18n.fonts || '',
+            images: i18n.images || '',
+            other: i18n.other || ''
+        };
+        var detectedLabel = i18n.detected || '';
+
+        function updateSummaryDisplay() {
+            var parts = [];
+            if (typeCounts.css > 0) parts.push(typeCounts.css + ' ' + summaryLabels.css);
+            if (typeCounts.javascript > 0) parts.push(typeCounts.javascript + ' ' + summaryLabels.javascript);
+            if (typeCounts.fonts > 0) parts.push(typeCounts.fonts + ' ' + summaryLabels.fonts);
+            if (typeCounts.images > 0) parts.push(typeCounts.images + ' ' + summaryLabels.images);
+            if (typeCounts.other > 0) parts.push(typeCounts.other + ' ' + summaryLabels.other);
+            summary.textContent = parts.length > 0 ? detectedLabel + ' ' + parts.join(', ') : '';
+        }
+
+        function setStatus(message, isError) {
+            status.textContent = message;
+            status.style.color = isError ? '#b91c1c' : '#374151';
+        }
+
+        function clearRows() {
+            rowsWrap.innerHTML = '';
+            table.style.display = 'none';
+            if (filtersBar) { filtersBar.style.display = 'none'; }
+            summary.textContent = '';
+            activeFilter = 'all';
+            typeCounts = { css: 0, javascript: 0, fonts: 0, images: 0, other: 0 };
+            if (filtersBar) {
+                filtersBar.querySelectorAll('[data-pivot-performance-toolkit-filter]').forEach(function (btn) {
+                    var isAll = btn.getAttribute('data-pivot-performance-toolkit-filter') === 'all';
+                    btn.setAttribute('aria-pressed', isAll ? 'true' : 'false');
+                    btn.classList.toggle('button-primary', isAll);
+                });
+            }
+        }
+
+        function applyFilter(filter) {
+            activeFilter = filter;
+            rowsWrap.querySelectorAll('tr[data-pivot-performance-toolkit-category]').forEach(function (tr) {
+                var cat = tr.getAttribute('data-pivot-performance-toolkit-category') || '';
+                tr.style.display = (filter === 'all' || cat === filter) ? '' : 'none';
+            });
+            if (filtersBar) {
+                filtersBar.querySelectorAll('[data-pivot-performance-toolkit-filter]').forEach(function (btn) {
+                    var isActive = btn.getAttribute('data-pivot-performance-toolkit-filter') === filter;
+                    btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+                    btn.classList.toggle('button-primary', isActive);
+                });
+            }
+        }
+
+        function addRow(type, url, category) {
+            var tr = document.createElement('tr');
+            tr.setAttribute('data-pivot-performance-toolkit-category', category);
+
+            if (activeFilter !== 'all' && category !== activeFilter) {
+                tr.style.display = 'none';
+            }
+
+            var typeKey = type.toLowerCase();
+            if (typeKey === 'css' || typeKey === 'stylesheet') {
+                typeCounts.css++;
+            } else if (typeKey === 'javascript' || typeKey === 'script' || typeKey === 'js') {
+                typeCounts.javascript++;
+            } else if (typeKey === 'font' || typeKey === 'fonts') {
+                typeCounts.fonts++;
+            } else if (typeKey === 'image' || typeKey === 'img' || typeKey === 'svg') {
+                typeCounts.images++;
+            } else {
+                typeCounts.other++;
+            }
+
+            var typeCell = document.createElement('td');
+            typeCell.textContent = type;
+            tr.appendChild(typeCell);
+
+            var urlCell = document.createElement('td');
+            urlCell.style.wordBreak = 'break-all';
+            urlCell.style.overflowWrap = 'break-word';
+            urlCell.style.maxWidth = '0';
+            var link = document.createElement('a');
+            link.href = url;
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            link.textContent = url;
+            urlCell.appendChild(link);
+            tr.appendChild(urlCell);
+
+            var categoryCell = document.createElement('td');
+            categoryCell.textContent = category;
+            tr.appendChild(categoryCell);
+
+            rowsWrap.appendChild(tr);
+        }
+
+        if (filtersBar) {
+            filtersBar.addEventListener('click', function (e) {
+                var btn = e.target.closest('[data-pivot-performance-toolkit-filter]');
+                if (!btn) { return; }
+                applyFilter(btn.getAttribute('data-pivot-performance-toolkit-filter') || 'all');
+            });
+        }
+
+        runBtn.addEventListener('click', function () {
+            var action    = root.getAttribute('data-ajax-action') || '';
+            var nonce     = root.getAttribute('data-ajax-nonce') || '';
+            var targetUrl = select.value || '';
+            var ajaxUrl   = getAjaxUrl();
+
+            if (!targetUrl) {
+                setStatus(i18n.selectUrl || '', true);
+                return;
+            }
+
+            runBtn.disabled = true;
+            clearRows();
+            setStatus(i18n.detecting || '', false);
+
+            var body = new URLSearchParams();
+            body.set('action', action);
+            body.set('_ajax_nonce', nonce);
+            body.set('target_url', targetUrl);
+
+            fetch(ajaxUrl, {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+                body: body.toString()
+            })
+                .then(function (r) { return r.json(); })
+                .then(function (payload) {
+                    if (!payload || !payload.success) {
+                        var msg = payload && payload.data && payload.data.message
+                            ? String(payload.data.message)
+                            : (i18n.detectionFailed || '');
+                        throw new Error(msg);
+                    }
+
+                    var rows = payload.data && Array.isArray(payload.data.rows) ? payload.data.rows : [];
+                    var summaryText = payload.data && payload.data.summary_text ? String(payload.data.summary_text) : '';
+
+                    if (rows.length === 0) {
+                        setStatus(i18n.noAssetsFound || '', false);
+                        summary.textContent = summaryText;
+                        return;
+                    }
+
+                    rows.forEach(function (row) {
+                        if (!row || typeof row !== 'object') { return; }
+                        addRow(String(row.type || '-'), String(row.url || '-'), String(row.category || '-'));
+                    });
+
+                    table.style.display = '';
+                    if (filtersBar) { filtersBar.style.display = 'flex'; }
+                    updateSummaryDisplay();
+                    setStatus(i18n.detectionComplete || '', false);
+                })
+                .catch(function (error) {
+                    setStatus(error && error.message ? error.message : (i18n.detectionFailed || ''), true);
+                })
+                .finally(function () {
+                    runBtn.disabled = false;
+                });
+        });
+    }
+
     function onDomReady(fn) {
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', fn);
@@ -813,6 +1249,9 @@
         bindDisableOnSubmitForms();
         bindCollapsibleTriggers();
         bindHttp11AutoExpand();
+        bindWooExclusions();
+        bindBrowserCacheTest();
+        bindAssetsDetector();
 
         if (toggle && shell) {
             toggle.addEventListener('click', function () {

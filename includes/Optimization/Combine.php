@@ -453,6 +453,13 @@ final class Combine implements ModuleInterface {
 			return $this->originalTags( $group );
 		}
 
+		// Not a wp_enqueue_script() bypass: $target_web is only known after
+		// the N originally-enqueued <script src> tags in $group have already
+		// been read from disk and merged, which can only happen once
+		// WordPress has finished enqueuing and printing them — this string
+		// replaces those already-enqueued tags in the final output, it
+		// doesn't introduce a new unenqueued one. There is no earlier hook
+		// at which the combined file's URL could be enqueued instead.
 		return '<script src="' . esc_url( $target_web ) . '"></script>';
 	}
 

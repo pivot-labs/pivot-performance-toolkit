@@ -39,7 +39,9 @@ final class DelayedJsTest extends TestCase {
 	}
 
 	public function test_runtime_script_itself_is_never_delayed(): void {
-		$tag = '<script id="pivot-performance-toolkit-delayed-js-runtime">/* runtime */</script>';
+		// WordPress prints source-less enqueued scripts with id="{handle}-js"
+		// (see enqueueRuntimeScript()), not the raw handle.
+		$tag = '<script id="pivot-performance-toolkit-delayed-js-runtime-js">/* runtime */</script>';
 
 		self::assertSame( $tag, $this->delayed_js->delayScriptTags( $tag ) );
 	}

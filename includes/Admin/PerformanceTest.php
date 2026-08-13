@@ -22,6 +22,7 @@ final class PerformanceTest implements ModuleInterface {
 
 	private const LAST_RESULT_OPTION = 'pivot_performance_toolkit_last_performance_result';
 	private const TRANSIENT_PREFIX   = 'pivot_performance_toolkit_test_';
+	private const PROBE_SCRIPT_ID    = 'pivot-performance-toolkit-perf-probe';
 	private const SCORE_WEIGHTS      = array(
 		'page_load_time' => 25,
 		'lcp'            => 25,
@@ -48,8 +49,15 @@ final class PerformanceTest implements ModuleInterface {
 	public function register(): void {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueueAdminAssets' ) );
 		add_action( 'rest_api_init', array( $this, 'registerRestRoutes' ) );
-		add_action( 'wp_head', array( $this, 'renderFrontendProbeScript' ), 0 );
-		add_action( 'wp_footer', array( $this, 'renderFrontendProbeScript' ), 99 );
+		// Priorities 0 and 1 both run before WordPress's own script-printing
+		// callbacks (wp_print_head_scripts at wp_head:9, wp_print_footer_scripts
+		// at wp_footer:20) — required so the enqueue below actually reaches
+		// the queue in time to be printed by either one, since we can't
+		// assume which of wp_head()/wp_footer() the page-under-test's theme
+		// calls (or calls correctly). The $printed guard picks whichever
+		// fires first and skips the other.
+		add_action( 'wp_head', array( $this, 'enqueueFrontendProbeScript' ), 0 );
+		add_action( 'wp_footer', array( $this, 'enqueueFrontendProbeScript' ), 1 );
 	}
 
 	public function renderPerformanceTestCard(): void {
@@ -155,7 +163,7 @@ final class PerformanceTest implements ModuleInterface {
 				'methods'             => 'POST',
 				// Deliberately public: this is called by a plain <script> the
 				// probe embeds in whatever page is under test (see
-				// renderFrontendProbeScript() below), which has no WordPress
+				// enqueueFrontendProbeScript() below), which has no WordPress
 				// auth context to check — it may not even be the admin's own
 				// browser. The real access control is restCollectTest()'s
 				// token check: only a request carrying the exact 40-char
@@ -251,31 +259,42 @@ final class PerformanceTest implements ModuleInterface {
 		return rest_ensure_response( $state );
 	}
 
-	public function renderFrontendProbeScript(): void {
+	public function enqueueFrontendProbeScript(): void {
 		static $printed = false;
 
 		if ( $printed || is_admin() ) {
 			return;
 		}
 
-		$printed     = true;
-		$collect_url = esc_url_raw( rest_url( 'ptk/v1/performance-tests/collect' ) );
-		$safe_url    = wp_json_encode( $collect_url );
+		$printed = true;
 
-		echo "\n<script>\n";
-		echo '(function(){';
-		echo 'var collectUrl=' . $safe_url . ';'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $safe_url is wp_json_encode() of an esc_url_raw() value, the correct way to safely embed a PHP string as a JS literal inside a <script> block.
-		echo 'function getToken(){var token="";try{token=String(window.name||"").trim();}catch(e){}if(token&&token.length>=20){return token;}try{var m=document.cookie.match(/(?:^|;\\s*)pivot_performance_toolkit_perf_probe=([^;]+)/);if(m){token=String(m[1]||"").trim();if(token.length>=20){return token;}}}catch(e){}return "";}';
-		echo 'var fcp=0;';
-		echo 'var lcp=0;';
-		echo 'if("PerformanceObserver" in window){try{var paintObserver=new PerformanceObserver(function(list){var entries=list.getEntries();entries.forEach(function(entry){if(entry.name==="first-contentful-paint"){fcp=fcp||entry.startTime||0;}});});paintObserver.observe({type:"paint",buffered:true});var po=new PerformanceObserver(function(list){var entries=list.getEntries();if(entries.length){lcp=entries[entries.length-1].startTime||lcp;}});po.observe({type:"largest-contentful-paint",buffered:true});}catch(e){}}';
-		echo 'function num(value){var n=Number(value);return Number.isFinite(n)?Math.round(n*100)/100:0;}';
-		echo 'function getFcpMetric(){var paints=performance.getEntriesByType("paint")||[];var paintEntry=paints.find(function(p){return p.name==="first-contentful-paint";});var namedEntry=performance.getEntriesByName("first-contentful-paint", "paint")[0]||null;var entry=paintEntry||namedEntry;return num(entry&&entry.startTime?entry.startTime:fcp);}';
-		echo 'function getJsMetrics(){var scripts=document.querySelectorAll("script[src]")||[];var count=scripts.length;var totalSize=0;var resources=performance.getEntriesByType("resource")||[];resources.forEach(function(r){if(r.name&&(r.name.endsWith(".js")||r.initiatorType==="script")){var size=r.transferSize||r.encodedBodySize||0;totalSize+=size;}});return{total_js_count:count,total_js_size_bytes:totalSize};}';
-		echo 'function getCssMetrics(){var links=document.querySelectorAll("link[rel=\"stylesheet\"]")||[];var count=links.length;var totalSize=0;var resources=performance.getEntriesByType("resource")||[];resources.forEach(function(r){if(r.name&&(r.name.endsWith(".css")||r.initiatorType==="link")){var size=r.transferSize||r.encodedBodySize||0;totalSize+=size;}});return{total_css_count:count,total_css_size_bytes:totalSize};}';
-		echo 'function getImageMetrics(){var images=document.querySelectorAll("img")||[];var count=images.length;var totalSize=0;var resources=performance.getEntriesByType("resource")||[];resources.forEach(function(r){var name=String(r&&r.name?r.name:"").toLowerCase();var type=String(r&&r.initiatorType?r.initiatorType:"").toLowerCase();if(type==="img"||/\.(avif|bmp|gif|heic|heif|ico|jpe?g|png|svg|webp|tif|tiff)(\?|#|$)/i.test(name)){var size=r.transferSize||r.encodedBodySize||0;totalSize+=size;}});return{total_image_count:count,total_image_size_bytes:totalSize};}';
-		echo 'function collect(){var nav=(performance.getEntriesByType("navigation")[0]||null);if(!fcp){fcp=getFcpMetric();}if(!lcp){var lcpEntries=performance.getEntriesByType("largest-contentful-paint")||[];if(lcpEntries.length){lcp=lcpEntries[lcpEntries.length-1].startTime||0;}}var jsMetrics=getJsMetrics();var cssMetrics=getCssMetrics();var imageMetrics=getImageMetrics();var resources=performance.getEntriesByType("resource")||[];var metrics={ttfb_ms:num(nav&&nav.responseStart?nav.responseStart:0),fcp_ms:num(fcp),lcp_ms:num(lcp),dom_content_loaded_ms:num(nav&&nav.domContentLoadedEventEnd?nav.domContentLoadedEventEnd:0),load_event_ms:num(nav&&nav.loadEventEnd?nav.loadEventEnd:0),total_resource_count:resources.length,total_js_count:jsMetrics.total_js_count,total_js_size_bytes:jsMetrics.total_js_size_bytes,total_css_count:cssMetrics.total_css_count,total_css_size_bytes:cssMetrics.total_css_size_bytes,total_image_count:imageMetrics.total_image_count,total_image_size_bytes:imageMetrics.total_image_size_bytes};return metrics;}';
-		echo 'function getCacheHit(){return fetch(window.location.href,{method:"GET",credentials:"same-origin",cache:"no-store"}).then(function(response){var cacheStatus=String(response.headers.get("x-pivot-cache")||"").toUpperCase();return cacheStatus==="HIT"?1:0;}).catch(function(){return 0;});}';
+		wp_register_script( self::PROBE_SCRIPT_ID, false, array(), PIVOT_PERFORMANCE_TOOLKIT_VERSION );
+		wp_enqueue_script( self::PROBE_SCRIPT_ID );
+		wp_localize_script(
+			self::PROBE_SCRIPT_ID,
+			'ptkPerfProbe',
+			array(
+				'collectUrl' => esc_url_raw( rest_url( 'ptk/v1/performance-tests/collect' ) ),
+			)
+		);
+		wp_add_inline_script( self::PROBE_SCRIPT_ID, $this->frontendProbeScript() );
+	}
+
+	private function frontendProbeScript(): string {
+		$js  = '(function(){';
+		$js .= 'var collectUrl=window.ptkPerfProbe&&window.ptkPerfProbe.collectUrl?window.ptkPerfProbe.collectUrl:"";';
+		$js .= 'if(!collectUrl){return;}';
+		$js .= 'function getToken(){var token="";try{token=String(window.name||"").trim();}catch(e){}if(token&&token.length>=20){return token;}try{var m=document.cookie.match(/(?:^|;\\s*)pivot_performance_toolkit_perf_probe=([^;]+)/);if(m){token=String(m[1]||"").trim();if(token.length>=20){return token;}}}catch(e){}return "";}';
+		$js .= 'var fcp=0;';
+		$js .= 'var lcp=0;';
+		$js .= 'if("PerformanceObserver" in window){try{var paintObserver=new PerformanceObserver(function(list){var entries=list.getEntries();entries.forEach(function(entry){if(entry.name==="first-contentful-paint"){fcp=fcp||entry.startTime||0;}});});paintObserver.observe({type:"paint",buffered:true});var po=new PerformanceObserver(function(list){var entries=list.getEntries();if(entries.length){lcp=entries[entries.length-1].startTime||lcp;}});po.observe({type:"largest-contentful-paint",buffered:true});}catch(e){}}';
+		$js .= 'function num(value){var n=Number(value);return Number.isFinite(n)?Math.round(n*100)/100:0;}';
+		$js .= 'function getFcpMetric(){var paints=performance.getEntriesByType("paint")||[];var paintEntry=paints.find(function(p){return p.name==="first-contentful-paint";});var namedEntry=performance.getEntriesByName("first-contentful-paint", "paint")[0]||null;var entry=paintEntry||namedEntry;return num(entry&&entry.startTime?entry.startTime:fcp);}';
+		$js .= 'function getJsMetrics(){var scripts=document.querySelectorAll("script[src]")||[];var count=scripts.length;var totalSize=0;var resources=performance.getEntriesByType("resource")||[];resources.forEach(function(r){if(r.name&&(r.name.endsWith(".js")||r.initiatorType==="script")){var size=r.transferSize||r.encodedBodySize||0;totalSize+=size;}});return{total_js_count:count,total_js_size_bytes:totalSize};}';
+		$js .= 'function getCssMetrics(){var links=document.querySelectorAll("link[rel=\"stylesheet\"]")||[];var count=links.length;var totalSize=0;var resources=performance.getEntriesByType("resource")||[];resources.forEach(function(r){if(r.name&&(r.name.endsWith(".css")||r.initiatorType==="link")){var size=r.transferSize||r.encodedBodySize||0;totalSize+=size;}});return{total_css_count:count,total_css_size_bytes:totalSize};}';
+		$js .= 'function getImageMetrics(){var images=document.querySelectorAll("img")||[];var count=images.length;var totalSize=0;var resources=performance.getEntriesByType("resource")||[];resources.forEach(function(r){var name=String(r&&r.name?r.name:"").toLowerCase();var type=String(r&&r.initiatorType?r.initiatorType:"").toLowerCase();if(type==="img"||/\.(avif|bmp|gif|heic|heif|ico|jpe?g|png|svg|webp|tif|tiff)(\?|#|$)/i.test(name)){var size=r.transferSize||r.encodedBodySize||0;totalSize+=size;}});return{total_image_count:count,total_image_size_bytes:totalSize};}';
+		$js .= 'function collect(){var nav=(performance.getEntriesByType("navigation")[0]||null);if(!fcp){fcp=getFcpMetric();}if(!lcp){var lcpEntries=performance.getEntriesByType("largest-contentful-paint")||[];if(lcpEntries.length){lcp=lcpEntries[lcpEntries.length-1].startTime||0;}}var jsMetrics=getJsMetrics();var cssMetrics=getCssMetrics();var imageMetrics=getImageMetrics();var resources=performance.getEntriesByType("resource")||[];var metrics={ttfb_ms:num(nav&&nav.responseStart?nav.responseStart:0),fcp_ms:num(fcp),lcp_ms:num(lcp),dom_content_loaded_ms:num(nav&&nav.domContentLoadedEventEnd?nav.domContentLoadedEventEnd:0),load_event_ms:num(nav&&nav.loadEventEnd?nav.loadEventEnd:0),total_resource_count:resources.length,total_js_count:jsMetrics.total_js_count,total_js_size_bytes:jsMetrics.total_js_size_bytes,total_css_count:cssMetrics.total_css_count,total_css_size_bytes:cssMetrics.total_css_size_bytes,total_image_count:imageMetrics.total_image_count,total_image_size_bytes:imageMetrics.total_image_size_bytes};return metrics;}';
+		$js .= 'function getCacheHit(){return fetch(window.location.href,{method:"GET",credentials:"same-origin",cache:"no-store"}).then(function(response){var cacheStatus=String(response.headers.get("x-pivot-cache")||"").toUpperCase();return cacheStatus==="HIT"?1:0;}).catch(function(){return 0;});}';
 		// The token is (re-)read here, at send-time, rather than once at parse-time:
 		// if this cached page also carries a freshly-injected probe script (from the
 		// advanced-cache drop-in, for a genuine cache HIT), that script deletes the
@@ -283,10 +302,11 @@ final class PerformanceTest implements ModuleInterface {
 		// deferred send() fires. Reading the token lazily lets this copy correctly
 		// detect that and stand down, instead of racing the fresh script and
 		// overwriting its correct result with a stale re-check.
-		echo 'function send(){var token=getToken();if(!token){return;}var sentKey="pivot_performance_toolkit_perf_sent_"+token;try{if(window.sessionStorage&&window.sessionStorage.getItem(sentKey)==="1"){return;}}catch(e){}return getCacheHit().then(function(cacheHit){document.cookie="pivot_performance_toolkit_perf_probe=;path=/;SameSite=Lax;max-age=0;expires=Thu, 01 Jan 1970 00:00:00 GMT";var metrics=collect();metrics.page_cache_hit=cacheHit;var payload={token:token,pageUrl:window.location.href,metrics:metrics};return fetch(collectUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload),keepalive:true,credentials:"omit"}).then(function(){try{if(window.sessionStorage){window.sessionStorage.setItem(sentKey,"1");}}catch(e){}try{window.name="";}catch(e){} });}).catch(function(){});}';
-		echo 'window.addEventListener("load",function(){window.setTimeout(send,300);});';
-		echo '})();';
-		echo "\n</script>\n";
+		$js .= 'function send(){var token=getToken();if(!token){return;}var sentKey="pivot_performance_toolkit_perf_sent_"+token;try{if(window.sessionStorage&&window.sessionStorage.getItem(sentKey)==="1"){return;}}catch(e){}return getCacheHit().then(function(cacheHit){document.cookie="pivot_performance_toolkit_perf_probe=;path=/;SameSite=Lax;max-age=0;expires=Thu, 01 Jan 1970 00:00:00 GMT";var metrics=collect();metrics.page_cache_hit=cacheHit;var payload={token:token,pageUrl:window.location.href,metrics:metrics};return fetch(collectUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload),keepalive:true,credentials:"omit"}).then(function(){try{if(window.sessionStorage){window.sessionStorage.setItem(sentKey,"1");}}catch(e){}try{window.name="";}catch(e){} });}).catch(function(){});}';
+		$js .= 'window.addEventListener("load",function(){window.setTimeout(send,300);});';
+		$js .= '})();';
+
+		return $js;
 	}
 
 	/**

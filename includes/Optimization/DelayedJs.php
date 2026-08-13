@@ -57,7 +57,7 @@ final class DelayedJs implements ModuleInterface {
 	}
 
 	public function register(): void {
-		add_action( 'wp_head', array( $this, 'renderRuntimeScript' ), 1 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueueRuntimeScript' ) );
 		// Priority 12: runs third among this plugin's four
 		// wp_template_enhancement_output_buffer callbacks, after Combine
 		// (10) and AsyncCss (11), before Assets/minify (13) — preserves the
@@ -66,16 +66,21 @@ final class DelayedJs implements ModuleInterface {
 		add_filter( 'wp_template_enhancement_output_buffer', array( $this, 'maybeDelayScriptTags' ), 12 );
 	}
 
-	public function renderRuntimeScript(): void {
+	/**
+	 * Registers a source-less script handle (a WordPress-supported pattern
+	 * for inline-only scripts) purely so the runtime snippet below can ride
+	 * the normal wp_print_head_scripts() queue instead of being echoed
+	 * directly — WordPress prints it with id="{handle}-js", matched in
+	 * maybeDelayScriptTag() below so the runtime never delays itself.
+	 */
+	public function enqueueRuntimeScript(): void {
 		if ( ! $this->settings->getBool( 'delay_js_execution' ) || is_admin() ) {
 			return;
 		}
 
-		$timeout = self::FALLBACK_TIMEOUT_MS;
-
-		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped -- static inline script, no user input; $timeout is an int constant, not user data.
-		echo '<script id="' . esc_attr( self::RUNTIME_SCRIPT_ID ) . '">' . $this->runtimeScript( $timeout ) . '</script>' . "\n";
-		// phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped
+		wp_register_script( self::RUNTIME_SCRIPT_ID, false, array(), PIVOT_PERFORMANCE_TOOLKIT_VERSION );
+		wp_enqueue_script( self::RUNTIME_SCRIPT_ID );
+		wp_add_inline_script( self::RUNTIME_SCRIPT_ID, $this->runtimeScript( self::FALLBACK_TIMEOUT_MS ) );
 	}
 
 	public function maybeDelayScriptTags( string $html ): string {
@@ -118,7 +123,7 @@ final class DelayedJs implements ModuleInterface {
 		$src  = $this->extractAttribute( $attributes_raw, 'src' );
 		$type = $this->extractAttribute( $attributes_raw, 'type' );
 
-		if ( self::RUNTIME_SCRIPT_ID === $id ) {
+		if ( self::RUNTIME_SCRIPT_ID . '-js' === $id ) {
 			return $matches[0];
 		}
 

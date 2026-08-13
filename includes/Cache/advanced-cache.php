@@ -142,6 +142,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 			$ptk_safe_token = json_encode( $ptk_probe_token );
 			$ptk_safe_url   = json_encode( $ptk_collect_url );
 
+			// wp_enqueue_script() isn't reachable here — this whole drop-in runs
+			// before wp-settings.php has bootstrapped WordPress (no hook system,
+			// no script-loader), and the string being modified is a byte-for-byte
+			// cached HTML file, not a template being rendered through it. A raw
+			// <script> tag is the only mechanism this early in the request.
 			$ptk_script  = "\n<script>\n(function(){\nvar token=" . $ptk_safe_token . ';var collectUrl=' . $ptk_safe_url . ';';
 			$ptk_script .= "document.cookie='pivot_performance_toolkit_perf_probe=;path=/;SameSite=Lax;max-age=0;expires=Thu, 01 Jan 1970 00:00:00 GMT';";
 			$ptk_script .= "try{window.name='';}catch(e){}";

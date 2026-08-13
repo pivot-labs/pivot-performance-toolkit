@@ -64,7 +64,6 @@ final class BrowserCacheHeadersPage extends BladeAdminPage {
 			'htaccess_applied' => HtaccessCacheHeaders::isApplied(),
 			'nginx_snippet'    => $this->generateNginxSnippet(),
 			'server_software'  => $server_software,
-			'home_url'         => home_url(),
 			'option_key'       => $this->settings->optionKey(),
 			'apply_action'     => self::APPLY_ACTION,
 			'remove_action'    => self::REMOVE_ACTION,

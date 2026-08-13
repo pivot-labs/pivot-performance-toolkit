@@ -83,45 +83,5 @@ if ( ! defined( 'ABSPATH' ) ) {
         @endphp
     </form>
 
-    <script>
-        (function () {
-            const addButton = document.getElementById('pivot-performance-toolkit-add-woo-exclusions');
-            const textarea = document.getElementById('pivot-performance-toolkit-excluded-urls');
-            const defaults = @json($woo_defaults);
-
-            if (!addButton || !textarea || !Array.isArray(defaults)) {
-                return;
-            }
-
-            addButton.addEventListener('click', function () {
-                const existing = textarea.value
-                    .split('\n')
-                    .map(function (line) {
-                        return line.trim();
-                    })
-                    .filter(function (line) {
-                        return line !== '';
-                    });
-
-                const normalized = new Set(existing.map(function (line) {
-                    return line.toLowerCase();
-                }));
-
-                defaults.forEach(function (rule) {
-                    if (typeof rule !== 'string') {
-                        return;
-                    }
-
-                    if (!normalized.has(rule.toLowerCase())) {
-                        existing.push(rule);
-                        normalized.add(rule.toLowerCase());
-                    }
-                });
-
-                textarea.value = existing.join('\n');
-                textarea.focus();
-            });
-        }());
-    </script>
 </x-card>
 
