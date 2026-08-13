@@ -12,6 +12,10 @@ namespace PivotPerformanceToolkit\Optimization;
 use PivotPerformanceToolkit\Contracts\ModuleInterface;
 use PivotPerformanceToolkit\Core\Settings;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 final class AsyncCss implements ModuleInterface {
 
 	private Settings $settings;

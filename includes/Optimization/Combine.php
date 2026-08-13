@@ -14,6 +14,10 @@ use PivotPerformanceToolkit\Core\Settings;
 use PivotPerformanceToolkit\Utils\FilesystemCheck;
 use PivotPerformanceToolkit\Utils\LocalAssetResolver;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 final class Combine implements ModuleInterface {
 
 	private const COMBINED_ASSETS_SUBDIR = 'cache/pivot-performance-toolkit/combined-assets';

@@ -12,6 +12,10 @@ namespace PivotPerformanceToolkit\Optimization;
 use PivotPerformanceToolkit\Contracts\ModuleInterface;
 use PivotPerformanceToolkit\Core\Settings;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 final class DelayedJs implements ModuleInterface {
 
 	private const PLACEHOLDER_TYPE  = 'pivotperformancetoolkit/delayed-js';
