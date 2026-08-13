@@ -1,5 +1,5 @@
 === Pivot Performance Toolkit ===
-Contributors: jeffshaikh
+Contributors: pivotlabs
 Tags: performance, cache, minify, lazy load, cloudflare
 Requires at least: 6.5
 Tested up to: 7.0
