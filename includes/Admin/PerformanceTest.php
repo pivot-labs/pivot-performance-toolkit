@@ -153,6 +153,16 @@ final class PerformanceTest implements ModuleInterface {
 			'/performance-tests/collect',
 			array(
 				'methods'             => 'POST',
+				// Deliberately public: this is called by a plain <script> the
+				// probe embeds in whatever page is under test (see
+				// renderFrontendProbeScript() below), which has no WordPress
+				// auth context to check — it may not even be the admin's own
+				// browser. The real access control is restCollectTest()'s
+				// token check: only a request carrying the exact 40-char
+				// wp_generate_password() token restStartTest() (itself gated
+				// on manage_options) just issued for a still-pending, still-
+				// unexpired test can write anything; every other request 404s
+				// before touching any data.
 				'permission_callback' => '__return_true',
 				'callback'            => array( $this, 'restCollectTest' ),
 			)
