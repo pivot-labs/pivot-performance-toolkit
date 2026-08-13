@@ -98,6 +98,16 @@ We recommend enabling one feature at a time to validate the performance impact. 
 
 Imagify's default WebP delivery method (server rewrite rules) is not reliable behind a CDN, including Cloudflare — this is a known limitation of that delivery method, not a Pivot Performance Toolkit issue. In Imagify's settings, switch WebP delivery to the "&lt;picture&gt; tag" method, which works correctly with Cloudflare. The CDN & Integrations page will show a reminder about this when both Cloudflare and Imagify are detected active.
 
+== External services ==
+
+This plugin connects to the Cloudflare API if you set up the optional Cloudflare integration (CDN & Integrations tab). It's only used to purge Cloudflare's cache — either when you click "Purge Cache," or automatically after you publish/update/trash content, if you've turned that option on.
+
+Nothing is sent unless you've entered your own Cloudflare API token and Zone ID. What gets sent is your Zone ID and API token (to authenticate the request) and a purge instruction — no page content, no visitor data.
+
+Service: Cloudflare, Inc. — https://api.cloudflare.com
+Terms of Service: https://www.cloudflare.com/terms/
+Privacy Policy: https://www.cloudflare.com/privacypolicy/
+
 == Source Code ==
 
 The stylesheet shipped in this plugin (`dist/admin.css`) is a compiled/minified build produced from human-readable source via Tailwind CSS and Vite. The source files (`src/css/admin.css`, `tailwind.config.js`, `vite.config.js`, `package.json`) are excluded from the distributed plugin package to keep it lean, but are published in full in the public GitHub repository:
