@@ -27,6 +27,7 @@ final class DelayedJsTest extends TestCase {
 		Functions\when( 'wp_parse_args' )->alias(
 			static fn( $args, $defaults = array() ): array => array_merge( $defaults, (array) $args )
 		);
+		Functions\when( 'wp_unslash' )->returnArg();
 
 		$this->delayed_js = new DelayedJs( new Settings() );
 	}
@@ -167,5 +168,130 @@ final class DelayedJsTest extends TestCase {
 		self::assertStringContainsString( 'src="/jquery.js"', $result, 'jQuery must be left completely untouched.' );
 		self::assertStringContainsString( 'data-pivot-delayed-src="/app.js"', $result );
 		self::assertStringContainsString( 'type="application/ld+json">{}</script>', $result, 'JSON-LD must be left completely untouched.' );
+	}
+
+	protected function tearDown(): void {
+		unset( $_SERVER['REQUEST_METHOD'] );
+
+		parent::tearDown();
+	}
+
+	// ── maybeDelayScriptTags: the wp_template_enhancement_output_buffer
+	// guard logic that replaced the old template_redirect + ob_start() gate.
+
+	private function delayedJsWithSetting( bool $enabled ): DelayedJs {
+		Functions\when( 'get_option' )->justReturn( array( 'delay_js_execution' => $enabled ) );
+
+		return new DelayedJs( new Settings() );
+	}
+
+	private function stubPassingGuardConditions(): void {
+		Functions\when( 'is_admin' )->justReturn( false );
+		Functions\when( 'is_user_logged_in' )->justReturn( false );
+		Functions\when( 'is_feed' )->justReturn( false );
+		Functions\when( 'is_preview' )->justReturn( false );
+		Functions\when( 'is_404' )->justReturn( false );
+		$_SERVER['REQUEST_METHOD'] = 'GET';
+	}
+
+	public function test_maybe_delay_returns_html_unchanged_when_setting_is_off(): void {
+		$this->stubPassingGuardConditions();
+		$delayed_js = $this->delayedJsWithSetting( false );
+
+		$html = '<script id="other-js">doStuff();</script>';
+
+		self::assertSame( $html, $delayed_js->maybeDelayScriptTags( $html ) );
+	}
+
+	public function test_maybe_delay_returns_html_unchanged_on_admin(): void {
+		$this->stubPassingGuardConditions();
+		Functions\when( 'is_admin' )->justReturn( true );
+		$delayed_js = $this->delayedJsWithSetting( true );
+
+		$html = '<script id="other-js">doStuff();</script>';
+
+		self::assertSame( $html, $delayed_js->maybeDelayScriptTags( $html ) );
+	}
+
+	public function test_maybe_delay_returns_html_unchanged_when_logged_in(): void {
+		$this->stubPassingGuardConditions();
+		Functions\when( 'is_user_logged_in' )->justReturn( true );
+		$delayed_js = $this->delayedJsWithSetting( true );
+
+		$html = '<script id="other-js">doStuff();</script>';
+
+		self::assertSame( $html, $delayed_js->maybeDelayScriptTags( $html ) );
+	}
+
+	public function test_maybe_delay_returns_html_unchanged_on_feed(): void {
+		$this->stubPassingGuardConditions();
+		Functions\when( 'is_feed' )->justReturn( true );
+		$delayed_js = $this->delayedJsWithSetting( true );
+
+		$html = '<script id="other-js">doStuff();</script>';
+
+		self::assertSame( $html, $delayed_js->maybeDelayScriptTags( $html ) );
+	}
+
+	public function test_maybe_delay_returns_html_unchanged_on_preview(): void {
+		$this->stubPassingGuardConditions();
+		Functions\when( 'is_preview' )->justReturn( true );
+		$delayed_js = $this->delayedJsWithSetting( true );
+
+		$html = '<script id="other-js">doStuff();</script>';
+
+		self::assertSame( $html, $delayed_js->maybeDelayScriptTags( $html ) );
+	}
+
+	public function test_maybe_delay_returns_html_unchanged_on_404(): void {
+		$this->stubPassingGuardConditions();
+		Functions\when( 'is_404' )->justReturn( true );
+		$delayed_js = $this->delayedJsWithSetting( true );
+
+		$html = '<script id="other-js">doStuff();</script>';
+
+		self::assertSame( $html, $delayed_js->maybeDelayScriptTags( $html ) );
+	}
+
+	public function test_maybe_delay_returns_html_unchanged_on_non_get_request(): void {
+		$this->stubPassingGuardConditions();
+		$_SERVER['REQUEST_METHOD'] = 'POST';
+		$delayed_js                = $this->delayedJsWithSetting( true );
+
+		$html = '<script id="other-js">doStuff();</script>';
+
+		self::assertSame( $html, $delayed_js->maybeDelayScriptTags( $html ) );
+	}
+
+	public function test_maybe_delay_transforms_html_when_all_guards_pass(): void {
+		$this->stubPassingGuardConditions();
+		$delayed_js = $this->delayedJsWithSetting( true );
+
+		$html = '<script id="other-js">doStuff();</script>';
+
+		self::assertStringContainsString( 'type="pivotperformancetoolkit/delayed-js"', $delayed_js->maybeDelayScriptTags( $html ) );
+	}
+
+	/**
+	 * Priority 12 is semantically load-bearing, not arbitrary: it must run
+	 * after Combine (10)/AsyncCss (11) and before Assets (13) to preserve
+	 * the transform order the old nested ob_start() priorities produced —
+	 * see the comment on this registration in DelayedJs::register().
+	 */
+	public function test_registers_on_wp_template_enhancement_output_buffer_at_priority_12(): void {
+		$filter_calls = array();
+		Functions\when( 'add_filter' )->alias(
+			static function ( ...$args ) use ( &$filter_calls ): void {
+				$filter_calls[] = $args;
+			}
+		);
+		Functions\when( 'add_action' )->justReturn( null );
+
+		$this->delayed_js->register();
+
+		self::assertSame(
+			array( 'wp_template_enhancement_output_buffer', array( $this->delayed_js, 'maybeDelayScriptTags' ), 12 ),
+			$filter_calls[0]
+		);
 	}
 }

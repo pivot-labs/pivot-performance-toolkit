@@ -37,8 +37,15 @@ final class PageCache implements ModuleInterface {
 			$this->writeConfigFile();
 		}
 
-		// Cache writing – fires after headers are sent but before output is flushed.
-		add_action( 'template_redirect', array( $this, 'startBuffering' ), 1 );
+		// Cache writing — fires once the full page HTML is finalized, right
+		// before it's sent to the browser (core's docs describe this action
+		// as "complimentary to send_headers": headers may still be sent
+		// here). Registered as an action, not a filter, since this class
+		// only observes/stores the final output — it never needs to modify
+		// it — so it always sees whatever Combine/AsyncCss/DelayedJs/Assets
+		// (if active) already transformed, same as when this ran as the
+		// outermost of five nested ob_start() calls.
+		add_action( 'wp_finalized_template_enhancement_output_buffer', array( $this, 'maybeCacheOutput' ) );
 
 		// Invalidate cache when content changes.
 		add_action( 'save_post', array( $this, 'purgeAll' ) );
@@ -48,7 +55,7 @@ final class PageCache implements ModuleInterface {
 		add_action( 'update_option_' . $this->settings->optionKey(), array( $this, 'writeConfigFile' ) );
 	}
 
-	public function startBuffering(): void {
+	public function maybeCacheOutput( string $html ): void {
 		if ( ! $this->settings->getBool( 'enable_page_cache' ) ) {
 			$this->sendDebugHeaders( 'BYPASS', 'disabled' );
 			return;
@@ -83,27 +90,19 @@ final class PageCache implements ModuleInterface {
 			return;
 		}
 
+		if ( '' === $html ) {
+			return;
+		}
+
 		$cache_file = $this->cacheFilePath();
+		$written    = file_put_contents( $cache_file, $html, LOCK_EX );
 
-		ob_start(
-			function ( string $html ) use ( $cache_file ): string {
-				if ( '' === $html ) {
-					return $html;
-				}
-
-				// Attempt to write cache; fail gracefully
-					$written = file_put_contents( $cache_file, $html, LOCK_EX );
-
-				if ( false === $written ) {
-					$this->sendDebugHeaders( 'BYPASS', 'fs_write_failed' );
-					FilesystemCheck::invalidateCache();
-				} else {
-					$this->sendDebugHeaders( 'MISS' );
-				}
-
-				return $html;
-			}
-		);
+		if ( false === $written ) {
+			$this->sendDebugHeaders( 'BYPASS', 'fs_write_failed' );
+			FilesystemCheck::invalidateCache();
+		} else {
+			$this->sendDebugHeaders( 'MISS' );
+		}
 	}
 
 	public function purgeAll(): void {

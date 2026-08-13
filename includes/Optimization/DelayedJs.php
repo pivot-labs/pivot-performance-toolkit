@@ -58,7 +58,12 @@ final class DelayedJs implements ModuleInterface {
 
 	public function register(): void {
 		add_action( 'wp_head', array( $this, 'renderRuntimeScript' ), 1 );
-		add_action( 'template_redirect', array( $this, 'startOutputDelay' ), 12 );
+		// Priority 12: runs third among this plugin's four
+		// wp_template_enhancement_output_buffer callbacks, after Combine
+		// (10) and AsyncCss (11), before Assets/minify (13) — preserves the
+		// same relative transform order the old nested ob_start()
+		// priorities (14/13/12/11, closing innermost-first) produced.
+		add_filter( 'wp_template_enhancement_output_buffer', array( $this, 'maybeDelayScriptTags' ), 12 );
 	}
 
 	public function renderRuntimeScript(): void {
@@ -73,21 +78,21 @@ final class DelayedJs implements ModuleInterface {
 		// phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
-	public function startOutputDelay(): void {
+	public function maybeDelayScriptTags( string $html ): string {
 		if ( ! $this->settings->getBool( 'delay_js_execution' ) || is_admin() ) {
-			return;
+			return $html;
 		}
 
 		if ( is_user_logged_in() || is_feed() || is_preview() || is_404() ) {
-			return;
+			return $html;
 		}
 
 		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- used only in a strict === comparison against a hardcoded literal, never stored or output.
 		if ( ! isset( $_SERVER['REQUEST_METHOD'] ) || strtoupper( (string) wp_unslash( $_SERVER['REQUEST_METHOD'] ) ) !== 'GET' ) {
-			return;
+			return $html;
 		}
 
-		ob_start( array( $this, 'delayScriptTags' ) );
+		return $this->delayScriptTags( $html );
 	}
 
 	public function delayScriptTags( string $html ): string {

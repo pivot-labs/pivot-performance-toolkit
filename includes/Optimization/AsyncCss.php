@@ -25,24 +25,29 @@ final class AsyncCss implements ModuleInterface {
 	}
 
 	public function register(): void {
-		add_action( 'template_redirect', array( $this, 'startOutputAsync' ), 13 );
+		// Priority 11: runs second among this plugin's four
+		// wp_template_enhancement_output_buffer callbacks, after Combine
+		// (10) and before DelayedJs (12) and Assets/minify (13) — preserves
+		// the same relative transform order the old nested ob_start()
+		// priorities (13/14/12/11, closing innermost-first) produced.
+		add_filter( 'wp_template_enhancement_output_buffer', array( $this, 'maybeAsyncStylesheetTags' ), 11 );
 	}
 
-	public function startOutputAsync(): void {
+	public function maybeAsyncStylesheetTags( string $html ): string {
 		if ( ! $this->settings->getBool( 'async_css_loading' ) || is_admin() ) {
-			return;
+			return $html;
 		}
 
 		if ( is_user_logged_in() || is_feed() || is_preview() || is_404() ) {
-			return;
+			return $html;
 		}
 
 		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- used only in a strict === comparison against a hardcoded literal, never stored or output.
 		if ( ! isset( $_SERVER['REQUEST_METHOD'] ) || strtoupper( (string) wp_unslash( $_SERVER['REQUEST_METHOD'] ) ) !== 'GET' ) {
-			return;
+			return $html;
 		}
 
-		ob_start( array( $this, 'asyncStylesheetTags' ) );
+		return $this->asyncStylesheetTags( $html );
 	}
 
 	public function asyncStylesheetTags( string $html ): string {

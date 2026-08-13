@@ -52,54 +52,52 @@ final class Combine implements ModuleInterface {
 
 	public function register(): void {
 		// Priority 14 — after Assets' inline minify (11), DelayedJs (12), and
-		// AsyncCss (13). Output buffers nest in registration order and flush
-		// innermost-first, so this runs *first* among them, seeing the
+		// AsyncCss (11), DelayedJs (12), Assets/minify (13). Priority 10 —
+		// lowest of the four, so this runs *first* among them, seeing the
 		// original <link>/<script> tags before anything else rewrites the
 		// rel/type/src attributes this class depends on. Its own output
 		// (fewer, combined tags) then flows into AsyncCss/DelayedJs/minify
 		// as if they were the original tags — composing correctly with all
 		// three instead of running blind to what they've already changed.
-		add_action( 'template_redirect', array( $this, 'startOutputCombine' ), 14 );
+		// (Preserves the same relative order the old nested ob_start()
+		// priorities, 14/13/12/11 closing innermost-first, produced.)
+		add_filter( 'wp_template_enhancement_output_buffer', array( $this, 'maybeCombineTags' ), 10 );
 	}
 
-	public function startOutputCombine(): void {
+	public function maybeCombineTags( string $html ): string {
 		if ( is_admin() ) {
-			return;
+			return $html;
 		}
 
 		if ( is_user_logged_in() || is_feed() || is_preview() || is_404() ) {
-			return;
+			return $html;
 		}
 
 		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- used only in a strict === comparison against a hardcoded literal, never stored or output.
 		if ( ! isset( $_SERVER['REQUEST_METHOD'] ) || strtoupper( (string) wp_unslash( $_SERVER['REQUEST_METHOD'] ) ) !== 'GET' ) {
-			return;
+			return $html;
 		}
 
 		$combine_css = $this->settings->getBool( 'combine_css' );
 		$combine_js  = $this->settings->getBool( 'combine_js' );
 
 		if ( ! $combine_css && ! $combine_js ) {
-			return;
+			return $html;
 		}
 
-		ob_start(
-			function ( string $html ) use ( $combine_css, $combine_js ): string {
-				if ( '' === $html ) {
-					return $html;
-				}
+		if ( '' === $html ) {
+			return $html;
+		}
 
-				if ( $combine_css ) {
-					$html = $this->combineRuns( $html, '#(?:<link\b[^>]*>\s*)+#i', '#<link\b[^>]*>#i', array( $this, 'combineCssRun' ) );
-				}
+		if ( $combine_css ) {
+			$html = $this->combineRuns( $html, '#(?:<link\b[^>]*>\s*)+#i', '#<link\b[^>]*>#i', array( $this, 'combineCssRun' ) );
+		}
 
-				if ( $combine_js ) {
-					$html = $this->combineRuns( $html, '#(?:<script\b[^>]*>.*?</script>\s*)+#is', '#<script\b[^>]*>.*?</script>#is', array( $this, 'combineJsRun' ) );
-				}
+		if ( $combine_js ) {
+			$html = $this->combineRuns( $html, '#(?:<script\b[^>]*>.*?</script>\s*)+#is', '#<script\b[^>]*>.*?</script>#is', array( $this, 'combineJsRun' ) );
+		}
 
-				return $html;
-			}
-		);
+		return $html;
 	}
 
 	/**

@@ -35,6 +35,7 @@ final class CombineTest extends TestCase {
 		Functions\when( 'content_url' )->alias(
 			static fn( string $path = '' ): string => 'https://example.com/wp-content/' . ltrim( $path, '/' )
 		);
+		Functions\when( 'wp_unslash' )->returnArg();
 
 		$settings      = new Settings();
 		$this->combine = new Combine( $settings );
@@ -42,6 +43,7 @@ final class CombineTest extends TestCase {
 
 	protected function tearDown(): void {
 		$this->removeDir( WP_CONTENT_DIR );
+		unset( $_SERVER['REQUEST_METHOD'] );
 
 		parent::tearDown();
 	}
@@ -253,5 +255,149 @@ final class CombineTest extends TestCase {
 
 			self::assertStringContainsString( $case, $result, "Expected {$case} to be left untouched." );
 		}
+	}
+
+	// ── maybeCombineTags: the wp_template_enhancement_output_buffer guard
+	// logic that replaced the old template_redirect + ob_start() gate.
+
+	private function combineWithSettings( bool $combine_css, bool $combine_js ): Combine {
+		Functions\when( 'get_option' )->justReturn(
+			array(
+				'combine_css' => $combine_css,
+				'combine_js'  => $combine_js,
+			)
+		);
+
+		return new Combine( new Settings() );
+	}
+
+	private function stubPassingGuardConditions(): void {
+		Functions\when( 'is_admin' )->justReturn( false );
+		Functions\when( 'is_user_logged_in' )->justReturn( false );
+		Functions\when( 'is_feed' )->justReturn( false );
+		Functions\when( 'is_preview' )->justReturn( false );
+		Functions\when( 'is_404' )->justReturn( false );
+		$_SERVER['REQUEST_METHOD'] = 'GET';
+	}
+
+	public function test_maybe_combine_returns_html_unchanged_when_both_settings_off(): void {
+		$this->stubPassingGuardConditions();
+		$combine = $this->combineWithSettings( false, false );
+
+		$html = "<link rel='stylesheet' href='/a.css'>\n<link rel='stylesheet' href='/b.css'>";
+
+		self::assertSame( $html, $combine->maybeCombineTags( $html ) );
+	}
+
+	public function test_maybe_combine_returns_html_unchanged_on_admin(): void {
+		$this->stubPassingGuardConditions();
+		Functions\when( 'is_admin' )->justReturn( true );
+		$combine = $this->combineWithSettings( true, true );
+
+		$html = "<link rel='stylesheet' href='/a.css'>\n<link rel='stylesheet' href='/b.css'>";
+
+		self::assertSame( $html, $combine->maybeCombineTags( $html ) );
+	}
+
+	public function test_maybe_combine_returns_html_unchanged_when_logged_in(): void {
+		$this->stubPassingGuardConditions();
+		Functions\when( 'is_user_logged_in' )->justReturn( true );
+		$combine = $this->combineWithSettings( true, true );
+
+		$html = "<link rel='stylesheet' href='/a.css'>\n<link rel='stylesheet' href='/b.css'>";
+
+		self::assertSame( $html, $combine->maybeCombineTags( $html ) );
+	}
+
+	public function test_maybe_combine_returns_html_unchanged_on_feed(): void {
+		$this->stubPassingGuardConditions();
+		Functions\when( 'is_feed' )->justReturn( true );
+		$combine = $this->combineWithSettings( true, true );
+
+		$html = "<link rel='stylesheet' href='/a.css'>\n<link rel='stylesheet' href='/b.css'>";
+
+		self::assertSame( $html, $combine->maybeCombineTags( $html ) );
+	}
+
+	public function test_maybe_combine_returns_html_unchanged_on_preview(): void {
+		$this->stubPassingGuardConditions();
+		Functions\when( 'is_preview' )->justReturn( true );
+		$combine = $this->combineWithSettings( true, true );
+
+		$html = "<link rel='stylesheet' href='/a.css'>\n<link rel='stylesheet' href='/b.css'>";
+
+		self::assertSame( $html, $combine->maybeCombineTags( $html ) );
+	}
+
+	public function test_maybe_combine_returns_html_unchanged_on_404(): void {
+		$this->stubPassingGuardConditions();
+		Functions\when( 'is_404' )->justReturn( true );
+		$combine = $this->combineWithSettings( true, true );
+
+		$html = "<link rel='stylesheet' href='/a.css'>\n<link rel='stylesheet' href='/b.css'>";
+
+		self::assertSame( $html, $combine->maybeCombineTags( $html ) );
+	}
+
+	public function test_maybe_combine_returns_html_unchanged_on_non_get_request(): void {
+		$this->stubPassingGuardConditions();
+		$_SERVER['REQUEST_METHOD'] = 'POST';
+		$combine                   = $this->combineWithSettings( true, true );
+
+		$html = "<link rel='stylesheet' href='/a.css'>\n<link rel='stylesheet' href='/b.css'>";
+
+		self::assertSame( $html, $combine->maybeCombineTags( $html ) );
+	}
+
+	public function test_maybe_combine_returns_html_unchanged_on_empty_string(): void {
+		$this->stubPassingGuardConditions();
+		$combine = $this->combineWithSettings( true, true );
+
+		self::assertSame( '', $combine->maybeCombineTags( '' ) );
+	}
+
+	/**
+	 * Full end-to-end positive path through the public entry point (not
+	 * just the private combineCssRun() other tests in this file exercise
+	 * via reflection): with all guards passing and combine_css on, two
+	 * real, adjacent, eligible stylesheets (the same fixtures
+	 * test_two_adjacent_local_stylesheets_combine_into_one_bundle() uses)
+	 * actually combine into one written bundle file.
+	 */
+	public function test_maybe_combine_transforms_real_stylesheets_when_all_guards_pass(): void {
+		$this->stubPassingGuardConditions();
+		$combine = $this->combineWithSettings( true, false );
+
+		$html = '<link rel="stylesheet" href="https://example.com/fixtures/css/a.css">'
+			. '<link rel="stylesheet" href="https://example.com/fixtures/css/b.css">';
+
+		$result = $combine->maybeCombineTags( $html );
+
+		self::assertMatchesRegularExpression(
+			'#^<link rel="stylesheet" href="https://example\.com/wp-content/cache/pivot-performance-toolkit/combined-assets/[a-f0-9]{32}\.css">$#',
+			$result
+		);
+	}
+
+	/**
+	 * Priority 10 is semantically load-bearing, not arbitrary: it's the
+	 * lowest of this plugin's four wp_template_enhancement_output_buffer
+	 * priorities, so Combine always runs first — see the comment on this
+	 * registration in Combine::register() for why that ordering matters.
+	 */
+	public function test_registers_on_wp_template_enhancement_output_buffer_at_priority_10(): void {
+		$calls = array();
+		Functions\when( 'add_filter' )->alias(
+			static function ( ...$args ) use ( &$calls ): void {
+				$calls[] = $args;
+			}
+		);
+
+		$this->combine->register();
+
+		self::assertSame(
+			array( 'wp_template_enhancement_output_buffer', array( $this->combine, 'maybeCombineTags' ), 10 ),
+			$calls[0]
+		);
 	}
 }

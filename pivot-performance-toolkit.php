@@ -4,7 +4,7 @@
  * Plugin URI: https://www.pivotlabs.dev/
  * Description: Performance optimization toolkit for WordPress.
  * Version: 1.1.1-dev
- * Requires at least: 6.5
+ * Requires at least: 6.9
  * Requires PHP: 8.2
  * Author: Pivot Labs
  * Author URI: https://www.pivotlabs.dev

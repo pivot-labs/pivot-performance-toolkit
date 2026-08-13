@@ -39,7 +39,12 @@ final class Assets implements ModuleInterface {
 		add_filter( 'script_loader_tag', array( $this, 'minifyScriptTag' ), 9, 3 );
 		add_filter( 'script_loader_tag', array( $this, 'addDeferAttribute' ), 10, 3 );
 		add_filter( 'style_loader_tag', array( $this, 'minifyStylesheetTag' ), 10, 4 );
-		add_action( 'template_redirect', array( $this, 'startOutputMinification' ), 11 );
+		// Priority 13: runs last among this plugin's four
+		// wp_template_enhancement_output_buffer callbacks, after Combine
+		// (10), AsyncCss (11), and DelayedJs (12) — preserves the same
+		// relative transform order the old nested ob_start() priorities
+		// (14/13/12/11, closing innermost-first) produced.
+		add_filter( 'wp_template_enhancement_output_buffer', array( $this, 'maybeMinifyOutput' ), 13 );
 	}
 
 	public function addDeferAttribute( string $tag, string $handle, string $src ): string {
@@ -129,14 +134,14 @@ final class Assets implements ModuleInterface {
 		return str_replace( $href, $minified_url, $html );
 	}
 
-	public function startOutputMinification(): void {
+	public function maybeMinifyOutput( string $html ): string {
 		if ( is_admin() || is_user_logged_in() || is_feed() || is_preview() || is_404() ) {
-			return;
+			return $html;
 		}
 
 		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- used only in a strict === comparison against a hardcoded literal, never stored or output.
 		if ( ! isset( $_SERVER['REQUEST_METHOD'] ) || strtoupper( (string) wp_unslash( $_SERVER['REQUEST_METHOD'] ) ) !== 'GET' ) {
-			return;
+			return $html;
 		}
 
 		$minify_html = $this->settings->getBool( 'minify_html' );
@@ -144,46 +149,42 @@ final class Assets implements ModuleInterface {
 		$minify_js   = $this->settings->getBool( 'minify_js' );
 
 		if ( ! $minify_html && ! $minify_css && ! $minify_js ) {
-			return;
+			return $html;
 		}
 
-		ob_start(
-			function ( string $html ) use ( $minify_html, $minify_css, $minify_js ): string {
-				if ( '' === $html ) {
-					return $html;
-				}
+		if ( '' === $html ) {
+			return $html;
+		}
 
-				if ( $minify_css ) {
-					$html = preg_replace_callback(
-						'#<style\b([^>]*)>(.*?)</style>#is',
-						static function ( array $matches ): string {
-							return '<style' . $matches[1] . '>' . self::minifyCss( $matches[2] ) . '</style>';
-						},
-						$html
-					) ?? $html;
-				}
+		if ( $minify_css ) {
+			$html = preg_replace_callback(
+				'#<style\b([^>]*)>(.*?)</style>#is',
+				static function ( array $matches ): string {
+					return '<style' . $matches[1] . '>' . self::minifyCss( $matches[2] ) . '</style>';
+				},
+				$html
+			) ?? $html;
+		}
 
-				if ( $minify_js ) {
-					$html = preg_replace_callback(
-						'#<script\b([^>]*)>(.*?)</script>#is',
-						static function ( array $matches ): string {
-							if ( '' === trim( $matches[2] ) ) {
-								return $matches[0];
-							}
+		if ( $minify_js ) {
+			$html = preg_replace_callback(
+				'#<script\b([^>]*)>(.*?)</script>#is',
+				static function ( array $matches ): string {
+					if ( '' === trim( $matches[2] ) ) {
+						return $matches[0];
+					}
 
-							return '<script' . $matches[1] . '>' . self::minifyJs( $matches[2] ) . '</script>';
-						},
-						$html
-					) ?? $html;
-				}
+					return '<script' . $matches[1] . '>' . self::minifyJs( $matches[2] ) . '</script>';
+				},
+				$html
+			) ?? $html;
+		}
 
-				if ( $minify_html ) {
-					$html = self::minifyHtml( $html );
-				}
+		if ( $minify_html ) {
+			$html = self::minifyHtml( $html );
+		}
 
-				return $html;
-			}
-		);
+		return $html;
 	}
 
 	private static function minifyHtml( string $html ): string {

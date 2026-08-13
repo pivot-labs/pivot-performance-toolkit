@@ -25,10 +25,12 @@ final class AssetsTest extends TestCase {
 			static fn( $args, $defaults = array() ): array => array_merge( $defaults, (array) $args )
 		);
 		Functions\when( 'is_admin' )->justReturn( false );
+		Functions\when( 'wp_unslash' )->returnArg();
 	}
 
 	protected function tearDown(): void {
 		$this->removeDir( WP_CONTENT_DIR );
+		unset( $_SERVER['REQUEST_METHOD'] );
 
 		parent::tearDown();
 	}
@@ -266,5 +268,130 @@ final class AssetsTest extends TestCase {
 		self::assertStringNotContainsString( 'a standalone comment', $minified_content );
 		self::assertStringContainsString( 'var x = 1;', $minified_content );
 		self::assertStringContainsString( 'var y = 2;', $minified_content );
+	}
+
+	// ── maybeMinifyOutput: the wp_template_enhancement_output_buffer guard
+	// logic that replaced the old template_redirect + ob_start() gate.
+
+	private function stubPassingGuardConditions(): void {
+		Functions\when( 'is_admin' )->justReturn( false );
+		Functions\when( 'is_user_logged_in' )->justReturn( false );
+		Functions\when( 'is_feed' )->justReturn( false );
+		Functions\when( 'is_preview' )->justReturn( false );
+		Functions\when( 'is_404' )->justReturn( false );
+		$_SERVER['REQUEST_METHOD'] = 'GET';
+	}
+
+	public function test_maybe_minify_returns_html_unchanged_when_all_minify_settings_off(): void {
+		$this->stubPassingGuardConditions();
+		$assets = $this->assetsWithSettings(
+			array(
+				'minify_html' => false,
+				'minify_css'  => false,
+				'minify_js'   => false,
+			)
+		);
+
+		$html = '<!-- a comment --><style>.a{color:red}</style>';
+
+		self::assertSame( $html, $assets->maybeMinifyOutput( $html ) );
+	}
+
+	public function test_maybe_minify_returns_html_unchanged_on_admin(): void {
+		$this->stubPassingGuardConditions();
+		Functions\when( 'is_admin' )->justReturn( true );
+		$assets = $this->assetsWithSettings( array( 'minify_html' => true ) );
+
+		$html = '<!-- a comment -->';
+
+		self::assertSame( $html, $assets->maybeMinifyOutput( $html ) );
+	}
+
+	public function test_maybe_minify_returns_html_unchanged_when_logged_in(): void {
+		$this->stubPassingGuardConditions();
+		Functions\when( 'is_user_logged_in' )->justReturn( true );
+		$assets = $this->assetsWithSettings( array( 'minify_html' => true ) );
+
+		$html = '<!-- a comment -->';
+
+		self::assertSame( $html, $assets->maybeMinifyOutput( $html ) );
+	}
+
+	public function test_maybe_minify_returns_html_unchanged_on_feed(): void {
+		$this->stubPassingGuardConditions();
+		Functions\when( 'is_feed' )->justReturn( true );
+		$assets = $this->assetsWithSettings( array( 'minify_html' => true ) );
+
+		$html = '<!-- a comment -->';
+
+		self::assertSame( $html, $assets->maybeMinifyOutput( $html ) );
+	}
+
+	public function test_maybe_minify_returns_html_unchanged_on_preview(): void {
+		$this->stubPassingGuardConditions();
+		Functions\when( 'is_preview' )->justReturn( true );
+		$assets = $this->assetsWithSettings( array( 'minify_html' => true ) );
+
+		$html = '<!-- a comment -->';
+
+		self::assertSame( $html, $assets->maybeMinifyOutput( $html ) );
+	}
+
+	public function test_maybe_minify_returns_html_unchanged_on_404(): void {
+		$this->stubPassingGuardConditions();
+		Functions\when( 'is_404' )->justReturn( true );
+		$assets = $this->assetsWithSettings( array( 'minify_html' => true ) );
+
+		$html = '<!-- a comment -->';
+
+		self::assertSame( $html, $assets->maybeMinifyOutput( $html ) );
+	}
+
+	public function test_maybe_minify_returns_html_unchanged_on_non_get_request(): void {
+		$this->stubPassingGuardConditions();
+		$_SERVER['REQUEST_METHOD'] = 'POST';
+		$assets                    = $this->assetsWithSettings( array( 'minify_html' => true ) );
+
+		$html = '<!-- a comment -->';
+
+		self::assertSame( $html, $assets->maybeMinifyOutput( $html ) );
+	}
+
+	public function test_maybe_minify_transforms_html_when_all_guards_pass(): void {
+		$this->stubPassingGuardConditions();
+		$assets = $this->assetsWithSettings( array( 'minify_html' => true ) );
+
+		$html = "<div>a</div>\n<!-- a comment -->\n<div>b</div>";
+
+		self::assertStringNotContainsString( '<!--', $assets->maybeMinifyOutput( $html ) );
+	}
+
+	/**
+	 * Priority 13 is semantically load-bearing, not arbitrary: it's the
+	 * highest of this plugin's four wp_template_enhancement_output_buffer
+	 * priorities, so Assets/minify always runs last — see the comment on
+	 * this registration in Assets::register().
+	 */
+	public function test_registers_on_wp_template_enhancement_output_buffer_at_priority_13(): void {
+		$assets = $this->assetsWithSettings( array() );
+
+		$calls = array();
+		Functions\when( 'add_filter' )->alias(
+			static function ( ...$args ) use ( &$calls ): void {
+				$calls[] = $args;
+			}
+		);
+
+		$assets->register();
+
+		$buffer_calls = array_values(
+			array_filter( $calls, static fn( array $call ): bool => 'wp_template_enhancement_output_buffer' === $call[0] )
+		);
+
+		self::assertCount( 1, $buffer_calls );
+		self::assertSame(
+			array( 'wp_template_enhancement_output_buffer', array( $assets, 'maybeMinifyOutput' ), 13 ),
+			$buffer_calls[0]
+		);
 	}
 }

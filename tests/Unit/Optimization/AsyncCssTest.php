@@ -27,6 +27,7 @@ final class AsyncCssTest extends TestCase {
 		Functions\when( 'wp_parse_args' )->alias(
 			static fn( $args, $defaults = array() ): array => array_merge( $defaults, (array) $args )
 		);
+		Functions\when( 'wp_unslash' )->returnArg();
 
 		$this->async_css = new AsyncCss( new Settings() );
 	}
@@ -117,5 +118,134 @@ final class AsyncCssTest extends TestCase {
 		self::assertStringContainsString( 'rel="preload"', $result );
 		self::assertStringContainsString( "rel='preconnect'", $result );
 		self::assertStringContainsString( "rel='stylesheet' href='/b.css' media='print'", $result );
+	}
+
+	// ── maybeAsyncStylesheetTags: the wp_template_enhancement_output_buffer
+	// guard logic that replaced the old template_redirect + ob_start() gate.
+
+	private function asyncCssWithSetting( bool $enabled ): AsyncCss {
+		Functions\when( 'get_option' )->justReturn( array( 'async_css_loading' => $enabled ) );
+
+		return new AsyncCss( new Settings() );
+	}
+
+	/**
+	 * Stubs every guard condition to "pass" (feature on, front-end,
+	 * logged-out, GET) so a single guard can be flipped per test to prove
+	 * it alone is sufficient to suppress the transform.
+	 */
+	private function stubPassingGuardConditions(): void {
+		Functions\when( 'is_admin' )->justReturn( false );
+		Functions\when( 'is_user_logged_in' )->justReturn( false );
+		Functions\when( 'is_feed' )->justReturn( false );
+		Functions\when( 'is_preview' )->justReturn( false );
+		Functions\when( 'is_404' )->justReturn( false );
+		$_SERVER['REQUEST_METHOD'] = 'GET';
+	}
+
+	protected function tearDown(): void {
+		unset( $_SERVER['REQUEST_METHOD'] );
+
+		parent::tearDown();
+	}
+
+	public function test_maybe_async_returns_html_unchanged_when_setting_is_off(): void {
+		$this->stubPassingGuardConditions();
+		$async_css = $this->asyncCssWithSetting( false );
+
+		$html = "<link rel='stylesheet' href='/a.css'>";
+
+		self::assertSame( $html, $async_css->maybeAsyncStylesheetTags( $html ) );
+	}
+
+	public function test_maybe_async_returns_html_unchanged_on_admin(): void {
+		$this->stubPassingGuardConditions();
+		Functions\when( 'is_admin' )->justReturn( true );
+		$async_css = $this->asyncCssWithSetting( true );
+
+		$html = "<link rel='stylesheet' href='/a.css'>";
+
+		self::assertSame( $html, $async_css->maybeAsyncStylesheetTags( $html ) );
+	}
+
+	public function test_maybe_async_returns_html_unchanged_when_logged_in(): void {
+		$this->stubPassingGuardConditions();
+		Functions\when( 'is_user_logged_in' )->justReturn( true );
+		$async_css = $this->asyncCssWithSetting( true );
+
+		$html = "<link rel='stylesheet' href='/a.css'>";
+
+		self::assertSame( $html, $async_css->maybeAsyncStylesheetTags( $html ) );
+	}
+
+	public function test_maybe_async_returns_html_unchanged_on_feed(): void {
+		$this->stubPassingGuardConditions();
+		Functions\when( 'is_feed' )->justReturn( true );
+		$async_css = $this->asyncCssWithSetting( true );
+
+		$html = "<link rel='stylesheet' href='/a.css'>";
+
+		self::assertSame( $html, $async_css->maybeAsyncStylesheetTags( $html ) );
+	}
+
+	public function test_maybe_async_returns_html_unchanged_on_preview(): void {
+		$this->stubPassingGuardConditions();
+		Functions\when( 'is_preview' )->justReturn( true );
+		$async_css = $this->asyncCssWithSetting( true );
+
+		$html = "<link rel='stylesheet' href='/a.css'>";
+
+		self::assertSame( $html, $async_css->maybeAsyncStylesheetTags( $html ) );
+	}
+
+	public function test_maybe_async_returns_html_unchanged_on_404(): void {
+		$this->stubPassingGuardConditions();
+		Functions\when( 'is_404' )->justReturn( true );
+		$async_css = $this->asyncCssWithSetting( true );
+
+		$html = "<link rel='stylesheet' href='/a.css'>";
+
+		self::assertSame( $html, $async_css->maybeAsyncStylesheetTags( $html ) );
+	}
+
+	public function test_maybe_async_returns_html_unchanged_on_non_get_request(): void {
+		$this->stubPassingGuardConditions();
+		$_SERVER['REQUEST_METHOD'] = 'POST';
+		$async_css                 = $this->asyncCssWithSetting( true );
+
+		$html = "<link rel='stylesheet' href='/a.css'>";
+
+		self::assertSame( $html, $async_css->maybeAsyncStylesheetTags( $html ) );
+	}
+
+	public function test_maybe_async_transforms_html_when_all_guards_pass(): void {
+		$this->stubPassingGuardConditions();
+		$async_css = $this->asyncCssWithSetting( true );
+
+		$html = "<link rel='stylesheet' href='/a.css'>";
+
+		self::assertStringContainsString( 'rel="preload"', $async_css->maybeAsyncStylesheetTags( $html ) );
+	}
+
+	/**
+	 * Priority 11 is semantically load-bearing, not arbitrary: it must run
+	 * after Combine (10) and before DelayedJs (12)/Assets (13) to preserve
+	 * the transform order the old nested ob_start() priorities produced —
+	 * see the comment on this registration in AsyncCss::register().
+	 */
+	public function test_registers_on_wp_template_enhancement_output_buffer_at_priority_11(): void {
+		$calls = array();
+		Functions\when( 'add_filter' )->alias(
+			static function ( ...$args ) use ( &$calls ): void {
+				$calls[] = $args;
+			}
+		);
+
+		$this->async_css->register();
+
+		self::assertSame(
+			array( 'wp_template_enhancement_output_buffer', array( $this->async_css, 'maybeAsyncStylesheetTags' ), 11 ),
+			$calls[0]
+		);
 	}
 }
