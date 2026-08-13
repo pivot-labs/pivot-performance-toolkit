@@ -133,6 +133,13 @@ This regenerates the `dist/` directory from the source files in `src/css/` and `
 
 == Changelog ==
 
+= 1.1.1 =
+
+* Security: Hardening pass covering input sanitization, output escaping, nonce/permission checks, and file-access guards across the plugin, following a WordPress.org review.
+* Change: Minimum WordPress version raised to 6.9, so page-output processing (async CSS, delayed JS, combine, minify, page cache) uses core's own output-buffer API instead of a plugin-managed one.
+* Change: Several inline admin scripts moved to the standard WordPress script-enqueue system.
+* Fix: Contributors and External Services info corrected in this readme.
+
 = 1.0.1 =
 
 * Fix: page caching could silently never serve cached pages on some installs. The cache would fill up normally, but the drop-in responsible for serving a fast cache hit had no configuration to read until the Cache settings page was saved once — so every request kept regenerating the cache instead of serving it. New installs are unaffected on activation, and existing installs self-correct automatically on the next page load.
@@ -142,6 +149,10 @@ This regenerates the `dist/` directory from the source files in `src/css/` and `
 * Initial public release.
 
 == Upgrade Notice ==
+
+= 1.1.1 =
+
+Now requires WordPress 6.9 or later. Security hardening release — recommended update.
 
 = 1.0.1 =
 
