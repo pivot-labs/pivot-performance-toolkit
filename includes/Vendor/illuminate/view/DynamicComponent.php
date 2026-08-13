@@ -52,14 +52,12 @@ class DynamicComponent extends Component
      */
     public function render()
     {
-        $template = <<<'EOF'
-<?php extract((new \PivotPerformanceToolkit\Vendor\Illuminate\Support\Collection($attributes->getAttributes()))->mapWithKeys(function ($value, $key) { return [PivotPerformanceToolkit\Vendor\Illuminate\Support\Str::camel(str_replace([':', '.'], ' ', $key)) => $value]; })->all(), EXTR_SKIP); ?>
+        $template = '<?php extract((new \\PivotPerformanceToolkit\\Vendor\\Illuminate\\Support\\Collection($attributes->getAttributes()))->mapWithKeys(function ($value, $key) { return [PivotPerformanceToolkit\\Vendor\\Illuminate\\Support\\Str::camel(str_replace([\':\', \'.\'], \' \', $key)) => $value]; })->all(), EXTR_SKIP); ?>
 {{ props }}
 <x-{{ component }} {{ bindings }} {{ attributes }}>
 {{ slots }}
 {{ defaultSlot }}
-</x-{{ component }}>
-EOF;
+</x-{{ component }}>';
 
         return function ($data) use ($template) {
             $bindings = $this->bindings($class = $this->classForComponent());

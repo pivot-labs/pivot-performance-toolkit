@@ -65,23 +65,21 @@ trait TranslatorTrait
             $parts = $matches[0];
         }
 
-        $intervalRegexp = <<<'EOF'
-            /^(?P<interval>
-                ({\s*
-                    (\-?\d+(\.\d+)?[\s*,\s*\-?\d+(\.\d+)?]*)
-                \s*})
+        $intervalRegexp = '/^(?P<interval>
+    ({\\s*
+        (\\-?\\d+(\\.\\d+)?[\\s*,\\s*\\-?\\d+(\\.\\d+)?]*)
+    \\s*})
 
-                    |
+        |
 
-                (?P<left_delimiter>[\[\]])
-                    \s*
-                    (?P<left>-Inf|\-?\d+(\.\d+)?)
-                    \s*,\s*
-                    (?P<right>\+?Inf|\-?\d+(\.\d+)?)
-                    \s*
-                (?P<right_delimiter>[\[\]])
-            )\s*(?P<message>.*?)$/xs
-            EOF;
+    (?P<left_delimiter>[\\[\\]])
+        \\s*
+        (?P<left>-Inf|\\-?\\d+(\\.\\d+)?)
+        \\s*,\\s*
+        (?P<right>\\+?Inf|\\-?\\d+(\\.\\d+)?)
+        \\s*
+    (?P<right_delimiter>[\\[\\]])
+)\\s*(?P<message>.*?)$/xs';
 
         $standardRules = [];
         foreach ($parts as $part) {
