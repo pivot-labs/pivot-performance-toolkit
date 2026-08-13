@@ -5,124 +5,124 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 <x-card :title="__('Optimization Exclusions', 'pivot-performance-toolkit')" id="pivot-performance-toolkit-file-optimization-exclusions">
 
-    @php
-        $exclusionsOpen = !empty(trim((string) $options['minify_external_css_exclusions']))
-                       || !empty(trim((string) $options['minify_external_js_exclusions']))
-                       || !empty(trim((string) $options['delay_js_exclusions']))
-                       || !empty(trim((string) $options['async_css_exclusions']));
-    @endphp
+	@php
+		$exclusionsOpen = !empty(trim((string) $options['minify_external_css_exclusions']))
+						|| !empty(trim((string) $options['minify_external_js_exclusions']))
+						|| !empty(trim((string) $options['delay_js_exclusions']))
+						|| !empty(trim((string) $options['async_css_exclusions']));
+	@endphp
 
-     <div class="pivot-performance-toolkit-http11-warning">
-         <strong>{{ __('Warning:', 'pivot-performance-toolkit') }}</strong>
-         <span>{{ __('Minification, async CSS, and delay-execution exclusions can break dependency order, plugin-specific assets, conditional loading logic, and above-the-fold styling. Use only after testing key pages — especially for scripts that must run before user interaction (consent banners, payment forms) or stylesheets needed for first paint.', 'pivot-performance-toolkit') }}</span>
-     </div>
+	<div class="pivot-performance-toolkit-http11-warning">
+		<strong>{{ __('Warning:', 'pivot-performance-toolkit') }}</strong>
+		<span>{{ __('Minification, async CSS, and delay-execution exclusions can break dependency order, plugin-specific assets, conditional loading logic, and above-the-fold styling. Use only after testing key pages — especially for scripts that must run before user interaction (consent banners, payment forms) or stylesheets needed for first paint.', 'pivot-performance-toolkit') }}</span>
+	</div>
 
-    <button
-        type="button"
-        class="pivot-performance-toolkit-exclusions-trigger pivot-performance-toolkit-collapse-trigger"
-        aria-expanded="{{ $exclusionsOpen ? 'true' : 'false' }}"
-        aria-controls="pivot-performance-toolkit-exclusions-content"
-    >
-        {{ __('Exclusion Rules', 'pivot-performance-toolkit') }}
-    </button>
+	<button
+		type="button"
+		class="pivot-performance-toolkit-exclusions-trigger pivot-performance-toolkit-collapse-trigger"
+		aria-expanded="{{ $exclusionsOpen ? 'true' : 'false' }}"
+		aria-controls="pivot-performance-toolkit-exclusions-content"
+	>
+		{{ __('Exclusion Rules', 'pivot-performance-toolkit') }}
+	</button>
 
-    <div id="pivot-performance-toolkit-exclusions-content" class="pivot-performance-toolkit-card-content pivot-performance-toolkit-collapsible-section" aria-hidden="{{ $exclusionsOpen ? 'false' : 'true' }}">
+	<div id="pivot-performance-toolkit-exclusions-content" class="pivot-performance-toolkit-card-content pivot-performance-toolkit-collapsible-section" aria-hidden="{{ $exclusionsOpen ? 'false' : 'true' }}">
 
-        <form method="post" action="{{ esc_url(admin_url('options.php')) }}">
-            @php
-                settings_fields('pivot_performance_toolkit');
-            @endphp
+		<form method="post" action="{{ esc_url(admin_url('options.php')) }}">
+			@php
+				settings_fields('pivot_performance_toolkit');
+			@endphp
 
-            <div class="pivot-performance-toolkit-field">
-                <label for="pivot-performance-toolkit-external-css-exclusions" style="display:block;font-weight:600;">
-                    {{ __('External CSS exclusions', 'pivot-performance-toolkit') }}
-                </label>
-                <p>{{ __('Prevent specific stylesheets from being minified by external CSS minification.', 'pivot-performance-toolkit') }}</p>
-                <textarea
-                    id="pivot-performance-toolkit-external-css-exclusions"
-                    name="{{ $option_key }}[minify_external_css_exclusions]"
-                    class="pivot-performance-toolkit-exclusions-textarea"
-                    rows="6"
-                    placeholder="{{ esc_attr("woocommerce-layout\nstyle.css\n/wp-content/themes/your-theme/css/*") }}"
-                    spellcheck="false"
-                >{{ esc_textarea((string) $options['minify_external_css_exclusions']) }}</textarea>
-                <p class="pivot-performance-toolkit-exclusions-hint">
-                    {!! wp_kses(
-                        __('<strong>One rule per line.</strong> You can exclude by stylesheet handle, file name, full path, or wildcard pattern. Examples: <code>woocommerce-layout</code>, <code>style.css</code>, <code>/wp-content/themes/your-theme/css/*</code>.', 'pivot-performance-toolkit'),
-                        array('strong' => array(), 'code' => array())
-                    ) !!}
-                </p>
-            </div>
+			<div class="pivot-performance-toolkit-field">
+				<label for="pivot-performance-toolkit-external-css-exclusions" style="display:block;font-weight:600;">
+					{{ __('External CSS exclusions', 'pivot-performance-toolkit') }}
+				</label>
+				<p>{{ __('Prevent specific stylesheets from being minified by external CSS minification.', 'pivot-performance-toolkit') }}</p>
+				<textarea
+					id="pivot-performance-toolkit-external-css-exclusions"
+					name="{{ $option_key }}[minify_external_css_exclusions]"
+					class="pivot-performance-toolkit-exclusions-textarea"
+					rows="6"
+					placeholder="{{ esc_attr("woocommerce-layout\nstyle.css\n/wp-content/themes/your-theme/css/*") }}"
+					spellcheck="false"
+				>{{ esc_textarea((string) $options['minify_external_css_exclusions']) }}</textarea>
+				<p class="pivot-performance-toolkit-exclusions-hint">
+					{!! wp_kses(
+						__('<strong>One rule per line.</strong> You can exclude by stylesheet handle, file name, full path, or wildcard pattern. Examples: <code>woocommerce-layout</code>, <code>style.css</code>, <code>/wp-content/themes/your-theme/css/*</code>.', 'pivot-performance-toolkit'),
+						array('strong' => array(), 'code' => array())
+					) !!}
+				</p>
+			</div>
 
-            <div class="pivot-performance-toolkit-field">
-                <label for="pivot-performance-toolkit-external-js-exclusions" style="display:block;font-weight:600;">
-                    {{ __('External JavaScript exclusions', 'pivot-performance-toolkit') }}
-                </label>
-                <p>{{ __('Prevent specific scripts from being minified by external JavaScript minification.', 'pivot-performance-toolkit') }}</p>
-                <textarea
-                    id="pivot-performance-toolkit-external-js-exclusions"
-                    name="{{ $option_key }}[minify_external_js_exclusions]"
-                    class="pivot-performance-toolkit-exclusions-textarea"
-                    rows="6"
-                    placeholder="{{ esc_attr("jquery-core\napp.js\n/wp-content/themes/your-theme/js/*") }}"
-                    spellcheck="false"
-                >{{ esc_textarea((string) $options['minify_external_js_exclusions']) }}</textarea>
-                <p class="pivot-performance-toolkit-exclusions-hint">
-                    {!! wp_kses(
-                        __('<strong>One rule per line.</strong> You can exclude by script handle, file name, full path, or wildcard pattern. Examples: <code>jquery-core</code>, <code>app.js</code>, <code>/wp-content/themes/your-theme/js/*</code>.', 'pivot-performance-toolkit'),
-                        array('strong' => array(), 'code' => array())
-                    ) !!}
-                </p>
-            </div>
+			<div class="pivot-performance-toolkit-field">
+				<label for="pivot-performance-toolkit-external-js-exclusions" style="display:block;font-weight:600;">
+					{{ __('External JavaScript exclusions', 'pivot-performance-toolkit') }}
+				</label>
+				<p>{{ __('Prevent specific scripts from being minified by external JavaScript minification.', 'pivot-performance-toolkit') }}</p>
+				<textarea
+					id="pivot-performance-toolkit-external-js-exclusions"
+					name="{{ $option_key }}[minify_external_js_exclusions]"
+					class="pivot-performance-toolkit-exclusions-textarea"
+					rows="6"
+					placeholder="{{ esc_attr("jquery-core\napp.js\n/wp-content/themes/your-theme/js/*") }}"
+					spellcheck="false"
+				>{{ esc_textarea((string) $options['minify_external_js_exclusions']) }}</textarea>
+				<p class="pivot-performance-toolkit-exclusions-hint">
+					{!! wp_kses(
+						__('<strong>One rule per line.</strong> You can exclude by script handle, file name, full path, or wildcard pattern. Examples: <code>jquery-core</code>, <code>app.js</code>, <code>/wp-content/themes/your-theme/js/*</code>.', 'pivot-performance-toolkit'),
+						array('strong' => array(), 'code' => array())
+					) !!}
+				</p>
+			</div>
 
-            <div class="pivot-performance-toolkit-field">
-                <label for="pivot-performance-toolkit-async-css-exclusions" style="display:block;font-weight:600;">
-                    {{ __('Async CSS loading exclusions', 'pivot-performance-toolkit') }}
-                </label>
-                <p>{{ __('Prevent specific stylesheets from being loaded asynchronously. Use for critical above-the-fold styles that must apply before first paint.', 'pivot-performance-toolkit') }}</p>
-                <textarea
-                    id="pivot-performance-toolkit-async-css-exclusions"
-                    name="{{ $option_key }}[async_css_exclusions]"
-                    class="pivot-performance-toolkit-exclusions-textarea"
-                    rows="6"
-                    placeholder="{{ esc_attr("astra-theme-css\nstyle.css\n/wp-content/themes/your-theme/css/*") }}"
-                    spellcheck="false"
-                >{{ esc_textarea((string) $options['async_css_exclusions']) }}</textarea>
-                <p class="pivot-performance-toolkit-exclusions-hint">
-                    {!! wp_kses(
-                        __('<strong>One rule per line.</strong> You can exclude by stylesheet id, file name, full path, or wildcard pattern. Examples: <code>astra-theme-css</code>, <code>style.css</code>, <code>/wp-content/themes/your-theme/css/*</code>.', 'pivot-performance-toolkit'),
-                        array('strong' => array(), 'code' => array())
-                    ) !!}
-                </p>
-            </div>
+			<div class="pivot-performance-toolkit-field">
+				<label for="pivot-performance-toolkit-async-css-exclusions" style="display:block;font-weight:600;">
+					{{ __('Async CSS loading exclusions', 'pivot-performance-toolkit') }}
+				</label>
+				<p>{{ __('Prevent specific stylesheets from being loaded asynchronously. Use for critical above-the-fold styles that must apply before first paint.', 'pivot-performance-toolkit') }}</p>
+				<textarea
+					id="pivot-performance-toolkit-async-css-exclusions"
+					name="{{ $option_key }}[async_css_exclusions]"
+					class="pivot-performance-toolkit-exclusions-textarea"
+					rows="6"
+					placeholder="{{ esc_attr("astra-theme-css\nstyle.css\n/wp-content/themes/your-theme/css/*") }}"
+					spellcheck="false"
+				>{{ esc_textarea((string) $options['async_css_exclusions']) }}</textarea>
+				<p class="pivot-performance-toolkit-exclusions-hint">
+					{!! wp_kses(
+						__('<strong>One rule per line.</strong> You can exclude by stylesheet id, file name, full path, or wildcard pattern. Examples: <code>astra-theme-css</code>, <code>style.css</code>, <code>/wp-content/themes/your-theme/css/*</code>.', 'pivot-performance-toolkit'),
+						array('strong' => array(), 'code' => array())
+					) !!}
+				</p>
+			</div>
 
-            <div class="pivot-performance-toolkit-field">
-                <label for="pivot-performance-toolkit-delay-js-exclusions" style="display:block;font-weight:600;">
-                    {{ __('Delay JS execution exclusions', 'pivot-performance-toolkit') }}
-                </label>
-                <p>{{ __('Prevent specific scripts from having their execution delayed. Use for scripts that must run immediately (e.g. payment gateways, consent banners).', 'pivot-performance-toolkit') }}</p>
-                <textarea
-                    id="pivot-performance-toolkit-delay-js-exclusions"
-                    name="{{ $option_key }}[delay_js_exclusions]"
-                    class="pivot-performance-toolkit-exclusions-textarea"
-                    rows="6"
-                    placeholder="{{ esc_attr("stripe-js\nrecaptcha.js\n/wp-content/plugins/your-plugin/js/*") }}"
-                    spellcheck="false"
-                >{{ esc_textarea((string) $options['delay_js_exclusions']) }}</textarea>
-                <p class="pivot-performance-toolkit-exclusions-hint">
-                    {!! wp_kses(
-                        __('<strong>One rule per line.</strong> You can exclude by script id, file name, full path, or wildcard pattern. Examples: <code>stripe-js</code>, <code>recaptcha.js</code>, <code>/wp-content/plugins/your-plugin/js/*</code>.', 'pivot-performance-toolkit'),
-                        array('strong' => array(), 'code' => array())
-                    ) !!}
-                </p>
-            </div>
+			<div class="pivot-performance-toolkit-field">
+				<label for="pivot-performance-toolkit-delay-js-exclusions" style="display:block;font-weight:600;">
+					{{ __('Delay JS execution exclusions', 'pivot-performance-toolkit') }}
+				</label>
+				<p>{{ __('Prevent specific scripts from having their execution delayed. Use for scripts that must run immediately (e.g. payment gateways, consent banners).', 'pivot-performance-toolkit') }}</p>
+				<textarea
+					id="pivot-performance-toolkit-delay-js-exclusions"
+					name="{{ $option_key }}[delay_js_exclusions]"
+					class="pivot-performance-toolkit-exclusions-textarea"
+					rows="6"
+					placeholder="{{ esc_attr("stripe-js\nrecaptcha.js\n/wp-content/plugins/your-plugin/js/*") }}"
+					spellcheck="false"
+				>{{ esc_textarea((string) $options['delay_js_exclusions']) }}</textarea>
+				<p class="pivot-performance-toolkit-exclusions-hint">
+					{!! wp_kses(
+						__('<strong>One rule per line.</strong> You can exclude by script id, file name, full path, or wildcard pattern. Examples: <code>stripe-js</code>, <code>recaptcha.js</code>, <code>/wp-content/plugins/your-plugin/js/*</code>.', 'pivot-performance-toolkit'),
+						array('strong' => array(), 'code' => array())
+					) !!}
+				</p>
+			</div>
 
-            @php
-                submit_button(__('Save exclusions', 'pivot-performance-toolkit'));
-            @endphp
-        </form>
+			@php
+				submit_button(__('Save exclusions', 'pivot-performance-toolkit'));
+			@endphp
+		</form>
 
-    </div>
+	</div>
 
 </x-card>
 

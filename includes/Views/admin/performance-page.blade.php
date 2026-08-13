@@ -4,10 +4,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <div class="pivot-performance-toolkit-col pivot-performance-toolkit-col--main">
-    @include('cards.optimization.performance.performance-test', array(
-        'options' => $options,
-        'last_score' => $last_score,
-        'has_result' => $has_result,
-    ))
+	@include('cards.optimization.performance.performance-test', array(
+		'options' => $options,
+		'last_score' => $last_score,
+		'has_result' => $has_result,
+	))
 </div>
 

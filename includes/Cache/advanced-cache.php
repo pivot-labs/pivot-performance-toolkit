@@ -168,7 +168,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			$ptk_html     = ( null !== $ptk_replaced ) ? $ptk_replaced : $ptk_html . $ptk_script;
 
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $ptk_html is our own previously-cached, already-rendered page (written by PageCache::maybeCacheOutput()), not request input; a full HTML document is replayed verbatim, not escaped as a single value the way an individual string would be. The only interpolated content is $ptk_script above, which is itself built from hardcoded literal JS plus $ptk_safe_token/$ptk_safe_url (both json_encode()'d — plain PHP, not wp_json_encode(), since this drop-in runs before that function is defined — see the other pre-boot notes in this file).
-		echo $ptk_html;
+			echo $ptk_html;
 			exit;
 		}
 	}

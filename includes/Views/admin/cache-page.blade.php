@@ -17,18 +17,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 </div>
 
 <div class="pivot-performance-toolkit-col pivot-performance-toolkit-col--sidebar">
-    @include('cards.caching.page.info.about')
-    @include('cards.caching.page.quick-actions', array(
-        'clear_action' => $clear_action,
-        'clear_minified_action' => $clear_minified_action,
-        'ajax_clear_action' => $ajax_clear_action,
-        'ajax_clear_minified_action' => $ajax_clear_minified_action,
-        'ajax_preload_action' => $ajax_preload_action,
-        'ajax_clear_nonce' => $ajax_clear_nonce,
-        'ajax_clear_minified_nonce' => $ajax_clear_minified_nonce,
-        'ajax_preload_nonce' => $ajax_preload_nonce,
-        'cache_cleared_message' => $cache_cleared_message,
-        'minified_cache_cleared_message' => $minified_cache_cleared_message,
-        'preload_cache_message' => $preload_cache_message,
-    ))
+	@include('cards.caching.page.info.about')
+	@include('cards.caching.page.quick-actions', array(
+		'clear_action' => $clear_action,
+		'clear_minified_action' => $clear_minified_action,
+		'ajax_clear_action' => $ajax_clear_action,
+		'ajax_clear_minified_action' => $ajax_clear_minified_action,
+		'ajax_preload_action' => $ajax_preload_action,
+		'ajax_clear_nonce' => $ajax_clear_nonce,
+		'ajax_clear_minified_nonce' => $ajax_clear_minified_nonce,
+		'ajax_preload_nonce' => $ajax_preload_nonce,
+		'cache_cleared_message' => $cache_cleared_message,
+		'minified_cache_cleared_message' => $minified_cache_cleared_message,
+		'preload_cache_message' => $preload_cache_message,
+	))
 </div>
