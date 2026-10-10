@@ -1,8 +1,8 @@
 === Pivot Performance Toolkit ===
-Contributors: pivotlabs
+Contributors: pivotlabs, jeffshaikh
 Tags: performance, cache, minify, lazy load, cloudflare
 Requires at least: 6.9
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 8.2
 Stable tag: 1.1.1
 License: GPLv2 or later

@@ -12,6 +12,10 @@ namespace PivotPerformanceToolkit\Core;
 use PivotPerformanceToolkit\Cache\PageCache;
 use PivotPerformanceToolkit\Utils\FilesystemCheck;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 final class Lifecycle {
 
 	private const DROPIN_INSTALL_NOTICE_TRANSIENT     = 'pivot_performance_toolkit_dropin_install_failure_notice';

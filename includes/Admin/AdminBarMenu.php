@@ -46,7 +46,7 @@ final class AdminBarMenu implements ModuleInterface {
 			return;
 		}
 
-		wp_register_style( 'pivot-performance-toolkit-admin-bar', false );
+		wp_register_style( 'pivot-performance-toolkit-admin-bar', false, array(), PIVOT_PERFORMANCE_TOOLKIT_VERSION );
 		wp_enqueue_style( 'pivot-performance-toolkit-admin-bar' );
 		wp_add_inline_style(
 			'pivot-performance-toolkit-admin-bar',

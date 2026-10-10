@@ -10,6 +10,7 @@
         "test:unit": "phpunit",
         "test": ["@test:smoke", "@test:unit"],
         "set-version": "bin/set-version.sh",
+        "make-pot": "@php bin/make-pot.php",
         "build:zip": "bin/build-zip.sh",
         "strauss": [
             "sh -c 'test -f ./bin/strauss.phar || curl -o bin/strauss.phar -L -C - https://github.com/BrianHenryIE/strauss/releases/latest/download/strauss.phar'",
@@ -56,7 +57,8 @@
         "phpcsstandards/phpcsextra": "^1.5",
         "wp-cli/dist-archive-command": "^3.1",
         "phpunit/phpunit": "^11",
-        "brain/monkey": "^2.6"
+        "brain/monkey": "^2.6",
+        "wp-cli/i18n-command": "^2.7"
     },
     "config": {
         "allow-plugins": {

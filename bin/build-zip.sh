@@ -41,6 +41,9 @@ echo "Building version: ${VERSION}"
 echo "==> npm run build"
 npm run build
 
+echo "==> regenerating languages/pivot-performance-toolkit.pot"
+composer make-pot
+
 OUT_DIR="$ROOT_DIR/dist-builds"
 mkdir -p "$OUT_DIR"
 OUT_ZIP="$OUT_DIR/pivot-performance-toolkit-${VERSION}.zip"

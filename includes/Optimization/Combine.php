@@ -409,6 +409,7 @@ final class Combine implements ModuleInterface {
 			return $this->originalTags( $group );
 		}
 
+		// phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet -- replaces N already-enqueued <link> tags captured from buffered output with their combined file; not a new stylesheet.
 		return '<link rel="stylesheet" href="' . esc_url( $target_web ) . '">';
 	}
 
@@ -460,6 +461,7 @@ final class Combine implements ModuleInterface {
 		// replaces those already-enqueued tags in the final output, it
 		// doesn't introduce a new unenqueued one. There is no earlier hook
 		// at which the combined file's URL could be enqueued instead.
+		// phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript -- see above; replaces already-enqueued <script> tags with their combined file.
 		return '<script src="' . esc_url( $target_web ) . '"></script>';
 	}
 

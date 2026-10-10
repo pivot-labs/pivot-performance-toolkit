@@ -17,6 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 // phpcs:disable WordPress.PHP.NoSilencedErrors.Discouraged
 // phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound -- wp_cache_get(), wp_cache_set(), etc. are WordPress core's own Object Cache API function names; WP core and every other plugin call them by this exact literal name, so they cannot be prefixed without breaking the entire object cache system.
 
+// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedClassFound -- WP_Object_Cache is WordPress core's own Object Cache class name (wp-includes/class-wp-object-cache.php); this file is a drop-in replacement for it, and must reuse the exact name so existing `instanceof WP_Object_Cache` checks elsewhere in WP/plugins keep working regardless of which backend is active. Core only defines its own copy when this drop-in is absent (see wp_start_object_cache() in wp-includes/load.php), so the two never coexist in one request.
 if ( ! class_exists( 'WP_Object_Cache' ) ) {
 	/**
 	 * File-based persistent object cache.

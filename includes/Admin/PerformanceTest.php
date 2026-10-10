@@ -189,7 +189,27 @@ final class PerformanceTest implements ModuleInterface {
 		);
 	}
 
+	/**
+	 * Test state changes on every poll while a test is running, so a CDN
+	 * caching any of these three responses (observed in practice with
+	 * Cloudflare, despite WordPress's own default no-cache headers) freezes
+	 * the client on a stale snapshot forever — CDN-Cache-Control is the
+	 * header Cloudflare (and some other CDNs) honor specifically for edge
+	 * caching, distinct from the browser-facing Cache-Control below.
+	 */
+	private static function sendNoStoreHeaders(): void {
+		if ( headers_sent() ) {
+			return;
+		}
+
+		header( 'Cache-Control: no-store, no-cache, must-revalidate, max-age=0' );
+		header( 'CDN-Cache-Control: no-store' );
+		header( 'Pragma: no-cache' );
+	}
+
 	public function restStartTest( \WP_REST_Request $request ) {
+		self::sendNoStoreHeaders();
+
 		$raw_target = trim( (string) $request->get_param( 'targetUrl' ) );
 		$target_url = self::normalizeTargetUrl( $raw_target );
 
@@ -216,6 +236,8 @@ final class PerformanceTest implements ModuleInterface {
 	}
 
 	public function restCollectTest( \WP_REST_Request $request ) {
+		self::sendNoStoreHeaders();
+
 		$token = sanitize_text_field( (string) $request->get_param( 'token' ) );
 
 		if ( '' === $token ) {
@@ -244,6 +266,8 @@ final class PerformanceTest implements ModuleInterface {
 	}
 
 	public function restGetResult( \WP_REST_Request $request ) {
+		self::sendNoStoreHeaders();
+
 		$token = sanitize_text_field( (string) $request->get_param( 'token' ) );
 
 		if ( '' === $token ) {
@@ -268,7 +292,7 @@ final class PerformanceTest implements ModuleInterface {
 
 		$printed = true;
 
-		wp_register_script( self::PROBE_SCRIPT_ID, false, array(), PIVOT_PERFORMANCE_TOOLKIT_VERSION );
+		wp_register_script( self::PROBE_SCRIPT_ID, false, array(), PIVOT_PERFORMANCE_TOOLKIT_VERSION, false );
 		wp_enqueue_script( self::PROBE_SCRIPT_ID );
 		wp_localize_script(
 			self::PROBE_SCRIPT_ID,

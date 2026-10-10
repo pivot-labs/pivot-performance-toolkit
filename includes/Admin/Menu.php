@@ -84,7 +84,7 @@ final class Menu {
 		// handle (registered with `false` as the src, a WordPress-supported
 		// pattern for inline-only styles) carries it instead of an inline
 		// <style> tag.
-		wp_register_style( 'pivot-performance-toolkit-menu-icon', false );
+		wp_register_style( 'pivot-performance-toolkit-menu-icon', false, array(), PIVOT_PERFORMANCE_TOOLKIT_VERSION );
 		wp_enqueue_style( 'pivot-performance-toolkit-menu-icon' );
 		wp_add_inline_style( 'pivot-performance-toolkit-menu-icon', $this->menuIconCss() );
 

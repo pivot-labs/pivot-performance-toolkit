@@ -78,7 +78,7 @@ final class DelayedJs implements ModuleInterface {
 			return;
 		}
 
-		wp_register_script( self::RUNTIME_SCRIPT_ID, false, array(), PIVOT_PERFORMANCE_TOOLKIT_VERSION );
+		wp_register_script( self::RUNTIME_SCRIPT_ID, false, array(), PIVOT_PERFORMANCE_TOOLKIT_VERSION, false );
 		wp_enqueue_script( self::RUNTIME_SCRIPT_ID );
 		wp_add_inline_script( self::RUNTIME_SCRIPT_ID, $this->runtimeScript( self::FALLBACK_TIMEOUT_MS ) );
 	}

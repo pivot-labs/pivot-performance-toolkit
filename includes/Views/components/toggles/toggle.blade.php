@@ -41,7 +41,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 					class="pivot-performance-toolkit-toggle-status"
 					aria-live="polite"
 					aria-atomic="true"
-					style="display: inline-flex; width: 56px; height: 22px; margin-right: 4px; align-items: center; justify-content: center; border-radius: 9999px; font-size: 11px; font-weight: 600; line-height: 1; opacity: 0; transition: opacity 180ms ease-in-out; box-sizing: border-box;"
 				></span>
 				<div class="group relative inline-flex w-11 shrink-0 rounded-full bg-gray-200 p-0.5 inset-ring inset-ring-gray-900/5 outline-offset-2 outline-indigo-600 transition-colors duration-200 ease-in-out has-checked:bg-indigo-600 has-focus-visible:outline-2">
 					<input
@@ -50,8 +49,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						value="1"
 						aria-label="{{ esc_attr((string) $label) }}"
 						{{ $checked ? 'checked' : '' }}
-						class="pivot-performance-toolkit-toggle-input absolute inset-0 z-10 m-0 h-full w-full opacity-0 appearance-none border-0 shadow-none focus:outline-hidden"
-						style="position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer;"
+						class="pivot-performance-toolkit-toggle-input absolute inset-0 z-10 m-0 h-full w-full cursor-pointer opacity-0 appearance-none border-0 shadow-none focus:outline-hidden"
 					/>
 					<span class="pivot-performance-toolkit-toggle-knob size-5 rounded-full bg-white shadow-xs ring-1 ring-gray-900/5 transition-transform duration-200 ease-in-out"></span>
 				</div>

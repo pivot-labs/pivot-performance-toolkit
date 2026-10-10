@@ -107,8 +107,8 @@ final class ToolsPage extends BladeAdminPage {
 	protected function buildViewData(): array {
 		$stats = $this->getMinifiedAssetStats();
 		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- these are read-only display values from this page's own post-redirect notice (already produced by a nonce-verified admin-post handler), not a new state-changing action.
-		$cleared       = isset( $_GET['pivot_performance_toolkit_minified_cleared'] ) && '1' === (string) wp_unslash( $_GET['pivot_performance_toolkit_minified_cleared'] );
-		$removed_files = isset( $_GET['pivot_performance_toolkit_minified_removed'] ) ? max( 0, (int) wp_unslash( $_GET['pivot_performance_toolkit_minified_removed'] ) ) : 0;
+		$cleared       = isset( $_GET['pivot_performance_toolkit_minified_cleared'] ) && 1 === absint( wp_unslash( $_GET['pivot_performance_toolkit_minified_cleared'] ) );
+		$removed_files = isset( $_GET['pivot_performance_toolkit_minified_removed'] ) ? absint( wp_unslash( $_GET['pivot_performance_toolkit_minified_removed'] ) ) : 0;
 		$tools_notice  = isset( $_GET['pivot_performance_toolkit_tools_notice'] ) ? sanitize_key( (string) wp_unslash( $_GET['pivot_performance_toolkit_tools_notice'] ) ) : '';
 		$tools_message = isset( $_GET['pivot_performance_toolkit_tools_message'] ) ? sanitize_text_field( (string) wp_unslash( $_GET['pivot_performance_toolkit_tools_message'] ) ) : '';
 		// phpcs:enable WordPress.Security.NonceVerification.Recommended
