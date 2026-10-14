@@ -43,7 +43,7 @@ final class PageCacheTest extends TestCase {
 			static fn( string $dir ): bool => is_dir( $dir ) || mkdir( $dir, 0777, true )
 		);
 		Functions\when( 'delete_transient' )->justReturn( true );
-		Functions\when( 'rest_url' )->justReturn( 'https://example.com/wp-json/ptk/v1/performance-tests/collect' );
+		Functions\when( 'rest_url' )->justReturn( 'https://example.com/wp-json/pivot-performance-toolkit/v1/performance-tests/collect' );
 		Functions\when( 'wp_delete_file' )->alias(
 			static function ( string $path ): void {
 				if ( file_exists( $path ) ) {
@@ -304,7 +304,7 @@ final class PageCacheTest extends TestCase {
 		self::assertTrue( $config['enabled'] );
 		self::assertSame( 3600, $config['ttl'] );
 		self::assertSame( array( 'woocommerce_items_in_cart', 'wordpress_logged_in_*' ), $config['bypass_cookies'] );
-		self::assertSame( 'https://example.com/wp-json/ptk/v1/performance-tests/collect', $config['collect_url'] );
+		self::assertSame( 'https://example.com/wp-json/pivot-performance-toolkit/v1/performance-tests/collect', $config['collect_url'] );
 	}
 
 	// ── register ─────────────────────────────────────────────────────────

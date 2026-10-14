@@ -11,8 +11,6 @@ $baseDir = dirname(dirname($vendorDir));
 
 return array(
     'PivotPerformanceToolkit\\Vendor\\voku\\' => array($vendorDir . '/voku/portable-ascii/src/voku'),
-    'PivotPerformanceToolkit\\Vendor\\Symfony\\Polyfill\\Php83\\' => array($vendorDir . '/symfony/polyfill-php83'),
-    'PivotPerformanceToolkit\\Vendor\\Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'PivotPerformanceToolkit\\Vendor\\Symfony\\Contracts\\Translation\\' => array($vendorDir . '/symfony/translation-contracts'),
     'PivotPerformanceToolkit\\Vendor\\Symfony\\Component\\Translation\\' => array($vendorDir . '/symfony/translation'),
     'PivotPerformanceToolkit\\Vendor\\Symfony\\Component\\Finder\\' => array($vendorDir . '/symfony/finder'),

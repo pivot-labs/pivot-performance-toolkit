@@ -8,14 +8,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
-class ComposerStaticInit00d6e2d4038a20a45ff9d087897168db
+class PivotPerformanceToolkit_Autoloader_Static
 {
     public static $files = array (
-        '0e9049a555a25d740942ccb3a0cdbb23' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '6f908b37b8c6cd15c7c3fb0e2f93947b' => __DIR__ . '/..' . '/illuminate/collections/functions.php',
         '9d26357b450098d9df7b400d9998c1ee' => __DIR__ . '/..' . '/illuminate/collections/helpers.php',
         '9d7d1842a18263174c851fc07343d6b8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
-        '13fd6ec7ff558108f63f25859bd831fa' => __DIR__ . '/..' . '/symfony/polyfill-php83/bootstrap.php',
         '2f9007af9f43c3e23ab34286611ecf96' => __DIR__ . '/..' . '/symfony/clock/Resources/now.php',
         '1faa6e60f9d51c80842741aa4e401183' => __DIR__ . '/..' . '/symfony/translation/Resources/functions.php',
         '524486a79edc72a5003e794ee74f3daa' => __DIR__ . '/..' . '/illuminate/support/functions.php',
@@ -28,8 +26,6 @@ class ComposerStaticInit00d6e2d4038a20a45ff9d087897168db
         'P' =>
         array (
             'PivotPerformanceToolkit\\Vendor\\voku\\' => 36,
-            'PivotPerformanceToolkit\\Vendor\\Symfony\\Polyfill\\Php83\\' => 54,
-            'PivotPerformanceToolkit\\Vendor\\Symfony\\Polyfill\\Mbstring\\' => 57,
             'PivotPerformanceToolkit\\Vendor\\Symfony\\Contracts\\Translation\\' => 61,
             'PivotPerformanceToolkit\\Vendor\\Symfony\\Component\\Translation\\' => 61,
             'PivotPerformanceToolkit\\Vendor\\Symfony\\Component\\Finder\\' => 56,
@@ -55,14 +51,6 @@ class ComposerStaticInit00d6e2d4038a20a45ff9d087897168db
         'PivotPerformanceToolkit\\Vendor\\voku\\' =>
         array (
             0 => __DIR__ . '/..' . '/voku/portable-ascii/src/voku',
-        ),
-        'PivotPerformanceToolkit\\Vendor\\Symfony\\Polyfill\\Php83\\' =>
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-php83',
-        ),
-        'PivotPerformanceToolkit\\Vendor\\Symfony\\Polyfill\\Mbstring\\' =>
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
         ),
         'PivotPerformanceToolkit\\Vendor\\Symfony\\Contracts\\Translation\\' =>
         array (
@@ -143,16 +131,6 @@ class ComposerStaticInit00d6e2d4038a20a45ff9d087897168db
 
     public static $classMap = array (
         'PivotPerformanceToolkit\\Vendor\\Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'DateError' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateError.php',
-        'DateException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateException.php',
-        'DateInvalidOperationException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateInvalidOperationException.php',
-        'DateInvalidTimeZoneException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateInvalidTimeZoneException.php',
-        'DateMalformedIntervalStringException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateMalformedIntervalStringException.php',
-        'DateMalformedPeriodStringException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateMalformedPeriodStringException.php',
-        'DateMalformedStringException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateMalformedStringException.php',
-        'DateObjectError' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateObjectError.php',
-        'DateRangeError' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateRangeError.php',
-        'Override' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/Override.php',
         'PivotPerformanceToolkit\\Vendor\\Carbon\\AbstractTranslator' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/AbstractTranslator.php',
         'PivotPerformanceToolkit\\Vendor\\Carbon\\Callback' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Callback.php',
         'PivotPerformanceToolkit\\Vendor\\Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
@@ -792,18 +770,15 @@ class ComposerStaticInit00d6e2d4038a20a45ff9d087897168db
         'PivotPerformanceToolkit\\Vendor\\Symfony\\Contracts\\Translation\\TranslatableInterface' => __DIR__ . '/..' . '/symfony/translation-contracts/TranslatableInterface.php',
         'PivotPerformanceToolkit\\Vendor\\Symfony\\Contracts\\Translation\\TranslatorInterface' => __DIR__ . '/..' . '/symfony/translation-contracts/TranslatorInterface.php',
         'PivotPerformanceToolkit\\Vendor\\Symfony\\Contracts\\Translation\\TranslatorTrait' => __DIR__ . '/..' . '/symfony/translation-contracts/TranslatorTrait.php',
-        'PivotPerformanceToolkit\\Vendor\\Symfony\\Polyfill\\Mbstring\\Mbstring' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/Mbstring.php',
-        'PivotPerformanceToolkit\\Vendor\\Symfony\\Polyfill\\Php83\\Php83' => __DIR__ . '/..' . '/symfony/polyfill-php83/Php83.php',
         'PivotPerformanceToolkit\\Vendor\\voku\\helper\\ASCII' => __DIR__ . '/..' . '/voku/portable-ascii/src/voku/helper/ASCII.php',
-        'SQLite3Exception' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/SQLite3Exception.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit00d6e2d4038a20a45ff9d087897168db::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit00d6e2d4038a20a45ff9d087897168db::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit00d6e2d4038a20a45ff9d087897168db::$classMap;
+            $loader->prefixLengthsPsr4 = PivotPerformanceToolkit_Autoloader_Static::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = PivotPerformanceToolkit_Autoloader_Static::$prefixDirsPsr4;
+            $loader->classMap = PivotPerformanceToolkit_Autoloader_Static::$classMap;
 
         }, null, ClassLoader::class);
     }

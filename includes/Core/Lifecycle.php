@@ -22,39 +22,6 @@ final class Lifecycle {
 	private const DEACTIVATE_CLEANUP_NOTICE_TRANSIENT = 'pivot_performance_toolkit_deactivate_cleanup_failure_notice';
 	private const WP_CONFIG_NOTICE_TRANSIENT          = 'pivot_performance_toolkit_wp_config_failure_notice';
 
-	/**
-	 * Option keys renamed during the Pivot Performance Toolkit rebrand, mapped from their
-	 * pre-rebrand names so existing installs keep their saved data instead of reverting to defaults.
-	 *
-	 * @var array<string, string>
-	 */
-	private const LEGACY_OPTION_KEYS = array(
-		'performance_toolkit_settings'                 => 'pivot_performance_toolkit_settings',
-		'performance_toolkit_remove_data_on_uninstall' => 'pivot_performance_toolkit_remove_data_on_uninstall',
-		'ptk_last_performance_result'                  => 'pivot_performance_toolkit_last_performance_result',
-	);
-
-	/**
-	 * Copies any option values still stored under a pre-rebrand key to its new key.
-	 * Safe to call on every request: it's a no-op once migrated.
-	 */
-	public static function maybeMigrateLegacyOptionKeys(): void {
-		foreach ( self::LEGACY_OPTION_KEYS as $legacy_key => $new_key ) {
-			if ( false !== get_option( $new_key, false ) ) {
-				continue;
-			}
-
-			$legacy_value = get_option( $legacy_key, false );
-
-			if ( false === $legacy_value ) {
-				continue;
-			}
-
-			update_option( $new_key, $legacy_value );
-			delete_option( $legacy_key );
-		}
-	}
-
 	private static function dropinSource(): string {
 		return PIVOT_PERFORMANCE_TOOLKIT_PATH . 'includes/Cache/advanced-cache.php';
 	}

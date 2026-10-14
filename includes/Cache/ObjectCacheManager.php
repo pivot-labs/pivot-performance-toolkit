@@ -79,7 +79,7 @@ final class ObjectCacheManager {
 	 */
 	public function detectProvider(): string {
 		if ( $this->isOurDropin() ) {
-			return __( 'PTK File Cache', 'pivot-performance-toolkit' );
+			return __( 'Pivot Performance Toolkit File Cache', 'pivot-performance-toolkit' );
 		}
 
 		if ( defined( 'WP_REDIS_CLUSTER' ) ) {

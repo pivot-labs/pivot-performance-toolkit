@@ -94,9 +94,9 @@ final class PerformanceTest implements ModuleInterface {
 
 		wp_localize_script(
 			'pivot-performance-toolkit-performance-test',
-			'ptkPerfTest',
+			'pivotPerformanceToolkitPerfTest',
 			array(
-				'restRoot'         => esc_url_raw( rest_url( 'ptk/v1/performance-tests/' ) ),
+				'restRoot'         => esc_url_raw( rest_url( 'pivot-performance-toolkit/v1/performance-tests/' ) ),
 				'nonce'            => wp_create_nonce( 'wp_rest' ),
 				'defaultUrl'       => esc_url_raw( home_url( '/' ) ),
 				'websiteProfile'   => $this->settings->getString( 'website_profile' ) ?: 'standard',
@@ -145,7 +145,7 @@ final class PerformanceTest implements ModuleInterface {
 
 	public function registerRestRoutes(): void {
 		register_rest_route(
-			'ptk/v1',
+			'pivot-performance-toolkit/v1',
 			'/performance-tests/start',
 			array(
 				'methods'             => 'POST',
@@ -157,7 +157,7 @@ final class PerformanceTest implements ModuleInterface {
 		);
 
 		register_rest_route(
-			'ptk/v1',
+			'pivot-performance-toolkit/v1',
 			'/performance-tests/collect',
 			array(
 				'methods'             => 'POST',
@@ -177,7 +177,7 @@ final class PerformanceTest implements ModuleInterface {
 		);
 
 		register_rest_route(
-			'ptk/v1',
+			'pivot-performance-toolkit/v1',
 			'/performance-tests/result',
 			array(
 				'methods'             => 'GET',
@@ -296,9 +296,9 @@ final class PerformanceTest implements ModuleInterface {
 		wp_enqueue_script( self::PROBE_SCRIPT_ID );
 		wp_localize_script(
 			self::PROBE_SCRIPT_ID,
-			'ptkPerfProbe',
+			'pivotPerformanceToolkitPerfProbe',
 			array(
-				'collectUrl' => esc_url_raw( rest_url( 'ptk/v1/performance-tests/collect' ) ),
+				'collectUrl' => esc_url_raw( rest_url( 'pivot-performance-toolkit/v1/performance-tests/collect' ) ),
 			)
 		);
 		wp_add_inline_script( self::PROBE_SCRIPT_ID, $this->frontendProbeScript() );
@@ -306,7 +306,7 @@ final class PerformanceTest implements ModuleInterface {
 
 	private function frontendProbeScript(): string {
 		$js  = '(function(){';
-		$js .= 'var collectUrl=window.ptkPerfProbe&&window.ptkPerfProbe.collectUrl?window.ptkPerfProbe.collectUrl:"";';
+		$js .= 'var collectUrl=window.pivotPerformanceToolkitPerfProbe&&window.pivotPerformanceToolkitPerfProbe.collectUrl?window.pivotPerformanceToolkitPerfProbe.collectUrl:"";';
 		$js .= 'if(!collectUrl){return;}';
 		$js .= 'function getToken(){var token="";try{token=String(window.name||"").trim();}catch(e){}if(token&&token.length>=20){return token;}try{var m=document.cookie.match(/(?:^|;\\s*)pivot_performance_toolkit_perf_probe=([^;]+)/);if(m){token=String(m[1]||"").trim();if(token.length>=20){return token;}}}catch(e){}return "";}';
 		$js .= 'var fcp=0;';

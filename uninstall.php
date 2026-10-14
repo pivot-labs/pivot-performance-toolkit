@@ -17,13 +17,7 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 // table for the rest of the request).
 ( function () {
 
-	// Fall back to the pre-rebrand option name in case the plugin was never reactivated
-	// (and its options never migrated) between the rebrand and this uninstall.
-	$policy = get_option( 'pivot_performance_toolkit_remove_data_on_uninstall', null );
-
-	if ( null === $policy ) {
-		$policy = get_option( 'performance_toolkit_remove_data_on_uninstall', '0' );
-	}
+	$policy = get_option( 'pivot_performance_toolkit_remove_data_on_uninstall', '0' );
 
 	if ( (string) '1' !== $policy ) {
 		return;
@@ -38,13 +32,10 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 
 	global $wp_filesystem;
 
-	// Remove plugin options (both current and pre-rebrand key names).
+	// Remove plugin options.
 	delete_option( 'pivot_performance_toolkit_settings' );
-	delete_option( 'performance_toolkit_settings' );
 	delete_option( 'pivot_performance_toolkit_remove_data_on_uninstall' );
-	delete_option( 'performance_toolkit_remove_data_on_uninstall' );
 	delete_option( 'pivot_performance_toolkit_last_performance_result' );
-	delete_option( 'ptk_last_performance_result' );
 
 	// Remove cache directory recursively.
 	if ( $wp_filesystem instanceof WP_Filesystem_Base && $wp_filesystem->is_dir( $cache_dir ) ) {

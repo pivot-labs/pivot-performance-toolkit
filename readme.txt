@@ -59,6 +59,8 @@ https://docs.pivotlabs.dev/performance-toolkit
 
 == Installation ==
 
+Requirements: WordPress 6.9 or later, PHP 8.2 or later, and the PHP mbstring extension (enabled on most hosts; the plugin shows a notice and stays inactive if it is missing).
+
 1. Upload the `pivot-performance-toolkit` folder to the `/wp-content/plugins/` directory, or install it through the WordPress plugin screen.
 2. Activate the plugin through the "Plugins" screen in WordPress.
 3. Go to **Pivot Performance Toolkit** in the WordPress admin menu.
@@ -97,6 +99,10 @@ We recommend enabling one feature at a time to validate the performance impact. 
 = I'm using Imagify and Cloudflare together and my images aren't showing as WebP =
 
 Imagify's default WebP delivery method (server rewrite rules) is not reliable behind a CDN, including Cloudflare — this is a known limitation of that delivery method, not a Pivot Performance Toolkit issue. In Imagify's settings, switch WebP delivery to the "&lt;picture&gt; tag" method, which works correctly with Cloudflare. The CDN & Integrations page will show a reminder about this when both Cloudflare and Imagify are detected active.
+
+= Why does the plugin include an object-cache.php that defines WP_Object_Cache? =
+
+The optional file-based object cache is a WordPress "drop-in". WordPress requires a drop-in to define a class named `WP_Object_Cache` and the global `wp_cache_*()` functions under exactly those names, so they cannot be prefixed. The file (`includes/Cache/object-cache.php`) is not loaded by the plugin. It is copied to `wp-content/object-cache.php` only when an administrator clicks "Enable File Object Cache" on the Cache screen, and it is removed again when the feature is disabled. The plugin never overwrites an `object-cache.php` that another plugin has installed.
 
 == External services ==
 

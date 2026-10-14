@@ -25,6 +25,27 @@ define( 'PIVOT_PERFORMANCE_TOOLKIT_PLUGIN_FILE', __FILE__ );
 define( 'PIVOT_PERFORMANCE_TOOLKIT_PATH', plugin_dir_path( __FILE__ ) );
 define( 'PIVOT_PERFORMANCE_TOOLKIT_URL', plugin_dir_url( __FILE__ ) );
 
+// The bundled templating library relies on the mbstring extension and ships no polyfill for it.
+if ( ! extension_loaded( 'mbstring' ) ) {
+	$pivot_performance_toolkit_render_mbstring_notice = static function (): void {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		echo '<div class="notice notice-error"><p>';
+		esc_html_e(
+			'Pivot Performance Toolkit requires the PHP mbstring extension and has not been loaded. Ask your host to enable mbstring, then reload this page.',
+			'pivot-performance-toolkit'
+		);
+		echo '</p></div>';
+	};
+
+	add_action( 'admin_notices', $pivot_performance_toolkit_render_mbstring_notice );
+	add_action( 'network_admin_notices', $pivot_performance_toolkit_render_mbstring_notice );
+
+	return;
+}
+
 $pivot_performance_toolkit_autoload_file = PIVOT_PERFORMANCE_TOOLKIT_PATH . 'vendor/autoload.php';
 
 if ( file_exists( $pivot_performance_toolkit_autoload_file ) ) {

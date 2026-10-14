@@ -75,8 +75,6 @@ final class Plugin {
 
 		$this->booted = true;
 
-		Lifecycle::maybeMigrateLegacyOptionKeys();
-
 		$this->settings           = new Settings();
 		$cloudflare               = new CloudflareIntegration( $this->settings );
 		$image_optimizer_detector = new ImageOptimizerDetector();

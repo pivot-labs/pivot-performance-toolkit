@@ -49,7 +49,7 @@ final class DatabaseOptimizerTest extends TestCase {
 		// targets the exact option names it means to delete.
 		$wpdb->shouldReceive( 'prepare' )->andReturnUsing(
 			static function ( string $query, ...$args ): string {
-				return vsprintf( str_replace( array( '%s', '%d' ), array( "'%s'", '%d' ), $query ), $args );
+				return vsprintf( str_replace( array( '%s', '%d', '%i' ), array( "'%s'", '%d', '`%s`' ), $query ), $args );
 			}
 		)->byDefault();
 
@@ -170,7 +170,7 @@ final class DatabaseOptimizerTest extends TestCase {
 
 	// ── optimizeTables ──────────────────────────────────────────────────
 
-	public function test_optimize_tables_runs_optimize_for_every_table_and_escapes_names(): void {
+	public function test_optimize_tables_runs_optimize_for_every_table_with_bound_identifiers(): void {
 		$wpdb = $this->mockWpdb();
 		$wpdb->shouldReceive( 'get_col' )->once()->with( 'SHOW TABLES' )->andReturn( array( 'wp_posts', 'wp_options' ) );
 
@@ -213,32 +213,52 @@ final class DatabaseOptimizerTest extends TestCase {
 		);
 	}
 
-	// ── getTableStats: sort column allowlist ───────────────────────────
+	// ── getTableStats: sorting ──────────────────────────────────────────
 
 	/**
-	 * $order_by is interpolated directly into the SQL (ORDER BY can't use
-	 * $wpdb->prepare() placeholders), so it must only ever come from the
-	 * hardcoded column allowlist — never $sort_by itself — regardless of
-	 * what string is passed in.
+	 * @return array<int, object>
 	 */
-	public function test_get_table_stats_rejects_unknown_sort_column(): void {
-		$wpdb = $this->mockWpdb();
-		$wpdb->shouldReceive( 'get_results' )
-			->once()
-			->with( Mockery::pattern( '/ORDER BY tbl_size DESC/' ) )
-			->andReturn( array() );
-
-		self::assertSame( array(), $this->optimizer->getTableStats( '1; DROP TABLE wp_users; --', 'desc' ) );
+	private function tableRows(): array {
+		return array(
+			(object) array( 'tbl_name' => 'wp_options', 'tbl_engine' => 'InnoDB', 'tbl_rows' => '50', 'tbl_size' => '2000', 'tbl_overhead' => '0' ),
+			(object) array( 'tbl_name' => 'wp_posts', 'tbl_engine' => 'MyISAM', 'tbl_rows' => '900', 'tbl_size' => '9000', 'tbl_overhead' => '10' ),
+			(object) array( 'tbl_name' => 'wp_comments', 'tbl_engine' => 'InnoDB', 'tbl_rows' => '5', 'tbl_size' => '500', 'tbl_overhead' => '0' ),
+		);
 	}
 
-	public function test_get_table_stats_maps_known_sort_column_and_ascending_direction(): void {
+	/**
+	 * The query is constant and the sort happens in PHP, so no request-derived
+	 * value (even a hostile $sort_by) can reach the SQL; unknown columns fall
+	 * back to size, descending by default.
+	 */
+	public function test_get_table_stats_query_never_contains_the_sort_input(): void {
 		$wpdb = $this->mockWpdb();
 		$wpdb->shouldReceive( 'get_results' )
 			->once()
-			->with( Mockery::pattern( '/ORDER BY tbl_name ASC/' ) )
-			->andReturn( array() );
+			->with( Mockery::on( static fn( string $sql ): bool => ! str_contains( $sql, 'DROP TABLE' ) && ! str_contains( $sql, 'ORDER BY' ) ) )
+			->andReturn( $this->tableRows() );
 
-		self::assertSame( array(), $this->optimizer->getTableStats( 'name', 'asc' ) );
+		$names = array_column( $this->optimizer->getTableStats( '1; DROP TABLE wp_users; --', 'desc' ), 'name' );
+
+		self::assertSame( array( 'wp_posts', 'wp_options', 'wp_comments' ), $names );
+	}
+
+	public function test_get_table_stats_sorts_by_known_column_ascending(): void {
+		$wpdb = $this->mockWpdb();
+		$wpdb->shouldReceive( 'get_results' )->once()->andReturn( $this->tableRows() );
+
+		$names = array_column( $this->optimizer->getTableStats( 'name', 'asc' ), 'name' );
+
+		self::assertSame( array( 'wp_comments', 'wp_options', 'wp_posts' ), $names );
+	}
+
+	public function test_get_table_stats_sorts_by_rows_descending(): void {
+		$wpdb = $this->mockWpdb();
+		$wpdb->shouldReceive( 'get_results' )->once()->andReturn( $this->tableRows() );
+
+		$names = array_column( $this->optimizer->getTableStats( 'rows', 'desc' ), 'name' );
+
+		self::assertSame( array( 'wp_posts', 'wp_options', 'wp_comments' ), $names );
 	}
 
 	public function test_get_table_stats_maps_result_rows(): void {

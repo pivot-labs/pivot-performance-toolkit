@@ -5,6 +5,22 @@
  *
  * DO NOT EDIT - this file is managed by the Pivot Performance Toolkit plugin.
  *
+ * Why this file defines `WP_Object_Cache` and global `wp_cache_*()` functions
+ * ---------------------------------------------------------------------------
+ * This is a WordPress object-cache drop-in, not regular plugin code. It is not
+ * loaded by the plugin. When an administrator clicks "Enable File Object Cache"
+ * (capability and nonce checked), the plugin copies this file to
+ * wp-content/object-cache.php, and WordPress core then loads it from there.
+ * It never overwrites an object-cache.php that another plugin installed.
+ *
+ * WordPress requires a drop-in to define a class named `WP_Object_Cache` and
+ * the global `wp_cache_*()` functions (the WP Object Cache API) under exactly
+ * those names: core calls them by their literal names, and core only defines
+ * its own `WP_Object_Cache` when no drop-in is present. They therefore cannot
+ * carry a plugin prefix. Redis Object Cache, Memcached and other object-cache
+ * drop-ins use the same names for the same reason. Everything else in the
+ * plugin uses the `pivot_performance_toolkit` prefix.
+ *
  * @package PivotPerformanceToolkit
  */
 

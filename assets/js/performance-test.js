@@ -821,7 +821,7 @@
     }
 
     function init() {
-        var cfg = (typeof window.ptkPerfTest === 'object' && window.ptkPerfTest) ? window.ptkPerfTest : null;
+        var cfg = (typeof window.pivotPerformanceToolkitPerfTest === 'object' && window.pivotPerformanceToolkitPerfTest) ? window.pivotPerformanceToolkitPerfTest : null;
         var card = document.querySelector('[data-pivot-performance-toolkit-performance-test]');
 
         TEST_I18N = (cfg && cfg.i18n && typeof cfg.i18n === 'object') ? cfg.i18n : {};

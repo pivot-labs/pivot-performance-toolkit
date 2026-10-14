@@ -258,30 +258,6 @@ return array (
       ),
       'dev_requirement' => false,
     ),
-    'symfony/polyfill-mbstring' => 
-    array (
-      'pretty_version' => 'v1.38.2',
-      'version' => '1.38.2.0',
-      'reference' => 'd3d318bad5e7a1bfbd026009c8bfb8d8f99ae6b6',
-      'type' => 'library',
-      'install_path' => __DIR__ . '/../symfony/polyfill-mbstring',
-      'aliases' => 
-      array (
-      ),
-      'dev_requirement' => false,
-    ),
-    'symfony/polyfill-php83' => 
-    array (
-      'pretty_version' => 'v1.38.1',
-      'version' => '1.38.1.0',
-      'reference' => '8339098cae28673c15cce00d80734af0453054e2',
-      'type' => 'library',
-      'install_path' => __DIR__ . '/../symfony/polyfill-php83',
-      'aliases' => 
-      array (
-      ),
-      'dev_requirement' => false,
-    ),
     'symfony/translation' => 
     array (
       'pretty_version' => 'v7.4.10',

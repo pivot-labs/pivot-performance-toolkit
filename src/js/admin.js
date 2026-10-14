@@ -2,12 +2,35 @@
 (function () {
     'use strict';
 
+    // The endpoint URL comes from PHP (admin_url( 'admin-ajax.php' ), localized as
+    // pivotPerformanceToolkitAdmin.ajaxUrl) so it is correct on any install layout;
+    // core's own window.ajaxurl is the only fallback. No path is ever guessed.
     function getAjaxUrl() {
+        var localized = (typeof window.pivotPerformanceToolkitAdmin === 'object' && window.pivotPerformanceToolkitAdmin)
+            ? window.pivotPerformanceToolkitAdmin.ajaxUrl
+            : '';
+
+        if (typeof localized === 'string' && localized !== '') {
+            return localized;
+        }
+
         if (typeof window.ajaxurl === 'string' && window.ajaxurl !== '') {
             return window.ajaxurl;
         }
 
-        return '/wp-admin/admin-ajax.php';
+        return '';
+    }
+
+    // Rejects (so each caller's existing .catch shows "Request failed.") instead of
+    // posting to the current page when no endpoint URL is available.
+    function ajaxFetch(options) {
+        var url = getAjaxUrl();
+
+        if (!url) {
+            return Promise.reject(new Error('Missing AJAX endpoint URL.'));
+        }
+
+        return fetch(url, options);
     }
 
     function showQuickActionNotice(container, type, message) {
@@ -18,8 +41,8 @@
         var existing = container.querySelector('.pivot-performance-toolkit-quick-action-notice');
 
         if (existing) {
-            if (existing._ptkDismissTimer) {
-                window.clearTimeout(existing._ptkDismissTimer);
+            if (existing._pivotPerformanceToolkitDismissTimer) {
+                window.clearTimeout(existing._pivotPerformanceToolkitDismissTimer);
             }
             existing.remove();
         }
@@ -35,7 +58,7 @@
 
         // Auto-dismiss success notices; errors stay until replaced.
         if (type !== 'error') {
-            notice._ptkDismissTimer = window.setTimeout(function () {
+            notice._pivotPerformanceToolkitDismissTimer = window.setTimeout(function () {
                 notice.style.transition = 'opacity 600ms ease-in-out';
                 notice.style.opacity = '0';
                 window.setTimeout(function () {
@@ -58,8 +81,8 @@
             return false;
         }
 
-        if (form._ptkToggleStatusTimer) {
-            window.clearTimeout(form._ptkToggleStatusTimer);
+        if (form._pivotPerformanceToolkitToggleStatusTimer) {
+            window.clearTimeout(form._pivotPerformanceToolkitToggleStatusTimer);
         }
 
         status.textContent = message;
@@ -68,7 +91,7 @@
         status.style.transition = 'opacity 180ms ease-in-out';
         status.style.opacity = '1';
 
-        form._ptkToggleStatusTimer = window.setTimeout(function () {
+        form._pivotPerformanceToolkitToggleStatusTimer = window.setTimeout(function () {
             status.style.transition = 'opacity 900ms ease-in-out';
             status.style.opacity = '0';
         }, 3000);
@@ -122,7 +145,7 @@
     }
 
     function bindQuickActionButtons() {
-        var i18n = (typeof window.ptkAdmin === 'object' && window.ptkAdmin) ? window.ptkAdmin : {};
+        var i18n = (typeof window.pivotPerformanceToolkitAdmin === 'object' && window.pivotPerformanceToolkitAdmin) ? window.pivotPerformanceToolkitAdmin : {};
         var requestFailedMessage = i18n.requestFailed || '';
         var buttons = document.querySelectorAll('.pivot-performance-toolkit-action-btn[data-ajax-action]');
 
@@ -149,7 +172,7 @@
                 body.set('action', action);
                 body.set('_ajax_nonce', nonce);
 
-                fetch(getAjaxUrl(), {
+                ajaxFetch({
                     method: 'POST',
                     credentials: 'same-origin',
                     headers: {
@@ -188,7 +211,7 @@
     }
 
     function bindAjaxActionForms() {
-        var i18n = (typeof window.ptkAdmin === 'object' && window.ptkAdmin) ? window.ptkAdmin : {};
+        var i18n = (typeof window.pivotPerformanceToolkitAdmin === 'object' && window.pivotPerformanceToolkitAdmin) ? window.pivotPerformanceToolkitAdmin : {};
         var requestFailedMessage = i18n.requestFailed || '';
         var savedMessage = i18n.saved || '';
         var errorMessage = i18n.error || '';
@@ -219,7 +242,7 @@
                     spinner.classList.add('is-active');
                 }
 
-                fetch(getAjaxUrl(), {
+                ajaxFetch({
                     method: 'POST',
                     credentials: 'same-origin',
                     headers: {
@@ -300,7 +323,7 @@
     }
 
     function bindSnippetCopyButtons() {
-        var i18n = (typeof window.ptkSnippet === 'object' && window.ptkSnippet) ? window.ptkSnippet : {};
+        var i18n = (typeof window.pivotPerformanceToolkitSnippet === 'object' && window.pivotPerformanceToolkitSnippet) ? window.pivotPerformanceToolkitSnippet : {};
         var copiedLabel     = i18n.copied || '';
         var copyFailedLabel = i18n.copyFailed || '';
 
@@ -328,7 +351,7 @@
     }
 
     function bindSnippetToggles() {
-        var i18n = (typeof window.ptkSnippet === 'object' && window.ptkSnippet) ? window.ptkSnippet : {};
+        var i18n = (typeof window.pivotPerformanceToolkitSnippet === 'object' && window.pivotPerformanceToolkitSnippet) ? window.pivotPerformanceToolkitSnippet : {};
         var expandLabel   = i18n.expand || '';
         var collapseLabel = i18n.collapse || '';
 
@@ -405,7 +428,7 @@
     }
 
     function bindHtaccessToggle() {
-        var i18n = (typeof window.ptkAdmin === 'object' && window.ptkAdmin) ? window.ptkAdmin : {};
+        var i18n = (typeof window.pivotPerformanceToolkitAdmin === 'object' && window.pivotPerformanceToolkitAdmin) ? window.pivotPerformanceToolkitAdmin : {};
         var requestFailedMessage = i18n.requestFailed || '';
 
         document.querySelectorAll('[data-htaccess-toggle]').forEach(function (container) {
@@ -435,7 +458,7 @@
                 body.set('action', action);
                 body.set('_ajax_nonce', nonce || '');
 
-                fetch(getAjaxUrl(), {
+                ajaxFetch({
                     method: 'POST',
                     credentials: 'same-origin',
                     headers: {
@@ -728,7 +751,7 @@
     function bindWooExclusions() {
         var addButton = document.getElementById('pivot-performance-toolkit-add-woo-exclusions');
         var textarea = document.getElementById('pivot-performance-toolkit-excluded-urls');
-        var data = (typeof window.ptkAdvancedRules === 'object' && window.ptkAdvancedRules) ? window.ptkAdvancedRules : {};
+        var data = (typeof window.pivotPerformanceToolkitAdvancedRules === 'object' && window.pivotPerformanceToolkitAdvancedRules) ? window.pivotPerformanceToolkitAdvancedRules : {};
         var defaults = data.wooDefaults;
 
         if (!addButton || !textarea || !Array.isArray(defaults)) {
@@ -772,7 +795,7 @@
             return;
         }
 
-        var data = (typeof window.ptkBrowserCacheTest === 'object' && window.ptkBrowserCacheTest) ? window.ptkBrowserCacheTest : {};
+        var data = (typeof window.pivotPerformanceToolkitBrowserCacheTest === 'object' && window.pivotPerformanceToolkitBrowserCacheTest) ? window.pivotPerformanceToolkitBrowserCacheTest : {};
         var homeUrl = data.homeUrl || '/';
         var i18n = (typeof data.i18n === 'object' && data.i18n) ? data.i18n : {};
 
@@ -986,7 +1009,7 @@
             return;
         }
 
-        var data = (typeof window.ptkAssetsDetector === 'object' && window.ptkAssetsDetector) ? window.ptkAssetsDetector : {};
+        var data = (typeof window.pivotPerformanceToolkitAssetsDetector === 'object' && window.pivotPerformanceToolkitAssetsDetector) ? window.pivotPerformanceToolkitAssetsDetector : {};
         var i18n = (typeof data.i18n === 'object' && data.i18n) ? data.i18n : {};
 
         var activeFilter = 'all';
@@ -1102,7 +1125,6 @@
             var action    = root.getAttribute('data-ajax-action') || '';
             var nonce     = root.getAttribute('data-ajax-nonce') || '';
             var targetUrl = select.value || '';
-            var ajaxUrl   = getAjaxUrl();
 
             if (!targetUrl) {
                 setStatus(i18n.selectUrl || '', true);
@@ -1118,7 +1140,7 @@
             body.set('_ajax_nonce', nonce);
             body.set('target_url', targetUrl);
 
-            fetch(ajaxUrl, {
+            ajaxFetch({
                 method: 'POST',
                 credentials: 'same-origin',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
@@ -1170,7 +1192,7 @@
     }
 
     function bindObjectCacheButtons() {
-        var i18n = (typeof window.ptkAdmin === 'object' && window.ptkAdmin) ? window.ptkAdmin : {};
+        var i18n = (typeof window.pivotPerformanceToolkitAdmin === 'object' && window.pivotPerformanceToolkitAdmin) ? window.pivotPerformanceToolkitAdmin : {};
         var requestFailedMessage = i18n.requestFailed || '';
 
         document.querySelectorAll('.pivot-performance-toolkit-oc-btn[data-oc-action]').forEach(function (btn) {
@@ -1191,7 +1213,7 @@
                 body.set('action', action);
                 body.set('_ajax_nonce', nonce);
 
-                fetch(getAjaxUrl(), {
+                ajaxFetch({
                     method: 'POST',
                     credentials: 'same-origin',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },

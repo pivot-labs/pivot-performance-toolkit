@@ -134,7 +134,7 @@ final class PageCache implements ModuleInterface {
 			'enabled'        => $this->settings->getBool( 'enable_page_cache' ),
 			'ttl'            => $this->settings->getInt( 'cache_ttl' ),
 			'bypass_cookies' => $this->settings->getLines( 'cache_bypass_cookies' ),
-			'collect_url'    => rest_url( 'ptk/v1/performance-tests/collect' ),
+			'collect_url'    => rest_url( 'pivot-performance-toolkit/v1/performance-tests/collect' ),
 		);
 
 		// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_export -- not debug output: this generates a PHP-file cache (`<?php return array(...);`) that advanced-cache.php includes directly for fast, opcache-friendly config reads without bootstrapping WordPress.

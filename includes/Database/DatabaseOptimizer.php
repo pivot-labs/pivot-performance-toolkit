@@ -218,8 +218,8 @@ final class DatabaseOptimizer {
 		$count  = 0;
 
 		foreach ( $tables as $table ) {
-            // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- OPTIMIZE TABLE is a maintenance mutation; there is nothing here to cache.
-			$wpdb->query( 'OPTIMIZE TABLE `' . esc_sql( $table ) . '`' );
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- OPTIMIZE TABLE is a maintenance mutation; there is nothing here to cache. The table name is bound as an identifier with %i.
+			$wpdb->query( $wpdb->prepare( 'OPTIMIZE TABLE %i', $table ) );
 			++$count;
 		}
 
@@ -256,20 +256,18 @@ final class DatabaseOptimizer {
 		global $wpdb;
 
 		$sortable_columns = array(
-			'name'   => 'tbl_name',
-			'engine' => 'tbl_engine',
-			'rows'   => 'tbl_rows',
-			'size'   => 'tbl_size',
+			'name'   => 'name',
+			'engine' => 'engine',
+			'rows'   => 'rows',
+			'size'   => 'size_bytes',
 		);
 
-		$order_by  = $sortable_columns[ $sort_by ] ?? 'tbl_size';
-		$direction = 'asc' === strtolower( $sort_dir ) ? 'ASC' : 'DESC';
+		$sort_key  = $sortable_columns[ $sort_by ] ?? 'size_bytes';
+		$ascending = 'asc' === strtolower( $sort_dir );
 
-		// $order_by is restricted to a hardcoded whitelist ($sortable_columns above);
-		// $direction is a ternary returning only 'ASC' or 'DESC'. Neither can ever
-		// contain attacker-controlled content, regardless of what $sort_by/$sort_dir
-		// are — ORDER BY identifiers cannot use $wpdb->prepare() placeholders anyway.
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery, PluginCheck.Security.DirectDB.UnescapedDBParameter -- live per-table size/row-count status display; caching would show stale figures right after the admin runs a cleanup/optimize action. $order_by is whitelist-derived, see comment above.
+		// Constant query (no interpolated values); the sort happens in PHP below, so no
+		// request-derived value ever reaches the SQL.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- live per-table size/row-count status display; caching would show stale figures right after the admin runs a cleanup/optimize action.
 		$rows = $wpdb->get_results(
 			"SELECT
                 table_name                 AS tbl_name,
@@ -278,8 +276,7 @@ final class DatabaseOptimizer {
                 data_length + index_length AS tbl_size,
                 CASE WHEN engine = 'MyISAM' THEN data_free ELSE 0 END AS tbl_overhead
              FROM information_schema.TABLES
-             WHERE table_schema = DATABASE()
-             ORDER BY {$order_by} {$direction}" // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+             WHERE table_schema = DATABASE()"
 		) ?: array();
 
 		$result = array();
@@ -292,6 +289,19 @@ final class DatabaseOptimizer {
 				'overhead_bytes' => (int) $row->tbl_overhead,
 			);
 		}
+
+		usort(
+			$result,
+			static function ( array $a, array $b ) use ( $sort_key, $ascending ): int {
+				$order = $a[ $sort_key ] <=> $b[ $sort_key ];
+
+				if ( 0 === $order ) {
+					$order = strcmp( $a['name'], $b['name'] );
+				}
+
+				return $ascending ? $order : -$order;
+			}
+		);
 
 		return $result;
 	}

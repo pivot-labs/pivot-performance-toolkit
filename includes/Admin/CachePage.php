@@ -411,7 +411,7 @@ final class CachePage extends BladeAdminPage {
 			'timeout'     => max( 1.0, $timeout ),
 			'redirection' => 3,
 			'headers'     => array(
-				'X-PTK-Preload' => '1',
+				'X-Pivot-Performance-Toolkit-Preload' => '1',
 			),
 			'user-agent'  => 'Pivot Performance Toolkit Cache Preload',
 			'sslverify'   => ! $this->isLocalOrNonProductionSite( $url ),

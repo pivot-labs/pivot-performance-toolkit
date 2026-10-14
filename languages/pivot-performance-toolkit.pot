@@ -1165,7 +1165,7 @@ msgid "Cache misses: %d"
 msgstr ""
 
 #: includes/Cache/ObjectCacheManager.php:82
-msgid "PTK File Cache"
+msgid "Pivot Performance Toolkit File Cache"
 msgstr ""
 
 #: includes/Cache/ObjectCacheManager.php:99

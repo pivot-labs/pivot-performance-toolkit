@@ -11,16 +11,6 @@ $baseDir = dirname(dirname($vendorDir));
 
 return array(
     'PivotPerformanceToolkit\\Vendor\\Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
-    'DateError' => $vendorDir . '/symfony/polyfill-php83/Resources/stubs/DateError.php',
-    'DateException' => $vendorDir . '/symfony/polyfill-php83/Resources/stubs/DateException.php',
-    'DateInvalidOperationException' => $vendorDir . '/symfony/polyfill-php83/Resources/stubs/DateInvalidOperationException.php',
-    'DateInvalidTimeZoneException' => $vendorDir . '/symfony/polyfill-php83/Resources/stubs/DateInvalidTimeZoneException.php',
-    'DateMalformedIntervalStringException' => $vendorDir . '/symfony/polyfill-php83/Resources/stubs/DateMalformedIntervalStringException.php',
-    'DateMalformedPeriodStringException' => $vendorDir . '/symfony/polyfill-php83/Resources/stubs/DateMalformedPeriodStringException.php',
-    'DateMalformedStringException' => $vendorDir . '/symfony/polyfill-php83/Resources/stubs/DateMalformedStringException.php',
-    'DateObjectError' => $vendorDir . '/symfony/polyfill-php83/Resources/stubs/DateObjectError.php',
-    'DateRangeError' => $vendorDir . '/symfony/polyfill-php83/Resources/stubs/DateRangeError.php',
-    'Override' => $vendorDir . '/symfony/polyfill-php83/Resources/stubs/Override.php',
     'PivotPerformanceToolkit\\Vendor\\Carbon\\AbstractTranslator' => $vendorDir . '/nesbot/carbon/src/Carbon/AbstractTranslator.php',
     'PivotPerformanceToolkit\\Vendor\\Carbon\\Callback' => $vendorDir . '/nesbot/carbon/src/Carbon/Callback.php',
     'PivotPerformanceToolkit\\Vendor\\Carbon\\Carbon' => $vendorDir . '/nesbot/carbon/src/Carbon/Carbon.php',
@@ -660,8 +650,5 @@ return array(
     'PivotPerformanceToolkit\\Vendor\\Symfony\\Contracts\\Translation\\TranslatableInterface' => $vendorDir . '/symfony/translation-contracts/TranslatableInterface.php',
     'PivotPerformanceToolkit\\Vendor\\Symfony\\Contracts\\Translation\\TranslatorInterface' => $vendorDir . '/symfony/translation-contracts/TranslatorInterface.php',
     'PivotPerformanceToolkit\\Vendor\\Symfony\\Contracts\\Translation\\TranslatorTrait' => $vendorDir . '/symfony/translation-contracts/TranslatorTrait.php',
-    'PivotPerformanceToolkit\\Vendor\\Symfony\\Polyfill\\Mbstring\\Mbstring' => $vendorDir . '/symfony/polyfill-mbstring/Mbstring.php',
-    'PivotPerformanceToolkit\\Vendor\\Symfony\\Polyfill\\Php83\\Php83' => $vendorDir . '/symfony/polyfill-php83/Php83.php',
     'PivotPerformanceToolkit\\Vendor\\voku\\helper\\ASCII' => $vendorDir . '/voku/portable-ascii/src/voku/helper/ASCII.php',
-    'SQLite3Exception' => $vendorDir . '/symfony/polyfill-php83/Resources/stubs/SQLite3Exception.php',
 );

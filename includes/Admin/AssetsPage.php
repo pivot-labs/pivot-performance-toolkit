@@ -83,7 +83,7 @@ final class AssetsPage extends BladeAdminPage {
 				'redirection' => 5,
 				'sslverify'   => ! $this->isLocalEnvironment(),
 				'headers'     => array(
-					'X-PTK-Asset-Detector' => '1',
+					'X-Pivot-Performance-Toolkit-Asset-Detector' => '1',
 				),
 				'user-agent'  => 'Pivot Performance Toolkit Assets Detector',
 			)

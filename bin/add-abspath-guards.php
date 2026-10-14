@@ -26,7 +26,7 @@ $guard = "\nif ( ! defined( 'ABSPATH' ) ) {\n\texit;\n}\n";
  * leading `declare(...);` / `namespace ...;` statements, or right after the
  * opening `<?php` tag if neither is present.
  */
-function ptk_find_insert_offset( string $content ): int {
+function pivot_performance_toolkit_find_insert_offset( string $content ): int {
 	$tokens               = token_get_all( $content );
 	$offset               = 0;
 	$open_tag_end         = null;
@@ -85,7 +85,7 @@ foreach ( $iterator as $file ) {
 		continue;
 	}
 
-	$insert_offset    = ptk_find_insert_offset( $content );
+	$insert_offset    = pivot_performance_toolkit_find_insert_offset( $content );
 	$patched_content  = substr( $content, 0, $insert_offset ) . $guard . substr( $content, $insert_offset );
 
 	if ( false === file_put_contents( $path, $patched_content ) ) {

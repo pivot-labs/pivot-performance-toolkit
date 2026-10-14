@@ -60,7 +60,7 @@ final class Menu {
 			'manage_options',
 			self::ROOT_SLUG,
 			array( $this, 'renderCurrentPage' ),
-			PIVOT_PERFORMANCE_TOOLKIT_URL . 'src/img/ptk-menu-icon-white.svg',
+			PIVOT_PERFORMANCE_TOOLKIT_URL . 'src/img/pivot-performance-toolkit-menu-icon-white.svg',
 			81
 		);
 
@@ -109,7 +109,7 @@ final class Menu {
 
 		wp_localize_script(
 			'pivot-performance-toolkit-admin-js',
-			'ptkSnippet',
+			'pivotPerformanceToolkitSnippet',
 			array(
 				'copied'     => __( 'Copied!', 'pivot-performance-toolkit' ),
 				'copyFailed' => __( 'Failed to copy. Please try again.', 'pivot-performance-toolkit' ),
@@ -120,8 +120,9 @@ final class Menu {
 
 		wp_localize_script(
 			'pivot-performance-toolkit-admin-js',
-			'ptkAdmin',
+			'pivotPerformanceToolkitAdmin',
 			array(
+				'ajaxUrl'       => admin_url( 'admin-ajax.php' ),
 				'requestFailed' => __( 'Request failed.', 'pivot-performance-toolkit' ),
 				'saved'         => __( 'Saved', 'pivot-performance-toolkit' ),
 				'error'         => __( 'Error', 'pivot-performance-toolkit' ),
@@ -134,7 +135,7 @@ final class Menu {
 		// against it only when that section's markup is present on the page.
 		wp_localize_script(
 			'pivot-performance-toolkit-admin-js',
-			'ptkAdvancedRules',
+			'pivotPerformanceToolkitAdvancedRules',
 			array(
 				'wooDefaults' => array(
 					'/cart',
@@ -148,7 +149,7 @@ final class Menu {
 
 		wp_localize_script(
 			'pivot-performance-toolkit-admin-js',
-			'ptkBrowserCacheTest',
+			'pivotPerformanceToolkitBrowserCacheTest',
 			array(
 				'homeUrl' => home_url(),
 				'i18n'    => array(
@@ -178,7 +179,7 @@ final class Menu {
 
 		wp_localize_script(
 			'pivot-performance-toolkit-admin-js',
-			'ptkAssetsDetector',
+			'pivotPerformanceToolkitAssetsDetector',
 			array(
 				'i18n' => array(
 					'selectUrl'         => __( 'Please select a URL first.', 'pivot-performance-toolkit' ),
@@ -198,7 +199,7 @@ final class Menu {
 	}
 
 	private function menuIconCss(): string {
-		$icon_url = esc_url( PIVOT_PERFORMANCE_TOOLKIT_URL . 'src/img/ptk-menu-icon-white.svg' );
+		$icon_url = esc_url( PIVOT_PERFORMANCE_TOOLKIT_URL . 'src/img/pivot-performance-toolkit-menu-icon-white.svg' );
 
 		return '#adminmenu .toplevel_page_pivot-performance-toolkit .wp-menu-image img{display:none}#adminmenu .toplevel_page_pivot-performance-toolkit .wp-menu-image{color:inherit}#adminmenu .toplevel_page_pivot-performance-toolkit .wp-menu-image:before{content:"";display:block;width:26px;height:26px;margin:-2px auto 0;transform:translateY(-1px);background-color:currentColor;-webkit-mask-image:url("' . $icon_url . '");mask-image:url("' . $icon_url . '");-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:26px 26px;mask-size:26px 26px}#adminmenu .toplevel_page_pivot-performance-toolkit.wp-has-current-submenu .wp-menu-image:before,#adminmenu .toplevel_page_pivot-performance-toolkit.current .wp-menu-image:before{transform:translateY(2px)}';
 	}
