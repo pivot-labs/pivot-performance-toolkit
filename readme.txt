@@ -4,7 +4,7 @@ Tags: performance, cache, minify, lazy load, cloudflare
 Requires at least: 6.9
 Tested up to: 7.1
 Requires PHP: 8.2
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -178,6 +178,16 @@ Icon artwork from Lucide (ISC license) is embedded as readable SVG markup in `in
 
 == Changelog ==
 
+= 1.1.2 =
+
+* Security: Admin notices and "settings saved" state are no longer passed in the URL; every screen is a registered admin page; database table sorting is nonce-protected; all `$_SERVER` / `$_COOKIE` input is read through one sanitizing class.
+* Change: Generated minified and combined CSS/JS files are now stored in `wp-content/uploads/pivot-performance-toolkit/` (previously under `wp-content/cache`). Old copies are removed the next time you clear the cache.
+* Change: The plugin now requires the PHP mbstring extension (it shows an admin notice if it is missing). The bundled Carbon and Symfony polyfill libraries were removed, making the package about 6 MB smaller.
+* Change: Inline JavaScript and CSS moved to enqueued files; the settings export now downloads through AJAX; page-output rewriting uses WordPress's HTML API and script-tag helpers.
+* Change: Short internal prefixes renamed to `pivot_performance_toolkit`. Bookmarked admin URLs that used the old `?section=` form now open the dashboard.
+* Fix: Database queries now use fixed or prepared SQL; no output buffer is left open when a template fails; asset locations are detected correctly on sites that move wp-content.
+* Docs: The readme now documents where the plugin writes files, which requests it makes, and how to rebuild the compiled CSS/JS from the included sources.
+
 = 1.1.1 =
 
 * Security: Hardening pass covering input sanitization, output escaping, nonce/permission checks, and file-access guards across the plugin, following a WordPress.org review.
@@ -194,6 +204,10 @@ Icon artwork from Lucide (ISC license) is embedded as readable SVG markup in `in
 * Initial public release.
 
 == Upgrade Notice ==
+
+= 1.1.2 =
+
+Requires the PHP mbstring extension. Security and compliance release; generated minified/combined assets move to the uploads folder (clear the cache once after updating). Recommended update.
 
 = 1.1.1 =
 
