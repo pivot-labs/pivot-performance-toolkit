@@ -16,7 +16,7 @@ use PivotPerformanceToolkit\Vendor\Illuminate\View\Engines\EngineResolver;
 use InvalidArgumentException;
 class Factory implements FactoryContract
 {
-    use Macroable, \PivotPerformanceToolkit\Vendor\Illuminate\View\Concerns\ManagesComponents, \PivotPerformanceToolkit\Vendor\Illuminate\View\Concerns\ManagesEvents, \PivotPerformanceToolkit\Vendor\Illuminate\View\Concerns\ManagesLoops;
+    use Macroable, \PivotPerformanceToolkit\Vendor\Illuminate\View\Concerns\ManagesEvents, \PivotPerformanceToolkit\Vendor\Illuminate\View\Concerns\ManagesLoops;
     /**
      * The engine implementation.
      *

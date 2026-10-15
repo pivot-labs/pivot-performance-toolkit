@@ -19,14 +19,12 @@ final class VendorViewTrimTest extends TestCase {
 	private const ROOT = __DIR__ . '/../../..';
 
 	/**
-	 * Files in the bundled view library allowed to call ob_start().
-	 * PhpEngine pairs it with ob_get_clean() in the same function.
-	 * ManagesComponents buffers a component's slot between its opening and closing
-	 * tag in a template; its callers always close it (renderComponent() / endSlot()).
+	 * Files in the bundled view library allowed to call ob_start(). PhpEngine pairs it
+	 * with ob_get_clean() in the same function. Component and slot buffering is done by
+	 * the plugin's own Views/ClosureComponents instead (see ClosureComponentsTest).
 	 */
 	private const ALLOWED = array(
 		'illuminate/view/Engines/PhpEngine.php',
-		'illuminate/view/Concerns/ManagesComponents.php',
 	);
 
 	public function test_only_expected_vendor_files_call_ob_start(): void {

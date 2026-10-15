@@ -394,7 +394,6 @@ return array(
     'PivotPerformanceToolkit\\Vendor\\Illuminate\\View\\Component' => $vendorDir . '/illuminate/view/Component.php',
     'PivotPerformanceToolkit\\Vendor\\Illuminate\\View\\ComponentAttributeBag' => $vendorDir . '/illuminate/view/ComponentAttributeBag.php',
     'PivotPerformanceToolkit\\Vendor\\Illuminate\\View\\ComponentSlot' => $vendorDir . '/illuminate/view/ComponentSlot.php',
-    'PivotPerformanceToolkit\\Vendor\\Illuminate\\View\\Concerns\\ManagesComponents' => $vendorDir . '/illuminate/view/Concerns/ManagesComponents.php',
     'PivotPerformanceToolkit\\Vendor\\Illuminate\\View\\Concerns\\ManagesEvents' => $vendorDir . '/illuminate/view/Concerns/ManagesEvents.php',
     'PivotPerformanceToolkit\\Vendor\\Illuminate\\View\\Concerns\\ManagesLoops' => $vendorDir . '/illuminate/view/Concerns/ManagesLoops.php',
     'PivotPerformanceToolkit\\Vendor\\Illuminate\\View\\DynamicComponent' => $vendorDir . '/illuminate/view/DynamicComponent.php',

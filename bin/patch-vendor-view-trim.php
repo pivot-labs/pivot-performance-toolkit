@@ -23,7 +23,7 @@ if ( ! is_dir( $vendor_dir ) ) {
 	exit( 0 );
 }
 
-$traits  = array( 'ManagesFragments', 'ManagesLayouts', 'ManagesStacks', 'ManagesTranslations' );
+$traits  = array( 'ManagesComponents', 'ManagesFragments', 'ManagesLayouts', 'ManagesStacks', 'ManagesTranslations' );
 $factory = $vendor_dir . '/illuminate/view/Factory.php';
 $errors  = array();
 

@@ -9,7 +9,7 @@ Tick items off as they're resolved. Each links to the reviewer's full explanatio
 - [x] [Determine file and directory locations correctly](#file-locations) — `plugin_basename()` in Menu; URL-prefix mapping in `LocalAssetResolver`; drop-in path commented. Cache dir moves under disallowed-writes
 - [x] [Setting a default timezone (vendored Carbon)](#timezone) — Carbon removed via composer `replace`
 - [x] [Writing data to disallowed locations](#disallowed-writes) — minified/combined assets moved to uploads via `AssetStorage`; page cache/drop-ins/Blade stay in wp-content (caching exception, documented)
-- [~] [Unclosed ob_start() (vendored Illuminate)](#ob-start) — 5 of 7 removed via `bin/patch-vendor-view-trim.php`; 2 component/slot buffers in `ManagesComponents` remain, explained
+- [x] [Unclosed ob_start() (vendored Illuminate)](#ob-start) — unused Blade traits removed + component/slot buffering replaced by `ClosureComponents` (body compiled to closures, `capture()` in one function)
 - [x] [Nonces and user permissions](#nonces) — `FlashNotice`, nonce-gated `TableSort`, screens routed as real admin pages (no `section`/`tab` reads)
 - [x] [Sanitize, validate and escape input (`$_SERVER`, `$_COOKIE`)](#sanitize) — all reads via `RequestInput`; drop-in uses a documented inline filter; parity test runs the drop-in
 - [x] [Escape variables and options when echoed](#escape) — inline JS/CSS to files, Composer guard removed, export via `wp_send_json_success`, `BladeEngine::display()`; 2 documented `echo` sites remain

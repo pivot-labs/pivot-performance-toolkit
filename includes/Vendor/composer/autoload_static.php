@@ -481,7 +481,6 @@ class PivotPerformanceToolkit_Autoloader_Static
         'PivotPerformanceToolkit\\Vendor\\Illuminate\\View\\Component' => __DIR__ . '/..' . '/illuminate/view/Component.php',
         'PivotPerformanceToolkit\\Vendor\\Illuminate\\View\\ComponentAttributeBag' => __DIR__ . '/..' . '/illuminate/view/ComponentAttributeBag.php',
         'PivotPerformanceToolkit\\Vendor\\Illuminate\\View\\ComponentSlot' => __DIR__ . '/..' . '/illuminate/view/ComponentSlot.php',
-        'PivotPerformanceToolkit\\Vendor\\Illuminate\\View\\Concerns\\ManagesComponents' => __DIR__ . '/..' . '/illuminate/view/Concerns/ManagesComponents.php',
         'PivotPerformanceToolkit\\Vendor\\Illuminate\\View\\Concerns\\ManagesEvents' => __DIR__ . '/..' . '/illuminate/view/Concerns/ManagesEvents.php',
         'PivotPerformanceToolkit\\Vendor\\Illuminate\\View\\Concerns\\ManagesLoops' => __DIR__ . '/..' . '/illuminate/view/Concerns/ManagesLoops.php',
         'PivotPerformanceToolkit\\Vendor\\Illuminate\\View\\DynamicComponent' => __DIR__ . '/..' . '/illuminate/view/DynamicComponent.php',

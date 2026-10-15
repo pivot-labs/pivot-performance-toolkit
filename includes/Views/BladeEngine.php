@@ -22,7 +22,6 @@ use PivotPerformanceToolkit\Vendor\Illuminate\View\Factory;
 use PivotPerformanceToolkit\Vendor\Illuminate\View\FileViewFinder;
 use PivotPerformanceToolkit\Vendor\Illuminate\View\Engines\CompilerEngine;
 use PivotPerformanceToolkit\Vendor\Illuminate\View\Engines\EngineResolver;
-use PivotPerformanceToolkit\Vendor\Illuminate\View\Compilers\BladeCompiler;
 
 /**
  * Blade templating engine for the plugin.
@@ -75,7 +74,7 @@ final class BladeEngine {
 		$resolver = new EngineResolver();
 
 		// Register the Blade compiler
-		$blade_compiler = new BladeCompiler( $filesystem, $cache_path );
+		$blade_compiler = new ClosureBladeCompiler( $filesystem, $cache_path );
 		$blade_compiler->setEchoFormat( 'pivotperformancetoolkit_vendor_e(%s)' );
 		$resolver->register(
 			'blade',
@@ -86,7 +85,7 @@ final class BladeEngine {
 
 		// Factory now requires an events dispatcher in recent Illuminate versions.
 		$events             = new Dispatcher( $this->container );
-		$this->view_factory = new Factory( $resolver, $finder, $events );
+		$this->view_factory = new ClosureViewFactory( $resolver, $finder, $events );
 		$this->view_factory->setContainer( $this->container );
 
 		// Blade component tag compilation resolves view contracts via the global container.
