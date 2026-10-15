@@ -169,6 +169,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		$pivot_performance_toolkit_html        = (string) file_get_contents( $pivot_performance_toolkit_file );
 
 		if ( '' !== $pivot_performance_toolkit_collect_url && '' !== $pivot_performance_toolkit_probe_src && '' !== $pivot_performance_toolkit_html ) {
+			// phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript -- hand-built on purpose: this drop-in runs before WordPress and its script loader exist (see the comment above this block).
 			$pivot_performance_toolkit_script = "\n" . '<script src="' . htmlspecialchars( $pivot_performance_toolkit_probe_src, ENT_QUOTES ) . '" data-collect-url="' . htmlspecialchars( $pivot_performance_toolkit_collect_url, ENT_QUOTES ) . '"></script>' . "\n";
 
 			$pivot_performance_toolkit_replaced = preg_replace( '/<\/body\s*>/i', str_replace( array( '\\', '$' ), array( '\\\\', '\\$' ), $pivot_performance_toolkit_script ) . '</body>', $pivot_performance_toolkit_html, 1 );

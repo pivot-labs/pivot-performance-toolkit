@@ -27,6 +27,7 @@ final class ToolsPage extends BladeAdminPage {
 
 	private const EXPORT_PLUGIN               = 'pivot-performance-toolkit';
 	private const EXPORT_SCHEMA_VERSION       = 1;
+	private const MAX_IMPORT_BYTES            = 1048576;
 	private const CLEAR_MINIFIED_ACTION       = 'pivot_performance_toolkit_clear_minified_assets';
 	private const EXPORT_SETTINGS_ACTION      = 'pivot_performance_toolkit_export_settings';
 	private const IMPORT_SETTINGS_ACTION      = 'pivot_performance_toolkit_import_settings';
@@ -233,6 +234,11 @@ final class ToolsPage extends BladeAdminPage {
 
 		if ( '' === $tmp_name || ! is_uploaded_file( $tmp_name ) ) {
 			$this->redirectWithNotice( false, __( 'Invalid uploaded file.', 'pivot-performance-toolkit' ), self::SLUG_IMPORT_EXPORT );
+		}
+
+		// A settings export is a few KB; refuse anything large before reading it into memory.
+		if ( (int) ( $file['size'] ?? 0 ) > self::MAX_IMPORT_BYTES ) {
+			$this->redirectWithNotice( false, __( 'Import file is too large.', 'pivot-performance-toolkit' ), self::SLUG_IMPORT_EXPORT );
 		}
 
 		$raw = file_get_contents( $tmp_name );

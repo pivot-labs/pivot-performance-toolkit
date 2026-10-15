@@ -46,6 +46,7 @@ final class RequestInput {
 			return $fallback;
 		}
 
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- sanitized by printableAscii(); sanitize_text_field() is deliberately not used here (see above).
 		return self::printableAscii( wp_unslash( (string) $_SERVER[ $key ] ) );
 	}
 

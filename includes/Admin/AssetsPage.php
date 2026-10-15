@@ -258,21 +258,25 @@ final class AssetsPage extends BladeAdminPage {
 		return $rows;
 	}
 
+	/**
+	 * Which part of WordPress an asset on this site comes from, judged by the URL prefixes
+	 * WordPress itself reports (not by assuming the default wp-content/ layout, which sites
+	 * can change).
+	 */
 	private function categorizeLocalUrl( string $path ): string {
-		if ( str_contains( $path, '/wp-includes/' ) ) {
-			return 'Core';
-		}
+		$prefixes = array(
+			'Core'   => includes_url(),
+			'Theme'  => get_theme_root_uri(),
+			'Plugin' => plugins_url(),
+			'Admin'  => admin_url(),
+		);
 
-		if ( str_contains( $path, '/wp-content/themes/' ) ) {
-			return 'Theme';
-		}
+		foreach ( $prefixes as $category => $url ) {
+			$prefix = trailingslashit( (string) wp_parse_url( $url, PHP_URL_PATH ) );
 
-		if ( str_contains( $path, '/wp-content/plugins/' ) ) {
-			return 'Plugin';
-		}
-
-		if ( str_contains( $path, '/wp-admin/' ) ) {
-			return 'Admin';
+			if ( '/' !== $prefix && str_starts_with( $path, $prefix ) ) {
+				return $category;
+			}
 		}
 
 		return 'Other';
