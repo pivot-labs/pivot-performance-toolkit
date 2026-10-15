@@ -43,6 +43,7 @@ final class Menu {
 		add_action( 'admin_menu', array( $this, 'addMenuPage' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueueAssets' ) );
 		add_action( 'current_screen', array( $this, 'suppressThirdPartyNotices' ), 100 );
+		add_filter( 'parent_file', array( $this, 'highlightParentMenu' ) );
 	}
 
 	public function addMenuPage(): void {
@@ -52,8 +53,10 @@ final class Menu {
 			return;
 		}
 
-		// Register only the root menu page. All other pages are routed internally
-		// via the ?section= query parameter.
+		// The root page is the only visible menu entry; the plugin's own navigation links to the
+		// rest. Every other page is still a real, capability-checked admin page (registered
+		// without a menu parent, so it is reachable at admin.php?page=<slug> but not listed in
+		// the sidebar), which lets WordPress itself tell AdminShell which screen to render.
 		$top_level_hook = add_menu_page(
 			$root_page->pageTitle(),
 			__( 'Performance', 'pivot-performance-toolkit' ),
@@ -67,6 +70,43 @@ final class Menu {
 		if ( is_string( $top_level_hook ) ) {
 			$this->page_hooks[] = $top_level_hook;
 		}
+
+		foreach ( $this->pages as $slug => $page ) {
+			if ( self::ROOT_SLUG === $slug ) {
+				continue;
+			}
+
+			$hook = add_submenu_page(
+				null,
+				$page->pageTitle(),
+				$page->pageTitle(),
+				'manage_options',
+				$slug,
+				array( $this, 'renderCurrentPage' )
+			);
+
+			if ( is_string( $hook ) ) {
+				$this->page_hooks[] = $hook;
+			}
+		}
+	}
+
+	/**
+	 * Keeps the "Performance" sidebar entry highlighted while one of the plugin's
+	 * hidden pages is showing.
+	 *
+	 * @param mixed $parent_file
+	 *
+	 * @return mixed
+	 */
+	public function highlightParentMenu( $parent_file ) {
+		global $plugin_page;
+
+		if ( is_string( $plugin_page ) && isset( $this->pages[ $plugin_page ] ) ) {
+			return self::ROOT_SLUG;
+		}
+
+		return $parent_file;
 	}
 
 	public function renderCurrentPage(): void {
@@ -80,13 +120,14 @@ final class Menu {
 	public function enqueueAssets( string $hook_suffix ): void {
 		// The menu icon appears in the global admin sidebar on every wp-admin
 		// screen, not just this plugin's own pages, so its styling can't wait
-		// for the page-specific bundle below — a dedicated, source-less style
-		// handle (registered with `false` as the src, a WordPress-supported
-		// pattern for inline-only styles) carries it instead of an inline
-		// <style> tag.
-		wp_register_style( 'pivot-performance-toolkit-menu-icon', false, array(), PIVOT_PERFORMANCE_TOOLKIT_VERSION );
-		wp_enqueue_style( 'pivot-performance-toolkit-menu-icon' );
-		wp_add_inline_style( 'pivot-performance-toolkit-menu-icon', $this->menuIconCss() );
+		// for the page-specific bundle below — a small dedicated stylesheet
+		// carries it.
+		wp_enqueue_style(
+			'pivot-performance-toolkit-menu-icon',
+			PIVOT_PERFORMANCE_TOOLKIT_URL . 'assets/css/menu-icon.css',
+			array(),
+			PIVOT_PERFORMANCE_TOOLKIT_VERSION
+		);
 
 		if ( ! in_array( $hook_suffix, $this->page_hooks, true ) ) {
 			return;
@@ -129,10 +170,9 @@ final class Menu {
 			)
 		);
 
-		// All plugin sections render behind this single bundle (routed via
-		// ?section=, not separate admin_enqueue_scripts hook suffixes), so
-		// section-specific data is localized here too and the JS binds
-		// against it only when that section's markup is present on the page.
+		// Every plugin page loads this single bundle (see the page_hooks check above), so
+		// section-specific data is localized here too and the JS binds against it only
+		// when that section's markup is present on the page.
 		wp_localize_script(
 			'pivot-performance-toolkit-admin-js',
 			'pivotPerformanceToolkitAdvancedRules',
@@ -197,13 +237,6 @@ final class Menu {
 			)
 		);
 	}
-
-	private function menuIconCss(): string {
-		$icon_url = esc_url( PIVOT_PERFORMANCE_TOOLKIT_URL . 'src/img/pivot-performance-toolkit-menu-icon-white.svg' );
-
-		return '#adminmenu .toplevel_page_pivot-performance-toolkit .wp-menu-image img{display:none}#adminmenu .toplevel_page_pivot-performance-toolkit .wp-menu-image{color:inherit}#adminmenu .toplevel_page_pivot-performance-toolkit .wp-menu-image:before{content:"";display:block;width:26px;height:26px;margin:-2px auto 0;transform:translateY(-1px);background-color:currentColor;-webkit-mask-image:url("' . $icon_url . '");mask-image:url("' . $icon_url . '");-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:26px 26px;mask-size:26px 26px}#adminmenu .toplevel_page_pivot-performance-toolkit.wp-has-current-submenu .wp-menu-image:before,#adminmenu .toplevel_page_pivot-performance-toolkit.current .wp-menu-image:before{transform:translateY(2px)}';
-	}
-
 	/**
 	 * Remove third-party admin notices from plugin screens.
 	 */
@@ -285,11 +318,12 @@ final class Menu {
 			return true;
 		}
 
-		if ( defined( 'WP_PLUGIN_DIR' ) && str_starts_with( $callback_file, WP_PLUGIN_DIR ) ) {
-			return false;
-		}
+		// plugin_basename() strips the plugins and mu-plugins directories (wherever this
+		// site relocated them) and returns any other path unchanged, so a changed result
+		// means the callback lives in another plugin.
+		$normalized = wp_normalize_path( $callback_file );
 
-		if ( defined( 'WPMU_PLUGIN_DIR' ) && str_starts_with( $callback_file, WPMU_PLUGIN_DIR ) ) {
+		if ( plugin_basename( $normalized ) !== trim( $normalized, '/' ) ) {
 			return false;
 		}
 

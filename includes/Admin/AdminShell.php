@@ -26,6 +26,24 @@ final class AdminShell {
 		'system'       => 'pivot-performance-toolkit-system-status',
 	);
 
+	private const SECTION_BY_PAGE = array(
+		'pivot-performance-toolkit'                      => 'overview',
+		'pivot-performance-toolkit-cache'                => 'caching',
+		'pivot-performance-toolkit-browser-cache'        => 'caching',
+		'pivot-performance-toolkit-cdn-integrations'     => 'caching',
+		'pivot-performance-toolkit-advanced-rules'       => 'caching',
+		'pivot-performance-toolkit-file-optimization'    => 'optimization',
+		'pivot-performance-toolkit-media-optimization'   => 'optimization',
+		'pivot-performance-toolkit-performance'          => 'optimization',
+		'pivot-performance-toolkit-assets'               => 'optimization',
+		'pivot-performance-toolkit-database'             => 'database',
+		'pivot-performance-toolkit-database-table'       => 'database',
+		'pivot-performance-toolkit-system-status'        => 'system',
+		'pivot-performance-toolkit-system-import-export' => 'system',
+		'pivot-performance-toolkit-system-maintenance'   => 'system',
+		'pivot-performance-toolkit-settings'             => 'settings',
+	);
+
 	private const SECTION_LABELS = array(
 		'overview'     => 'Overview',
 		'caching'      => 'Caching',
@@ -53,26 +71,44 @@ final class AdminShell {
 	);
 
 	/**
+	 * URL of a registered plugin page. Every screen is its own admin page
+	 * (admin.php?page=<slug>), so no section/tab query args are involved.
+	 */
+	public static function pageUrl( string $page_slug ): string {
+		return add_query_arg( 'page', $page_slug, admin_url( 'admin.php' ) );
+	}
+
+	/**
+	 * The navigation section a page belongs to (unknown pages fall under Overview).
+	 */
+	public static function sectionForPage( string $page_slug ): string {
+		return self::SECTION_BY_PAGE[ $page_slug ] ?? 'overview';
+	}
+
+	/**
+	 * Slug of the page WordPress is currently showing, taken from core's $plugin_page
+	 * global rather than the request.
+	 *
+	 * @param AdminPageInterface[] $pages
+	 */
+	private static function currentPageSlug( array $pages ): string {
+		global $plugin_page;
+
+		if ( is_string( $plugin_page ) && isset( $pages[ $plugin_page ] ) ) {
+			return $plugin_page;
+		}
+
+		return 'pivot-performance-toolkit';
+	}
+
+	/**
 	 * @param AdminPageInterface[] $pages
 	 */
 	public static function render( array $pages ): void {
-		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- these are read-only navigation query args (which section/tab to display), not a state-changing action; both are sanitized via sanitize_key().
-		// Determine current section from query parameter, default to 'overview'
-		$current_section = isset( $_GET['section'] )
-			? sanitize_key( (string) wp_unslash( $_GET['section'] ) )
-			: 'overview';
-
-		// If a specific tab/page slug is provided, use that; otherwise use the default page for the section
-		$tab_override = isset( $_GET['tab'] )
-			? sanitize_key( (string) wp_unslash( $_GET['tab'] ) )
-			: '';
-		// phpcs:enable WordPress.Security.NonceVerification.Recommended
-
-		if ( '' !== $tab_override && isset( $pages[ $tab_override ] ) ) {
-			$current_page_slug = $tab_override;
-		} else {
-			$current_page_slug = self::PAGE_BY_SECTION[ $current_section ] ?? 'pivot-performance-toolkit';
-		}
+		// Core resolves ?page= to $plugin_page (every screen below is a registered admin page),
+		// so which screen to show is never read from the request here.
+		$current_page_slug = self::currentPageSlug( $pages );
+		$current_section   = self::sectionForPage( $current_page_slug );
 
 		$current_page = $pages[ $current_page_slug ] ?? null;
 
@@ -108,12 +144,16 @@ final class AdminShell {
 			$shell_data['page_data'] = $current_page->viewData();
 		} else {
 			ob_start();
-			$current_page->renderContent();
-			$shell_data['content'] = (string) ob_get_clean();
+
+			try {
+				$current_page->renderContent();
+			} finally {
+				// Always close the buffer, even if the page throws.
+				$shell_data['content'] = (string) ob_get_clean();
+			}
 		}
 
-		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- BladeEngine::view() returns HTML already escaped by Blade's {{ }} at render time; re-escaping here would break the markup.
-		echo BladeEngine::view( 'admin.shell', $shell_data );
+		BladeEngine::display( 'admin.shell', $shell_data );
 	}
 
 	/**
@@ -154,7 +194,7 @@ final class AdminShell {
 		);
 
 		foreach ( $items as &$item ) {
-			$item['url']    = add_query_arg( 'section', $item['key'], admin_url( 'admin.php?page=pivot-performance-toolkit' ) );
+			$item['url']    = self::pageUrl( self::PAGE_BY_SECTION[ $item['key'] ] );
 			$item['active'] = $item['key'] === $current_section;
 		}
 		unset( $item );
@@ -168,7 +208,6 @@ final class AdminShell {
 	private static function buildSecondaryNav( string $current_section, string $current_page_slug ): array {
 		if ( 'caching' === $current_section ) {
 			return self::withSecondaryState(
-				'caching',
 				array(
 					array(
 						'slug'  => 'pivot-performance-toolkit-cache',
@@ -193,7 +232,6 @@ final class AdminShell {
 
 		if ( 'optimization' === $current_section ) {
 			return self::withSecondaryState(
-				'optimization',
 				array(
 					array(
 						'slug'  => 'pivot-performance-toolkit-file-optimization',
@@ -218,7 +256,6 @@ final class AdminShell {
 
 		if ( 'database' === $current_section ) {
 			return self::withSecondaryState(
-				'database',
 				array(
 					array(
 						'slug'  => 'pivot-performance-toolkit-database',
@@ -235,7 +272,6 @@ final class AdminShell {
 
 		if ( 'system' === $current_section ) {
 			return self::withSecondaryState(
-				'system',
 				array(
 					array(
 						'slug'  => 'pivot-performance-toolkit-system-status',
@@ -265,11 +301,9 @@ final class AdminShell {
 	 * @param array<int, array{slug:string,label:string}> $items
 	 * @return array<int, array<string, mixed>>
 	 */
-	private static function withSecondaryState( string $section, array $items, string $current_page_slug ): array {
-		$base_url = add_query_arg( 'section', $section, admin_url( 'admin.php?page=pivot-performance-toolkit' ) );
-
+	private static function withSecondaryState( array $items, string $current_page_slug ): array {
 		foreach ( $items as &$item ) {
-			$item['url']    = add_query_arg( 'tab', $item['slug'], $base_url );
+			$item['url']    = self::pageUrl( $item['slug'] );
 			$item['active'] = $item['slug'] === $current_page_slug;
 		}
 		unset( $item );

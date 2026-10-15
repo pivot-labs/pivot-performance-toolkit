@@ -12,9 +12,6 @@ $baseDir = dirname(dirname($vendorDir));
 return array(
     '6f908b37b8c6cd15c7c3fb0e2f93947b' => $vendorDir . '/illuminate/collections/functions.php',
     '9d26357b450098d9df7b400d9998c1ee' => $vendorDir . '/illuminate/collections/helpers.php',
-    '9d7d1842a18263174c851fc07343d6b8' => $vendorDir . '/symfony/deprecation-contracts/function.php',
-    '2f9007af9f43c3e23ab34286611ecf96' => $vendorDir . '/symfony/clock/Resources/now.php',
-    '1faa6e60f9d51c80842741aa4e401183' => $vendorDir . '/symfony/translation/Resources/functions.php',
     '524486a79edc72a5003e794ee74f3daa' => $vendorDir . '/illuminate/support/functions.php',
     '6f02d6897967d90eb93904845176913c' => $vendorDir . '/illuminate/support/helpers.php',
     '2adb6085e88f9ef6436bb5c9b427fd4c' => $vendorDir . '/illuminate/events/functions.php',

@@ -3,16 +3,16 @@
 Tick items off as they're resolved. Each links to the reviewer's full explanation below.
 
 - [x] [Ajax endpoint URL](#ajax-url) — `admin_url()` via `wp_localize_script` (`ajaxUrl`)
-- [ ] [Document source for compressed JS/CSS](#source-code)
-- [ ] [Use wp_enqueue commands](#enqueue)
-- [ ] [Document external services in the readme](#external-services)
-- [ ] [Determine file and directory locations correctly](#file-locations)
-- [ ] [Setting a default timezone (vendored Carbon)](#timezone)
-- [ ] [Writing data to disallowed locations](#disallowed-writes)
-- [ ] [Unclosed ob_start() (vendored Illuminate)](#ob-start)
-- [ ] [Nonces and user permissions](#nonces)
-- [ ] [Sanitize, validate and escape input (`$_SERVER`, `$_COOKIE`)](#sanitize)
-- [ ] [Escape variables and options when echoed](#escape)
+- [x] [Document source for compressed JS/CSS](#source-code) — sources + build config now ship in the zip; readme maps each built file to its source; Tailwind sources pinned so the build is reproducible (push + tag the repo before submitting)
+- [x] [Use wp_enqueue commands](#enqueue) — HTML API / `wp_get_script_tag()` for rewritten tags; drop-in probe now a single `<script src>` to the enqueued probe file
+- [x] [Document external services in the readme](#external-services)
+- [x] [Determine file and directory locations correctly](#file-locations) — `plugin_basename()` in Menu; URL-prefix mapping in `LocalAssetResolver`; drop-in path commented. Cache dir moves under disallowed-writes
+- [x] [Setting a default timezone (vendored Carbon)](#timezone) — Carbon removed via composer `replace`
+- [x] [Writing data to disallowed locations](#disallowed-writes) — minified/combined assets moved to uploads via `AssetStorage`; page cache/drop-ins/Blade stay in wp-content (caching exception, documented)
+- [~] [Unclosed ob_start() (vendored Illuminate)](#ob-start) — 5 of 7 removed via `bin/patch-vendor-view-trim.php`; 2 component/slot buffers in `ManagesComponents` remain, explained
+- [x] [Nonces and user permissions](#nonces) — `FlashNotice`, nonce-gated `TableSort`, screens routed as real admin pages (no `section`/`tab` reads)
+- [x] [Sanitize, validate and escape input (`$_SERVER`, `$_COOKIE`)](#sanitize) — all reads via `RequestInput`; drop-in uses a documented inline filter; parity test runs the drop-in
+- [x] [Escape variables and options when echoed](#escape) — inline JS/CSS to files, Composer guard removed, export via `wp_send_json_success`, `BladeEngine::display()`; 2 documented `echo` sites remain
 - [x] [Generic / too-short names and prefixes](#prefixes) — `ptk` renamed; polyfills dropped (`replace` + `ext-mbstring` guard); vendor autoloader renamed via `bin/rename-vendor-autoloader.php`. `WP_Object_Cache` can't be renamed (WP drop-in contract) — explain to reviewer
 - [x] [Unsafe SQL calls](#sql) — constant query + PHP sort; `OPTIMIZE TABLE %i`
 

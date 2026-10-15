@@ -18,6 +18,7 @@ final class AsyncCssTest extends TestCase {
 
 	protected function setUp(): void {
 		parent::setUp();
+		$this->requireHtmlApi();
 
 		Functions\when( 'esc_attr' )->returnArg();
 		Functions\when( 'esc_url' )->returnArg();
@@ -49,36 +50,52 @@ final class AsyncCssTest extends TestCase {
 
 		$result = $this->async_css->asyncStylesheetTags( $tag );
 
-		self::assertStringContainsString( 'rel="preload"', $result );
-		self::assertStringContainsString( 'as="style"', $result );
-		self::assertStringContainsString( 'href="/wp-content/themes/x/style.css"', $result );
-		self::assertStringContainsString( 'onload="this.onload=null;this.rel=&#039;stylesheet&#039;"', $result );
-		self::assertStringContainsString( '<noscript><link rel="stylesheet"', $result );
+		[ $preload, $noscript ] = explode( '<noscript>', $result, 2 );
 
-		// Default/absent media isn't meaningfully lost by omitting it (an
-		// absent attribute already means "all"), so it shouldn't appear on
-		// either output tag.
-		self::assertStringNotContainsString( 'media=', $result );
+		self::assertSame( 'preload', $this->attribute( $preload, 'rel' ) );
+		self::assertSame( 'style', $this->attribute( $preload, 'as' ) );
+		self::assertSame( '/wp-content/themes/x/style.css', $this->attribute( $preload, 'href' ) );
+		self::assertSame( 'theme-style-css', $this->attribute( $preload, 'id' ) );
+		self::assertSame( "this.onload=null;this.rel='stylesheet'", $this->attribute( $preload, 'onload' ) );
+
+		// The no-JavaScript fallback is the original tag, untouched.
+		self::assertSame( $tag . '</noscript>', $noscript );
 	}
 
 	/**
-	 * Regression test for the bug fixed this session: a stylesheet scoped to
-	 * a non-default media (e.g. a responsive breakpoint) must keep that
-	 * scoping on *both* the preload tag and the noscript fallback — once the
-	 * onload handler flips rel to "stylesheet", an absent media attribute
-	 * defaults to "all", so dropping it would make the stylesheet apply
-	 * globally instead of only at its intended breakpoint.
+	 * A stylesheet scoped to a non-default media (e.g. a responsive breakpoint) must keep
+	 * that scoping on *both* the preload tag and the noscript fallback: once the onload
+	 * handler flips rel to "stylesheet", an absent media attribute defaults to "all", so
+	 * dropping it would make the stylesheet apply globally instead of only at its breakpoint.
 	 */
 	public function test_non_default_media_is_preserved_on_both_output_tags(): void {
 		$tag = "<link rel='stylesheet' id='responsive-css' href='/wp-content/themes/x/responsive.css' media='screen and (max-width: 782px)'>";
 
-		$result = $this->async_css->asyncStylesheetTags( $tag );
+		[ $preload, $noscript ] = explode( '<noscript>', $this->async_css->asyncStylesheetTags( $tag ), 2 );
 
-		self::assertSame(
-			2,
-			substr_count( $result, 'media="screen and (max-width: 782px)"' ),
-			'The non-default media value must appear on both the preload tag and the noscript fallback.'
-		);
+		self::assertSame( 'screen and (max-width: 782px)', $this->attribute( $preload, 'media' ) );
+		self::assertSame( 'screen and (max-width: 782px)', $this->attribute( $noscript, 'media' ) );
+	}
+
+	public function test_other_attributes_survive_the_rewrite(): void {
+		$tag = "<link rel='stylesheet' href='/a.css' crossorigin='anonymous'>";
+
+		[ $preload, $noscript ] = explode( '<noscript>', $this->async_css->asyncStylesheetTags( $tag ), 2 );
+
+		self::assertSame( 'anonymous', $this->attribute( $preload, 'crossorigin' ) );
+		self::assertSame( 'anonymous', $this->attribute( $noscript, 'crossorigin' ) );
+	}
+
+	/**
+	 * First attribute value of the first <link> in $html, read with core's HTML API.
+	 */
+	private function attribute( string $html, string $name ): ?string {
+		$processor = new \WP_HTML_Tag_Processor( $html );
+		$processor->next_tag( 'link' );
+
+		$value = $processor->get_attribute( $name );
+
+		return is_string( $value ) ? $value : null;
 	}
 
 	public function test_excluded_by_exact_id_is_left_unchanged(): void {
@@ -105,7 +122,7 @@ final class AsyncCssTest extends TestCase {
 
 		$tag = "<link rel='stylesheet' id='other-css' href='/wp-content/themes/x/other.css'>";
 
-		self::assertStringContainsString( 'rel="preload"', $async_css->asyncStylesheetTags( $tag ) );
+		self::assertStringContainsString( 'preload', $async_css->asyncStylesheetTags( $tag ) );
 	}
 
 	public function test_multiple_tags_in_document_are_each_handled_independently(): void {
@@ -115,7 +132,7 @@ final class AsyncCssTest extends TestCase {
 
 		$result = $this->async_css->asyncStylesheetTags( $html );
 
-		self::assertStringContainsString( 'rel="preload"', $result );
+		self::assertStringContainsString( 'preload', $result );
 		self::assertStringContainsString( "rel='preconnect'", $result );
 		self::assertStringContainsString( "rel='stylesheet' href='/b.css' media='print'", $result );
 	}

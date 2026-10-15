@@ -34,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	>
 		<span class="pivot-performance-toolkit-icon-select__selected">
 			@if ($selected && !empty($selected['logo']))
-				<img src="{{ $selected['logo'] }}" alt="" class="pivot-performance-toolkit-icon-select__logo" aria-hidden="true" />
+				<img src="{!! esc_url((string) $selected['logo']) !!}" alt="" class="pivot-performance-toolkit-icon-select__logo" aria-hidden="true" />
 			@else
 				<span class="pivot-performance-toolkit-icon-select__logo-placeholder"></span>
 			@endif
@@ -69,7 +69,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			>
 				<span class="pivot-performance-toolkit-icon-select__option-content">
 					@if (!empty($opt['logo']))
-						<img src="{{ $opt['logo'] }}" alt="" class="pivot-performance-toolkit-icon-select__logo" aria-hidden="true" />
+						<img src="{!! esc_url((string) $opt['logo']) !!}" alt="" class="pivot-performance-toolkit-icon-select__logo" aria-hidden="true" />
 					@else
 						<span class="pivot-performance-toolkit-icon-select__logo-placeholder"></span>
 					@endif

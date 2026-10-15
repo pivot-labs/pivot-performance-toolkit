@@ -1,0 +1,37 @@
+/**
+ * Pivot Performance Toolkit - admin menu icon.
+ *
+ * Loaded on every wp-admin screen because the plugin's menu entry shows in the global
+ * sidebar. The SVG is applied as a mask so the icon picks up the menu's current colour.
+ */
+#adminmenu .toplevel_page_pivot-performance-toolkit .wp-menu-image img {
+    display: none;
+}
+#adminmenu .toplevel_page_pivot-performance-toolkit .wp-menu-image {
+    color: inherit;
+}
+#adminmenu .toplevel_page_pivot-performance-toolkit .wp-menu-image:before {
+    content: "";
+    display: block;
+    width: 26px;
+    height: 26px;
+    margin: -2px auto 0;
+    transform: translateY(-1px);
+    background-color: currentColor;
+    -webkit-mask-image: url("../../src/img/pivot-performance-toolkit-menu-icon-white.svg");
+    mask-image: url("../../src/img/pivot-performance-toolkit-menu-icon-white.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: 26px 26px;
+    mask-size: 26px 26px;
+}
+#adminmenu
+    .toplevel_page_pivot-performance-toolkit.wp-has-current-submenu
+    .wp-menu-image:before,
+#adminmenu
+    .toplevel_page_pivot-performance-toolkit.current
+    .wp-menu-image:before {
+    transform: translateY(2px);
+}

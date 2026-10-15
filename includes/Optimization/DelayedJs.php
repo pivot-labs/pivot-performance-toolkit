@@ -11,6 +11,7 @@ namespace PivotPerformanceToolkit\Optimization;
 
 use PivotPerformanceToolkit\Contracts\ModuleInterface;
 use PivotPerformanceToolkit\Core\Settings;
+use PivotPerformanceToolkit\Utils\RequestInput;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -18,8 +19,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 final class DelayedJs implements ModuleInterface {
 
-	private const PLACEHOLDER_TYPE  = 'pivotperformancetoolkit/delayed-js';
-	private const RUNTIME_SCRIPT_ID = 'pivot-performance-toolkit-delayed-js-runtime';
+	private const PLACEHOLDER_TYPE = 'pivotperformancetoolkit/delayed-js';
+	public const RUNTIME_SCRIPT_ID = 'pivot-performance-toolkit-delayed-js-runtime';
 
 	/**
 	 * `type` attribute values that mark a <script> as executable JavaScript.
@@ -67,20 +68,33 @@ final class DelayedJs implements ModuleInterface {
 	}
 
 	/**
-	 * Registers a source-less script handle (a WordPress-supported pattern
-	 * for inline-only scripts) purely so the runtime snippet below can ride
-	 * the normal wp_print_head_scripts() queue instead of being echoed
-	 * directly — WordPress prints it with id="{handle}-js", matched in
-	 * maybeDelayScriptTag() below so the runtime never delays itself.
+	 * Enqueues the runtime that restores delayed scripts (assets/js/delayed-js-runtime.js).
+	 * WordPress prints its tag with id="{handle}-js" and its localized settings with
+	 * id="{handle}-js-extra"; maybeDelayScriptTag() below skips both so the runtime
+	 * never delays itself. Assets and Combine list the handle too, so it is neither
+	 * deferred nor folded into a bundle that would itself be delayed.
 	 */
 	public function enqueueRuntimeScript(): void {
 		if ( ! $this->settings->getBool( 'delay_js_execution' ) || is_admin() ) {
 			return;
 		}
 
-		wp_register_script( self::RUNTIME_SCRIPT_ID, false, array(), PIVOT_PERFORMANCE_TOOLKIT_VERSION, false );
+		wp_register_script(
+			self::RUNTIME_SCRIPT_ID,
+			PIVOT_PERFORMANCE_TOOLKIT_URL . 'assets/js/delayed-js-runtime.js',
+			array(),
+			PIVOT_PERFORMANCE_TOOLKIT_VERSION,
+			false
+		);
+		wp_localize_script(
+			self::RUNTIME_SCRIPT_ID,
+			'pivotPerformanceToolkitDelayedJs',
+			array(
+				'placeholderType' => self::PLACEHOLDER_TYPE,
+				'timeoutMs'       => self::FALLBACK_TIMEOUT_MS,
+			)
+		);
 		wp_enqueue_script( self::RUNTIME_SCRIPT_ID );
-		wp_add_inline_script( self::RUNTIME_SCRIPT_ID, $this->runtimeScript( self::FALLBACK_TIMEOUT_MS ) );
 	}
 
 	public function maybeDelayScriptTags( string $html ): string {
@@ -92,8 +106,7 @@ final class DelayedJs implements ModuleInterface {
 			return $html;
 		}
 
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- used only in a strict === comparison against a hardcoded literal, never stored or output.
-		if ( ! isset( $_SERVER['REQUEST_METHOD'] ) || strtoupper( (string) wp_unslash( $_SERVER['REQUEST_METHOD'] ) ) !== 'GET' ) {
+		if ( ! RequestInput::isGetRequest() ) {
 			return $html;
 		}
 
@@ -123,7 +136,7 @@ final class DelayedJs implements ModuleInterface {
 		$src  = $this->extractAttribute( $attributes_raw, 'src' );
 		$type = $this->extractAttribute( $attributes_raw, 'type' );
 
-		if ( self::RUNTIME_SCRIPT_ID . '-js' === $id ) {
+		if ( str_starts_with( $id, self::RUNTIME_SCRIPT_ID . '-js' ) ) {
 			return $matches[0];
 		}
 
@@ -228,54 +241,5 @@ final class DelayedJs implements ModuleInterface {
 
 	private function removeAttribute( string $attributes, string $name ): string {
 		return (string) preg_replace( '/\s+' . preg_quote( $name, '/' ) . '\s*=\s*(["\']).*?\1/i', '', $attributes );
-	}
-
-	private function runtimeScript( int $timeout ): string {
-		return sprintf(
-			'(function () {
-    var triggered = false;
-    var events = [\'mousemove\', \'scroll\', \'keydown\', \'touchstart\', \'click\'];
-
-    function restore() {
-        if (triggered) return;
-        triggered = true;
-
-        events.forEach(function (evt) {
-            window.removeEventListener(evt, restore, { passive: true });
-        });
-        clearTimeout(timer);
-
-        var delayed = document.querySelectorAll(\'script[type="%1$s"]\');
-        delayed.forEach(function (oldScript) {
-            var newScript = document.createElement(\'script\');
-            // Dynamically-inserted external scripts execute as soon as they
-            // finish fetching (not in insertion order) unless async is
-            // explicitly disabled — required to preserve relative order
-            // between e.g. wp-i18n and its inline "after" companion script.
-            newScript.async = false;
-            for (var i = 0; i < oldScript.attributes.length; i++) {
-                var attr = oldScript.attributes[i];
-                if (attr.name === \'type\') continue;
-                if (attr.name === \'data-pivot-delayed-src\') {
-                    newScript.src = attr.value;
-                    continue;
-                }
-                newScript.setAttribute(attr.name, attr.value);
-            }
-            if (!newScript.src) {
-                newScript.text = oldScript.text;
-            }
-            oldScript.replaceWith(newScript);
-        });
-    }
-
-    var timer = setTimeout(restore, %2$d);
-    events.forEach(function (evt) {
-        window.addEventListener(evt, restore, { passive: true, once: true });
-    });
-})();',
-			self::PLACEHOLDER_TYPE,
-			$timeout
-		);
 	}
 }

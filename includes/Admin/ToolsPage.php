@@ -14,6 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use PivotPerformanceToolkit\Core\Settings;
+use PivotPerformanceToolkit\Utils\AssetStorage;
 
 final class ToolsPage extends BladeAdminPage {
 
@@ -32,7 +33,6 @@ final class ToolsPage extends BladeAdminPage {
 	private const SET_UNINSTALL_POLICY_ACTION = 'pivot_performance_toolkit_set_uninstall_policy';
 	private const RESET_TO_DEFAULTS_ACTION    = 'pivot_performance_toolkit_reset_to_defaults';
 
-	private const MINIFIED_ASSETS_DIR     = WP_CONTENT_DIR . '/cache/pivot-performance-toolkit/minified-assets';
 	private const UNINSTALL_POLICY_OPTION = 'pivot_performance_toolkit_remove_data_on_uninstall';
 	private const REDACTED_VALUE          = '[redacted]';
 
@@ -56,7 +56,7 @@ final class ToolsPage extends BladeAdminPage {
 		if ( ! self::$actions_registered ) {
 			self::$actions_registered = true;
 			add_action( 'admin_post_' . self::CLEAR_MINIFIED_ACTION, array( $this, 'handleClearMinifiedAssets' ) );
-			add_action( 'admin_post_' . self::EXPORT_SETTINGS_ACTION, array( $this, 'handleExportSettings' ) );
+			add_action( 'wp_ajax_' . self::EXPORT_SETTINGS_ACTION, array( $this, 'handleExportSettings' ) );
 			add_action( 'admin_post_' . self::IMPORT_SETTINGS_ACTION, array( $this, 'handleImportSettings' ) );
 			add_action( 'admin_post_' . self::SET_UNINSTALL_POLICY_ACTION, array( $this, 'handleSetUninstallPolicy' ) );
 			add_action( 'admin_post_' . self::RESET_TO_DEFAULTS_ACTION, array( $this, 'handleResetToDefaults' ) );
@@ -105,13 +105,12 @@ final class ToolsPage extends BladeAdminPage {
 	 * @return array<string, mixed>
 	 */
 	protected function buildViewData(): array {
-		$stats = $this->getMinifiedAssetStats();
-		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- these are read-only display values from this page's own post-redirect notice (already produced by a nonce-verified admin-post handler), not a new state-changing action.
-		$cleared       = isset( $_GET['pivot_performance_toolkit_minified_cleared'] ) && 1 === absint( wp_unslash( $_GET['pivot_performance_toolkit_minified_cleared'] ) );
-		$removed_files = isset( $_GET['pivot_performance_toolkit_minified_removed'] ) ? absint( wp_unslash( $_GET['pivot_performance_toolkit_minified_removed'] ) ) : 0;
-		$tools_notice  = isset( $_GET['pivot_performance_toolkit_tools_notice'] ) ? sanitize_key( (string) wp_unslash( $_GET['pivot_performance_toolkit_tools_notice'] ) ) : '';
-		$tools_message = isset( $_GET['pivot_performance_toolkit_tools_message'] ) ? sanitize_text_field( (string) wp_unslash( $_GET['pivot_performance_toolkit_tools_message'] ) ) : '';
-		// phpcs:enable WordPress.Security.NonceVerification.Recommended
+		$stats         = $this->getMinifiedAssetStats();
+		$flash         = FlashNotice::get( 'tools' );
+		$cleared       = ! empty( $flash['cleared'] );
+		$removed_files = (int) ( $flash['removed'] ?? 0 );
+		$tools_notice  = (string) ( $flash['notice'] ?? '' );
+		$tools_message = (string) ( $flash['message'] ?? '' );
 		$last_exported = $this->settings->getString( 'last_settings_exported_at_gmt' );
 
 		return array(
@@ -140,41 +139,33 @@ final class ToolsPage extends BladeAdminPage {
 
 		check_admin_referer( 'pivot_performance_toolkit_clear_minified_assets' );
 
-		$removed = 0;
+		$removed = AssetStorage::clear();
 
-		foreach ( glob( self::MINIFIED_ASSETS_DIR . '/*.min.css' ) ?: array() as $file_path ) {
-			if ( wp_delete_file( $file_path ) ) {
-				++$removed;
-			}
-		}
-
-		foreach ( glob( self::MINIFIED_ASSETS_DIR . '/*.min.js' ) ?: array() as $file_path ) {
-			if ( wp_delete_file( $file_path ) ) {
-				++$removed;
-			}
-		}
-
-		$redirect_url = add_query_arg(
-			array_merge(
-				self::sectionQueryArgsForSlug( self::SLUG_MAINTENANCE ),
-				array(
-					'pivot_performance_toolkit_minified_cleared' => '1',
-					'pivot_performance_toolkit_minified_removed' => (string) $removed,
-				)
-			),
-			admin_url( 'admin.php' )
+		FlashNotice::set(
+			'tools',
+			array(
+				'cleared' => true,
+				'removed' => $removed,
+			)
 		);
+
+		$redirect_url = AdminShell::pageUrl( self::SLUG_MAINTENANCE );
 
 		wp_safe_redirect( $redirect_url );
 		exit;
 	}
 
+	/**
+	 * Builds the settings export and hands it to the browser, which saves it as a file.
+	 * Core's wp_send_json_*() owns the response; the page's JS turns the returned
+	 * `download` payload into a file download, so nothing here echoes the file itself.
+	 */
 	public function handleExportSettings(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'You are not allowed to perform this action.', 'pivot-performance-toolkit' ) );
+			wp_send_json_error( array( 'message' => __( 'You are not allowed to perform this action.', 'pivot-performance-toolkit' ) ), 403 );
 		}
 
-		check_admin_referer( 'pivot_performance_toolkit_export_settings' );
+		check_ajax_referer( 'pivot_performance_toolkit_export_settings' );
 
 		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- reduced to a boolean via !empty() only; the raw string content (which is what wp_unslash() would affect) is never read, stored, or output.
 		$include_secrets = isset( $_POST['pivot_performance_toolkit_include_secrets'] ) && ! empty( $_POST['pivot_performance_toolkit_include_secrets'] );
@@ -200,22 +191,23 @@ final class ToolsPage extends BladeAdminPage {
 		$json = wp_json_encode( $payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
 
 		if ( ! is_string( $json ) || '' === $json ) {
-			$this->redirectWithNotice( false, __( 'Could not generate export file.', 'pivot-performance-toolkit' ), self::SLUG_IMPORT_EXPORT );
+			wp_send_json_error( array( 'message' => __( 'Could not generate export file.', 'pivot-performance-toolkit' ) ), 500 );
 		}
 
 		$settings                                  = $this->settings->all();
 		$settings['last_settings_exported_at_gmt'] = $payload['exported_at_gmt'];
 		update_option( $this->settings->optionKey(), $settings );
 
-		$filename = 'pivot-performance-toolkit-settings-' . gmdate( 'Ymd-His' ) . '.json';
-
-		nocache_headers();
-		header( 'Content-Type: application/json; charset=utf-8' );
-		header( 'Content-Disposition: attachment; filename="' . $filename . '"' );
-
-		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- this is a raw JSON file download (Content-Disposition: attachment), not HTML output; esc_html() would corrupt the exported JSON.
-		echo $json;
-		exit;
+		wp_send_json_success(
+			array(
+				'message'  => __( 'Export ready. Your download should start automatically.', 'pivot-performance-toolkit' ),
+				'download' => array(
+					'filename' => 'pivot-performance-toolkit-settings-' . gmdate( 'Ymd-His' ) . '.json',
+					'mime'     => 'application/json',
+					'content'  => $json,
+				),
+			)
+		);
 	}
 
 	public function handleImportSettings(): void {
@@ -350,41 +342,18 @@ final class ToolsPage extends BladeAdminPage {
 	}
 
 	private function redirectWithNotice( bool $success, string $message, string $page_slug ): void {
-		$redirect_url = add_query_arg(
-			array_merge(
-				self::sectionQueryArgsForSlug( $page_slug ),
-				array(
-					'pivot_performance_toolkit_tools_notice'  => $success ? 'success' : 'error',
-					'pivot_performance_toolkit_tools_message' => $message,
-				)
-			),
-			admin_url( 'admin.php' )
+		FlashNotice::set(
+			'tools',
+			array(
+				'notice'  => $success ? 'success' : 'error',
+				'message' => $message,
+			)
 		);
+
+		$redirect_url = AdminShell::pageUrl( $page_slug );
 
 		wp_safe_redirect( $redirect_url );
 		exit;
-	}
-
-	/**
-	 * Only the root "pivot-performance-toolkit" page is registered with WordPress;
-	 * every other page slug is routed internally via ?section=&tab=. Translate an
-	 * internal page slug into the query args that actually reach it.
-	 *
-	 * @return array<string, string>
-	 */
-	private static function sectionQueryArgsForSlug( string $page_slug ): array {
-		if ( self::SLUG_SETTINGS === $page_slug ) {
-			return array(
-				'page'    => 'pivot-performance-toolkit',
-				'section' => 'settings',
-			);
-		}
-
-		return array(
-			'page'    => 'pivot-performance-toolkit',
-			'section' => 'system',
-			'tab'     => $page_slug,
-		);
 	}
 
 	private function isSupportedSchemaVersion( int $schema_version ): bool {
@@ -429,22 +398,12 @@ final class ToolsPage extends BladeAdminPage {
 	 * @return array{count:int,bytes:int}
 	 */
 	private function getMinifiedAssetStats(): array {
-		$count = 0;
-		$bytes = 0;
-
-		foreach ( glob( self::MINIFIED_ASSETS_DIR . '/*.min.css' ) ?: array() as $file_path ) {
-			++$count;
-			$bytes += (int) @filesize( $file_path );
-		}
-
-		foreach ( glob( self::MINIFIED_ASSETS_DIR . '/*.min.js' ) ?: array() as $file_path ) {
-			++$count;
-			$bytes += (int) @filesize( $file_path );
-		}
+		$minified = AssetStorage::stats( AssetStorage::MINIFIED );
+		$combined = AssetStorage::stats( AssetStorage::COMBINED );
 
 		return array(
-			'count' => $count,
-			'bytes' => $bytes,
+			'count' => $minified['count'] + $combined['count'],
+			'bytes' => $minified['bytes'] + $combined['bytes'],
 		);
 	}
 

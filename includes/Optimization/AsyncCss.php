@@ -11,6 +11,7 @@ namespace PivotPerformanceToolkit\Optimization;
 
 use PivotPerformanceToolkit\Contracts\ModuleInterface;
 use PivotPerformanceToolkit\Core\Settings;
+use PivotPerformanceToolkit\Utils\RequestInput;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -42,8 +43,7 @@ final class AsyncCss implements ModuleInterface {
 			return $html;
 		}
 
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- used only in a strict === comparison against a hardcoded literal, never stored or output.
-		if ( ! isset( $_SERVER['REQUEST_METHOD'] ) || strtoupper( (string) wp_unslash( $_SERVER['REQUEST_METHOD'] ) ) !== 'GET' ) {
+		if ( ! RequestInput::isGetRequest() ) {
 			return $html;
 		}
 
@@ -86,21 +86,22 @@ final class AsyncCss implements ModuleInterface {
 			return $tag;
 		}
 
-		$id_attr = '' !== $id ? ' id="' . esc_attr( $id ) . '"' : '';
+		// Rewrite the existing tag with the HTML API instead of assembling a new one: every
+		// attribute it already has (id, media, crossorigin, ...) survives, and a non-default
+		// media must, since once the onload handler sets rel="stylesheet" an absent media
+		// attribute defaults to "all" and would make a scoped stylesheet apply globally.
+		$processor = new \WP_HTML_Tag_Processor( $tag );
 
-		// A non-default media (e.g. a responsive/conditional stylesheet) must
-		// survive the swap below — once the onload handler sets rel="stylesheet",
-		// an absent media attribute defaults to "all", so dropping it here would
-		// make a scoped stylesheet apply globally.
-		$media_attr = ( '' !== $media && 0 !== strcasecmp( $media, 'all' ) ) ? ' media="' . esc_attr( $media ) . '"' : '';
+		if ( ! $processor->next_tag( 'link' ) ) {
+			return $tag;
+		}
 
-		$preload = '<link rel="preload" as="style" href="' . esc_url( $href ) . '"' . $id_attr . $media_attr
-			. ' onload="this.onload=null;this.rel=&#039;stylesheet&#039;">';
+		$processor->set_attribute( 'rel', 'preload' );
+		$processor->set_attribute( 'as', 'style' );
+		$processor->set_attribute( 'onload', "this.onload=null;this.rel='stylesheet'" );
 
-		// phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet -- rewriting an already-enqueued <link> tag captured from buffered output, not registering a new stylesheet.
-		$noscript = '<noscript><link rel="stylesheet" href="' . esc_url( $href ) . '"' . $id_attr . $media_attr . '></noscript>';
-
-		return $preload . $noscript;
+		// The untouched original is the no-JavaScript fallback.
+		return $processor->get_updated_html() . '<noscript>' . $tag . '</noscript>';
 	}
 
 	private function isExcluded( string $id, string $href ): bool {

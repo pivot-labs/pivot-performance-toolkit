@@ -63,14 +63,14 @@ final class CdnIntegrationsPage extends BladeAdminPage {
 	 * @return array<string, mixed>
 	 */
 	protected function buildViewData(): array {
+		$flash = FlashNotice::get( 'cloudflare' );
+
 		return array(
 			'options'                 => $this->settings->all(),
 			'option_key'              => $this->settings->optionKey(),
-			// phpcs:disable WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- these are read-only display values from this page's own post-redirect notice / WordPress core's settings-updated param; used only in strict comparisons/sanitize_key(), never stored or output raw.
-			'notice'                  => isset( $_GET['pivot_performance_toolkit_cf_notice'] ) ? sanitize_key( wp_unslash( (string) $_GET['pivot_performance_toolkit_cf_notice'] ) ) : '',
-			'message'                 => isset( $_GET['pivot_performance_toolkit_cf_message'] ) ? sanitize_text_field( wp_unslash( (string) $_GET['pivot_performance_toolkit_cf_message'] ) ) : '',
-			'settings_updated'        => isset( $_GET['settings-updated'] ) && (string) wp_unslash( $_GET['settings-updated'] ) === 'true',
-			// phpcs:enable WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			'notice'                  => (string) ( $flash['notice'] ?? '' ),
+			'message'                 => (string) ( $flash['message'] ?? '' ),
+			'settings_updated'        => FlashNotice::settingsSaved(),
 			'test_action'             => self::TEST_ACTION,
 			'purge_action'            => self::PURGE_ACTION,
 			'test_nonce'              => wp_create_nonce( 'pivot_performance_toolkit_cloudflare_test' ),
@@ -135,16 +135,15 @@ final class CdnIntegrationsPage extends BladeAdminPage {
 	}
 
 	private function redirectWithNotice( bool $success, string $message ): void {
-		$redirect_url = add_query_arg(
+		FlashNotice::set(
+			'cloudflare',
 			array(
-				'page'                                 => 'pivot-performance-toolkit',
-				'section'                              => 'caching',
-				'tab'                                  => $this->slug(),
-				'pivot_performance_toolkit_cf_notice'  => $success ? 'success' : 'error',
-				'pivot_performance_toolkit_cf_message' => $message,
-			),
-			admin_url( 'admin.php' )
+				'notice'  => $success ? 'success' : 'error',
+				'message' => $message,
+			)
 		);
+
+		$redirect_url = AdminShell::pageUrl( $this->slug() );
 
 		wp_safe_redirect( $redirect_url );
 		exit;

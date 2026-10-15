@@ -11,19 +11,13 @@ for dir in illuminate symfony nesbot carbonphp doctrine voku psr; do
     fi
 done
 
-# Prune dead CLI-only tooling from the scoped symfony/translation package.
-# Confirmed unused: these are Symfony Console commands (translation
-# lint/pull/push, a standalone status script, and the .po dumper only
-# TranslationPullCommand calls) meant to run via a console app entry point
-# this WordPress plugin doesn't have. Verified via a full-codebase grep
-# before removing — nothing outside this subtree references them, including
-# Translator.php (the core, always-loaded class). Re-verify the same way
-# after any Strauss/Composer version bump, since a future release could
-# start referencing one of these from elsewhere.
-SCOPED_TRANSLATION_DIR="$(dirname "$0")/../includes/Vendor/symfony/translation"
-if [ -d "$SCOPED_TRANSLATION_DIR" ]; then
-    rm -rf "$SCOPED_TRANSLATION_DIR/Command"
-    rm -f "$SCOPED_TRANSLATION_DIR/Resources/bin/translation-status.php"
-    rm -f "$SCOPED_TRANSLATION_DIR/Dumper/PoFileDumper.php"
-    echo "Removed unused symfony/translation CLI tooling from $SCOPED_TRANSLATION_DIR"
-fi
+# Remove packages that composer.json "replace"s: the Symfony polyfills (the plugin requires
+# PHP 8.2+ and ext-mbstring) and Carbon with its dependencies (nothing in the Blade rendering
+# path uses them, and Illuminate guards its one Carbon call with class_exists). Strauss never
+# deletes directories it has stopped copying, so remove any stale scoped copies here.
+for stale in \
+    symfony/polyfill-mbstring symfony/polyfill-php83 \
+    nesbot carbonphp psr/clock symfony/clock \
+    symfony/translation symfony/translation-contracts symfony/deprecation-contracts; do
+    rm -rf "$(dirname "$0")/../includes/Vendor/$stale"
+done

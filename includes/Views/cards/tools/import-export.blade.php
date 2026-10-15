@@ -19,7 +19,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	>
 		<div class="space-y-4">
 
-			<form method="post" action="{{ esc_url(admin_url('admin-post.php')) }}">
+			<div id="pivot-performance-toolkit-export-notice"></div>
+
+			<form method="post" action="{{ esc_url(admin_url('admin-ajax.php')) }}" data-ajax-action-form data-ajax-notice-target="#pivot-performance-toolkit-export-notice">
 				<input type="hidden" name="action" value="{{ esc_attr($export_settings_action) }}" />
 				@php wp_nonce_field('pivot_performance_toolkit_export_settings'); @endphp
 				<label style="display:block;margin:6px 0 10px;">

@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
-use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterval;
+use Carbon\CarbonInterval;
 use Closure;
 use DateInterval;
 use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Macroable;
@@ -34,7 +34,7 @@ class Sleep
     /**
      * The total duration to sleep.
      *
-     * @var \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterval
+     * @var \Carbon\CarbonInterval
      */
     public $duration;
 
@@ -62,7 +62,7 @@ class Sleep
     /**
      * The sequence of sleep durations encountered while faking.
      *
-     * @var array<int, \PivotPerformanceToolkit\Vendor\Carbon\CarbonInterval>
+     * @var array<int, \Carbon\CarbonInterval>
      */
     protected static $sequence = [];
 

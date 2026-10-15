@@ -21,14 +21,6 @@ final class SettingsPage extends BladeAdminPage {
 	private const SET_UNINSTALL_POLICY_ACTION = 'pivot_performance_toolkit_set_uninstall_policy';
 	private const SET_WEBSITE_PROFILE_ACTION  = 'pivot_performance_toolkit_set_website_profile';
 
-	private const TOOLS_NOTICE_QUERY_KEY = 'pivot_performance_toolkit_tools_notice';
-
-	private const TOOLS_MESSAGE_QUERY_KEY = 'pivot_performance_toolkit_tools_message';
-
-	private const SETTINGS_NOTICE_QUERY_KEY = 'pivot_performance_toolkit_settings_notice';
-
-	private const SETTINGS_MESSAGE_QUERY_KEY = 'pivot_performance_toolkit_settings_message';
-
 	private Settings $settings;
 
 	public function __construct( Settings $settings ) {
@@ -61,12 +53,12 @@ final class SettingsPage extends BladeAdminPage {
 	 * @return array<string, mixed>
 	 */
 	protected function buildViewData(): array {
-		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- these are read-only display values from this page's own post-redirect notice (already produced by a nonce-verified admin-post handler), not a new state-changing action.
-		$tools_notice     = isset( $_GET[ self::TOOLS_NOTICE_QUERY_KEY ] ) ? sanitize_key( (string) wp_unslash( $_GET[ self::TOOLS_NOTICE_QUERY_KEY ] ) ) : '';
-		$tools_message    = isset( $_GET[ self::TOOLS_MESSAGE_QUERY_KEY ] ) ? sanitize_text_field( (string) wp_unslash( $_GET[ self::TOOLS_MESSAGE_QUERY_KEY ] ) ) : '';
-		$settings_notice  = isset( $_GET[ self::SETTINGS_NOTICE_QUERY_KEY ] ) ? sanitize_key( (string) wp_unslash( $_GET[ self::SETTINGS_NOTICE_QUERY_KEY ] ) ) : '';
-		$settings_message = isset( $_GET[ self::SETTINGS_MESSAGE_QUERY_KEY ] ) ? sanitize_text_field( (string) wp_unslash( $_GET[ self::SETTINGS_MESSAGE_QUERY_KEY ] ) ) : '';
-		// phpcs:enable WordPress.Security.NonceVerification.Recommended
+		$tools_flash      = FlashNotice::get( 'tools' );
+		$settings_flash   = FlashNotice::get( 'settings' );
+		$tools_notice     = (string) ( $tools_flash['notice'] ?? '' );
+		$tools_message    = (string) ( $tools_flash['message'] ?? '' );
+		$settings_notice  = (string) ( $settings_flash['notice'] ?? '' );
+		$settings_message = (string) ( $settings_flash['message'] ?? '' );
 		$current_settings = $this->settings->all();
 		$recommendation   = ProfileDetector::detectRecommendation();
 

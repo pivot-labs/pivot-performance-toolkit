@@ -14,8 +14,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use PivotPerformanceToolkit\Contracts\ModuleInterface;
+use PivotPerformanceToolkit\Utils\AssetStorage;
 use PivotPerformanceToolkit\Views\BladeEngine;
 use WP_Admin_Bar;
+use PivotPerformanceToolkit\Utils\RequestInput;
 
 final class AdminBarMenu implements ModuleInterface {
 
@@ -25,7 +27,6 @@ final class AdminBarMenu implements ModuleInterface {
 
 	private const PAGE_CACHE_DIR = WP_CONTENT_DIR . '/cache/pivot-performance-toolkit';
 
-	private const MINIFIED_CACHE_DIR = WP_CONTENT_DIR . '/cache/pivot-performance-toolkit/minified-assets';
 
 	public function register(): void {
 		add_action( 'admin_bar_menu', array( $this, 'registerMenu' ), 100 );
@@ -169,8 +170,7 @@ final class AdminBarMenu implements ModuleInterface {
 		}
 
 		// Only GET requests.
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- used only in a strict === comparison against a hardcoded literal, never stored or output.
-		if ( ! isset( $_SERVER['REQUEST_METHOD'] ) || strtoupper( (string) wp_unslash( $_SERVER['REQUEST_METHOD'] ) ) !== 'GET' ) {
+		if ( ! RequestInput::isGetRequest() ) {
 			return false;
 		}
 
@@ -182,8 +182,7 @@ final class AdminBarMenu implements ModuleInterface {
 	 */
 	private function getCurrentPageCacheStatus(): array {
 		// Indicator should reflect file state even for logged-in/admin-bar visits.
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- used only in a strict === comparison against a hardcoded literal, never stored or output.
-		if ( is_admin() || ! isset( $_SERVER['REQUEST_METHOD'] ) || strtoupper( (string) wp_unslash( $_SERVER['REQUEST_METHOD'] ) ) !== 'GET' ) {
+		if ( is_admin() || ! RequestInput::isGetRequest() ) {
 			return array(
 				'label'     => __( 'Unavailable', 'pivot-performance-toolkit' ),
 				'class'     => 'pivot-performance-toolkit-cache-status-bypass',
@@ -244,11 +243,9 @@ final class AdminBarMenu implements ModuleInterface {
 	}
 
 	private function currentRequestUrl(): ?string {
-		// phpcs:disable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- this URL is only ever MD5-hashed to build a cache file path (see cacheFilePathFromUrl()) or rawurlencode()'d into a query arg; raw content is never stored, echoed, or used in a filesystem/query context directly.
-		$scheme      = ( ! empty( $_SERVER['HTTPS'] ) && strtolower( (string) wp_unslash( $_SERVER['HTTPS'] ) ) !== 'off' ) ? 'https' : 'http';
-		$host        = isset( $_SERVER['HTTP_HOST'] ) ? (string) wp_unslash( $_SERVER['HTTP_HOST'] ) : 'localhost';
-		$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? (string) wp_unslash( $_SERVER['REQUEST_URI'] ) : '/';
-		// phpcs:enable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$scheme      = RequestInput::isHttps() ? 'https' : 'http';
+		$host        = RequestInput::keyPart( 'HTTP_HOST', 'localhost' );
+		$request_uri = RequestInput::keyPart( 'REQUEST_URI', '/' );
 
 		if ( '' === $host ) {
 			return null;
@@ -312,13 +309,7 @@ final class AdminBarMenu implements ModuleInterface {
 			wp_delete_file( $file_path );
 		}
 
-		foreach ( glob( self::MINIFIED_CACHE_DIR . '/*.min.css' ) ?: array() as $file_path ) {
-			wp_delete_file( $file_path );
-		}
-
-		foreach ( glob( self::MINIFIED_CACHE_DIR . '/*.min.js' ) ?: array() as $file_path ) {
-			wp_delete_file( $file_path );
-		}
+		AssetStorage::clear();
 
 		$redirect = wp_get_referer();
 
@@ -326,7 +317,9 @@ final class AdminBarMenu implements ModuleInterface {
 			$redirect = admin_url( 'admin.php?page=pivot-performance-toolkit' );
 		}
 
-		wp_safe_redirect( add_query_arg( 'pivot_performance_toolkit_cache_purged', '1', $redirect ) );
+		FlashNotice::set( 'adminbar', array( 'cache_purged' => true ) );
+
+		wp_safe_redirect( $redirect );
 		exit;
 	}
 
@@ -357,7 +350,9 @@ final class AdminBarMenu implements ModuleInterface {
 			$redirect = home_url();
 		}
 
-		wp_safe_redirect( add_query_arg( 'pivot_performance_toolkit_page_cache_purged', '1', $redirect ) );
+		FlashNotice::set( 'adminbar', array( 'page_cache_purged' => true ) );
+
+		wp_safe_redirect( $redirect );
 		exit;
 	}
 
@@ -366,14 +361,14 @@ final class AdminBarMenu implements ModuleInterface {
 			return;
 		}
 
-		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped, WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- BladeEngine::view() returns HTML already escaped by Blade's {{ }} at render time; re-escaping here would break the markup. The $_GET values below are read-only post-redirect display flags reduced to booleans via strict '1' === comparison, never echoed raw, not a state-changing action.
-		echo BladeEngine::view(
+		$flash = FlashNotice::get( 'adminbar' );
+
+		BladeEngine::display(
 			'admin.admin-bar-notice',
 			array(
-				'cache_purged'      => isset( $_GET['pivot_performance_toolkit_cache_purged'] ) && (string) '1' === wp_unslash( $_GET['pivot_performance_toolkit_cache_purged'] ),
-				'page_cache_purged' => isset( $_GET['pivot_performance_toolkit_page_cache_purged'] ) && (string) '1' === wp_unslash( $_GET['pivot_performance_toolkit_page_cache_purged'] ),
+				'cache_purged'      => ! empty( $flash['cache_purged'] ),
+				'page_cache_purged' => ! empty( $flash['page_cache_purged'] ),
 			)
 		);
-		// phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped, WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 	}
 }

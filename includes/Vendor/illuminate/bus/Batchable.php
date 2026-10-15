@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
-use PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable;
+use Carbon\CarbonImmutable;
 use PivotPerformanceToolkit\Vendor\Illuminate\Container\Container;
 use PivotPerformanceToolkit\Vendor\Illuminate\Support\Str;
 use PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\BatchFake;
@@ -78,9 +78,9 @@ trait Batchable
      * @param  int  $failedJobs
      * @param  array  $failedJobIds
      * @param  array  $options
-     * @param  \PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable|null  $createdAt
-     * @param  \PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable|null  $cancelledAt
-     * @param  \PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable|null  $finishedAt
+     * @param  \Carbon\CarbonImmutable|null  $createdAt
+     * @param  \Carbon\CarbonImmutable|null  $cancelledAt
+     * @param  \Carbon\CarbonImmutable|null  $finishedAt
      * @return array{0: $this, 1: \PivotPerformanceToolkit\Vendor\Illuminate\Support\Testing\Fakes\BatchFake}
      */
     public function withFakeBatch(string $id = '',

@@ -294,7 +294,7 @@ trait InteractsWithData
      * @param  string|null  $tz
      * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon|null
      *
-     * @throws \PivotPerformanceToolkit\Vendor\Carbon\Exceptions\InvalidFormatException
+     * @throws \Carbon\Exceptions\InvalidFormatException
      */
     public function date($key, $format = null, $tz = null)
     {

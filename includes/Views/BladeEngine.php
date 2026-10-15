@@ -58,6 +58,9 @@ final class BladeEngine {
 
 		// Define paths for views and cache
 		$views_path = PIVOT_PERFORMANCE_TOOLKIT_PATH . 'includes/Views';
+		// Compiled templates are executable PHP, so they are kept in wp-content/cache (where caching
+		// plugins write) rather than the publicly served uploads folder, and never in the plugin
+		// folder, which is replaced on every update.
 		$cache_path = WP_CONTENT_DIR . '/cache/pivot-performance-toolkit-blade';
 
 		// Ensure cache directory exists
@@ -117,5 +120,25 @@ final class BladeEngine {
 	 */
 	public static function view( string $view, array $data = array() ): string {
 		return self::getInstance()->render( $view, $data );
+	}
+
+	/**
+	 * Render a Blade view and print it. This is the plugin's single place that echoes
+	 * rendered view output.
+	 *
+	 * Why the output is not passed through an escaping function here: every dynamic value
+	 * in a template is escaped when the template is rendered, either by Blade's `{{ }}`
+	 * (compiled to the escaping helper set in setupViewFactory()) or by an explicit
+	 * esc_*() / wp_kses*() call inside a `{!! !!}` block, and the rest is static markup.
+	 * What comes back here is therefore finished HTML, a whole admin screen with forms,
+	 * inputs, data-* attributes and inline SVG. Running that through wp_kses_post() would
+	 * strip the interface, and esc_html() would print it as text.
+	 *
+	 * @param string               $view View name (e.g., 'admin.cache-page').
+	 * @param array<string, mixed> $data Data to pass to the view.
+	 */
+	public static function display( string $view, array $data = array() ): void {
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- see the method docblock: template output is already escaped at render time.
+		echo self::view( $view, $data );
 	}
 }

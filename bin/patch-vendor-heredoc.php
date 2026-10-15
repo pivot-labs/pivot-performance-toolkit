@@ -30,42 +30,6 @@ if ( ! is_dir( $vendorDir ) ) {
  * @var array<int, array{file: string, search: string, replace: string}>
  */
 $patches = array(
-	// line 68 in original vendor source
-	array(
-		'file'    => $vendorDir . '/symfony/translation-contracts/TranslatorTrait.php',
-		'search'  => '        $intervalRegexp = <<<\'EOF\'
-            /^(?P<interval>
-                ({\\s*
-                    (\\-?\\d+(\\.\\d+)?[\\s*,\\s*\\-?\\d+(\\.\\d+)?]*)
-                \\s*})
-
-                    |
-
-                (?P<left_delimiter>[\\[\\]])
-                    \\s*
-                    (?P<left>-Inf|\\-?\\d+(\\.\\d+)?)
-                    \\s*,\\s*
-                    (?P<right>\\+?Inf|\\-?\\d+(\\.\\d+)?)
-                    \\s*
-                (?P<right_delimiter>[\\[\\]])
-            )\\s*(?P<message>.*?)$/xs
-            EOF;',
-		'replace' => '        $intervalRegexp = \'/^(?P<interval>
-    ({\\\\s*
-        (\\\\-?\\\\d+(\\\\.\\\\d+)?[\\\\s*,\\\\s*\\\\-?\\\\d+(\\\\.\\\\d+)?]*)
-    \\\\s*})
-
-        |
-
-    (?P<left_delimiter>[\\\\[\\\\]])
-        \\\\s*
-        (?P<left>-Inf|\\\\-?\\\\d+(\\\\.\\\\d+)?)
-        \\\\s*,\\\\s*
-        (?P<right>\\\\+?Inf|\\\\-?\\\\d+(\\\\.\\\\d+)?)
-        \\\\s*
-    (?P<right_delimiter>[\\\\[\\\\]])
-)\\\\s*(?P<message>.*?)$/xs\';',
-	),
 	// line 55 in original vendor source
 	array(
 		'file'    => $vendorDir . '/illuminate/view/DynamicComponent.php',
@@ -83,42 +47,6 @@ EOF;',
 {{ slots }}
 {{ defaultSlot }}
 </x-{{ component }}>\';',
-	),
-	// line 313 in original vendor source
-	array(
-		'file'    => $vendorDir . '/symfony/translation/Translator.php',
-		'search'  => '        $content = \\sprintf(<<<EOF
-            <?php
-
-            use PivotPerformanceToolkit\\Vendor\\Symfony\\Component\\Translation\\MessageCatalogue;
-
-            \\$catalogue = new MessageCatalogue(\'%s\', %s);
-
-            %s
-            return \\$catalogue;
-
-            EOF,',
-		'replace' => '        $content = \\sprintf(\'<?php
-
-use PivotPerformanceToolkit\\\\Vendor\\\\Symfony\\\\Component\\\\Translation\\\\MessageCatalogue;
-
-$catalogue = new MessageCatalogue(\\\'%s\\\', %s);
-
-%s
-return $catalogue;
-\',',
-	),
-	// line 343 in original vendor source
-	array(
-		'file'    => $vendorDir . '/symfony/translation/Translator.php',
-		'search'  => '            $fallbackContent .= \\sprintf(<<<\'EOF\'
-                $catalogue%s = new MessageCatalogue(\'%s\', %s);
-                $catalogue%s->addFallbackCatalogue($catalogue%s);
-
-                EOF,',
-		'replace' => '            $fallbackContent .= \\sprintf(\'$catalogue%s = new MessageCatalogue(\\\'%s\\\', %s);
-$catalogue%s->addFallbackCatalogue($catalogue%s);
-\',',
 	),
 );
 

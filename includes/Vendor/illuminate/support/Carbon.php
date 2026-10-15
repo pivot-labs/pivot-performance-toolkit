@@ -6,8 +6,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
-use PivotPerformanceToolkit\Vendor\Carbon\Carbon as BaseCarbon;
-use PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable as BaseCarbonImmutable;
+use Carbon\Carbon as BaseCarbon;
+use Carbon\CarbonImmutable as BaseCarbonImmutable;
 use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Conditionable;
 use PivotPerformanceToolkit\Vendor\Illuminate\Support\Traits\Dumpable;
 use Ramsey\Uuid\Uuid;

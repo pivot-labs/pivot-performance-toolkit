@@ -30,8 +30,11 @@ final class ObjectCacheManager {
 
 	public function __construct() {
 		$this->dropin_source = PIVOT_PERFORMANCE_TOOLKIT_PATH . 'includes/Cache/object-cache.php';
-		$this->dropin_dest   = WP_CONTENT_DIR . '/object-cache.php';
-		$this->cache_dir     = WP_CONTENT_DIR . '/cache/pivot-performance-toolkit/object-cache';
+		// WordPress only loads an object-cache drop-in from the content directory, so there is no
+		// other location (uploads, plugin folder) it could live in; WP_CONTENT_DIR is the same
+		// constant core uses to find it. Every other check in this class goes through this path.
+		$this->dropin_dest = WP_CONTENT_DIR . '/object-cache.php';
+		$this->cache_dir   = WP_CONTENT_DIR . '/cache/pivot-performance-toolkit/object-cache';
 	}
 
 	// -------------------------------------------------------------------------
@@ -70,7 +73,7 @@ final class ObjectCacheManager {
 	public function canInstall(): bool {
 		return ! $this->hasForeignDropin()
 			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_is_writable -- pre-flight check for a direct-PHP copy() elsewhere in this class (not WP_Filesystem), so drop-in install works silently on activation without a credentials prompt.
-			&& is_writable( WP_CONTENT_DIR )
+			&& is_writable( dirname( $this->dropin_dest ) )
 			&& file_exists( $this->dropin_source );
 	}
 
@@ -127,7 +130,7 @@ final class ObjectCacheManager {
 		}
 
 		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_is_writable -- pre-flight check for a direct-PHP copy() below (not WP_Filesystem), so drop-in install works silently on activation without a credentials prompt.
-		if ( ! is_writable( WP_CONTENT_DIR ) ) {
+		if ( ! is_writable( dirname( $this->dropin_dest ) ) ) {
 			return array(
 				'ok'      => false,
 				'message' => __( 'The wp-content directory is not writable by PHP.', 'pivot-performance-toolkit' ),

@@ -128,6 +128,27 @@
         });
     }
 
+    // Saves a file the server returned as { filename, mime, content } (see ToolsPage::handleExportSettings()).
+    function downloadFile(file) {
+        if (!file || typeof file.content !== 'string') {
+            return;
+        }
+
+        var blob = new Blob([file.content], { type: file.mime || 'application/octet-stream' });
+        var url = window.URL.createObjectURL(blob);
+        var link = document.createElement('a');
+
+        link.href = url;
+        link.download = file.filename || 'download';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        window.setTimeout(function () {
+            window.URL.revokeObjectURL(url);
+        }, 1000);
+    }
+
     function setQuickActionBusy(button, busy) {
         // <button> supports .disabled natively; <a role="button"> does not,
         // so aria-disabled + a guard in the click handler covers both.
@@ -265,6 +286,10 @@
                         }
 
                         if (payload && payload.success) {
+                            if (payload.data && payload.data.download) {
+                                downloadFile(payload.data.download);
+                            }
+
                             if (isAutosaveForm && showToggleAutosaveStatus(form, 'success', form.getAttribute('data-ajax-success-label') || savedMessage)) {
                                 return;
                             }

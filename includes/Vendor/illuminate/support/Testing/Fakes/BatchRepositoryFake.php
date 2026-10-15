@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
-use PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable;
+use Carbon\CarbonImmutable;
 use Closure;
 use PivotPerformanceToolkit\Vendor\Illuminate\Bus\BatchRepository;
 use PivotPerformanceToolkit\Vendor\Illuminate\Bus\PendingBatch;

@@ -39,11 +39,57 @@ final class DelayedJsTest extends TestCase {
 	}
 
 	public function test_runtime_script_itself_is_never_delayed(): void {
-		// WordPress prints source-less enqueued scripts with id="{handle}-js"
+		// WordPress prints the enqueued runtime file with id="{handle}-js"
 		// (see enqueueRuntimeScript()), not the raw handle.
-		$tag = '<script id="pivot-performance-toolkit-delayed-js-runtime-js">/* runtime */</script>';
+		$tag = '<script src="https://example.com/wp-content/plugins/pivot-performance-toolkit/assets/js/delayed-js-runtime.js?ver=1" id="pivot-performance-toolkit-delayed-js-runtime-js"></script>';
 
 		self::assertSame( $tag, $this->delayed_js->delayScriptTags( $tag ) );
+	}
+
+	public function test_runtime_localized_settings_are_never_delayed(): void {
+		// wp_localize_script() prints its data as id="{handle}-js-extra", just before the file tag.
+		$tag = '<script id="pivot-performance-toolkit-delayed-js-runtime-js-extra">var pivotPerformanceToolkitDelayedJs = {"timeoutMs":"8000"};</script>';
+
+		self::assertSame( $tag, $this->delayed_js->delayScriptTags( $tag ) );
+	}
+
+	public function test_enqueue_runtime_registers_the_static_file_with_its_settings(): void {
+		if ( ! defined( 'PIVOT_PERFORMANCE_TOOLKIT_URL' ) ) {
+			define( 'PIVOT_PERFORMANCE_TOOLKIT_URL', 'https://example.com/wp-content/plugins/pivot-performance-toolkit/' );
+		}
+
+		if ( ! defined( 'PIVOT_PERFORMANCE_TOOLKIT_VERSION' ) ) {
+			define( 'PIVOT_PERFORMANCE_TOOLKIT_VERSION', '1.1.1' );
+		}
+
+		Functions\when( 'get_option' )->justReturn( array( 'delay_js_execution' => true ) );
+		Functions\when( 'is_admin' )->justReturn( false );
+
+		$handle = DelayedJs::RUNTIME_SCRIPT_ID;
+
+		Functions\expect( 'wp_register_script' )
+			->once()
+			->with( $handle, PIVOT_PERFORMANCE_TOOLKIT_URL . 'assets/js/delayed-js-runtime.js', array(), PIVOT_PERFORMANCE_TOOLKIT_VERSION, false );
+		Functions\expect( 'wp_localize_script' )
+			->once()
+			->with( $handle, 'pivotPerformanceToolkitDelayedJs', array( 'placeholderType' => 'pivotperformancetoolkit/delayed-js', 'timeoutMs' => 8000 ) );
+		Functions\expect( 'wp_enqueue_script' )->once()->with( $handle );
+
+		( new DelayedJs( new Settings() ) )->enqueueRuntimeScript();
+
+		self::addToAssertionCount( 1 );
+	}
+
+	public function test_enqueue_runtime_does_nothing_when_delay_is_disabled(): void {
+		Functions\when( 'get_option' )->justReturn( array( 'delay_js_execution' => false ) );
+		Functions\when( 'is_admin' )->justReturn( false );
+
+		Functions\expect( 'wp_register_script' )->never();
+		Functions\expect( 'wp_enqueue_script' )->never();
+
+		( new DelayedJs( new Settings() ) )->enqueueRuntimeScript();
+
+		self::addToAssertionCount( 1 );
 	}
 
 	/**

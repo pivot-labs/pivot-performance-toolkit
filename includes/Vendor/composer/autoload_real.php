@@ -26,8 +26,6 @@ class PivotPerformanceToolkit_Autoloader_Init
             return self::$loader;
         }
 
-        require __DIR__ . '/platform_check.php';
-
         spl_autoload_register(array('PivotPerformanceToolkit_Autoloader_Init', 'loadClassLoader'), true, true);
         self::$loader = $loader = new \PivotPerformanceToolkit\Vendor\Composer\Autoload\ClassLoader(\dirname(__DIR__));
         spl_autoload_unregister(array('PivotPerformanceToolkit_Autoloader_Init', 'loadClassLoader'));

@@ -17,7 +17,9 @@
             "@php bin/strauss.phar",
             "@php bin/add-abspath-guards.php",
             "@php bin/patch-vendor-heredoc.php",
+            "@php bin/patch-vendor-view-trim.php",
             "@php bin/rename-vendor-autoloader.php",
+            "@php bin/patch-vendor-autoload-php-check.php",
             "@composer dump-autoload"
         ],
         "post-install-cmd": ["@strauss"],
@@ -28,7 +30,9 @@
             "@php bin/strauss.phar",
             "@php bin/add-abspath-guards.php",
             "@php bin/patch-vendor-heredoc.php",
+            "@php bin/patch-vendor-view-trim.php",
             "@php bin/rename-vendor-autoloader.php",
+            "@php bin/patch-vendor-autoload-php-check.php",
             "sh bin/dist-clean.sh",
             "@composer dump-autoload --optimize"
         ]
@@ -38,6 +42,7 @@
         "illuminate/view": "^11.0"
     },
     "replace": {
+        "nesbot/carbon": "*",
         "symfony/polyfill-mbstring": "*",
         "symfony/polyfill-php83": "*"
     },
@@ -68,6 +73,7 @@
         "wp-cli/i18n-command": "^2.7"
     },
     "config": {
+        "platform-check": false,
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true
         }

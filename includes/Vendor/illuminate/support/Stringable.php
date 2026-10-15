@@ -1413,7 +1413,7 @@ class Stringable implements JsonSerializable, ArrayAccess, BaseStringable
      * @param  string|null  $tz
      * @return \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon
      *
-     * @throws \PivotPerformanceToolkit\Vendor\Carbon\Exceptions\InvalidFormatException
+     * @throws \Carbon\Exceptions\InvalidFormatException
      */
     public function toDate($format = null, $tz = null)
     {

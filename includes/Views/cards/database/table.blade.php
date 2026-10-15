@@ -10,17 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		$display_rows = $max_rows > 0 ? array_slice($table_stats, 0, $max_rows) : $table_stats;
 		$sort_by = (string) ($sort_by ?? 'size');
 		$sort_dir = strtolower((string) ($sort_dir ?? 'desc'));
-		$next_size_dir = ($sort_by === 'size' && $sort_dir === 'asc') ? 'desc' : 'asc';
-		$size_sort_url = add_query_arg(
-			array(
-				'page' => isset($_GET['page']) ? sanitize_key((string) wp_unslash($_GET['page'])) : 'pivot-performance-toolkit',
-				'section' => isset($_GET['section']) ? sanitize_key((string) wp_unslash($_GET['section'])) : 'database',
-				'tab' => isset($_GET['tab']) ? sanitize_key((string) wp_unslash($_GET['tab'])) : '',
-				'sort' => 'size',
-				'sort_dir' => $next_size_dir,
-			),
-			admin_url('admin.php')
-		);
+		$size_sort_url = (string) ($size_sort_url ?? '');
 		$size_sort_indicator = '';
 
 		if ($sort_by === 'size') {
@@ -36,9 +26,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<th>{{ __('Engine', 'pivot-performance-toolkit') }}</th>
 					<th>{{ __('Rows', 'pivot-performance-toolkit') }}</th>
 					<th>
-						<a href="{!! esc_url($size_sort_url) !!}" style="text-decoration:none;">
+						@if ($size_sort_url !== '')
+							<a href="{!! esc_url($size_sort_url) !!}" style="text-decoration:none;">
+								{{ __('Size', 'pivot-performance-toolkit') }}{{ $size_sort_indicator }}
+							</a>
+						@else
 							{{ __('Size', 'pivot-performance-toolkit') }}{{ $size_sort_indicator }}
-						</a>
+						@endif
 					</th>
 					@if ($show_overhead)
 						<th>{{ __('Overhead', 'pivot-performance-toolkit') }}</th>
@@ -69,14 +63,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</table>
 		@if ($max_rows > 0 && count($table_stats) > count($display_rows))
 			@php
-				$view_all_url = add_query_arg(
-					array(
-						'page' => 'pivot-performance-toolkit',
-						'section' => 'database',
-						'tab' => 'pivot-performance-toolkit-database-table',
-					),
-					admin_url('admin.php')
-				);
+				$view_all_url = \PivotPerformanceToolkit\Admin\AdminShell::pageUrl( 'pivot-performance-toolkit-database-table' );
 			@endphp
 			<p style="margin-top:8px;font-size:12px;color:#646970;">
 				{{ sprintf(

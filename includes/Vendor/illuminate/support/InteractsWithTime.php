@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
-use PivotPerformanceToolkit\Vendor\Carbon\CarbonInterval;
+use Carbon\CarbonInterval;
 use DateInterval;
 use DateTimeInterface;
 

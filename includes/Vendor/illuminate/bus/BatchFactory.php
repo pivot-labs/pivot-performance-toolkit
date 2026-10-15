@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
-use PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable;
+use Carbon\CarbonImmutable;
 use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Factory as QueueFactory;
 
 class BatchFactory
@@ -40,9 +40,9 @@ class BatchFactory
      * @param  int  $failedJobs
      * @param  array  $failedJobIds
      * @param  array  $options
-     * @param  \PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable  $createdAt
-     * @param  \PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable|null  $cancelledAt
-     * @param  \PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable|null  $finishedAt
+     * @param  \Carbon\CarbonImmutable  $createdAt
+     * @param  \Carbon\CarbonImmutable|null  $cancelledAt
+     * @param  \Carbon\CarbonImmutable|null  $finishedAt
      * @return \PivotPerformanceToolkit\Vendor\Illuminate\Bus\Batch
      */
     public function make(BatchRepository $repository,

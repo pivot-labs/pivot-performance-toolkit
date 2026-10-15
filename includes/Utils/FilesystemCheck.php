@@ -26,10 +26,18 @@ final class FilesystemCheck {
 	public static function checkCacheDirectories(): array {
 		$cache_base = WP_CONTENT_DIR . '/cache/pivot-performance-toolkit';
 
-		$dirs = array(
-			'base'            => $cache_base,
-			'minified_assets' => $cache_base . '/minified-assets',
-		);
+		$dirs = array( 'base' => $cache_base );
+
+		foreach ( array(
+			'minified_assets' => AssetStorage::MINIFIED,
+			'combined_assets' => AssetStorage::COMBINED,
+		) as $name => $kind ) {
+			$asset_dir = AssetStorage::dir( $kind );
+
+			if ( null !== $asset_dir ) {
+				$dirs[ $name ] = $asset_dir;
+			}
+		}
 
 		$results = array(
 			'writable' => true,

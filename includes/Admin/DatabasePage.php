@@ -50,25 +50,15 @@ final class DatabasePage extends BladeAdminPage {
 	 * @return array<string, mixed>
 	 */
 	protected function buildViewData(): array {
-		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- read-only table-sort query args, not a state-changing action; both are sanitized via sanitize_key() and validated against a hardcoded whitelist below.
-		$sort_by  = isset( $_GET['sort'] ) ? sanitize_key( (string) wp_unslash( $_GET['sort'] ) ) : 'size';
-		$sort_dir = isset( $_GET['sort_dir'] ) ? sanitize_key( (string) wp_unslash( $_GET['sort_dir'] ) ) : 'desc';
-		// phpcs:enable WordPress.Security.NonceVerification.Recommended
+		$sort     = TableSort::fromRequest();
+		$sort_by  = $sort['sort_by'];
+		$sort_dir = $sort['sort_dir'];
 
-		if ( ! in_array( $sort_by, array( 'name', 'engine', 'rows', 'size' ), true ) ) {
-			$sort_by = 'size';
-		}
-
-		if ( ! in_array( $sort_dir, array( 'asc', 'desc' ), true ) ) {
-			$sort_dir = 'desc';
-		}
-
-		$stats       = $this->optimizer->getDatabaseStats();
-		$table_stats = $this->optimizer->getTableStats( $sort_by, $sort_dir );
-		// phpcs:disable WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- these are read-only display values from this page's own post-redirect notice (already produced by a nonce-verified admin-post handler); sanitized via sanitize_key()/(int) cast, never stored or output raw.
-		$cleaned_task  = isset( $_GET['pivot_performance_toolkit_cleaned'] ) ? sanitize_key( (string) wp_unslash( $_GET['pivot_performance_toolkit_cleaned'] ) ) : '';
-		$cleaned_count = isset( $_GET['pivot_performance_toolkit_count'] ) ? (int) wp_unslash( $_GET['pivot_performance_toolkit_count'] ) : 0;
-		// phpcs:enable WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$stats         = $this->optimizer->getDatabaseStats();
+		$table_stats   = $this->optimizer->getTableStats( $sort_by, $sort_dir );
+		$flash         = FlashNotice::get( 'database' );
+		$cleaned_task  = (string) ( $flash['task'] ?? '' );
+		$cleaned_count = (int) ( $flash['count'] ?? 0 );
 		$show_overhead = false;
 		$has_innodb    = false;
 		$has_myisam    = false;
@@ -139,6 +129,8 @@ final class DatabasePage extends BladeAdminPage {
 			'optimize'       => __( 'Tables optimized', 'pivot-performance-toolkit' ),
 		);
 
+		$overview_url = AdminShell::pageUrl( 'pivot-performance-toolkit-database' );
+
 		return array(
 			'stats'              => $stats,
 			'table_stats'        => $table_stats,
@@ -148,27 +140,14 @@ final class DatabasePage extends BladeAdminPage {
 			'cleaned_count'      => $cleaned_count,
 			'sort_by'            => $sort_by,
 			'sort_dir'           => $sort_dir,
+			'size_sort_url'      => TableSort::nextSizeUrl( $overview_url, $sort_by, $sort_dir ),
 			'show_overhead'      => $show_overhead,
 			'engine_display'     => $engine_display,
 			'cleanup_action'     => self::CLEANUP_ACTION,
 			'db_size_formatted'  => DatabaseOptimizer::formatBytes( (int) $stats['size_bytes'] ),
 			'myisam_reclaimable' => DatabaseOptimizer::formatBytes( (int) $stats['myisam_overhead_bytes'] ),
-			'overview_url'       => add_query_arg(
-				array(
-					'page'    => 'pivot-performance-toolkit',
-					'section' => 'database',
-					'tab'     => 'pivot-performance-toolkit-database',
-				),
-				admin_url( 'admin.php' )
-			),
-			'tables_url'         => add_query_arg(
-				array(
-					'page'    => 'pivot-performance-toolkit',
-					'section' => 'database',
-					'tab'     => 'pivot-performance-toolkit-database-table',
-				),
-				admin_url( 'admin.php' )
-			),
+			'overview_url'       => $overview_url,
+			'tables_url'         => AdminShell::pageUrl( 'pivot-performance-toolkit-database-table' ),
 		);
 	}
 
@@ -206,29 +185,21 @@ final class DatabasePage extends BladeAdminPage {
 				break;
 			default:
 				wp_safe_redirect(
-					add_query_arg(
-						array(
-							'page'    => 'pivot-performance-toolkit',
-							'section' => 'database',
-							'tab'     => $this->slug(),
-						),
-						admin_url( 'admin.php' )
-					)
+					AdminShell::pageUrl( $this->slug() )
 				);
 				exit;
 		}
 
-		wp_safe_redirect(
-			add_query_arg(
-				array(
-					'page'                              => 'pivot-performance-toolkit',
-					'section'                           => 'database',
-					'tab'                               => 'pivot-performance-toolkit-database',
-					'pivot_performance_toolkit_cleaned' => $task,
-					'pivot_performance_toolkit_count'   => $count,
-				),
-				admin_url( 'admin.php' )
+		FlashNotice::set(
+			'database',
+			array(
+				'task'  => $task,
+				'count' => $count,
 			)
+		);
+
+		wp_safe_redirect(
+			AdminShell::pageUrl( 'pivot-performance-toolkit-database' )
 		);
 		exit;
 	}

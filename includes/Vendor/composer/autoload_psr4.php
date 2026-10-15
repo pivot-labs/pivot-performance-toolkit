@@ -11,13 +11,9 @@ $baseDir = dirname(dirname($vendorDir));
 
 return array(
     'PivotPerformanceToolkit\\Vendor\\voku\\' => array($vendorDir . '/voku/portable-ascii/src/voku'),
-    'PivotPerformanceToolkit\\Vendor\\Symfony\\Contracts\\Translation\\' => array($vendorDir . '/symfony/translation-contracts'),
-    'PivotPerformanceToolkit\\Vendor\\Symfony\\Component\\Translation\\' => array($vendorDir . '/symfony/translation'),
     'PivotPerformanceToolkit\\Vendor\\Symfony\\Component\\Finder\\' => array($vendorDir . '/symfony/finder'),
-    'PivotPerformanceToolkit\\Vendor\\Symfony\\Component\\Clock\\' => array($vendorDir . '/symfony/clock'),
     'PivotPerformanceToolkit\\Vendor\\Psr\\SimpleCache\\' => array($vendorDir . '/psr/simple-cache/src'),
     'PivotPerformanceToolkit\\Vendor\\Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
-    'PivotPerformanceToolkit\\Vendor\\Psr\\Clock\\' => array($vendorDir . '/psr/clock/src'),
     'PivotPerformanceToolkit\\Vendor\\Illuminate\\View\\' => array($vendorDir . '/illuminate/view'),
     'PivotPerformanceToolkit\\Vendor\\Illuminate\\Support\\' => array($vendorDir . '/illuminate/support', $vendorDir . '/illuminate/collections', $vendorDir . '/illuminate/conditionable', $vendorDir . '/illuminate/macroable'),
     'PivotPerformanceToolkit\\Vendor\\Illuminate\\Pipeline\\' => array($vendorDir . '/illuminate/pipeline'),
@@ -27,6 +23,4 @@ return array(
     'PivotPerformanceToolkit\\Vendor\\Illuminate\\Container\\' => array($vendorDir . '/illuminate/container'),
     'PivotPerformanceToolkit\\Vendor\\Illuminate\\Bus\\' => array($vendorDir . '/illuminate/bus'),
     'PivotPerformanceToolkit\\Vendor\\Doctrine\\Inflector\\' => array($vendorDir . '/doctrine/inflector/src'),
-    'PivotPerformanceToolkit\\Vendor\\Carbon\\Doctrine\\' => array($vendorDir . '/carbonphp/carbon-doctrine-types/src/Carbon/Doctrine'),
-    'PivotPerformanceToolkit\\Vendor\\Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon'),
 );

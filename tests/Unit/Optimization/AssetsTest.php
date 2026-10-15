@@ -20,6 +20,7 @@ final class AssetsTest extends TestCase {
 		parent::setUp();
 
 		Functions\when( 'wp_parse_url' )->alias( 'parse_url' );
+		$this->stubDefaultAssetLocations();
 		Functions\when( 'wp_basename' )->alias( 'basename' );
 		Functions\when( 'wp_parse_args' )->alias(
 			static fn( $args, $defaults = array() ): array => array_merge( $defaults, (array) $args )
@@ -77,6 +78,17 @@ final class AssetsTest extends TestCase {
 		$tag    = '<script src="/jquery.js"></script>';
 
 		self::assertSame( $tag, $assets->addDeferAttribute( $tag, 'jquery-core', '/jquery.js' ) );
+	}
+
+	/**
+	 * The delay runtime has to run synchronously and early; deferring it would let delayed
+	 * scripts' triggers register late.
+	 */
+	public function test_defer_not_added_for_the_delay_runtime(): void {
+		$assets = $this->assetsWithSettings( array( 'defer_scripts' => true ) );
+		$tag    = '<script src="/assets/js/delayed-js-runtime.js"></script>';
+
+		self::assertSame( $tag, $assets->addDeferAttribute( $tag, 'pivot-performance-toolkit-delayed-js-runtime', '/assets/js/delayed-js-runtime.js' ) );
 	}
 
 	public function test_defer_not_duplicated_when_already_present(): void {
@@ -254,12 +266,12 @@ final class AssetsTest extends TestCase {
 		$result = $assets->minifyScriptTag( $tag, 'a', $src );
 
 		self::assertMatchesRegularExpression(
-			'#src=\'https://example\.com/wp-content/cache/pivot-performance-toolkit/minified-assets/[a-f0-9]{32}\.min\.js\'#',
+			'#src=\'https://example\.com/wp-content/uploads/pivot-performance-toolkit/minified-assets/[a-f0-9]{32}\.min\.js\'#',
 			$result
 		);
 
 		preg_match( "/src='([^']+)'/", $result, $src_match );
-		$minified_path = WP_CONTENT_DIR . '/cache/pivot-performance-toolkit/minified-assets/' . basename( $src_match[1] );
+		$minified_path = WP_CONTENT_DIR . '/uploads/pivot-performance-toolkit/minified-assets/' . basename( $src_match[1] );
 
 		self::assertFileExists( $minified_path );
 

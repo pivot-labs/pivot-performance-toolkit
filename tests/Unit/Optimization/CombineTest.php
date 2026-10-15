@@ -19,8 +19,10 @@ final class CombineTest extends TestCase {
 
 	protected function setUp(): void {
 		parent::setUp();
+		$this->requireHtmlApi();
 
 		Functions\when( 'wp_parse_url' )->alias( 'parse_url' );
+		$this->stubDefaultAssetLocations();
 		Functions\when( 'wp_basename' )->alias( 'basename' );
 		Functions\when( 'esc_url' )->returnArg();
 		Functions\when( 'home_url' )->justReturn( 'https://example.com' );
@@ -129,6 +131,16 @@ final class CombineTest extends TestCase {
 		self::assertNull( $this->call( 'eligibleJsTag', array( $tag ) ) );
 	}
 
+	/**
+	 * If the delay runtime were folded into a bundle, DelayedJs would delay the bundle and the
+	 * runtime would wait for the very interaction it exists to trigger.
+	 */
+	public function test_js_tag_is_ineligible_for_the_delay_runtime(): void {
+		$tag = '<script id="pivot-performance-toolkit-delayed-js-runtime-js" src="/wp-content/plugins/pivot-performance-toolkit/assets/js/delayed-js-runtime.js"></script>';
+
+		self::assertNull( $this->call( 'eligibleJsTag', array( $tag ) ) );
+	}
+
 	// ── combineCssRun / combineJsRun: grouping & order preservation ────
 
 	/**
@@ -171,12 +183,12 @@ final class CombineTest extends TestCase {
 		$result = $this->call( 'combineCssRun', array( array( $tag_a, $tag_b ) ) );
 
 		self::assertMatchesRegularExpression(
-			'#^<link rel="stylesheet" href="https://example\.com/wp-content/cache/pivot-performance-toolkit/combined-assets/[a-f0-9]{32}\.css">$#',
+			'#^<link (?=[^>]*rel="stylesheet")(?=[^>]*href="https://example\.com/wp-content/uploads/pivot-performance-toolkit/combined-assets/[a-f0-9]{32}\.css")[^>]*>$#',
 			$result
 		);
 
 		preg_match( '/href="([^"]+)"/', $result, $href_match );
-		$bundle_path = WP_CONTENT_DIR . '/cache/pivot-performance-toolkit/combined-assets/' . basename( $href_match[1] );
+		$bundle_path = WP_CONTENT_DIR . '/uploads/pivot-performance-toolkit/combined-assets/' . basename( $href_match[1] );
 
 		self::assertFileExists( $bundle_path );
 
@@ -189,6 +201,28 @@ final class CombineTest extends TestCase {
 			$bundle_content,
 			'The relative url() in a.css must be rewritten relative to its own source directory.'
 		);
+	}
+
+	public function test_two_adjacent_local_scripts_combine_into_one_core_built_script_tag(): void {
+		// Mirrors core's wp_get_script_tag(): the tag plus a trailing newline.
+		Functions\when( 'wp_get_script_tag' )->alias(
+			static fn( array $attributes ): string => '<script src="' . $attributes['src'] . '"></script>' . "\n"
+		);
+
+		$result = $this->call(
+			'combineJsRun',
+			array( array( '<script src="https://example.com/fixtures/js/a.js"></script>', '<script src="https://example.com/fixtures/js/b.js"></script>' ) )
+		);
+
+		self::assertMatchesRegularExpression(
+			'#^<script src="https://example\.com/wp-content/uploads/pivot-performance-toolkit/combined-assets/[a-f0-9]{32}\.js"></script>$#',
+			$result
+		);
+
+		preg_match( '/src="([^"]+)"/', $result, $src_match );
+		$bundle = (string) file_get_contents( WP_CONTENT_DIR . '/uploads/pivot-performance-toolkit/combined-assets/' . basename( $src_match[1] ) );
+
+		self::assertStringContainsString( 'window.b = 2;', $bundle );
 	}
 
 	// ── rewriteRelativeCssUrls / resolveRelativeCssUrl ─────────────────
@@ -374,7 +408,7 @@ final class CombineTest extends TestCase {
 		$result = $combine->maybeCombineTags( $html );
 
 		self::assertMatchesRegularExpression(
-			'#^<link rel="stylesheet" href="https://example\.com/wp-content/cache/pivot-performance-toolkit/combined-assets/[a-f0-9]{32}\.css">$#',
+			'#^<link (?=[^>]*rel="stylesheet")(?=[^>]*href="https://example\.com/wp-content/uploads/pivot-performance-toolkit/combined-assets/[a-f0-9]{32}\.css")[^>]*>$#',
 			$result
 		);
 	}

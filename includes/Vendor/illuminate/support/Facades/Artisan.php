@@ -11,7 +11,7 @@ use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Console\Kernel as Consol
 /**
  * @method static int handle(\Symfony\Component\Console\Input\InputInterface $input, \Symfony\Component\Console\Output\OutputInterface|null $output = null)
  * @method static void terminate(\Symfony\Component\Console\Input\InputInterface $input, int $status)
- * @method static void whenCommandLifecycleIsLongerThan(\DateTimeInterface|\PivotPerformanceToolkit\Vendor\Carbon\CarbonInterval|float|int $threshold, callable $handler)
+ * @method static void whenCommandLifecycleIsLongerThan(\DateTimeInterface|\Carbon\CarbonInterval|float|int $threshold, callable $handler)
  * @method static \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon|null commandStartedAt()
  * @method static \Illuminate\Console\Scheduling\Schedule resolveConsoleSchedule()
  * @method static \Illuminate\Foundation\Console\ClosureCommand command(string $signature, \Closure $callback)

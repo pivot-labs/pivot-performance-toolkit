@@ -15,6 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use PivotPerformanceToolkit\Cache\HtaccessCacheHeaders;
 use PivotPerformanceToolkit\Core\Settings;
+use PivotPerformanceToolkit\Utils\RequestInput;
 
 final class BrowserCacheHeadersPage extends BladeAdminPage {
 
@@ -56,8 +57,8 @@ final class BrowserCacheHeadersPage extends BladeAdminPage {
 	 * @return array<string, mixed>
 	 */
 	protected function buildViewData(): array {
-		// phpcs:disable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.NonceVerification.Recommended -- SERVER_SOFTWARE is set by the web server, not user input; it's only ever displayed via Blade's {{ }}, which HTML-escapes it at render time. The notice/message query args are read-only display values from this page's own post-redirect notice (set by handleApply()/handleRemove() below, both of which already verify the nonce via check_admin_referer() before redirecting here) — sanitized and used only for display, never to trigger a state change.
-		$server_software = isset( $_SERVER['SERVER_SOFTWARE'] ) ? (string) wp_unslash( $_SERVER['SERVER_SOFTWARE'] ) : '';
+		$server_software = RequestInput::server( 'SERVER_SOFTWARE' );
+		$flash           = FlashNotice::get( 'htaccess' );
 
 		return array(
 			'htaccess_snippet' => HtaccessCacheHeaders::snippet(),
@@ -69,10 +70,9 @@ final class BrowserCacheHeadersPage extends BladeAdminPage {
 			'remove_action'    => self::REMOVE_ACTION,
 			'apply_nonce'      => wp_create_nonce( self::APPLY_ACTION ),
 			'remove_nonce'     => wp_create_nonce( self::REMOVE_ACTION ),
-			'notice'           => isset( $_GET['pivot_performance_toolkit_htaccess_notice'] ) ? sanitize_key( wp_unslash( (string) $_GET['pivot_performance_toolkit_htaccess_notice'] ) ) : '',
-			'message'          => isset( $_GET['pivot_performance_toolkit_htaccess_message'] ) ? sanitize_text_field( wp_unslash( (string) $_GET['pivot_performance_toolkit_htaccess_message'] ) ) : '',
+			'notice'           => (string) ( $flash['notice'] ?? '' ),
+			'message'          => (string) ( $flash['message'] ?? '' ),
 		);
-		// phpcs:enable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.NonceVerification.Recommended
 	}
 
 	public function handleApply(): void {
@@ -124,16 +124,15 @@ final class BrowserCacheHeadersPage extends BladeAdminPage {
 	}
 
 	private function redirectWithNotice( bool $success, string $message ): void {
-		$redirect_url = add_query_arg(
+		FlashNotice::set(
+			'htaccess',
 			array(
-				'page'    => 'pivot-performance-toolkit',
-				'section' => 'caching',
-				'tab'     => $this->slug(),
-				'pivot_performance_toolkit_htaccess_notice' => $success ? 'success' : 'error',
-				'pivot_performance_toolkit_htaccess_message' => $message,
-			),
-			admin_url( 'admin.php' )
+				'notice'  => $success ? 'success' : 'error',
+				'message' => $message,
+			)
 		);
+
+		$redirect_url = AdminShell::pageUrl( $this->slug() );
 
 		wp_safe_redirect( $redirect_url );
 		exit;

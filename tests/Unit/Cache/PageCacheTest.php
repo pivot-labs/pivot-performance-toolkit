@@ -36,6 +36,10 @@ final class PageCacheTest extends TestCase {
 			}
 		);
 		Functions\when( 'wp_unslash' )->returnArg();
+		Functions\when( 'update_option' )->justReturn( true );
+		Functions\when( 'home_url' )->justReturn( 'https://example.com' );
+		Functions\when( 'wp_parse_url' )->alias( 'parse_url' );
+		Functions\when( 'set_url_scheme' )->alias( static fn( string $url, string $scheme ): string => preg_replace( '#^[a-z]+://#', $scheme . '://', $url ) );
 		Functions\when( 'wp_parse_args' )->alias(
 			static fn( $args, $defaults = array() ): array => array_merge( $defaults, (array) $args )
 		);
@@ -305,6 +309,24 @@ final class PageCacheTest extends TestCase {
 		self::assertSame( 3600, $config['ttl'] );
 		self::assertSame( array( 'woocommerce_items_in_cart', 'wordpress_logged_in_*' ), $config['bypass_cookies'] );
 		self::assertSame( 'https://example.com/wp-json/pivot-performance-toolkit/v1/performance-tests/collect', $config['collect_url'] );
+		self::assertStringStartsWith( 'https://example.com/wp-content/plugins/pivot-performance-toolkit/assets/js/performance-probe.js?ver=', $config['probe_script'] );
+	}
+
+	public function test_register_rewrites_a_config_file_written_by_an_older_version(): void {
+		$this->pageCache()->writeConfigFile();
+
+		// Same file on disk, but the stored version no longer matches the running plugin.
+		Functions\when( 'get_option' )->alias(
+			fn( string $key, $fallback = array() ) => 'pivot_performance_toolkit_cache_config_version' === $key ? '0.0.1' : ( $this->options[ $key ] ?? $fallback )
+		);
+		file_put_contents( self::CACHE_DIR . '/config.php', "<?php\nreturn array( 'enabled' => true );\n" );
+		Functions\when( 'add_action' )->justReturn( true );
+
+		$this->pageCache()->refreshStaleConfig();
+
+		$config = include self::CACHE_DIR . '/config.php';
+
+		self::assertArrayHasKey( 'probe_script', $config );
 	}
 
 	// ── register ─────────────────────────────────────────────────────────

@@ -20,9 +20,27 @@ if ( ! defined( 'ABSPATH' ) ) {
 // variable table for the rest of the request).
 ( function () {
 
+	/*
+	 * Request input handling in this file
+	 * -----------------------------------
+	 * This drop-in is included from wp-settings.php before wp-includes/formatting.php, so
+	 * sanitize_text_field(), wp_unslash() and friends do not exist yet (and cannot be loaded
+	 * early without breaking core's own require of that file). Every $_SERVER / $_COOKIE read
+	 * below therefore goes through this one function instead, which keeps printable ASCII only:
+	 * control characters (header/log injection), spaces and raw non-ASCII bytes are dropped.
+	 * Values are never echoed or written; they are only compared, prefix-matched, or hashed.
+	 *
+	 * Nothing has added slashes to the superglobals yet at this point, so no unslashing is
+	 * needed. PageCache.php, which runs after wp_magic_quotes(), unslashes and then applies
+	 * the same filter (RequestInput::keyPart()) so both sides build an identical cache key.
+	 */
+	$pivot_performance_toolkit_clean = static function ( $value ): string {
+		return (string) preg_replace( '/[^\x21-\x7E]/', '', is_scalar( $value ) ? (string) $value : '' );
+	};
+
 	// Only handle anonymous GET requests.
-	// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- used only in a strict === comparison against a hardcoded literal, never stored or output. wp_unslash() lives in wp-includes/formatting.php, which this drop-in is included before (see wp-settings.php), so it's not yet defined here.
-	if ( ! isset( $_SERVER['REQUEST_METHOD'] ) || 'GET' !== strtoupper( $_SERVER['REQUEST_METHOD'] ) ) {
+	// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- sanitized by $pivot_performance_toolkit_clean() (see the comment block above); compared against a literal only.
+	if ( 'GET' !== strtoupper( $pivot_performance_toolkit_clean( $_SERVER['REQUEST_METHOD'] ?? '' ) ) ) {
 		return;
 	}
 
@@ -38,8 +56,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	// those functions, so it must not rely solely on that assumption. This
 	// check is explicit and independent of the logged-in-cookie heuristic
 	// below, so it still holds even if a cache file ever ended up here.
-	// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- only used for a strpos() prefix match below; never stored, output, or used as a filesystem path. wp_unslash() isn't yet defined this early in the bootstrap.
-	$pivot_performance_toolkit_request_uri  = isset( $_SERVER['REQUEST_URI'] ) ? (string) $_SERVER['REQUEST_URI'] : '/';
+	// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- sanitized by $pivot_performance_toolkit_clean() (see the comment block above); only used for a strpos() prefix match.
+	$pivot_performance_toolkit_request_uri  = $pivot_performance_toolkit_clean( $_SERVER['REQUEST_URI'] ?? '' );
+	$pivot_performance_toolkit_request_uri  = '' !== $pivot_performance_toolkit_request_uri ? $pivot_performance_toolkit_request_uri : '/';
 	$pivot_performance_toolkit_request_path = strtok( $pivot_performance_toolkit_request_uri, '?' );
 	$pivot_performance_toolkit_request_path = false !== $pivot_performance_toolkit_request_path ? $pivot_performance_toolkit_request_path : $pivot_performance_toolkit_request_uri;
 
@@ -51,13 +70,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	// Detect performance-test probe cookie.
 	// When set, we bypass the logged-in check so the probe can measure the real cached page.
-	// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- only the length is checked below; the token's content is never stored, output, or otherwise used. wp_unslash() isn't yet defined this early in the bootstrap (see the REQUEST_METHOD check above).
-	$pivot_performance_toolkit_probe_token = isset( $_COOKIE['pivot_performance_toolkit_perf_probe'] ) ? trim( (string) $_COOKIE['pivot_performance_toolkit_perf_probe'] ) : '';
+	// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- sanitized by $pivot_performance_toolkit_clean() (see the comment block above); the length is checked and the value is only ever json_encode()d into the probe script.
+	$pivot_performance_toolkit_probe_token = $pivot_performance_toolkit_clean( $_COOKIE['pivot_performance_toolkit_perf_probe'] ?? '' );
 	$pivot_performance_toolkit_is_probe    = ( strlen( $pivot_performance_toolkit_probe_token ) >= 20 );
 
 	// Skip logged-in users by checking WP auth cookies (skip for probe requests).
 	if ( ! $pivot_performance_toolkit_is_probe ) {
-		foreach ( array_keys( $_COOKIE ) as $pivot_performance_toolkit_cookie ) {
+		foreach ( array_keys( is_array( $_COOKIE ) ? $_COOKIE : array() ) as $pivot_performance_toolkit_cookie ) {
+			$pivot_performance_toolkit_cookie = $pivot_performance_toolkit_clean( $pivot_performance_toolkit_cookie );
+
 			if ( 0 === strncmp( $pivot_performance_toolkit_cookie, 'wordpress_logged_in_', 20 ) ) {
 				return;
 			}
@@ -83,7 +104,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	if ( ! $pivot_performance_toolkit_is_probe && array() !== $pivot_performance_toolkit_bypass_cookies && isset( $_COOKIE ) && is_array( $_COOKIE ) ) {
 		foreach ( array_keys( $_COOKIE ) as $pivot_performance_toolkit_cookie_name ) {
-			if ( ! is_string( $pivot_performance_toolkit_cookie_name ) || '' === $pivot_performance_toolkit_cookie_name ) {
+			$pivot_performance_toolkit_cookie_name = $pivot_performance_toolkit_clean( $pivot_performance_toolkit_cookie_name );
+
+			if ( '' === $pivot_performance_toolkit_cookie_name ) {
 				continue;
 			}
 
@@ -111,10 +134,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	$pivot_performance_toolkit_ttl       = isset( $pivot_performance_toolkit_config['ttl'] ) ? (int) $pivot_performance_toolkit_config['ttl'] : 3600;
 	$pivot_performance_toolkit_cache_dir = WP_CONTENT_DIR . '/cache/pivot-performance-toolkit';
-	// phpcs:disable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- these are only ever MD5-hashed below to build the cache file name; raw content is never stored, echoed, or used directly as a filesystem path. wp_unslash() isn't yet defined this early in the bootstrap.
-	$pivot_performance_toolkit_scheme = ( ! empty( $_SERVER['HTTPS'] ) && strtolower( (string) $_SERVER['HTTPS'] ) !== 'off' ) ? 'https' : 'http';
-	$pivot_performance_toolkit_host   = isset( $_SERVER['HTTP_HOST'] ) ? (string) $_SERVER['HTTP_HOST'] : 'localhost';
-	$pivot_performance_toolkit_uri    = isset( $_SERVER['REQUEST_URI'] ) ? (string) $_SERVER['REQUEST_URI'] : '/';
+	// phpcs:disable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- all three are sanitized by $pivot_performance_toolkit_clean() (see the comment block above) and only MD5-hashed to build the cache file name.
+	$pivot_performance_toolkit_https  = strtolower( $pivot_performance_toolkit_clean( $_SERVER['HTTPS'] ?? '' ) );
+	$pivot_performance_toolkit_scheme = ( '' !== $pivot_performance_toolkit_https && 'off' !== $pivot_performance_toolkit_https ) ? 'https' : 'http';
+	$pivot_performance_toolkit_host   = $pivot_performance_toolkit_clean( $_SERVER['HTTP_HOST'] ?? '' );
+	$pivot_performance_toolkit_host   = '' !== $pivot_performance_toolkit_host ? $pivot_performance_toolkit_host : 'localhost';
+	$pivot_performance_toolkit_uri    = $pivot_performance_toolkit_clean( $_SERVER['REQUEST_URI'] ?? '' );
+	$pivot_performance_toolkit_uri    = '' !== $pivot_performance_toolkit_uri ? $pivot_performance_toolkit_uri : '/';
 	// phpcs:enable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 	$pivot_performance_toolkit_key  = md5( $pivot_performance_toolkit_scheme . '://' . $pivot_performance_toolkit_host . $pivot_performance_toolkit_uri );
 	$pivot_performance_toolkit_file = $pivot_performance_toolkit_cache_dir . '/' . $pivot_performance_toolkit_key . '.html';
@@ -132,42 +158,39 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	header( 'X-Pivot-Cache: HIT' );
 
-	// For probe requests: inject the metrics-collection script into the cached HTML
-	// before </body> so the probe can report back its timing data.
+	// For probe requests: add the plugin's performance-probe.js (the same file the plugin enqueues
+	// on pages that are not served from the cache) before </body>, so the probe can report its
+	// timings. The tag is built by hand because this runs before WordPress has loaded: there is
+	// no script loader to call, and the page being modified is a finished HTML file, not
+	// something that is still being enqueued.
 	if ( $pivot_performance_toolkit_is_probe ) {
 		$pivot_performance_toolkit_collect_url = isset( $pivot_performance_toolkit_config['collect_url'] ) ? (string) $pivot_performance_toolkit_config['collect_url'] : '';
+		$pivot_performance_toolkit_probe_src   = isset( $pivot_performance_toolkit_config['probe_script'] ) ? (string) $pivot_performance_toolkit_config['probe_script'] : '';
 		$pivot_performance_toolkit_html        = (string) file_get_contents( $pivot_performance_toolkit_file );
 
-		if ( '' !== $pivot_performance_toolkit_collect_url && '' !== $pivot_performance_toolkit_html ) {
-			$pivot_performance_toolkit_safe_token = json_encode( $pivot_performance_toolkit_probe_token );
-			$pivot_performance_toolkit_safe_url   = json_encode( $pivot_performance_toolkit_collect_url );
+		if ( '' !== $pivot_performance_toolkit_collect_url && '' !== $pivot_performance_toolkit_probe_src && '' !== $pivot_performance_toolkit_html ) {
+			$pivot_performance_toolkit_script = "\n" . '<script src="' . htmlspecialchars( $pivot_performance_toolkit_probe_src, ENT_QUOTES ) . '" data-collect-url="' . htmlspecialchars( $pivot_performance_toolkit_collect_url, ENT_QUOTES ) . '"></script>' . "\n";
 
-			// wp_enqueue_script() isn't reachable here — this whole drop-in runs
-			// before wp-settings.php has bootstrapped WordPress (no hook system,
-			// no script-loader), and the string being modified is a byte-for-byte
-			// cached HTML file, not a template being rendered through it. A raw
-			// <script> tag is the only mechanism this early in the request.
-			$pivot_performance_toolkit_script  = "\n<script>\n(function(){\nvar token=" . $pivot_performance_toolkit_safe_token . ';var collectUrl=' . $pivot_performance_toolkit_safe_url . ';';
-			$pivot_performance_toolkit_script .= "document.cookie='pivot_performance_toolkit_perf_probe=;path=/;SameSite=Lax;max-age=0;expires=Thu, 01 Jan 1970 00:00:00 GMT';";
-			$pivot_performance_toolkit_script .= "try{window.name='';}catch(e){}";
-			$pivot_performance_toolkit_script .= 'var sentKey="pivot_performance_toolkit_perf_sent_"+token;';
-			$pivot_performance_toolkit_script .= 'try{if(window.sessionStorage&&window.sessionStorage.getItem(sentKey)==="1"){return;}}catch(e){}';
-			$pivot_performance_toolkit_script .= 'var fcp=0;var lcp=0;';
-			$pivot_performance_toolkit_script .= 'if("PerformanceObserver" in window){try{var paintObs=new PerformanceObserver(function(list){list.getEntries().forEach(function(e){if(e.name==="first-contentful-paint"){fcp=fcp||e.startTime||0;}});});paintObs.observe({type:"paint",buffered:true});var lcpObs=new PerformanceObserver(function(list){var e=list.getEntries();if(e.length){lcp=e[e.length-1].startTime||lcp;}});lcpObs.observe({type:"largest-contentful-paint",buffered:true});}catch(e){}}';
-			$pivot_performance_toolkit_script .= 'function num(v){var n=Number(v);return Number.isFinite(n)?Math.round(n*100)/100:0;}';
-			$pivot_performance_toolkit_script .= 'function getFcp(){var p=performance.getEntriesByType("paint")||[];var e=p.find(function(x){return x.name==="first-contentful-paint";});return num(e&&e.startTime?e.startTime:fcp);}';
-			$pivot_performance_toolkit_script .= 'function getJs(){var s=document.querySelectorAll("script[src]")||[];var c=s.length,t=0;(performance.getEntriesByType("resource")||[]).forEach(function(r){if(r.name&&(r.name.endsWith(".js")||r.initiatorType==="script")){t+=r.transferSize||r.encodedBodySize||0;}});return{total_js_count:c,total_js_size_bytes:t};}';
-			$pivot_performance_toolkit_script .= 'function getCss(){var s=document.querySelectorAll("link[rel=\"stylesheet\"]")||[];var c=s.length,t=0;(performance.getEntriesByType("resource")||[]).forEach(function(r){if(r.name&&(r.name.endsWith(".css")||r.initiatorType==="link")){t+=r.transferSize||r.encodedBodySize||0;}});return{total_css_count:c,total_css_size_bytes:t};}';
-			$pivot_performance_toolkit_script .= 'function getImg(){var imgs=document.querySelectorAll("img")||[];var c=imgs.length,t=0;(performance.getEntriesByType("resource")||[]).forEach(function(r){var n=String(r&&r.name?r.name:"").toLowerCase(),tp=String(r&&r.initiatorType?r.initiatorType:"").toLowerCase();if(tp==="img"||/\\.(avif|bmp|gif|heic|heif|ico|jpe?g|png|svg|webp|tif|tiff)(\\?|#|$)/i.test(n)){t+=r.transferSize||r.encodedBodySize||0;}});return{total_image_count:c,total_image_size_bytes:t};}';
-			$pivot_performance_toolkit_script .= 'function collect(){var nav=performance.getEntriesByType("navigation")[0]||null;if(!fcp){fcp=getFcp();}if(!lcp){var le=performance.getEntriesByType("largest-contentful-paint")||[];if(le.length){lcp=le[le.length-1].startTime||0;}}var js=getJs(),css=getCss(),img=getImg(),res=performance.getEntriesByType("resource")||[];return{ttfb_ms:num(nav&&nav.responseStart?nav.responseStart:0),fcp_ms:num(fcp),lcp_ms:num(lcp),dom_content_loaded_ms:num(nav&&nav.domContentLoadedEventEnd?nav.domContentLoadedEventEnd:0),load_event_ms:num(nav&&nav.loadEventEnd?nav.loadEventEnd:0),total_resource_count:res.length,total_js_count:js.total_js_count,total_js_size_bytes:js.total_js_size_bytes,total_css_count:css.total_css_count,total_css_size_bytes:css.total_css_size_bytes,total_image_count:img.total_image_count,total_image_size_bytes:img.total_image_size_bytes,page_cache_hit:1};}';
-			$pivot_performance_toolkit_script .= 'function send(){var p={token:token,pageUrl:window.location.href,metrics:collect()};fetch(collectUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(p),keepalive:true,credentials:"omit"}).then(function(){try{if(window.sessionStorage){window.sessionStorage.setItem(sentKey,"1");}}catch(e){}}).catch(function(){});}';
-			$pivot_performance_toolkit_script .= 'window.addEventListener("load",function(){window.setTimeout(send,300);});';
-			$pivot_performance_toolkit_script .= "})();\n</script>\n";
-
-			$pivot_performance_toolkit_replaced = preg_replace( '/<\/body\s*>/i', $pivot_performance_toolkit_script . '</body>', $pivot_performance_toolkit_html, 1 );
+			$pivot_performance_toolkit_replaced = preg_replace( '/<\/body\s*>/i', str_replace( array( '\\', '$' ), array( '\\\\', '\\$' ), $pivot_performance_toolkit_script ) . '</body>', $pivot_performance_toolkit_html, 1 );
 			$pivot_performance_toolkit_html     = ( null !== $pivot_performance_toolkit_replaced ) ? $pivot_performance_toolkit_replaced : $pivot_performance_toolkit_html . $pivot_performance_toolkit_script;
 
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $pivot_performance_toolkit_html is our own previously-cached, already-rendered page (written by PageCache::maybeCacheOutput()), not request input; a full HTML document is replayed verbatim, not escaped as a single value the way an individual string would be. The only interpolated content is $pivot_performance_toolkit_script above, which is itself built from hardcoded literal JS plus $pivot_performance_toolkit_safe_token/$pivot_performance_toolkit_safe_url (both json_encode()'d — plain PHP, not wp_json_encode(), since this drop-in runs before that function is defined — see the other pre-boot notes in this file).
+			/*
+			 * Why this echo is not escaped
+			 * ----------------------------
+			 * This branch only runs for a performance-test request that hits the page cache. It replays
+			 * the HTML file this plugin wrote earlier (PageCache::maybeCacheOutput()) with one small
+			 * <script src> tag added before </body>, so the dashboard can read its timings.
+			 *
+			 * - The page is a complete, already-rendered HTML document read from our own cache
+			 *   directory, not request input. Escaping it would turn the page into text.
+			 * - The only added content is the tag above, whose two URLs come from the plugin's own
+			 *   config file (written by PageCache::writeConfigFile()) and pass through
+			 *   htmlspecialchars() with ENT_QUOTES.
+			 * - This file is a drop-in that WordPress includes from wp-settings.php before plugins,
+			 *   hooks and most of core are loaded, so wp_kses() and the esc_*() functions do not exist
+			 *   yet (see the other pre-boot notes in this file).
+			 */
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- cached page replayed verbatim; see the comment block above.
 			echo $pivot_performance_toolkit_html;
 			exit;
 		}

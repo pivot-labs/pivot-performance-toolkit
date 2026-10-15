@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<nav class="pivot-performance-toolkit-primary-nav" aria-label="{{ esc_attr__('Primary', 'pivot-performance-toolkit') }}">
 			@foreach ($primaryNav as $item)
 				<a
-					href="{{ (string) ($item['url'] ?? '#') }}"
+					href="{!! esc_url((string) ($item['url'] ?? '#')) !!}"
 					class="{{ !empty($item['active']) ? 'is-active' : '' }}"
 				>
 					@if (!empty($item['icon']))
@@ -47,7 +47,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<nav aria-label="{{ esc_attr__('Primary', 'pivot-performance-toolkit') }}">
 					@foreach ($primaryNav as $item)
 						<a
-							href="{{ (string) ($item['url'] ?? '#') }}"
+							href="{!! esc_url((string) ($item['url'] ?? '#')) !!}"
 							class="{{ !empty($item['active']) ? 'is-active' : '' }}"
 						>
 							@if (!empty($item['icon']))

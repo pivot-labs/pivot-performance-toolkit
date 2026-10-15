@@ -11,8 +11,10 @@ namespace PivotPerformanceToolkit\Optimization;
 
 use PivotPerformanceToolkit\Contracts\ModuleInterface;
 use PivotPerformanceToolkit\Core\Settings;
+use PivotPerformanceToolkit\Utils\AssetStorage;
 use PivotPerformanceToolkit\Utils\FilesystemCheck;
 use PivotPerformanceToolkit\Utils\LocalAssetResolver;
+use PivotPerformanceToolkit\Utils\RequestInput;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -20,13 +22,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 final class Assets implements ModuleInterface {
 
-	private const MINIFIED_ASSETS_SUBDIR = 'cache/pivot-performance-toolkit/minified-assets';
 
 	private const EXCLUDED_HANDLES = array(
 		'jquery',
 		'jquery-core',
 		'jquery-migrate',
 		'wp-polyfill',
+		DelayedJs::RUNTIME_SCRIPT_ID,
 	);
 
 	private Settings $settings;
@@ -139,8 +141,7 @@ final class Assets implements ModuleInterface {
 			return $html;
 		}
 
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- used only in a strict === comparison against a hardcoded literal, never stored or output.
-		if ( ! isset( $_SERVER['REQUEST_METHOD'] ) || strtoupper( (string) wp_unslash( $_SERVER['REQUEST_METHOD'] ) ) !== 'GET' ) {
+		if ( ! RequestInput::isGetRequest() ) {
 			return $html;
 		}
 
@@ -286,9 +287,9 @@ final class Assets implements ModuleInterface {
 			return null;
 		}
 
-		$cache_dir = WP_CONTENT_DIR . '/' . self::MINIFIED_ASSETS_SUBDIR;
+		$cache_dir = AssetStorage::dir( AssetStorage::MINIFIED );
 
-		if ( ! is_dir( $cache_dir ) && ! wp_mkdir_p( $cache_dir ) ) {
+		if ( null === $cache_dir || ( ! is_dir( $cache_dir ) && ! wp_mkdir_p( $cache_dir ) ) ) {
 			return null;
 		}
 
@@ -300,7 +301,7 @@ final class Assets implements ModuleInterface {
 		$signature   = $source_path . '|' . ( is_file( $source_path ) ? (string) filemtime( $source_path ) : '0' ) . '|' . (string) strlen( $content );
 		$target_name = md5( $signature ) . '.min.css';
 		$target_path = $cache_dir . '/' . $target_name;
-		$target_web  = content_url( self::MINIFIED_ASSETS_SUBDIR . '/' . $target_name );
+		$target_web  = AssetStorage::url( AssetStorage::MINIFIED, $target_name );
 
 		if ( ! is_file( $target_path ) ) {
 			$minified = self::minifyCss( $content );
@@ -309,7 +310,7 @@ final class Assets implements ModuleInterface {
 				return null;
 			}
 
-			// phpcs:ignore PluginCheck.CodeAnalysis.WriteFile.PluginDirectoryWrite -- $target_path resolves under WP_CONTENT_DIR . '/cache/pivot-performance-toolkit/...', a sibling of wp-content/plugins/, not inside the plugin's own folder; it's untouched by plugin upgrades/reinstalls.
+			// phpcs:ignore PluginCheck.CodeAnalysis.WriteFile.PluginDirectoryWrite -- $target_path is inside the plugin's folder in the uploads directory (AssetStorage), never the plugin's own directory.
 			$written = file_put_contents( $target_path, $minified, LOCK_EX );
 
 			if ( false === $written ) {
@@ -328,9 +329,9 @@ final class Assets implements ModuleInterface {
 			return null;
 		}
 
-		$cache_dir = WP_CONTENT_DIR . '/' . self::MINIFIED_ASSETS_SUBDIR;
+		$cache_dir = AssetStorage::dir( AssetStorage::MINIFIED );
 
-		if ( ! is_dir( $cache_dir ) && ! wp_mkdir_p( $cache_dir ) ) {
+		if ( null === $cache_dir || ( ! is_dir( $cache_dir ) && ! wp_mkdir_p( $cache_dir ) ) ) {
 			return null;
 		}
 
@@ -342,7 +343,7 @@ final class Assets implements ModuleInterface {
 		$signature   = $source_path . '|' . ( is_file( $source_path ) ? (string) filemtime( $source_path ) : '0' ) . '|' . (string) strlen( $content );
 		$target_name = md5( $signature ) . '.min.js';
 		$target_path = $cache_dir . '/' . $target_name;
-		$target_web  = content_url( self::MINIFIED_ASSETS_SUBDIR . '/' . $target_name );
+		$target_web  = AssetStorage::url( AssetStorage::MINIFIED, $target_name );
 
 		if ( ! is_file( $target_path ) ) {
 			$minified = self::minifyJs( $content );
@@ -351,7 +352,7 @@ final class Assets implements ModuleInterface {
 				return null;
 			}
 
-			// phpcs:ignore PluginCheck.CodeAnalysis.WriteFile.PluginDirectoryWrite -- $target_path resolves under WP_CONTENT_DIR . '/cache/pivot-performance-toolkit/...', a sibling of wp-content/plugins/, not inside the plugin's own folder; it's untouched by plugin upgrades/reinstalls.
+			// phpcs:ignore PluginCheck.CodeAnalysis.WriteFile.PluginDirectoryWrite -- $target_path is inside the plugin's folder in the uploads directory (AssetStorage), never the plugin's own directory.
 			$written = file_put_contents( $target_path, $minified, LOCK_EX );
 
 			if ( false === $written ) {

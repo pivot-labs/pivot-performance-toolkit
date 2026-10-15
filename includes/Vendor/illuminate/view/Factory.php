@@ -16,7 +16,7 @@ use PivotPerformanceToolkit\Vendor\Illuminate\View\Engines\EngineResolver;
 use InvalidArgumentException;
 class Factory implements FactoryContract
 {
-    use Macroable, \PivotPerformanceToolkit\Vendor\Illuminate\View\Concerns\ManagesComponents, \PivotPerformanceToolkit\Vendor\Illuminate\View\Concerns\ManagesEvents, \PivotPerformanceToolkit\Vendor\Illuminate\View\Concerns\ManagesFragments, \PivotPerformanceToolkit\Vendor\Illuminate\View\Concerns\ManagesLayouts, \PivotPerformanceToolkit\Vendor\Illuminate\View\Concerns\ManagesLoops, \PivotPerformanceToolkit\Vendor\Illuminate\View\Concerns\ManagesStacks, \PivotPerformanceToolkit\Vendor\Illuminate\View\Concerns\ManagesTranslations;
+    use Macroable, \PivotPerformanceToolkit\Vendor\Illuminate\View\Concerns\ManagesComponents, \PivotPerformanceToolkit\Vendor\Illuminate\View\Concerns\ManagesEvents, \PivotPerformanceToolkit\Vendor\Illuminate\View\Concerns\ManagesLoops;
     /**
      * The engine implementation.
      *
@@ -428,10 +428,7 @@ class Factory implements FactoryContract
     {
         $this->renderCount = 0;
         $this->renderedOnce = [];
-        $this->flushSections();
-        $this->flushStacks();
         $this->flushComponents();
-        $this->flushFragments();
     }
     /**
      * Flush all of the section contents if done rendering.

@@ -40,6 +40,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		'max_rows'  => 8,
 		'sort_by' => $sort_by,
 		'sort_dir' => $sort_dir,
+		'size_sort_url' => $size_sort_url,
 	))
 
 </div>

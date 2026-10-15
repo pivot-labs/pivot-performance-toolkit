@@ -1,4 +1,15 @@
-@import "tailwindcss";
+@import "tailwindcss" source(none);
+
+/*
+ * Tailwind v4 otherwise scans every file under the project root for class names, which makes
+ * the built stylesheet depend on unrelated files (docs, tests, vendored libraries). List the
+ * plugin's own templates and scripts explicitly so `npm run build` is reproducible from the
+ * shipped sources.
+ */
+@source "../../includes";
+@source not "../../includes/Vendor";
+@source "../../assets/js";
+@source "../js";
 
 @layer utilities {
     /* Keep WordPress admin spacing intact. Plugin layout should only style

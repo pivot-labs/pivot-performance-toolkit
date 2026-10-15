@@ -24,20 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<p class="mt-1.5 mb-0 text-gray-500"><?php esc_html_e( 'Quick test from dashboard. Open Performance page for full report.', 'pivot-performance-toolkit' ); ?></p>
 			</div>
 					<?php if ( ! empty( $show_open_full_test ) ) : ?>
-				<a class="button" href="
-						<?php
-						echo esc_url(
-							add_query_arg(
-								array(
-									'page'    => 'pivot-performance-toolkit',
-									'section' => 'optimization',
-									'tab'     => 'pivot-performance-toolkit-performance',
-								),
-								admin_url( 'admin.php' )
-							)
-						);
-						?>
-										"><?php esc_html_e( 'Open Full Test', 'pivot-performance-toolkit' ); ?></a>
+				<a class="button" href="<?php echo esc_url( \PivotPerformanceToolkit\Admin\AdminShell::pageUrl( 'pivot-performance-toolkit-performance' ) ); ?>"><?php esc_html_e( 'Open Full Test', 'pivot-performance-toolkit' ); ?></a>
 			<?php endif; ?>
 		</div>
 	</div>

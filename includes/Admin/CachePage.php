@@ -15,6 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use PivotPerformanceToolkit\Cache\ObjectCacheManager;
 use PivotPerformanceToolkit\Core\Settings;
+use PivotPerformanceToolkit\Utils\AssetStorage;
 
 final class CachePage extends BladeAdminPage {
 
@@ -69,9 +70,8 @@ final class CachePage extends BladeAdminPage {
 	 * @return array<string, mixed>
 	 */
 	protected function buildViewData(): array {
-		$options = $this->settings->all();
-		// phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- read-only "was this just saved" display flag from WordPress core's own settings-updated redirect param; used only in a strict === comparison against a hardcoded literal, never stored or output raw.
-		$settings_updated = isset( $_GET['settings-updated'] ) && (string) wp_unslash( $_GET['settings-updated'] ) === 'true';
+		$options          = $this->settings->all();
+		$settings_updated = FlashNotice::settingsSaved();
 		$cache_cleared    = (bool) get_transient( 'pivot_performance_toolkit_cache_cleared' );
 
 		if ( $cache_cleared ) {
@@ -423,6 +423,9 @@ final class CachePage extends BladeAdminPage {
 			$error_message = $response->get_error_message();
 
 			// Local HTTPS setups commonly fail on loopback cert verification.
+			// $fallback_url is the same URL on the same host (only the scheme changes), and
+			// preloadable URLs are already restricted to this site's host, so this never
+			// contacts a third party. Documented in readme.txt, "External services".
 			if ( str_starts_with( $url, 'https://' ) ) {
 				$fallback_url      = 'http://' . substr( $url, 8 );
 				$fallback_response = wp_remote_get( $fallback_url, $args );
@@ -494,26 +497,11 @@ final class CachePage extends BladeAdminPage {
 	}
 
 	private function cacheSectionUrl(): string {
-		return add_query_arg(
-			array(
-				'page'    => 'pivot-performance-toolkit',
-				'section' => 'caching',
-				'tab'     => $this->slug(),
-			),
-			admin_url( 'admin.php' )
-		);
+		return AdminShell::pageUrl( $this->slug() );
 	}
 
 	private function clearMinifiedCacheFiles(): void {
-		$cache_dir = WP_CONTENT_DIR . '/cache/pivot-performance-toolkit/minified-assets';
-
-		foreach ( glob( $cache_dir . '/*.min.css' ) ?: array() as $file_path ) {
-			wp_delete_file( $file_path );
-		}
-
-		foreach ( glob( $cache_dir . '/*.min.js' ) ?: array() as $file_path ) {
-			wp_delete_file( $file_path );
-		}
+		AssetStorage::clear();
 	}
 
 	/**

@@ -37,6 +37,17 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	delete_option( 'pivot_performance_toolkit_remove_data_on_uninstall' );
 	delete_option( 'pivot_performance_toolkit_last_performance_result' );
 
+	// Remove generated minified/combined assets from this plugin's folder in the uploads directory.
+	$uploads = wp_upload_dir( null, false );
+
+	if ( empty( $uploads['error'] ) && is_string( $uploads['basedir'] ?? null ) ) {
+		$assets_dir = untrailingslashit( $uploads['basedir'] ) . '/pivot-performance-toolkit';
+
+		if ( $wp_filesystem instanceof WP_Filesystem_Base && $wp_filesystem->is_dir( $assets_dir ) ) {
+			$wp_filesystem->rmdir( $assets_dir, true );
+		}
+	}
+
 	// Remove cache directory recursively.
 	if ( $wp_filesystem instanceof WP_Filesystem_Base && $wp_filesystem->is_dir( $cache_dir ) ) {
 		$wp_filesystem->rmdir( $cache_dir, true );

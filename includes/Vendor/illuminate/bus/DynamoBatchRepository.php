@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use Aws\DynamoDb\DynamoDbClient;
 use Aws\DynamoDb\Marshaler;
-use PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable;
+use Carbon\CarbonImmutable;
 use Closure;
 use PivotPerformanceToolkit\Vendor\Illuminate\Support\Str;
 

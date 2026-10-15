@@ -65,8 +65,7 @@ final class PerformanceTest implements ModuleInterface {
 		$last_result = is_array( $last_result ) ? $last_result : array();
 		$last_score  = self::calculateOverallScoreFromResult( $last_result );
 
-		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped -- BladeEngine::view() returns HTML already escaped by Blade's {{ }} at render time; re-escaping here would break the markup.
-		echo BladeEngine::view(
+		BladeEngine::display(
 			'cards.optimization.performance.performance-test',
 			array(
 				'options'    => self::getTestableContentOptions(),
@@ -74,11 +73,12 @@ final class PerformanceTest implements ModuleInterface {
 				'has_result' => self::hasStoredResult( $last_result ),
 			)
 		);
-		// phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 	public function enqueueAdminAssets( string $hook_suffix ): void {
-		if ( 'toplevel_page_pivot-performance-toolkit' !== $hook_suffix ) {
+		// The dashboard is the top-level page; the full Performance screen is a hidden
+		// admin page of this plugin (admin_page_<slug>).
+		if ( 'toplevel_page_pivot-performance-toolkit' !== $hook_suffix && 0 !== strpos( $hook_suffix, 'admin_page_pivot-performance-toolkit' ) ) {
 			return;
 		}
 
@@ -292,8 +292,13 @@ final class PerformanceTest implements ModuleInterface {
 
 		$printed = true;
 
-		wp_register_script( self::PROBE_SCRIPT_ID, false, array(), PIVOT_PERFORMANCE_TOOLKIT_VERSION, false );
-		wp_enqueue_script( self::PROBE_SCRIPT_ID );
+		wp_register_script(
+			self::PROBE_SCRIPT_ID,
+			PIVOT_PERFORMANCE_TOOLKIT_URL . 'assets/js/performance-probe.js',
+			array(),
+			PIVOT_PERFORMANCE_TOOLKIT_VERSION,
+			false
+		);
 		wp_localize_script(
 			self::PROBE_SCRIPT_ID,
 			'pivotPerformanceToolkitPerfProbe',
@@ -301,36 +306,7 @@ final class PerformanceTest implements ModuleInterface {
 				'collectUrl' => esc_url_raw( rest_url( 'pivot-performance-toolkit/v1/performance-tests/collect' ) ),
 			)
 		);
-		wp_add_inline_script( self::PROBE_SCRIPT_ID, $this->frontendProbeScript() );
-	}
-
-	private function frontendProbeScript(): string {
-		$js  = '(function(){';
-		$js .= 'var collectUrl=window.pivotPerformanceToolkitPerfProbe&&window.pivotPerformanceToolkitPerfProbe.collectUrl?window.pivotPerformanceToolkitPerfProbe.collectUrl:"";';
-		$js .= 'if(!collectUrl){return;}';
-		$js .= 'function getToken(){var token="";try{token=String(window.name||"").trim();}catch(e){}if(token&&token.length>=20){return token;}try{var m=document.cookie.match(/(?:^|;\\s*)pivot_performance_toolkit_perf_probe=([^;]+)/);if(m){token=String(m[1]||"").trim();if(token.length>=20){return token;}}}catch(e){}return "";}';
-		$js .= 'var fcp=0;';
-		$js .= 'var lcp=0;';
-		$js .= 'if("PerformanceObserver" in window){try{var paintObserver=new PerformanceObserver(function(list){var entries=list.getEntries();entries.forEach(function(entry){if(entry.name==="first-contentful-paint"){fcp=fcp||entry.startTime||0;}});});paintObserver.observe({type:"paint",buffered:true});var po=new PerformanceObserver(function(list){var entries=list.getEntries();if(entries.length){lcp=entries[entries.length-1].startTime||lcp;}});po.observe({type:"largest-contentful-paint",buffered:true});}catch(e){}}';
-		$js .= 'function num(value){var n=Number(value);return Number.isFinite(n)?Math.round(n*100)/100:0;}';
-		$js .= 'function getFcpMetric(){var paints=performance.getEntriesByType("paint")||[];var paintEntry=paints.find(function(p){return p.name==="first-contentful-paint";});var namedEntry=performance.getEntriesByName("first-contentful-paint", "paint")[0]||null;var entry=paintEntry||namedEntry;return num(entry&&entry.startTime?entry.startTime:fcp);}';
-		$js .= 'function getJsMetrics(){var scripts=document.querySelectorAll("script[src]")||[];var count=scripts.length;var totalSize=0;var resources=performance.getEntriesByType("resource")||[];resources.forEach(function(r){if(r.name&&(r.name.endsWith(".js")||r.initiatorType==="script")){var size=r.transferSize||r.encodedBodySize||0;totalSize+=size;}});return{total_js_count:count,total_js_size_bytes:totalSize};}';
-		$js .= 'function getCssMetrics(){var links=document.querySelectorAll("link[rel=\"stylesheet\"]")||[];var count=links.length;var totalSize=0;var resources=performance.getEntriesByType("resource")||[];resources.forEach(function(r){if(r.name&&(r.name.endsWith(".css")||r.initiatorType==="link")){var size=r.transferSize||r.encodedBodySize||0;totalSize+=size;}});return{total_css_count:count,total_css_size_bytes:totalSize};}';
-		$js .= 'function getImageMetrics(){var images=document.querySelectorAll("img")||[];var count=images.length;var totalSize=0;var resources=performance.getEntriesByType("resource")||[];resources.forEach(function(r){var name=String(r&&r.name?r.name:"").toLowerCase();var type=String(r&&r.initiatorType?r.initiatorType:"").toLowerCase();if(type==="img"||/\.(avif|bmp|gif|heic|heif|ico|jpe?g|png|svg|webp|tif|tiff)(\?|#|$)/i.test(name)){var size=r.transferSize||r.encodedBodySize||0;totalSize+=size;}});return{total_image_count:count,total_image_size_bytes:totalSize};}';
-		$js .= 'function collect(){var nav=(performance.getEntriesByType("navigation")[0]||null);if(!fcp){fcp=getFcpMetric();}if(!lcp){var lcpEntries=performance.getEntriesByType("largest-contentful-paint")||[];if(lcpEntries.length){lcp=lcpEntries[lcpEntries.length-1].startTime||0;}}var jsMetrics=getJsMetrics();var cssMetrics=getCssMetrics();var imageMetrics=getImageMetrics();var resources=performance.getEntriesByType("resource")||[];var metrics={ttfb_ms:num(nav&&nav.responseStart?nav.responseStart:0),fcp_ms:num(fcp),lcp_ms:num(lcp),dom_content_loaded_ms:num(nav&&nav.domContentLoadedEventEnd?nav.domContentLoadedEventEnd:0),load_event_ms:num(nav&&nav.loadEventEnd?nav.loadEventEnd:0),total_resource_count:resources.length,total_js_count:jsMetrics.total_js_count,total_js_size_bytes:jsMetrics.total_js_size_bytes,total_css_count:cssMetrics.total_css_count,total_css_size_bytes:cssMetrics.total_css_size_bytes,total_image_count:imageMetrics.total_image_count,total_image_size_bytes:imageMetrics.total_image_size_bytes};return metrics;}';
-		$js .= 'function getCacheHit(){return fetch(window.location.href,{method:"GET",credentials:"same-origin",cache:"no-store"}).then(function(response){var cacheStatus=String(response.headers.get("x-pivot-cache")||"").toUpperCase();return cacheStatus==="HIT"?1:0;}).catch(function(){return 0;});}';
-		// The token is (re-)read here, at send-time, rather than once at parse-time:
-		// if this cached page also carries a freshly-injected probe script (from the
-		// advanced-cache drop-in, for a genuine cache HIT), that script deletes the
-		// cookie/window.name synchronously as soon as it parses, well before this
-		// deferred send() fires. Reading the token lazily lets this copy correctly
-		// detect that and stand down, instead of racing the fresh script and
-		// overwriting its correct result with a stale re-check.
-		$js .= 'function send(){var token=getToken();if(!token){return;}var sentKey="pivot_performance_toolkit_perf_sent_"+token;try{if(window.sessionStorage&&window.sessionStorage.getItem(sentKey)==="1"){return;}}catch(e){}return getCacheHit().then(function(cacheHit){document.cookie="pivot_performance_toolkit_perf_probe=;path=/;SameSite=Lax;max-age=0;expires=Thu, 01 Jan 1970 00:00:00 GMT";var metrics=collect();metrics.page_cache_hit=cacheHit;var payload={token:token,pageUrl:window.location.href,metrics:metrics};return fetch(collectUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload),keepalive:true,credentials:"omit"}).then(function(){try{if(window.sessionStorage){window.sessionStorage.setItem(sentKey,"1");}}catch(e){}try{window.name="";}catch(e){} });}).catch(function(){});}';
-		$js .= 'window.addEventListener("load",function(){window.setTimeout(send,300);});';
-		$js .= '})();';
-
-		return $js;
+		wp_enqueue_script( self::PROBE_SCRIPT_ID );
 	}
 
 	/**

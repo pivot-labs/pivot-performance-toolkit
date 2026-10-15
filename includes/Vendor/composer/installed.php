@@ -18,18 +18,6 @@ return array (
   ),
   'versions' => 
   array (
-    'carbonphp/carbon-doctrine-types' => 
-    array (
-      'pretty_version' => '3.2.0',
-      'version' => '3.2.0.0',
-      'reference' => '18ba5ddfec8976260ead6e866180bd5d2f71aa1d',
-      'type' => 'library',
-      'install_path' => __DIR__ . '/../carbonphp/carbon-doctrine-types',
-      'aliases' => 
-      array (
-      ),
-      'dev_requirement' => false,
-    ),
     'doctrine/inflector' => 
     array (
       'pretty_version' => '2.1.0',
@@ -174,30 +162,6 @@ return array (
       ),
       'dev_requirement' => false,
     ),
-    'nesbot/carbon' => 
-    array (
-      'pretty_version' => '3.11.4',
-      'version' => '3.11.4.0',
-      'reference' => 'e890471a3494740f7d9326d72ce6a8c559ffee60',
-      'type' => 'library',
-      'install_path' => __DIR__ . '/../nesbot/carbon',
-      'aliases' => 
-      array (
-      ),
-      'dev_requirement' => false,
-    ),
-    'psr/clock' => 
-    array (
-      'pretty_version' => '1.0.0',
-      'version' => '1.0.0.0',
-      'reference' => 'e41a24703d4560fd0acb709162f73b8adfc3aa0d',
-      'type' => 'library',
-      'install_path' => __DIR__ . '/../psr/clock',
-      'aliases' => 
-      array (
-      ),
-      'dev_requirement' => false,
-    ),
     'psr/container' => 
     array (
       'pretty_version' => '2.0.2',
@@ -222,30 +186,6 @@ return array (
       ),
       'dev_requirement' => false,
     ),
-    'symfony/clock' => 
-    array (
-      'pretty_version' => 'v7.4.8',
-      'version' => '7.4.8.0',
-      'reference' => '674fa3b98e21531dd040e613479f5f6fa8f32111',
-      'type' => 'library',
-      'install_path' => __DIR__ . '/../symfony/clock',
-      'aliases' => 
-      array (
-      ),
-      'dev_requirement' => false,
-    ),
-    'symfony/deprecation-contracts' => 
-    array (
-      'pretty_version' => 'v3.7.0',
-      'version' => '3.7.0.0',
-      'reference' => '50f59d1f3ca46d41ac911f97a78626b6756af35b',
-      'type' => 'library',
-      'install_path' => __DIR__ . '/../symfony/deprecation-contracts',
-      'aliases' => 
-      array (
-      ),
-      'dev_requirement' => false,
-    ),
     'symfony/finder' => 
     array (
       'pretty_version' => 'v7.4.8',
@@ -253,30 +193,6 @@ return array (
       'reference' => 'e0be088d22278583a82da281886e8c3592fbf149',
       'type' => 'library',
       'install_path' => __DIR__ . '/../symfony/finder',
-      'aliases' => 
-      array (
-      ),
-      'dev_requirement' => false,
-    ),
-    'symfony/translation' => 
-    array (
-      'pretty_version' => 'v7.4.10',
-      'version' => '7.4.10.0',
-      'reference' => 'ada7578c30dd5feaa8259cff3e885069ea81ddde',
-      'type' => 'library',
-      'install_path' => __DIR__ . '/../symfony/translation',
-      'aliases' => 
-      array (
-      ),
-      'dev_requirement' => false,
-    ),
-    'symfony/translation-contracts' => 
-    array (
-      'pretty_version' => 'v3.7.0',
-      'version' => '3.7.0.0',
-      'reference' => '0ab302977a952b42fd51475c4ebac81f8da0a95d',
-      'type' => 'library',
-      'install_path' => __DIR__ . '/../symfony/translation-contracts',
       'aliases' => 
       array (
       ),

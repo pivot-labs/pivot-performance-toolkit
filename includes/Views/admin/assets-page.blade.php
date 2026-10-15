@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <div class="pivot-performance-toolkit-col pivot-performance-toolkit-col--main col-span-full">
-	@if ($settings_updated && !isset($_GET['pivot_performance_toolkit_notice']))
+	@if ($settings_updated)
 		<div class="notice notice-success is-dismissible">
 			<p>{{ __('Settings saved successfully.', 'pivot-performance-toolkit') }}</p>
 		</div>

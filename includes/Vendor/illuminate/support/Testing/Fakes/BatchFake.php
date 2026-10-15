@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
-use PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable;
+use Carbon\CarbonImmutable;
 use PivotPerformanceToolkit\Vendor\Illuminate\Bus\Batch;
 use PivotPerformanceToolkit\Vendor\Illuminate\Bus\UpdatedBatchJobCounts;
 use PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon;
@@ -38,9 +38,9 @@ class BatchFake extends Batch
      * @param  int  $failedJobs
      * @param  array  $failedJobIds
      * @param  array  $options
-     * @param  \PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable  $createdAt
-     * @param  \PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable|null  $cancelledAt
-     * @param  \PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable|null  $finishedAt
+     * @param  \Carbon\CarbonImmutable  $createdAt
+     * @param  \Carbon\CarbonImmutable|null  $cancelledAt
+     * @param  \Carbon\CarbonImmutable|null  $finishedAt
      * @return void
      */
     public function __construct(

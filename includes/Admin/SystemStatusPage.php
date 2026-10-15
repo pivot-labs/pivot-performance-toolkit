@@ -16,6 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 use PivotPerformanceToolkit\Core\Settings;
 use PivotPerformanceToolkit\Media\ImageOptimizerDetector;
 use PivotPerformanceToolkit\Utils\FilesystemCheck;
+use PivotPerformanceToolkit\Utils\RequestInput;
 
 final class SystemStatusPage extends BladeAdminPage {
 
@@ -158,8 +159,7 @@ final class SystemStatusPage extends BladeAdminPage {
 	 * Get server software name and version
 	 */
 	private static function getServerSoftware(): array {
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- only used with stripos()/preg_match() below; the returned 'name' is always a hardcoded literal and 'version' is regex-constrained to [0-9.]+, so raw content never reaches the caller.
-		$server_software = isset( $_SERVER['SERVER_SOFTWARE'] ) ? (string) wp_unslash( $_SERVER['SERVER_SOFTWARE'] ) : '';
+		$server_software = RequestInput::server( 'SERVER_SOFTWARE' );
 		$name            = 'Unknown';
 		$version         = 'N/A';
 
@@ -322,8 +322,7 @@ final class SystemStatusPage extends BladeAdminPage {
 		}
 
 		// HTTPS status
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- used only in a strict !== comparison and an (int) cast for a strict === comparison; the resulting boolean only ever selects between two hardcoded translated strings below, never echoed raw.
-		$https    = ( isset( $_SERVER['HTTPS'] ) && 'off' !== wp_unslash( $_SERVER['HTTPS'] ) ) || ( isset( $_SERVER['SERVER_PORT'] ) && 443 === (int) wp_unslash( $_SERVER['SERVER_PORT'] ) );
+		$https    = RequestInput::isHttps() || 443 === (int) RequestInput::server( 'SERVER_PORT' );
 		$config[] = array(
 			'label' => __( 'HTTPS Enabled', 'pivot-performance-toolkit' ),
 			'value' => $https ? __( 'Yes', 'pivot-performance-toolkit' ) : __( 'No', 'pivot-performance-toolkit' ),

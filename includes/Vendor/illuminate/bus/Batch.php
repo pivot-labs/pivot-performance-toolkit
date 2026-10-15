@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
-use PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable;
+use Carbon\CarbonImmutable;
 use Closure;
 use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Queue\Factory as QueueFactory;
 use PivotPerformanceToolkit\Vendor\Illuminate\Contracts\Support\Arrayable;
@@ -85,21 +85,21 @@ class Batch implements Arrayable, JsonSerializable
     /**
      * The date indicating when the batch was created.
      *
-     * @var \PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable
+     * @var \Carbon\CarbonImmutable
      */
     public $createdAt;
 
     /**
      * The date indicating when the batch was cancelled.
      *
-     * @var \PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable|null
+     * @var \Carbon\CarbonImmutable|null
      */
     public $cancelledAt;
 
     /**
      * The date indicating when the batch was finished.
      *
-     * @var \PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable|null
+     * @var \Carbon\CarbonImmutable|null
      */
     public $finishedAt;
 
@@ -115,9 +115,9 @@ class Batch implements Arrayable, JsonSerializable
      * @param  int  $failedJobs
      * @param  array  $failedJobIds
      * @param  array  $options
-     * @param  \PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable  $createdAt
-     * @param  \PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable|null  $cancelledAt
-     * @param  \PivotPerformanceToolkit\Vendor\Carbon\CarbonImmutable|null  $finishedAt
+     * @param  \Carbon\CarbonImmutable  $createdAt
+     * @param  \Carbon\CarbonImmutable|null  $cancelledAt
+     * @param  \Carbon\CarbonImmutable|null  $finishedAt
      * @return void
      */
     public function __construct(

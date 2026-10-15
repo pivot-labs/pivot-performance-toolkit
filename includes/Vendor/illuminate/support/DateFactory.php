@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
-use PivotPerformanceToolkit\Vendor\Carbon\Factory;
+use Carbon\Factory;
 use InvalidArgumentException;
 
 /**
@@ -35,7 +35,7 @@ use InvalidArgumentException;
  * @method string getLocale()
  * @method int getMidDayAt()
  * @method \PivotPerformanceToolkit\Vendor\Illuminate\Support\Carbon|null getTestNow()
- * @method \PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\TranslatorInterface getTranslator()
+ * @method \Symfony\Component\Translation\TranslatorInterface getTranslator()
  * @method int getWeekEndsAt()
  * @method int getWeekStartsAt()
  * @method array getWeekendDays()
@@ -70,7 +70,7 @@ use InvalidArgumentException;
  * @method void setMidDayAt($hour)
  * @method void setTestNow($testNow = null)
  * @method void setToStringFormat($format)
- * @method void setTranslator(\PivotPerformanceToolkit\Vendor\Symfony\Component\Translation\TranslatorInterface $translator)
+ * @method void setTranslator(\Symfony\Component\Translation\TranslatorInterface $translator)
  * @method void setUtf8($utf8)
  * @method void setWeekEndsAt($day)
  * @method void setWeekStartsAt($day)

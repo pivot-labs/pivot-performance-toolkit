@@ -11,8 +11,10 @@ namespace PivotPerformanceToolkit\Optimization;
 
 use PivotPerformanceToolkit\Contracts\ModuleInterface;
 use PivotPerformanceToolkit\Core\Settings;
+use PivotPerformanceToolkit\Utils\AssetStorage;
 use PivotPerformanceToolkit\Utils\FilesystemCheck;
 use PivotPerformanceToolkit\Utils\LocalAssetResolver;
+use PivotPerformanceToolkit\Utils\RequestInput;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -20,7 +22,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 final class Combine implements ModuleInterface {
 
-	private const COMBINED_ASSETS_SUBDIR = 'cache/pivot-performance-toolkit/combined-assets';
 
 	/**
 	 * `type` attribute values eligible for combining. Deliberately excludes
@@ -42,6 +43,7 @@ final class Combine implements ModuleInterface {
 		'jquery-core',
 		'jquery-migrate',
 		'wp-polyfill',
+		DelayedJs::RUNTIME_SCRIPT_ID,
 	);
 
 	private Settings $settings;
@@ -73,8 +75,7 @@ final class Combine implements ModuleInterface {
 			return $html;
 		}
 
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- used only in a strict === comparison against a hardcoded literal, never stored or output.
-		if ( ! isset( $_SERVER['REQUEST_METHOD'] ) || strtoupper( (string) wp_unslash( $_SERVER['REQUEST_METHOD'] ) ) !== 'GET' ) {
+		if ( ! RequestInput::isGetRequest() ) {
 			return $html;
 		}
 
@@ -409,8 +410,14 @@ final class Combine implements ModuleInterface {
 			return $this->originalTags( $group );
 		}
 
-		// phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet -- replaces N already-enqueued <link> tags captured from buffered output with their combined file; not a new stylesheet.
-		return '<link rel="stylesheet" href="' . esc_url( $target_web ) . '">';
+		// Built with the HTML API (it escapes the attribute value) to replace the N tags this
+		// bundle was made from; this runs on the finished page, after enqueueing is over.
+		$processor = new \WP_HTML_Tag_Processor( '<link>' );
+		$processor->next_tag( 'link' );
+		$processor->set_attribute( 'rel', 'stylesheet' );
+		$processor->set_attribute( 'href', $target_web );
+
+		return $processor->get_updated_html();
 	}
 
 	/**
@@ -454,15 +461,9 @@ final class Combine implements ModuleInterface {
 			return $this->originalTags( $group );
 		}
 
-		// Not a wp_enqueue_script() bypass: $target_web is only known after
-		// the N originally-enqueued <script src> tags in $group have already
-		// been read from disk and merged, which can only happen once
-		// WordPress has finished enqueuing and printing them — this string
-		// replaces those already-enqueued tags in the final output, it
-		// doesn't introduce a new unenqueued one. There is no earlier hook
-		// at which the combined file's URL could be enqueued instead.
-		// phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript -- see above; replaces already-enqueued <script> tags with their combined file.
-		return '<script src="' . esc_url( $target_web ) . '"></script>';
+		// This replaces the N <script src> tags already printed for the page, so it runs after
+		// enqueueing is over; core's own tag builder keeps the markup (and its filters) standard.
+		return trim( wp_get_script_tag( array( 'src' => $target_web ) ) );
 	}
 
 	/**
@@ -482,9 +483,9 @@ final class Combine implements ModuleInterface {
 	 * @param array<int, string> $signature_parts
 	 */
 	private function writeCombinedAsset( array $signature_parts, string $content, string $extension ): ?string {
-		$cache_dir = WP_CONTENT_DIR . '/' . self::COMBINED_ASSETS_SUBDIR;
+		$cache_dir = AssetStorage::dir( AssetStorage::COMBINED );
 
-		if ( ! is_dir( $cache_dir ) && ! wp_mkdir_p( $cache_dir ) ) {
+		if ( null === $cache_dir || ( ! is_dir( $cache_dir ) && ! wp_mkdir_p( $cache_dir ) ) ) {
 			return null;
 		}
 
@@ -494,13 +495,13 @@ final class Combine implements ModuleInterface {
 
 		$target_name = md5( implode( '|', $signature_parts ) ) . '.' . $extension;
 		$target_path = $cache_dir . '/' . $target_name;
-		$target_web  = content_url( self::COMBINED_ASSETS_SUBDIR . '/' . $target_name );
+		$target_web  = AssetStorage::url( AssetStorage::COMBINED, $target_name );
 
 		if ( is_file( $target_path ) ) {
 			return $target_web;
 		}
 
-		// phpcs:ignore PluginCheck.CodeAnalysis.WriteFile.PluginDirectoryWrite -- $target_path resolves under WP_CONTENT_DIR . '/cache/pivot-performance-toolkit/...', a sibling of wp-content/plugins/, not inside the plugin's own folder; it's untouched by plugin upgrades/reinstalls.
+		// phpcs:ignore PluginCheck.CodeAnalysis.WriteFile.PluginDirectoryWrite -- $target_path is inside the plugin's folder in the uploads directory (AssetStorage), never the plugin's own directory.
 		$written = file_put_contents( $target_path, $content, LOCK_EX );
 
 		if ( false === $written ) {

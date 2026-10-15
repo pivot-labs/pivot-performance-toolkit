@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	@if (!empty($secondary_nav))
 		<nav class="pivot-performance-toolkit-secondary-nav" aria-label="{{ esc_attr__('Section', 'pivot-performance-toolkit') }}">
 			@foreach ($secondary_nav as $item)
-				<a href="{{ (string) ($item['url'] ?? '#') }}" class="{{ !empty($item['active']) ? 'is-active' : '' }}">
+				<a href="{!! esc_url((string) ($item['url'] ?? '#')) !!}" class="{{ !empty($item['active']) ? 'is-active' : '' }}">
 					{{ esc_html((string) ($item['label'] ?? '')) }}
 				</a>
 			@endforeach

@@ -59,7 +59,7 @@ use Illuminate\Database\Console\WipeCommand;
  * @method static void bindValues(\PDOStatement $statement, array $bindings)
  * @method static array prepareBindings(array $bindings)
  * @method static void logQuery(string $query, array $bindings, float|null $time = null)
- * @method static void whenQueryingForLongerThan(\DateTimeInterface|\PivotPerformanceToolkit\Vendor\Carbon\CarbonInterval|float|int $threshold, callable $handler)
+ * @method static void whenQueryingForLongerThan(\DateTimeInterface|\Carbon\CarbonInterval|float|int $threshold, callable $handler)
  * @method static void allowQueryDurationHandlersToRunAgain()
  * @method static float totalQueryDuration()
  * @method static void resetTotalQueryDuration()
