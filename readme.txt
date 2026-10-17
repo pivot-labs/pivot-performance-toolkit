@@ -191,7 +191,7 @@ Icon artwork from Lucide (ISC license) is embedded as readable SVG markup in `in
 * Change: Inline JavaScript and CSS moved to enqueued files; the settings export now downloads through AJAX; page-output rewriting uses WordPress's HTML API and script-tag helpers.
 * Change: Short internal prefixes renamed to `pivot_performance_toolkit`. Bookmarked admin URLs that used the old `?section=` form now open the dashboard.
 * Fix: Database queries now use fixed or prepared SQL; no output buffer is left open when a template fails; asset locations are detected correctly on sites that move wp-content.
-* Change: On WordPress Multisite the plugin stays inactive and shows a dismissible notice (once per user) explaining that multisite is not supported.
+* Change: On WordPress Multisite the plugin stays inactive and shows a dismissible notice on the Plugins screen (once per user) explaining that multisite is not supported.
 * Docs: The readme now documents where the plugin writes files, which requests it makes, and how to rebuild the compiled CSS/JS from the included sources.
 
 = 1.1.1 =

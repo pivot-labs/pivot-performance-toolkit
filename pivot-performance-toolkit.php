@@ -68,7 +68,8 @@ const PIVOT_PERFORMANCE_TOOLKIT_MULTISITE_NOTICE_META = 'pivot_performance_toolk
  * Explains that the plugin stays inactive on a multisite network.
  *
  * The page cache uses a single-site layout, so none of the plugin boots on
- * multisite. The notice can be dismissed; the dismissal is remembered per user.
+ * multisite. The notice appears on the Plugins screen only and can be dismissed;
+ * the dismissal is remembered per user.
  */
 function pivot_performance_toolkit_register_multisite_notice(): void {
 	$nonce_action = 'pivot_performance_toolkit_dismiss_multisite_notice';
@@ -88,6 +89,12 @@ function pivot_performance_toolkit_register_multisite_notice(): void {
 	);
 
 	$render_notice = static function () use ( $nonce_action ): void {
+		// The plugin registers no screens of its own on multisite, so the Plugins list is the only place to explain why.
+		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+		if ( ! $screen || ! in_array( $screen->id, array( 'plugins', 'plugins-network' ), true ) ) {
+			return;
+		}
+
 		if ( ! current_user_can( 'manage_options' ) || get_user_meta( get_current_user_id(), PIVOT_PERFORMANCE_TOOLKIT_MULTISITE_NOTICE_META, true ) ) {
 			return;
 		}
