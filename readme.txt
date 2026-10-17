@@ -13,6 +13,8 @@ A practical, safe-by-default WordPress performance plugin with page caching, min
 == Description ==
 Pivot Performance Toolkit helps speed up WordPress sites with focused optimizations that are easy to configure and safe to roll out.
 
+Single-site WordPress only: the page cache uses a single-site layout, so on a Multisite network the plugin stays inactive and shows a dismissible notice.
+
 Core features in this version include:
 
 * Real-time performance scoring, runnable on demand from the dashboard: page load time, Largest Contentful Paint, Time to First Byte, First Contentful Paint, resource count, and JS/CSS/image payload size, with a live cache-hit indicator.
@@ -59,7 +61,7 @@ https://docs.pivotlabs.dev/performance-toolkit
 
 == Installation ==
 
-Requirements: WordPress 6.9 or later, PHP 8.2 or later, and the PHP mbstring extension (enabled on most hosts; the plugin shows a notice and stays inactive if it is missing).
+Requirements: WordPress 6.9 or later, PHP 8.2 or later, and the PHP mbstring extension (enabled on most hosts; the plugin shows a notice and stays inactive if it is missing). WordPress Multisite is not supported.
 
 1. Upload the `pivot-performance-toolkit` folder to the `/wp-content/plugins/` directory, or install it through the WordPress plugin screen.
 2. Activate the plugin through the "Plugins" screen in WordPress.
@@ -100,6 +102,9 @@ In your uploads folder, in `pivot-performance-toolkit/minified-assets` (combined
 * Optionally, a `WP_CACHE` line in `wp-config.php` and cache headers in `.htaccess`, both only when you use the matching setting.
 
 The plugin never writes to its own plugin folder, to other plugins or themes, or to WordPress core directories.
+
+= Does it work on WordPress Multisite? =
+No. The page cache uses a single-site layout, so on a multisite network the plugin stays inactive and shows a notice explaining why.
 
 = What happens if I enable a feature and it breaks the website? =
 
@@ -186,6 +191,7 @@ Icon artwork from Lucide (ISC license) is embedded as readable SVG markup in `in
 * Change: Inline JavaScript and CSS moved to enqueued files; the settings export now downloads through AJAX; page-output rewriting uses WordPress's HTML API and script-tag helpers.
 * Change: Short internal prefixes renamed to `pivot_performance_toolkit`. Bookmarked admin URLs that used the old `?section=` form now open the dashboard.
 * Fix: Database queries now use fixed or prepared SQL; no output buffer is left open when a template fails; asset locations are detected correctly on sites that move wp-content.
+* Change: On WordPress Multisite the plugin stays inactive and shows a dismissible notice (once per user) explaining that multisite is not supported.
 * Docs: The readme now documents where the plugin writes files, which requests it makes, and how to rebuild the compiled CSS/JS from the included sources.
 
 = 1.1.1 =

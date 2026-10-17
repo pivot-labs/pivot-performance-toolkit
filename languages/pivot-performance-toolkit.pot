@@ -3106,8 +3106,13 @@ msgid "Cache directory not writable: %s"
 msgstr ""
 
 #: pivot-performance-toolkit.php:61
-msgid ""
-"Pivot Performance Toolkit Free does not support WordPress Multisite. \n"
-"\t\t\t\t\tThe free version uses a single-site cache architecture and cannot safely operate in a multisite network environment. \n"
-"\t\t\t\t\tMultisite support will be available in Pro."
+msgid "Pivot Performance Toolkit does not support WordPress Multisite. It uses a single-site cache architecture and cannot safely operate in a multisite network environment, so it stays inactive on this network."
+msgstr ""
+
+#: includes/Admin/SystemStatusPage.php
+msgid "PHP mbstring Extension (required)"
+msgstr ""
+
+#: includes/Admin/SystemStatusPage.php
+msgid "Missing: ask your host to enable it"
 msgstr ""

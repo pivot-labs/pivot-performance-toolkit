@@ -91,6 +91,12 @@ final class SystemStatusPage extends BladeAdminPage {
 				'value' => PHP_VERSION,
 			),
 			array(
+				'label' => __( 'PHP mbstring Extension (required)', 'pivot-performance-toolkit' ),
+				'value' => extension_loaded( 'mbstring' )
+					? __( 'Enabled', 'pivot-performance-toolkit' )
+					: __( 'Missing: ask your host to enable it', 'pivot-performance-toolkit' ),
+			),
+			array(
 				'label' => __( 'WordPress Version', 'pivot-performance-toolkit' ),
 				'value' => get_bloginfo( 'version' ),
 			),

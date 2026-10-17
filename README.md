@@ -24,8 +24,8 @@ See [readme.txt](readme.txt) for the full WordPress.org plugin description, FAQ,
 
 ## Requirements
 
-- WordPress 6.5+
-- PHP 8.2+
+- WordPress 6.9+ (single site; Multisite is not supported, the plugin stays inactive and shows a dismissible notice)
+- PHP 8.2+ with the mbstring extension
 
 ## Structure
 
