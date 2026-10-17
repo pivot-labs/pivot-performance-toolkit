@@ -36,4 +36,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 </x-card>
 
 
-<?php do_action( 'pivot_performance_toolkit_render_pro_overview_cards' ); ?>
+<?php do_action( 'pivot_performance_toolkit_render_overview_cards' ); ?>
