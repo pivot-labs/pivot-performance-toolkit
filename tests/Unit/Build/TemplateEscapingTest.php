@@ -69,9 +69,6 @@ final class TemplateEscapingTest extends TestCase {
 		'admin/shell.blade.php'            => array(
 			'$content' => 'Output of a legacy AdminPageInterface::renderContent() page, captured by AdminShell::render(). Those pages escape their own output.',
 		),
-		'components/action-block.blade.php' => array(
-			'$form' => 'A <form> built and Blade-rendered in cards/caching/cdn/actions.blade.php (its values go through {{ }} / esc_*()), captured with ob_get_clean() and passed in as a prop.',
-		),
 	);
 
 	/**

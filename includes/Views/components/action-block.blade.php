@@ -8,7 +8,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	'color' => 'blue',
 	'title' => '',
 	'description' => '',
-	'form' => '',
 ])
 
 @php
@@ -59,7 +58,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</p>
 
 		<div class="mt-auto pt-5">
-			{!! $form !!}
+			{{ $slot }}
 		</div>
 	</div>
 </div>
