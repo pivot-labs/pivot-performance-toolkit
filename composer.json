@@ -49,7 +49,12 @@
     "autoload": {
         "psr-4": {
             "PivotPerformanceToolkit\\": "includes/"
-        }
+        },
+        "exclude-from-classmap": [
+            "includes/Vendor/",
+            "includes/Cache/object-cache.php",
+            "includes/Cache/advanced-cache.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
