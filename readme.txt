@@ -106,6 +106,9 @@ The plugin never writes to its own plugin folder, to other plugins or themes, or
 = Does it work on WordPress Multisite? =
 No. The page cache uses a single-site layout, so on a multisite network the plugin stays inactive and shows a notice explaining why.
 
+= Does the plugin set any cookies? =
+Only while you run the performance test. When an administrator clicks "Run Test", the admin's own browser sets one temporary cookie, `pivot_performance_toolkit_perf_probe`, containing a random one-time token. It lets the page cache recognise the test request so the result is measured correctly and shows whether the page was served from cache. It lasts at most 120 seconds, is removed as soon as the test finishes, is set only in the browser of the person running the test, and contains no personal or visitor data. Visitors to your site never receive this cookie, and the plugin sets no other cookies.
+
 = What happens if I enable a feature and it breaks the website? =
 
 We recommend enabling one feature at a time to validate the performance impact. If you encounter an issue, there is a the ability to disable the feature and clear the cache. Additionally there is a "Reset to Defaults" button in the Tools tab that will disable all features and clear caches if needed.
@@ -135,7 +138,7 @@ The plugin also makes HTTP requests whose only destination is your own website's
 * Cache preload (Cache screen): requests your site's own URLs so the page cache is warmed. If an HTTPS loopback request fails (common on local development servers with self-signed certificates), the same URL is retried once over `http://` on that same host. This is the `http://` fallback you may see in the code; it never targets another domain.
 * Asset detector (Assets screen): fetches one page of your own site that you pick, to list the CSS and JavaScript it loads. Only URLs on your own host are accepted.
 * HTTP protocol check (File Optimization screen): sends a HEAD request to your own home page to read which HTTP version the server answered with.
-* Performance test (Dashboard / Performance): runs in your browser against a page of your own site.
+* Performance test (Dashboard / Performance): runs in your browser against a page of your own site and sets a temporary cookie in your browser for the duration of the test (see the FAQ entry on cookies).
 
 Apart from the Cloudflare integration above, the plugin does not contact any external server, load remote scripts or fonts, or send usage data. The admin screens also contain ordinary links (to the plugin documentation at docs.pivotlabs.dev, and to WebPageTest and GTmetrix in the Browser Cache testing help); they only open when you click them and nothing is sent in the background.
 
@@ -191,6 +194,7 @@ Icon artwork from Lucide (ISC license) is embedded as readable SVG markup in `in
 * Change: Inline JavaScript and CSS moved to enqueued files; the settings export now downloads through AJAX; page-output rewriting uses WordPress's HTML API and script-tag helpers.
 * Change: Short internal prefixes renamed to `pivot_performance_toolkit`. Bookmarked admin URLs that used the old `?section=` form now open the dashboard.
 * Fix: Database queries now use fixed or prepared SQL; no output buffer is left open when a template fails; asset locations are detected correctly on sites that move wp-content.
+* Docs: The readme now describes the temporary performance-test cookie.
 * Change: On WordPress Multisite the plugin stays inactive and shows a dismissible notice on the Plugins screen (once per user) explaining that multisite is not supported.
 * Docs: The readme now documents where the plugin writes files, which requests it makes, and how to rebuild the compiled CSS/JS from the included sources.
 
