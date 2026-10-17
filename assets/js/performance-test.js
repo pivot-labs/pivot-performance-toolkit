@@ -862,6 +862,7 @@
                     setStatus(statusEl, tr('running', 'Running test...'), false);
 
                     var token = startPayload.token;
+                    var cacheWarmup = String(startPayload.cacheWarmup || '');
 
                     // Set the probe cookie so the cache drop-in serves cached HTML to this request
                     // and injects the metrics-collection script into it.
@@ -891,7 +892,13 @@
                                     if (probeWindow && !probeWindow.closed) {
                                         probeWindow.close();
                                     }
-                                    setStatus(statusEl, tr('done', 'Test complete.'), false);
+                                    if (cacheWarmup === 'warmed') {
+                                        setStatus(statusEl, tr('doneWarmed', 'Test complete. The page was not cached yet, so it was cached first and then measured.'), false);
+                                    } else if (cacheWarmup === 'failed') {
+                                        setStatus(statusEl, tr('doneWarmFailed', 'Test complete. The page could not be added to the cache first, so a cache miss is possible.'), false);
+                                    } else {
+                                        setStatus(statusEl, tr('done', 'Test complete.'), false);
+                                    }
                                     runButton.disabled = false;
                                     return;
                                 }

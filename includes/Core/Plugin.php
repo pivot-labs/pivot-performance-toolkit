@@ -109,11 +109,13 @@ final class Plugin {
 			$menu->register();
 		}
 
+		$page_cache = new PageCache( $this->settings );
+
 		$this->modules = array(
 			new FilesystemNotices(),
 			new AdminBarMenu(),
-			new PerformanceTest( $this->settings ),
-			new PageCache( $this->settings ),
+			new PerformanceTest( $this->settings, $page_cache ),
+			$page_cache,
 			new Assets( $this->settings ),
 			new AsyncCss( $this->settings ),
 			new Combine( $this->settings ),

@@ -9,6 +9,7 @@ namespace PivotPerformanceToolkit\Tests\Unit\Admin;
 
 use Brain\Monkey\Functions;
 use PivotPerformanceToolkit\Admin\PerformanceTest;
+use PivotPerformanceToolkit\Cache\PageCache;
 use PivotPerformanceToolkit\Core\Settings;
 use PivotPerformanceToolkit\Tests\Unit\TestCase;
 
@@ -57,7 +58,9 @@ final class PerformanceTestTest extends TestCase {
 	}
 
 	private function performanceTest(): PerformanceTest {
-		return new PerformanceTest( new Settings() );
+		$settings = new Settings();
+
+		return new PerformanceTest( $settings, new PageCache( $settings ) );
 	}
 
 	/**

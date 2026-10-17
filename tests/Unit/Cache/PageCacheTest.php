@@ -360,4 +360,98 @@ final class PageCacheTest extends TestCase {
 			$buffer_calls[0]
 		);
 	}
+	// ── warmUrl: fill the cache before a performance test ───────────────
+
+	/**
+	 * Stub the loopback request. $on_request runs when the plugin "requests" the page
+	 * (a real request would end in maybeCacheOutput()); returns the number of requests made.
+	 */
+	private function stubLoopback( callable $on_request ): \ArrayObject {
+		$calls = new \ArrayObject();
+
+		Functions\when( 'wp_get_environment_type' )->justReturn( 'local' );
+		Functions\when( 'wp_remote_get' )->alias(
+			static function ( string $url ) use ( $calls, $on_request ) {
+				$calls[] = $url;
+				$on_request( $url );
+
+				return array( 'response' => array( 'code' => 200 ) );
+			}
+		);
+		Functions\when( 'is_wp_error' )->justReturn( false );
+		Functions\when( 'wp_remote_retrieve_response_code' )->justReturn( 200 );
+
+		return $calls;
+	}
+
+	public function test_warm_does_nothing_when_page_cache_is_disabled(): void {
+		$calls = $this->stubLoopback( static function (): void {} );
+
+		self::assertSame( 'disabled', $this->pageCache( array( 'enable_page_cache' => false ) )->warmUrl( 'https://example.com/some-page/' ) );
+		self::assertCount( 0, $calls );
+	}
+
+	public function test_warm_skips_urls_that_are_never_cached(): void {
+		$calls = $this->stubLoopback( static function (): void {} );
+
+		self::assertSame( 'excluded', $this->pageCache( array( 'cache_excluded_urls' => '/checkout' ) )->warmUrl( 'https://example.com/checkout/?step=2' ) );
+		self::assertCount( 0, $calls );
+	}
+
+	/**
+	 * The key warmUrl() looks for must be the one a real request writes (cacheFilePath()),
+	 * or "already cached" would never be detected and every test would re-request the page.
+	 */
+	public function test_warm_recognises_a_page_a_real_request_already_cached(): void {
+		$page_cache = $this->pageCache();
+		$calls      = $this->stubLoopback( static function (): void {} );
+
+		$_SERVER['HTTPS']       = 'on';
+		$_SERVER['REQUEST_URI'] = '/some-page/?a=1';
+		$page_cache->maybeCacheOutput( '<html>cached</html>' );
+
+		self::assertSame( 'cached', $page_cache->warmUrl( 'https://example.com/some-page/?a=1#section' ) );
+		self::assertCount( 0, $calls );
+	}
+
+	public function test_warm_requests_the_page_once_and_reports_it_warmed(): void {
+		$page_cache = $this->pageCache();
+		$calls      = $this->stubLoopback(
+			function () use ( $page_cache ): void {
+				$_SERVER['HTTPS']       = 'on';
+				$_SERVER['REQUEST_URI'] = '/some-page/';
+				$page_cache->maybeCacheOutput( '<html>fresh</html>' );
+			}
+		);
+
+		self::assertSame( 'warmed', $page_cache->warmUrl( 'https://example.com/some-page/' ) );
+		self::assertSame( array( 'https://example.com/some-page/' ), $calls->getArrayCopy() );
+		self::assertSame( 1, $this->cacheFileCount() );
+
+		// A second test run finds it cached and makes no request.
+		self::assertSame( 'cached', $page_cache->warmUrl( 'https://example.com/some-page/' ) );
+		self::assertCount( 1, $calls );
+	}
+
+	public function test_warm_reports_failed_when_the_request_does_not_fill_the_cache(): void {
+		$calls = $this->stubLoopback( static function (): void {} );
+
+		self::assertSame( 'failed', $this->pageCache()->warmUrl( 'https://example.com/some-page/' ) );
+		self::assertCount( 1, $calls );
+	}
+
+	public function test_warm_treats_an_expired_cache_file_as_missing(): void {
+		$page_cache = $this->pageCache( array( 'cache_ttl' => 60 ) );
+		$this->stubLoopback( static function (): void {} );
+
+		$_SERVER['HTTPS']       = 'on';
+		$_SERVER['REQUEST_URI'] = '/some-page/';
+		$page_cache->maybeCacheOutput( '<html>old</html>' );
+
+		foreach ( glob( self::CACHE_DIR . '/*.html' ) ?: array() as $file ) {
+			touch( $file, time() - 3600 );
+		}
+
+		self::assertSame( 'failed', $page_cache->warmUrl( 'https://example.com/some-page/' ) );
+	}
 }

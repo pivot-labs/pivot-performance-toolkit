@@ -13,6 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+use PivotPerformanceToolkit\Cache\PageCache;
 use PivotPerformanceToolkit\Contracts\ModuleInterface;
 use PivotPerformanceToolkit\Core\Settings;
 use PivotPerformanceToolkit\Utils\PerformanceProfileBands;
@@ -42,8 +43,11 @@ final class PerformanceTest implements ModuleInterface {
 
 	private Settings $settings;
 
-	public function __construct( Settings $settings ) {
-		$this->settings = $settings;
+	private PageCache $page_cache;
+
+	public function __construct( Settings $settings, PageCache $page_cache ) {
+		$this->settings   = $settings;
+		$this->page_cache = $page_cache;
 	}
 
 	public function register(): void {
@@ -115,6 +119,8 @@ final class PerformanceTest implements ModuleInterface {
 					'starting'               => __( 'Starting test...', 'pivot-performance-toolkit' ),
 					'running'                => __( 'Loading target URL and collecting metrics...', 'pivot-performance-toolkit' ),
 					'done'                   => __( 'Test complete.', 'pivot-performance-toolkit' ),
+					'doneWarmed'             => __( 'Test complete. The page was not cached yet, so it was cached first and then measured.', 'pivot-performance-toolkit' ),
+					'doneWarmFailed'         => __( 'Test complete. The page could not be added to the cache first, so a cache miss is possible.', 'pivot-performance-toolkit' ),
 					'timeout'                => __( 'Timed out waiting for test result.', 'pivot-performance-toolkit' ),
 					'failed'                 => __( 'Could not run test.', 'pivot-performance-toolkit' ),
 					'requestFailed'          => __( 'Request failed.', 'pivot-performance-toolkit' ),
@@ -217,6 +223,11 @@ final class PerformanceTest implements ModuleInterface {
 			return new \WP_Error( 'pivot_performance_toolkit_invalid_target', __( 'Please provide a valid URL on this site.', 'pivot-performance-toolkit' ), array( 'status' => 400 ) );
 		}
 
+		// If the page cache is on and this page is not in it yet (for example just after
+		// the cache was cleared), fill it first so the test measures the cached page that
+		// visitors get. The test request itself never writes to the cache.
+		$cache_warmup = $this->page_cache->warmUrl( $target_url );
+
 		$token = wp_generate_password( 40, false, false );
 		$state = array(
 			'status'       => 'pending',
@@ -229,8 +240,9 @@ final class PerformanceTest implements ModuleInterface {
 
 		return rest_ensure_response(
 			array(
-				'token'   => $token,
-				'testUrl' => $target_url,
+				'token'       => $token,
+				'testUrl'     => $target_url,
+				'cacheWarmup' => $cache_warmup,
 			)
 		);
 	}

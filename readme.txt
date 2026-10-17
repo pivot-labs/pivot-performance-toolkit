@@ -138,7 +138,7 @@ The plugin also makes HTTP requests whose only destination is your own website's
 * Cache preload (Cache screen): requests your site's own URLs so the page cache is warmed. If an HTTPS loopback request fails (common on local development servers with self-signed certificates), the same URL is retried once over `http://` on that same host. This is the `http://` fallback you may see in the code; it never targets another domain.
 * Asset detector (Assets screen): fetches one page of your own site that you pick, to list the CSS and JavaScript it loads. Only URLs on your own host are accepted.
 * HTTP protocol check (File Optimization screen): sends a HEAD request to your own home page to read which HTTP version the server answered with.
-* Performance test (Dashboard / Performance): runs in your browser against a page of your own site and sets a temporary cookie in your browser for the duration of the test (see the FAQ entry on cookies).
+* Performance test (Dashboard / Performance): runs in your browser against a page of your own site and sets a temporary cookie in your browser for the duration of the test (see the FAQ entry on cookies). If the page cache is on and the page is not cached yet, the plugin first requests that page once from your own server so the test measures the cached page; this is the same kind of request as the cache preload.
 
 Apart from the Cloudflare integration above, the plugin does not contact any external server, load remote scripts or fonts, or send usage data. The admin screens also contain ordinary links (to the plugin documentation at docs.pivotlabs.dev, and to WebPageTest and GTmetrix in the Browser Cache testing help); they only open when you click them and nothing is sent in the background.
 
@@ -194,6 +194,7 @@ Icon artwork from Lucide (ISC license) is embedded as readable SVG markup in `in
 * Change: Inline JavaScript and CSS moved to enqueued files; the settings export now downloads through AJAX; page-output rewriting uses WordPress's HTML API and script-tag helpers.
 * Change: Short internal prefixes renamed to `pivot_performance_toolkit`. Bookmarked admin URLs that used the old `?section=` form now open the dashboard.
 * Fix: Database queries now use fixed or prepared SQL; no output buffer is left open when a template fails; asset locations are detected correctly on sites that move wp-content.
+* Change: The performance test now caches the tested page first when the page cache is on and the page is not cached yet, so it no longer reports a cache miss right after the cache is cleared. The result says when this happened.
 * Docs: The readme now describes the temporary performance-test cookie.
 * Change: On WordPress Multisite the plugin stays inactive and shows a dismissible notice on the Plugins screen (once per user) explaining that multisite is not supported.
 * Docs: The readme now documents where the plugin writes files, which requests it makes, and how to rebuild the compiled CSS/JS from the included sources.

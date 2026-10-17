@@ -194,21 +194,30 @@ final class PageCache implements ModuleInterface {
 		$request_uri  = RequestInput::keyPart( 'REQUEST_URI', '/' );
 		$request_path = strtok( $request_uri, '?' ) ?: '/';  // strip query string for matching
 
+		if ( $this->isExcludedPath( $request_path ) ) {
+			return 'excluded_url';
+		}
+
+		return null;
+	}
+
+	/**
+	 * Whether a URL path matches one of the "never cache" rules.
+	 */
+	private function isExcludedPath( string $request_path ): bool {
 		foreach ( $this->settings->getLines( 'cache_excluded_urls' ) as $pattern ) {
 			if ( false !== strpos( $pattern, '*' ) ) {
 				// Wildcard pattern — e.g. /my-account/*
 				if ( fnmatch( $pattern, $request_path ) ) {
-					return 'excluded_url';
+					return true;
 				}
-			} else {
+			} elseif ( strpos( $request_path, rtrim( $pattern, '/' ) ) === 0 ) {
 				// Prefix match — /checkout matches /checkout, /checkout/, /checkout/step-2
-				if ( strpos( $request_path, rtrim( $pattern, '/' ) ) === 0 ) {
-					return 'excluded_url';
-				}
+				return true;
 			}
 		}
 
-		return null;
+		return false;
 	}
 
 	private function hasBypassCookie(): bool {
@@ -265,6 +274,70 @@ final class PageCache implements ModuleInterface {
 		if ( null !== $reason && '' !== $reason ) {
 			header( 'X-Pivot-Cache-Reason: ' . $reason );
 		}
+	}
+
+	/**
+	 * Make sure a page of this site is in the page cache, for the performance test.
+	 *
+	 * A test request never writes to the cache (see maybeCacheOutput()), so after the
+	 * cache is cleared the test would report a miss and keep doing so until a visitor
+	 * or the preload fills it. When the cache is on and the page is cacheable, this
+	 * requests the page once, anonymously, which stores it exactly as a visitor's
+	 * request would. The caller has already checked that $url is on this site's host.
+	 *
+	 * @return string 'disabled' (page cache off), 'excluded' (the page is never cached),
+	 *                'cached' (already in the cache), 'warmed' (cached by this call) or
+	 *                'failed' (the request did not fill the cache).
+	 */
+	public function warmUrl( string $url ): string {
+		if ( ! $this->settings->getBool( 'enable_page_cache' ) ) {
+			return 'disabled';
+		}
+
+		$path = (string) wp_parse_url( $url, PHP_URL_PATH );
+
+		if ( $this->isExcludedPath( '' !== $path ? $path : '/' ) ) {
+			return 'excluded';
+		}
+
+		if ( $this->hasFreshCacheFile( $url ) ) {
+			return 'cached';
+		}
+
+		LoopbackRequest::fetch( $url );
+
+		return $this->hasFreshCacheFile( $url ) ? 'warmed' : 'failed';
+	}
+
+	private function hasFreshCacheFile( string $url ): bool {
+		$file = $this->cacheFilePathForUrl( $url );
+
+		if ( ! is_file( $file ) ) {
+			return false;
+		}
+
+		return ( (int) filemtime( $file ) + $this->settings->getInt( 'cache_ttl' ) ) >= time();
+	}
+
+	/**
+	 * The cache file a request for $url would use. Same key as cacheFilePath() and the
+	 * advanced-cache.php drop-in: scheme://host[:port]request-uri, filtered the same way.
+	 */
+	private function cacheFilePathForUrl( string $url ): string {
+		$parts  = wp_parse_url( $url );
+		$scheme = isset( $parts['scheme'] ) && 'https' === strtolower( (string) $parts['scheme'] ) ? 'https' : 'http';
+		$host   = isset( $parts['host'] ) ? (string) $parts['host'] : 'localhost';
+
+		if ( isset( $parts['port'] ) ) {
+			$host .= ':' . (int) $parts['port'];
+		}
+
+		$uri = ( isset( $parts['path'] ) && '' !== $parts['path'] ? (string) $parts['path'] : '/' )
+			. ( isset( $parts['query'] ) && '' !== $parts['query'] ? '?' . $parts['query'] : '' );
+
+		$cache_key = md5( $scheme . '://' . RequestInput::printableAscii( $host ) . RequestInput::printableAscii( $uri ) );
+
+		return $this->cache_dir . '/' . $cache_key . '.html';
 	}
 
 	private function cacheFilePath(): string {

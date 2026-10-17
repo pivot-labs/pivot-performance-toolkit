@@ -5,9 +5,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 return array (
   'root' => 
   array (
-    'name' => 'jeffshaikh/pivot-performance-toolkit',
-    'pretty_version' => '1.1.1',
-    'version' => '1.1.1.0',
+    'name' => 'pivot-labs/pivot-performance-toolkit',
+    'pretty_version' => '1.1.2',
+    'version' => '1.1.2.0',
     'reference' => NULL,
     'type' => 'wordpress-plugin',
     'install_path' => __DIR__ . '/../',
